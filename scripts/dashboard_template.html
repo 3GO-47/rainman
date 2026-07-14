@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="RAINMAN — NFL defense-vs-position intelligence terminal">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><ellipse cx=%228%22 cy=%228%22 rx=%227%22 ry=%224.4%22 transform=%22rotate(-28 8 8)%22 fill=%22%235c3a1e%22/><path d=%22M5.8 9.7 L10.2 6.3%22 stroke=%22white%22/></svg>">
+<title>RAINMAN — Defense-vs-Position Field Theory</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+:root{--bg:#000;--panel:#050505;--edge:#262626;--edge2:#3d3d3d;--txt:#e6e6e6;--dim:#7d7d7d;
+--amber:#58a6ff;--green:#00c853;--red:#ff453a;--cyan:#4dd0e1;--violet:#b388ff;}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--txt);font:12px/1.45 Consolas,"IBM Plex Mono","Cascadia Code",monospace;overflow-x:auto}
+header{display:flex;align-items:baseline;gap:14px;padding:10px 18px 8px;border-bottom:2px solid var(--amber);background:#000;flex-wrap:wrap}
+h1{font-size:16px;margin:0;color:var(--amber);letter-spacing:3px;font-weight:bold}
+.sub{color:var(--dim);font-size:11px;letter-spacing:.5px}
+.sub b{color:var(--amber)}
+nav{display:flex;gap:2px;padding:6px 18px;border-bottom:1px solid var(--edge);flex-wrap:wrap;background:#000;position:sticky;top:0;z-index:5}
+nav button{background:#000;border:1px solid var(--edge);color:var(--amber);padding:4px 12px;cursor:pointer;font:inherit;letter-spacing:1px;text-transform:uppercase;font-size:11px}
+nav button:hover{border-color:var(--amber)}
+nav button.on{background:var(--amber);color:#000;font-weight:bold;border-color:var(--amber)}
+nav button .fk{color:var(--dim);font-size:9.5px;margin-right:5px}
+nav button.on .fk{color:#000}
+main{padding:12px 18px}
+table{border-collapse:collapse;width:100%;font-size:11.5px}
+th,td{padding:2px 7px;border-bottom:1px solid #141414;text-align:right;white-space:nowrap}
+th{color:#8b98a5;cursor:pointer;position:sticky;top:33px;background:#000;z-index:2;font-weight:normal;text-transform:uppercase;font-size:10px;letter-spacing:1px;border-bottom:1px solid var(--edge2)}
+th.rk{color:var(--cyan)}
+td:first-child,th:first-child{text-align:left}
+tr:hover td{background:#0a0f14}
+.controls{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+select,input{background:#000;color:var(--txt);border:1px solid var(--edge2);padding:4px 7px;font:inherit}
+.panel{background:var(--panel);border:1px solid var(--edge);padding:10px 12px;margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+h3{color:var(--amber);font-size:11.5px;margin:2px 0 8px;text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid var(--edge);padding-bottom:4px}
+h3 .f{color:var(--dim);text-transform:none;letter-spacing:0;font-weight:normal}
+.note{color:var(--dim);font-size:10.5px;margin:6px 0}
+.badge{display:inline-block;min-width:26px;text-align:center;padding:0 4px;color:#000;font-weight:bold}
+.psi{font-weight:bold}
+.specwrap{position:relative;display:inline-block;min-width:50px;text-align:right}
+.spec{position:absolute;right:0;top:15%;height:70%;background:linear-gradient(90deg,transparent,rgba(88,166,255,.20));z-index:-1}
+.inj0{color:#ffd600}.injm1{color:var(--red)}
+.up{color:var(--red)}.dn{color:var(--green)}
+.tabs{display:flex;gap:2px;margin-bottom:10px}
+.tabs button{background:#000;border:1px solid var(--edge);color:var(--amber);padding:3px 11px;cursor:pointer;font:inherit;font-size:11px;text-transform:uppercase}
+.tabs button.on{background:var(--amber);color:#000;font-weight:bold;border-color:var(--amber)}
+.cell{cursor:pointer}
+#matrixTbl td{text-align:center}
+.mini{font-size:10.5px;color:var(--dim)}
+.tl{vertical-align:-4px;margin-right:4px}
+.tc{display:inline-flex;align-items:center;gap:2px}
+.specband{position:relative;height:92px;border:1px solid var(--edge);
+ background:linear-gradient(90deg,rgba(0,200,83,.14),rgba(120,130,140,.08) 50%,rgba(255,69,58,.14))}
+.specband img{position:absolute;width:22px;height:22px;transform:translateX(-50%);transition:.2s;cursor:help}
+.specband img:hover{transform:translateX(-50%) scale(1.6);z-index:3}
+.specband img.selA{width:30px;height:30px;z-index:2;border-radius:50%;box-shadow:0 0 0 2px var(--amber)}
+.specband img.selB{width:26px;height:26px;z-index:2;border-radius:50%;box-shadow:0 0 0 2px var(--violet)}
+.specscale{display:flex;justify-content:space-between;color:var(--dim);font-size:10px;margin-top:5px;letter-spacing:1px}
+.wave{vertical-align:middle}
+.gamecard table{font-size:11px}
+.gamecard h3{font-size:11.5px}
+.advbar{position:relative;height:5px;margin:2px 0 10px;opacity:.9}
+.advdot{position:absolute;top:-3px;width:11px;height:11px;border-radius:50%;background:var(--amber);
+ box-shadow:0 0 0 1px #000;transform:translateX(-50%);transition:left .4s}
+td.st{min-width:88px;text-align:right}
+td.st .mini{margin:0 3px 0 2px}
+table.fx{table-layout:fixed}
+table.fx td,table.fx th{overflow:hidden;text-overflow:ellipsis}
+.sep{border:0;border-top:1px solid var(--edge);margin:14px 0}
+.pos{display:inline-flex;align-items:center;gap:3px;border:1px solid;padding:0 5px;font-size:10px;letter-spacing:1px;border-radius:2px;line-height:15px}
+.plink{cursor:pointer}
+.plink:hover{text-decoration:underline;color:var(--amber)}
+canvas.chart{max-height:260px}
+.sm-row{display:grid;grid-template-columns:88px 225px 1fr 106px 106px 106px 106px 52px;align-items:center;gap:6px;padding:7px 8px;border-left:3px solid;border-bottom:1px solid #101010}
+.sm-row:hover{background:#0a0f14}
+.sm-role{display:flex;align-items:center;gap:5px;font-size:11px}
+.sm-who{display:flex;flex-direction:column;line-height:1.35;overflow:hidden}
+.sm-track{position:relative;height:10px;background:#0d1117;border-radius:5px;margin-bottom:3px}
+.sm-fill{height:100%;border-radius:5px;opacity:.8;animation:grow .9s cubic-bezier(.2,.8,.2,1)}
+@keyframes grow{from{width:0}}
+.sm-tick{position:absolute;top:-3px;width:2px;height:16px;background:#e6e6e6;opacity:.85}
+.sm-stat{display:flex;align-items:baseline;gap:4px;justify-content:flex-end;font-size:11.5px;white-space:nowrap}
+.sm-stat b{color:#e6e6e6}
+.sm-stat span{color:#7d7d7d;font-size:9.5px}
+.sm-stat.dim{color:#2a2a2a;justify-content:center}
+.sm-psi{text-align:right;font-size:13px}
+.tdbar{position:relative;height:15px;background:#0b0e12;border:1px solid #1c232c;border-radius:7px;max-width:300px;overflow:hidden}
+.tdbar .fill{height:100%;border-radius:7px 0 0 7px;animation:grow .9s cubic-bezier(.2,.8,.2,1)}
+.tdbar .tick{position:absolute;top:0;bottom:0;width:2px;background:#e6e6e6;opacity:.75}
+.tdbar .val{position:absolute;right:7px;top:0;font-size:9.5px;color:#dfe6ec;line-height:15px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:36px 16px;overflow:auto}
+.modalbox{background:#060606;border:1px solid var(--edge2);max-width:920px;width:100%;padding:14px 18px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.9)}
+.mclose{cursor:pointer;color:var(--dim);border:1px solid var(--edge);padding:2px 8px;background:#000;font:inherit}
+.modalbox .mclose{position:absolute;top:8px;right:10px}
+@media (max-width:840px){
+ main{padding:10px 8px}
+ header{padding:8px 10px;gap:8px}
+ h1{font-size:14px;letter-spacing:2px}
+ .sub{font-size:9.5px}
+ nav{padding:5px 8px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+ nav button{padding:4px 8px;font-size:10px;white-space:nowrap}
+ nav button .fk{display:none}
+ .grid2,.grid3{grid-template-columns:1fr}
+ .panel{overflow-x:auto}
+ .sm-row{min-width:860px}
+ #tdTbl,#labTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#tdb>.controls{overflow-x:auto}
+ table{font-size:10.5px}
+ th{position:static}
+ .controls{gap:6px}
+ select,input{padding:4px 5px;font-size:11px}
+ .modal{padding:10px 4px}
+ .modalbox{padding:10px 8px}
+ canvas.chart{max-height:220px}
+}
+</style></head><body>
+<header><h1><svg width="17" height="17" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN</h1><span class="sub">DVP TERMINAL &middot; NFL DEFENSE-VS-POSITION &middot; DATA <b>24/25 + 25/26</b> (544 GM &middot; 10,702 ROWS) &middot; SCHED <b>26/27</b> &middot; BUILT <b>__BUILT__</b> &middot; BLEND <b>__BLEND__</b> &middot; RANK <b>1</b>/32 = MOST ALLOWED &middot; p&#8407; = m&middot;v&#8407;</span></header>
+<nav>
+<button data-v="home" class="on"><span class="fk">F1</span>Home</button>
+<button data-v="tdb"><span class="fk">F2</span>TD Board</button>
+<button data-v="chamber"><span class="fk">F3</span>Weekly Matchups</button>
+<button data-v="players"><span class="fk">F4</span>Players</button>
+<button data-v="defenses"><span class="fk">F5</span>Defenses</button>
+<button data-v="sked"><span class="fk">F6</span>Schedule</button>
+</nav>
+<main>
+<div id="home"><div id="homeTop"></div><div id="insights"></div></div>
+<div id="chamber" hidden></div>
+<div id="players" hidden><div id="dcView" class="panel"></div><div id="lab"></div><hr class="sep"><div id="player"></div></div>
+<div id="defenses" hidden><div class="tabs" id="defTabs">
+<button data-t="ranks" class="on">Rankings</button><button data-t="matrix">Matrix</button><button data-t="defense">Observatory</button></div>
+<div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
+<div id="sked" hidden></div>
+<div id="tdb" hidden></div>
+</main>
+<script>
+const J = __DATA__;
+/* ---------- helpers ---------- */
+const $=q=>document.querySelector(q);
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+const stdev=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)*(x-m))))};
+function gradeColor(rank,n=32){const t=Math.max(0,Math.min(1,(rank-1)/(n-1)));
+  const h=t<.5?145-(t*2)*85:60-((t-.5)*2)*60;return `hsl(${h},52%,${45-t*4}%)`}
+function gradeBg(rank){ // 6 discrete bands: greens -> slate middle -> reds
+  if(rank<=5)  return 'hsla(145,70%,38%,.85)';
+  if(rank<=10) return 'hsla(150,45%,29%,.85)';
+  if(rank<=16) return 'hsla(210,16%,30%,.85)';
+  if(rank<=21) return 'hsla(222,18%,22%,.85)';
+  if(rank<=27) return 'hsla(8,45%,33%,.85)';
+  return 'hsla(2,70%,42%,.85)';}
+const SCACHE={};
+function series(def,stat){const se=Math.max(...J.weekly.map(r=>r[1]));const k=def+'|'+stat;
+  if(SCACHE[k])return SCACHE[k];
+  return SCACHE[k]=J.weekly.filter(r=>r[0]===def&&r[1]===se).sort((a,b)=>a[2]-b[2]).map(r=>r[WCOL[stat]]);}
+function sparkWave(vals,color,w=96,h=24){
+  if(!vals||vals.length<2)return '';
+  const mx=Math.max(...vals,1),mn=Math.min(...vals,0);
+  const X=i=>(i/(vals.length-1))*(w-4)+2, Y=v=>h-3-((v-mn)/((mx-mn)||1))*(h-7);
+  let dp=`M${X(0).toFixed(1)},${Y(vals[0]).toFixed(1)}`;
+  for(let i=1;i<vals.length;i++){const xc=((X(i-1)+X(i))/2).toFixed(1);
+    dp+=` Q${xc},${Y(vals[i-1]).toFixed(1)} ${X(i).toFixed(1)},${Y(vals[i]).toFixed(1)}`;}
+  const ym=Y(mean(vals)).toFixed(1);
+  return `<svg class="wave" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">`+
+   `<path d="${dp} L${X(vals.length-1).toFixed(1)},${h} L2,${h} Z" fill="${color}22" stroke="none"/>`+
+   `<path d="${dp}" fill="none" stroke="${color}" stroke-width="1.4"/>`+
+   `<line x1="2" y1="${ym}" x2="${w-2}" y2="${ym}" stroke="#5d7186" stroke-dasharray="3,3" stroke-width=".7"/>`+
+   `<circle cx="${X(vals.length-1).toFixed(1)}" cy="${Y(vals[vals.length-1]).toFixed(1)}" r="1.8" fill="${color}"/></svg>`;}
+const lbl=c=>c.includes('P+R')||c.includes('R+R')?'+':c.includes('PY')?'PaYd':c==='P TD'?'PaTD':c.includes('RecY')?'RcYd':c.includes('Recep')?'Rec':c.includes('RY')?'RuYd':c.includes('TD')?'TD':c;
+function allowLine(def,grp,D){
+  const d=D[def];if(!d||!J.groupStats[grp])return '—';
+  return J.groupStats[grp].filter(c=>!c.includes('P+R')&&!c.includes('R+R')).map(c=>{const o=d.stats[c];
+    return `${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span>&nbsp;${badge(o.rank)}`}).join(' &nbsp;');}
+const ORDER={QB:['QB PY','QB RY','P TD','QB TD'],
+ RB1:['RB1 RY','RB1 Recep','RB1 RecY','RB1 TD'],
+ RB2:['RB2+ RY','RB2 Recep','RB2 RecY','RB2 TD'],
+ WR1:['WR1 RecY','WR1 Recep',null,'WR1 TD'],WR2:['WR2 RecY','WR2 Recep',null,'WR2 TD'],
+ WR3:['WR3 RecY','WR3 Recep',null,'WR3 TD'],'WR4+':['WR4+ RecY','WR4+ Recep',null,'WR4+ TD'],
+ TE1:['TE1 RecY','TE1 Recep',null,'TE1 TD'],TE2:['TE2 RecY','TE2 Recep',null,'TE2 TD'],
+ 'D/ST':[null,null,null,'D/ST TD']};
+function allowCells(def,grp,D){const d=D[def];
+  return (ORDER[grp]||[null,null,null,null]).map(c=>{
+    if(!c||!d)return '<td class="st"></td>';
+    const o=d.stats[c];
+    return `<td class="st">${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span>${badge(o.rank)}</td>`}).join('');}
+function fieldTilt(vis,home,pos){
+  let yl='';for(let i=1;i<10;i++){const x=26+i*26.8;
+    yl+=`<line x1="${x.toFixed(1)}" y1="2" x2="${x.toFixed(1)}" y2="16" stroke="${i===5?'#3f7a4e':'#274d33'}" stroke-width="${i===5?1.6:1}"/>`;
+    yl+=`<line x1="${(x-13.4).toFixed(1)}" y1="6" x2="${(x-13.4).toFixed(1)}" y2="8" stroke="#274d33" stroke-width="1"/>`;
+    yl+=`<line x1="${(x-13.4).toFixed(1)}" y1="10" x2="${(x-13.4).toFixed(1)}" y2="12" stroke="#274d33" stroke-width="1"/>`;}
+  const cx=26+(Math.max(0,Math.min(100,pos))/100)*268;
+  return `<svg viewBox="0 0 320 18" preserveAspectRatio="none" style="width:100%;height:16px;display:block;margin:2px 0 10px">
+   <rect x="0" y="2" width="320" height="14" fill="#0a2414"/>
+   <rect x="0" y="2" width="26" height="14" fill="${hex2rgba(vivid(vis),.55)}"/>
+   <rect x="294" y="2" width="26" height="14" fill="${hex2rgba(vivid(home),.55)}"/>${yl}
+   <ellipse cx="${cx.toFixed(1)}" cy="9" rx="5.2" ry="3.4" fill="#5c3a1e" stroke="#cfd8dc" stroke-width=".6"/>
+   <line x1="${(cx-2.4).toFixed(1)}" y1="9" x2="${(cx+2.4).toFixed(1)}" y2="9" stroke="#e6e6e6" stroke-width=".8"/></svg>`;}
+function badge(rank){if(rank===''||rank==null||isNaN(rank))return '<span class="dim">—</span>';
+  return `<span class="badge" style="background:${gradeColor(+rank)}">${(+rank).toFixed(+rank%1?1:0)}</span>`}
+function psi(v){if(v==null||isNaN(v))return '—';
+  return `<span class="psi" style="color:${gradeColor(+v)}">${(+v).toFixed(1)}</span>`}
+function spec(v,max){const w=max>0?Math.min(100,100*v/max):0;
+  return `<span class="specwrap"><span class="spec" style="width:${w}%"></span>${v}</span>`}
+const TEAM={
+ ARI:{n:'Cardinals',s:'ari',c1:'#e05a7e'},ATL:{n:'Falcons',s:'atl',c1:'#d94f5c'},
+ BAL:{n:'Ravens',s:'bal',c1:'#9d7bff'},BUF:{n:'Bills',s:'buf',c1:'#4c8fe0'},
+ CAR:{n:'Panthers',s:'car',c1:'#0085CA'},CHI:{n:'Bears',s:'chi',c1:'#C83803'},
+ CIN:{n:'Bengals',s:'cin',c1:'#FB4F14'},CLE:{n:'Browns',s:'cle',c1:'#FF3C00'},
+ DAL:{n:'Cowboys',s:'dal',c1:'#7ba7de'},DEN:{n:'Broncos',s:'den',c1:'#FB4F14'},
+ DET:{n:'Lions',s:'det',c1:'#2f9fe0'},GB:{n:'Packers',s:'gb',c1:'#FFB612'},
+ HOU:{n:'Texans',s:'hou',c1:'#d94f5c'},IND:{n:'Colts',s:'ind',c1:'#7ba7de'},
+ JAX:{n:'Jaguars',s:'jax',c1:'#D7A22A'},KC:{n:'Chiefs',s:'kc',c1:'#ff5d54'},
+ LV:{n:'Raiders',s:'lv',c1:'#A5ACAF'},LAC:{n:'Chargers',s:'lac',c1:'#2fa5e0'},
+ LAR:{n:'Rams',s:'lar',c1:'#FFA300'},MIA:{n:'Dolphins',s:'mia',c1:'#12b5c0'},
+ MIN:{n:'Vikings',s:'min',c1:'#9d7bff'},NE:{n:'Patriots',s:'ne',c1:'#d94f5c'},
+ NO:{n:'Saints',s:'no',c1:'#D3BC8D'},NYG:{n:'Giants',s:'nyg',c1:'#7ba7de'},
+ NYJ:{n:'Jets',s:'nyj',c1:'#3fd08e'},PHI:{n:'Eagles',s:'phi',c1:'#0fae94'},
+ PIT:{n:'Steelers',s:'pit',c1:'#FFB612'},SEA:{n:'Seahawks',s:'sea',c1:'#69BE28'},
+ SF:{n:'49ers',s:'sf',c1:'#e04646'},TB:{n:'Buccaneers',s:'tb',c1:'#e0654f'},
+ TEN:{n:'Titans',s:'ten',c1:'#4B92DB'},WAS:{n:'Commanders',s:'wsh',c1:'#c04141'}};
+const LOGO=t=>`https://a.espncdn.com/i/teamlogos/nfl/500/${(TEAM[t]||{s:t.toLowerCase()}).s}.png`;
+const tlogo=(t,px=17)=>TEAM[t]?`<img class="tl" src="${LOGO(t)}" style="width:${px}px;height:${px}px" alt="">`:'';
+const tcell=t=>TEAM[t]?`<span class="tc">${tlogo(t)}<span style="color:${TEAM[t].c1}">${t}</span></span>`:esc(t||'');
+const oppcell=o=>!o||o==='BYE'?(o||'—'):(o[0]==='@'?'@':'')+tcell(o.replace('@',''));
+const POSC={QB:'#4fc3f7',RB:'#b388ff',FB:'#b388ff',WR:'#f06292',TE:'#ffd600','D/ST':'#90a4ae'};
+const posOf=x=>!x?'':(x[0]==='D'?'D/ST':x.slice(0,2));
+function posIcon(p,px=12){const c=POSC[p]||'#8b98a5';
+  const G={QB:`<ellipse cx="8" cy="8" rx="6" ry="3.7" transform="rotate(-28 8 8)" fill="none" stroke="${c}" stroke-width="1.2"/><path d="M6.2 9.4 L9.8 6.6 M7 9.9 L7.6 8.4 M8.4 7.8 L9 6.3" stroke="${c}" stroke-width="1" fill="none"/>`,
+  RB:`<path d="M2 12 C5.5 12 5.5 5 8.5 5 L12.5 5 M12.5 5 L10 2.8 M12.5 5 L10 7.2" fill="none" stroke="${c}" stroke-width="1.4"/>`,
+  WR:`<path d="M8 14.5 L8 4 M8 7 L12.4 3.4 M8 7 L3.6 3.4 M8 10.5 L12.4 10.5" fill="none" stroke="${c}" stroke-width="1.3"/>`,
+  TE:`<rect x="3" y="9.5" width="5" height="5" fill="none" stroke="${c}" stroke-width="1.2"/><path d="M8 9.5 C8 5.5 10.5 5 13 2.8 M13 2.8 L12.6 5.6 M13 2.8 L10.2 3.2" fill="none" stroke="${c}" stroke-width="1.2"/>`,
+  'D/ST':`<path d="M8 1.8 L13.2 3.8 V8 C13.2 11.6 10.9 13.7 8 14.8 C5.1 13.7 2.8 11.6 2.8 8 V3.8 Z" fill="none" stroke="${c}" stroke-width="1.3"/>`};
+  return `<svg width="${px}" height="${px}" viewBox="0 0 16 16" style="vertical-align:-2px">${G[p]||G['D/ST']}</svg>`;}
+const slotchip=x=>{const p=posOf(x);const c=POSC[p]||'#8b98a5';
+  return `<span class="pos" style="color:${c};border-color:${c}55">${posIcon(p,11)}${x}</span>`};
+const LCACHE={};
+function logoPt(t,px=22){const k=t+'_'+px;if(LCACHE[k])return LCACHE[k];
+  const cv=document.createElement('canvas');cv.width=cv.height=px;LCACHE[k]=cv;
+  const im=new Image();im.onload=()=>{try{cv.getContext('2d').drawImage(im,0,0,px,px)}catch(e){}
+    if(window.phChart)try{phChart.update('none')}catch(e){}
+    if(window.tdChart)try{tdChart.update('none')}catch(e){}
+    if(window.psChart)try{psChart.update('none')}catch(e){}};
+  im.src=LOGO(t);return cv;}
+const hex2rgba=(h,a)=>{const v=parseInt(h.slice(1),16);return `rgba(${v>>16},${(v>>8)&255},${v&255},${a})`};
+const vivid=t=>TEAM[t]?TEAM[t].c1:'#61dcff';
+document.querySelector('.sub').innerHTML=document.querySelector('.sub').innerHTML
+  .replace('__BUILT__',J.built).replace('__BLEND__',J.blend);
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  ['home','chamber','players','defenses','sked','tdb'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);});
+addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6'].indexOf(e.key);
+  if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
+const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21};
+const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
+/* ---------- player universe (depth chart + owners + wk1 opponents) ---------- */
+const SLOTG=s=>{if(!s)return'';if(s[0]==='Q')return'QB';if(s.startsWith('FB'))return'RB2';
+  if(s.startsWith('RB'))return s==='RB1'?'RB1':'RB2';
+  if(s.startsWith('WR'))return['WR1','WR2','WR3'].includes(s)?s:'WR4+';
+  if(s.startsWith('TE'))return s==='TE1'?'TE1':'TE2';return''};
+const OWNER={};J.matchups.forEach(m=>{if(m.owner)OWNER[m.player+'|'+m.team]=m.owner});
+const UNIVERSE=J.depth.filter(d=>d.pos_row!=='FB').map(d=>{
+  const g=SLOTG(d.slot);
+  const oppRaw=(J.sched26[d.team]||[])[0]||'';
+  const opp=oppRaw==='BYE'?'':oppRaw.replace('@','');
+  return {player:d.player,team:d.team,slot:d.slot,grp:g,inj:d.injury,depth:+d.depth,
+    row:d.pos_row,pos:d.pos_row.replace(/\d/,'').replace(/[0-9+]/g,''),
+    owner:OWNER[d.player+'|'+d.team]||'',oppRaw,opp};
+});
+// overall WR pecking order per team: WR1-3 = starters, then WR4, WR5, WR6... down the bench
+[...new Set(UNIVERSE.map(u=>u.team))].forEach(t=>{
+  UNIVERSE.filter(u=>u.team===t&&u.pos==='WR')
+    .sort((a,b)=>a.depth-b.depth||a.row.localeCompare(b.row))
+    .forEach((u,i)=>{u.dslot='WR'+(i+1);u.ord=i+1;});});
+UNIVERSE.forEach(u=>{if(!u.dslot){u.dslot=u.slot;u.ord=u.depth;}});
+/* ---------- Ψ Matchup Lab: the workbook position sheets, live ---------- */
+const LABDEF={
+ QB:{heads:['*P*','*R*','*P+R*','*PTD*','*TD*'],stats:g=>J.groupStats.QB},
+ RB:{heads:['*R*','*C*','*Y*','*R+Y*','*TD*'],stats:g=>J.groupStats[g==='RB1'?'RB1':'RB2']},
+ WR:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g]||J.groupStats['WR4+']},
+ TE:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g==='TE1'?'TE1':'TE2']}};
+function lab(){
+  const srcs=Object.keys(J.dvp);
+    const teams=[...new Set(UNIVERSE.map(u=>u.team))].sort();
+  $('#lab').innerHTML=`
+  <div class="tabs" id="labTabs">${['QB','RB','WR','TE'].map((p,i)=>
+    `<button data-p="${p}" class="${i===0?'on':''}">${posIcon(p,12)} ${p}</button>`).join('')}</div>
+  <div class="controls">
+    <select id="labSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
+    <select id="labWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
+    <select id="labTeam"><option value="">team: all</option>${teams.map(t=>`<option>${t}</option>`).join('')}</select>
+    <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <input id="labQ" placeholder="search player..." size="18">
+    <span class="note">starred cols = opponent's DvP rank for that stat (chosen 2026/27 week) &middot; click a player name for his full deep dive below &middot; unstarred = raw allowed/gm &middot; &Psi; = mean of ranks &middot; click headers to sort</span>
+  </div><div id="labTbl"></div>`;
+  let pos='QB',sortK='psi',sortA=true;
+  function rows(){
+    const src=$('#labSrc').value,D=J.dvp[src];
+    const ft=$('#labTeam').value,q=$('#labQ').value.toLowerCase();
+    const dep=$('#labDepth').value,hin=$('#labInj').value;
+    return UNIVERSE.filter(u=>u.pos===pos&&u.grp
+      &&(!ft||u.team===ft)
+      &&(!dep||u.depth<=+dep)
+      &&(hin!=='x'||u.inj!=='-1')
+      &&(!q||u.player.toLowerCase().includes(q)))
+    .map(u=>{
+      const stats=LABDEF[pos].stats(u.grp);
+      const wk=+($('#labWk').value||1);
+      const oppRaw=(J.sched26[u.team]||[])[wk-1]||'';
+      const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
+      const d=opp&&D[opp]?D[opp]:null;
+      return {...u,oppRaw,opp,statset:stats,
+        ranks:stats.map(c=>d?d.stats[c].rank:null),
+        raws:stats.map(c=>d?d.stats[c].avg:null),
+        psi:d?d.comps[u.grp]:null};
+    });
+  }
+  function render(){
+    const src=$('#labSrc').value,D=J.dvp[src];
+    const heads=LABDEF[pos].heads;
+    // column max for spectral bars: max avg across defenses per stat position
+    const sampleStats=LABDEF[pos].stats(pos==='RB'?'RB1':pos==='TE'?'TE1':pos==='WR'?'WR1':'QB');
+    const colmax=sampleStats.map((_,i)=>Math.max(...Object.values(D).map(d=>{
+      const alts=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2']
+        .filter(g=>g.startsWith(pos==='QB'?'QB':pos)).map(g=>J.groupStats[g][i]).filter(Boolean);
+      return Math.max(...alts.map(c=>d.stats[c]?d.stats[c].avg:0));})));
+    let R=rows();
+    R.sort((a,b)=>{
+      let x,y;
+      if(sortK==='psi'){x=a.psi==null?99:a.psi;y=b.psi==null?99:b.psi}
+      else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
+      else if(sortK.startsWith('v')){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
+      else {x=a[sortK]||'';y=b[sortK]||''}
+      return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
+    $('#labTbl').innerHTML=`<table><thead><tr>
+      <th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="slot">Slot</th>
+      <th data-k="opp">Opp</th>
+      ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}
+      <th class="rk" data-k="psi">&Psi;</th>
+      ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
+      <th>&omega; opp allows</th>
+    </tr></thead><tbody>
+    ${R.map(u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
+      return `<tr><td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>
+      <td>${oppcell(u.oppRaw)}</td>
+      ${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}
+      <td>${psi(u.psi)}</td>
+      ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
+      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td>
+      </tr>`}).join('')}</tbody></table>
+    <p class="note">${R.length} players &middot; source: ${src}</p>`;
+    document.querySelectorAll('#labTbl th').forEach(th=>th.onclick=()=>{
+      const k=th.dataset.k;sortA=(sortK===k)?!sortA:true;sortK=k;render()});
+    document.querySelectorAll('#labTbl .plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
+  }
+  document.querySelectorAll('#labTabs button').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('#labTabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');pos=b.dataset.p;sortK='psi';sortA=true;render()});
+  ['labSrc','labWk','labTeam','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
+  $('#labQ').oninput=render;
+  render();
+}
+/* ---------- DvP Rankings: 32 defenses, every stat, workbook Data-tab style ---------- */
+function ranks(){
+  const srcs=Object.keys(J.dvp);
+  const tabs=[...J.slots,'ALL'];
+  $('#ranks').innerHTML=`
+  <div class="tabs" id="rkTabs">${tabs.map((s,i)=>`<button data-s="${s}" class="${i===0?'on':''}">${s==='ALL'?s:posIcon(posOf(s),11)+' '+s}</button>`).join('')}</div>
+  <div class="controls"><select id="rkSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
+  <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed</span></div>
+  <div id="rkTbl"></div>`;
+  let slot='QB',sortK='psi',sortA=true;
+  function render(){
+    const src=$('#rkSrc').value,D=J.dvp[src];
+    const defs=Object.keys(D);
+    if(slot==='ALL'){
+      let R=defs.map(d=>({d,ranks:J.statCols.map(c=>D[d].stats[c].rank),
+        avgPsi:mean(Object.values(D[d].comps))}));
+      R.sort((a,b)=>(sortK==='d'?(a.d<b.d?-1:1):a.avgPsi-b.avgPsi)*(sortA?1:-1));
+      $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th>
+        ${J.statCols.map(c=>`<th class="rk">${c}</th>`).join('')}</tr></thead><tbody>
+        ${R.map(r=>`<tr><td>${tcell(r.d)}</td>${r.ranks.map(x=>`<td>${badge(x)}</td>`).join('')}</tr>`).join('')}
+        </tbody></table>`;
+      document.querySelectorAll('#rkTbl th').forEach(th=>th.onclick=()=>{
+        sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k||'psi';render()});
+      return;
+    }
+    const stats=J.groupStats[slot];
+    const colmax=stats.map(c=>Math.max(...defs.map(d=>D[d].stats[c].avg)));
+    let R=defs.map(d=>({d,psi:D[d].comps[slot],
+      ranks:stats.map(c=>D[d].stats[c].rank),raws:stats.map(c=>D[d].stats[c].avg)}));
+    R.sort((a,b)=>{let x,y;
+      if(sortK==='psi'){x=a.psi;y=b.psi}
+      else if(sortK==='d'){x=a.d;y=b.d}
+      else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i];y=b.ranks[i]}
+      else{const i=+sortK.slice(1);x=a.raws[i];y=b.raws[i]}
+      return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
+    $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th><th class="rk" data-k="psi">&Psi;</th><th>&omega; ${J.primary[slot]} wkly</th>
+      ${stats.map((c,i)=>`<th class="rk" data-k="r${i}">*${c}*</th>`).join('')}
+      ${stats.map((c,i)=>`<th data-k="v${i}">${c}</th>`).join('')}</tr></thead><tbody>
+      ${R.map(r=>`<tr><td>${tcell(r.d)}</td><td>${psi(r.psi)}</td><td>${sparkWave(series(r.d,J.primary[slot]),vivid(r.d))}</td>
+      ${r.ranks.map(x=>`<td>${badge(x)}</td>`).join('')}
+      ${r.raws.map((v,i)=>`<td>${spec(v,colmax[i]||1)}</td>`).join('')}</tr>`).join('')}
+      </tbody></table>`;
+    document.querySelectorAll('#rkTbl th').forEach(th=>th.onclick=()=>{
+      sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k;render()});
+  }
+  document.querySelectorAll('#rkTabs button').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('#rkTabs button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');slot=b.dataset.s;sortK=slot==='ALL'?'psi':'psi';sortA=true;render()});
+  $('#rkSrc').onchange=render;
+  render();
+}
+/* ---------- Field Matrix: 32x10 potential map + radar fingerprint ---------- */
+let mChart;
+function matrix(){
+  const srcs=Object.keys(J.dvp);
+  $('#matrix').innerHTML=`<div class="controls">
+    <select id="mSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
+    <span class="note">&Psi; per slot &middot; green wells attract fantasy points, red ridges repel &middot; click a cell for the defense's full fingerprint</span></div>
+    <div class="grid2"><div id="matrixWrap"></div>
+    <div class="panel" id="mDrill" hidden></div></div>`;
+  function render(){
+    const src=$('#mSrc').value,D=J.dvp[src];
+    const defs=Object.keys(D).sort();
+    $('#matrixWrap').innerHTML=`<table id="matrixTbl"><thead><tr><th>DEF</th>
+      ${J.slots.map(s=>`<th style="color:${POSC[posOf(s)]}">${s}</th>`).join('')}</tr></thead><tbody>
+      ${defs.map(d=>`<tr><td>${tcell(d)}</td>${J.slots.map(s=>{const v=D[d].comps[s];
+        return v==null?'<td></td>':`<td class="cell" data-d="${d}">${badge(v)}</td>`}).join('')}</tr>`).join('')}
+      </tbody></table>`;
+    document.querySelectorAll('#matrixTbl .cell').forEach(td=>td.onclick=()=>drill(td.dataset.d,src));
+  }
+  function drill(d,src){
+    const D=J.dvp[src][d];
+    $('#mDrill').hidden=false;
+    $('#mDrill').innerHTML=`<h3>${tlogo(d,24)} ${d} — spectral fingerprint <span class="f">(${src}; radius = 33 − rank: bigger = leakier)</span></h3>
+      <canvas id="mCanvas" class="chart"></canvas><div id="mStats"></div>`;
+    if(mChart)mChart.destroy();
+    mChart=new Chart($('#mCanvas'),{type:'radar',
+      data:{labels:J.slots,datasets:[{label:d+' permeability',
+        data:J.slots.map(s=>D.comps[s]==null?0:33-D.comps[s]),
+        borderColor:'#61dcff',backgroundColor:'rgba(97,220,255,.18)',pointBackgroundColor:'#61dcff'}]},
+      options:{scales:{r:{min:0,max:32,ticks:{display:false},grid:{color:'#1c2836'},
+        angleLines:{color:'#1c2836'},pointLabels:{color:'#cfdcea',font:{family:'monospace'}}}},
+        plugins:{legend:{labels:{color:'#cfdcea'}}}}});
+    $('#mStats').innerHTML=`<table><thead><tr><th>stat</th><th>allowed/gm</th><th class="rk">rank</th></tr></thead>
+      <tbody>${J.statCols.map(c=>`<tr><td>${c}</td><td>${D.stats[c].avg}</td><td>${badge(D.stats[c].rank)}</td></tr>`).join('')}</tbody></table>`;
+  }
+  $('#mSrc').onchange=render;
+  render();
+}
+/* ---------- Defense Observatory: comparative field physics ---------- */
+var dChart,rChart,phChart;
+function defense(){
+  const defs=[...new Set(J.weekly.map(r=>r[0]))].sort();
+  const seasons=[...new Set(J.weekly.map(r=>r[1]))].sort();
+  const latest=Math.max(...seasons);
+  $('#defense').innerHTML=`
+  <div class="controls">
+    <select id="dDef">${defs.map(d=>`<option>${d}</option>`).join('')}</select>
+    <span class="mini">⟷ interfere with</span>
+    <select id="dCmp">${defs.map(d=>`<option ${d===defs[1]?'selected':''}>${d}</option>`).join('')}</select>
+    <select id="dSea">${seasons.map(x=>`<option ${x===latest?'selected':''}>${x}</option>`).join('')}</select>
+    <select id="dSlot">${J.slots.map(x=>`<option>${x}</option>`).join('')}</select>
+    <select id="dStat">${J.statCols.map(c=>`<option>${c}</option>`).join('')}</select>
+  </div>
+  <div id="dHero" class="panel"></div>
+  <div class="grid2">
+    <div class="panel"><h3 id="dTitle"></h3><canvas id="dCanvas" class="chart"></canvas></div>
+    <div class="panel"><h3 id="rTitle"></h3><canvas id="rCanvas" class="chart"></canvas></div>
+  </div>
+  <div class="panel"><h3 id="specTitle"></h3><div id="dSpectrum"></div>
+    <div class="specscale"><span>&Psi; 1 &middot; FUSION — leaks everything</span><span>&Psi; 32 &middot; EVENT HORIZON — nothing escapes</span></div></div>
+  <div class="grid2">
+    <div class="panel"><h3 id="phTitle"></h3><canvas id="phCanvas" class="chart"></canvas></div>
+    <div class="panel" id="dTrend"></div>
+  </div>`;
+  const AX={ticks:{color:'#5d7186'},grid:{color:'#1c2836'}};
+  function render(){
+    const d=$('#dDef').value,b=$('#dCmp').value,se=+$('#dSea').value,
+          slot=$('#dSlot').value,c=$('#dStat').value;
+    const D=J.dvp[String(se)]||J.dvp.combined;
+    const CA=vivid(d),CB=vivid(b);
+    /* hero banner */
+    $('#dHero').innerHTML=`<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:5px 8px;
+      background:linear-gradient(90deg,${hex2rgba(CA,.22)},transparent 65%);border-left:3px solid ${CA}">
+      ${tlogo(d,44)}<div><div style="font-size:16px;letter-spacing:2px;color:#fff">${TEAM[d].n.toUpperCase()} DEFENSE</div>
+      <div class="mini">season ${se} &middot; &Psi; field strength by slot</div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">${J.slots.map(sl=>{
+        const v=(D[d]||{comps:{}}).comps[sl];
+        return `<span class="mini" style="text-align:center;color:${POSC[posOf(sl)]}">${sl}<br>${v==null?'—':badge(v)}</span>`}).join('')}</div></div>`;
+    /* worldline vs league band vs rival */
+    const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((x,y)=>x[2]-y[2]);
+    const lg={};
+    [...new Set(J.weekly.filter(r=>r[1]===se).map(r=>r[2]))].forEach(w=>{
+      const v=J.weekly.filter(r=>r[1]===se&&r[2]===w).map(r=>r[WCOL[c]]);
+      lg[w]={m:mean(v),sd:stdev(v)}});
+    const bMap={};J.weekly.filter(r=>r[0]===b&&r[1]===se).forEach(r=>bMap[r[2]]=r[WCOL[c]]);
+    const xs=rows.map(r=>'wk'+r[2]),ys=rows.map(r=>r[WCOL[c]]);
+    $('#dTitle').innerHTML=`${tlogo(d)} worldline — ${c} <span class="f">vs league μ±σ field and ${b}</span>`;
+    if(dChart)dChart.destroy();
+    dChart=new Chart($('#dCanvas'),{type:'line',data:{labels:xs,datasets:[
+      {label:d,data:ys,borderColor:CA,backgroundColor:hex2rgba(CA,.12),tension:.32,borderWidth:2.6,pointRadius:3},
+      {label:b,data:rows.map(r=>bMap[r[2]]??null),borderColor:CB,borderDash:[7,4],tension:.32,pointRadius:2,spanGaps:true},
+      {label:'league μ',data:rows.map(r=>+lg[r[2]].m.toFixed(1)),borderColor:'#5d7186',borderDash:[3,4],pointRadius:0},
+      {label:'μ+σ',data:rows.map(r=>+(lg[r[2]].m+lg[r[2]].sd).toFixed(1)),borderColor:'transparent',pointRadius:0,fill:'+1',backgroundColor:'rgba(97,220,255,.08)'},
+      {label:'μ−σ',data:rows.map(r=>+Math.max(0,lg[r[2]].m-lg[r[2]].sd).toFixed(1)),borderColor:'transparent',pointRadius:0}]},
+      options:{plugins:{legend:{labels:{color:'#cfdcea',filter:i=>!i.text.includes('σ')}}},
+      scales:{x:AX,y:AX}}});
+    /* interference radar */
+    $('#rTitle').innerHTML=`interference — ${tlogo(d)}${d} vs ${tlogo(b)}${b} <span class="f">permeability = 33−&Psi; &middot; season ${se}</span>`;
+    if(rChart)rChart.destroy();
+    const perm=t=>J.slots.map(sl=>{const v=(D[t]||{comps:{}}).comps[sl];return v==null?0:+(33-v).toFixed(1)});
+    rChart=new Chart($('#rCanvas'),{type:'radar',data:{labels:J.slots,datasets:[
+      {label:d,data:perm(d),borderColor:CA,backgroundColor:hex2rgba(CA,.20),pointBackgroundColor:CA},
+      {label:b,data:perm(b),borderColor:CB,backgroundColor:hex2rgba(CB,.14),pointBackgroundColor:CB}]},
+      options:{scales:{r:{min:0,max:32,ticks:{display:false},grid:{color:'#1c2836'},
+        angleLines:{color:'#1c2836'},pointLabels:{color:'#cfdcea',font:{family:'monospace',size:11}}}},
+        plugins:{legend:{labels:{color:'#cfdcea'}}}}});
+    /* energy spectrum: all 32 defenses on one axis */
+    $('#specTitle').innerHTML=`energy spectrum — every defense vs ${slot} <span class="f">(position = &Psi; composite &middot; hover for value &middot; season ${se})</span>`;
+    const list=Object.keys(D).map(t=>({t,v:D[t].comps[slot]})).filter(x=>x.v!=null).sort((x,y)=>x.v-y.v);
+    $('#dSpectrum').innerHTML=`<div class="specband">${list.map((x,i)=>{
+      const cls=x.t===d?'selA':x.t===b?'selB':'';
+      return `<img class="${cls}" title="${x.t} — Ψ ${x.v.toFixed(1)} vs ${slot}" src="${LOGO(x.t)}"
+        style="left:${(3+94*(x.v-1)/31).toFixed(2)}%;top:${10+(i%3)*26}px">`}).join('')}</div>`;
+    /* phase portrait: season μ vs last-3 μ, every defense */
+    const stat2=J.primary[slot];
+    const pts=defs.map(t=>{const rw=J.weekly.filter(r=>r[0]===t&&r[1]===se).sort((x,y)=>x[2]-y[2])
+        .map(r=>r[WCOL[stat2]]);
+      return {t,x:+mean(rw).toFixed(1),y:+mean(rw.slice(-3)).toFixed(1)}});
+    const lo=Math.min(...pts.map(p=>Math.min(p.x,p.y))),hi=Math.max(...pts.map(p=>Math.max(p.x,p.y)));
+    $('#phTitle').innerHTML=`phase portrait — ${slot} <span class="f">(${stat2}: season μ vs last-3 μ &middot; above diagonal = collapsing &middot; below = tightening)</span>`;
+    if(phChart)phChart.destroy();
+    phChart=new Chart($('#phCanvas'),{data:{datasets:[
+      {type:'scatter',label:'defenses',data:pts,parsing:false,
+        pointStyle:pts.map(p=>logoPt(p.t,p.t===d||p.t===b?30:20)),
+        borderColor:pts.map(p=>p.t===d?CA:p.t===b?CB:'transparent'),borderWidth:2},
+      {type:'line',label:'equilibrium',data:[{x:lo,y:lo},{x:hi,y:hi}],borderColor:'#5d7186',
+        borderDash:[5,5],pointRadius:0}]},
+      options:{plugins:{legend:{display:false},tooltip:{callbacks:{
+        label:ctx=>ctx.raw.t?`${ctx.raw.t}: season ${ctx.raw.x} · last3 ${ctx.raw.y}`:''}}},
+      scales:{x:{...AX,title:{display:true,text:'season μ '+stat2,color:'#5d7186'}},
+              y:{...AX,title:{display:true,text:'last-3 μ',color:'#5d7186'}}}}});
+    /* momentum + uncertainty table */
+    $('#dTrend').innerHTML=`<h3>${tlogo(d)} momentum &amp; uncertainty <span class="f">last 4 wks vs season ${se}</span></h3>
+      <table><thead><tr><th>slot</th><th>stat</th><th>μ/gm</th><th>last4</th><th>Δp</th><th>σ</th><th>σ/μ</th></tr></thead><tbody>
+      ${J.slots.map(sl=>{const c2=J.primary[sl];const all=rows.map(r=>r[WCOL[c2]]);
+        const mm=mean(all),m4=mean(all.slice(-4)),sd=stdev(all);
+        const pct=mm?100*(m4-mm)/mm:0,cv=mm?100*sd/mm:0;
+        const arrow=pct>15?'<span class="up">&#9650;</span>':pct<-15?'<span class="dn">&#9660;</span>':'&middot;';
+        return `<tr><td>${sl}</td><td class="mini">${c2}</td><td>${mm.toFixed(1)}</td><td>${m4.toFixed(1)}</td>
+        <td>${arrow} <span class="${pct>15?'up':pct<-15?'dn':'mini'}">${pct>=0?'+':''}${pct.toFixed(0)}%</span></td>
+        <td class="mini">${sd.toFixed(1)}</td><td class="mini">${cv.toFixed(0)}%</td></tr>`}).join('')}</tbody></table>
+      <p class="note">Δp &gt; 0 collapsing (allowing more) &middot; Δp &lt; 0 tightening &middot; σ/μ high = boom/bust, rank less trustworthy</p>`;
+  }
+  ['dDef','dCmp','dSea','dSlot','dStat'].forEach(id=>$('#'+id).onchange=render);
+  render();
+}
+/* ---------- Player Collider ---------- */
+let pChart1,pChart2;
+function player(){
+  const names=[...new Set(J.logs.map(l=>l[LOG.player]))].sort();
+  $('#player').innerHTML=`<div class="controls">
+    <input id="pIn" list="pList" placeholder="collide a player..." size="30">
+    <datalist id="pList">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</datalist></div><div id="pOut"></div>`;
+  $('#pIn').onchange=()=>{
+    const n=$('#pIn').value;
+    const L=J.logs.filter(l=>l[LOG.player]===n).sort((a,b)=>a[LOG.season]-b[LOG.season]||a[LOG.week]-b[LOG.week]);
+    if(!L.length){$('#pOut').innerHTML='<p class="note">no game logs in the chamber</p>';return}
+    const last=L[L.length-1];
+    const dc=J.depth.find(d=>d.player===n)||{slot:last[LOG.slot],team:last[LOG.team]};
+    const grp=SLOTG(dc.slot);
+    const ppr=L.map(l=>l[LOG.fppr]);
+    const use=L.map(l=>l[LOG.tgt]+l[LOG.ra]);
+    const mu=mean(ppr),sd=stdev(ppr);
+    const sch=(J.sched26[dc.team]||[]).map((o,i)=>({wk:i+1,o})).filter(x=>x.o!=='BYE').slice(0,4);
+    $('#pOut').innerHTML=`<div class="grid3">
+      <div class="panel"><h3>${tlogo(dc.team,22)} ${esc(n)} <span class="f">${dc.team} · ${dc.slot||'?'} · μ ${mu.toFixed(1)} ppr · σ ${sd.toFixed(1)}</span></h3>
+        <canvas id="pC1" class="chart"></canvas></div>
+      <div class="panel"><h3>usage worldline <span class="f">targets + carries</span></h3>
+        <canvas id="pC2" class="chart"></canvas></div>
+      <div class="panel"><h3>trajectory <span class="f">next 4 · slot ${grp||'?'} · combined DvP</span></h3>
+        <table><thead><tr><th>wk</th><th>opp</th><th class="rk">&Psi;</th></tr></thead><tbody>
+        ${sch.map(x=>{const d=x.o.replace('@','');const v=(J.dvp.combined[d]||{comps:{}}).comps[grp];
+          return `<tr><td>wk${x.wk}</td><td>${oppcell(x.o)}</td><td>${v==null?'—':psi(v)}</td></tr>`}).join('')}
+        </tbody></table></div></div>
+      <div class="panel"><h3>full game log <span class="f">every scraped season · traces to data/game_logs/</span></h3>
+      <table><thead><tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>att</th><th>pyd</th><th>ptd</th><th>int</th>
+      <th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th>std</th><th>ppr</th></tr></thead><tbody>
+      ${L.map(l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td>
+      <td>${l[LOG.slot]}</td><td>${l[LOG.patt]||'—'}</td>
+      <td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.int]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td>
+      <td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td>
+      <td>${l[LOG.fstd].toFixed(1)}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`).join('')}</tbody></table></div>`;
+    const labels=L.map(l=>l[LOG.season]%100+'w'+l[LOG.week]);
+    if(pChart1)pChart1.destroy();
+    pChart1=new Chart($('#pC1'),{type:'bar',data:{labels,datasets:[
+      {label:'PPR',data:ppr,backgroundColor:ppr.map(v=>v>=mu?'rgba(63,208,142,.75)':'rgba(255,93,84,.6)')},
+      {type:'line',label:'μ',data:ppr.map(()=>mu),borderColor:'#5d7186',borderDash:[6,4],pointRadius:0}]},
+      options:{plugins:{legend:{labels:{color:'#cfdcea'}}},scales:{x:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}},y:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}}}}});
+    if(pChart2)pChart2.destroy();
+    pChart2=new Chart($('#pC2'),{type:'line',data:{labels,datasets:[
+      {label:'touches+targets',data:use,borderColor:'#9d7bff',backgroundColor:'rgba(157,123,255,.15)',fill:true,tension:.3}]},
+      options:{plugins:{legend:{labels:{color:'#cfdcea'}}},scales:{x:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}},y:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}}}}});
+  };
+}
+/* ---------- Grand Unified Insights ---------- */
+function insights(){
+  $('#insights').innerHTML=`<div class="controls">
+    <select id="inWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
+    <span class="note"><b style="color:var(--cyan)">HOW TO READ THIS</b> — &Psi; = the opponent defense's average rank in the stats that matter for that role
+(QB: pass yds / rush yds / pass+rush / pass TD / total TD &middot; RB: rush yds / catches / rec yds / rush+rec / TD &middot; WR &amp; TE: catches / rec yds / TD).
+Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actual per-game production the opponent defense gives up to that role, its league rank per stat, whether the defense is trending softer or tighter, its weekly waveform, and the player's own recent scoring. Recomputed live from depth charts + the 26/27 schedule; OUT players excluded.</span></div>
+    <div id="inSm"></div><div id="inRest"></div>`;
+  const groups=['QB','RB1','RB2','WR1','WR2','WR3','TE1'];
+  function smRender(){
+    const wk=+$('#inWk').value,D=J.dvp.combined;
+    const se=Math.max(...J.weekly.map(r=>r[1]));
+    const form={};
+    J.logs.forEach(l=>{if(l[LOG.season]===se)(form[l[LOG.player]]=form[l[LOG.player]]||[]).push(l[LOG.fppr])});
+    const cand=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp))
+      .map(u=>{const o=(J.sched26[u.team]||[])[wk-1]||'';
+        if(!o||o==='BYE')return null;
+        const def=o.replace('@','');
+        const v=(D[def]||{comps:{}}).comps[u.grp];
+        return v==null?null:{player:u.player,team:u.team,o,def,comp:v,grp:u.grp}})
+      .filter(Boolean);
+    const line=r=>{
+      const ser=series(r.def,J.primary[r.grp]);
+      const tm=mean(ser),t3=mean(ser.slice(-3));const pct=tm?100*(t3-tm)/tm:0;
+      const tr=pct>12?`<span class="up">&#9650;+${pct.toFixed(0)}%</span>`:pct<-12?`<span class="dn">&#9660;${pct.toFixed(0)}%</span>`:`<span class="mini">flat</span>`;
+      const f=(form[r.player]||[]).slice(-3);
+      return `<tr><td class="pp plink" data-p="${r.player}">${esc(r.player)}</td><td>${tcell(r.team)}</td><td>${oppcell(r.o)}</td><td>${psi(r.comp)}</td>
+        ${allowCells(r.def,r.grp,D)}<td>${tr}</td><td>${sparkWave(ser,vivid(r.def),80,18)}</td>
+        <td>${f.length?mean(f).toFixed(1):'—'}</td></tr>`};
+    const hdr=g=>`<tr><th>player</th><th>tm</th><th>opp</th><th class="rk">&Psi;</th>
+      ${ORDER[g].map(c=>`<th>${c?lbl(c)+' (rk)':''}</th>`).join('')}<th>def trend L3</th><th>&omega; wkly</th><th>L3 ppr</th></tr>`;
+    const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
+    $('#inSm').innerHTML=groups.map(g=>{
+      const rows=cand.filter(x=>x.grp===g).sort((a,b)=>a.comp-b.comp);
+      return `<div class="panel"><h3 style="color:${POSC[posOf(g)]}">${posIcon(posOf(g),14)} ${g} — wk ${wk}</h3>
+      <p class="mini" style="color:var(--green)">TARGET — softest fields this week</p>
+      <table class="fx">${CG}<thead>${hdr(g)}</thead><tbody>${rows.slice(0,5).map(line).join('')}</tbody></table>
+      <p class="mini" style="margin-top:8px;color:var(--red)">AVOID — hardest fields this week</p>
+      <table class="fx">${CG}<thead>${hdr(g)}</thead><tbody>${rows.slice(-5).reverse().map(line).join('')}</tbody></table>
+      </div>`}).join('');
+  }
+  $('#inWk').onchange=smRender;smRender();
+  const season=Math.max(...J.weekly.map(r=>r[1]));
+  const defs=[...new Set(J.weekly.map(r=>r[0]))];
+  const movers=[],vol=[];
+  defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===season).sort((a,b)=>a[2]-b[2]);
+    J.slots.forEach(sl=>{const c=J.primary[sl],all=rows.map(r=>r[WCOL[c]]);
+      const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
+      if(m>2){movers.push({d,sl,c,m,m3,pct:100*(m3-m)/m});vol.push({d,sl,c,m,cv:sd/m})}})});
+  movers.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
+  vol.sort((a,b)=>b.cv-a.cv);
+  const mv=`<div class="panel"><h3>momentum shifts — last 3 wks vs season ${season}</h3>
+    <table><thead><tr><th>defense</th><th>slot</th><th>stat</th><th>μ/gm</th><th>last3</th><th>Δp</th></tr></thead><tbody>
+    ${movers.slice(0,12).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="mini">${x.c}</td>
+    <td>${x.m.toFixed(1)}</td><td>${x.m3.toFixed(1)}</td>
+    <td class="${x.pct>0?'up':'dn'}">${x.pct>0?'&#9650; +':'&#9660; '}${x.pct.toFixed(0)}%</td></tr>`).join('')}
+    </tbody></table><p class="note">&#9650; softening (target these defenses) &middot; &#9660; hardening (fade)</p></div>`;
+  const un=`<div class="panel"><h3>uncertainty principle — most/least predictable defenses (${season})</h3>
+    <div class="grid2"><div><p class="mini">HIGH σ/μ — BOOM/BUST</p>
+    <table>${vol.slice(0,8).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="mini">${x.c}</td><td>${(100*x.cv).toFixed(0)}%</td></tr>`).join('')}</table></div>
+    <div><p class="mini">LOW σ/μ — DETERMINISTIC</p>
+    <table>${vol.slice(-8).reverse().map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="mini">${x.c}</td><td>${(100*x.cv).toFixed(0)}%</td></tr>`).join('')}</table></div></div>
+    <p class="note">coefficient of variation of weekly stat allowed &middot; high = matchup rank is less trustworthy week to week</p></div>`;
+  const key=['QB','RB1','WR1','TE1'];
+  const ss=key.map(sl=>{const per=Object.keys(J.sched26).map(t=>{
+      const cs=J.sched26[t].filter(o=>o!=='BYE').map(o=>{const d=o.replace('@','');
+        return (J.dvp.combined[d]||{comps:{}}).comps[sl]}).filter(v=>v!=null);
+      return {t,avg:mean(cs)}}).sort((a,b)=>a.avg-b.avg);
+    const line=r=>`<tr><td>${tcell(r.t)}</td><td>${psi(r.avg)}</td></tr>`;
+    return `<div class="panel"><h3 style="color:${POSC[posOf(sl)]}">${posIcon(posOf(sl),13)} ${sl} geodesics — full 2026 schedule strength</h3><div class="grid2">
+    <div><p class="mini">DOWNHILL (easiest)</p><table>${per.slice(0,5).map(line).join('')}</table></div>
+    <div><p class="mini">UPHILL (hardest)</p><table>${per.slice(-5).reverse().map(line).join('')}</table></div></div></div>`}).join('');
+  $('#inRest').innerHTML=mv+un+ss+`<p class="note"><b>momentum</b> = defenses trending softer/harder RIGHT NOW (recent form the season rank hasn't caught up to — target/fade before the market does) &middot; <b>uncertainty</b> = how trustworthy a defense's rank is week to week &middot; <b>geodesics</b> = full-season strength of schedule per role (planning signal, not a weekly call)</p>`;
+}
+/* ---------- Spacetime Grid: 32 offenses x 18 weeks of 2026/27 ---------- */
+function sked(){
+  const srcs=Object.keys(J.dvp);
+  $('#sked').innerHTML=`<div class="controls">
+    <select id="skSlot">${J.slots.map(x=>`<option>${x}</option>`).join('')}</select>
+    <select id="skSrc">${srcs.map(x=>`<option ${x==='combined'?'selected':''}>${x}</option>`).join('')}</select>
+    <span class="note"><svg width="13" height="13" viewBox="0 0 16 16" style="vertical-align:-2px"><path d="M3.5 2 V6.5 M12.5 2 V6.5 M3.5 6 H12.5 M8 6 V14 M5.5 14 H10.5" stroke="#8b98a5" fill="none" stroke-width="1.3"/></svg> the 2026/27 season as one field — each offense's 18-week geodesic; cell = opponent, color = opponent's &Psi; vs the chosen slot (green well = soft, red ridge = hard) &middot; &Sigma;&Psi; = season average &middot; sorted easiest &rarr; hardest &middot; bands: <span style="background:hsla(145,70%,38%,.85);padding:0 5px;color:#fff">1-5</span> <span style="background:hsla(150,45%,29%,.85);padding:0 5px;color:#fff">6-10</span> <span style="background:hsla(210,16%,30%,.85);padding:0 5px;color:#fff">11-16</span> <span style="background:hsla(222,18%,22%,.85);padding:0 5px;color:#fff">17-21</span> <span style="background:hsla(8,45%,33%,.85);padding:0 5px;color:#fff">22-27</span> <span style="background:hsla(2,70%,42%,.85);padding:0 5px;color:#fff">28-32</span></span></div>
+    <div id="skTbl"></div>`;
+  function render(){
+    const slot=$('#skSlot').value,D=J.dvp[$('#skSrc').value];
+    const rows=Object.keys(J.sched26).map(t=>{
+      const cells=J.sched26[t].map(o=>{
+        if(o==='BYE')return {bye:true};
+        const opp=o.replace('@','');
+        const v=(D[opp]||{comps:{}}).comps[slot];
+        return {opp,v,away:o[0]==='@'}});
+      return {t,cells,avg:mean(cells.filter(c=>c.v!=null).map(c=>c.v))};
+    }).sort((a,b)=>a.avg-b.avg);
+    $('#skTbl').innerHTML=`<table><thead><tr><th>offense</th>
+      ${Array.from({length:18},(_,i)=>`<th>w${i+1}</th>`).join('')}<th class="rk">&Sigma;&Psi;</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr><td>${tcell(r.t)}</td>${r.cells.map(c=>{
+        if(c.bye)return '<td style="background:rgba(93,113,134,.13)" class="mini">&empty;</td>';
+        return `<td style="background:${c.v==null?'transparent':gradeBg(c.v)};text-align:center"
+          title="${r.t} ${c.away?'@':'vs'} ${c.opp} — ${slot} &Psi; ${c.v==null?'?':c.v.toFixed(1)}">${c.away?'@':''}${tlogo(c.opp,15)}<span style="font-size:9.5px;color:#fff;font-weight:bold"> ${c.v==null?'':c.v.toFixed(0)}</span></td>`;
+      }).join('')}<td>${psi(r.avg)}</td></tr>`).join('')}</tbody></table>`;
+  }
+  ['skSlot','skSrc'].forEach(id=>$('#'+id).onchange=render);
+  render();
+}
+/* ---------- Collision Chamber: weekly comprehensive matchups ---------- */
+function chamber(){
+  $('#chamber').innerHTML=`<div class="controls">
+    <select id="chWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 week ${i+1}</option>`).join('')}</select>
+    <select id="chSrc">${Object.keys(J.dvp).map(x=>`<option ${x==='combined'?'selected':''}>${x}</option>`).join('')}</select>
+    <span class="note">every collision of the week &middot; each offense's slot owners vs the opposing defensive field &middot; &omega; = that defense's weekly allowed waveform (latest scraped season, dashed μ) &middot; dot on the tilt bar leans toward the offense in the softer field</span></div>
+    <div id="chOut"></div>`;
+  const ROWS=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
+  const starter=(t,g)=>UNIVERSE.filter(u=>u.team===t&&u.slot===(g==='QB'?'QB1':g)).sort((a,b)=>(a.ord||9)-(b.ord||9))[0];
+  function side(off,def,D){
+    const rows=ROWS.map(g=>{
+      const u=starter(off,g);
+      const v=(D[def]||{comps:{}}).comps[g];
+      const inj=u&&u.inj==='0'?' <span class="inj0">Q</span>':u&&u.inj==='-1'?' <span class="injm1">OUT</span>':'';
+      return `<tr><td>${slotchip(g)}</td><td class="pp plink" data-p="${u?u.player:''}">${u?esc(u.player):'—'}${inj}</td>`+
+        `${allowCells(def,g,D)}<td>${sparkWave(series(def,J.primary[g]),vivid(def),80,18)}</td></tr>`}).join('');
+    const avg=mean(ROWS.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
+    return {html:`<div><table class="fx"><colgroup><col style="width:62px"><col><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:90px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
+      `<th colspan="4" style="text-align:center">${tcell(def)} def allows /gm (rank)</th><th>&omega;</th></tr></thead><tbody>${rows}</tbody></table>`+
+      `<p class="mini" style="text-align:right">mean field &Psi; ${avg.toFixed(1)}</p></div>`,avg};
+  }
+  function render(){
+    const wk=+$('#chWk').value,D=J.dvp[$('#chSrc').value];
+    const games=J.games26.filter(g=>g[0]===wk);
+    const byes=Object.keys(J.sched26).filter(t=>J.sched26[t][wk-1]==='BYE');
+    $('#chOut').innerHTML=games.map(([w,vis,home,date])=>{
+      const A=side(vis,home,D),B=side(home,vis,D);
+      const diff=B.avg-A.avg;
+      const favT=diff>0?vis:home;
+      const dot=(50-Math.max(-45,Math.min(45,diff*6))).toFixed(1);
+      return `<div class="panel gamecard" style="border-top:2px solid ${vivid(favT)}">
+        <h3>${tlogo(vis,20)} ${vis} @ ${tlogo(home,20)} ${home}
+          <span class="f">${date} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
+        ${fieldTilt(vis,home,+dot)}
+        <div class="grid2">${A.html}${B.html}</div></div>`}).join('')
+      +(byes.length?`<p class="note">out of phase this week (bye): ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
+  }
+  ['chWk','chSrc'].forEach(id=>$('#'+id).onchange=render);render();
+}
+/* ---------- Home: the command center ---------- */
+function home(){
+  const D=J.dvp.combined,se=Math.max(...J.weekly.map(r=>r[1]));
+  const pick=g=>{const rows=UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g))
+    .map(u=>{const o=(J.sched26[u.team]||[])[0]||'';if(!o||o==='BYE')return null;
+      const def=o.replace('@','');const v=(D[def]||{comps:{}}).comps[g];
+      return v==null?null:{u,o,def,v}}).filter(Boolean).sort((a,b)=>a.v-b.v);
+    return {best:rows[0],worst:rows[rows.length-1]};};
+  // WK1 SMASH BOARD (HTML): every role + FLEX (best remaining non-QB), full stat lines
+  const roles=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
+  const pool=[];
+  roles.forEach(g=>{UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
+    const o=(J.sched26[u.team]||[])[0]||'';if(!o||o==='BYE')return;
+    const def=o.replace('@','');const v=(J.dvp.combined[def]||{comps:{}}).comps[g];
+    if(v!=null)pool.push({g,u,o,def,v});});});
+  const srows=[];const taken=new Set();
+  roles.forEach(g=>{const c=pool.filter(x=>x.g===g).sort((a2,b2)=>a2.v-b2.v)[0];
+    if(c){srows.push({label:g==='WR4+'?'WR4':g,...c});taken.add(c.u.player+c.u.team);}});
+  pool.filter(x=>['RB1','WR1','WR2','TE1'].includes(x.g)&&!taken.has(x.u.player+x.u.team)).sort((a2,b2)=>a2.v-b2.v).slice(0,2)
+    .forEach((c,i)=>srows.push({label:'FLEX'+(i+1),flex:true,...c}));
+  const smRow=x=>{const c=x.flex?'#e8e8e8':POSC[posOf(x.g)],pr=J.primary[x.g];
+    const vals=Object.keys(J.dvp.combined).map(t=>+J.dvp.combined[t].stats[pr].avg);
+    const mx=Math.max(...vals),av2=mean(vals);
+    const val=+J.dvp.combined[x.def].stats[pr].avg;
+    const stats=(ORDER[x.g]||[]).map(c2=>{
+      if(!c2)return `<div class="sm-stat dim">&middot;</div>`;
+      const o2=J.dvp.combined[x.def].stats[c2];
+      return `<div class="sm-stat"><b>${(+o2.avg).toFixed(1)}</b><span>${lbl(c2)}</span>${badge(o2.rank)}</div>`;}).join('');
+    return `<div class="sm-row" style="border-left-color:${c}">
+     <div class="sm-role" style="color:${c}">${x.flex?'<span style="font-size:13px">&#10033;</span>':posIcon(posOf(x.g),13)}<b>${x.label}</b>${x.flex?`<span class="mini">${x.g}</span>`:''}</div>
+     <div class="sm-who"><span class="pp plink" data-p="${x.u.player}">${tlogo(x.u.team,17)}<b>${esc(x.u.player)}</b></span>
+       <span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)} &middot; wk 1</span></div>
+     <div><div class="sm-track"><div class="sm-fill" style="width:${(val/mx*100).toFixed(1)}%;background:${c}"></div>
+       <div class="sm-tick" style="left:${(av2/mx*100).toFixed(1)}%"></div></div>
+       <span class="mini">${val.toFixed(1)} ${lbl(pr)}/gm &middot; lg avg ${av2.toFixed(1)} &middot; lg max ${mx.toFixed(1)}</span></div>
+     ${stats}
+     <div class="sm-psi">${psi(x.v)}</div></div>`;};
+  const curvature=`<div class="panel" style="padding-bottom:2px"><h3>wk 1 smash board — best matchup at every role + flex <span class="f">flex = best remaining RB1/WR1/WR2/TE1 &middot; bar = primary stat opponent surrenders vs league (tick = avg) &middot; right: full stat line with league rank &middot; click a name for his card</span></h3>
+   <div class="sm-row" style="border-left-color:transparent;border-bottom:1px solid var(--edge2);color:#7d7d7d;font-size:9.5px;letter-spacing:1px;padding:3px 8px">
+    <div>ROLE</div><div>PLAYER &middot; OPPONENT</div><div>PRIMARY VS LEAGUE</div>
+    <div style="text-align:right">YDS/VOL</div><div style="text-align:right">REC/RUYD</div><div style="text-align:right">YDS2/PATD</div><div style="text-align:right">TD</div><div style="text-align:right">&Psi;</div></div>
+   ${srows.map(smRow).join('')}</div>`;
+  const board=['QB','RB1','RB2','WR1','WR2','WR3','TE1'].map(g=>{const {best,worst}=pick(g);
+    const cell=x=>x?`<td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}</td><td>${tcell(x.u.team)}</td><td>${oppcell(x.o)}</td>${allowCells(x.def,g,D)}`:'<td colspan="7"></td>';
+    return `<tr><td>${slotchip(g)}</td>${cell(best)}${cell(worst)}</tr>`}).join('');
+  const ext=J.slots.map(sl=>{
+    const list=Object.keys(D).map(t=>({t,v:D[t].comps[sl]})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
+    const soft=list[0],hard=list[list.length-1],pr=J.primary[sl];
+    const cellv=t=>`${(+D[t].stats[pr].avg).toFixed(1)}<span class="mini">${lbl(pr)}</span>`;
+    return `<tr><td>${slotchip(sl)}</td><td>${tcell(soft.t)}</td><td>${cellv(soft.t)}</td><td>${psi(soft.v)}</td>
+      <td>${sparkWave(series(soft.t,pr),vivid(soft.t),80,18)}</td>
+      <td>${tcell(hard.t)}</td><td>${cellv(hard.t)}</td><td>${psi(hard.v)}</td>
+      <td>${sparkWave(series(hard.t,pr),vivid(hard.t),80,18)}</td></tr>`}).join('');
+  const defs=[...new Set(J.weekly.map(r=>r[0]))];
+  const mv=[],vol=[];
+  defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((a,b)=>a[2]-b[2]);
+    J.slots.forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
+      const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
+      if(m>2){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});
+  mv.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));vol.sort((a,b)=>b.cv-a.cv);
+  const sos=g=>{const per=Object.keys(J.sched26).map(t=>({t,avg:mean(J.sched26[t].filter(o=>o!=='BYE')
+      .map(o=>(D[o.replace('@','')]||{comps:{}}).comps[g]).filter(v=>v!=null))})).sort((a,b)=>a.avg-b.avg);
+    return {easy:per.slice(0,3),hard:per.slice(-3).reverse()}};
+  const sosRow=(r,tag)=>`<tr><td>${tcell(r.t)}</td><td>${psi(r.avg)}</td><td class="mini">${tag}</td></tr>`;
+  const sq=sos('QB'),sw=sos('WR1'),sr=sos('RB1'),st2=sos('TE1');
+  const sosTbl=(o,name)=>`<div class="panel"><h3>${name} — 26/27 season slate</h3><table><tbody>
+    ${o.easy.map(r=>sosRow(r,'easiest')).join('')}${o.hard.map(r=>sosRow(r,'hardest')).join('')}</tbody></table></div>`;
+  $('#homeTop').innerHTML=curvature+`
+  <div class="panel"><h3>system <span class="f">built ${J.built} &middot; blend ${J.blend} &middot; 544 games &middot; 10,702 player-game rows &middot; 26/27 schedule + depth charts loaded &middot; rank 1/32 = most allowed</span></h3>
+  <p class="note">${['QB','RB','WR','TE','D/ST'].map(x=>`<span style="color:${POSC[x]}">${posIcon(x,11)} ${x}</span>`).join(' &nbsp; ')}</p>
+  <p class="note">F2 TD board &middot; F3 all 16 games each week &middot; F4 players + depth charts &middot; F5 defenses &middot; F6 season schedule &middot; click any player name anywhere for his popup card &middot; below: week-1 board, field extremes, movers, and the full week-by-week insight screens</p></div>
+  <div class="panel"><h3>wk 1 board — best &amp; worst matchup per role</h3>
+  <table class="fx"><colgroup><col style="width:62px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
+  <th style="color:var(--red)">avoid</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th></tr></thead><tbody>${board}</tbody></table></div>
+  <div class="panel"><h3>field extremes — every slot <span class="f">(${J.blend})</span></h3>
+  <table><thead><tr><th>slot</th><th style="color:var(--green)">bleeds most</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th>
+  <th style="color:var(--red)">locks down</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th></tr></thead><tbody>${ext}</tbody></table></div>
+  <div class="grid2">
+  <div class="panel"><h3>momentum — L3 vs season ${se}</h3><table><tbody>
+  ${mv.slice(0,6).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="${x.pct>0?'up':'dn'}">${x.pct>0?'&#9650;+':'&#9660;'}${x.pct.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>
+  <div class="panel"><h3>least trustworthy ranks — volatility ${se}</h3><table><tbody>
+  ${vol.slice(0,6).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td>&sigma;/&mu; ${x.cv.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>
+  </div>
+  <div class="grid2">${sosTbl(sq,'QB')}${sosTbl(sr,'RB1')}</div>
+  <div class="grid2">${sosTbl(sw,'WR1')}${sosTbl(st2,'TE1')}</div>`;
+}
+document.querySelectorAll('#defTabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#defTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  ['ranks','matrix','defense'].forEach(t=>$('#'+t).hidden=t!==b.dataset.t)});
+/* ---------- Player popup card ---------- */
+window.ppDeep=function(n){const m=document.getElementById('ppModal');if(m)m.remove();
+  document.querySelector('nav button[data-v="players"]').click();
+  const inp=$('#pIn');inp.value=n;inp.onchange();
+  setTimeout(()=>{try{$('#pOut').scrollIntoView({behavior:'smooth'})}catch(e){}},60);};
+window.playerPop=function(n){
+  if(!n)return;const old=document.getElementById('ppModal');if(old)old.remove();
+  const L=J.logs.filter(l=>l[LOG.player]===n).sort((a,b)=>a[LOG.season]-b[LOG.season]||a[LOG.week]-b[LOG.week]);
+  const dc=J.depth.find(d=>d.player===n)||{};
+  const team=dc.team||(L.length?L[L.length-1][LOG.team]:'');
+  const slot=dc.slot||(L.length?L[L.length-1][LOG.slot]:'');
+  const grp=SLOTG(slot);
+  const oppRaw=(J.sched26[team]||[])[0]||'';
+  const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
+  const gr=l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td><td>${l[LOG.slot]}</td><td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td><td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`;
+  const ghead=`<tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>pyd</th><th>ptd</th><th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th>ppr</th></tr>`;
+  const av=(lab2,arr)=>{const f=i=>mean(arr.map(l=>l[i])).toFixed(1);
+    return `<tr><td>${lab2}</td><td>${arr.length}</td><td>${f(LOG.py)}</td><td>${f(LOG.ra)}</td><td>${f(LOG.ry)}</td><td>${f(LOG.tgt)}</td><td>${f(LOG.rec)}</td><td>${f(LOG.recy)}</td><td>${mean(arr.map(l=>l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd])).toFixed(2)}</td><td><b>${f(LOG.fppr)}</b></td></tr>`};
+  const seasons2=[...new Set(L.map(l=>l[LOG.season]))];
+  const vs=opp?L.filter(l=>l[LOG.opp]===opp):[];
+  const rkT=grp?(()=>{const D=J.dvp.combined;const stats=J.groupStats[grp]||[];
+    const defs=Object.keys(D).map(t2=>({t2,psi:D[t2].comps[grp],st:stats.map(c2=>D[t2].stats[c2])}))
+      .filter(d2=>d2.psi!=null).sort((a2,b2)=>a2.psi-b2.psi);
+    return `<p class="mini">all 32 defenses vs ${grp} — combined ${J.blend} &middot; his wk-1 opponent outlined</p>
+    <table><thead><tr><th>#</th><th>defense</th><th class="rk">&Psi;</th>${stats.map(c2=>`<th>${lbl(c2)} (rk)</th>`).join('')}</tr></thead><tbody>
+    ${defs.map((d2,i2)=>`<tr style="${d2.t2===opp?'outline:1px solid #4dd0e1;background:rgba(77,208,225,.08)':''}">
+      <td class="mini">${i2+1}</td><td>${tcell(d2.t2)}</td><td>${psi(d2.psi)}</td>
+      ${d2.st.map(o3=>`<td>${(+o3.avg).toFixed(1)} ${badge(o3.rank)}</td>`).join('')}</tr>`).join('')}
+    </tbody></table>`})():'';
+  const html=`<div class="modal" id="ppModal"><div class="modalbox">
+   <button class="mclose" id="ppX">ESC &#10005;</button>
+   <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk 1, 26/27)</span></h3>
+   ${rkT?`<div class="tabs" style="margin-top:6px"><button id="ppT1" class="on">player card</button><button id="ppT2">${grp} dvp rankings</button></div>`:''}
+   <div id="ppV1">
+   ${L.length?`<p class="mini">averages per game</p>
+   <table><thead><tr><th></th><th>G</th><th>pyd</th><th>car</th><th>ryd</th><th>tgt</th><th>rec</th><th>rcy</th><th>TD</th><th>ppr</th></tr></thead><tbody>
+   ${seasons2.map(se2=>av(se2,L.filter(l=>l[LOG.season]===se2))).join('')}${seasons2.length>1?av('all',L):''}</tbody></table>
+   <div style="margin:8px 0">${sparkWave(L.map(l=>l[LOG.fppr]),POSC[posOf(slot)]||'#58a6ff',420,34)} <span class="mini">ppr by game, all scraped seasons</span></div>`
+   :'<p class="note">no game logs in scraped seasons (rookie or no offensive snaps yet)</p>'}
+   ${opp?`<p class="mini">history vs ${opp}</p>${vs.length?`<table><thead>${ghead}</thead><tbody>${vs.map(gr).join('')}</tbody></table>`:`<p class="note">no games vs ${opp} in 2024-25</p>`}
+   ${grp?`<p class="mini" style="margin-top:8px">what ${opp} allows to ${grp}s /gm (league rank)</p><p>${allowLine(opp,grp,J.dvp.combined)}</p>`:''}`:''}
+   ${L.length?(()=>{const se3=Math.max(...L.map(l=>l[LOG.season]));const F=L.filter(l=>l[LOG.season]===se3);
+   return `<p class="mini" style="margin-top:8px">full ${se3} game log (${F.length} games) &middot; ${se3>2024?'2024 in the deep dive':''}</p>
+   <table><thead>${ghead}</thead><tbody>${F.map(gr).join('')}</tbody></table>`})():''}
+   </div><div id="ppV2" hidden>${rkT}</div>
+   <p style="margin-top:10px"><button class="mclose" style="position:static" id="ppDeepBtn">open full deep dive &rarr;</button></p>
+  </div></div>`;
+  document.body.insertAdjacentHTML('beforeend',html);
+  document.getElementById('ppX').onclick=()=>document.getElementById('ppModal').remove();
+  document.getElementById('ppDeepBtn').onclick=()=>ppDeep(n);
+  const t1=document.getElementById('ppT1'),t2=document.getElementById('ppT2');
+  if(t1&&t2){const sw=a3=>{t1.classList.toggle('on',a3);t2.classList.toggle('on',!a3);
+    document.getElementById('ppV1').hidden=!a3;document.getElementById('ppV2').hidden=a3;};
+   t1.onclick=()=>sw(true);t2.onclick=()=>sw(false);}
+  document.getElementById('ppModal').onclick=e=>{if(e.target.id==='ppModal')e.target.remove()};
+};
+document.addEventListener('click',e=>{const t=e.target.closest('.pp');if(t&&t.dataset.p)playerPop(t.dataset.p)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('ppModal');if(m)m.remove()}});
+/* ---------- Depth chart viewer (Players tab) ---------- */
+function dchart(){
+  const teams=[...new Set(J.depth.map(d=>d.team))].sort();
+  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand &middot; ESPN snapshot ${J.depthDate||'?'} &middot; re-pulled weekly in-season &middot; Q = questionable, OUT = out/IR</span></h3>
+   <div id="dcBody" hidden><div class="controls" style="margin-top:8px"><select id="dcTeam">${teams.map(t=>`<option>${t}</option>`).join('')}</select></div><div id="dcOut"></div></div>`;
+  $('#dcToggle').onclick=()=>{const b=$('#dcBody');b.hidden=!b.hidden;$('#dcArr').innerHTML=b.hidden?'&#9656;':'&#9662;'};
+  function render(){
+    const t=$('#dcTeam').value,by={};
+    J.depth.filter(d=>d.team===t).forEach(d=>{(by[d.pos_row]=by[d.pos_row]||[]).push(d)});
+    const order=['QB','RB','WR1','WR2','WR3','TE','FB'];
+    $('#dcOut').innerHTML=`<div style="display:grid;grid-template-columns:repeat(${order.filter(p=>by[p]).length},1fr);gap:10px">
+     ${order.filter(p=>by[p]).map(p=>{const c=POSC[posOf(p)];
+      return `<div><p class="mini" style="color:${c}">${posIcon(posOf(p),11)} ${p}</p><table><tbody>
+      ${by[p].sort((a,b)=>a.depth-b.depth).map(d=>`<tr><td class="mini">${d.depth}</td><td>${esc(d.player)}${d.injury==='0'?' <span class="inj0">Q</span>':d.injury==='-1'?' <span class="injm1">OUT</span>':''}</td></tr>`).join('')}
+      </tbody></table></div>`}).join('')}</div>`;
+  }
+  $('#dcTeam').onchange=render;render();
+}
+/* ---------- TD Board: composite TD rankings, all players ---------- */
+var tdChart,psChart;
+function tdboard(){
+  $('#tdb').innerHTML=`<div class="controls">
+   <select id="tdWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
+   <select id="tdPos"><option value="">pos: all</option><option>QB</option><option>RB</option><option>WR</option><option>TE</option></select>
+   <select id="tdSlot"><option value="core" selected>core slots (top WR4 only)</option><option value="">every body (WR5, WR6...)</option>
+     <option>QB</option><option>RB1</option><option>RB2</option><option>WR1</option><option>WR2</option><option>WR3</option><option>WR4+</option><option>TE1</option><option>TE2</option></select>
+   <select id="tdTeam"><option value="">team: all</option>${[...new Set(UNIVERSE.map(u=>u.team))].sort().map(t=>`<option>${t}</option>`).join('')}</select>
+   <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
+   <div class="grid2">
+   <div class="panel"><h3>TD phase space — the rankings, plotted <span class="f">all 32 defenses by air vs ground TDs conceded &middot; &Sigma; contours = total TDs/gm equipotentials</span></h3>
+   <canvas id="psCanvas" style="max-height:380px"></canvas>
+   <p class="note">right = bleeds passing TDs &middot; up = bleeds rushing TDs &middot; the further out past a &Sigma; contour, the more total scoring a defense concedes &middot; computed from raw 24-25 game logs</p></div>
+   <div class="panel"><h3>the TD collider — opportunity &times; ability <span class="f">x &rarr; softer TD field this week &middot; y &uarr; player's own '25 TD rate &middot; top-right = fusion core</span></h3>
+   <canvas id="tdCanvas" style="max-height:380px"></canvas></div>
+   </div>
+   <div id="tdTbl"></div>`;
+  /* TD phase space: defense-level scatter of the TD rankings (static across weeks) */
+  (function(){
+    const acc={};
+    J.logs.forEach(l=>{const d=l[LOG.opp];const a=acc[d]=acc[d]||{air:0,gnd:0,g:new Set()};
+      a.air+=l[LOG.ptd];a.gnd+=l[LOG.rtd];a.g.add(l[LOG.season]+'-'+l[LOG.week]);});
+    const ps=Object.keys(acc).map(d=>({t:d,x:+(acc[d].air/acc[d].g.size).toFixed(2),y:+(acc[d].gnd/acc[d].g.size).toFixed(2)}));
+    const XM2=mean(ps.map(p2=>p2.x)),YM2=mean(ps.map(p2=>p2.y));
+    const equip={id:'equip',afterDraw(ch){const x2=ch.scales.x,y3=ch.scales.y;if(!x2||!y3)return;
+      const ctx=ch.ctx;ctx.save();
+      ctx.strokeStyle='rgba(77,208,225,.20)';ctx.setLineDash([4,5]);ctx.font='9px monospace';ctx.fillStyle='rgba(77,208,225,.55)';
+      [1.6,2.0,2.4,2.8].forEach(c2=>{
+        const xa=Math.max(x2.min,c2-y3.max),xb=Math.min(x2.max,c2-y3.min);
+        if(xa<xb){ctx.beginPath();ctx.moveTo(x2.getPixelForValue(xa),y3.getPixelForValue(c2-xa));
+          ctx.lineTo(x2.getPixelForValue(xb),y3.getPixelForValue(c2-xb));ctx.stroke();
+          ctx.fillText('\u03a3'+c2.toFixed(1),x2.getPixelForValue(xb)-26,y3.getPixelForValue(c2-xb)-4);}});
+      ctx.strokeStyle='rgba(230,230,230,.18)';ctx.setLineDash([5,5]);
+      ctx.beginPath();ctx.moveTo(x2.getPixelForValue(XM2),y3.top);ctx.lineTo(x2.getPixelForValue(XM2),y3.bottom);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(x2.left,y3.getPixelForValue(YM2));ctx.lineTo(x2.right,y3.getPixelForValue(YM2));ctx.stroke();
+      ctx.restore();}};
+    if(psChart)psChart.destroy();
+    psChart=new Chart($('#psCanvas'),{type:'scatter',
+      data:{datasets:[{data:ps,parsing:false,pointStyle:ps.map(p2=>logoPt(p2.t,19)),borderColor:'transparent'}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c2=>`${c2.raw.t}: ${c2.raw.x} air &middot; ${c2.raw.y} ground TD/gm — \u03a3 ${(c2.raw.x+c2.raw.y).toFixed(2)}`.replace(/&middot;/g,'·')}}},
+      scales:{x:{title:{display:true,text:'passing TDs allowed /gm',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}},
+        y:{title:{display:true,text:'rushing TDs allowed /gm',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}}}},
+      plugins:[equip]});
+  })();
+  function render(){
+    const wk=+$('#tdWk').value,fp=$('#tdPos').value,sc=$('#tdSlot').value,tm=$('#tdTeam').value,D=J.dvp.combined;
+    const groups=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
+    const rows=[];
+    const lg={};groups.forEach(g=>{const arr=Object.keys(D).map(t=>g==='QB'?D[t].stats['P TD'].avg+D[t].stats['QB TD'].avg:D[t].stats[g+' TD'].avg);lg[g]={mx:Math.max(...arr),av:mean(arr)}});
+    groups.forEach(g=>{
+      if(sc&&sc!=='core'&&g!==sc)return;
+      UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
+      if(fp&&posOf(g)!==fp)return;
+      if(tm&&u.team!==tm)return;
+      if(sc==='core'&&g==='WR4+'&&u.dslot!=='WR4')return;
+      if(sc==='core'&&g==='TE2'&&u.depth>2)return;
+      const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
+      const def=o.replace('@','');const d=D[def];if(!d)return;
+      let cols,score;
+      let meas;
+      if(g==='QB'){cols=[['PaTD',d.stats['P TD']],['ruTD',d.stats['QB TD']]];
+        score=(d.stats['P TD'].rank+d.stats['QB TD'].rank)/2;meas=d.stats['P TD'].avg+d.stats['QB TD'].avg;}
+      else{cols=[['TD',d.stats[g+' TD']]];score=d.stats[g+' TD'].rank;meas=d.stats[g+' TD'].avg;}
+      rows.push({u,g,o,def,cols,score,meas});});});
+    rows.sort((a,b)=>a.score-b.score);
+    /* collider scatter: x = TD matchup rank (reversed), y = player's own TDs/gm 2025 */
+    const plot=rows.slice(0,130).map(r=>{
+      const Ls=J.logs.filter(l=>l[LOG.player]===r.u.player&&l[LOG.season]===2025);
+      const y2=Ls.length?mean(Ls.map(l=>l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd])):0;
+      return {x:r.score,y:+y2.toFixed(2),t:r.u.player,tm:r.u.team,g:r.g};});
+    const YM=mean(plot.map(p2=>p2.y));
+    if(tdChart)tdChart.destroy();
+    const quad={id:'quad',afterDraw(ch){const x2=ch.scales.x,y3=ch.scales.y;if(!x2||!y3)return;
+      const ctx=ch.ctx;ctx.save();
+      ctx.strokeStyle='rgba(230,230,230,.22)';ctx.setLineDash([5,5]);
+      ctx.beginPath();ctx.moveTo(x2.getPixelForValue(16.5),y3.top);ctx.lineTo(x2.getPixelForValue(16.5),y3.bottom);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(x2.left,y3.getPixelForValue(YM));ctx.lineTo(x2.right,y3.getPixelForValue(YM));ctx.stroke();
+      ctx.setLineDash([]);ctx.font='10px monospace';
+      ctx.fillStyle='rgba(0,200,83,.75)';ctx.textAlign='right';
+      ctx.fillText('FUSION CORE — scorers in open fields',x2.right-8,y3.top+14);
+      ctx.fillStyle='rgba(125,125,125,.7)';ctx.textAlign='left';
+      ctx.fillText('PROVEN, BUT WALLED OFF',x2.left+8,y3.top+14);
+      ctx.fillText('DEAD ZONE',x2.left+8,y3.bottom-8);
+      ctx.fillStyle='rgba(77,208,225,.75)';ctx.textAlign='right';
+      ctx.fillText('OPEN FIELD, UNPROVEN',x2.right-8,y3.bottom-8);
+      ctx.restore();}};
+    tdChart=new Chart($('#tdCanvas'),{type:'scatter',
+      data:{datasets:[{data:plot,parsing:false,pointStyle:plot.map(p2=>logoPt(p2.tm,17)),borderColor:'transparent'}]},
+      options:{maintainAspectRatio:false,plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:c2=>`${c2.raw.t} (${c2.raw.g}) — TD field rank ${c2.raw.x} · ${c2.raw.y} TD/gm '25`}}},
+      scales:{x:{reverse:true,title:{display:true,text:'TD matchup rank (right = opponent allows the most TDs)',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}},
+        y:{title:{display:true,text:"player TDs per game ('25)",color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}}}},
+      plugins:[quad]});
+    $('#tdTbl').innerHTML=`<table class="fx"><colgroup><col style="width:34px"><col style="width:170px"><col style="width:58px"><col style="width:82px"><col style="width:66px"><col style="width:230px"><col style="width:60px"><col style="width:96px"><col></colgroup>
+      <thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th><th>opp</th>
+      <th style="text-align:left">TDs opp allows /gm (rank)</th><th class="rk">TD &Psi;</th><th>&omega; wkly TD</th><th style="text-align:left">TD volume vs role league range (tick = lg avg)</th></tr></thead><tbody>
+      ${rows.map((r,i)=>`<tr><td class="mini">${i+1}</td><td class="pp plink" data-p="${r.u.player}">${esc(r.u.player)}</td><td>${tcell(r.u.team)}</td>
+      <td>${slotchip(r.u.dslot||r.g)}</td><td>${oppcell(r.o)}</td>
+      <td style="text-align:left">${r.cols.map(([n,o2])=>`${(+o2.avg).toFixed(1)}<span class="mini">${n}</span>&nbsp;${badge(o2.rank)}`).join(' &nbsp;')}</td>
+      <td>${psi(r.score)}</td><td>${sparkWave(series(r.def,r.g==='QB'?'P TD':r.g+' TD'),vivid(r.def),80,18)}</td>
+      <td><div class="tdbar"><div class="fill" style="width:${(r.meas/lg[r.g].mx*100).toFixed(1)}%;background:linear-gradient(90deg,${gradeColor(r.score)}55,${gradeColor(r.score)})"></div><span class="tick" style="left:${(lg[r.g].av/lg[r.g].mx*100).toFixed(1)}%"></span><span class="val">${r.meas.toFixed(1)}/gm</span></div></td></tr>`).join('')}
+      </tbody></table><p class="note">${rows.length} players &middot; combined ${J.blend} DvP</p>`;
+  }
+  ['tdWk','tdPos','tdSlot','tdTeam'].forEach(id=>$('#'+id).onchange=render);render();
+}
+home();dchart();lab();ranks();matrix();sked();tdboard();chamber();defense();player();insights();
+</script></body></html>
