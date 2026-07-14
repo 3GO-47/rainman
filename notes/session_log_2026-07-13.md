@@ -246,3 +246,12 @@ NEW: player popup cards — click any player name anywhere (smash board, TD boar
   tab, popups; chamber/home now pick the top-ordered body for WR4+/TE2 slots
 - Verified: core default = 288 rows (QB1..WR4,TE2), all-bodies = 532 with WR1..WR12 labels,
   team filter -> 17 rows for KC, 0 runtime errors
+
+## v21 — FINAL: mobile + verification + GitHub (2026-07-14)
+- Mobile: viewport meta, inline football favicon, responsive media queries (<=840px: single-column
+  grids, horizontally scrollable panels/tables, compact nav without F-key chips, tighter controls)
+- Final data verification: scripts/verify_data.py 45/45 PASSED post all UI changes; final render
+  smoke: 6 nav, 10 home panels, 11 smash rows, 288 TD rows, 16 chamber cards, 32 sked rows, 0 errors
+- Git repo initialized (built on native fs, copied to mount — the mount corrupts git's atomic
+  writes, documented here for future sessions): commit d5daab9, 50 files, clean status, fsck clean
+- README finalized with views summary + audit status
