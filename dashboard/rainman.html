@@ -80,8 +80,9 @@ h3 .f{color:var(--dim);text-transform:none;letter-spacing:0;font-weight:normal}
 .advbar{position:relative;height:5px;margin:2px 0 10px;opacity:.9}
 .advdot{position:absolute;top:-3px;width:11px;height:11px;border-radius:50%;background:var(--amber);
  box-shadow:0 0 0 1px #000;transform:translateX(-50%);transition:left .4s}
-td.st{min-width:88px;text-align:right}
-td.st .mini{margin:0 3px 0 2px}
+td.st{min-width:96px;text-align:left;padding-left:4px;padding-right:4px}
+td.st .mini{margin:0 0 0 2px}
+table.fx td.st{overflow:visible;text-overflow:clip}
 table.fx{table-layout:fixed}
 table.fx td,table.fx th{overflow:hidden;text-overflow:ellipsis}
 .sep{border:0;border-top:1px solid var(--edge);margin:14px 0}
@@ -210,7 +211,7 @@ function allowCells(def,grp,D){const d=D[def];
   return (ORDER[grp]||[null,null,null,null]).map(c=>{
     if(!c||!d)return '<td class="st"></td>';
     const o=d.stats[c];
-    return `<td class="st">${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span>${badge(o.rank)}</td>`}).join('');}
+    return `<td class="st">${badge(o.rank)} ${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span></td>`}).join('');}
 function fieldTilt(vis,home,pos){
   let yl='';for(let i=1;i<10;i++){const x=26+i*26.8;
     yl+=`<line x1="${x.toFixed(1)}" y1="2" x2="${x.toFixed(1)}" y2="16" stroke="${i===5?'#3f7a4e':'#274d33'}" stroke-width="${i===5?1.6:1}"/>`;
@@ -743,7 +744,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
         <td>${f.length?mean(f).toFixed(1):'—'}</td></tr>`};
     const hdr=g=>`<tr><th>player</th><th>tm</th><th>opp</th><th class="rk">&Psi;</th>
       ${ORDER[g].map(c=>`<th>${c?lbl(c)+' (rk)':''}</th>`).join('')}<th>def trend L3</th><th>&omega; wkly</th><th>L3 ppr</th></tr>`;
-    const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
+    const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
     $('#inSm').innerHTML=groups.map(g=>{
       const rows=cand.filter(x=>x.grp===g).sort((a,b)=>a.comp-b.comp);
       return `<div class="panel"><h3 style="color:${POSC[posOf(g)]}">${posIcon(posOf(g),14)} ${g} — wk ${wk}</h3>
@@ -833,7 +834,7 @@ function chamber(){
       return `<tr><td>${slotchip(g)}</td><td class="pp plink" data-p="${u?u.player:''}">${u?esc(u.player):'—'}${inj}</td>`+
         `${allowCells(def,g,D)}<td>${sparkWave(series(def,J.primary[g]),vivid(def),80,18)}</td></tr>`}).join('');
     const avg=mean(ROWS.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
-    return {html:`<div><table class="fx"><colgroup><col style="width:62px"><col><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:90px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
+    return {html:`<div><table class="fx"><colgroup><col style="width:58px"><col><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:88px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
       `<th colspan="4" style="text-align:center">${tcell(def)} def allows /gm (rank)</th><th>&omega;</th></tr></thead><tbody>${rows}</tbody></table>`+
       `<p class="mini" style="text-align:right">mean field &Psi; ${avg.toFixed(1)}</p></div>`,avg};
   }
@@ -941,7 +942,7 @@ function home(){
   <p class="note">${['QB','RB','WR','TE','D/ST'].map(x=>`<span style="color:${POSC[x]}">${posIcon(x,11)} ${x}</span>`).join(' &nbsp; ')}</p>
   <p class="note">F2 TD board &middot; F3 all 16 games each week &middot; F4 players + depth charts &middot; F5 defenses &middot; F6 season schedule &middot; click any player name anywhere for his popup card &middot; the filter bar above (week / slate / game / team) applies to every tab &middot; below: wk-${wk} board, field extremes, movers, and the full week-by-week insight screens</p></div>
   <div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
-  <table class="fx"><colgroup><col style="width:62px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
+  <table class="fx"><colgroup><col style="width:58px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
   <th style="color:var(--red)">avoid</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th></tr></thead><tbody>${board}</tbody></table></div>
   <div class="panel"><h3>field extremes — every slot <span class="f">(${J.blend})</span></h3>
   <table><thead><tr><th>slot</th><th style="color:var(--green)">bleeds most</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th>
