@@ -17,11 +17,37 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 - **Player Collider** — full multi-season game logs, PPR/usage charts, next-4 trajectory
 - **Grand Unified Insights** — week-aware smash/avoid, momentum shifts, volatility, schedule geodesics
 
+## Global filter bar (every tab)
+The sticky bar under the nav drives every view at once:
+- **WEEK** — the 2026/27 week (defaults to the current week from `refresh.py`; Home, TD Board,
+  Weekly Matchups, Matchup Lab, popup cards and the Schedule highlight all follow it)
+- **SLATE** — TNF · SUN 1P (1:00 ET / 12:00 CT) · SUN 4P (4:05-4:25 ET / 3:05-3:25 CT) · SNF · MNF,
+  plus THU DAY / FRI / SAT / INTL AM when the week has them; wk 18 = TBD until the NFL flexes
+- **GAME** — a single matchup (chronological list for the week, with kickoff time)
+- **TEAM** — one team; combine with slate/game to narrow further
+Player views show players whose team is in the filter; defense views show the filtered teams'
+defenses **and the defenses they face that week**; the Observatory auto-selects the two sides of
+a chosen game. The bar's summary shows games/teams matched, kickoff (ET + CT) and byes.
+Kickoffs come from `data/processed/kickoffs_2026.csv` (built by `scripts/build_kickoffs.py`
+from the PFR schedule + week pages in `data/raw/`).
+
+Filter state lives in the URL hash (`#wk=3&slate=LATE&game=GB@MIN&team=MIN`) — the **link** button
+copies it, so a bookmark or a pasted link reopens the exact view. Home also has a **slate map**
+(every kickoff window with the field-tilt favorite; click a window to filter every tab), Weekly
+Matchups groups its game cards under slate headers, and the Matchup Lab / TD Board carry a
+sortable kick column.
+
+## Live deploy
+`.github/workflows/pages.yml` publishes `dashboard/rainman.html` to GitHub Pages on every push
+to main (one-time: Settings → Pages → Source = *GitHub Actions*). Live at
+https://3go-47.github.io/rainman/ once enabled.
+
 ## Data flow (every number traces to data/game_logs/)
 ```
 PFR box scores (Chrome scrape) -> data/raw/box_lines_{season}.txt
   -> scripts/build_game_logs.py  -> data/game_logs/game_logs_{season}.csv   [source of truth]
   -> scripts/compute_dvp.py      -> dvp_weekly / dvp_season_{s} / dvp_combined
+PFR schedule + week pages     -> scripts/build_kickoffs.py -> kickoffs_2026.csv (day/time/slate)
 ESPN depth charts (Chrome)      -> scripts/build_depth_chart.py -> depth_charts_{date}.csv
 PFR schedule                    -> schedule_2026.csv (26/27, byes marked, box ids precomputed)
   -> scripts/build_matchups.py  -> matchups_current.csv
@@ -44,6 +70,13 @@ true WR1-WR12 labels) · Weekly Matchups (16 game cards, gridiron tilt) · Playe
 depth charts, depth/injury filters, popup player cards, deep dives) · Defenses (rankings /
 matrix / observatory) · Schedule (6-band heat grid). F1-F6 keyboard shortcuts; mobile-responsive
 (viewport meta + media queries); click any player name anywhere for his card.
+
+## Changelog
+- 2026-09-13 (b) — URL-hash filter state + link button; Home slate map; slate headers in Weekly
+  Matchups; kick column in Lab + TD Board; GitHub Pages deploy workflow.
+- 2026-09-13 — global week/slate/game/team filter bar across every tab; kickoff times + slate
+  buckets for all 272 games; single global week (no more hard-coded wk 1 on Home/popups);
+  system panel counts computed from the payload; headless render test passes with 0 JS errors.
 
 ## Status (as of 2026-07-14)
 - 2024 + 2025 seasons fully scraped: 544/544 box scores, 10,702 game-log rows, 0 fetch errors
