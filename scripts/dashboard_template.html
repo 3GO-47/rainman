@@ -14,16 +14,34 @@ header{display:flex;align-items:baseline;gap:14px;padding:10px 18px 8px;border-b
 h1{font-size:16px;margin:0;color:var(--amber);letter-spacing:3px;font-weight:bold}
 .sub{color:var(--dim);font-size:11px;letter-spacing:.5px}
 .sub b{color:var(--amber)}
-nav{display:flex;gap:2px;padding:6px 18px;border-bottom:1px solid var(--edge);flex-wrap:wrap;background:#000;position:sticky;top:0;z-index:5}
+#top{position:sticky;top:0;z-index:5;background:#000}
+nav{display:flex;gap:2px;padding:6px 18px;border-bottom:1px solid var(--edge);flex-wrap:wrap;background:#000}
 nav button{background:#000;border:1px solid var(--edge);color:var(--amber);padding:4px 12px;cursor:pointer;font:inherit;letter-spacing:1px;text-transform:uppercase;font-size:11px}
 nav button:hover{border-color:var(--amber)}
 nav button.on{background:var(--amber);color:#000;font-weight:bold;border-color:var(--amber)}
 nav button .fk{color:var(--dim);font-size:9.5px;margin-right:5px}
 nav button.on .fk{color:#000}
+#gbar{display:flex;gap:6px;align-items:center;padding:5px 18px;border-bottom:1px solid var(--edge2);flex-wrap:wrap;background:#000}
+#gbar .gl{color:var(--dim);font-size:9.5px;letter-spacing:1.5px;margin-left:8px}
+#gbar .gl:first-child{margin-left:0}
+#gbar select{padding:2px 5px;font-size:11px}
+.chips{display:flex;gap:2px;flex-wrap:wrap}
+.chips button{background:#000;border:1px solid var(--edge);color:var(--amber);padding:2px 8px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+.chips button:hover{border-color:var(--amber)}
+.chips button.on{background:var(--amber);color:#000;font-weight:bold;border-color:var(--amber)}
+.chips button .n{color:var(--dim);font-size:9px;margin-left:3px}
+.chips button.on .n{color:#000}
+#gClear{background:#000;border:1px solid var(--edge);color:var(--dim);padding:2px 8px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:1px}
+#gClear:hover{color:var(--red);border-color:var(--red)}
+#gShare{background:#000;border:1px solid var(--edge);color:var(--dim);padding:2px 8px;cursor:pointer;font:inherit;font-size:10px;letter-spacing:1px}
+#gShare:hover{color:var(--cyan);border-color:var(--cyan)}
+#gSum{color:var(--dim);font-size:10.5px;margin-left:auto}
+#gbar.live{border-bottom-color:var(--cyan)}
+.slate{display:inline-block;border:1px solid var(--edge2);color:var(--cyan);padding:0 5px;font-size:9.5px;letter-spacing:1px;border-radius:2px;vertical-align:1px}
 main{padding:12px 18px}
 table{border-collapse:collapse;width:100%;font-size:11.5px}
 th,td{padding:2px 7px;border-bottom:1px solid #141414;text-align:right;white-space:nowrap}
-th{color:#8b98a5;cursor:pointer;position:sticky;top:33px;background:#000;z-index:2;font-weight:normal;text-transform:uppercase;font-size:10px;letter-spacing:1px;border-bottom:1px solid var(--edge2)}
+th{color:#8b98a5;cursor:pointer;position:sticky;top:var(--sticky,33px);background:#000;z-index:2;font-weight:normal;text-transform:uppercase;font-size:10px;letter-spacing:1px;border-bottom:1px solid var(--edge2)}
 th.rk{color:var(--cyan)}
 td:first-child,th:first-child{text-align:left}
 tr:hover td{background:#0a0f14}
@@ -62,8 +80,9 @@ h3 .f{color:var(--dim);text-transform:none;letter-spacing:0;font-weight:normal}
 .advbar{position:relative;height:5px;margin:2px 0 10px;opacity:.9}
 .advdot{position:absolute;top:-3px;width:11px;height:11px;border-radius:50%;background:var(--amber);
  box-shadow:0 0 0 1px #000;transform:translateX(-50%);transition:left .4s}
-td.st{min-width:88px;text-align:right}
-td.st .mini{margin:0 3px 0 2px}
+td.st{min-width:96px;text-align:left;padding-left:4px;padding-right:4px}
+td.st .mini{margin:0 0 0 2px}
+table.fx td.st{overflow:visible;text-overflow:clip}
 table.fx{table-layout:fixed}
 table.fx td,table.fx th{overflow:hidden;text-overflow:ellipsis}
 .sep{border:0;border-top:1px solid var(--edge);margin:14px 0}
@@ -98,6 +117,8 @@ canvas.chart{max-height:260px}
  h1{font-size:14px;letter-spacing:2px}
  .sub{font-size:9.5px}
  nav{padding:5px 8px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+ #gbar{padding:4px 8px;gap:4px}
+ #gSum{margin-left:0;width:100%}
  nav button{padding:4px 8px;font-size:10px;white-space:nowrap}
  nav button .fk{display:none}
  .grid2,.grid3{grid-template-columns:1fr}
@@ -114,7 +135,7 @@ canvas.chart{max-height:260px}
 }
 </style></head><body>
 <header><h1><svg width="17" height="17" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN</h1><span class="sub">DVP TERMINAL &middot; NFL DEFENSE-VS-POSITION &middot; DATA <b>24/25 + 25/26</b> (544 GM &middot; 10,702 ROWS) &middot; SCHED <b>26/27</b> &middot; BUILT <b>__BUILT__</b> &middot; BLEND <b>__BLEND__</b> &middot; RANK <b>1</b>/32 = MOST ALLOWED &middot; p&#8407; = m&middot;v&#8407;</span></header>
-<nav>
+<div id="top"><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
 <button data-v="tdb"><span class="fk">F2</span>TD Board</button>
 <button data-v="chamber"><span class="fk">F3</span>Weekly Matchups</button>
@@ -122,6 +143,15 @@ canvas.chart{max-height:260px}
 <button data-v="defenses"><span class="fk">F5</span>Defenses</button>
 <button data-v="sked"><span class="fk">F6</span>Schedule</button>
 </nav>
+<div id="gbar" title="global filter — applies to every tab">
+<span class="gl">WEEK</span><select id="gWk"></select>
+<span class="gl">SLATE</span><div class="chips" id="gSlates"></div>
+<span class="gl">GAME</span><select id="gGame"></select>
+<span class="gl">TEAM</span><select id="gTeam"></select>
+<button id="gClear">&#10005; clear</button>
+<button id="gShare" title="copy a link that opens the dashboard with this exact week / slate / game / team">&#128279; link</button>
+<span id="gSum"></span>
+</div></div>
 <main>
 <div id="home"><div id="homeTop"></div><div id="insights"></div></div>
 <div id="chamber" hidden></div>
@@ -181,7 +211,7 @@ function allowCells(def,grp,D){const d=D[def];
   return (ORDER[grp]||[null,null,null,null]).map(c=>{
     if(!c||!d)return '<td class="st"></td>';
     const o=d.stats[c];
-    return `<td class="st">${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span>${badge(o.rank)}</td>`}).join('');}
+    return `<td class="st">${badge(o.rank)} ${(+o.avg).toFixed(1)}<span class="mini">${lbl(c)}</span></td>`}).join('');}
 function fieldTilt(vis,home,pos){
   let yl='';for(let i=1;i<10;i++){const x=26+i*26.8;
     yl+=`<line x1="${x.toFixed(1)}" y1="2" x2="${x.toFixed(1)}" y2="16" stroke="${i===5?'#3f7a4e':'#274d33'}" stroke-width="${i===5?1.6:1}"/>`;
@@ -251,6 +281,85 @@ addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6'].indexOf(e
   if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
+/* ---------- GLOBAL FILTER: week · slate · game · team — applies to every tab ---------- */
+const GM={wk:0,vis:1,home:2,date:3,day:4,time:5,slate:6};
+const SLATE_LBL={TNF:'TNF',THU:'THU DAY',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
+const SLATE_TIP={TNF:'Thursday night (incl. the Wednesday opener)',THU:'Thanksgiving-day afternoon games',FRI:'Friday holiday windows',SAT:'Saturday windows',INTL:'Sunday 9:30 AM ET international games',EARLY:'Sunday 1:00 PM ET / 12:00 CT',LATE:'Sunday 4:05-4:25 PM ET / 3:05-3:25 CT',SNF:'Sunday night',MNF:'Monday night',TBD:'kickoff not yet set (NFL flex)'};
+const SLATE_ORDER=['TNF','THU','FRI','SAT','INTL','EARLY','LATE','SNF','MNF','TBD'];
+const G={week:J.week||1,slate:'',game:'',team:''};
+const tmin=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return 9999;return (+m[1]%12+(m[3]==='PM'?12:0))*60+ +m[2]};
+const ctTime=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return '';let h=+m[1]%12+(m[3]==='PM'?12:0)-1;if(h<0)h+=24;return `${h%12||12}:${m[2]} ${h>=12?'PM':'AM'} CT`};
+const GAMES=wk=>J.games26.filter(g=>g[GM.wk]===wk).sort((a,b)=>(a[GM.date]<b[GM.date]?-1:a[GM.date]>b[GM.date]?1:0)||tmin(a[GM.time])-tmin(b[GM.time]));
+const gameOf=(t,wk)=>GAMES(wk).find(g=>g[GM.vis]===t||g[GM.home]===t);
+const oppFor=(t,wk)=>(J.sched26[t]||[])[wk-1]||'';
+const slateChip=s=>s?`<span class="slate" title="${SLATE_TIP[s]||''}">${SLATE_LBL[s]||s}</span>`:'';
+const kickLbl=g=>!g?'':g[GM.time]?`${g[GM.day]} ${g[GM.time]} ET / ${ctTime(g[GM.time])} ${slateChip(g[GM.slate])}`:`${g[GM.day]} kickoff TBD`;
+let ACT=null,DEFSET=null;   // null = no filter
+function recompute(){
+  let gs=GAMES(G.week);
+  if(G.slate)gs=gs.filter(g=>g[GM.slate]===G.slate);
+  if(G.game)gs=gs.filter(g=>g[GM.vis]+'@'+g[GM.home]===G.game);
+  ACT=null;
+  if(G.slate||G.game){ACT=new Set();gs.forEach(g=>{ACT.add(g[GM.vis]);ACT.add(g[GM.home])});}
+  if(G.team)ACT=(!ACT||ACT.has(G.team))?new Set([G.team]):new Set();
+  DEFSET=null;
+  if(ACT){DEFSET=new Set(ACT);ACT.forEach(t=>{const o=oppFor(t,G.week).replace('@','');if(o&&o!=='BYE')DEFSET.add(o)});}
+}
+const inF=t=>!ACT||ACT.has(t);        // offense / player side: team is in the filter
+const inD=t=>!DEFSET||DEFSET.has(t);  // defense side: filtered teams + the defenses they face this week
+const RR=[];                          // every view registers its re-render here
+function readHash(){
+  const h=new URLSearchParams(location.hash.replace(/^#/,''));
+  if(h.get('wk')&&+h.get('wk')>=1&&+h.get('wk')<=18)G.week=+h.get('wk');
+  if(h.get('slate')&&SLATE_ORDER.includes(h.get('slate')))G.slate=h.get('slate');
+  if(h.get('game'))G.game=h.get('game');
+  if(h.get('team')&&J.sched26[h.get('team')])G.team=h.get('team');
+}
+function writeHash(){
+  const h=new URLSearchParams();
+  if(G.week!==(J.week||1))h.set('wk',G.week);
+  if(G.slate)h.set('slate',G.slate);if(G.game)h.set('game',G.game);if(G.team)h.set('team',G.team);
+  const str=h.toString();
+  try{history.replaceState(null,'',str?'#'+str:location.pathname+location.search)}catch(e){}
+}
+function gbarInit(){
+  readHash();
+  const teams=Object.keys(J.sched26).sort();
+  $('#gWk').innerHTML=Array.from({length:18},(_,i)=>`<option value="${i+1}" ${i+1===G.week?'selected':''}>wk ${i+1}</option>`).join('');
+  $('#gTeam').innerHTML=`<option value="">all teams</option>`+teams.map(t=>`<option value="${t}" ${t===G.team?'selected':''}>${t} ${TEAM[t]?TEAM[t].n:''}</option>`).join('');
+  $('#gWk').onchange=()=>{G.week=+$('#gWk').value;G.slate='';G.game='';apply()};
+  $('#gTeam').onchange=()=>{G.team=$('#gTeam').value;apply()};
+  $('#gGame').onchange=()=>{G.game=$('#gGame').value;apply()};
+  $('#gClear').onclick=()=>{G.slate='';G.game='';G.team='';$('#gTeam').value='';apply()};
+  $('#gShare').onclick=()=>{writeHash();const u=location.href;const done=()=>{$('#gShare').textContent='copied';setTimeout(()=>$('#gShare').innerHTML='&#128279; link',1200)};
+    (navigator.clipboard?navigator.clipboard.writeText(u).then(done,()=>prompt('link',u)):prompt('link',u));};
+  addEventListener('hashchange',()=>{const w=G.week;G.slate='';G.game='';G.team='';readHash();
+    if(G.week!==w)$('#gWk').value=G.week;$('#gTeam').value=G.team;apply()});
+  addEventListener('resize',()=>document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px'));
+  apply();
+}
+function apply(){
+  recompute();
+  const gs=GAMES(G.week);
+  const cnt={};gs.forEach(g=>cnt[g[GM.slate]]=(cnt[g[GM.slate]]||0)+1);
+  $('#gSlates').innerHTML=`<button data-s="" class="${G.slate?'':'on'}">all</button>`+SLATE_ORDER.filter(s=>cnt[s]).map(s=>
+    `<button data-s="${s}" class="${G.slate===s?'on':''}" title="${SLATE_TIP[s]}">${SLATE_LBL[s]}<span class="n">${cnt[s]}</span></button>`).join('');
+  document.querySelectorAll('#gSlates button').forEach(b=>b.onclick=()=>{G.slate=b.dataset.s;G.game='';apply()});
+  const gl=G.slate?gs.filter(g=>g[GM.slate]===G.slate):gs;
+  $('#gGame').innerHTML=`<option value="">all games</option>`+gl.map(g=>{const k=g[GM.vis]+'@'+g[GM.home];
+    return `<option value="${k}" ${k===G.game?'selected':''}>${g[GM.vis]} @ ${g[GM.home]} · ${g[GM.day]} ${g[GM.time]||'TBD'}</option>`}).join('');
+  const nT=ACT?ACT.size:32,nG=ACT?gs.filter(g=>ACT.has(g[GM.vis])||ACT.has(g[GM.home])).length:gs.length;
+  const byes=Object.keys(J.sched26).filter(t=>J.sched26[t][G.week-1]==='BYE');
+  const tg=G.team?gameOf(G.team,G.week):null;
+  $('#gSum').innerHTML=`wk ${G.week} · ${nG} game${nG===1?'':'s'} · ${nT} team${nT===1?'':'s'}`
+    +(G.team&&!tg?' · <span class="inj0">'+G.team+' on BYE</span>':tg?' · '+tg[GM.vis]+' @ '+tg[GM.home]+' '+kickLbl(tg):'')
+    +(!ACT&&byes.length?' · bye: '+byes.join(' '):'');
+  $('#gbar').classList.toggle('live',!!ACT);
+  if(G.game&&!gl.some(g=>g[GM.vis]+'@'+g[GM.home]===G.game)){G.game='';recompute();}
+  writeHash();
+  document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px');
+  RR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+}
 /* ---------- player universe (depth chart + owners + wk1 opponents) ---------- */
 const SLOTG=s=>{if(!s)return'';if(s[0]==='Q')return'QB';if(s.startsWith('FB'))return'RB2';
   if(s.startsWith('RB'))return s==='RB1'?'RB1':'RB2';
@@ -259,7 +368,7 @@ const SLOTG=s=>{if(!s)return'';if(s[0]==='Q')return'QB';if(s.startsWith('FB'))re
 const OWNER={};J.matchups.forEach(m=>{if(m.owner)OWNER[m.player+'|'+m.team]=m.owner});
 const UNIVERSE=J.depth.filter(d=>d.pos_row!=='FB').map(d=>{
   const g=SLOTG(d.slot);
-  const oppRaw=(J.sched26[d.team]||[])[0]||'';
+  const oppRaw=(J.sched26[d.team]||[])[(J.week||1)-1]||'';
   const opp=oppRaw==='BYE'?'':oppRaw.replace('@','');
   return {player:d.player,team:d.team,slot:d.slot,grp:g,inj:d.injury,depth:+d.depth,
     row:d.pos_row,pos:d.pos_row.replace(/\d/,'').replace(/[0-9+]/g,''),
@@ -285,30 +394,29 @@ function lab(){
     `<button data-p="${p}" class="${i===0?'on':''}">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
     <select id="labSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-    <select id="labWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
-    <select id="labTeam"><option value="">team: all</option>${teams.map(t=>`<option>${t}</option>`).join('')}</select>
     <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <input id="labQ" placeholder="search player..." size="18">
-    <span class="note">starred cols = opponent's DvP rank for that stat (chosen 2026/27 week) &middot; click a player name for his full deep dive below &middot; unstarred = raw allowed/gm &middot; &Psi; = mean of ranks &middot; click headers to sort</span>
+    <span class="note">starred cols = opponent's DvP rank for that stat (week / slate / game / team from the global filter bar) &middot; click a player name for his full deep dive below &middot; unstarred = raw allowed/gm &middot; &Psi; = mean of ranks &middot; click headers to sort</span>
   </div><div id="labTbl"></div>`;
   let pos='QB',sortK='psi',sortA=true;
   function rows(){
     const src=$('#labSrc').value,D=J.dvp[src];
-    const ft=$('#labTeam').value,q=$('#labQ').value.toLowerCase();
+    const q=$('#labQ').value.toLowerCase();
     const dep=$('#labDepth').value,hin=$('#labInj').value;
     return UNIVERSE.filter(u=>u.pos===pos&&u.grp
-      &&(!ft||u.team===ft)
+      &&inF(u.team)
       &&(!dep||u.depth<=+dep)
       &&(hin!=='x'||u.inj!=='-1')
       &&(!q||u.player.toLowerCase().includes(q)))
     .map(u=>{
       const stats=LABDEF[pos].stats(u.grp);
-      const wk=+($('#labWk').value||1);
+      const wk=G.week;
       const oppRaw=(J.sched26[u.team]||[])[wk-1]||'';
       const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
       const d=opp&&D[opp]?D[opp]:null;
-      return {...u,oppRaw,opp,statset:stats,
+      const gm=gameOf(u.team,wk);
+      return {...u,oppRaw,opp,statset:stats,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
         psi:d?d.comps[u.grp]:null};
@@ -329,11 +437,12 @@ function lab(){
       if(sortK==='psi'){x=a.psi==null?99:a.psi;y=b.psi==null?99:b.psi}
       else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
       else if(sortK.startsWith('v')){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
+      else if(sortK==='kick'){x=a.kickord;y=b.kickord}
       else {x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
     $('#labTbl').innerHTML=`<table><thead><tr>
       <th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="slot">Slot</th>
-      <th data-k="opp">Opp</th>
+      <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
       ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}
       <th class="rk" data-k="psi">&Psi;</th>
       ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
@@ -341,13 +450,13 @@ function lab(){
     </tr></thead><tbody>
     ${R.map(u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<tr><td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>
-      <td>${oppcell(u.oppRaw)}</td>
+      <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
       ${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}
       <td>${psi(u.psi)}</td>
       ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
       <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td>
       </tr>`}).join('')}</tbody></table>
-    <p class="note">${R.length} players &middot; source: ${src}</p>`;
+    <p class="note">${R.length} players &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
     document.querySelectorAll('#labTbl th').forEach(th=>th.onclick=()=>{
       const k=th.dataset.k;sortA=(sortK===k)?!sortA:true;sortK=k;render()});
     document.querySelectorAll('#labTbl .plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
@@ -355,9 +464,9 @@ function lab(){
   document.querySelectorAll('#labTabs button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#labTabs button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');pos=b.dataset.p;sortK='psi';sortA=true;render()});
-  ['labSrc','labWk','labTeam','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
+  ['labSrc','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
   $('#labQ').oninput=render;
-  render();
+  RR.push(render);
 }
 /* ---------- DvP Rankings: 32 defenses, every stat, workbook Data-tab style ---------- */
 function ranks(){
@@ -366,12 +475,12 @@ function ranks(){
   $('#ranks').innerHTML=`
   <div class="tabs" id="rkTabs">${tabs.map((s,i)=>`<button data-s="${s}" class="${i===0?'on':''}">${s==='ALL'?s:posIcon(posOf(s),11)+' '+s}</button>`).join('')}</div>
   <div class="controls"><select id="rkSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-  <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed</span></div>
+  <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed &middot; with a filter active: the filtered teams' defenses + the defenses they face this week</span></div>
   <div id="rkTbl"></div>`;
   let slot='QB',sortK='psi',sortA=true;
   function render(){
     const src=$('#rkSrc').value,D=J.dvp[src];
-    const defs=Object.keys(D);
+    const defs=Object.keys(D).filter(inD);
     if(slot==='ALL'){
       let R=defs.map(d=>({d,ranks:J.statCols.map(c=>D[d].stats[c].rank),
         avgPsi:mean(Object.values(D[d].comps))}));
@@ -408,7 +517,7 @@ function ranks(){
     document.querySelectorAll('#rkTabs button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');slot=b.dataset.s;sortK=slot==='ALL'?'psi':'psi';sortA=true;render()});
   $('#rkSrc').onchange=render;
-  render();
+  RR.push(render);
 }
 /* ---------- Field Matrix: 32x10 potential map + radar fingerprint ---------- */
 let mChart;
@@ -421,7 +530,7 @@ function matrix(){
     <div class="panel" id="mDrill" hidden></div></div>`;
   function render(){
     const src=$('#mSrc').value,D=J.dvp[src];
-    const defs=Object.keys(D).sort();
+    const defs=Object.keys(D).filter(inD).sort();
     $('#matrixWrap').innerHTML=`<table id="matrixTbl"><thead><tr><th>DEF</th>
       ${J.slots.map(s=>`<th style="color:${POSC[posOf(s)]}">${s}</th>`).join('')}</tr></thead><tbody>
       ${defs.map(d=>`<tr><td>${tcell(d)}</td>${J.slots.map(s=>{const v=D[d].comps[s];
@@ -446,7 +555,7 @@ function matrix(){
       <tbody>${J.statCols.map(c=>`<tr><td>${c}</td><td>${D.stats[c].avg}</td><td>${badge(D.stats[c].rank)}</td></tr>`).join('')}</tbody></table>`;
   }
   $('#mSrc').onchange=render;
-  render();
+  RR.push(render);
 }
 /* ---------- Defense Observatory: comparative field physics ---------- */
 var dChart,rChart,phChart;
@@ -554,7 +663,7 @@ function defense(){
       <p class="note">Δp &gt; 0 collapsing (allowing more) &middot; Δp &lt; 0 tightening &middot; σ/μ high = boom/bust, rank less trustworthy</p>`;
   }
   ['dDef','dCmp','dSea','dSlot','dStat'].forEach(id=>$('#'+id).onchange=render);
-  render();
+  RR.push(()=>{if(ACT&&ACT.size){const a=[...ACT][0],o=oppFor(a,G.week).replace('@','');$('#dDef').value=a;if(o&&o!=='BYE'&&o!==a)$('#dCmp').value=o;}render()});
 }
 /* ---------- Player Collider ---------- */
 let pChart1,pChart2;
@@ -573,13 +682,13 @@ function player(){
     const ppr=L.map(l=>l[LOG.fppr]);
     const use=L.map(l=>l[LOG.tgt]+l[LOG.ra]);
     const mu=mean(ppr),sd=stdev(ppr);
-    const sch=(J.sched26[dc.team]||[]).map((o,i)=>({wk:i+1,o})).filter(x=>x.o!=='BYE').slice(0,4);
+    const sch=(J.sched26[dc.team]||[]).map((o,i)=>({wk:i+1,o})).filter(x=>x.o!=='BYE'&&x.wk>=G.week).slice(0,4);
     $('#pOut').innerHTML=`<div class="grid3">
       <div class="panel"><h3>${tlogo(dc.team,22)} ${esc(n)} <span class="f">${dc.team} · ${dc.slot||'?'} · μ ${mu.toFixed(1)} ppr · σ ${sd.toFixed(1)}</span></h3>
         <canvas id="pC1" class="chart"></canvas></div>
       <div class="panel"><h3>usage worldline <span class="f">targets + carries</span></h3>
         <canvas id="pC2" class="chart"></canvas></div>
-      <div class="panel"><h3>trajectory <span class="f">next 4 · slot ${grp||'?'} · combined DvP</span></h3>
+      <div class="panel"><h3>trajectory <span class="f">next 4 from wk ${G.week} · slot ${grp||'?'} · combined DvP</span></h3>
         <table><thead><tr><th>wk</th><th>opp</th><th class="rk">&Psi;</th></tr></thead><tbody>
         ${sch.map(x=>{const d=x.o.replace('@','');const v=(J.dvp.combined[d]||{comps:{}}).comps[grp];
           return `<tr><td>wk${x.wk}</td><td>${oppcell(x.o)}</td><td>${v==null?'—':psi(v)}</td></tr>`}).join('')}
@@ -603,22 +712,22 @@ function player(){
       {label:'touches+targets',data:use,borderColor:'#9d7bff',backgroundColor:'rgba(157,123,255,.15)',fill:true,tension:.3}]},
       options:{plugins:{legend:{labels:{color:'#cfdcea'}}},scales:{x:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}},y:{ticks:{color:'#5d7186'},grid:{color:'#1c2836'}}}}});
   };
+  RR.push(()=>{if($('#pIn').value)$('#pIn').onchange()});
 }
 /* ---------- Grand Unified Insights ---------- */
 function insights(){
   $('#insights').innerHTML=`<div class="controls">
-    <select id="inWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
     <span class="note"><b style="color:var(--cyan)">HOW TO READ THIS</b> — &Psi; = the opponent defense's average rank in the stats that matter for that role
 (QB: pass yds / rush yds / pass+rush / pass TD / total TD &middot; RB: rush yds / catches / rec yds / rush+rec / TD &middot; WR &amp; TE: catches / rec yds / TD).
 Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actual per-game production the opponent defense gives up to that role, its league rank per stat, whether the defense is trending softer or tighter, its weekly waveform, and the player's own recent scoring. Recomputed live from depth charts + the 26/27 schedule; OUT players excluded.</span></div>
     <div id="inSm"></div><div id="inRest"></div>`;
   const groups=['QB','RB1','RB2','WR1','WR2','WR3','TE1'];
   function smRender(){
-    const wk=+$('#inWk').value,D=J.dvp.combined;
+    const wk=G.week,D=J.dvp.combined;
     const se=Math.max(...J.weekly.map(r=>r[1]));
     const form={};
     J.logs.forEach(l=>{if(l[LOG.season]===se)(form[l[LOG.player]]=form[l[LOG.player]]||[]).push(l[LOG.fppr])});
-    const cand=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp))
+    const cand=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&inF(u.team)&&u.slot===(u.grp==='QB'?'QB1':u.grp))
       .map(u=>{const o=(J.sched26[u.team]||[])[wk-1]||'';
         if(!o||o==='BYE')return null;
         const def=o.replace('@','');
@@ -635,7 +744,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
         <td>${f.length?mean(f).toFixed(1):'—'}</td></tr>`};
     const hdr=g=>`<tr><th>player</th><th>tm</th><th>opp</th><th class="rk">&Psi;</th>
       ${ORDER[g].map(c=>`<th>${c?lbl(c)+' (rk)':''}</th>`).join('')}<th>def trend L3</th><th>&omega; wkly</th><th>L3 ppr</th></tr>`;
-    const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
+    const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
     $('#inSm').innerHTML=groups.map(g=>{
       const rows=cand.filter(x=>x.grp===g).sort((a,b)=>a.comp-b.comp);
       return `<div class="panel"><h3 style="color:${POSC[posOf(g)]}">${posIcon(posOf(g),14)} ${g} — wk ${wk}</h3>
@@ -645,9 +754,9 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
       <table class="fx">${CG}<thead>${hdr(g)}</thead><tbody>${rows.slice(-5).reverse().map(line).join('')}</tbody></table>
       </div>`}).join('');
   }
-  $('#inWk').onchange=smRender;smRender();
+  function rest(){
   const season=Math.max(...J.weekly.map(r=>r[1]));
-  const defs=[...new Set(J.weekly.map(r=>r[0]))];
+  const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
   const movers=[],vol=[];
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===season).sort((a,b)=>a[2]-b[2]);
     J.slots.forEach(sl=>{const c=J.primary[sl],all=rows.map(r=>r[WCOL[c]]);
@@ -668,7 +777,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
     <table>${vol.slice(-8).reverse().map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="mini">${x.c}</td><td>${(100*x.cv).toFixed(0)}%</td></tr>`).join('')}</table></div></div>
     <p class="note">coefficient of variation of weekly stat allowed &middot; high = matchup rank is less trustworthy week to week</p></div>`;
   const key=['QB','RB1','WR1','TE1'];
-  const ss=key.map(sl=>{const per=Object.keys(J.sched26).map(t=>{
+  const ss=key.map(sl=>{const per=Object.keys(J.sched26).filter(inF).map(t=>{
       const cs=J.sched26[t].filter(o=>o!=='BYE').map(o=>{const d=o.replace('@','');
         return (J.dvp.combined[d]||{comps:{}}).comps[sl]}).filter(v=>v!=null);
       return {t,avg:mean(cs)}}).sort((a,b)=>a.avg-b.avg);
@@ -677,6 +786,8 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
     <div><p class="mini">DOWNHILL (easiest)</p><table>${per.slice(0,5).map(line).join('')}</table></div>
     <div><p class="mini">UPHILL (hardest)</p><table>${per.slice(-5).reverse().map(line).join('')}</table></div></div></div>`}).join('');
   $('#inRest').innerHTML=mv+un+ss+`<p class="note"><b>momentum</b> = defenses trending softer/harder RIGHT NOW (recent form the season rank hasn't caught up to — target/fade before the market does) &middot; <b>uncertainty</b> = how trustworthy a defense's rank is week to week &middot; <b>geodesics</b> = full-season strength of schedule per role (planning signal, not a weekly call)</p>`;
+  }
+  RR.push(()=>{smRender();rest()});
 }
 /* ---------- Spacetime Grid: 32 offenses x 18 weeks of 2026/27 ---------- */
 function sked(){
@@ -688,7 +799,7 @@ function sked(){
     <div id="skTbl"></div>`;
   function render(){
     const slot=$('#skSlot').value,D=J.dvp[$('#skSrc').value];
-    const rows=Object.keys(J.sched26).map(t=>{
+    const rows=Object.keys(J.sched26).filter(inF).map(t=>{
       const cells=J.sched26[t].map(o=>{
         if(o==='BYE')return {bye:true};
         const opp=o.replace('@','');
@@ -697,7 +808,7 @@ function sked(){
       return {t,cells,avg:mean(cells.filter(c=>c.v!=null).map(c=>c.v))};
     }).sort((a,b)=>a.avg-b.avg);
     $('#skTbl').innerHTML=`<table><thead><tr><th>offense</th>
-      ${Array.from({length:18},(_,i)=>`<th>w${i+1}</th>`).join('')}<th class="rk">&Sigma;&Psi;</th></tr></thead><tbody>
+      ${Array.from({length:18},(_,i)=>`<th${i+1===G.week?' style="color:var(--amber)"':''}>w${i+1}</th>`).join('')}<th class="rk">&Sigma;&Psi;</th></tr></thead><tbody>
       ${rows.map(r=>`<tr><td>${tcell(r.t)}</td>${r.cells.map(c=>{
         if(c.bye)return '<td style="background:rgba(93,113,134,.13)" class="mini">&empty;</td>';
         return `<td style="background:${c.v==null?'transparent':gradeBg(c.v)};text-align:center"
@@ -705,12 +816,11 @@ function sked(){
       }).join('')}<td>${psi(r.avg)}</td></tr>`).join('')}</tbody></table>`;
   }
   ['skSlot','skSrc'].forEach(id=>$('#'+id).onchange=render);
-  render();
+  RR.push(render);
 }
 /* ---------- Collision Chamber: weekly comprehensive matchups ---------- */
 function chamber(){
   $('#chamber').innerHTML=`<div class="controls">
-    <select id="chWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 week ${i+1}</option>`).join('')}</select>
     <select id="chSrc">${Object.keys(J.dvp).map(x=>`<option ${x==='combined'?'selected':''}>${x}</option>`).join('')}</select>
     <span class="note">every collision of the week &middot; each offense's slot owners vs the opposing defensive field &middot; &omega; = that defense's weekly allowed waveform (latest scraped season, dashed μ) &middot; dot on the tilt bar leans toward the offense in the softer field</span></div>
     <div id="chOut"></div>`;
@@ -724,41 +834,46 @@ function chamber(){
       return `<tr><td>${slotchip(g)}</td><td class="pp plink" data-p="${u?u.player:''}">${u?esc(u.player):'—'}${inj}</td>`+
         `${allowCells(def,g,D)}<td>${sparkWave(series(def,J.primary[g]),vivid(def),80,18)}</td></tr>`}).join('');
     const avg=mean(ROWS.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
-    return {html:`<div><table class="fx"><colgroup><col style="width:62px"><col><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:90px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
+    return {html:`<div><table class="fx"><colgroup><col style="width:58px"><col><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:88px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
       `<th colspan="4" style="text-align:center">${tcell(def)} def allows /gm (rank)</th><th>&omega;</th></tr></thead><tbody>${rows}</tbody></table>`+
       `<p class="mini" style="text-align:right">mean field &Psi; ${avg.toFixed(1)}</p></div>`,avg};
   }
   function render(){
-    const wk=+$('#chWk').value,D=J.dvp[$('#chSrc').value];
-    const games=J.games26.filter(g=>g[0]===wk);
+    const wk=G.week,D=J.dvp[$('#chSrc').value];
+    const games=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
     const byes=Object.keys(J.sched26).filter(t=>J.sched26[t][wk-1]==='BYE');
-    $('#chOut').innerHTML=games.map(([w,vis,home,date])=>{
+    let lastSlate=null;
+    $('#chOut').innerHTML=(games.length?'':'<p class="note">no games match the current filter</p>')+games.map(g=>{const [w,vis,home,date]=g;
+      const hdr=g[GM.slate]!==lastSlate?`<h3 style="margin-top:14px;border-bottom:1px solid var(--edge2)">${slateChip(g[GM.slate])} <span class="f">${SLATE_TIP[g[GM.slate]]||''} &middot; ${games.filter(x=>x[GM.slate]===g[GM.slate]).length} game${games.filter(x=>x[GM.slate]===g[GM.slate]).length===1?'':'s'}</span></h3>`:'';
+      lastSlate=g[GM.slate];
       const A=side(vis,home,D),B=side(home,vis,D);
       const diff=B.avg-A.avg;
       const favT=diff>0?vis:home;
       const dot=(50-Math.max(-45,Math.min(45,diff*6))).toFixed(1);
-      return `<div class="panel gamecard" style="border-top:2px solid ${vivid(favT)}">
+      return hdr+`<div class="panel gamecard" style="border-top:2px solid ${vivid(favT)}">
         <h3>${tlogo(vis,20)} ${vis} @ ${tlogo(home,20)} ${home}
-          <span class="f">${date} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
+          <span class="f">${date} &middot; ${kickLbl(g)} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
         ${fieldTilt(vis,home,+dot)}
         <div class="grid2">${A.html}${B.html}</div></div>`}).join('')
       +(byes.length?`<p class="note">out of phase this week (bye): ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
   }
-  ['chWk','chSrc'].forEach(id=>$('#'+id).onchange=render);render();
+  $('#chSrc').onchange=render;RR.push(render);
 }
 /* ---------- Home: the command center ---------- */
 function home(){
-  const D=J.dvp.combined,se=Math.max(...J.weekly.map(r=>r[1]));
-  const pick=g=>{const rows=UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g))
-    .map(u=>{const o=(J.sched26[u.team]||[])[0]||'';if(!o||o==='BYE')return null;
+  RR.push(render);
+  function render(){
+  const D=J.dvp.combined,se=Math.max(...J.weekly.map(r=>r[1])),wk=G.week;
+  const pick=g=>{const rows=UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inF(u.team)&&u.slot===(g==='QB'?'QB1':g))
+    .map(u=>{const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return null;
       const def=o.replace('@','');const v=(D[def]||{comps:{}}).comps[g];
       return v==null?null:{u,o,def,v}}).filter(Boolean).sort((a,b)=>a.v-b.v);
     return {best:rows[0],worst:rows[rows.length-1]};};
   // WK1 SMASH BOARD (HTML): every role + FLEX (best remaining non-QB), full stat lines
   const roles=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
   const pool=[];
-  roles.forEach(g=>{UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
-    const o=(J.sched26[u.team]||[])[0]||'';if(!o||o==='BYE')return;
+  roles.forEach(g=>{UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inF(u.team)&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
+    const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
     const def=o.replace('@','');const v=(J.dvp.combined[def]||{comps:{}}).comps[g];
     if(v!=null)pool.push({g,u,o,def,v});});});
   const srows=[];const taken=new Set();
@@ -777,13 +892,13 @@ function home(){
     return `<div class="sm-row" style="border-left-color:${c}">
      <div class="sm-role" style="color:${c}">${x.flex?'<span style="font-size:13px">&#10033;</span>':posIcon(posOf(x.g),13)}<b>${x.label}</b>${x.flex?`<span class="mini">${x.g}</span>`:''}</div>
      <div class="sm-who"><span class="pp plink" data-p="${x.u.player}">${tlogo(x.u.team,17)}<b>${esc(x.u.player)}</b></span>
-       <span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)} &middot; wk 1</span></div>
+       <span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)} &middot; wk ${wk}</span></div>
      <div><div class="sm-track"><div class="sm-fill" style="width:${(val/mx*100).toFixed(1)}%;background:${c}"></div>
        <div class="sm-tick" style="left:${(av2/mx*100).toFixed(1)}%"></div></div>
        <span class="mini">${val.toFixed(1)} ${lbl(pr)}/gm &middot; lg avg ${av2.toFixed(1)} &middot; lg max ${mx.toFixed(1)}</span></div>
      ${stats}
      <div class="sm-psi">${psi(x.v)}</div></div>`;};
-  const curvature=`<div class="panel" style="padding-bottom:2px"><h3>wk 1 smash board — best matchup at every role + flex <span class="f">flex = best remaining RB1/WR1/WR2/TE1 &middot; bar = primary stat opponent surrenders vs league (tick = avg) &middot; right: full stat line with league rank &middot; click a name for his card</span></h3>
+  const curvature=`<div class="panel" style="padding-bottom:2px"><h3>wk ${wk} smash board — best matchup at every role + flex <span class="f">flex = best remaining RB1/WR1/WR2/TE1 &middot; bar = primary stat opponent surrenders vs league (tick = avg) &middot; right: full stat line with league rank &middot; click a name for his card</span></h3>
    <div class="sm-row" style="border-left-color:transparent;border-bottom:1px solid var(--edge2);color:#7d7d7d;font-size:9.5px;letter-spacing:1px;padding:3px 8px">
     <div>ROLE</div><div>PLAYER &middot; OPPONENT</div><div>PRIMARY VS LEAGUE</div>
     <div style="text-align:right">YDS/VOL</div><div style="text-align:right">REC/RUYD</div><div style="text-align:right">YDS2/PATD</div><div style="text-align:right">TD</div><div style="text-align:right">&Psi;</div></div>
@@ -792,33 +907,42 @@ function home(){
     const cell=x=>x?`<td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}</td><td>${tcell(x.u.team)}</td><td>${oppcell(x.o)}</td>${allowCells(x.def,g,D)}`:'<td colspan="7"></td>';
     return `<tr><td>${slotchip(g)}</td>${cell(best)}${cell(worst)}</tr>`}).join('');
   const ext=J.slots.map(sl=>{
-    const list=Object.keys(D).map(t=>({t,v:D[t].comps[sl]})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
+    const list=Object.keys(D).filter(inD).map(t=>({t,v:D[t].comps[sl]})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
+    if(!list.length)return '';
     const soft=list[0],hard=list[list.length-1],pr=J.primary[sl];
     const cellv=t=>`${(+D[t].stats[pr].avg).toFixed(1)}<span class="mini">${lbl(pr)}</span>`;
     return `<tr><td>${slotchip(sl)}</td><td>${tcell(soft.t)}</td><td>${cellv(soft.t)}</td><td>${psi(soft.v)}</td>
       <td>${sparkWave(series(soft.t,pr),vivid(soft.t),80,18)}</td>
       <td>${tcell(hard.t)}</td><td>${cellv(hard.t)}</td><td>${psi(hard.v)}</td>
       <td>${sparkWave(series(hard.t,pr),vivid(hard.t),80,18)}</td></tr>`}).join('');
-  const defs=[...new Set(J.weekly.map(r=>r[0]))];
+  const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
   const mv=[],vol=[];
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((a,b)=>a[2]-b[2]);
     J.slots.forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
       const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
       if(m>2){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});
   mv.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));vol.sort((a,b)=>b.cv-a.cv);
-  const sos=g=>{const per=Object.keys(J.sched26).map(t=>({t,avg:mean(J.sched26[t].filter(o=>o!=='BYE')
+  const sos=g=>{const per=Object.keys(J.sched26).filter(inF).map(t=>({t,avg:mean(J.sched26[t].filter(o=>o!=='BYE')
       .map(o=>(D[o.replace('@','')]||{comps:{}}).comps[g]).filter(v=>v!=null))})).sort((a,b)=>a.avg-b.avg);
     return {easy:per.slice(0,3),hard:per.slice(-3).reverse()}};
   const sosRow=(r,tag)=>`<tr><td>${tcell(r.t)}</td><td>${psi(r.avg)}</td><td class="mini">${tag}</td></tr>`;
   const sq=sos('QB'),sw=sos('WR1'),sr=sos('RB1'),st2=sos('TE1');
   const sosTbl=(o,name)=>`<div class="panel"><h3>${name} — 26/27 season slate</h3><table><tbody>
     ${o.easy.map(r=>sosRow(r,'easiest')).join('')}${o.hard.map(r=>sosRow(r,'hardest')).join('')}</tbody></table></div>`;
-  $('#homeTop').innerHTML=curvature+`
-  <div class="panel"><h3>system <span class="f">built ${J.built} &middot; blend ${J.blend} &middot; 544 games &middot; 10,702 player-game rows &middot; 26/27 schedule + depth charts loaded &middot; rank 1/32 = most allowed</span></h3>
+  const gsw=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
+  const tilt=g=>{const f=(off,def)=>mean(['QB','RB1','RB2','WR1','WR2','WR3','TE1'].map(x=>(D[def]||{comps:{}}).comps[x]).filter(v=>v!=null));
+    const a=f(g[GM.vis],g[GM.home]),b=f(g[GM.home],g[GM.vis]);const d=b-a;return {fav:d>0?g[GM.vis]:g[GM.home],mag:Math.abs(d),a,b}};
+  const bySlate={};gsw.forEach(g=>(bySlate[g[GM.slate]]=bySlate[g[GM.slate]]||[]).push(g));
+  const slateMap=`<div class="panel"><h3>wk ${wk} slate map <span class="f">every kickoff window &middot; ET / CT &middot; tilt = which offense sits in the softer field (mean &Psi; of its QB/RB/WR/TE roles vs the opposing D) &middot; click a window to filter every tab to it</span></h3>
+   <div class="grid3">${SLATE_ORDER.filter(s=>bySlate[s]).map(s=>`<div><p class="mini" style="cursor:pointer" data-slate="${s}">${slateChip(s)} <span style="color:var(--txt)">${SLATE_TIP[s]}</span> &middot; ${bySlate[s].length}</p>
+     <table><tbody>${bySlate[s].map(g=>{const t=tilt(g);return `<tr><td>${tcell(g[GM.vis])} @ ${tcell(g[GM.home])}</td><td class="mini">${g[GM.time]?g[GM.time].replace(' ','')+'/'+ctTime(g[GM.time]).replace(' CT','').replace(' ',''):'TBD'}</td><td>${tcell(t.fav)} <span class="mini">+${t.mag.toFixed(1)}&Psi;</span></td></tr>`}).join('')}</tbody></table></div>`).join('')}</div>
+   ${gsw.length?'':'<p class="note">no games in the current filter</p>'}</div>`;
+  $('#homeTop').innerHTML=curvature+slateMap+`
+  <div class="panel"><h3>system <span class="f">built ${J.built} &middot; blend ${J.blend} &middot; ${Math.round(J.weekly.length/2)} games &middot; ${J.logs.length.toLocaleString()} player-game rows &middot; 26/27 schedule + kickoffs &middot; depth charts ${J.depthDate} &middot; rank 1/32 = most allowed</span></h3>
   <p class="note">${['QB','RB','WR','TE','D/ST'].map(x=>`<span style="color:${POSC[x]}">${posIcon(x,11)} ${x}</span>`).join(' &nbsp; ')}</p>
-  <p class="note">F2 TD board &middot; F3 all 16 games each week &middot; F4 players + depth charts &middot; F5 defenses &middot; F6 season schedule &middot; click any player name anywhere for his popup card &middot; below: week-1 board, field extremes, movers, and the full week-by-week insight screens</p></div>
-  <div class="panel"><h3>wk 1 board — best &amp; worst matchup per role</h3>
-  <table class="fx"><colgroup><col style="width:62px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:150px"><col style="width:56px"><col style="width:62px"><col style="width:92px"><col style="width:92px"><col style="width:92px"><col style="width:92px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
+  <p class="note">F2 TD board &middot; F3 all 16 games each week &middot; F4 players + depth charts &middot; F5 defenses &middot; F6 season schedule &middot; click any player name anywhere for his popup card &middot; the filter bar above (week / slate / game / team) applies to every tab &middot; below: wk-${wk} board, field extremes, movers, and the full week-by-week insight screens</p></div>
+  <div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
+  <table class="fx"><colgroup><col style="width:58px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
   <th style="color:var(--red)">avoid</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th></tr></thead><tbody>${board}</tbody></table></div>
   <div class="panel"><h3>field extremes — every slot <span class="f">(${J.blend})</span></h3>
   <table><thead><tr><th>slot</th><th style="color:var(--green)">bleeds most</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th>
@@ -831,6 +955,8 @@ function home(){
   </div>
   <div class="grid2">${sosTbl(sq,'QB')}${sosTbl(sr,'RB1')}</div>
   <div class="grid2">${sosTbl(sw,'WR1')}${sosTbl(st2,'TE1')}</div>`;
+  document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{G.slate=G.slate===el.dataset.slate?'':el.dataset.slate;G.game='';apply()});
+  }
 }
 document.querySelectorAll('#defTabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#defTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
@@ -847,7 +973,7 @@ window.playerPop=function(n){
   const team=dc.team||(L.length?L[L.length-1][LOG.team]:'');
   const slot=dc.slot||(L.length?L[L.length-1][LOG.slot]:'');
   const grp=SLOTG(slot);
-  const oppRaw=(J.sched26[team]||[])[0]||'';
+  const oppRaw=(J.sched26[team]||[])[G.week-1]||'';
   const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
   const gr=l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td><td>${l[LOG.slot]}</td><td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td><td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`;
   const ghead=`<tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>pyd</th><th>ptd</th><th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th>ppr</th></tr>`;
@@ -858,7 +984,7 @@ window.playerPop=function(n){
   const rkT=grp?(()=>{const D=J.dvp.combined;const stats=J.groupStats[grp]||[];
     const defs=Object.keys(D).map(t2=>({t2,psi:D[t2].comps[grp],st:stats.map(c2=>D[t2].stats[c2])}))
       .filter(d2=>d2.psi!=null).sort((a2,b2)=>a2.psi-b2.psi);
-    return `<p class="mini">all 32 defenses vs ${grp} — combined ${J.blend} &middot; his wk-1 opponent outlined</p>
+    return `<p class="mini">all 32 defenses vs ${grp} — combined ${J.blend} &middot; his wk-${G.week} opponent outlined</p>
     <table><thead><tr><th>#</th><th>defense</th><th class="rk">&Psi;</th>${stats.map(c2=>`<th>${lbl(c2)} (rk)</th>`).join('')}</tr></thead><tbody>
     ${defs.map((d2,i2)=>`<tr style="${d2.t2===opp?'outline:1px solid #4dd0e1;background:rgba(77,208,225,.08)':''}">
       <td class="mini">${i2+1}</td><td>${tcell(d2.t2)}</td><td>${psi(d2.psi)}</td>
@@ -866,7 +992,7 @@ window.playerPop=function(n){
     </tbody></table>`})():'';
   const html=`<div class="modal" id="ppModal"><div class="modalbox">
    <button class="mclose" id="ppX">ESC &#10005;</button>
-   <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk 1, 26/27)</span></h3>
+   <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk ${G.week}, 26/27)${opp?' &middot; '+kickLbl(gameOf(team,G.week)):''}</span></h3>
    ${rkT?`<div class="tabs" style="margin-top:6px"><button id="ppT1" class="on">player card</button><button id="ppT2">${grp} dvp rankings</button></div>`:''}
    <div id="ppV1">
    ${L.length?`<p class="mini">averages per game</p>
@@ -909,17 +1035,15 @@ function dchart(){
       ${by[p].sort((a,b)=>a.depth-b.depth).map(d=>`<tr><td class="mini">${d.depth}</td><td>${esc(d.player)}${d.injury==='0'?' <span class="inj0">Q</span>':d.injury==='-1'?' <span class="injm1">OUT</span>':''}</td></tr>`).join('')}
       </tbody></table></div>`}).join('')}</div>`;
   }
-  $('#dcTeam').onchange=render;render();
+  $('#dcTeam').onchange=render;RR.push(()=>{if(G.team)$('#dcTeam').value=G.team;render()});
 }
 /* ---------- TD Board: composite TD rankings, all players ---------- */
 var tdChart,psChart;
 function tdboard(){
   $('#tdb').innerHTML=`<div class="controls">
-   <select id="tdWk">${Array.from({length:18},(_,i)=>`<option value="${i+1}">2026/27 wk ${i+1}</option>`).join('')}</select>
    <select id="tdPos"><option value="">pos: all</option><option>QB</option><option>RB</option><option>WR</option><option>TE</option></select>
    <select id="tdSlot"><option value="core" selected>core slots (top WR4 only)</option><option value="">every body (WR5, WR6...)</option>
      <option>QB</option><option>RB1</option><option>RB2</option><option>WR1</option><option>WR2</option><option>WR3</option><option>WR4+</option><option>TE1</option><option>TE2</option></select>
-   <select id="tdTeam"><option value="">team: all</option>${[...new Set(UNIVERSE.map(u=>u.team))].sort().map(t=>`<option>${t}</option>`).join('')}</select>
    <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
    <div class="grid2">
    <div class="panel"><h3>TD phase space — the rankings, plotted <span class="f">all 32 defenses by air vs ground TDs conceded &middot; &Sigma; contours = total TDs/gm equipotentials</span></h3>
@@ -958,7 +1082,7 @@ function tdboard(){
       plugins:[equip]});
   })();
   function render(){
-    const wk=+$('#tdWk').value,fp=$('#tdPos').value,sc=$('#tdSlot').value,tm=$('#tdTeam').value,D=J.dvp.combined;
+    const wk=G.week,fp=$('#tdPos').value,sc=$('#tdSlot').value,D=J.dvp.combined;
     const groups=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
     const rows=[];
     const lg={};groups.forEach(g=>{const arr=Object.keys(D).map(t=>g==='QB'?D[t].stats['P TD'].avg+D[t].stats['QB TD'].avg:D[t].stats[g+' TD'].avg);lg[g]={mx:Math.max(...arr),av:mean(arr)}});
@@ -966,7 +1090,7 @@ function tdboard(){
       if(sc&&sc!=='core'&&g!==sc)return;
       UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
       if(fp&&posOf(g)!==fp)return;
-      if(tm&&u.team!==tm)return;
+      if(!inF(u.team))return;
       if(sc==='core'&&g==='WR4+'&&u.dslot!=='WR4')return;
       if(sc==='core'&&g==='TE2'&&u.depth>2)return;
       const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
@@ -1006,17 +1130,18 @@ function tdboard(){
       scales:{x:{reverse:true,title:{display:true,text:'TD matchup rank (right = opponent allows the most TDs)',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}},
         y:{title:{display:true,text:"player TDs per game ('25)",color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}}}},
       plugins:[quad]});
-    $('#tdTbl').innerHTML=`<table class="fx"><colgroup><col style="width:34px"><col style="width:170px"><col style="width:58px"><col style="width:82px"><col style="width:66px"><col style="width:230px"><col style="width:60px"><col style="width:96px"><col></colgroup>
-      <thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th><th>opp</th>
+    $('#tdTbl').innerHTML=`<table class="fx"><colgroup><col style="width:34px"><col style="width:170px"><col style="width:58px"><col style="width:82px"><col style="width:66px"><col style="width:64px"><col style="width:230px"><col style="width:60px"><col style="width:96px"><col></colgroup>
+      <thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>kick</th>
       <th style="text-align:left">TDs opp allows /gm (rank)</th><th class="rk">TD &Psi;</th><th>&omega; wkly TD</th><th style="text-align:left">TD volume vs role league range (tick = lg avg)</th></tr></thead><tbody>
       ${rows.map((r,i)=>`<tr><td class="mini">${i+1}</td><td class="pp plink" data-p="${r.u.player}">${esc(r.u.player)}</td><td>${tcell(r.u.team)}</td>
-      <td>${slotchip(r.u.dslot||r.g)}</td><td>${oppcell(r.o)}</td>
+      <td>${slotchip(r.u.dslot||r.g)}</td><td>${oppcell(r.o)}</td><td>${(g2=>g2?slateChip(g2[GM.slate]):'')(gameOf(r.u.team,wk))}</td>
       <td style="text-align:left">${r.cols.map(([n,o2])=>`${(+o2.avg).toFixed(1)}<span class="mini">${n}</span>&nbsp;${badge(o2.rank)}`).join(' &nbsp;')}</td>
       <td>${psi(r.score)}</td><td>${sparkWave(series(r.def,r.g==='QB'?'P TD':r.g+' TD'),vivid(r.def),80,18)}</td>
       <td><div class="tdbar"><div class="fill" style="width:${(r.meas/lg[r.g].mx*100).toFixed(1)}%;background:linear-gradient(90deg,${gradeColor(r.score)}55,${gradeColor(r.score)})"></div><span class="tick" style="left:${(lg[r.g].av/lg[r.g].mx*100).toFixed(1)}%"></span><span class="val">${r.meas.toFixed(1)}/gm</span></div></td></tr>`).join('')}
-      </tbody></table><p class="note">${rows.length} players &middot; combined ${J.blend} DvP</p>`;
+      </tbody></table><p class="note">${rows.length} players &middot; wk ${wk} &middot; combined ${J.blend} DvP</p>`;
   }
-  ['tdWk','tdPos','tdSlot','tdTeam'].forEach(id=>$('#'+id).onchange=render);render();
+  ['tdPos','tdSlot'].forEach(id=>$('#'+id).onchange=render);RR.push(render);
 }
 home();dchart();lab();ranks();matrix();sked();tdboard();chamber();defense();player();insights();
+gbarInit();
 </script></body></html>

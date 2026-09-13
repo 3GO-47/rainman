@@ -58,8 +58,16 @@ def main():
     for r in csv.DictReader(open('data/processed/schedule_2026.csv')):
         sched[r['team']] = [r[f'week_{i}'] for i in range(1, 19)]
     data['sched26'] = sched
-    data['games26'] = [[int(r['week']), r['vis'], r['home'], r['date']]
+    # games26 row: [week, vis, home, date, day, time_et, slate] — kickoff cols from kickoffs_2026.csv
+    kick = {}
+    if os.path.exists('data/processed/kickoffs_2026.csv'):
+        for r in csv.DictReader(open('data/processed/kickoffs_2026.csv')):
+            kick[(int(r['week']), r['vis'], r['home'])] = (r['day'], r['time_et'], r['slate'])
+    data['games26'] = [[int(r['week']), r['vis'], r['home'], r['date']] +
+                       list(kick.get((int(r['week']), r['vis'], r['home']), ('', '', 'TBD')))
                        for r in csv.DictReader(open('data/processed/games_2026.csv'))]
+    # current 2026/27 matchup week (set by refresh.py via build_matchups.py)
+    data['week'] = int(data['matchups'][0]['week']) if data['matchups'] else 1
     dcp = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     data['depth'] = list(csv.DictReader(open(dcp, encoding='utf-8')))
     data['depthDate'] = dcp.split('_')[-1][:10]

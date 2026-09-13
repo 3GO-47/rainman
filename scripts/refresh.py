@@ -43,6 +43,7 @@ def main():
     for s in seasons:
         run(['scripts/build_game_logs.py', s])
     run(['scripts/compute_dvp.py'])
+    run(['scripts/build_kickoffs.py'])
     dc = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     print(f'depth chart snapshot: {dc}')
     run(['scripts/build_matchups.py', dc, str(week)])
