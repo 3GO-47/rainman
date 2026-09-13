@@ -22,7 +22,10 @@ The sticky bar under the nav drives every view at once:
 - **WEEK** — the 2026/27 week (defaults to the current week from `refresh.py`; Home, TD Board,
   Weekly Matchups, Matchup Lab, popup cards and the Schedule highlight all follow it)
 - **SLATE** — TNF · SUN 1P (1:00 ET / 12:00 CT) · SUN 4P (4:05-4:25 ET / 3:05-3:25 CT) · SNF · MNF,
-  plus THU DAY / FRI / SAT / INTL AM when the week has them; wk 18 = TBD until the NFL flexes
+  plus THU DAY / FRI / SAT / INTL AM when the week has them; wk 18 = TBD until the NFL flexes.
+  Chips toggle, so any combination works (e.g. SUN 4P + SNF)
+- **POS** — QB / RB / WR / TE / D-ST, multi-select; narrows every view to those slots (Lab and
+  Rankings tabs, Matrix columns, game-card rows, TD Board, Home boards, insight screens)
 - **GAME** — a single matchup (chronological list for the week, with kickoff time)
 - **TEAM** — one team; combine with slate/game to narrow further
 Player views show players whose team is in the filter; defense views show the filtered teams'
@@ -31,7 +34,7 @@ a chosen game. The bar's summary shows games/teams matched, kickoff (ET + CT) an
 Kickoffs come from `data/processed/kickoffs_2026.csv` (built by `scripts/build_kickoffs.py`
 from the PFR schedule + week pages in `data/raw/`).
 
-Filter state lives in the URL hash (`#wk=3&slate=LATE&game=GB@MIN&team=MIN`) — the **link** button
+Filter state lives in the URL hash (`#wk=3&slate=LATE,SNF&pos=RB,WR&game=GB@MIN&team=MIN`) — the **link** button
 copies it, so a bookmark or a pasted link reopens the exact view. Home also has a **slate map**
 (every kickoff window with the field-tilt favorite; click a window to filter every tab), Weekly
 Matchups groups its game cards under slate headers, and the Matchup Lab / TD Board carry a
@@ -72,6 +75,8 @@ matrix / observatory) · Schedule (6-band heat grid). F1-F6 keyboard shortcuts; 
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-13 (c) — multi-select slate chips + multi-select POS filter (QB/RB/WR/TE/D-ST) applied to every
+  tab; clipped rank badges fixed (badge-first, wider stat cells).
 - 2026-09-13 (b) — URL-hash filter state + link button; Home slate map; slate headers in Weekly
   Matchups; kick column in Lab + TD Board; GitHub Pages deploy workflow.
 - 2026-09-13 — global week/slate/game/team filter bar across every tab; kickoff times + slate
