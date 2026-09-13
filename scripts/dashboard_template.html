@@ -146,6 +146,7 @@ canvas.chart{max-height:260px}
 <div id="gbar" title="global filter — applies to every tab">
 <span class="gl">WEEK</span><select id="gWk"></select>
 <span class="gl">SLATE</span><div class="chips" id="gSlates"></div>
+<span class="gl">POS</span><div class="chips" id="gPos"></div>
 <span class="gl">GAME</span><select id="gGame"></select>
 <span class="gl">TEAM</span><select id="gTeam"></select>
 <button id="gClear">&#10005; clear</button>
@@ -286,7 +287,9 @@ const GM={wk:0,vis:1,home:2,date:3,day:4,time:5,slate:6};
 const SLATE_LBL={TNF:'TNF',THU:'THU DAY',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
 const SLATE_TIP={TNF:'Thursday night (incl. the Wednesday opener)',THU:'Thanksgiving-day afternoon games',FRI:'Friday holiday windows',SAT:'Saturday windows',INTL:'Sunday 9:30 AM ET international games',EARLY:'Sunday 1:00 PM ET / 12:00 CT',LATE:'Sunday 4:05-4:25 PM ET / 3:05-3:25 CT',SNF:'Sunday night',MNF:'Monday night',TBD:'kickoff not yet set (NFL flex)'};
 const SLATE_ORDER=['TNF','THU','FRI','SAT','INTL','EARLY','LATE','SNF','MNF','TBD'];
-const G={week:J.week||1,slate:'',game:'',team:''};
+const G={week:J.week||1,slates:new Set(),pos:new Set(),game:'',team:''};
+const POSLIST=['QB','RB','WR','TE','D/ST'];
+const inP=p=>!G.pos.size||G.pos.has(p);   // position filter (posOf(slot))
 const tmin=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return 9999;return (+m[1]%12+(m[3]==='PM'?12:0))*60+ +m[2]};
 const ctTime=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return '';let h=+m[1]%12+(m[3]==='PM'?12:0)-1;if(h<0)h+=24;return `${h%12||12}:${m[2]} ${h>=12?'PM':'AM'} CT`};
 const GAMES=wk=>J.games26.filter(g=>g[GM.wk]===wk).sort((a,b)=>(a[GM.date]<b[GM.date]?-1:a[GM.date]>b[GM.date]?1:0)||tmin(a[GM.time])-tmin(b[GM.time]));
@@ -297,10 +300,10 @@ const kickLbl=g=>!g?'':g[GM.time]?`${g[GM.day]} ${g[GM.time]} ET / ${ctTime(g[GM
 let ACT=null,DEFSET=null;   // null = no filter
 function recompute(){
   let gs=GAMES(G.week);
-  if(G.slate)gs=gs.filter(g=>g[GM.slate]===G.slate);
+  if(G.slates.size)gs=gs.filter(g=>G.slates.has(g[GM.slate]));
   if(G.game)gs=gs.filter(g=>g[GM.vis]+'@'+g[GM.home]===G.game);
   ACT=null;
-  if(G.slate||G.game){ACT=new Set();gs.forEach(g=>{ACT.add(g[GM.vis]);ACT.add(g[GM.home])});}
+  if(G.slates.size||G.game){ACT=new Set();gs.forEach(g=>{ACT.add(g[GM.vis]);ACT.add(g[GM.home])});}
   if(G.team)ACT=(!ACT||ACT.has(G.team))?new Set([G.team]):new Set();
   DEFSET=null;
   if(ACT){DEFSET=new Set(ACT);ACT.forEach(t=>{const o=oppFor(t,G.week).replace('@','');if(o&&o!=='BYE')DEFSET.add(o)});}
@@ -311,14 +314,15 @@ const RR=[];                          // every view registers its re-render here
 function readHash(){
   const h=new URLSearchParams(location.hash.replace(/^#/,''));
   if(h.get('wk')&&+h.get('wk')>=1&&+h.get('wk')<=18)G.week=+h.get('wk');
-  if(h.get('slate')&&SLATE_ORDER.includes(h.get('slate')))G.slate=h.get('slate');
+  if(h.get('slate'))h.get('slate').split(',').filter(x=>SLATE_ORDER.includes(x)).forEach(x=>G.slates.add(x));
+  if(h.get('pos'))h.get('pos').split(',').filter(x=>POSLIST.includes(x)).forEach(x=>G.pos.add(x));
   if(h.get('game'))G.game=h.get('game');
   if(h.get('team')&&J.sched26[h.get('team')])G.team=h.get('team');
 }
 function writeHash(){
   const h=new URLSearchParams();
   if(G.week!==(J.week||1))h.set('wk',G.week);
-  if(G.slate)h.set('slate',G.slate);if(G.game)h.set('game',G.game);if(G.team)h.set('team',G.team);
+  if(G.slates.size)h.set('slate',[...G.slates].join(','));if(G.pos.size)h.set('pos',[...G.pos].join(','));if(G.game)h.set('game',G.game);if(G.team)h.set('team',G.team);
   const str=h.toString();
   try{history.replaceState(null,'',str?'#'+str:location.pathname+location.search)}catch(e){}
 }
@@ -327,13 +331,13 @@ function gbarInit(){
   const teams=Object.keys(J.sched26).sort();
   $('#gWk').innerHTML=Array.from({length:18},(_,i)=>`<option value="${i+1}" ${i+1===G.week?'selected':''}>wk ${i+1}</option>`).join('');
   $('#gTeam').innerHTML=`<option value="">all teams</option>`+teams.map(t=>`<option value="${t}" ${t===G.team?'selected':''}>${t} ${TEAM[t]?TEAM[t].n:''}</option>`).join('');
-  $('#gWk').onchange=()=>{G.week=+$('#gWk').value;G.slate='';G.game='';apply()};
+  $('#gWk').onchange=()=>{G.week=+$('#gWk').value;G.slates.clear();G.game='';apply()};
   $('#gTeam').onchange=()=>{G.team=$('#gTeam').value;apply()};
   $('#gGame').onchange=()=>{G.game=$('#gGame').value;apply()};
-  $('#gClear').onclick=()=>{G.slate='';G.game='';G.team='';$('#gTeam').value='';apply()};
+  $('#gClear').onclick=()=>{G.slates.clear();G.pos.clear();G.game='';G.team='';$('#gTeam').value='';apply()};
   $('#gShare').onclick=()=>{writeHash();const u=location.href;const done=()=>{$('#gShare').textContent='copied';setTimeout(()=>$('#gShare').innerHTML='&#128279; link',1200)};
     (navigator.clipboard?navigator.clipboard.writeText(u).then(done,()=>prompt('link',u)):prompt('link',u));};
-  addEventListener('hashchange',()=>{const w=G.week;G.slate='';G.game='';G.team='';readHash();
+  addEventListener('hashchange',()=>{const w=G.week;G.slates.clear();G.pos.clear();G.game='';G.team='';readHash();
     if(G.week!==w)$('#gWk').value=G.week;$('#gTeam').value=G.team;apply()});
   addEventListener('resize',()=>document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px'));
   apply();
@@ -342,10 +346,13 @@ function apply(){
   recompute();
   const gs=GAMES(G.week);
   const cnt={};gs.forEach(g=>cnt[g[GM.slate]]=(cnt[g[GM.slate]]||0)+1);
-  $('#gSlates').innerHTML=`<button data-s="" class="${G.slate?'':'on'}">all</button>`+SLATE_ORDER.filter(s=>cnt[s]).map(s=>
-    `<button data-s="${s}" class="${G.slate===s?'on':''}" title="${SLATE_TIP[s]}">${SLATE_LBL[s]}<span class="n">${cnt[s]}</span></button>`).join('');
-  document.querySelectorAll('#gSlates button').forEach(b=>b.onclick=()=>{G.slate=b.dataset.s;G.game='';apply()});
-  const gl=G.slate?gs.filter(g=>g[GM.slate]===G.slate):gs;
+  $('#gSlates').innerHTML=`<button data-s="" class="${G.slates.size?'':'on'}">all</button>`+SLATE_ORDER.filter(s=>cnt[s]).map(s=>
+    `<button data-s="${s}" class="${G.slates.has(s)?'on':''}" title="${SLATE_TIP[s]} — click to toggle, combine several">${SLATE_LBL[s]}<span class="n">${cnt[s]}</span></button>`).join('');
+  document.querySelectorAll('#gSlates button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;if(!v)G.slates.clear();else G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
+  $('#gPos').innerHTML=`<button data-p="" class="${G.pos.size?'':'on'}">all</button>`+POSLIST.map(pp=>
+    `<button data-p="${pp}" class="${G.pos.has(pp)?'on':''}" style="${G.pos.has(pp)?'':'color:'+POSC[pp]}" title="toggle ${pp} — combine several">${posIcon(pp,10)} ${pp}</button>`).join('');
+  document.querySelectorAll('#gPos button').forEach(b=>b.onclick=()=>{const v=b.dataset.p;if(!v)G.pos.clear();else G.pos.has(v)?G.pos.delete(v):G.pos.add(v);apply()});
+  const gl=G.slates.size?gs.filter(g=>G.slates.has(g[GM.slate])):gs;
   $('#gGame').innerHTML=`<option value="">all games</option>`+gl.map(g=>{const k=g[GM.vis]+'@'+g[GM.home];
     return `<option value="${k}" ${k===G.game?'selected':''}>${g[GM.vis]} @ ${g[GM.home]} · ${g[GM.day]} ${g[GM.time]||'TBD'}</option>`}).join('');
   const nT=ACT?ACT.size:32,nG=ACT?gs.filter(g=>ACT.has(g[GM.vis])||ACT.has(g[GM.home])).length:gs.length;
@@ -353,8 +360,8 @@ function apply(){
   const tg=G.team?gameOf(G.team,G.week):null;
   $('#gSum').innerHTML=`wk ${G.week} · ${nG} game${nG===1?'':'s'} · ${nT} team${nT===1?'':'s'}`
     +(G.team&&!tg?' · <span class="inj0">'+G.team+' on BYE</span>':tg?' · '+tg[GM.vis]+' @ '+tg[GM.home]+' '+kickLbl(tg):'')
-    +(!ACT&&byes.length?' · bye: '+byes.join(' '):'');
-  $('#gbar').classList.toggle('live',!!ACT);
+    +(!ACT&&byes.length?' · bye: '+byes.join(' '):'')+(G.pos.size?' · pos: '+[...G.pos].join('+'):'');
+  $('#gbar').classList.toggle('live',!!ACT||!!G.pos.size);
   if(G.game&&!gl.some(g=>g[GM.vis]+'@'+g[GM.home]===G.game)){G.game='';recompute();}
   writeHash();
   document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px');
@@ -466,7 +473,8 @@ function lab(){
     b.classList.add('on');pos=b.dataset.p;sortK='psi';sortA=true;render()});
   ['labSrc','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
   $('#labQ').oninput=render;
-  RR.push(render);
+  RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>b.hidden=!inP(b.dataset.p));
+    if(!inP(pos)){const f=tabs.find(b=>!b.hidden);if(f){f.click();return}}render()});
 }
 /* ---------- DvP Rankings: 32 defenses, every stat, workbook Data-tab style ---------- */
 function ranks(){
@@ -485,9 +493,10 @@ function ranks(){
       let R=defs.map(d=>({d,ranks:J.statCols.map(c=>D[d].stats[c].rank),
         avgPsi:mean(Object.values(D[d].comps))}));
       R.sort((a,b)=>(sortK==='d'?(a.d<b.d?-1:1):a.avgPsi-b.avgPsi)*(sortA?1:-1));
+      const keep=J.statCols.map(c=>inP(c.startsWith('P TD')?'QB':posOf(c)));
       $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th>
-        ${J.statCols.map(c=>`<th class="rk">${c}</th>`).join('')}</tr></thead><tbody>
-        ${R.map(r=>`<tr><td>${tcell(r.d)}</td>${r.ranks.map(x=>`<td>${badge(x)}</td>`).join('')}</tr>`).join('')}
+        ${J.statCols.filter((c,i)=>keep[i]).map(c=>`<th class="rk">${c}</th>`).join('')}</tr></thead><tbody>
+        ${R.map(r=>`<tr><td>${tcell(r.d)}</td>${r.ranks.filter((x,i)=>keep[i]).map(x=>`<td>${badge(x)}</td>`).join('')}</tr>`).join('')}
         </tbody></table>`;
       document.querySelectorAll('#rkTbl th').forEach(th=>th.onclick=()=>{
         sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k||'psi';render()});
@@ -517,7 +526,8 @@ function ranks(){
     document.querySelectorAll('#rkTabs button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');slot=b.dataset.s;sortK=slot==='ALL'?'psi':'psi';sortA=true;render()});
   $('#rkSrc').onchange=render;
-  RR.push(render);
+  RR.push(()=>{const tabs=[...document.querySelectorAll('#rkTabs button')];tabs.forEach(b=>b.hidden=b.dataset.s!=='ALL'&&!inP(posOf(b.dataset.s)));
+    if(slot!=='ALL'&&!inP(posOf(slot))){const f=tabs.find(b=>!b.hidden);if(f){f.click();return}}render()});
 }
 /* ---------- Field Matrix: 32x10 potential map + radar fingerprint ---------- */
 let mChart;
@@ -531,9 +541,10 @@ function matrix(){
   function render(){
     const src=$('#mSrc').value,D=J.dvp[src];
     const defs=Object.keys(D).filter(inD).sort();
+    const SL=J.slots.filter(x=>inP(posOf(x)));
     $('#matrixWrap').innerHTML=`<table id="matrixTbl"><thead><tr><th>DEF</th>
-      ${J.slots.map(s=>`<th style="color:${POSC[posOf(s)]}">${s}</th>`).join('')}</tr></thead><tbody>
-      ${defs.map(d=>`<tr><td>${tcell(d)}</td>${J.slots.map(s=>{const v=D[d].comps[s];
+      ${SL.map(s=>`<th style="color:${POSC[posOf(s)]}">${s}</th>`).join('')}</tr></thead><tbody>
+      ${defs.map(d=>`<tr><td>${tcell(d)}</td>${SL.map(s=>{const v=D[d].comps[s];
         return v==null?'<td></td>':`<td class="cell" data-d="${d}">${badge(v)}</td>`}).join('')}</tr>`).join('')}
       </tbody></table>`;
     document.querySelectorAll('#matrixTbl .cell').forEach(td=>td.onclick=()=>drill(td.dataset.d,src));
@@ -745,7 +756,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
     const hdr=g=>`<tr><th>player</th><th>tm</th><th>opp</th><th class="rk">&Psi;</th>
       ${ORDER[g].map(c=>`<th>${c?lbl(c)+' (rk)':''}</th>`).join('')}<th>def trend L3</th><th>&omega; wkly</th><th>L3 ppr</th></tr>`;
     const CG='<colgroup><col style="width:150px"><col style="width:58px"><col style="width:64px"><col style="width:46px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:74px"><col style="width:88px"><col style="width:56px"></colgroup>';
-    $('#inSm').innerHTML=groups.map(g=>{
+    $('#inSm').innerHTML=groups.filter(g=>inP(posOf(g))).map(g=>{
       const rows=cand.filter(x=>x.grp===g).sort((a,b)=>a.comp-b.comp);
       return `<div class="panel"><h3 style="color:${POSC[posOf(g)]}">${posIcon(posOf(g),14)} ${g} — wk ${wk}</h3>
       <p class="mini" style="color:var(--green)">TARGET — softest fields this week</p>
@@ -759,7 +770,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
   const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
   const movers=[],vol=[];
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===season).sort((a,b)=>a[2]-b[2]);
-    J.slots.forEach(sl=>{const c=J.primary[sl],all=rows.map(r=>r[WCOL[c]]);
+    J.slots.filter(x=>inP(posOf(x))).forEach(sl=>{const c=J.primary[sl],all=rows.map(r=>r[WCOL[c]]);
       const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
       if(m>2){movers.push({d,sl,c,m,m3,pct:100*(m3-m)/m});vol.push({d,sl,c,m,cv:sd/m})}})});
   movers.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));
@@ -777,7 +788,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
     <table>${vol.slice(-8).reverse().map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="mini">${x.c}</td><td>${(100*x.cv).toFixed(0)}%</td></tr>`).join('')}</table></div></div>
     <p class="note">coefficient of variation of weekly stat allowed &middot; high = matchup rank is less trustworthy week to week</p></div>`;
   const key=['QB','RB1','WR1','TE1'];
-  const ss=key.map(sl=>{const per=Object.keys(J.sched26).filter(inF).map(t=>{
+  const ss=key.filter(x=>inP(posOf(x))).map(sl=>{const per=Object.keys(J.sched26).filter(inF).map(t=>{
       const cs=J.sched26[t].filter(o=>o!=='BYE').map(o=>{const d=o.replace('@','');
         return (J.dvp.combined[d]||{comps:{}}).comps[sl]}).filter(v=>v!=null);
       return {t,avg:mean(cs)}}).sort((a,b)=>a.avg-b.avg);
@@ -816,7 +827,8 @@ function sked(){
       }).join('')}<td>${psi(r.avg)}</td></tr>`).join('')}</tbody></table>`;
   }
   ['skSlot','skSrc'].forEach(id=>$('#'+id).onchange=render);
-  RR.push(render);
+  RR.push(()=>{const sel=$('#skSlot');[...sel.options].forEach(o=>o.hidden=!inP(posOf(o.value)));
+    if(!inP(posOf(sel.value))){const f=[...sel.options].find(o=>!o.hidden);if(f)sel.value=f.value;}render()});
 }
 /* ---------- Collision Chamber: weekly comprehensive matchups ---------- */
 function chamber(){
@@ -827,13 +839,14 @@ function chamber(){
   const ROWS=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
   const starter=(t,g)=>UNIVERSE.filter(u=>u.team===t&&u.slot===(g==='QB'?'QB1':g)).sort((a,b)=>(a.ord||9)-(b.ord||9))[0];
   function side(off,def,D){
-    const rows=ROWS.map(g=>{
+    const RW=ROWS.filter(g=>inP(posOf(g)));
+    const rows=RW.map(g=>{
       const u=starter(off,g);
       const v=(D[def]||{comps:{}}).comps[g];
       const inj=u&&u.inj==='0'?' <span class="inj0">Q</span>':u&&u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<tr><td>${slotchip(g)}</td><td class="pp plink" data-p="${u?u.player:''}">${u?esc(u.player):'—'}${inj}</td>`+
         `${allowCells(def,g,D)}<td>${sparkWave(series(def,J.primary[g]),vivid(def),80,18)}</td></tr>`}).join('');
-    const avg=mean(ROWS.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
+    const avg=mean(RW.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
     return {html:`<div><table class="fx"><colgroup><col style="width:58px"><col><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:88px"></colgroup><thead><tr><th></th><th>${tcell(off)} offense</th>`+
       `<th colspan="4" style="text-align:center">${tcell(def)} def allows /gm (rank)</th><th>&omega;</th></tr></thead><tbody>${rows}</tbody></table>`+
       `<p class="mini" style="text-align:right">mean field &Psi; ${avg.toFixed(1)}</p></div>`,avg};
@@ -872,12 +885,12 @@ function home(){
   // WK1 SMASH BOARD (HTML): every role + FLEX (best remaining non-QB), full stat lines
   const roles=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
   const pool=[];
-  roles.forEach(g=>{UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inF(u.team)&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
+  roles.filter(g=>inP(posOf(g))).forEach(g=>{UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inF(u.team)&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
     const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
     const def=o.replace('@','');const v=(J.dvp.combined[def]||{comps:{}}).comps[g];
     if(v!=null)pool.push({g,u,o,def,v});});});
   const srows=[];const taken=new Set();
-  roles.forEach(g=>{const c=pool.filter(x=>x.g===g).sort((a2,b2)=>a2.v-b2.v)[0];
+  roles.filter(g=>inP(posOf(g))).forEach(g=>{const c=pool.filter(x=>x.g===g).sort((a2,b2)=>a2.v-b2.v)[0];
     if(c){srows.push({label:g==='WR4+'?'WR4':g,...c});taken.add(c.u.player+c.u.team);}});
   pool.filter(x=>['RB1','WR1','WR2','TE1'].includes(x.g)&&!taken.has(x.u.player+x.u.team)).sort((a2,b2)=>a2.v-b2.v).slice(0,2)
     .forEach((c,i)=>srows.push({label:'FLEX'+(i+1),flex:true,...c}));
@@ -903,10 +916,10 @@ function home(){
     <div>ROLE</div><div>PLAYER &middot; OPPONENT</div><div>PRIMARY VS LEAGUE</div>
     <div style="text-align:right">YDS/VOL</div><div style="text-align:right">REC/RUYD</div><div style="text-align:right">YDS2/PATD</div><div style="text-align:right">TD</div><div style="text-align:right">&Psi;</div></div>
    ${srows.map(smRow).join('')}</div>`;
-  const board=['QB','RB1','RB2','WR1','WR2','WR3','TE1'].map(g=>{const {best,worst}=pick(g);
+  const board=['QB','RB1','RB2','WR1','WR2','WR3','TE1'].filter(g=>inP(posOf(g))).map(g=>{const {best,worst}=pick(g);
     const cell=x=>x?`<td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}</td><td>${tcell(x.u.team)}</td><td>${oppcell(x.o)}</td>${allowCells(x.def,g,D)}`:'<td colspan="7"></td>';
     return `<tr><td>${slotchip(g)}</td>${cell(best)}${cell(worst)}</tr>`}).join('');
-  const ext=J.slots.map(sl=>{
+  const ext=J.slots.filter(x=>inP(posOf(x))).map(sl=>{
     const list=Object.keys(D).filter(inD).map(t=>({t,v:D[t].comps[sl]})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
     if(!list.length)return '';
     const soft=list[0],hard=list[list.length-1],pr=J.primary[sl];
@@ -918,7 +931,7 @@ function home(){
   const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
   const mv=[],vol=[];
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((a,b)=>a[2]-b[2]);
-    J.slots.forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
+    J.slots.filter(x=>inP(posOf(x))).forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
       const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
       if(m>2){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});
   mv.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));vol.sort((a,b)=>b.cv-a.cv);
@@ -953,9 +966,8 @@ function home(){
   <div class="panel"><h3>least trustworthy ranks — volatility ${se}</h3><table><tbody>
   ${vol.slice(0,6).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td>&sigma;/&mu; ${x.cv.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>
   </div>
-  <div class="grid2">${sosTbl(sq,'QB')}${sosTbl(sr,'RB1')}</div>
-  <div class="grid2">${sosTbl(sw,'WR1')}${sosTbl(st2,'TE1')}</div>`;
-  document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{G.slate=G.slate===el.dataset.slate?'':el.dataset.slate;G.game='';apply()});
+  <div class="grid2">${[['QB',sq],['RB1',sr],['WR1',sw],['TE1',st2]].filter(x=>inP(posOf(x[0]))).map(x=>sosTbl(x[1],x[0])).join('')}</div>`;
+  document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
   }
 }
 document.querySelectorAll('#defTabs button').forEach(b=>b.onclick=()=>{
@@ -1041,7 +1053,6 @@ function dchart(){
 var tdChart,psChart;
 function tdboard(){
   $('#tdb').innerHTML=`<div class="controls">
-   <select id="tdPos"><option value="">pos: all</option><option>QB</option><option>RB</option><option>WR</option><option>TE</option></select>
    <select id="tdSlot"><option value="core" selected>core slots (top WR4 only)</option><option value="">every body (WR5, WR6...)</option>
      <option>QB</option><option>RB1</option><option>RB2</option><option>WR1</option><option>WR2</option><option>WR3</option><option>WR4+</option><option>TE1</option><option>TE2</option></select>
    <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
@@ -1082,14 +1093,14 @@ function tdboard(){
       plugins:[equip]});
   })();
   function render(){
-    const wk=G.week,fp=$('#tdPos').value,sc=$('#tdSlot').value,D=J.dvp.combined;
+    const wk=G.week,sc=$('#tdSlot').value,D=J.dvp.combined;
     const groups=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
     const rows=[];
     const lg={};groups.forEach(g=>{const arr=Object.keys(D).map(t=>g==='QB'?D[t].stats['P TD'].avg+D[t].stats['QB TD'].avg:D[t].stats[g+' TD'].avg);lg[g]={mx:Math.max(...arr),av:mean(arr)}});
     groups.forEach(g=>{
       if(sc&&sc!=='core'&&g!==sc)return;
       UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
-      if(fp&&posOf(g)!==fp)return;
+      if(!inP(posOf(g)))return;
       if(!inF(u.team))return;
       if(sc==='core'&&g==='WR4+'&&u.dslot!=='WR4')return;
       if(sc==='core'&&g==='TE2'&&u.depth>2)return;
@@ -1140,7 +1151,7 @@ function tdboard(){
       <td><div class="tdbar"><div class="fill" style="width:${(r.meas/lg[r.g].mx*100).toFixed(1)}%;background:linear-gradient(90deg,${gradeColor(r.score)}55,${gradeColor(r.score)})"></div><span class="tick" style="left:${(lg[r.g].av/lg[r.g].mx*100).toFixed(1)}%"></span><span class="val">${r.meas.toFixed(1)}/gm</span></div></td></tr>`).join('')}
       </tbody></table><p class="note">${rows.length} players &middot; wk ${wk} &middot; combined ${J.blend} DvP</p>`;
   }
-  ['tdPos','tdSlot'].forEach(id=>$('#'+id).onchange=render);RR.push(render);
+  $('#tdSlot').onchange=render;RR.push(render);
 }
 home();dchart();lab();ranks();matrix();sked();tdboard();chamber();defense();player();insights();
 gbarInit();
