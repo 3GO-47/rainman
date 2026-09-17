@@ -59,3 +59,11 @@ Never return data lines from javascript_tool directly (results truncate ~1.5KB).
 See scripts/build_depth_chart.py header for the output format: TEAM|POSROW|DEPTH|NAME|TAG.
 Team slugs: buf mia ne nyj bal cin cle pit hou ind jax ten den kc lv lac dal nyg phi wsh
 chi det gb min atl car no tb ari lar sf sea (note wsh -> normalized to WAS downstream).
+
+## ESPN depth chart parser (verified 2026-09-17, in-page JS on any espn.com tab)
+const SL={buf:'BUF',mia:'MIA',ne:'NE',nyj:'NYJ',bal:'BAL',cin:'CIN',cle:'CLE',pit:'PIT',hou:'HOU',ind:'IND',jax:'JAX',ten:'TEN',den:'DEN',kc:'KC',lv:'LV',lac:'LAC',dal:'DAL',nyg:'NYG',phi:'PHI',wsh:'WSH',chi:'CHI',det:'DET',gb:'GB',min:'MIN',atl:'ATL',car:'CAR',no:'NO',tb:'TB',ari:'ARI',lar:'LAR',sf:'SF',sea:'SEA'};
+window.parseDepth=function(doc,team){const rt=[...doc.querySelectorAll('.ResponsiveTable')].find(r=>[...r.querySelectorAll('table')[0].querySelectorAll('tbody tr')].some(tr=>tr.textContent.trim()==='QB'));if(!rt)return['ERR|'+team+'|no_offense'];const T=rt.querySelectorAll('table');const pos=[...T[0].querySelectorAll('tbody tr')].map(tr=>tr.textContent.trim());const rows=[...T[1].querySelectorAll('tbody tr')];const out=[];let wr=0;pos.forEach((p,i)=>{let pr=p;if(p==='WR'){wr++;pr='WR'+wr;}const tr=rows[i];if(!tr)return;[...tr.querySelectorAll('td')].forEach((td,d)=>{const a=td.querySelector('a');if(!a)return;out.push([team,pr,d+1,a.textContent.trim(),(td.querySelector('.nfl-injuries-status')||{textContent:''}).textContent.trim()].join('|'));});});return out;};
+// loop: fetch('https://www.espn.com/nfl/team/depth/_/name/'+slug) -> DOMParser -> parseDepth(doc,team), 1500ms apart,
+// fire-and-forget (evaluate times out at 45s) then poll window._dc; keep only /^[A-Z]+\|(QB|RB|WR\d|TE|FB)\|/ rows.
+// Box-score loop: same pattern — start runBatch(ids) without await, poll window._acc / window._done.
+// Verify transcription with {lines, chars, sum of charCodes} computed in-page vs python on disk.

@@ -25,3 +25,15 @@
 - (d) Multi-select: G.slates (Set) + new G.pos (Set, QB/RB/WR/TE/D-ST) with `inP(posOf(slot))` applied in lab tabs,
   rankings tabs/ALL columns, matrix columns, chamber rows, TD board, home boards/extremes/movers/SOS, insights, schedule slot.
   Hash: slate=A,B&pos=X,Y. TD board's local pos select removed. Smoke test: 0 JS errors.
+
+## 2026-09-17 — week 1 scraped, week 2 matchups live
+- 2026 wk 1: 16/16 box scores via Chrome (317 raw lines, 0 ERR) -> game_logs_2026.csv 314 rows, 3 D/ST TDs.
+  Transcription verified by char-count + code-sum checksum against the in-page accumulator.
+- positions_2026.csv pulled from PFR fantasy page (425 players) — inference fallback now only 2 rows.
+- ESPN depth charts re-pulled 2026-09-17 (32 teams, 558 skill-position rows; OL rows no longer stored).
+  Parser JS now lives in notes/scrape_recipe.md.
+- refresh.py auto-detected wk 2; matchups_current = wk 2. dvp_combined stays 2024+2025 until 2026 has >=4 weeks
+  (compute_dvp label fixed — it previously printed 2026 in seasons_blended even when excluded).
+- Dashboard: TREND_SE = latest season with >=4 weeks drives waveforms / momentum / volatility / Observatory default
+  (2025 for now; flips to 2026 automatically at wk 4). 2026 is selectable as a DvP source.
+- verify_data.py made in-season aware (expected boxscores/team-games derived from scraped weeks): 64/64 PASS.
