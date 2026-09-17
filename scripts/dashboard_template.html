@@ -180,7 +180,7 @@ function gradeBg(rank){ // 6 discrete bands: greens -> slate middle -> reds
   if(rank<=27) return 'hsla(8,45%,33%,.85)';
   return 'hsla(2,70%,42%,.85)';}
 const SCACHE={};
-function series(def,stat){const se=Math.max(...J.weekly.map(r=>r[1]));const k=def+'|'+stat;
+function series(def,stat){const se=TREND_SE;const k=def+'|'+stat;
   if(SCACHE[k])return SCACHE[k];
   return SCACHE[k]=J.weekly.filter(r=>r[0]===def&&r[1]===se).sort((a,b)=>a[2]-b[2]).map(r=>r[WCOL[stat]]);}
 function sparkWave(vals,color,w=96,h=24){
@@ -282,6 +282,11 @@ addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6'].indexOf(e
   if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
+// TREND_SE: the season used for waveforms / momentum / volatility — the latest season with >=4 weeks
+// of game logs (early in a new season the prior year is the only meaningful trend signal)
+const TREND_SE=(()=>{const wk={};J.weekly.forEach(r=>(wk[r[1]]=wk[r[1]]||new Set()).add(r[2]));
+  const ok=Object.keys(wk).map(Number).filter(s=>wk[s].size>=4);return ok.length?Math.max(...ok):Math.max(...Object.keys(wk).map(Number))})();
+const CUR_SE=TREND_SE;
 /* ---------- GLOBAL FILTER: week · slate · game · team — applies to every tab ---------- */
 const GM={wk:0,vis:1,home:2,date:3,day:4,time:5,slate:6};
 const SLATE_LBL={TNF:'TNF',THU:'THU DAY',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
@@ -579,7 +584,7 @@ function defense(){
     <select id="dDef">${defs.map(d=>`<option>${d}</option>`).join('')}</select>
     <span class="mini">⟷ interfere with</span>
     <select id="dCmp">${defs.map(d=>`<option ${d===defs[1]?'selected':''}>${d}</option>`).join('')}</select>
-    <select id="dSea">${seasons.map(x=>`<option ${x===latest?'selected':''}>${x}</option>`).join('')}</select>
+    <select id="dSea">${seasons.map(x=>`<option ${x===TREND_SE?'selected':''}>${x}</option>`).join('')}</select>
     <select id="dSlot">${J.slots.map(x=>`<option>${x}</option>`).join('')}</select>
     <select id="dStat">${J.statCols.map(c=>`<option>${c}</option>`).join('')}</select>
   </div>
@@ -735,7 +740,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
   const groups=['QB','RB1','RB2','WR1','WR2','WR3','TE1'];
   function smRender(){
     const wk=G.week,D=J.dvp.combined;
-    const se=Math.max(...J.weekly.map(r=>r[1]));
+    const se=TREND_SE;
     const form={};
     J.logs.forEach(l=>{if(l[LOG.season]===se)(form[l[LOG.player]]=form[l[LOG.player]]||[]).push(l[LOG.fppr])});
     const cand=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&inF(u.team)&&u.slot===(u.grp==='QB'?'QB1':u.grp))
@@ -766,7 +771,7 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
       </div>`}).join('');
   }
   function rest(){
-  const season=Math.max(...J.weekly.map(r=>r[1]));
+  const season=TREND_SE;
   const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
   const movers=[],vol=[];
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===season).sort((a,b)=>a[2]-b[2]);
@@ -876,7 +881,7 @@ function chamber(){
 function home(){
   RR.push(render);
   function render(){
-  const D=J.dvp.combined,se=Math.max(...J.weekly.map(r=>r[1])),wk=G.week;
+  const D=J.dvp.combined,se=TREND_SE,wk=G.week;
   const pick=g=>{const rows=UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inF(u.team)&&u.slot===(g==='QB'?'QB1':g))
     .map(u=>{const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return null;
       const def=o.replace('@','');const v=(D[def]||{comps:{}}).comps[g];

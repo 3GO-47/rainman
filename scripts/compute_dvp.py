@@ -114,12 +114,13 @@ def main():
 
     # combined: average per-season AVG stats, then re-rank. Current (2026) weighted 2x if >=4 wks.
     CURRENT = 2026
-    frames = []
+    frames, used = [], []
     for s, t in per_season.items():
         weight = 2 if (s == CURRENT and (wdf[wdf.season == s].week.nunique() >= 4)) else 1
         if s == CURRENT and weight == 1 and len(per_season) > 1:
             continue  # <4 weeks of current season: prior seasons only
         a = t.set_index('defense')[[c + ' avg' for c in STAT_COLS]]
+        used.append(f'{s}x2' if weight == 2 else str(s))
         for _ in range(weight): frames.append(a)
     comb_avg = sum(frames) / len(frames)
     comb_avg.columns = STAT_COLS
@@ -127,12 +128,12 @@ def main():
     comb = comb_avg.round(2).add_suffix(' avg').join(ranks.add_suffix(' rank'))
     for slot, cols in COMPOSITES.items():
         comb[f'{slot} *'] = ranks[cols].mean(axis=1).round(2)
-    comb.insert(0, 'seasons_blended', '+'.join(map(str, sorted(per_season))))
+    comb.insert(0, 'seasons_blended', '+'.join(used))
     comb.reset_index().to_csv('data/processed/dvp_combined.csv', index=False)
 
     print('dvp_weekly:', len(wdf), 'rows | seasons:', seasons)
     for s in seasons: print(f'dvp_season_{s}: 32 defenses')
-    print('combined blends:', sorted(per_season))
+    print('combined blends:', '+'.join(used))
 
 if __name__ == '__main__':
     main()

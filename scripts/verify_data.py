@@ -67,8 +67,13 @@ def main():
         dst = pd.read_csv(f'data/processed/dst_tds_{se}.csv')
         raw = open(f'data/raw/box_lines_{se}.txt', encoding='utf-8').read().splitlines()
         plines = [l for l in raw if l.startswith('P|')]
+        # in-season aware: only the scraped weeks are expected to be complete
+        wk_done = sorted(logs['week'].unique())
+        games_w = games[games['week'].isin(wk_done)]
+        exp_box = len(games_w); exp_tg = 2*exp_box
         # --- raw layer ---
-        ok(f'{se} raw: 272 unique boxscores', len({l.split("|")[1] for l in plines})==272)
+        ok(f'{se} raw: {exp_box} unique boxscores (weeks {min(wk_done)}-{max(wk_done)})',
+           len({l.split("|")[1] for l in plines})==exp_box)
         ok(f'{se} raw: zero ERR lines', not any(l.startswith('ERR') for l in raw))
         ok(f'{se} raw: all P lines have 18 fields', all(len(l.split('|'))==18 for l in plines))
         dup = len(plines) - len({(l.split('|')[1], l.split('|')[2]) for l in plines})
@@ -77,17 +82,19 @@ def main():
         # --- coverage ---
         tg = logs.groupby(['team','week']).size().reset_index()
         per_team = tg.groupby('team').size()
-        ok(f'{se} coverage: 32 teams x 17 games', (per_team==17).all() and len(per_team)==32,
+        exp_per_team = games_w['vis'].value_counts().add(games_w['home'].value_counts(), fill_value=0)
+        ok(f'{se} coverage: every team has all its scheduled games in scraped weeks',
+           len(per_team)==32 and all(per_team.get(t,0)==n for t,n in exp_per_team.items()),
            f'min {per_team.min()} max {per_team.max()}')
         gm = logs.groupby(['week','team','opponent']).ngroups
-        ok(f'{se} coverage: 544 team-games', gm==544, str(gm))
+        ok(f'{se} coverage: {exp_tg} team-games', gm==exp_tg, str(gm))
         # both sides of each game present + opponents reciprocal
         pairs = set(map(tuple, logs[['week','team','opponent']].drop_duplicates().values))
         ok(f'{se} reciprocity: every (wk,A,B) has (wk,B,A)',
            all((w,o,t) in pairs for (w,t,o) in pairs))
         # schedule match
         sched_pairs = set()
-        for _, r in games.iterrows():
+        for _, r in games_w.iterrows():
             sched_pairs.add((r['week'], r['vis'], r['home'])); sched_pairs.add((r['week'], r['home'], r['vis']))
         ok(f'{se} logs match schedule exactly', pairs==sched_pairs,
            f'{len(pairs^sched_pairs)} mismatches')
@@ -102,7 +109,7 @@ def main():
         # --- independent DvP recompute, EVERY cell ---
         ind = independent_weekly(logs, dst)
         w_se = wdf[wdf.season==se]
-        ok(f'{se} dvp_weekly rows = 544', len(w_se)==544, str(len(w_se)))
+        ok(f'{se} dvp_weekly rows = {exp_tg}', len(w_se)==exp_tg, str(len(w_se)))
         bad = 0; checked = 0
         for _, row in w_se.iterrows():
             r2 = ind.get((row['defense'], row['week']))
@@ -154,8 +161,9 @@ def main():
             if abs(J['dvp']['combined'][d]['stats'][c]['avg'] - round(comb.loc[d,c+' avg'],2)) > 0.011: pay_bad += 1
             if abs(J['dvp']['combined'][d]['stats'][c]['rank'] - comb.loc[d,c+' rank']) > 0.001: pay_bad += 1
     ok('dashboard payload == dvp_combined.csv (2176 cells)', pay_bad==0, f'{pay_bad} off')
-    ok('dashboard logs == game_logs rows', len(J['logs'])==10702, str(len(J['logs'])))
-    ok('dashboard weekly == 1088 defense-weeks', len(J['weekly'])==1088, str(len(J['weekly'])))
+    n_logs = sum(len(pd.read_csv(f)) for f in glob.glob('data/game_logs/game_logs_*.csv'))
+    ok(f'dashboard logs == game_logs rows ({n_logs})', len(J['logs'])==n_logs, str(len(J['logs'])))
+    ok(f'dashboard weekly == {len(wdf)} defense-weeks', len(J['weekly'])==len(wdf), str(len(J['weekly'])))
     # weekly column order matches WCOL convention (defense,season,week,opp + STAT_COLS)
     w0 = J['weekly'][0]
     csv_row = wdf[(wdf.defense==w0[0])&(wdf.season==w0[1])&(wdf.week==w0[2])].iloc[0]
