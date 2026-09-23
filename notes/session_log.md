@@ -37,3 +37,9 @@
 - Dashboard: TREND_SE = latest season with >=4 weeks drives waveforms / momentum / volatility / Observatory default
   (2025 for now; flips to 2026 automatically at wk 4). 2026 is selectable as a DvP source.
 - verify_data.py made in-season aware (expected boxscores/team-games derived from scraped weeks): 64/64 PASS.
+
+## 2026-09-23 — week 2 scraped, week 3 matchups live
+- 2026 wk 2: 16/16 box scores (324 raw lines, 0 ERR, checksum-verified) -> game_logs_2026 636 rows, 5 D/ST TDs.
+- ESPN depth 2026-09-23 (562 rows). Notable: Jayden Daniels O, Caleb Williams D, Goedert D, Reed D, Dart O (Winston QB1 NYG),
+  Njoku/Kolar O (LAC), Slayton now IND WR3. New 'D' (doubtful) tag observed — already in OUT_TAGS.
+- refresh -> wk 3; blend still 2024+2025 (flips at wk 4). verify_data 64/64. Smoke test 0 JS errors.
