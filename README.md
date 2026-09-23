@@ -75,6 +75,7 @@ matrix / observatory) · Schedule (6-band heat grid). F1-F6 keyboard shortcuts; 
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-23 — 2026 wk 2 box scores + 09-23 depth charts; wk 3 matchups live.
 - 2026-09-17 — 2026 wk 1 box scores + positions + fresh depth charts; wk 2 matchups live; trend season
   auto-selects the latest season with ≥4 weeks; verify_data in-season aware (64/64).
 - 2026-09-13 (c) — multi-select slate chips + multi-select POS filter (QB/RB/WR/TE/D-ST) applied to every
