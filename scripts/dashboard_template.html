@@ -37,6 +37,16 @@ nav button.on .fk{color:#000}
 #gShare:hover{color:var(--cyan);border-color:var(--cyan)}
 #gSum{color:var(--dim);font-size:10.5px;margin-left:auto}
 #gbar.live{border-bottom-color:var(--cyan)}
+.tag{display:inline-block;border:1px solid #2a3542;background:#0e141b;color:#dfe6ec;padding:0 6px;font-size:10px;border-radius:3px;white-space:nowrap}
+.newdc{display:inline-block;background:#ffd600;color:#000;font-size:9px;font-weight:bold;padding:0 4px;border-radius:2px;letter-spacing:.5px;vertical-align:1px}
+.covbar{display:inline-flex;height:13px;border:1px solid #1c232c;border-radius:3px;overflow:hidden;vertical-align:middle;background:#0b0e12}
+.covbar i{display:block;height:100%;font-size:8.5px;line-height:13px;color:#000;text-align:center;overflow:hidden;font-style:normal;font-weight:bold}
+.tobar{display:inline-block;width:40px;height:9px;background:#0b0e12;border:1px solid #1c232c;border-radius:4px;overflow:hidden;vertical-align:middle}
+.tobar i{display:block;height:100%}
+table.fx.intel{table-layout:auto}table.intel th{position:static}table.intel td:nth-child(-n+3),table.intel th:nth-child(-n+3){text-align:left}table.intel td,table.intel th{white-space:nowrap;overflow:visible;text-overflow:clip;padding-right:8px}table.intel tbody tr{cursor:pointer}table.intel tbody tr.on td{background:#141c25}
+table.intel td.tagcell{white-space:normal;min-width:250px;max-width:340px;line-height:1.35}
+ul.ev{margin:2px 0 0 14px;padding:0;font-size:10.5px;color:#c9d1d9}ul.ev li{margin:1px 0}
+#inOut{overflow-x:auto}
 .slate{display:inline-block;border:1px solid var(--edge2);color:var(--cyan);padding:0 5px;font-size:9.5px;letter-spacing:1px;border-radius:2px;vertical-align:1px}
 main{padding:12px 18px}
 table{border-collapse:collapse;width:100%;font-size:11.5px}
@@ -142,6 +152,7 @@ canvas.chart{max-height:260px}
 <button data-v="players"><span class="fk">F4</span>Players</button>
 <button data-v="defenses"><span class="fk">F5</span>Defenses</button>
 <button data-v="sked"><span class="fk">F6</span>Schedule</button>
+<button data-v="intel"><span class="fk">F7</span>Intel</button>
 </nav>
 <div id="gbar" title="global filter — applies to every tab">
 <span class="gl">WEEK</span><select id="gWk"></select>
@@ -162,6 +173,7 @@ canvas.chart{max-height:260px}
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
+<div id="intel" hidden></div>
 </main>
 <script>
 const J = __DATA__;
@@ -277,10 +289,10 @@ document.querySelector('.sub').innerHTML=document.querySelector('.sub').innerHTM
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend);
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  ['home','chamber','players','defenses','sked','tdb'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);});
-addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6'].indexOf(e.key);
+  ['home','chamber','players','defenses','sked','tdb','intel'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);});
+addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6','F7'].indexOf(e.key);
   if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
-const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21};
+const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21,snaps:22,snp:23,tsh:24,adot:25,rsh:26,wopr:27};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
 // TREND_SE: the season used for waveforms / momentum / volatility — the latest season with >=4 weeks
 // of game logs (early in a new season the prior year is the only meaningful trend signal)
@@ -386,6 +398,10 @@ const UNIVERSE=J.depth.filter(d=>d.pos_row!=='FB').map(d=>{
     row:d.pos_row,pos:d.pos_row.replace(/\d/,'').replace(/[0-9+]/g,''),
     owner:OWNER[d.player+'|'+d.team]||'',oppRaw,opp};
 });
+// USG: season-to-date usage per player (latest season that has snap data) — snap share, target share, aDOT
+const USG=(()=>{const se=Math.max(...J.logs.filter(l=>l[LOG.snaps]!=null).map(l=>l[LOG.season]).concat([0]));const m={};
+  J.logs.forEach(l=>{if(l[LOG.season]!==se||l[LOG.snp]==null)return;const a=m[l[LOG.player]]=m[l[LOG.player]]||{n:0,snp:0,tsh:0,tn:0,ad:0,adn:0};a.n++;a.snp+=l[LOG.snp];if(l[LOG.tsh]!=null){a.tsh+=l[LOG.tsh];a.tn++}if(l[LOG.adot]!=null&&l[LOG.tgt]>0){a.ad+=l[LOG.adot]*l[LOG.tgt];a.adn+=l[LOG.tgt]}});
+  Object.values(m).forEach(a=>{a.snp/=a.n;a.tsh=a.tn?a.tsh/a.tn:null;a.adot=a.adn?a.ad/a.adn:null});m._se=se;return m})();
 // overall WR pecking order per team: WR1-3 = starters, then WR4, WR5, WR6... down the bench
 [...new Set(UNIVERSE.map(u=>u.team))].forEach(t=>{
   UNIVERSE.filter(u=>u.team===t&&u.pos==='WR')
@@ -428,7 +444,9 @@ function lab(){
       const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
       const d=opp&&D[opp]?D[opp]:null;
       const gm=gameOf(u.team,wk);
+      const ug=USG[u.player]||{};
       return {...u,oppRaw,opp,statset:stats,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
+        snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
         psi:d?d.comps[u.grp]:null};
@@ -450,11 +468,13 @@ function lab(){
       else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
       else if(sortK.startsWith('v')){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
+      else if(sortK==='snp'||sortK==='tsh'){x=a[sortK]==null?-1:a[sortK];y=b[sortK]==null?-1:b[sortK]}
       else {x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
     $('#labTbl').innerHTML=`<table><thead><tr>
       <th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
+      <th data-k="snp" title="season-to-date offensive snap share (${USG._se})">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th>
       ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}
       <th class="rk" data-k="psi">&Psi;</th>
       ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
@@ -463,6 +483,7 @@ function lab(){
     ${R.map(u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<tr><td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
+      <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td>
       ${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}
       <td>${psi(u.psi)}</td>
       ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
@@ -711,11 +732,12 @@ function player(){
         </tbody></table></div></div>
       <div class="panel"><h3>full game log <span class="f">every scraped season · traces to data/game_logs/</span></h3>
       <table><thead><tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>att</th><th>pyd</th><th>ptd</th><th>int</th>
-      <th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th>std</th><th>ppr</th></tr></thead><tbody>
+      <th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th title="offensive snaps · snap share">snaps</th><th title="share of team targets">tgt%</th><th title="avg depth of target">aDOT</th><th>std</th><th>ppr</th></tr></thead><tbody>
       ${L.map(l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td>
       <td>${l[LOG.slot]}</td><td>${l[LOG.patt]||'—'}</td>
       <td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.int]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td>
       <td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td>
+      <td class="mini">${l[LOG.snaps]==null?'—':l[LOG.snaps]+' · '+(100*l[LOG.snp]).toFixed(0)+'%'}</td><td class="mini">${l[LOG.tsh]==null?'—':(100*l[LOG.tsh]).toFixed(0)+'%'}</td><td class="mini">${l[LOG.adot]==null?'—':l[LOG.adot].toFixed(1)}</td>
       <td>${l[LOG.fstd].toFixed(1)}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`).join('')}</tbody></table></div>`;
     const labels=L.map(l=>l[LOG.season]%100+'w'+l[LOG.week]);
     if(pChart1)pChart1.destroy();
@@ -872,6 +894,7 @@ function chamber(){
         <h3>${tlogo(vis,20)} ${vis} @ ${tlogo(home,20)} ${home}
           <span class="f">${date} &middot; ${kickLbl(g)} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
         ${fieldTilt(vis,home,+dot)}
+        <p class="mini" style="margin:2px 0 6px">${tcell(vis)} D &rarr; ${schemeLine(vis)||'<span class="dim">no scheme data</span>'} &nbsp;&nbsp; ${tcell(home)} D &rarr; ${schemeLine(home)||'<span class="dim">no scheme data</span>'}</p>
         <div class="grid2">${A.html}${B.html}</div></div>`}).join('')
       +(byes.length?`<p class="note">out of phase this week (bye): ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
   }
@@ -992,8 +1015,8 @@ window.playerPop=function(n){
   const grp=SLOTG(slot);
   const oppRaw=(J.sched26[team]||[])[G.week-1]||'';
   const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
-  const gr=l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td><td>${l[LOG.slot]}</td><td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td><td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`;
-  const ghead=`<tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>pyd</th><th>ptd</th><th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th>ppr</th></tr>`;
+  const gr=l=>`<tr><td>${l[LOG.season]}</td><td>${l[LOG.week]}</td><td>${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</td><td>${l[LOG.slot]}</td><td>${l[LOG.py]}</td><td>${l[LOG.ptd]}</td><td>${l[LOG.ra]}</td><td>${l[LOG.ry]}</td><td>${l[LOG.rtd]}</td><td>${l[LOG.tgt]}</td><td>${l[LOG.rec]}</td><td>${l[LOG.recy]}</td><td>${l[LOG.rectd]}</td><td class="mini">${l[LOG.snp]==null?'—':(100*l[LOG.snp]).toFixed(0)+'%'}</td><td class="mini">${l[LOG.tsh]==null?'—':(100*l[LOG.tsh]).toFixed(0)+'%'}</td><td><b>${l[LOG.fppr].toFixed(1)}</b></td></tr>`;
+  const ghead=`<tr><th>ssn</th><th>wk</th><th>opp</th><th>slot</th><th>pyd</th><th>ptd</th><th>car</th><th>ryd</th><th>rtd</th><th>tgt</th><th>rec</th><th>rcy</th><th>rct</th><th title="offensive snap share">snp%</th><th title="share of team targets">tgt%</th><th>ppr</th></tr>`;
   const av=(lab2,arr)=>{const f=i=>mean(arr.map(l=>l[i])).toFixed(1);
     return `<tr><td>${lab2}</td><td>${arr.length}</td><td>${f(LOG.py)}</td><td>${f(LOG.ra)}</td><td>${f(LOG.ry)}</td><td>${f(LOG.tgt)}</td><td>${f(LOG.rec)}</td><td>${f(LOG.recy)}</td><td>${mean(arr.map(l=>l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd])).toFixed(2)}</td><td><b>${f(LOG.fppr)}</b></td></tr>`};
   const seasons2=[...new Set(L.map(l=>l[LOG.season]))];
@@ -1158,6 +1181,131 @@ function tdboard(){
   }
   $('#tdSlot').onchange=render;RR.push(render);
 }
-home();dchart();lab();ranks();matrix();sked();tdboard();chamber();defense();player();insights();
+/* ---------- INTEL: scheme tags · playcaller tendencies · defensive turnover · usage ---------- */
+/* source: nflverse pbp + FTN charting + NGS participation + snap counts, joined to game_logs by build_advanced.py */
+const IN=J.intel||{off:{},def:{},tags:{},turnover:{},coaching:{},schemeSlot:[]};
+const IN_SE=Object.keys(IN.def).sort().reverse();
+const pct=(v,d=0)=>v==null||isNaN(v)?'<span class="dim">—</span>':(100*v).toFixed(d)+'%';
+const num1=(v,d=1)=>v==null||isNaN(v)?'<span class="dim">—</span>':(+v).toFixed(d);
+const sgn=(v,d=1)=>v==null||isNaN(v)?'<span class="dim">—</span>':`<span style="color:${v>0?'#00c853':v<0?'#ff5252':'var(--dim)'}">${v>0?'+':''}${(+v).toFixed(d)}</span>`;
+// rank a metric within a season block; hi=true => rank 1 = highest value
+function irank(block,team,key,hi=true){const vals=Object.entries(block).map(([t,r])=>[t,r[key]]).filter(x=>x[1]!=null&&!isNaN(x[1]));
+  vals.sort((a,b)=>hi?b[1]-a[1]:a[1]-b[1]);const i=vals.findIndex(x=>x[0]===team);return i<0?null:i+1}
+const rk=(block,team,key,hi=true)=>{const r=irank(block,team,key,hi);return r==null?'':badge(r)};
+const COVK=[['cover1','C1','#4fc3f7'],['cover3','C3','#7c4dff'],['cover2','C2','#00c853'],['cover4','C4','#ffd600'],['cover6','C6','#ff9100'],['two_man','2M','#f06292'],['cover0','C0','#ff5252']];
+function covBar(r,w=170){if(r.cover1==null)return '<span class="dim">no charting</span>';
+  return `<span class="covbar" style="width:${w}px" title="${COVK.map(([k,l])=>l+' '+(100*(r[k]||0)).toFixed(0)+'%').join(' · ')}${r.cov_est?' · estimated from '+r.cov_est+' charting':''}">${COVK.map(([k,l,c])=>{const v=r[k]||0;return v<.005?'':`<i style="width:${(100*v).toFixed(1)}%;background:${c}" title="${l} ${(100*v).toFixed(0)}%">${v>=.12?l:''}</i>`}).join('')}</span>${r.cov_est?'<sup class="dim" title="coverage estimated from '+r.cov_est+' (this season not yet charted)">†</sup>':''}`}
+const coachCell=(name,changed,from,prev)=>`${esc(name||'?')}${changed===1||changed===true?` <span class="newdc" title="new this season${prev?' · replaces '+prev:''}${from?' · from '+from:''}">NEW${from&&from!=='new/promoted'?' &larr; '+from.replace('HC@','HC '):''}</span>`:''}`;
+const tagChip=(t)=>t?`<span class="tag" title="${esc(t.evidence||'')}">${esc(t.primary_tag||'—')}</span>${t.descriptors?`<span class="mini"> ${esc(t.descriptors)}</span>`:''}`:'<span class="dim">—</span>';
+function intel(){
+  $('#intel').innerHTML=`<div class="tabs" id="inTabs"><button data-t="D" class="on">Defense &middot; DC scheme</button><button data-t="O">Offense &middot; OC scheme</button><button data-t="S">Scheme &times; Slot</button><button data-t="U">Player Usage</button></div>
+  <div class="controls"><span class="gl">SEASON</span><select id="inSe">${IN_SE.map(s=>`<option>${s}</option>`).join('')}</select>
+  <input id="inQ" placeholder="search team / coach / player..." size="22">
+  <span class="note">tags are computed, not opinion: dominant coverage shell + man/zone + blitz + box + personnel (defense) &middot; PROE + play-action / motion / shotgun / RPO / tempo / personnel (offense) &middot; † = coverage not yet charted this season, estimated from the coordinator's most recent charted unit &middot; turnover = change in the 11 highest-snap starters vs last season &middot; click a row to drill in &middot; obeys the global filter bar</span></div>
+  <div id="inOut"></div><div id="inDrill"></div>`;
+  let tab='D',sortK=null,sortA=true,drill=null;
+  $('#inTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#inTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;sortK=null;drill=null;render()};
+  $('#inSe').onchange=()=>{drill=null;render()};$('#inQ').oninput=render;
+  const q=()=>$('#inQ').value.trim().toLowerCase();
+  function sortRows(R,def){R.sort((a,b)=>{const k=sortK||def;let x=a.s[k],y=b.s[k];if(x==null)x=sortA?1e9:-1e9;if(y==null)y=sortA?1e9:-1e9;return (x<y?-1:x>y?1:0)*(sortA?1:-1)})}
+  function thead(cols){return `<thead><tr>${cols.map(([k,l,tip])=>`<th data-k="${k}" title="${tip||''}" style="cursor:pointer">${l}${sortK===k?(sortA?' &#9650;':' &#9660;'):''}</th>`).join('')}</tr></thead>`}
+  function bindSort(def){$('#inOut').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=k==='team'||k==='coach'||k==='player';}render()});
+    $('#inOut').querySelectorAll('tr[data-t]').forEach(tr=>tr.onclick=e=>{if(e.target.closest('.pp'))return;drill=drill===tr.dataset.t?null:tr.dataset.t;render()})}
+  function render(){
+    const se=$('#inSe').value,D=IN.def[se]||{},O=IN.off[se]||{},T=IN.tags[se]||{},TO=IN.turnover[se]||{},C=IN.coaching[se]||{};
+    const prevSe=String(+se-1),Tp=IN.tags[prevSe]||{};
+    const qq=q();
+    if(tab==='D'){
+      const cols=[['team','def'],['coach','DC'],['tag','scheme (computed)'],['cov','coverage shell mix','C1 man-free · C3 · C2 · C4 quarters · C6 · 2-man · C0'],['man','man%','man coverage rate on pass plays'],['two','2-high%','two-high safety shells'],['blitz','blitz%','5+ rushers'],['press','press%','QB pressured'],['box','box','avg defenders in box'],['nick','nickel%'],['epa','EPA/p','EPA per play allowed · rank 1 = most allowed = softest'],['pepa','pass EPA'],['repa','rush EPA'],['xpl','expl%','explosive plays allowed (20+ pass / 12+ rush)'],['to','turnover','share of last season\'s top-11 starters gone'],['ret','ret snaps','share of last season\'s starter snaps still on the roster']];
+      const R=Object.keys(D).filter(t=>inD(t)).map(t=>{const r=D[t],tg=T[t]&&T[t].DEF||{},to=TO[t]&&TO[t].DEF||{},c=C[t]||{};
+        return {t,r,tg,to,c,s:{team:t,coach:tg.coach||c.dc||'',tag:tg.primary_tag||'',cov:r.cover1,man:r.man_rate,two:r.two_high,blitz:r.blitz_rate,press:r.pressure_rate,box:r.avg_box,nick:r.nickel_rate,epa:r.epa_play_allowed,pepa:r.pass_epa_allowed,repa:r.rush_epa_allowed,xpl:r.explosive_allowed,to:to.turnover_pct,ret:to.prev_snaps_returning_pct}}})
+        .filter(x=>!qq||(x.t+' '+x.s.coach+' '+x.s.tag+' '+(x.tg.descriptors||'')).toLowerCase().includes(qq));
+      sortRows(R,'epa');if(!sortK)R.reverse(); // default: softest (most EPA allowed) first
+      $('#inOut').innerHTML=`<table class="fx intel">${thead(cols)}<tbody>${R.map(x=>{const r=x.r,tg=x.tg,to=x.to,c=x.c;
+        return `<tr data-t="${x.t}" class="${drill===x.t?'on':''}"><td>${tcell(x.t)}</td><td>${coachCell(tg.coach||c.dc,tg.coach_changed==null?c.dc_changed:tg.coach_changed,tg.coach_from||c.dc_from,c.dc_prev)}</td>
+        <td class="tagcell">${tagChip(tg)}</td><td>${covBar(r)}</td>
+        <td>${pct(r.man_rate)} ${rk(D,x.t,'man_rate')}</td><td>${pct(r.two_high)}</td><td>${pct(r.blitz_rate)} ${rk(D,x.t,'blitz_rate')}</td><td>${pct(r.pressure_rate)}</td>
+        <td>${num1(r.avg_box,2)}</td><td>${pct(r.nickel_rate)}</td>
+        <td>${sgn(r.epa_play_allowed,3)} ${rk(D,x.t,'epa_play_allowed')}</td><td>${sgn(r.pass_epa_allowed,3)} ${rk(D,x.t,'pass_epa_allowed')}</td><td>${sgn(r.rush_epa_allowed,3)} ${rk(D,x.t,'rush_epa_allowed')}</td><td>${pct(r.explosive_allowed,1)}</td>
+        <td>${to.turnover_pct==null?'<span class="dim">—</span>':`<span class="tobar"><i style="width:${(100*to.turnover_pct).toFixed(0)}%;background:${to.turnover_pct>=.5?'#ff5252':to.turnover_pct>=.3?'#ffd600':'#00c853'}"></i></span> ${pct(to.turnover_pct)}`}</td><td>${pct(to.prev_snaps_returning_pct)}</td></tr>`}).join('')}</tbody></table>
+        <p class="note">${R.length} defenses &middot; ${se} &middot; ranks 1-32 within season &middot; coverage/personnel from NGS participation + FTN charting; EPA/success/explosive from nflverse play-by-play</p>`;
+      bindSort();$('#inDrill').innerHTML=drill&&D[drill]?drillDef(drill,se):'';
+    } else if(tab==='O'){
+      const cols=[['team','off'],['coach','OC / playcaller'],['tag','scheme (computed)'],['proe','PROE','pass rate over expected (neutral situations), pct points'],['npr','neutral pass%','pass rate, win prob 20-80%, Q1-3'],['pa','PA%','play-action rate on dropbacks'],['sg','shotgun%'],['uc','under center%'],['mo','motion%'],['rpo','RPO%'],['nh','no-huddle%'],['pace','sec/play','seconds per offensive snap (lower = faster)'],['p11','11 pers%','3-WR personnel share'],['hv','heavy%','12/21/13 personnel share'],['adot','aDOT'],['deep','deep%','targets 20+ air yards'],['epa','EPA/p','rank 1 = most efficient'],['rb','RB tgt%'],['te','TE tgt%'],['wr','WR tgt%'],['to','turnover','share of last season\'s top-11 starters gone']];
+      const R=Object.keys(O).filter(t=>inF(t)).map(t=>{const r=O[t],tg=T[t]&&T[t].OFF||{},to=TO[t]&&TO[t].OFF||{},c=C[t]||{};
+        return {t,r,tg,to,c,s:{team:t,coach:tg.coach||c.oc||'',tag:tg.primary_tag||'',proe:r.proe,npr:r.neutral_pass_rate,pa:r.play_action_rate,sg:r.shotgun_rate,uc:r.under_center_rate,mo:r.motion_rate,rpo:r.rpo_rate,nh:r.no_huddle_rate,pace:r.sec_per_play,p11:r.p11,hv:r.heavy_pers,adot:r.adot,deep:r.deep_rate,epa:r.epa_play,rb:r.rb_tgt_share,te:r.te_tgt_share,wr:r.wr_tgt_share,to:to.turnover_pct}}})
+        .filter(x=>!qq||(x.t+' '+x.s.coach+' '+x.s.tag+' '+(x.tg.descriptors||'')).toLowerCase().includes(qq));
+      sortRows(R,'epa');if(!sortK)R.reverse();
+      $('#inOut').innerHTML=`<table class="fx intel">${thead(cols)}<tbody>${R.map(x=>{const r=x.r,tg=x.tg,to=x.to,c=x.c;
+        return `<tr data-t="${x.t}" class="${drill===x.t?'on':''}"><td>${tcell(x.t)}</td><td>${coachCell(tg.coach||c.oc,tg.coach_changed==null?c.oc_changed:tg.coach_changed,tg.coach_from||c.oc_from,c.oc_prev)}</td>
+        <td class="tagcell">${tagChip(tg)}</td><td>${sgn(r.proe)} ${rk(O,x.t,'proe')}</td><td>${pct(r.neutral_pass_rate)}</td><td>${pct(r.play_action_rate)} ${rk(O,x.t,'play_action_rate')}</td><td>${pct(r.shotgun_rate)}</td><td>${pct(r.under_center_rate)}</td>
+        <td>${pct(r.motion_rate)} ${rk(O,x.t,'motion_rate')}</td><td>${pct(r.rpo_rate)}</td><td>${pct(r.no_huddle_rate)}</td><td>${num1(r.sec_per_play)} ${rk(O,x.t,'sec_per_play',false)}</td>
+        <td>${pct(r.p11)}</td><td>${pct(r.heavy_pers)}</td><td>${num1(r.adot)}</td><td>${pct(r.deep_rate,1)}</td><td>${sgn(r.epa_play,3)} ${rk(O,x.t,'epa_play')}</td>
+        <td>${pct(r.rb_tgt_share)}</td><td>${pct(r.te_tgt_share)}</td><td>${pct(r.wr_tgt_share)}</td>
+        <td>${to.turnover_pct==null?'<span class="dim">—</span>':`<span class="tobar"><i style="width:${(100*to.turnover_pct).toFixed(0)}%;background:${to.turnover_pct>=.5?'#ff5252':to.turnover_pct>=.3?'#ffd600':'#00c853'}"></i></span> ${pct(to.turnover_pct)}`}</td></tr>`}).join('')}</tbody></table>
+        <p class="note">${R.length} offenses &middot; ${se} &middot; ranks 1-32 within season &middot; PROE / pace / EPA from nflverse pbp; play-action, motion, RPO, screens from FTN charting; personnel from NGS participation (2024-25)</p>`;
+      bindSort();$('#inDrill').innerHTML=drill&&O[drill]?drillOff(drill,se):'';
+    } else if(tab==='S'){
+      const fams=[...new Set(IN.schemeSlot.map(r=>r.family))],grps=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
+      const cell=(f,g)=>{const r=IN.schemeSlot.find(x=>x.family===f&&x.grp===g);if(!r)return '<td class="dim">—</td>';const i=r.index;const c=i>=106?'#00c853':i>=102?'#8bc34a':i<=94?'#ff5252':i<=98?'#ff8a65':'#7d7d7d';
+        return `<td title="${f} vs ${g}: ${r.ppr_allowed} PPR/gm allowed vs league ${r.lg_avg} · ${r.games} team-games">${sgn(i-100,0)} <span class="mini">${r.ppr_allowed}</span></td>`};
+      const users=(f)=>Object.keys(T).filter(t=>T[t].DEF&&T[t].DEF.primary_tag===f&&inD(t));
+      $('#inOut').innerHTML=`<table><thead><tr><th>defensive scheme family</th><th>${se} defenses tagged</th>${grps.map(g=>`<th>${g}</th>`).join('')}</tr></thead><tbody>
+        ${fams.map(f=>`<tr><td class="tagcell"><span class="tag">${esc(f)}</span></td><td>${users(f).map(t=>tcell(t)).join(' ')||'<span class="dim">—</span>'}</td>${grps.map(g=>cell(f,g)).join('')}</tr>`).join('')}</tbody></table>
+        <p class="note">PPR points per game allowed to each slot by every defense in the family, indexed to league average (+6 = 6% more than average) &middot; charted seasons 2024-25 only &middot; a schematic prior, not a matchup rank: combine with the DvP tabs</p>`;
+      $('#inDrill').innerHTML='';
+    } else {
+      const S=+se,agg={};
+      J.logs.forEach(l=>{if(l[LOG.season]!==S||l[LOG.snaps]==null)return;if(!inF(l[LOG.team])||!inP(l[LOG.pos]))return;
+        const a=agg[l[LOG.player]]=agg[l[LOG.player]]||{p:l[LOG.player],team:l[LOG.team],pos:l[LOG.pos],slot:l[LOG.slot],g:0,sn:0,sp:0,spn:0,tg:0,ts:0,tsn:0,ra:0,rs:0,rsn:0,ad:0,adn:0,wo:0,won:0,ppr:0};
+        a.team=l[LOG.team];a.slot=l[LOG.slot];a.g++;a.sn+=l[LOG.snaps];a.tg+=l[LOG.tgt];a.ra+=l[LOG.ra];a.ppr+=l[LOG.fppr];
+        if(l[LOG.snp]!=null){a.sp+=l[LOG.snp];a.spn++}if(l[LOG.tsh]!=null){a.ts+=l[LOG.tsh];a.tsn++}if(l[LOG.rsh]!=null){a.rs+=l[LOG.rsh];a.rsn++}
+        if(l[LOG.adot]!=null&&l[LOG.tgt]>0){a.ad+=l[LOG.adot]*l[LOG.tgt];a.adn+=l[LOG.tgt]}if(l[LOG.wopr]!=null){a.wo+=l[LOG.wopr];a.won++}});
+      let R=Object.values(agg).map(a=>({a,s:{player:a.p,team:a.team,pos:a.pos,g:a.g,snaps:a.sn/a.g,snp:a.spn?a.sp/a.spn:null,tgt:a.tg/a.g,tsh:a.tsn?a.ts/a.tsn:null,car:a.ra/a.g,rsh:a.rsn?a.rs/a.rsn:null,adot:a.adn?a.ad/a.adn:null,wopr:a.won?a.wo/a.won:null,ppr:a.ppr/a.g}}))
+        .filter(x=>!qq||(x.a.p+' '+x.a.team).toLowerCase().includes(qq));
+      sortRows(R,'ppr');if(!sortK)R.reverse();
+      const cols=[['player','player'],['team','tm'],['pos','pos'],['g','G'],['snaps','snaps/g'],['snp','snap%','offensive snap share per game (avg)'],['tgt','tgt/g'],['tsh','tgt share','share of team targets per game (avg)'],['car','car/g'],['rsh','rush share'],['adot','aDOT','avg depth of target (air yards / target)'],['wopr','WOPR','1.5 × target share + 0.7 × air-yards share'],['ppr','PPR/g']];
+      $('#inOut').innerHTML=`<table class="fx intel">${thead(cols)}<tbody>${R.map(x=>{const s=x.s;return `<tr><td class="pp plink" data-p="${x.a.p}">${esc(x.a.p)}</td><td>${tcell(s.team)}</td><td style="color:${POSC[s.pos]||'#ccc'}">${s.pos}</td><td>${s.g}</td><td>${num1(s.snaps,0)}</td>
+        <td>${usgBar(s.snp,'#4fc3f7')}</td><td>${num1(s.tgt)}</td><td>${usgBar(s.tsh,'#f06292',.4)}</td><td>${num1(s.car)}</td><td>${usgBar(s.rsh,'#b388ff',.8)}</td><td>${num1(s.adot)}</td><td>${num1(s.wopr,2)}</td><td><b>${num1(s.ppr)}</b></td></tr>`}).join('')}</tbody></table>
+        <p class="note">${R.length} players &middot; ${se} &middot; snaps from nflverse snap counts (PFR ids), target / air-yard shares from play-by-play &middot; click a name for his card &middot; position + team from the global filter bar</p>`;
+      bindSort();$('#inDrill').innerHTML='';
+    }
+  }
+  function usgBar(v,c,mx=1){if(v==null)return '<span class="dim">—</span>';return `<span class="tobar" style="width:54px"><i style="width:${Math.min(100,100*v/mx).toFixed(0)}%;background:${c}"></i></span> ${(100*v).toFixed(0)}%`}
+  function hist(team,side,key,seasons,fmt){return seasons.map(s=>{const b=(side==='DEF'?IN.def:IN.off)[s]||{};const v=b[team]?b[team][key]:null;return `<td>${v==null?'<span class="dim">—</span>':fmt(v)}</td>`}).join('')}
+  function drillDef(t,se){const r=IN.def[se][t],tg=IN.tags[se][t]&&IN.tags[se][t].DEF||{},to=IN.turnover[se]&&IN.turnover[se][t]&&IN.turnover[se][t].DEF,c=IN.coaching[se]&&IN.coaching[se][t]||{};
+    const S=IN_SE.slice().sort();
+    const rows=[['man%','man_rate',pct],['2-high%','two_high',pct],['C1','cover1',pct],['C3','cover3',pct],['C2','cover2',pct],['C4','cover4',pct],['blitz%','blitz_rate',pct],['pressure%','pressure_rate',pct],['avg box','avg_box',v=>num1(v,2)],['light box vs run','light_box_rate',pct],['nickel%','nickel_rate',pct],['dime%','dime_rate',pct],['EPA/play allowed','epa_play_allowed',v=>sgn(v,3)],['pass EPA allowed','pass_epa_allowed',v=>sgn(v,3)],['rush EPA allowed','rush_epa_allowed',v=>sgn(v,3)],['success% allowed','success_allowed',pct],['explosive% allowed','explosive_allowed',v=>pct(v,1)],['sack%','sack_rate',v=>pct(v,1)]];
+    const stint=S.map(s=>{const cc=IN.coaching[s]&&IN.coaching[s][t];return `<td>${cc?esc(cc.dc):'—'}${cc&&cc.dc_changed===1?' <span class="newdc">NEW</span>':''}<br><span class="mini">${IN.tags[s]&&IN.tags[s][t]&&IN.tags[s][t].DEF?esc(IN.tags[s][t].DEF.primary_tag):''}</span></td>`}).join('');
+    return `<div class="panel" style="border-left:3px solid ${vivid(t)}"><h3>${tlogo(t,20)} ${t} defense &middot; ${se} <span class="f">DC ${esc(tg.coach||c.dc||'?')}${c.dc_changed===1?` &middot; new this season (replaces ${esc(c.dc_prev||'?')}${c.dc_from?', from '+esc(c.dc_from.replace('HC@','HC of ')):''})`:c.dc_changed===0?' &middot; returning':''} &middot; HC ${esc(c.hc||'?')}${c.hc_changed===1?' (NEW)':''}</span></h3>
+     <p><span class="tag">${esc(tg.primary_tag||'—')}</span> <span class="mini">${esc(tg.descriptors||'')}</span></p>
+     <p class="mini">coverage source: ${esc(tg.coverage_source||'—')}</p>
+     <div class="grid2"><div><p class="mini">evidence (all rates from charted plays)</p><ul class="ev">${(tg.evidence||'').split(' | ').map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+     <div><p class="mini">trajectory by season</p><table><thead><tr><th>metric</th>${S.map(s=>`<th>${s}</th>`).join('')}</tr></thead><tbody><tr><td>DC / tag</td>${stint}</tr>
+     ${rows.map(([l,k,f])=>`<tr><td>${l}</td>${hist(t,'DEF',k,S,f)}</tr>`).join('')}</tbody></table></div></div>
+     ${to?`<p class="mini" style="margin-top:8px">defensive turnover vs ${+se-1}: ${to.retained}/${to.prev_starters} top-11 starters retained &middot; turnover ${pct(to.turnover_pct)} &middot; ${pct(to.prev_snaps_returning_pct)} of last season's starter snaps return</p>
+     <div class="grid3"><div><p class="mini" style="color:#ff5252">departed</p><ul class="ev">${(to.departed||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="dim">none</li>'}</ul></div>
+     <div><p class="mini" style="color:#00c853">new starters</p><ul class="ev">${(to.new_starters||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="dim">none</li>'}</ul></div>
+     <div><p class="mini">current top-11 by snaps</p><ul class="ev">${(to.cur_starter_names||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`:'<p class="note">no prior-season starter data for turnover</p>'}</div>`}
+  function drillOff(t,se){const r=IN.off[se][t],tg=IN.tags[se][t]&&IN.tags[se][t].OFF||{},to=IN.turnover[se]&&IN.turnover[se][t]&&IN.turnover[se][t].OFF,c=IN.coaching[se]&&IN.coaching[se][t]||{};
+    const S=IN_SE.slice().sort();
+    const rows=[['PROE','proe',v=>sgn(v)],['neutral pass%','neutral_pass_rate',pct],['early-down pass%','early_down_pass_rate',pct],['play-action%','play_action_rate',pct],['shotgun%','shotgun_rate',pct],['under center%','under_center_rate',pct],['motion%','motion_rate',pct],['RPO%','rpo_rate',pct],['no-huddle%','no_huddle_rate',pct],['screen%','screen_rate',pct],['sec/play','sec_per_play',v=>num1(v)],['plays/game','plays_per_game',v=>num1(v)],['11 personnel','p11',pct],['12 personnel','p12',pct],['21 personnel','p21',pct],['aDOT','adot',v=>num1(v)],['deep%','deep_rate',v=>pct(v,1)],['RZ pass%','rz_pass_rate',pct],['EPA/play','epa_play',v=>sgn(v,3)],['pass EPA','pass_epa',v=>sgn(v,3)],['rush EPA','rush_epa',v=>sgn(v,3)],['success%','success_rate',pct],['explosive%','explosive_rate',v=>pct(v,1)],['RB / TE / WR tgt share','rb_tgt_share',pct]];
+    const stint=S.map(s=>{const cc=IN.coaching[s]&&IN.coaching[s][t];return `<td>${cc?esc(cc.oc):'—'}${cc&&cc.oc_changed===1?' <span class="newdc">NEW</span>':''}<br><span class="mini">${IN.tags[s]&&IN.tags[s][t]&&IN.tags[s][t].OFF?esc(IN.tags[s][t].OFF.primary_tag):''}</span></td>`}).join('');
+    return `<div class="panel" style="border-left:3px solid ${vivid(t)}"><h3>${tlogo(t,20)} ${t} offense &middot; ${se} <span class="f">OC ${esc(tg.coach||c.oc||'?')}${c.oc_changed===1?` &middot; new this season (replaces ${esc(c.oc_prev||'?')}${c.oc_from?', from '+esc(c.oc_from.replace('HC@','HC of ')):''})`:c.oc_changed===0?' &middot; returning':''} &middot; HC ${esc(c.hc||'?')}${c.hc_changed===1?' (NEW)':''}</span></h3>
+     <p><span class="tag">${esc(tg.primary_tag||'—')}</span> <span class="mini">${esc(tg.descriptors||'')}</span></p>
+     <div class="grid2"><div><p class="mini">evidence (all rates from charted plays)</p><ul class="ev">${(tg.evidence||'').split(' | ').map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+     <p class="mini" style="margin-top:8px">target distribution</p><p>${['rb_tgt_share','te_tgt_share','wr_tgt_share'].map((k,i)=>`<span style="color:${['#b388ff','#ffd600','#f06292'][i]}">${['RB','TE','WR'][i]} ${pct(r[k])}</span>`).join(' &middot; ')}</p></div>
+     <div><p class="mini">trajectory by season</p><table><thead><tr><th>metric</th>${S.map(s=>`<th>${s}</th>`).join('')}</tr></thead><tbody><tr><td>OC / tag</td>${stint}</tr>
+     ${rows.map(([l,k,f])=>`<tr><td>${l}</td>${hist(t,'OFF',k,S,f)}</tr>`).join('')}</tbody></table></div></div>
+     ${to?`<p class="mini" style="margin-top:8px">offensive turnover vs ${+se-1}: ${to.retained}/${to.prev_starters} top-11 starters retained &middot; turnover ${pct(to.turnover_pct)}</p>
+     <div class="grid3"><div><p class="mini" style="color:#ff5252">departed</p><ul class="ev">${(to.departed||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="dim">none</li>'}</ul></div>
+     <div><p class="mini" style="color:#00c853">new starters</p><ul class="ev">${(to.new_starters||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="dim">none</li>'}</ul></div>
+     <div><p class="mini">current top-11 by snaps</p><ul class="ev">${(to.cur_starter_names||'').split('; ').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`:''}</div>`}
+  RR.push(render);render();
+}
+// one-line scheme summary for a defense (game cards / player cards)
+function schemeLine(def,se){se=se||IN_SE[0];const tg=IN.tags[se]&&IN.tags[se][def]&&IN.tags[se][def].DEF;if(!tg)return '';const c=IN.coaching[se]&&IN.coaching[se][def]||{};
+  return `<span class="mini" title="${esc(tg.evidence||'')}">DC ${esc(tg.coach||c.dc||'?')}${c.dc_changed===1?' <span class="newdc">NEW</span>':''} &middot; <span class="tag">${esc(tg.primary_tag)}</span></span>`}
+home();dchart();lab();ranks();matrix();sked();tdboard();chamber();defense();player();insights();intel();
 gbarInit();
 </script></body></html>

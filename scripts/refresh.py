@@ -47,6 +47,13 @@ def main():
     dc = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     print(f'depth chart snapshot: {dc}')
     run(['scripts/build_matchups.py', dc, str(week)])
+    # advanced layer (usage / scheme tags / turnover / coaching) from the nflverse cache in data/raw/nflverse/.
+    # The cache is refreshed by scripts/fetch_nflverse.py, which needs github.com access (cloud workspace);
+    # build_advanced.py itself is offline and is skipped only if the cache is missing.
+    if glob.glob('data/raw/nflverse/pbp_slim_*.parquet'):
+        run(['scripts/build_advanced.py'])
+    else:
+        print('!! data/raw/nflverse/ missing — run scripts/fetch_nflverse.py first; Intel tab will be stale')
     run(['scripts/build_dashboard.py'])
 
     # summary + anomaly report

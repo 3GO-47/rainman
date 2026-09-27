@@ -2,7 +2,7 @@
 Usage: python3 build_dashboard.py
 Every number traces to data/game_logs/ via the derived CSVs. Rerun after any data refresh.
 """
-import csv, glob, json, os, datetime
+import re, csv, glob, json, os, datetime
 import pandas as pd
 
 STAT_COLS = ['QB PY','P TD','QB RY','RB1 RY','RB2+ RY','WR RY','RB1 Recep','RB1 RecY',
@@ -30,6 +30,48 @@ def dvp_table(path):
                   'comps': {s: float(r[s+' *']) for s in SLOTS if (s+' *') in df.columns}}
     return out
 
+COV_COLS = ['man_rate','zone_rate','cover0','cover1','cover2','cover3','cover4','cover6','two_man','cover_other','single_high','two_high',
+            'base_rate','nickel_rate','dime_rate','four_down_rate','pressure_rate']
+def intel_payload():
+    """Scheme / tendency / turnover / coaching layer from build_advanced.py outputs (nflverse + FTN charting)."""
+    P = 'data/processed/'
+    if not os.path.exists(P + 'scheme_tags.csv'): return None
+    def num(v, d=3):
+        if v is None or v == '' or v == 'nan': return None
+        if v in ('True', 'False'): return v == 'True'
+        try: return round(float(v), d)
+        except ValueError: return v
+    def by_season_team(path, keys=('season', 'team'), side=None):
+        out = {}
+        for r in csv.DictReader(open(path, encoding='utf-8')):
+            d = out.setdefault(r['season'], {}).setdefault(r['team'], {})
+            row = {k: (v if k in ('coverage_source','evidence','descriptors','primary_tag','coach','coach_from','departed','new_starters','cur_starter_names',
+                                 'hc','oc','dc','hc_prev','oc_prev','dc_prev','hc_from','oc_from','dc_from','side','team','season') else num(v))
+                   for k, v in r.items() if k not in keys}
+            if side and 'side' in r: d[r['side']] = row
+            else: d.update(row)
+        return out
+    intel = {'off': by_season_team(P + 'team_off_tendencies.csv'),
+             'def': by_season_team(P + 'team_def_tendencies.csv'),
+             'tags': by_season_team(P + 'scheme_tags.csv', side=True),
+             'turnover': by_season_team(P + 'starter_turnover.csv', side=True) if os.path.exists(P + 'starter_turnover.csv') else {},
+             'coaching': by_season_team(P + 'coaching.csv') if os.path.exists(P + 'coaching.csv') else {},
+             'schemeSlot': [{k: num(v, 2) if k not in ('family', 'grp') else v for k, v in r.items()}
+                            for r in csv.DictReader(open(P + 'scheme_slot_effects.csv', encoding='utf-8'))] if os.path.exists(P + 'scheme_slot_effects.csv') else []}
+    # coverage for uncharted seasons: mirror the same fallback tag_defense used (new DC's prior unit, else same team prior season)
+    for s in sorted(intel['def']):
+        for t, row in intel['def'][s].items():
+            if row.get('coverage_charted') is True and row.get('two_high') is not None: continue
+            src = (intel['tags'].get(s, {}).get(t, {}).get('DEF') or {}).get('coverage_source', '')
+            m = re.search(r'^(\d{4}) charting.*prior unit \((\w+)\)', src) or re.search(r'^(\d{4}) charting', src)
+            if not m: continue
+            ss, st = m.group(1), (m.group(2) if m.lastindex == 2 else t)
+            base = intel['def'].get(ss, {}).get(st)
+            if not base: continue
+            for c in COV_COLS: row[c] = base.get(c)
+            row['cov_est'] = f'{ss} {st}'
+    return intel
+
 def main():
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
             'groupStats': GROUP_STATS, 'primary': PRIMARY}
@@ -43,6 +85,12 @@ def main():
     data['weekly'] = [[r['defense'], int(r['season']), int(r['week']), r['opponent']] +
                       [round(float(r[c]), 1) for c in STAT_COLS] for _, r in wk.iterrows()]
 
+    # usage layer (build_advanced.py: game_logs x nflverse snap counts / pbp) -> appended to each log row
+    usage = {}
+    if os.path.exists('data/processed/player_usage.csv'):
+        for r in csv.DictReader(open('data/processed/player_usage.csv', encoding='utf-8')):
+            f4 = lambda k, d=3: (round(float(r[k]), d) if r[k] not in ('', 'nan') else None)
+            usage[(int(r['season']), int(r['week']), r['player_id'])] = [f4('snaps', 0), f4('snap_pct'), f4('target_share'), f4('adot', 1), f4('rush_share'), f4('wopr')]
     logs = []
     for f in sorted(glob.glob('data/game_logs/game_logs_*.csv')):
         for r in csv.DictReader(open(f, encoding='utf-8')):
@@ -50,8 +98,10 @@ def main():
                 r['opponent'], r['home_away'], r['slot'], r['pos'], int(r['pass_yds']), int(r['pass_td']),
                 int(r['pass_att']), int(r['int']), int(r['rush_att']), int(r['rush_yds']), int(r['rush_td']),
                 int(r['targets']), int(r['rec']), int(r['rec_yds']), int(r['rec_td']),
-                float(r['fantasy_pts_std']), float(r['fantasy_pts_ppr'])])
+                float(r['fantasy_pts_std']), float(r['fantasy_pts_ppr'])]
+                + usage.get((int(r['season']), int(r['week']), r['player_id']), [None] * 6))
     data['logs'] = logs
+    data['intel'] = intel_payload()
 
     data['matchups'] = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8')))
     sched = {}
