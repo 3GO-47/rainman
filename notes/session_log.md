@@ -74,3 +74,13 @@
 - UX: Ctrl-K or "/" command palette (players + teams, keyboard nav); click any team code → team filter toggle;
   view fade-in; compact filter-bar buttons; header data counts computed (24/25 + 25/26 + 26/27 · 576 GM · 11,338 rows).
 - Smoke test (Playwright): brief renders 48 rows, palette opens Justin Jefferson, team-code click sets BAL filter, 0 JS errors.
+
+## 2026-09-27 (c) — roster filter, my-lineup, Ψ+ conviction
+- build_matchups.py: cross-team fallback (last name + first initial + position, unique) and fuzzy last-name match
+  within team (Judklins→Judkins); the Master Key team column is draft-day, so 60 traded/signed players now resolve
+  to their current team. 42 still unmatched = not on any ESPN depth chart (FA/IR/retired: Mixon, Thielen, Ertz…).
+- Dashboard: G.owner + inO/inU; ROSTER select + hash owner=; lineup() panel (1 QB·2 RB·2 WR·1 TE·1 FLEX by Ψ+,
+  OUT/bye never start); conv() = 0.55 DvP(Ψ→0-100, shrunk toward 50 by trust) + 0.15 scheme + 0.15 env + 0.15 role;
+  Ψ+ column in Lab (sortable) and player-card context line; game cards tag each starter with his owner and
+  highlight/dim rows when a roster is selected.
+- Smoke test: 12 owners, Blitz → 14 rostered + 2 off-chart, 7 suggested starters, 0 JS errors.
