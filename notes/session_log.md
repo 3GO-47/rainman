@@ -84,3 +84,15 @@
   Ψ+ column in Lab (sortable) and player-card context line; game cards tag each starter with his owner and
   highlight/dim rows when a roster is selected.
 - Smoke test: 12 owners, Blitz → 14 rostered + 2 off-chart, 7 suggested starters, 0 JS errors.
+
+## 2026-09-27 (d) — Big Board: projections + rankings
+- projection(u,wk) in dashboard_template (cached per apply): baseline shrunk to slot league mean (LG_PPR from DvP
+  combined via pprAllowed), × matchup (trust-shrunk) × scheme (half) × env × role; range from own quantiles.
+  Sanity: wk 3 top = Gibbs 27.5 (NYJ), Henry 24.6, Allen 24.3, St. Brown 23.6, CMC 23.6; QB1 Allen, TE1 McBride.
+- Big Board view (F2): ALL/QB/RB/WR/TE/FLEX, starters/all-depth, hide OUT, search, CSV export, 23 sortable columns,
+  positional ranks computed on the full starter pool so pos# is stable under filters.
+- Home top-12 + lifts/drags panel; My Lineup now ranks/picks by PROJ (Ψ+ kept as a column); player card PROJ line.
+- Nav reordered to F1 Home · F2 Big Board · F3 Matchups · F4 Players · F5 Defenses · F6 TD Board · F7 Schedule · F8 Intel;
+  "?" glossary modal; tab switch scrolls to top. Sticky-header fix: tables inside overflow containers use static th
+  (Intel) or no overflow wrapper (Big Board).
+- Smoke: 331 rows on the board, 0 JS errors, load 1.8 s headless.
