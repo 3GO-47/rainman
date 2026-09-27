@@ -96,3 +96,13 @@
   "?" glossary modal; tab switch scrolls to top. Sticky-header fix: tables inside overflow containers use static th
   (Intel) or no overflow wrapper (Big Board).
 - Smoke: 331 rows on the board, 0 JS errors, load 1.8 s headless.
+
+## 2026-09-27 (e) — Model Lab backtest + re-tune
+- runBacktest(): 6,009 player-weeks (2025 with 2024 DvP / 2024 env / 2025 coaching+turnover; 2026 wk1-2 with the live
+  2024+2025 config), walk-forward baselines. tuneModel(): 324-point grid over matchup weight/mode, trust, scheme, env, role.
+- Results (starters, Spearman ρ): baseline .594 · raw prior DvP ×1 .571 · tuned .601. Quintile spreads (actual ÷ baseline,
+  hardest→softest): prior DvP ratio 0.956→1.003 (+4.8 pts on a 56-pt ratio swing), blended DvP 0.91→1.00, scheme idx
+  0.875→1.03 (near 1:1), role Δ 0.90→1.08, env ≈ flat. By position DvP matters most for QB/TE, ~zero for WR.
+- MODEL re-tuned accordingly (matchMode blend k4, matchByPos, schemeW 1, envW .1, roleW .6 clamp .25); live projection()
+  and the backtest share applyW()/rawRatio() so the lab reports exactly the live configuration.
+- Wk 3 board after re-tune: Allen 24.8, Gibbs 24.5, St. Brown 21.9, Henry 21.1, JSN 20.5.
