@@ -50,7 +50,7 @@ ul.ev{margin:2px 0 0 14px;padding:0;font-size:10.5px;color:#c9d1d9}ul.ev li{marg
 .rise{color:var(--green)}.fall{color:var(--red)}
 table.fx.bb{table-layout:auto}.bb td,.bb th{white-space:nowrap;overflow:visible;text-overflow:clip;padding-right:7px}.bb td:nth-child(3){text-align:left}.bb tr.outrow td{opacity:.5}
 #gHelp{background:#000;border:1px solid var(--edge);color:var(--amber);padding:4px 10px;cursor:pointer;font:inherit;font-size:12px;font-weight:bold}#gHelp:hover{border-color:var(--amber)}
-#bbTbl{overflow:visible}
+#bbTbl{overflow:visible}#mlBody .grid2>div{min-width:0;overflow-x:auto}#mlBody table{white-space:nowrap}
 .ownr{font-size:8.5px;color:var(--dim);border:1px solid var(--edge);padding:0 3px;margin-left:3px;letter-spacing:.3px;vertical-align:1px}
 tr.mine td{background:#0d1a10}tr.mine td.pp{color:#00c853;font-weight:bold}tr.notmine td{opacity:.55}tr.notmine td.pp{opacity:.7}
 .lineup{border-color:#2a5a3a}.lineup h3{color:#00c853}.startmk{color:#00c853}.lineupTbl tr.start td{background:#0b160e}
@@ -1346,7 +1346,7 @@ const WK26=(()=>{const m={};J.weekly.forEach(r=>{if(r[1]===2026)m[r[0]]=(m[r[0]]
 function trust(def){const to=IN.turnover[SE_NOW]&&IN.turnover[SE_NOW][def]&&IN.turnover[SE_NOW][def].DEF,c=IN.coaching[SE_NOW]&&IN.coaching[SE_NOW][def]||{};
   if(!to&&c.dc_changed==null)return null;
   const ret=to?to.prev_snaps_returning_pct:0.7,newDC=c.dc_changed===1,wk=WK26[def]||0;
-  let s=100-(1-ret)*70-(newDC?18:0);s=Math.min(100,s+Math.min(wk,6)*3);s=Math.max(0,Math.round(s));
+  const s=trustAt(def,SE_NOW,wk);
   const lbl=s>=72?'stable':s>=50?'shifting':'rebuilt';
   const notes=[`${Math.round(ret*100)}% of last season's starter snaps return`,newDC?`new DC ${c.dc||''}`.trim()+(c.dc_from&&c.dc_from!=='new/promoted'?' (from '+c.dc_from.replace('HC@','HC ')+')':''):`same DC (${c.dc||'?'})`,`${wk} wk of 2026 data`];
   return {s,lbl,notes,ret,newDC,wk}}
@@ -1474,6 +1474,106 @@ function lineup(){
      <tbody>${['QB','RB','WR','TE'].filter(p=>inP(p)).map(p=>pos(p).length?`<tr><td colspan="14" class="mini" style="color:${POSC[p]};padding-top:6px">${posIcon(p,11)} ${p}</td></tr>`+pos(p).map(row).join(''):'').join('')}</tbody></table>
      ${extra.length?`<p class="note">no current depth-chart slot (FA / IR / practice squad — no matchup computed): ${extra.map(m=>esc(m.mk_name)+' ('+m.team+')').join(' · ')}</p>`:''}</div>`}
 }
+/* ---------- MODEL LAB: walk-forward backtest of the projection formula ----------
+   For every player-week already played (all of 2025, and the 2026 weeks scraped) the model is rebuilt with only the
+   information available before that kickoff — prior-season DvP, the coordinator/turnover file for that season, the
+   prior season's pace/EPA, and the player's own games up to the previous week — then compared with what he scored. */
+/* tuned 2026-09-27 on 5,312 starter-weeks (2025 + 2026 wk1-2, walk-forward): the player's own baseline carries the
+   ranking; the opponent layers are real but small — DvP (prior season blended with season-to-date, k=4) earns
+   position-specific weights (QB/TE most, WR ~none), scheme family × slot is the strongest opponent signal at full
+   weight, role trend helps, game environment adds nothing measurable (kept as a 0.1 tie-breaker). See Model Lab. */
+const MODEL={shrinkK:3,matchMode:'blend',blendK:4,matchW:.2,matchByPos:{QB:.35,RB:.15,WR:.05,TE:.25},trustFloor:.4,schemeW:1,schemeClamp:[.85,1.15],envW:.1,roleW:.6,roleClamp:.25};
+const shrinkBase=(own,sw,prior)=>(own*sw+prior*MODEL.shrinkK)/(sw+MODEL.shrinkK);
+const matchupX=(rawR,tScore,M=MODEL)=>1+(rawR-1)*M.matchW*(tScore==null?1:M.trustFloor+(1-M.trustFloor)*tScore/100);
+const schemeX=(idx,M=MODEL)=>idx==null?1:clamp(1+(idx/100-1)*M.schemeW,M.schemeClamp[0],M.schemeClamp[1]);
+const envX=(p,M=MODEL)=>p==null?1:1+(p-.5)*M.envW;
+const roleX=(d,M=MODEL)=>d==null?1:1+clamp(d*M.roleW,-M.roleClamp,M.roleClamp);
+function trustAt(def,se,wk){const to=IN.turnover[se]&&IN.turnover[se][def]&&IN.turnover[se][def].DEF,c=IN.coaching[se]&&IN.coaching[se][def]||{};
+  if(!to&&c.dc_changed==null)return null;const ret=to?to.prev_snaps_returning_pct:0.7,newDC=c.dc_changed===1;
+  let s=100-(1-ret)*70-(newDC?18:0);s=Math.min(100,s+Math.min(wk,6)*3);return Math.max(0,Math.round(s))}
+function lgPPR(D){const o={};['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'].forEach(g=>o[g]=mean(Object.values(D).map(d=>pprAllowed(d,g))));return o}
+// PPR a defense allowed to a slot in one week, from the weekly DvP rows
+function pprAllowedWk(r,grp){const v=k=>+r[WCOL[k]]||0;
+  if(grp==='QB')return v('QB PY')/25+v('P TD')*4+v('QB RY')/10+v('QB TD')*6;
+  if(grp==='RB1')return v('RB1 RY')/10+v('RB1 Recep')+v('RB1 RecY')/10+v('RB1 TD')*6;
+  if(grp==='RB2')return v('RB2+ RY')/10+v('RB2 Recep')+v('RB2 RecY')/10+v('RB2 TD')*6;
+  return v(grp+' Recep')+v(grp+' RecY')/10+v(grp+' TD')*6}
+// season-to-date PPR allowed by def to grp before week w (mean, count)
+const WKIDX=(()=>{const m={};J.weekly.forEach(r=>(m[r[0]+'|'+r[1]]=m[r[0]+'|'+r[1]]||[]).push(r));return m})();
+function inSeasonAllowed(def,se,grp,w){const rows=(WKIDX[def+'|'+se]||[]).filter(r=>r[2]<w);if(!rows.length)return {n:0,avg:null};return {n:rows.length,avg:mean(rows.map(r=>pprAllowedWk(r,grp)))}}
+let BT=null;
+function runBacktest(){if(BT)return BT;
+  const CFG={2025:{D:J.dvp['2024'],priorSe:2024,envSe:'2024',tagSe:'2025'},2026:{D:J.dvp.combined,priorSe:2025,envSe:'2025',tagSe:'2026'}};
+  const rows=[];
+  Object.entries(CFG).forEach(([S,c])=>{S=+S;if(!c.D)return;const LG=lgPPR(c.D);
+    const L=J.logs.filter(l=>l[LOG.season]===S);if(!L.length)return;
+    // games per week from the logs (team, opp) → environment percentiles within the week
+    const wkGames={};L.forEach(l=>{const k=l[LOG.ha]==='A'?l[LOG.team]+'@'+l[LOG.opp]:l[LOG.opp]+'@'+l[LOG.team];(wkGames[l[LOG.week]]=wkGames[l[LOG.week]]||new Set()).add(k)});
+    const O=IN.off[c.envSe]||{},Dd=IN.def[c.envSe]||{};const envP={};
+    Object.entries(wkGames).forEach(([w,set])=>{const sc=[...set].map(k=>{const [v,h]=k.split('@');const ov=O[v],oh=O[h],dv=Dd[v],dh=Dd[h];return ov&&oh&&dv&&dh?[k,(ov.epa_play+dh.epa_play_allowed+oh.epa_play+dv.epa_play_allowed)/2]:null}).filter(Boolean);
+      const vals=sc.map(x=>x[1]);sc.forEach(([k,v])=>envP[w+'|'+k]=pctile(vals,v))});
+    L.forEach(l=>{const grp=SLOTG(l[LOG.slot]);if(!grp||!LG[grp])return;const def=l[LOG.opp],d=c.D[def];if(!d)return;const w=l[LOG.week];
+      const all=PLOGS[l[LOG.player]]||[];const prior=all.filter(x=>x[LOG.season]===c.priorSe).slice(-8),cur=all.filter(x=>x[LOG.season]===S&&x[LOG.week]<w);
+      let sw=0,sv=0;cur.forEach(x=>{sw+=2;sv+=2*x[LOG.fppr]});prior.forEach(x=>{sw+=1;sv+=x[LOG.fppr]});
+      const pr=LG[grp],own=sw?sv/sw:pr,base=shrinkBase(own,sw,pr);
+      const t=trustAt(def,String(S),w-1),rawR=pprAllowed(d,grp)/pr,mR=matchupX(rawR,t);
+      const ins=inSeasonAllowed(def,S,grp,w);const psiV=d.comps?d.comps[grp]:null;
+      const tg=IN.tags[c.tagSe]&&IN.tags[c.tagSe][def]&&IN.tags[c.tagSe][def].DEF;const ss=tg?IN.schemeSlot.find(x=>x.family===tg.primary_tag&&x.grp===grp):null;const sR=schemeX(ss?ss.index:null);
+      const gk=l[LOG.ha]==='A'?l[LOG.team]+'@'+l[LOG.opp]:l[LOG.opp]+'@'+l[LOG.team];const eR=envX(envP[w+'|'+gk]);
+      let rR=1,roleD=null;if(grp!=='QB'&&cur.length>=2){const withSnp=cur.filter(x=>x[LOG.snp]!=null);if(withSnp.length>=2){const last=withSnp[withSnp.length-1];const seas=mean(withSnp.map(x=>x[LOG.snp]));roleD=last[LOG.snp]-seas;rR=roleX(roleD)}}
+      const row={S,w,p:l[LOG.player],pos:l[LOG.pos],grp,n:sw,base,act:l[LOG.fppr],starter:l[LOG.slot]===(grp==='QB'?'QB1':grp),
+        rawR,t,idx:ss?ss.index:null,envP:envP[w+'|'+gk],roleD,insN:ins.n,insAvg:ins.avg,pr,psiV,priorAllowed:pprAllowed(d,grp)};
+      row.naive=base*(1+(rawR-1))*1;                       // what a raw, full-strength prior-season DvP multiplier would have said
+      row.m=applyW(row,{...MODEL,schemeW:0,envW:0,roleW:0}); // baseline × tuned matchup only
+      row.full=applyW(row,MODEL);                           // the live configuration
+      rows.push(row)})});
+  BT=rows;return rows}
+function rawRatio(r,M){const mode=M.matchMode||'prior';if(mode==='psi')return r.psiV==null?1:1+(16.5-r.psiV)/15.5*(M.psiK||.25);
+  if(mode==='blend'){const k=M.blendK==null?8:M.blendK;const a=r.insN?(r.priorAllowed*k+r.insAvg*r.insN)/(k+r.insN):r.priorAllowed;return a/r.pr}
+  if(mode==='inseason'){return r.insN>=3?r.insAvg/r.pr:r.rawR}return r.rawR}
+function applyW(r,M){const MM=M.matchByPos&&M.matchByPos[r.pos]!=null?{...M,matchW:M.matchByPos[r.pos]}:M;return r.base*matchupX(rawRatio(r,M),r.t,MM)*schemeX(r.idx,M)*envX(r.envP,M)*roleX(r.roleD,M)}
+function tuneModel(rows){const R=rows.filter(r=>r.starter);const grid=[];
+  for(const matchW of [0,.25,.5,.75,1])for(const trustFloor of [.4,1])for(const schemeW of [0,.25,.5,1])for(const envW of [0,.2,.4])for(const roleW of [0,.6,1.2]){
+    if(matchW===0&&trustFloor===1)continue;const M={...MODEL,matchW,trustFloor,schemeW,envW,roleW};R.forEach(r=>r.tmp=applyW(r,M));const m=btMetrics(R,'tmp');grid.push({M,rho:m.rho,mae:m.mae,hit:btHits(R,'tmp')})}
+  grid.sort((a,b)=>b.rho-a.rho);return grid}
+function btMetrics(rows,key){const n=rows.length;if(n<3)return null;const x=rows.map(r=>r[key]),y=rows.map(r=>r.act);const mx=mean(x),my=mean(y);
+  let sxy=0,sxx=0,syy=0,mae=0;for(let i=0;i<n;i++){sxy+=(x[i]-mx)*(y[i]-my);sxx+=(x[i]-mx)**2;syy+=(y[i]-my)**2;mae+=Math.abs(x[i]-y[i])}
+  const rank=a=>{const idx=a.map((v,i)=>[v,i]).sort((p,q)=>p[0]-q[0]);const r=new Array(a.length);idx.forEach(([v,i],k)=>r[i]=k);return r};const rx=rank(x),ry=rank(y);
+  const mrx=mean(rx),mry=mean(ry);let a=0,b=0,c2=0;for(let i=0;i<n;i++){a+=(rx[i]-mrx)*(ry[i]-mry);b+=(rx[i]-mrx)**2;c2+=(ry[i]-mry)**2}
+  return {n,r:sxy/Math.sqrt(sxx*syy),rho:a/Math.sqrt(b*c2),mae:mae/n,bias:mx-my}}
+// top-N hit rate: per season-week-position, share of the model's top N who actually finished top N
+function btHits(rows,key){const N={QB:10,RB:20,WR:30,TE:10};const by={};rows.forEach(r=>{if(!N[r.pos])return;(by[r.S+'|'+r.w+'|'+r.pos]=by[r.S+'|'+r.w+'|'+r.pos]||[]).push(r)});
+  let hit=0,tot=0;Object.entries(by).forEach(([k,a])=>{const n=N[k.split('|')[2]];if(a.length<n*1.5)return;const top=new Set([...a].sort((p,q)=>q[key]-p[key]).slice(0,n).map(r=>r.p));const act=[...a].sort((p,q)=>q.act-p.act).slice(0,n);act.forEach(r=>{tot++;if(top.has(r.p))hit++})});
+  return tot?hit/tot:null}
+function modelLab(){const host=$('#modelLab');if(!host)return;
+  host.innerHTML=`<div class="panel"><h3 id="mlToggle" style="cursor:pointer;margin-bottom:0"><span id="mlArr">&#9656;</span> model lab <span class="f">walk-forward backtest of PROJ over every player-week already played &middot; click to expand</span></h3><div id="mlBody" hidden></div></div>`;
+  $('#mlToggle').onclick=()=>{const b=$('#mlBody');b.hidden=!b.hidden;$('#mlArr').innerHTML=b.hidden?'&#9656;':'&#9662;';if(!b.hidden&&!b.innerHTML)renderLab()};
+  function renderLab(){const t0=performance.now();const rows=runBacktest();
+    const seasons=[...new Set(rows.map(r=>r.S))].sort();const variants=[['base','baseline only (own avg, shrunk to slot mean)'],['naive','baseline × RAW prior-season DvP ratio (what a naive DvP model does)'],['m','baseline × tuned DvP matchup (blend, trust, position weight)'],['full','live model (+ scheme + env + role)']];
+    const cell=(v,d=2,good)=>v==null?'—':`<span style="color:${good==null?'var(--txt)':good?'#00c853':'var(--txt)'}">${(+v).toFixed(d)}</span>`;
+    const block=(title,R)=>{const M=variants.map(([k,l])=>[l,btMetrics(R,k),btHits(R,k)]);const best=Math.max(...M.map(x=>x[1]?x[1].rho:-1));
+      return `<p class="mini" style="margin-top:8px"><b style="color:var(--txt)">${title}</b> &middot; ${R.length.toLocaleString()} player-weeks</p><table><thead><tr><th style="text-align:left">variant</th><th>pearson r</th><th>spearman &rho;</th><th>MAE</th><th>bias</th><th title="of each week's actual top-N at the position (QB10/RB20/WR30/TE10), share the model had in its top-N">top-N hit</th></tr></thead><tbody>
+      ${M.map(([l,m,h])=>`<tr><td style="text-align:left">${l}</td><td>${cell(m&&m.r,3)}</td><td>${cell(m&&m.rho,3,m&&m.rho===best)}</td><td>${cell(m&&m.mae,2)}</td><td>${m?(m.bias>0?'+':'')+m.bias.toFixed(2):'—'}</td><td>${h==null?'—':(100*h).toFixed(0)+'%'}</td></tr>`).join('')}</tbody></table>`};
+    // signal strength per factor: starters with 4+ weighted games, split into quintiles of the factor; actual ÷ baseline per quintile
+    const R4=rows.filter(r=>r.starter&&r.n>=4);R4.forEach(r=>{r.blendR=r.insN?((r.priorAllowed*4+r.insAvg*r.insN)/(4+r.insN))/r.pr:r.rawR});
+    const quint=(key)=>{const Q=R4.filter(r=>r[key]!=null).sort((a,b)=>a[key]-b[key]);const n=Q.length;if(n<50)return null;const f=i=>{const sl=Q.slice(Math.floor(i*n/5),Math.floor((i+1)*n/5));return {k:mean(sl.map(r=>r[key])),ratio:mean(sl.map(r=>r.act))/mean(sl.map(r=>r.base))}};return {lo:f(0),mid:f(2),hi:f(4),n}};
+    const sig=[['rawR','prior-season DvP ratio (PPR allowed / league)'],['blendR','DvP blended with season-to-date (k=4)'],['idx','scheme family × slot index'],['envP','game environment percentile'],['roleD','role trend (last snap share − season)']].map(([k,l])=>[l,quint(k)]).filter(x=>x[1]);
+    const sigTbl=`<p class="mini" style="margin-top:8px"><b style="color:var(--txt)">how much each opponent / context factor actually moves results</b> &middot; starters with 4+ games, bucketed into quintiles of the factor &middot; cell = actual points ÷ the player's own baseline</p>
+     <table><thead><tr><th style="text-align:left">factor</th><th>hardest 20%</th><th>middle</th><th>softest 20%</th><th>spread</th><th>n</th></tr></thead><tbody>${sig.map(([l,q])=>{const sp=q.hi.ratio-q.lo.ratio;return `<tr><td style="text-align:left">${l}</td><td class="mini">${q.lo.k.toFixed(2)} &rarr; <b style="color:var(--txt)">${q.lo.ratio.toFixed(3)}</b></td><td class="mini">${q.mid.k.toFixed(2)} &rarr; ${q.mid.ratio.toFixed(3)}</td><td class="mini">${q.hi.k.toFixed(2)} &rarr; <b style="color:var(--txt)">${q.hi.ratio.toFixed(3)}</b></td><td class="${sp>=.06?'rise':sp<=.02?'fall':'mini'}">${sp>0?'+':''}${(100*sp).toFixed(1)} pts</td><td class="mini">${q.n}</td></tr>`}).join('')}</tbody></table>
+     <p class="note">reading it: a raw DvP ratio spans ~0.74&rarr;1.30 (a 56-point swing) but moves real scoring only ~5 points — which is why the tuned model applies it at 5-35% strength by position. The scheme-family index and the role trend move results almost one-for-one with their size, so they carry full weight. Environment barely registers.</p>`;
+    // calibration deciles on the full model, starters only
+    const st=rows.filter(r=>r.starter&&r.n>0).sort((a,b)=>a.full-b.full);const dec=[];for(let i=0;i<10;i++){const sl=st.slice(Math.floor(i*st.length/10),Math.floor((i+1)*st.length/10));if(sl.length)dec.push({i:i+1,p:mean(sl.map(r=>r.full)),a:mean(sl.map(r=>r.act)),n:sl.length})}
+    const mx=Math.max(...dec.map(d=>Math.max(d.p,d.a)));
+    $('#mlBody').innerHTML=`<p class="note" style="margin-top:8px">Each row is a real player-week. The model for week W of season S sees only: DvP from the season(s) before S, S's coordinator + turnover file (trust with W−1 weeks of credit), the prior season's pace/EPA for the environment, and the player's own games through week W−1. 2026 uses exactly the live configuration (2024+2025 DvP). Scheme families come from the season's tags (charting covers 2024-25, so that factor is the one place 2025 sees its own year — it carries half weight and the table shows the model with and without it).</p>
+     <div class="grid2"><div>${block('all player-weeks with a slot',rows)}${block('starters only (slot = role)',rows.filter(r=>r.starter))}${seasons.map(S=>block(`season ${S} · starters`,rows.filter(r=>r.S===S&&r.starter))).join('')}</div>
+     <div>${['QB','RB','WR','TE'].map(p=>block(p+' starters',rows.filter(r=>r.starter&&r.pos===p))).join('')}
+      <p class="mini" style="margin-top:8px"><b style="color:var(--txt)">calibration</b> &middot; starters bucketed by projection decile &middot; bar = avg projection, tick = avg actual</p>
+      <table><tbody>${dec.map(d=>`<tr><td class="mini">D${d.i}</td><td><div class="tdbar" style="max-width:260px;width:260px"><div class="fill" style="width:${(100*d.p/mx).toFixed(1)}%;background:#4fc3f7aa"></div><span class="tick" style="left:${(100*d.a/mx).toFixed(1)}%"></span></div></td><td class="mini">proj ${d.p.toFixed(1)} &middot; actual ${d.a.toFixed(1)} &middot; n ${d.n}</td></tr>`).join('')}</tbody></table>
+      <p class="note">reading it: &rho; is what matters for rankings (ordering), MAE for the points themselves. The honest headline: knowing the player (baseline) does most of the work; a naive full-strength DvP multiplier makes rankings <i>worse</i>; the tuned opponent layers add a small, consistent edge on top. Weekly fantasy scoring is noisy — a single-week &rho; near 0.6 for starters is strong for any public projection.</p>
+      <p class="mini" style="margin-top:8px"><b style="color:var(--txt)">live configuration</b> &middot; matchup = prior DvP blended with 2026 season-to-date (k=${MODEL.blendK}), weights QB ${MODEL.matchByPos.QB} · RB ${MODEL.matchByPos.RB} · WR ${MODEL.matchByPos.WR} · TE ${MODEL.matchByPos.TE}, trust floor ${MODEL.trustFloor} &middot; scheme ${MODEL.schemeW} (clamp ${MODEL.schemeClamp.join('-')}) &middot; env ${MODEL.envW} &middot; role ${MODEL.roleW} (clamp ${MODEL.roleClamp}) &middot; baseline shrink k=${MODEL.shrinkK}</p></div></div>
+     ${sigTbl}
+     <p class="note">computed in ${(performance.now()-t0).toFixed(0)} ms in your browser from the embedded game logs — rerun by reloading after a refresh</p>`}
+}
 /* ---------- BIG BOARD: weekly player projections + rankings from every layer (game logs · DvP · trust · scheme · environment · usage) ---------- */
 /* PPR a defense allows to a slot, from the DvP averages (same scoring as the game logs: 1/25 pass yd, 4 pass TD, 1/10 rush-rec yd, 6 TD, 1 per catch) */
 function pprAllowed(d,grp){const s=k=>d.stats[k]?+d.stats[k].avg:0;
@@ -1491,21 +1591,23 @@ function projection(u,wk){wk=wk||G.week;const key=u.player+'|'+u.team+'|'+wk+'|'
   // 1. baseline: the player's own PPR/gm — 2026 games weigh 2, the last 8 games of 2025 weigh 1, shrunk toward the slot's league mean
   const L=PLOGS[u.player]||[];const l26=L.filter(l=>l[LOG.season]===2026),l25=L.filter(l=>l[LOG.season]===2025).slice(-8);
   const prior=LG_PPR[grp];let sw=0,sv=0;l26.forEach(l=>{sw+=2;sv+=2*l[LOG.fppr]});l25.forEach(l=>{sw+=1;sv+=l[LOG.fppr]});
-  const own=sw?sv/sw:prior;const base=(own*sw+prior*3)/(sw+3);
-  // 2. matchup: PPR the opponent allows to this slot vs league, shrunk by defense trust
-  const t=trust(def),tw=t?0.4+0.6*t.s/100:1;const rawR=pprAllowed(d,grp)/prior;const mR=1+(rawR-1)*tw;
-  // 3. scheme family × slot (half weight — a prior, not a result)   4. game environment   5. role trend (last game vs season snap share)
-  const e=schemeEdge(def,grp);const sR=e?clamp(1+(e.idx/100-1)*0.5,.85,1.15):1;
-  const g=gameOf(u.team,wk);let envP=null;if(g){const x=envAll(wk).find(y=>y.g===g);if(x)envP=x.e.scoreP}const eR=envP==null?1:1+(envP-.5)*.2;
-  let rR=1;const ug=USG[u.player];if(ug&&grp!=='QB'){const last=[...(PLOGS[u.player]||[])].reverse().find(l=>l[LOG.season]===USG._se&&l[LOG.snp]!=null);if(last)rR=1+clamp((last[LOG.snp]-ug.snp)*.6,-.15,.15)}
-  const p=base*mR*sR*eR*rR;
+  const own=sw?sv/sw:prior;const base=shrinkBase(own,sw,prior);
+  // 2. matchup: PPR the opponent allows to this slot (prior seasons blended with 2026 season-to-date) vs league, shrunk by trust, position weight
+  const t=trust(def);const ins=inSeasonAllowed(def,2026,grp,wk);const priorAllowed=pprAllowed(d,grp);
+  const comp={base,pos:u.pos,rawR:priorAllowed/prior,t:t?t.s:null,pr:prior,priorAllowed,insN:ins.n,insAvg:ins.avg,psiV:d.comps[grp]};
+  const MM=MODEL.matchByPos[u.pos]!=null?{...MODEL,matchW:MODEL.matchByPos[u.pos]}:MODEL;const rawR=rawRatio(comp,MODEL);const mR=matchupX(rawR,comp.t,MM);
+  // 3. scheme family × slot   4. game environment   5. role trend (last game vs season snap share)
+  const e=schemeEdge(def,grp);comp.idx=e?e.idx:null;const sR=schemeX(comp.idx);
+  const g=gameOf(u.team,wk);let envP=null;if(g){const x=envAll(wk).find(y=>y.g===g);if(x)envP=x.e.scoreP}comp.envP=envP;const eR=envX(envP);
+  let roleD=null;const ug=USG[u.player];if(ug&&grp!=='QB'){const last=[...(PLOGS[u.player]||[])].reverse().find(l=>l[LOG.season]===USG._se&&l[LOG.snp]!=null);if(last)roleD=last[LOG.snp]-ug.snp}comp.roleD=roleD;const rR=roleX(roleD);
+  const p=applyW(comp,MODEL);
   // range: the player's own p25 / p75 game scaled to the projection (needs 4+ games; else ±35%)
   const hist=[...l25.map(l=>l[LOG.fppr]),...l26.map(l=>l[LOG.fppr]),...l26.map(l=>l[LOG.fppr])].sort((a,b)=>a-b);
   const qt=q=>hist[Math.min(hist.length-1,Math.floor(q*hist.length))];const scale=own>0?p/own:1;
   const floor=hist.length>=4?Math.max(0,qt(.25)*scale):p*.65,ceil=hist.length>=4?qt(.8)*scale:p*1.35;
   const psiV=d.comps[grp],c=conv(u.player,u.team,def,grp,wk);
   const r={p,base,own,n:sw,mR,rawR,sR,eR,rR,floor,ceil,def,o,g,psiV,c,t,prior,env:envP,edge:e,
-    tip:`baseline ${base.toFixed(1)} (own ${own.toFixed(1)} over ${l26.length} '26 + ${l25.length} '25 games, shrunk to slot mean ${prior.toFixed(1)}) × matchup ${mR.toFixed(2)} (${def} allows ${(rawR*100).toFixed(0)}% of league to ${grp}s${t?', trust '+t.s:''}) × scheme ${sR.toFixed(2)} × env ${eR.toFixed(2)} × role ${rR.toFixed(2)}`};
+    tip:`baseline ${base.toFixed(1)} (own ${own.toFixed(1)} over ${l26.length} '26 + ${l25.length} '25 games, shrunk to slot mean ${prior.toFixed(1)}) × matchup ${mR.toFixed(2)} (${def} allows ${(rawR*100).toFixed(0)}% of league to ${grp}s — 2024-25 blended with ${ins.n} wk of 2026${t?', trust '+t.s:''}, ${u.pos} weight ${MM.matchW}) × scheme ${sR.toFixed(2)} × env ${eR.toFixed(2)} × role ${rR.toFixed(2)}`};
   PCACHE[key]=r;return r}
 const fmtX=(v,d=2)=>{const c=v>1.04?'#00c853':v<0.96?'#ff5252':'var(--dim)';return `<span style="color:${c}">${v.toFixed(d)}&times;</span>`};
 const rangeBar=(r,mx)=>{const w=220,x=v=>clamp(v/mx,0,1)*w;return `<svg width="${w}" height="14" style="vertical-align:middle"><line x1="${x(r.floor)}" x2="${x(r.ceil)}" y1="7" y2="7" stroke="#2a3542" stroke-width="6"/><line x1="${x(r.floor)}" x2="${x(r.ceil)}" y1="7" y2="7" stroke="${gradeColor(1+(1-clamp(r.p/mx,0,1))*31)}" stroke-width="3" opacity=".85"/><circle cx="${x(r.p)}" cy="7" r="4" fill="#fff"/><circle cx="${x(r.base)}" cy="7" r="2.5" fill="#000" stroke="#aaa"/></svg>`};
@@ -1518,7 +1620,8 @@ function board(){
    <input id="bbQ" placeholder="search player / team..." size="18">
    <button id="bbCsv" class="mclose" style="position:static" title="download this board as CSV">&#8681; csv</button>
    <span class="note">PROJ = his own PPR/gm (this season 2&times;, last 8 of '25) shrunk to the slot mean, &times; what the opponent allows to his slot (shrunk by defense trust) &times; scheme family &times; game environment &times; role trend &middot; range = his own 25th-80th percentile game scaled to the projection &middot; &#9679; projection, &#9675; baseline &middot; hover PROJ for the arithmetic &middot; click headers to sort, names for cards</span>
-  </div><div id="bbTbl"></div>`;
+  </div><div id="modelLab"></div><div id="bbTbl"></div>`;
+  modelLab();
   let pos='ALL',sortK='p',sortA=false;
   $('#bbTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#bbTabs').children].forEach(x=>x.classList.toggle('on',x===b));pos=b.dataset.p;render()};
   ['bbDepth','bbInj'].forEach(id=>$('#'+id).onchange=render);$('#bbQ').oninput=render;
