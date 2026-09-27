@@ -43,3 +43,22 @@
 - ESPN depth 2026-09-23 (562 rows). Notable: Jayden Daniels O, Caleb Williams D, Goedert D, Reed D, Dart O (Winston QB1 NYG),
   Njoku/Kolar O (LAC), Slayton now IND WR3. New 'D' (doubtful) tag observed — already in OUT_TAGS.
 - refresh -> wk 3; blend still 2024+2025 (flips at wk 4). verify_data 64/64. Smoke test 0 JS errors.
+
+## 2026-09-27 — advanced layer: usage, scheme tags, turnover, coaching (Intel tab)
+- New sources (public nflverse releases, fetched from the cloud workspace via scripts/fetch_nflverse.py; the desktop
+  VM cannot reach github.com): snap_counts, ftn_charting, pbp_participation (2024-25), rosters, depth_charts,
+  play-by-play slimmed to 45 cols (data/raw/nflverse/, ~24 MB, committed so the desktop build is offline).
+- scripts/build_advanced.py (~7 s from cache): player_usage (11,338 rows joined to game_logs by PFR id),
+  team_off/def_tendencies (96 rows each), scheme_tags (192), starter_turnover (128), coaching (96),
+  scheme_slot_effects (45).
+- Coordinators: 96 HC/OC/DC rows scraped from PFR coaches pages into data/raw/coordinators.csv (blanks filled
+  as "<HC> (HC calls ...)"). 2026: 15 new DCs / 21 new OCs / 10 new HCs. New-DC tags inherit the DC's prior
+  charted unit (BAL←MIA Weaver, NYG←TEN D. Wilson, PIT←LV P. Graham); other new DCs fall back to the same
+  team's 2025 charting and are flagged "NEW DC — verify" in coverage_source.
+- Tagging v2: dominant-shell + man/two-high overrides (defense), PROE + percentile tree (offense) — replaced
+  v1 which left 15/32 defenses "Multiple" and 22/32 offenses "Pro-style mixed".
+- Dashboard: Intel tab (F7) with 4 sub-tabs + drill-downs, obeys global filter (inD for defenses, inF for
+  offenses/usage); LOG rows carry snaps/snap%/tgt share/aDOT/rush share/WOPR (indices 22-27); Lab gets snp%/tgt%
+  columns (season-to-date, sortable); player card + deep-dive logs show snp%/tgt%/aDOT; game cards show each
+  defense's DC + scheme tag. Payload 2.39 MB. Smoke test (Playwright, all tabs + filter interplay): 0 JS errors.
+- refresh.py now runs build_advanced.py when the nflverse cache exists (fetch step documented in README).
