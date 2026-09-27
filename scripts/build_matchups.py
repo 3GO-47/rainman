@@ -41,7 +41,28 @@ def main(dc_path, week):
         if len(parts) > 2:  # suffix names: index second-to-last token too
             ix.setdefault((norm(parts[-2]), first, r['team']), r)
 
-    out, unmatched = [], []
+    # cross-team fallback: (last, first initial) -> candidates (the Master Key team column is the draft-day team;
+    # players traded / signed since are matched by name + position and moved to their current team)
+    import difflib
+    ix_any, lasts = {}, {}
+    for r in dc:
+        parts = r['player'].split(); last = norm(parts[-1]); first = parts[0][0].lower()
+        ix_any.setdefault((last, first), []).append(r)
+        lasts.setdefault(r['team'], {}).setdefault(last, []).append(r)
+        if len(parts) > 2: ix_any.setdefault((norm(parts[-2]), first), []).append(r)
+    def resolve(last, first, team, pos):
+        d = ix.get((last, first, team)) or ix.get((last, team))
+        if d: return d, 'team'
+        cands = [c for c in ix_any.get((last, first), []) if c['pos_row'].rstrip('0123456789+') == pos or (pos == 'RB' and c['pos_row'] == 'FB')]
+        if len(cands) == 1: return cands[0], 'moved'
+        if len(cands) > 1:  # several same-name players at the position: take the highest depth slot
+            return sorted(cands, key=lambda c: int(c['depth']))[0], 'moved?'
+        fz = difflib.get_close_matches(last, list(lasts.get(team, {})), n=1, cutoff=0.85)
+        if fz:
+            c = [x for x in lasts[team][fz[0]] if x['player'][0].lower() == first]
+            if len(c) == 1: return c[0], 'fuzzy'
+        return None, ''
+    out, unmatched, moved = [], [], []
     for _, m in mk.iterrows():
         pos = str(m.get('Pos.','')).upper().strip()
         if pos not in ('QB','RB','WR','TE','D/ST','DST','K'): continue
@@ -49,7 +70,9 @@ def main(dc_path, week):
         owner = m.get('Owner'); owner = '' if pd.isna(owner) else str(owner)
         parts = nm.replace('.',' ').split()
         last = norm(parts[-1]); first = parts[0][0].lower() if parts else ''
-        d = ix.get((last, first, team)) or ix.get((last, team))
+        d, how = resolve(last, first, team, pos)
+        if d and how != 'team':
+            moved.append(f"{nm} {team}->{d['team']} ({how})"); team = d['team']
         slot = d['slot'] if d else ''
         inj = d['injury'] if d else ''
         full = d['player'] if d else nm
@@ -67,7 +90,9 @@ def main(dc_path, week):
         out.append(row)
     with open('data/processed/matchups_current.csv','w',newline='',encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=list(out[0].keys())); w.writeheader(); w.writerows(out)
-    print(f'matchups_current.csv: {len(out)} rostered/ranked players, {len(unmatched)} unmatched vs depth chart')
+    print(f'matchups_current.csv: {len(out)} rostered/ranked players, {len(unmatched)} unmatched vs depth chart, {len(moved)} matched on a new team')
+    if moved: print('  moved: ' + '; '.join(moved))
+    if unmatched: print('  unmatched: ' + '; '.join(unmatched))
     if unmatched:
         open('notes/matchup_unmatched.md','w',encoding='utf-8').write(
             '# Master Key players not matched to ESPN depth chart\n\n' +
