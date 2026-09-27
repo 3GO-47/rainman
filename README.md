@@ -76,7 +76,20 @@ nflverse releases (fetch_nflverse.py, needs github.com) -> data/raw/nflverse/*.p
 dvp_combined weighting: prior seasons only until 2026 has ≥4 weeks of data, then the current
 season counts 2×.
 
-## Intel layer (F7) — how the tags are computed
+## Big Board (F2) — the projection model
+```
+PROJ = baseline × matchup × scheme × environment × role
+baseline    = shrink(own PPR/gm, n_eff, slot league mean, k=3)      own: 2026 games ×2, last 8 games of 2025 ×1
+matchup     = 1 + (PPR_allowed(opp, slot) / league_mean(slot) − 1) × (0.4 + 0.6·trust/100)
+scheme      = clamp(1 + (scheme_slot_index/100 − 1) × 0.5, 0.85, 1.15)      (2024-25 charting, half weight)
+environment = 1 + (week percentile of the game's scoring index − 0.5) × 0.2
+role        = 1 + clamp((last-game snap share − season snap share) × 0.6, −0.15, 0.15)   (QB = 1)
+range       = his own 25th / 80th percentile game × (PROJ / own)              (< 4 games → ±35%)
+```
+PPR_allowed comes straight from the DvP averages (pass yd/25, 4/pass TD, rush+rec yd/10, 6/TD, 1/rec).
+Everything is client-side in `dashboard_template.html` (`projection()`), so the CSV export is the model's output.
+
+## Intel layer (F8) — how the tags are computed
 - **Defense scheme tag** = dominant coverage shell over charted pass plays (C3 vs C1/C0 vs C4/C6 vs C2/2-man),
   overridden by man ≥40% ("Man-heavy · Cover-1 press") or two-high ≥50% & zone ≥65% ("Two-high zone shell");
   "multiple / disguise" when no shell reaches 36%. Descriptors: blitz rate (5+ rushers) vs league percentiles,
@@ -99,10 +112,17 @@ Home (smash board + full insight screens) · TD Board (phase-space + collider sc
 true WR1-WR12 labels) · Weekly Matchups (16 game cards, gridiron tilt) · Players (collapsible
 depth charts, depth/injury filters, popup player cards, deep dives) · Defenses (rankings /
 matrix / observatory) · Schedule (6-band heat grid) · Intel (DC/OC scheme tags, tendencies, turnover,
-player usage). F1-F7 keyboard shortcuts; mobile-responsive
+player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcuts; ? glossary; ctrl-K find; mobile-responsive
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-27 (d) — **Big Board (F2)**: weekly player projections + rankings that fold every layer together —
+  PROJ = own PPR/gm (this season 2×, last 8 of '25, shrunk to the slot mean) × PPR the opponent allows to his slot
+  vs league (shrunk by defense trust) × scheme family × game environment × role trend; floor/ceiling from his own
+  25th-80th percentile game; overall + positional ranks, lift vs baseline, every factor as a sortable column, CSV
+  export; ALL/QB/RB/WR/TE/FLEX tabs; obeys week/slate/pos/game/team/roster filters. Home shows the top-12 board and
+  biggest lifts/drags; My Lineup ranks and picks starters by projection; player cards carry the PROJ arithmetic.
+  Nav reordered (Home · Big Board · Matchups · Players · Defenses · TD Board · Schedule · Intel, F1-F8); "?" glossary.
 - 2026-09-27 (c) — ROSTER filter (draft-results owner) in the global bar, applied to every board; "My lineup"
   panel on Home when a roster is selected (ranked by Ψ+ with suggested starters, trust / scheme / role columns);
   Ψ+ conviction score (DvP Ψ shrunk by defense trust + scheme edge + game environment + role) in Matchup Lab and
