@@ -80,10 +80,12 @@ season counts 2×.
 ```
 PROJ = baseline × matchup × scheme × environment × role
 baseline    = shrink(own PPR/gm, n_eff, slot league mean, k=3)      own: 2026 games ×2, last 8 games of 2025 ×1
-matchup     = 1 + (PPR_allowed(opp, slot) / league_mean(slot) − 1) × (0.4 + 0.6·trust/100)
-scheme      = clamp(1 + (scheme_slot_index/100 − 1) × 0.5, 0.85, 1.15)      (2024-25 charting, half weight)
-environment = 1 + (week percentile of the game's scoring index − 0.5) × 0.2
-role        = 1 + clamp((last-game snap share − season snap share) × 0.6, −0.15, 0.15)   (QB = 1)
+allowed     = (prior-season DvP PPR_allowed(opp, slot) × 4 + season-to-date PPR_allowed × weeks) / (4 + weeks)
+matchup     = 1 + (allowed / league_mean(slot) − 1) × w_pos × (0.4 + 0.6·trust/100)     w_pos: QB .35 RB .15 WR .05 TE .25
+scheme      = clamp(1 + (scheme_slot_index/100 − 1) × 1.0, 0.85, 1.15)      (2024-25 charting)
+environment = 1 + (week percentile of the game's scoring index − 0.5) × 0.1  (tie-breaker; no measurable lift)
+role        = 1 + clamp((last-game snap share − season snap share) × 0.6, −0.25, 0.25)   (QB = 1)
+Weights were tuned by the walk-forward backtest in the Model Lab (constants live in MODEL in the template).
 range       = his own 25th / 80th percentile game × (PROJ / own)              (< 4 games → ±35%)
 ```
 PPR_allowed comes straight from the DvP averages (pass yd/25, 4/pass TD, rush+rec yd/10, 6/TD, 1/rec).
@@ -116,6 +118,13 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-27 (e) — **Model Lab** (Big Board → expand): walk-forward backtest of PROJ over 6,009 player-weeks (all of
+  2025 + 2026 wk 1-2), each week rebuilt with only pre-kickoff information. Findings drove a re-tune: a raw
+  prior-season DvP multiplier makes rankings worse (ρ .571 vs .594 baseline-only); DvP blended with season-to-date
+  and applied at position weights (QB .35 · RB .15 · WR .05 · TE .25) is neutral-to-positive; scheme family × slot is
+  the strongest opponent signal (full weight); role trend helps; environment adds nothing (0.1 tie-breaker). Live
+  model: ρ .601 starters (baseline .594, naive DvP .571), MAE 4.93, well calibrated by decile. The lab shows every
+  variant per season/position, factor quintile spreads, calibration, and the live configuration.
 - 2026-09-27 (d) — **Big Board (F2)**: weekly player projections + rankings that fold every layer together —
   PROJ = own PPR/gm (this season 2×, last 8 of '25, shrunk to the slot mean) × PPR the opponent allows to his slot
   vs league (shrunk by defense trust) × scheme family × game environment × role trend; floor/ceiling from his own
