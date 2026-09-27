@@ -103,6 +103,12 @@ player usage). F1-F7 keyboard shortcuts; mobile-responsive
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-27 (b) — Home "Intel brief": game environments (scoring index = both offenses' EPA + both defenses'
+  EPA allowed, pace, PROE, shootout / rock-fight tags), role movers (last game vs season snap + target share),
+  scheme edges (opponent scheme family × slot, league-indexed), fragile priors (defense trust score = returning
+  starter snaps − new-DC penalty + 2026 weeks). Trust pills + environment line on every game card and player
+  card; scheme-edge column + usage arrows in Matchup Lab; Ctrl-K / "/" command palette (jump to any player or
+  team); click any team code anywhere to toggle it as the team filter; header counts computed from the payload.
 - 2026-09-27 — Intel tab (F7): DC/OC scheme tags with evidence, coverage-shell mix, blitz/box/personnel,
   EPA allowed, PROE/play-action/motion/tempo, scheme × slot index, defensive + offensive starter turnover,
   coaching changes (15 new DCs, 21 new OCs, 10 new HCs in 2026). Snap% / target share in Matchup Lab,
