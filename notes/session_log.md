@@ -62,3 +62,15 @@
   columns (season-to-date, sortable); player card + deep-dive logs show snp%/tgt%/aDOT; game cards show each
   defense's DC + scheme tag. Payload 2.39 MB. Smoke test (Playwright, all tabs + filter interplay): 0 JS errors.
 - refresh.py now runs build_advanced.py when the nflverse cache exists (fetch step documented in README).
+
+## 2026-09-27 (b) — seamless UI + insight layer on top of the intel data
+- Signals (dashboard_template, all client-side from J.intel + logs): trust(def) 0-100 = 100 − 70×(1−returning starter
+  snap %) − 18 if new DC + 3/wk of 2026 data (capped 6); envOf(vis,home) scoring index / pace / plays / PROE with
+  week-relative percentiles → tags fast/slow, pass/run-lean, shootout/rock fight; schemeEdge(def,grp) from
+  scheme_slot_effects; roleMoves() last 2026 game vs season-to-date snap%/tgt share (min 30% snaps, |Δ| ≥ 12 pts).
+- Home: "wk N intel brief" panel under the smash board (environments ranked, fragile priors, role movers,
+  scheme edges capped 2 per slot, TE2/WR4+ excluded as low-volume). Game cards: trust pills + env line.
+  Player card: DC/scheme/trust/scheme-edge/role line. Lab: sch column + snap arrows.
+- UX: Ctrl-K or "/" command palette (players + teams, keyboard nav); click any team code → team filter toggle;
+  view fade-in; compact filter-bar buttons; header data counts computed (24/25 + 25/26 + 26/27 · 576 GM · 11,338 rows).
+- Smoke test (Playwright): brief renders 48 rows, palette opens Justin Jefferson, team-code click sets BAL filter, 0 JS errors.
