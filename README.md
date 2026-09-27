@@ -103,6 +103,11 @@ player usage). F1-F7 keyboard shortcuts; mobile-responsive
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-27 (c) — ROSTER filter (draft-results owner) in the global bar, applied to every board; "My lineup"
+  panel on Home when a roster is selected (ranked by Ψ+ with suggested starters, trust / scheme / role columns);
+  Ψ+ conviction score (DvP Ψ shrunk by defense trust + scheme edge + game environment + role) in Matchup Lab and
+  player cards; owner tags + roster highlighting on game cards; build_matchups re-matches drafted players who
+  changed teams since the draft (60 recovered, e.g. Diggs NE→WAS, Waddle MIA→DEN).
 - 2026-09-27 (b) — Home "Intel brief": game environments (scoring index = both offenses' EPA + both defenses'
   EPA allowed, pace, PROE, shootout / rock-fight tags), role movers (last game vs season snap + target share),
   scheme edges (opponent scheme family × slot, league-indexed), fragile priors (defense trust score = returning
