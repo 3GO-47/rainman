@@ -54,6 +54,15 @@ PFR schedule + week pages     -> scripts/build_kickoffs.py -> kickoffs_2026.csv 
 ESPN depth charts (Chrome)      -> scripts/build_depth_chart.py -> depth_charts_{date}.csv
 PFR schedule                    -> schedule_2026.csv (26/27, byes marked, box ids precomputed)
   -> scripts/build_matchups.py  -> matchups_current.csv
+nflverse releases (fetch_nflverse.py, needs github.com) -> data/raw/nflverse/*.parquet
+  (snap counts · FTN charting · NGS participation · play-by-play slim · rosters · depth charts)
+  -> scripts/build_advanced.py  -> player_usage (snaps, snap%, target/rush/air-yard share, aDOT, WOPR)
+                                   team_off_tendencies / team_def_tendencies (per season)
+                                   scheme_tags (computed DC/OC scheme + evidence + coverage source)
+                                   starter_turnover (top-11-by-snaps YoY: retained/departed/new)
+                                   coaching (HC/OC/DC per season, change flags, where the new coach came from;
+                                             source: data/raw/coordinators.csv, PFR coaches pages)
+                                   scheme_slot_effects (scheme family x slot PPR index)
   -> scripts/build_dashboard.py -> dashboard/rainman.html
 ```
 `scripts/dashboard_template.html` is the dashboard source; the builder injects fresh JSON.
@@ -67,14 +76,38 @@ PFR schedule                    -> schedule_2026.csv (26/27, byes marked, box id
 dvp_combined weighting: prior seasons only until 2026 has ≥4 weeks of data, then the current
 season counts 2×.
 
+## Intel layer (F7) — how the tags are computed
+- **Defense scheme tag** = dominant coverage shell over charted pass plays (C3 vs C1/C0 vs C4/C6 vs C2/2-man),
+  overridden by man ≥40% ("Man-heavy · Cover-1 press") or two-high ≥50% & zone ≥65% ("Two-high zone shell");
+  "multiple / disguise" when no shell reaches 36%. Descriptors: blitz rate (5+ rushers) vs league percentiles,
+  average box, base/nickel/dime personnel. Evidence string carries every underlying rate.
+- **2026 coverage** is not charted yet by NGS participation: the tag uses the coordinator's most recent charted
+  unit (new DC → his prior team's 2025 unit, e.g. BAL ← Weaver's MIA; returning DC → same team 2025), marked †
+  and named in `coverage_source`. FTN-charted fields (blitz, box, pressure) and pbp EPA are live 2026 data.
+- **Offense scheme tag** = PROE (pass-first ≥ +3 / run-first ≤ −3) + tree by league-percentile means:
+  under-center play-action/motion (Shanahan/McVay), spread shotgun-RPO-tempo, or vertical air-raid; descriptors
+  when a rate is ≥78th percentile (play-action heavy, motion-heavy, RPO-heavy, up-tempo, screen game, vertical,
+  quick game, slow pace) + personnel (11-heavy ≥72%, heavy ≥35%).
+- **Turnover** = top-11 defenders/offensive players by snaps each season; turnover % = share of last season's
+  eleven who are not in this season's eleven; returning-snap % = share of their snaps still on the roster.
+  Departed players carry a destination (new team / bench-injured / left NFL-FA); new starters a source
+  (team / promoted / rookie).
+- **Player usage** = game_logs ⋈ nflverse snap counts on PFR id; target/rush/air-yard shares from pbp per game.
+
 ## Views (final)
 Home (smash board + full insight screens) · TD Board (phase-space + collider scatters, filters,
 true WR1-WR12 labels) · Weekly Matchups (16 game cards, gridiron tilt) · Players (collapsible
 depth charts, depth/injury filters, popup player cards, deep dives) · Defenses (rankings /
-matrix / observatory) · Schedule (6-band heat grid). F1-F6 keyboard shortcuts; mobile-responsive
+matrix / observatory) · Schedule (6-band heat grid) · Intel (DC/OC scheme tags, tendencies, turnover,
+player usage). F1-F7 keyboard shortcuts; mobile-responsive
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-27 — Intel tab (F7): DC/OC scheme tags with evidence, coverage-shell mix, blitz/box/personnel,
+  EPA allowed, PROE/play-action/motion/tempo, scheme × slot index, defensive + offensive starter turnover,
+  coaching changes (15 new DCs, 21 new OCs, 10 new HCs in 2026). Snap% / target share in Matchup Lab,
+  player cards and deep-dive game logs; scheme line on every Weekly Matchups game card; refresh.py runs
+  build_advanced.py.
 - 2026-09-23 — 2026 wk 2 box scores + 09-23 depth charts; wk 3 matchups live.
 - 2026-09-17 — 2026 wk 1 box scores + positions + fresh depth charts; wk 2 matchups live; trend season
   auto-selects the latest season with ≥4 weeks; verify_data in-season aware (64/64).
