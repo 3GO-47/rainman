@@ -72,6 +72,37 @@ def intel_payload():
             row['cov_est'] = f'{ss} {st}'
     return intel
 
+def bets_payload():
+    """Game model + frozen picks ledger + player-prop lines (build_games.py / build_props.py)."""
+    P = 'data/processed/'
+    if not os.path.exists(P + 'game_model.csv'): return None
+    def rows(path, keep=None):
+        out = []
+        for r in csv.DictReader(open(path, encoding='utf-8')):
+            if keep and not keep(r): continue
+            o = {}
+            for k, v in r.items():
+                if v in ('', 'nan'): o[k] = None
+                else:
+                    try: o[k] = round(float(v), 3) if ('.' in v or v.lstrip('-').isdigit()) and k not in ('game_id','pfr','pick_ats','pick_total','pick_ml','res_ats','res_total','res_ml','frozen_on','result','lean','market','stat_cols','updated','kick','event','pfr_id') else v
+                    except ValueError: o[k] = v
+            out.append(o)
+        return out
+    gm = rows(P + 'game_model.csv', lambda r: r['season'] == '2026')
+    bt = [r for r in csv.DictReader(open(P + 'game_model.csv', encoding='utf-8')) if r['season'] in ('2024', '2025') and r['result'] not in ('', 'nan')]
+    def rec(rs, col): return {'W': sum(r[col] == 'W' for r in rs), 'L': sum(r[col] == 'L' for r in rs), 'P': sum(r[col] == 'PUSH' for r in rs)}
+    mae = lambda rs, col: round(sum(abs(float(r[col]) - float(r['result'])) for r in rs) / max(1, len(rs)), 2)
+    backtest = {'n': len(bt), 'ats': rec(bt, 'res_ats'), 'total': rec(bt, 'res_total'), 'mae_model': mae(bt, 'model_spread'), 'mae_market': mae(bt, 'spread_line'),
+                'mae_total_model': round(sum(abs(float(r['model_total']) - float(r['total'])) for r in bt) / max(1, len(bt)), 2),
+                'mae_total_market': round(sum(abs(float(r['total_line']) - float(r['total'])) for r in bt if r['total_line'] not in ('', 'nan')) / max(1, len(bt)), 2)}
+    ledger = rows(P + 'picks_ledger.csv') if os.path.exists(P + 'picks_ledger.csv') else []
+    retro = rows(P + 'picks_retro.csv') if os.path.exists(P + 'picks_retro.csv') else []
+    rt = rows(P + 'team_ratings.csv', lambda r: r['season'] == '2026')
+    props = rows(P + 'props_current.csv') if os.path.exists(P + 'props_current.csv') else []
+    pledger = rows(P + 'props_ledger.csv') if os.path.exists(P + 'props_ledger.csv') else []
+    return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
+            'propsWeek': int(props[0]['week']) if props else None}
+
 def main():
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
             'groupStats': GROUP_STATS, 'primary': PRIMARY}
@@ -102,6 +133,7 @@ def main():
                 + usage.get((int(r['season']), int(r['week']), r['player_id']), [None] * 6))
     data['logs'] = logs
     data['intel'] = intel_payload()
+    data['bets'] = bets_payload()
 
     data['matchups'] = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8')))
     sched = {}

@@ -54,6 +54,14 @@ def main():
         run(['scripts/build_advanced.py'])
     else:
         print('!! data/raw/nflverse/ missing — run scripts/fetch_nflverse.py first; Intel tab will be stale')
+    # game model + frozen picks ledger (needs data/processed/game_lines.csv from scripts/fetch_games.py — cloud) and
+    # player-prop lines (data/raw/props_*.txt from the Chrome recipe) — both offline once their inputs exist
+    if os.path.exists('data/processed/game_lines.csv'):
+        run(['scripts/build_games.py'])
+    else:
+        print('!! data/processed/game_lines.csv missing — run scripts/fetch_games.py (cloud) for lines / results / picks')
+    if glob.glob('data/raw/props_*.txt'):
+        run(['scripts/build_props.py'])
     run(['scripts/build_dashboard.py'])
 
     # summary + anomaly report
