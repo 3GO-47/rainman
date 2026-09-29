@@ -67,3 +67,24 @@ window.parseDepth=function(doc,team){const rt=[...doc.querySelectorAll('.Respons
 // fire-and-forget (evaluate times out at 45s) then poll window._dc; keep only /^[A-Z]+\|(QB|RB|WR\d|TE|FB)\|/ rows.
 // Box-score loop: same pattern — start runBatch(ids) without await, poll window._acc / window._done.
 // Verify transcription with {lines, chars, sum of charCodes} computed in-page vs python on disk.
+
+## Final-score lines (added 2026-09-29)
+parseBox now also emits `S|bid|Away Team Name|pts|Home Team Name|pts` from the .scorebox (build_game_logs ignores S lines;
+they cross-check nflverse results). Background tabs throttle timers — keep the PFR tab in the foreground or expect ~1 game/min.
+
+## Game lines / results (no browser needed — cloud)
+python3 scripts/fetch_games.py  -> data/raw/nflverse/games.csv (nflverse nfldata; scores, closing spread/total/moneylines,
+rest, roof, QBs for every game) -> data/processed/game_lines.csv. Then scripts/build_games.py (run by refresh.py).
+
+## Player prop lines — DraftKings via ESPN's public odds API (in-page JS on any espn.com tab, no key)
+1. scoreboard: https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?seasontype=2&week=W&dates=2026 -> event ids,
+   abbreviations, DK spread/total.
+2. per event: https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/{id}/competitions/{id}/odds/100/propBets?limit=500&page=N
+   (provider 100 = DraftKings; pageCount ~3; ALWAYS https — the $ref links are http and get blocked as mixed content).
+   Items: type.name (market), athlete.$ref (…/athletes/{espnId}), current.target.value (line), open.target.value. No prices.
+3. keep full-game 'Total … (incl. overtime)' markets, dedupe (over/under appear as two identical records), drop kicker markets ->
+   lines `GM|eventId|away|home|kickUTC|spread text|total` and `PB|eventId|espnId|typeId|market|line|open|updated`
+   -> data/raw/props_2026_wk{W}_{date}.txt (verify lines/chars/charCode-sum) -> python3 scripts/build_props.py
+   (espn_id -> pfr_id via data/raw/nflverse/roster_2026.parquet).
+Timing: DK posts main props progressively — Tuesday only the early/TNF games have them (6/16 in wk 4); re-pull Fri/Sat for the
+full slate. The ledger freezes a lean the first time it is seen and grades it from game logs after the refresh.

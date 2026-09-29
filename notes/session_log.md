@@ -106,3 +106,17 @@
 - MODEL re-tuned accordingly (matchMode blend k4, matchByPos, schemeW 1, envW .1, roleW .6 clamp .25); live projection()
   and the backtest share applyW()/rawRatio() so the lab reports exactly the live configuration.
 - Wk 3 board after re-tune: Allen 24.8, Gibbs 24.5, St. Brown 21.9, Henry 21.1, JSN 20.5.
+
+## 2026-09-29 — week 3 refresh · Games & Picks · props
+- Wk 3: 16/16 box scores (336 lines, 22,977 chars, checksum 1,931,399 verified), 317 game-log rows, 3 D/ST TDs; parseBox
+  now emits S| final-score lines — all 16 match nflverse results. ESPN depth 2026-09-29: 567 rows (notables: Josh Allen Q,
+  Jayden Daniels Q, Caleb Williams D, Baker Mayfield O, Etienne O, Achane IR, Goedert D). refresh -> wk 4; verify 64/64.
+- Spot checks: Bijan 29-194-2 + 2-19 = 35.3 PPR; JSN 10-128-2 (+1/1 14 pass) = 35.36; Allen 204-0-2 INT, 22 rush 2 TD,
+  1 rec, fumble = 17.46. Snap-count join 100% for wk 3.
+- fetch_games.py (nflverse nfldata) -> game_lines.csv 816 games 2024-26 incl. wk 4-5 lines. build_games.py: SRS-style
+  margin rating (corr with result .41 vs EPA-rating .17 vs market .50); model spread MAE 10.25 vs market 9.67; ATS by
+  |edge| bucket never clears 53%; totals with edge ≥3: 113-94. ML disabled (41-101). 16 wk-4 picks frozen 2026-09-29.
+- Props: ESPN core API propBets (provider 100 = DK) — 1,295 markets/game incl. milestones/quarters; kept full-game totals:
+  128 markets, 46 players, 6/16 games posted on Tuesday. build_props.py per-stat projections; 36 leans frozen.
+- Dashboard: Games & Picks tab (F9) — matchup cards (market vs model vs ratings vs env/scheme/trust), ledger with
+  frozen/retro/backtest records, props table. Payload 2.83 MB. Smoke: 16 cards, 67 ledger rows, 36 prop rows, 0 JS errors.
