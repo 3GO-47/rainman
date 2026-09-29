@@ -63,6 +63,9 @@ nflverse releases (fetch_nflverse.py, needs github.com) -> data/raw/nflverse/*.p
                                    coaching (HC/OC/DC per season, change flags, where the new coach came from;
                                              source: data/raw/coordinators.csv, PFR coaches pages)
                                    scheme_slot_effects (scheme family x slot PPR index)
+nflverse nfldata games.csv (fetch_games.py) -> game_lines.csv -> build_games.py -> team_ratings / game_model /
+                                                 picks_ledger (frozen) / picks_retro
+ESPN odds API (Chrome recipe)  -> data/raw/props_2026_wk{W}_{date}.txt -> build_props.py -> props_current / props_ledger
   -> scripts/build_dashboard.py -> dashboard/rainman.html
 ```
 `scripts/dashboard_template.html` is the dashboard source; the builder injects fresh JSON.
@@ -118,6 +121,13 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-09-29 — 2026 wk 3 box scores (16/16, checksum-verified, scores cross-checked vs nflverse) + ESPN depth charts 09-29;
+  wk 4 matchups live; blend flips to 2024+2025+2026×2 at the wk 4 refresh. **Games & Picks (F9)**: nflverse lines/results
+  (scores, DK-consensus spread/total/moneyline, rest, QBs) → walk-forward power ratings + spread/total model → picks where
+  the model disagrees ≥3 pts, **frozen** when first built and graded against the frozen line; honest 2024-25 backtest
+  shown next to the live record (ATS 49%, totals 55%; the market is the better forecaster; moneyline picks removed after
+  going 41-101). **Player props**: DraftKings lines via ESPN's public odds feed (no key), joined to per-stat projections,
+  L10 over-rates and DvP ranks; leans frozen and auto-graded. Scrape recipes documented; refresh.py runs both builders.
 - 2026-09-27 (e) — **Model Lab** (Big Board → expand): walk-forward backtest of PROJ over 6,009 player-weeks (all of
   2025 + 2026 wk 1-2), each week rebuilt with only pre-kickoff information. Findings drove a re-tune: a raw
   prior-season DvP multiplier makes rankings worse (ρ .571 vs .594 baseline-only); DvP blended with season-to-date
