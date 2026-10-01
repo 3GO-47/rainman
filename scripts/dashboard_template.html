@@ -454,10 +454,13 @@ function lab(){
     <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <input id="labQ" placeholder="search player..." size="18">
-    <span class="note">position buttons toggle and combine (ALL = every position) &middot; starred cols = opponent's DvP rank for that stat (week / slate / game / team / roster from the global filter bar) &middot; with several positions selected the per-stat columns collapse into one "opp allows" line per player &middot; &Psi; = mean of ranks &middot; PROJ = projected PPR &middot; click a player name for his card &middot; click headers to sort</span>
+    <span class="note">position buttons toggle and combine (ALL = every position) &middot; starred cols = opponent's DvP rank for that stat (week / slate / game / team / roster from the global filter bar) &middot; with several positions selected the stats sit in a shared grid (PaYd · PaTD · RuYd · Rec · RcYd · TD · P+R/R+Y) — every column sorts, blanks mean the stat doesn't apply to that slot &middot; &Psi; = mean of ranks &middot; PROJ = projected PPR &middot; click a player name for his card &middot; click headers to sort</span>
   </div><div id="labTbl"></div>`;
   let posSet=new Set(['QB']),sortK='psi',sortA=true;
   const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
+  // unified stat grid for multi-position view: every slot's DvP stats land in the matching shared column
+  const UCOLS=[['PaYd','passing yards allowed (QB)'],['PaTD','passing TDs allowed (QB)'],['RuYd','rushing yards allowed (QB · RB)'],['Rec','receptions allowed (RB · WR · TE)'],['RcYd','receiving yards allowed (RB · WR · TE)'],['TD','TDs allowed to the slot (QB = rushing TD)'],['P+R / R+Y','QB pass+rush yards · RB rush+rec yards']];
+  const ucol=c=>c==='QB PY'?0:c==='P TD'?1:/ RY$/.test(c)?2:/Recep$/.test(c)?3:/RecY$/.test(c)?4:/P\+R|R\+R/.test(c)?6:/ TD$/.test(c)?5:-1;
   function rows(){
     const src=$('#labSrc').value,D=J.dvp[src];
     const q=$('#labQ').value.toLowerCase();
@@ -479,6 +482,8 @@ function lab(){
         snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,pr,proj:pr?pr.p:null,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
+        uR:(()=>{const a=UCOLS.map(()=>null);stats.forEach((c,i)=>{const k=ucol(c);if(k>=0&&d)a[k]=d.stats[c].rank});return a})(),
+        uV:(()=>{const a=UCOLS.map(()=>null);stats.forEach((c,i)=>{const k=ucol(c);if(k>=0&&d)a[k]=d.stats[c].avg});return a})(),
         psi:d?d.comps[u.grp]:null};
     });
   }
@@ -490,6 +495,8 @@ function lab(){
       if(sortK==='psi'){x=a.psi==null?99:a.psi;y=b.psi==null?99:b.psi}
       else if(sortK.startsWith('r')&&single){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
       else if(sortK.startsWith('v')&&single){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
+      else if(sortK.startsWith('u')){const i=+sortK.slice(1);x=a.uR[i]==null?(sortA?99:-1):a.uR[i];y=b.uR[i]==null?(sortA?99:-1):b.uR[i]}
+      else if(sortK.startsWith('w')){const i=+sortK.slice(1);x=a.uV[i]==null?(sortA?1e9:-1):a.uV[i];y=b.uV[i]==null?(sortA?1e9:-1):b.uV[i]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
       else if(sortK==='snp'||sortK==='tsh'||sortK==='sch'||sortK==='proj'){x=a[sortK]==null?-1:a[sortK];y=b[sortK]==null?-1:b[sortK]}
       else if(sortK==='cv'){x=a.cv?-a.cv.s:99;y=b.cv?-b.cv.s:99}
@@ -520,8 +527,13 @@ function lab(){
       ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
       <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td></tr>`).join('')}</tbody></table>`;
     } else {
-      html=`<table class="fx labMulti"><thead><tr>${common}${tail}<th style="text-align:left">opp allows to his slot /gm (rank)</th><th>&omega;</th></tr></thead><tbody>
-      ${R.map(u=>`<tr>${rowCommon(u)}${rowTail(u)}<td class="st" style="text-align:left">${u.opp?u.statset.map((c,i)=>`${badge(u.ranks[i])}&nbsp;${(+u.raws[i]).toFixed(1)}<span class="mini">${u.heads[i].replaceAll('*','')}</span>`).join(' &nbsp;'):'<span class="dim">—</span>'}</td>
+      // per-column max for the raw spectral bars across every slot that feeds the column
+      const umax=UCOLS.map((_,k)=>Math.max(1,...R.map(u=>u.uV[k]==null?0:u.uV[k])));
+      html=`<table class="fx labMulti"><thead><tr>${common}
+      ${UCOLS.map(([h,tip],i)=>`<th class="rk" data-k="u${i}" title="DvP rank: ${tip}">*${h}*</th>`).join('')}${tail}
+      ${UCOLS.map(([h,tip],i)=>`<th data-k="w${i}" title="raw allowed per game: ${tip}">${h}</th>`).join('')}<th>&omega;</th></tr></thead><tbody>
+      ${R.map(u=>`<tr>${rowCommon(u)}${u.uR.map(r=>`<td>${r==null?'<span class="dim">·</span>':badge(r)}</td>`).join('')}${rowTail(u)}
+      ${u.uV.map((v,k)=>`<td>${v==null?'<span class="dim">·</span>':spec(+(+v).toFixed(k===1||k===5?2:1),umax[k])}</td>`).join('')}
       <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp),80,18):''}</td></tr>`).join('')}</tbody></table>`;
     }
     $('#labTbl').innerHTML=html+`<p class="note">${R.length} players &middot; ${act.join(' + ')||'no position selected'} &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
@@ -533,7 +545,7 @@ function lab(){
   document.querySelectorAll('#labTabs button').forEach(b=>b.onclick=()=>{const p=b.dataset.p;
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
     else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
-    if(sortK.startsWith('r')||sortK.startsWith('v'))sortK='psi';paint();render()});
+    if(/^[rvuw]/.test(sortK))sortK='psi';paint();render()});
   ['labSrc','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
   $('#labQ').oninput=render;
   RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>{if(b.dataset.p!=='ALL')b.hidden=!inP(b.dataset.p)});
