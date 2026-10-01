@@ -120,3 +120,9 @@
   128 markets, 46 players, 6/16 games posted on Tuesday. build_props.py per-stat projections; 36 leans frozen.
 - Dashboard: Games & Picks tab (F9) — matchup cards (market vs model vs ratings vs env/scheme/trust), ledger with
   frozen/retro/backtest records, props table. Payload 2.83 MB. Smoke: 16 cards, 67 ledger rows, 36 prop rows, 0 JS errors.
+
+## 2026-10-01 — Matchup Lab multi-position
+- lab(): posSet (Set) replaces single pos; ALL button; single-position layout unchanged (per-stat rank + raw columns);
+  multi-position layout = common cols + Ψ/Ψ+/PROJ + one stat line (badge + raw per stat for that player's slot) + ω.
+  Sort keys r*/v* only valid in single mode (reset to Ψ on toggle). Global POS filter hides buttons and prunes posSet.
+- Smoke: QB 30 rows, QB+RB 61, ALL 185, RB-only 31, global WR filter → 94 rows with QB/RB/TE buttons hidden; 0 JS errors.
