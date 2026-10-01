@@ -122,8 +122,8 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 
 ## Changelog
 - 2026-10-01 — Players tab: position buttons now toggle and combine (ALL / QB / RB / WR / TE in any mix). With one
-  position selected the per-stat DvP columns stay; with several, they collapse into one "opp allows" line per player
-  and the table gets a Pos column, with Ψ / Ψ+ / PROJ sortable across positions. Respects the global POS filter.
+  position selected the per-stat DvP columns stay; with several, the stats sit in a shared sortable grid (PaYd · PaTD ·
+  RuYd · Rec · RcYd · TD · P+R/R+Y, rank badges + raw) plus a Pos column and Ψ / Ψ+ / PROJ. Respects the global POS filter.
 - 2026-09-29 — 2026 wk 3 box scores (16/16, checksum-verified, scores cross-checked vs nflverse) + ESPN depth charts 09-29;
   wk 4 matchups live; blend flips to 2024+2025+2026×2 at the wk 4 refresh. **Games & Picks (F9)**: nflverse lines/results
   (scores, DK-consensus spread/total/moneyline, rest, QBs) → walk-forward power ratings + spread/total model → picks where
