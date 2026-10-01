@@ -54,6 +54,7 @@ table.fx.bb{table-layout:auto}.bb td,.bb th{white-space:nowrap;overflow:visible;
 .ownr{font-size:8.5px;color:var(--dim);border:1px solid var(--edge);padding:0 3px;margin-left:3px;letter-spacing:.3px;vertical-align:1px}
 tr.mine td{background:#0d1a10}tr.mine td.pp{color:#00c853;font-weight:bold}tr.notmine td{opacity:.55}tr.notmine td.pp{opacity:.7}
 .lineup{border-color:#2a5a3a}.lineup h3{color:#00c853}.startmk{color:#00c853}.lineupTbl tr.start td{background:#0b160e}
+table.fx.labMulti{table-layout:auto}.labMulti td,.labMulti th{white-space:nowrap;overflow:visible;text-overflow:clip;padding-right:7px}.labMulti td:first-child{text-align:left}
 table.fx.lineupTbl{table-layout:auto}.lineupTbl td,.lineupTbl th{white-space:nowrap;overflow:visible;text-overflow:clip;padding-right:8px}.lineupTbl td:nth-child(-n+2){text-align:left}.lineupTbl tr.outrow td{opacity:.5}.lineupTbl tr.outrow td.pp{opacity:.8}
 .trust{display:inline-block;border:1px solid;padding:0 5px;font-size:9.5px;border-radius:2px;letter-spacing:.5px;white-space:nowrap}.trust b{font-size:8.5px;background:#ffd600;color:#000;padding:0 3px;border-radius:2px;margin-left:2px}
 .palbox{background:#060606;border:1px solid var(--amber);max-width:560px;width:100%;padding:10px;box-shadow:0 0 40px rgba(0,0,0,.9)}
@@ -444,93 +445,99 @@ const LABDEF={
  WR:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g]||J.groupStats['WR4+']},
  TE:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g==='TE1'?'TE1':'TE2']}};
 function lab(){
-  const srcs=Object.keys(J.dvp);
-    const teams=[...new Set(UNIVERSE.map(u=>u.team))].sort();
+  const srcs=Object.keys(J.dvp);const POS4=['QB','RB','WR','TE'];
   $('#lab').innerHTML=`
-  <div class="tabs" id="labTabs">${['QB','RB','WR','TE'].map((p,i)=>
-    `<button data-p="${p}" class="${i===0?'on':''}">${posIcon(p,12)} ${p}</button>`).join('')}</div>
+  <div class="tabs" id="labTabs"><button data-p="ALL">ALL</button>${POS4.map((p,i)=>
+    `<button data-p="${p}" class="${i===0?'on':''}" title="click to toggle · combine several">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
     <select id="labSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
     <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <input id="labQ" placeholder="search player..." size="18">
-    <span class="note">starred cols = opponent's DvP rank for that stat (week / slate / game / team from the global filter bar) &middot; click a player name for his full deep dive below &middot; unstarred = raw allowed/gm &middot; &Psi; = mean of ranks &middot; click headers to sort</span>
+    <span class="note">position buttons toggle and combine (ALL = every position) &middot; starred cols = opponent's DvP rank for that stat (week / slate / game / team / roster from the global filter bar) &middot; with several positions selected the per-stat columns collapse into one "opp allows" line per player &middot; &Psi; = mean of ranks &middot; PROJ = projected PPR &middot; click a player name for his card &middot; click headers to sort</span>
   </div><div id="labTbl"></div>`;
-  let pos='QB',sortK='psi',sortA=true;
+  let posSet=new Set(['QB']),sortK='psi',sortA=true;
+  const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
   function rows(){
     const src=$('#labSrc').value,D=J.dvp[src];
     const q=$('#labQ').value.toLowerCase();
-    const dep=$('#labDepth').value,hin=$('#labInj').value;
-    return UNIVERSE.filter(u=>u.pos===pos&&u.grp
+    const dep=$('#labDepth').value,hin=$('#labInj').value;const act=new Set(active());
+    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp
       &&inU(u)
       &&(!dep||u.depth<=+dep)
       &&(hin!=='x'||u.inj!=='-1')
       &&(!q||u.player.toLowerCase().includes(q)))
     .map(u=>{
-      const stats=LABDEF[pos].stats(u.grp);
+      const stats=LABDEF[u.pos].stats(u.grp);
       const wk=G.week;
       const oppRaw=(J.sched26[u.team]||[])[wk-1]||'';
       const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
       const d=opp&&D[opp]?D[opp]:null;
       const gm=gameOf(u.team,wk);
-      const ug=USG[u.player]||{};
-      return {...u,oppRaw,opp,statset:stats,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
-        snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,
+      const ug=USG[u.player]||{};const pr=opp?projection(u,wk):null;
+      return {...u,oppRaw,opp,statset:stats,heads:LABDEF[u.pos].heads,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
+        snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,pr,proj:pr?pr.p:null,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
         psi:d?d.comps[u.grp]:null};
     });
   }
   function render(){
-    const src=$('#labSrc').value,D=J.dvp[src];
-    const heads=LABDEF[pos].heads;
-    // column max for spectral bars: max avg across defenses per stat position
-    const sampleStats=LABDEF[pos].stats(pos==='RB'?'RB1':pos==='TE'?'TE1':pos==='WR'?'WR1':'QB');
-    const colmax=sampleStats.map((_,i)=>Math.max(...Object.values(D).map(d=>{
-      const alts=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2']
-        .filter(g=>g.startsWith(pos==='QB'?'QB':pos)).map(g=>J.groupStats[g][i]).filter(Boolean);
-      return Math.max(...alts.map(c=>d.stats[c]?d.stats[c].avg:0));})));
+    const src=$('#labSrc').value,D=J.dvp[src];const act=active();const single=act.length===1?act[0]:null;
     let R=rows();
     R.sort((a,b)=>{
       let x,y;
       if(sortK==='psi'){x=a.psi==null?99:a.psi;y=b.psi==null?99:b.psi}
-      else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
-      else if(sortK.startsWith('v')){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
+      else if(sortK.startsWith('r')&&single){const i=+sortK.slice(1);x=a.ranks[i]==null?99:a.ranks[i];y=b.ranks[i]==null?99:b.ranks[i]}
+      else if(sortK.startsWith('v')&&single){const i=+sortK.slice(1);x=a.raws[i]==null?-1:a.raws[i];y=b.raws[i]==null?-1:b.raws[i]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
-      else if(sortK==='snp'||sortK==='tsh'||sortK==='sch'){x=a[sortK]==null?-1:a[sortK];y=b[sortK]==null?-1:b[sortK]}
+      else if(sortK==='snp'||sortK==='tsh'||sortK==='sch'||sortK==='proj'){x=a[sortK]==null?-1:a[sortK];y=b[sortK]==null?-1:b[sortK]}
       else if(sortK==='cv'){x=a.cv?-a.cv.s:99;y=b.cv?-b.cv.s:99}
       else {x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
-    $('#labTbl').innerHTML=`<table><thead><tr>
-      <th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="slot">Slot</th>
+    const common=`<th data-k="player">Player</th><th data-k="team">Tm</th>${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
-      <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th><th data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th>
-      ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}
-      <th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th>
-      ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
-      <th>&omega; opp allows</th>
-    </tr></thead><tbody>
-    ${R.map(u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
-      return `<tr><td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>
+      <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th><th data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th>`;
+    const tail=`<th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
+    const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
+      return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td>${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
-      <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td><td>${u.opp?edgeChip(u.opp,u.grp):'—'}</td>
-      ${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}
-      <td>${psi(u.psi)}</td><td>${convBadge(u.cv)}</td>
+      <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td><td>${u.opp?edgeChip(u.opp,u.grp):'—'}</td>`};
+    const rowTail=u=>`<td>${psi(u.psi)}</td><td>${convBadge(u.cv)}</td><td title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
+    let html;
+    if(single){
+      const heads=LABDEF[single].heads;
+      const sampleStats=LABDEF[single].stats(single==='RB'?'RB1':single==='TE'?'TE1':single==='WR'?'WR1':'QB');
+      const colmax=sampleStats.map((_,i)=>Math.max(...Object.values(D).map(d=>{
+        const alts=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2']
+          .filter(g=>g.startsWith(single==='QB'?'QB':single)).map(g=>J.groupStats[g][i]).filter(Boolean);
+        return Math.max(...alts.map(c=>d.stats[c]?d.stats[c].avg:0));})));
+      html=`<table><thead><tr>${common}
+      ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}${tail}
+      ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
+      <th>&omega; opp allows</th></tr></thead><tbody>
+      ${R.map(u=>`<tr>${rowCommon(u)}${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}${rowTail(u)}
       ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
-      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td>
-      </tr>`}).join('')}</tbody></table>
-    <p class="note">${R.length} players &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
-    document.querySelectorAll('#labTbl th').forEach(th=>th.onclick=()=>{
+      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td></tr>`).join('')}</tbody></table>`;
+    } else {
+      html=`<table class="fx labMulti"><thead><tr>${common}${tail}<th style="text-align:left">opp allows to his slot /gm (rank)</th><th>&omega;</th></tr></thead><tbody>
+      ${R.map(u=>`<tr>${rowCommon(u)}${rowTail(u)}<td class="st" style="text-align:left">${u.opp?u.statset.map((c,i)=>`${badge(u.ranks[i])}&nbsp;${(+u.raws[i]).toFixed(1)}<span class="mini">${u.heads[i].replaceAll('*','')}</span>`).join(' &nbsp;'):'<span class="dim">—</span>'}</td>
+      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp),80,18):''}</td></tr>`).join('')}</tbody></table>`;
+    }
+    $('#labTbl').innerHTML=html+`<p class="note">${R.length} players &middot; ${act.join(' + ')||'no position selected'} &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
+    document.querySelectorAll('#labTbl th[data-k]').forEach(th=>th.onclick=()=>{
       const k=th.dataset.k;sortA=(sortK===k)?!sortA:true;sortK=k;render()});
     document.querySelectorAll('#labTbl .plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
   }
-  document.querySelectorAll('#labTabs button').forEach(b=>b.onclick=()=>{
-    document.querySelectorAll('#labTabs button').forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');pos=b.dataset.p;sortK='psi';sortA=true;render()});
+  function paint(){document.querySelectorAll('#labTabs button').forEach(b=>{const p=b.dataset.p;b.classList.toggle('on',p==='ALL'?POS4.every(x=>posSet.has(x)):posSet.has(p))})}
+  document.querySelectorAll('#labTabs button').forEach(b=>b.onclick=()=>{const p=b.dataset.p;
+    if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
+    else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
+    if(sortK.startsWith('r')||sortK.startsWith('v'))sortK='psi';paint();render()});
   ['labSrc','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
   $('#labQ').oninput=render;
-  RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>b.hidden=!inP(b.dataset.p));
-    if(!inP(pos)){const f=tabs.find(b=>!b.hidden);if(f){f.click();return}}render()});
+  RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>{if(b.dataset.p!=='ALL')b.hidden=!inP(b.dataset.p)});
+    if(!active().length){const f=POS4.find(p=>inP(p));if(f)posSet=new Set([f])}paint();render()});
 }
 /* ---------- DvP Rankings: 32 defenses, every stat, workbook Data-tab style ---------- */
 function ranks(){
