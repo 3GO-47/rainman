@@ -129,3 +129,13 @@
 - (b) Multi-position view reworked after feedback: instead of one combined stat line, a shared sortable grid
   (PaYd · PaTD · RuYd · Rec · RcYd · TD · P+R/R+Y) with rank badges and raw columns; each slot's stats map into the
   matching column (ucol), blanks where not applicable, nulls sort last in either direction.
+
+## 2026-10-02 — Mobile UI + lazy rendering
+- Render registry: RR.push tags each re-render hook with its view (BOOT array). apply() clears PCACHE, runs only the
+  visible view's hooks and marks the rest DIRTY; nav click runs a dirty view once. intel() no longer calls render().
+- Mobile CSS (≤840px): #gTog toggle (`#gbar:not(.open)>*:not(#gTog):not(#gSum){display:none}` — the earlier `.open`
+  rule lost on specificity to the :not() hide rule), chips wrap, select full width, overflow-x on .tbl/.card tables,
+  table.fx auto layout, gamecard 1-col.
+- Measured (Playwright iPhone 13, Chart.js stubbed): load 908 ms (was 2913), apply 138 ms (was 598), board 464 ms,
+  chamber 108 ms; perr/smoke8 0 JS errors. Screenshots home/filters/board/chamber/players/games verified.
+- Next: RAINMAN v2 (new UI shell) — prompt at notes/rainman_v2_prompt.md; v1 stays live at the root.
