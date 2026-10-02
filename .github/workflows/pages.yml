@@ -1,11 +1,11 @@
-# Deploys dashboard/rainman.html to GitHub Pages on every push to main.
+# Deploys dashboard/rainman.html (root = v1) and dashboard/v2/ (-> /v2/) to GitHub Pages on every push to main.
 # One-time setup: repo Settings -> Pages -> Source = "GitHub Actions".
 # Live URL: https://3go-47.github.io/rainman/
 name: deploy-dashboard
 on:
   push:
     branches: [main]
-    paths: ['dashboard/rainman.html', '.github/workflows/pages.yml']
+    paths: ['dashboard/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -27,6 +27,8 @@ jobs:
           mkdir -p _site
           cp dashboard/rainman.html _site/index.html
           cp dashboard/rainman.html _site/rainman.html
+          # v2 (in progress) is served side-by-side at /v2/ ; the root stays v1 until v2 is signed off
+          if [ -d dashboard/v2 ]; then mkdir -p _site/v2 && cp -r dashboard/v2/. _site/v2/; fi
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
