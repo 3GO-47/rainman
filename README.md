@@ -121,6 +121,10 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-02 — Mobile + performance pass. Views render lazily: only the visible tab re-renders on a filter change, the
+  others are marked dirty and rebuilt when opened (mobile load 2.9 s → 0.9 s, filter apply 600 → 140 ms). ≤840 px:
+  the filter bar collapses behind a ⚙ FILTERS toggle, nav scrolls horizontally, tables scroll inside their cards,
+  game cards stack, tap targets ≥36 px. Desktop unchanged.
 - 2026-10-01 — Players tab: position buttons now toggle and combine (ALL / QB / RB / WR / TE in any mix). With one
   position selected the per-stat DvP columns stay; with several, the stats sit in a shared sortable grid (PaYd · PaTD ·
   RuYd · Rec · RcYd · TD · P+R/R+Y, rank badges + raw) plus a Pos column and Ψ / Ψ+ / PROJ. Respects the global POS filter.
