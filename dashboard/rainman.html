@@ -348,7 +348,7 @@ function cinfo(n){if(n in CI)return CI[n];const p=J.college&&J.college.p[n];if(!
   const confL=CONF[cf]?CONF[cf][0]:div==='FCS'?'FCS':(conf||'').toUpperCase()||'—';
   const confC=CONF[cf]?CONF[cf][1]:TIER[tier][1];
   return CI[n]={key:p[0],id,disp:disp||p[0],ab:ab||p[0].slice(0,4).toUpperCase(),col,tier,confL,confC,year:p[1],pick:p[2],club:p[3],prev:p[4]};}
-const clogo=(ci,px=16)=>ci.id?`<img class="clg" src="https://a.espncdn.com/i/teamlogos/ncaa/500-dark/${ci.id}.png" onerror="this.onerror=null;this.src='https://a.espncdn.com/i/teamlogos/ncaa/500/${ci.id}.png'" style="width:${px}px;height:${px}px" alt="" loading="lazy">`
+const clogo=(ci,px=16)=>ci.id?`<img class="clg" src="https://a.espncdn.com/i/teamlogos/ncaa/500-dark/${ci.id}.png" onerror="this.onerror=null;this.src='https://a.espncdn.com/i/teamlogos/ncaa/500/${ci.id}.png'" style="width:${px}px;height:${px}px" alt="">`
   :`<span class="cinit" style="width:${px}px;height:${px}px;background:${ci.col}33;color:${ci.col}">${esc(ci.ab.slice(0,3))}</span>`;
 const confBadge=ci=>`<span class="cconf" style="color:${ci.confC};border-color:${ci.confC}66" title="${esc(TIER[ci.tier][2])}">${ci.confL}</span>`;
 const draftTxt=ci=>ci.pick?`${ci.year} draft &middot; #${ci.pick} overall${ci.club?' ('+ci.club+')':''}`:ci.year?`undrafted &middot; entered ${ci.year}`:'';
