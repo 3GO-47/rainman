@@ -176,3 +176,12 @@
 - G.owner='__FA__' = unrostered (inO / chamber mine / gSum label); lineup() renders waiver(slot,full) when no roster
   (top 8) or FA (top 60). Role gate excludes backup QBs/no-snap players (projection fell back to slot means for them).
 - Deploy note: Actions run #20 failed with "job was not acquired by Runner of type hosted" (GitHub-side); re-run queued.
+
+## 2026-10-05 (e) — v2 UI shipped as the main site
+- v2 = skin over v1 (same payload/formulas): build_dashboard_v2.py injects Google Fonts Inter + skin.css + skin.js into
+  the built rainman.html -> dashboard/v2/index.html. skin.js moves header/nav into an aside#rail (SVG icons, spring
+  indicator), adds .v2hero per view + Home .kpis, wraps window.runView for count-up/hero refresh, view enter + panel
+  stagger, mousemove tilt on .gamecard/.story. Gotchas: font shorthands need a fallback (headless had no Inter);
+  overflow-x on panels breaks sticky th (only grid children scroll, their th are static).
+- pages.yml: root + /v2/ = v2, /v1/ + /rainman.html = classic. refresh.py runs build_dashboard_v2.py.
+- Playwright: home/board/chamber/players/games/locker/popup/mobile 0 JS errors; 390 px no overflow.
