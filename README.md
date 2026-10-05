@@ -40,6 +40,27 @@ copies it, so a bookmark or a pasted link reopens the exact view. Home also has 
 Matchups groups its game cards under slate headers, and the Matchup Lab / TD Board carry a
 sortable kick column.
 
+## Bet Board (F2) — betting layer
+Pipeline (all in `refresh.py`, all reproducible from `data/game_logs/`):
+1. `build_adjusted_dvp.py` → `dvp_adjusted.csv`: opponent-adjusted, recency-weighted DvP (half-life 12 wk, shrink K=20).
+   This is now the default matchup ranking everywhere (raw/combined tables remain in the source toggles). Why: raw
+   allowed totals did not predict next week's allowed stats in walk-forward testing; the adjusted version does (small).
+2. `build_prop_model.py` → `prop_model.json`, `prop_projections.csv`: per market, projection = player form (recency,
+   shrunk to slot) × matchup (adjusted DvP, β) × market-implied team total (γ); walk-forward tuned; outcome
+   distributions from historical residuals. Results in `notes/model_validation.md`.
+3. `build_bets.py` → `bet_lines.csv` (lines + model + EV), `bet_td.csv` (anytime-TD fair prices), `bet_ledger.csv`
+   (every line frozen when first seen, graded from box scores), `bet_corr.json` (same-game correlations for SGPs).
+   Probability = 35% model + 65% no-vig market, until the ledger shows a bigger edge.
+4. Prices: DraftKings lines via ESPN arrive without prices (EV assumes −110). For **FanDuel prices**, put a free
+   The Odds API key in `.env` (`ODDS_API_KEY=...`, git-ignored); `refresh.py` then runs `fetch_odds_api.py`.
+
+UI tabs: **Props** (sortable by EV, matchup rank, projection; range bar = 10th–90th pct with line marker; confidence
+dots = weighted games of history) · **Anytime TD** (fair price; type a book price → EV) · **Parlay / SGP** (legs priced
+jointly with a Gaussian copula over measured correlations; enter the book's price → EV + capped fractional Kelly stake;
+log the ticket) · **Ledger** (model's frozen picks + your logged tickets, auto-graded, ROI, CSV export; your tickets
+live in this browser's storage) · **Model** (walk-forward skill and calibration per market).
+The v2 site opens on the Bet Board; Home is one click away.
+
 ## Reverting the UI (kept on purpose)
 - Classic v1 UI is always live at **/v1/** (rebuilt every refresh from `scripts/dashboard_template.html`).
 - Frozen snapshots served at **/archive/**: `rainman_v1_2026-10-05.html` (last v1-as-main build, commit f13c159) and
@@ -128,6 +149,11 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — **Betting-first: Bet Board (F2).** Matchup rankings now opponent-adjusted + recency-weighted (half-life
+  12 wk) because raw DvP failed a walk-forward test; per-market prop model (form × matchup × implied team total) with
+  honest skill numbers; priced props, anytime-TD fair prices, correlated SGP pricer with Kelly staking, frozen + graded
+  ledger, personal bet tracker; FanDuel prices via The Odds API key in `.env`. v2 lands on the Bet Board; Home gains a
+  "best prop edge" tile. Tabs renumbered F1–F11.
 - 2026-10-05 — **v2 refinement pass.** Home reorganized into a purposeful order (KPIs → storylines & birthdays → top
   projections → smash board → waiver radar / lineup → intel brief → slate map → deep-dive analytics, collapsed); the
   redundant system panel removed (its facts live in the sidebar). Every panel title collapses its card (remembered per
