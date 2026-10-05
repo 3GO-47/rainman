@@ -185,3 +185,12 @@
   overflow-x on panels breaks sticky th (only grid children scroll, their th are static).
 - pages.yml: root + /v2/ = v2, /v1/ + /rainman.html = classic. refresh.py runs build_dashboard_v2.py.
 - Playwright: home/board/chamber/players/games/locker/popup/mobile 0 JS errors; 390 px no overflow.
+
+## 2026-10-05 (f) — v2 refinement + revert safety
+- dashboard/archive/: frozen v1 (f13c159) + v2.0 (e57433e) builds, published at /archive/ by pages.yml.
+- skin.js polish() via debounced MutationObserver on <main>: capH, alignHeads (th align = first data row td align),
+  notes (>=150 chars -> .infob chip), collapsible (panel>h3 without id/controls; localStorage rm.v2.col; Home deep
+  panels default collapsed by title regex), homeOrder (#homeTop display:contents + CSS order), overflow (.hscroll).
+- Bugs caught: #home{display:flex} overrode [hidden] (home rendered under every tab); regex /board — best/ matched
+  "smash board — best matchup"; custom-toggle h3s (#mlToggle/#dcToggle) excluded from collapse.
+- Template: storyBlock non-compact = marquee&top rivalries + connections, rest in <details class="storymore">.
