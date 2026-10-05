@@ -150,3 +150,8 @@
   Coverage: 888 players, depth chart 567/567.
 - UI: cinfo/ccell/cbig/clogo helpers (500-dark logo variant with fallback to 500); Players lab College column + #labCol
   filter; Big Board College column + CSV cols; depth-chart logos (names now open the player card). 0 JS errors.
+
+## 2026-10-05 (b) — Two-team depth charts
+- dchart() rewritten: #dcGame (week's games) · #dcTeam vs #dcTeam2 · swap; mirrored table.dct (left team | position | right
+  team), header with logos, home/away and kickoff. RR hook syncs to G.game (both teams + auto-expand) or G.team (+ its
+  opponent via gameOf). Mobile: fixed layout, names wrap, no horizontal overflow at 390 px. 0 JS errors.
