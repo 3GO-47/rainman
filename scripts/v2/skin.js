@@ -21,10 +21,13 @@ function shell(){
   rail.innerHTML=`<div class="brand"><i><svg width="16" height="16" viewBox="0 0 16 16"><ellipse cx="8" cy="8" rx="6.6" ry="4.1" transform="rotate(-28 8 8)" fill="#0b0d14"/><path d="M5.8 9.7 L10.2 6.3" stroke="#fff" stroke-width="1.1"/></svg></i><div>RAINMAN<small>defense-vs-position</small></div></div>`;
   rail.appendChild(nav);
   const meta=document.createElement('div');meta.className='meta';
-  meta.innerHTML=(sub?sub.innerHTML.replace(/DVP TERMINAL &middot; |DVP TERMINAL · /,'').replace(/ &middot; p&#8407;.*$| · p⃗.*$/,''):'')+`<a class="v1link" href="https://3go-47.github.io/rainman/v1/">← classic view (v1)</a>`;
+  const seasons=[...new Set(J.logs.map(l=>l[2]))].sort().map(x=>`'${String(x).slice(2)}`).join(' ');
+  meta.innerHTML=`<dl><dt>data</dt><dd>${seasons}</dd><dt>games</dt><dd>${Math.round(J.weekly.length/2)}</dd><dt>player rows</dt><dd>${J.logs.length.toLocaleString()}</dd>
+    <dt>depth charts</dt><dd>${J.depthDate}</dd><dt>DvP blend</dt><dd>${J.blend}</dd><dt>built</dt><dd>${J.built}</dd></dl><a class="v1link" href="https://3go-47.github.io/rainman/v1/">← classic view (v1)</a>`;
   rail.appendChild(meta);document.body.prepend(rail);
   nav.querySelectorAll('button[data-v]').forEach(b=>{const fk=b.querySelector('.fk');const label=[...b.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
-    b.innerHTML=ico(b.dataset.v)+`<span class="lbl">${label}</span>`+(fk?fk.outerHTML:'');b.title=label});
+    const SHORT={chamber:'Matchups',games:'Games',locker:'Locker',defenses:'Defense'};
+    b.innerHTML=ico(b.dataset.v)+`<span class="lbl" data-s="${SHORT[b.dataset.v]||label}">${label}</span>`+(fk?fk.outerHTML:'');b.title=label});
   const h=$('#gHelp');if(h){h.innerHTML=ico('help')+'<span class="lbl">Glossary</span><span class="fk">?</span>';h.style.marginLeft='0'}
   const ind=document.createElement('div');ind.className='ind';nav.prepend(ind);
   const place=()=>{const on=nav.querySelector('button.on');if(!on)return;ind.style.transform=`translateY(${on.offsetTop}px)`;ind.style.height=on.offsetHeight+'px'};
@@ -40,6 +43,34 @@ const NUM=/^[+-]?\d{1,4}(\.\d{1,2})?$/;
 function countUp(root){if(RM)return;const els=[...root.querySelectorAll('td>b, .sm-psi, .psi')].filter(e=>e.offsetParent&&NUM.test(e.textContent.trim())).slice(0,160);
   const t0=performance.now(),D=650;const data=els.map(e=>{const s=e.textContent.trim();return {e,v:+s,dp:(s.split('.')[1]||'').length,s,pre:s[0]==='+'?'+':''}});
   const tick=t=>{const k=Math.min(1,(t-t0)/D),q=1-Math.pow(1-k,4);data.forEach(d=>{d.e.textContent=k<1?d.pre+(d.v*q).toFixed(d.dp):d.s});if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
+
+/* ---------- polish pass: runs after every render of the visible view (MutationObserver, debounced) ----------
+   · header cells take the alignment of their column's data · tables that overflow get their own scroller
+   · long explanatory paragraphs collapse behind an "how to read" chip · panel titles toggle collapse (remembered)
+   · Home gets its section order + deep analytics collapsed by default */
+const INFO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
+let COL={};try{COL=JSON.parse(localStorage.getItem('rm.v2.col')||'{}')}catch(e){}
+const saveCol=()=>{try{localStorage.setItem('rm.v2.col',JSON.stringify(COL))}catch(e){}};
+const hkey=h=>(h.firstChild&&h.firstChild.nodeType===3?h.firstChild.textContent:h.textContent).toLowerCase().replace(/\d+/g,'#').replace(/\s+/g,' ').trim().slice(0,48);
+function alignHeads(root){root.querySelectorAll('table').forEach(t=>{if(t.dataset.v2a)return;const r=t.tBodies[0]&&[...t.tBodies[0].rows].find(r=>r.cells.length>2);const hr=t.tHead&&t.tHead.rows[t.tHead.rows.length-1];
+  if(!r||!hr||hr.cells.length!==r.cells.length)return;t.dataset.v2a=1;[...hr.cells].forEach((th,i)=>{const td=r.cells[i];if(!td||th.colSpan>1)return;const a=getComputedStyle(td).textAlign;if(a==='left'||a==='center')th.style.textAlign=a})})}
+function overflow(root){root.querySelectorAll('table').forEach(t=>{const p=t.parentElement;if(!p||p.tagName==='TD')return;const over=t.scrollWidth>p.clientWidth+2;p.classList.toggle('hscroll',over)})}
+function notes(root){root.querySelectorAll('.note, .controls>.note').forEach(n=>{if(n.dataset.v2n)return;n.dataset.v2n=1;const txt=n.textContent.trim();
+  if(txt.length<150||/^\d+ (players|defenses|games|rows)/.test(txt))return;
+  const b=document.createElement('button');b.className='infob';b.type='button';b.innerHTML=INFO+'How to read this';n.classList.add('v2note');n.before(b);
+  b.onclick=()=>{const o=n.classList.toggle('open');b.classList.toggle('on',o);b.lastChild.textContent=o?'Hide notes':'How to read this'}})}
+const HOMEDEEP=/best &(amp;)? worst|best & worst|field extremes|momentum|least trustworthy|season slate|uncertainty|geodesics|— wk #$|predictable|system/;
+function collapsible(root){root.querySelectorAll('.panel>h3').forEach(h=>{const p=h.parentElement;const k=(root.id||'')+':'+hkey(h);
+  if(!h.classList.contains('v2h')){if(h.id||h.querySelector('select,input,button'))return;h.classList.add('v2h');h.addEventListener('click',e=>{if(e.target.closest('a,button,select,input,.plink,.pp,.tc'))return;const c=p.classList.toggle('v2col');COL[k]=c?1:0;saveCol()})}
+  const deep=root.id==='home'&&p.closest('#homeTop,#insights')&&HOMEDEEP.test(hkey(h))&&!p.closest('#lineupSlot,#bbHomeSlot,#briefSlot,#socialSlot');
+  const want=k in COL?!!COL[k]:deep;p.classList.toggle('v2col',want)})}
+function homeOrder(root){if(root.id!=='home')return;const top=$('#homeTop');if(!top)return;
+  [...top.children].forEach(c=>{if(c.id)return;const h=c.querySelector('h3');const t=h?hkey(h):'';
+    c.style.order=/smash board/.test(t)?4:/slate map/.test(t)?7:/^system/.test(t)?99:10;if(/^system/.test(t))c.style.display='none'});
+  if(!root.querySelector(':scope>.v2sec')){const s=document.createElement('div');s.className='v2sec';s.textContent='Deep dive — defenses, trends, schedule strength';root.appendChild(s)}}
+function capH(root){root.querySelectorAll('h3').forEach(h=>{const n=h.firstChild;if(n&&n.nodeType===3&&/^\s*[a-z]/.test(n.textContent))n.textContent=n.textContent.replace(/^(\s*)([a-z])/,(m,a,b)=>a+b.toUpperCase())})}
+function polish(){const v=visible();if(!v)return;capH(v);alignHeads(v);notes(v);collapsible(v);homeOrder(v);overflow(v)}
+let pT=0;const mo=new MutationObserver(()=>{clearTimeout(pT);pT=setTimeout(polish,60)});
 /* spring tilt on game cards: rotate toward the cursor, settle back with overshoot */
 function tilt(){if(RM||matchMedia('(hover:none)').matches)return;
   document.addEventListener('mousemove',e=>{const c=e.target.closest('.gamecard,.panel.story');$$('.tilt-on').forEach(x=>{if(x!==c){x.classList.remove('tilt-on');x.style.transition='transform .7s var(--spring)';x.style.transform=''}});
@@ -55,7 +86,7 @@ const VIEWS={home:['Home','This week at a glance — projections, matchups, stor
  intel:['Intel','Scheme tags, tendencies, coaching and starter turnover, usage.'],games:['Games & Picks','Market lines vs the model, frozen picks ledger, player props.'],locker:['Locker Room','Rivalries, alumni reunions, homecomings, revenge games and birthdays.']};
 function heroFor(v){const d=$('#'+v);if(!d)return;let h=d.querySelector(':scope>.v2hero');if(!h){h=document.createElement('div');h.className='v2hero';d.prepend(h)}
   const [t,sub]=VIEWS[v]||[v,''];const sum=($('#gSum')||{}).textContent||'';
-  h.innerHTML=`<div><div class="wk">${esc(sum.split(' · ').slice(0,3).join(' · '))}</div><h1>${t}</h1><p>${sub}</p></div>`;
+  h.innerHTML=`<div><h1>${t}</h1><p>${sub}</p></div>`;
   if(v==='home')kpis(d)}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function kickTime(g){try{const [hm,ap]=(g[GM.time]||'1:00 PM').split(' ');let [H,M]=hm.split(':').map(Number);if(ap==='PM'&&H<12)H+=12;if(ap==='AM'&&H===12)H=0;
@@ -78,6 +109,6 @@ function kpis(d){let k=d.querySelector(':scope>.kpis');if(!k){k=document.createE
   k.querySelectorAll('.kpi').forEach(t=>t.onclick=()=>{const go=t.dataset.go;if(go==='home'){const s=$('#lineupSlot');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});return}const b=$(`nav button[data-v="${go}"]`);if(b)b.click()})}
 
 const _enter=enter;enter=function(){const v=visible();if(v)heroFor(v.id);_enter()};
-shell();hookRender();tilt();requestAnimationFrame(enter);
+shell();hookRender();tilt();requestAnimationFrame(()=>{enter();polish()});mo.observe(document.querySelector('main'),{childList:true,subtree:true});addEventListener('resize',()=>{const v=visible();if(v)overflow(v)});
 setInterval(()=>{const v=visible();if(v&&v.id==='home')kpis(v)},60000);
 })();

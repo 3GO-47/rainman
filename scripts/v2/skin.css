@@ -138,3 +138,68 @@ a{color:var(--acc)}
 .kpi .s b{color:var(--txt);font-weight:600}
 @media (max-width:1200px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:840px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi .v{font-size:19px}.v2hero h1{font-size:21px}}
+/* ---------- refinement pass ---------- */
+html{background:var(--bg)}
+table{font-size:12px}
+th,td{padding:6px 7px}
+th{font-size:10px;letter-spacing:.05em}
+.tc{vertical-align:middle}
+.tl{vertical-align:middle;margin-right:5px}
+td{vertical-align:middle}
+/* tables that genuinely overflow get their own horizontal scroll (sticky header off inside, it can't stick there) */
+.hscroll{overflow-x:auto;overscroll-behavior-x:contain}
+.hscroll th{position:static}
+/* weekly-matchup cards: let names breathe */
+.gamecard table.fx{table-layout:auto}
+.gamecard td,.gamecard th{padding:4px 6px}
+.gamecard td.pp{max-width:150px;overflow:hidden;text-overflow:ellipsis}
+/* info toggles replace long explanatory paragraphs */
+.v2note{display:none}
+.v2note.open{display:block;animation:v2rise .35s var(--ease)}
+span.v2note.open{display:inline}
+.infob{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--edge2);background:rgba(255,255,255,.02);color:var(--dim);border-radius:999px;padding:3px 10px 3px 8px;
+ font:600 11px/1.3 Inter,system-ui,sans-serif;cursor:pointer;margin:2px 0 8px;transition:color .2s,border-color .2s,background .2s}
+.infob:hover,.infob.on{color:var(--txt);border-color:rgba(143,163,255,.45);background:rgba(143,163,255,.08)}
+.infob svg{width:13px;height:13px}
+.controls .infob{margin:0}
+/* collapsible panels: click the title */
+.panel>h3.v2h{cursor:pointer;user-select:none}
+.panel>h3.v2h::after{content:"";width:8px;height:8px;margin-left:auto;align-self:center;border-right:1.6px solid var(--faint);border-bottom:1.6px solid var(--faint);transform:rotate(45deg) translate(-2px,-2px);transition:transform .45s var(--spring)}
+.panel.v2col>h3.v2h::after{transform:rotate(-45deg)}
+.panel.v2col>h3{margin-bottom:0}
+.panel.v2col>*:not(h3){display:none!important}
+.panel.v2col{padding-top:13px;padding-bottom:13px}
+.panel>h3.v2h:hover::after{border-color:var(--txt)}
+/* Home: one column of purposeful sections, deep analytics after */
+#home{display:flex;flex-direction:column}#home[hidden]{display:none}
+#homeTop{display:contents}
+#home>.v2hero{order:0}#home>.kpis{order:1}#socialSlot{order:2}#bbHomeSlot{order:3}
+#lineupSlot{order:5}#briefSlot{order:6}#insights{order:12}
+.v2sec{order:9;font:700 11px/1 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:14px 0 12px;display:flex;align-items:center;gap:12px}
+.v2sec::after{content:"";flex:1;height:1px;background:var(--edge)}
+/* rail meta */
+#rail .meta dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0}
+#rail .meta dt{color:var(--faint)}#rail .meta dd{margin:0;color:var(--dim);text-align:right;font-variant-numeric:tabular-nums}
+/* intel brief: give columns room */
+.brief .grid3{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))!important}
+/* storylines */
+.storymore{margin-top:6px}.storymore summary{cursor:pointer;color:var(--dim);font-size:11.5px;list-style:none}
+.storymore summary::-webkit-details-marker{display:none}
+.storymore summary::before{content:"+ ";color:var(--acc)}
+.storymore[open] summary::before{content:"− "}
+/* fixed-layout tables truncated cells under the new type scale: size to content, scroll when wider than the card */
+table.fx{table-layout:auto}
+table.fx td,table.fx th{overflow:visible;text-overflow:clip;white-space:nowrap}
+table.fx col{width:auto!important}
+.gamecard .grid2{grid-template-columns:repeat(auto-fit,minmax(600px,1fr))}
+@media (max-width:840px){.gamecard .grid2{grid-template-columns:1fr}}
+/* scroll hint: soft edge shadows on horizontally scrolling tables (background-attachment trick) */
+.hscroll{background:linear-gradient(90deg,var(--panel) 30%,transparent) left/40px 100% no-repeat local,linear-gradient(270deg,var(--panel) 30%,transparent) right/40px 100% no-repeat local,
+ radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.55),transparent) left/14px 100% no-repeat scroll,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.55),transparent) right/14px 100% no-repeat scroll}
+@media (max-width:840px){
+ .kpis{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -10px 16px;padding:2px 10px 6px;scrollbar-width:none}
+ .kpi{flex:0 0 72%;scroll-snap-align:start}
+ .v2hero p{display:none}
+ .v2hero{margin-bottom:12px}
+}
+@media (max-width:840px){#rail nav button .lbl{font-size:0}#rail nav button .lbl::after{content:attr(data-s);font-size:9.5px}}
