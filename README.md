@@ -43,7 +43,7 @@ sortable kick column.
 ## Live deploy
 `.github/workflows/pages.yml` publishes `dashboard/rainman.html` to GitHub Pages on every push
 to main (one-time: Settings → Pages → Source = *GitHub Actions*). Live at
-https://3go-47.github.io/rainman/ once enabled.
+https://3go-47.github.io/rainman/ once enabled (v2 UI; classic v1 at /v1/).
 
 ## Data flow (every number traces to data/game_logs/)
 ```
@@ -121,6 +121,12 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — **New UI (v2) is now the main site**; the classic terminal UI stays live at `/v1/`. v2 is a new shell
+  and design system layered over the same engine (`scripts/build_dashboard_v2.py` = v1 build + `scripts/v2/skin.css`
+  + `scripts/v2/skin.js`), so every number is identical: sidebar navigation with a spring-physics active indicator
+  (bottom tab bar on phones), glass filter strip, Inter typography, rounded card system, per-page hero headers, Home
+  KPI tiles (games + live kickoff countdown, top projection, smash spot, waiver #1, storylines), view transitions,
+  staggered card entrances, count-up numbers, cursor-tilt game cards; honors reduced-motion.
 - 2026-10-05 — Depth charts stay collapsed until you open them (a game/team filter swaps the teams but no longer
   forces the panel open); storyline strips start collapsed. **Waiver radar**: ROSTER filter gains *free agents
   (unrostered)* — every tab narrows to players on no roster in the draft results, and Home shows the radar (QB1s and
