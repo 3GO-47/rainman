@@ -491,7 +491,7 @@ function recompute(){
   if(ACT){DEFSET=new Set(ACT);ACT.forEach(t=>{const o=oppFor(t,G.week).replace('@','');if(o&&o!=='BYE')DEFSET.add(o)});}
 }
 const inF=t=>!ACT||ACT.has(t);        // offense / player side: team is in the filter
-const inO=(p,t)=>!G.owner||OWNER[p+'|'+t]===G.owner;   // roster (owner) filter — draft results from the Master Key
+const inO=(p,t)=>!G.owner||(G.owner==='__FA__'?!OWNER[p+'|'+t]:OWNER[p+'|'+t]===G.owner);   // roster (owner) filter — draft results from the Master Key
 const inU=u=>inF(u.team)&&inO(u.player,u.team);          // universe entry passes team + roster filters
 const inD=t=>!DEFSET||DEFSET.has(t);  // defense side: filtered teams + the defenses they face this week
 // every view registers its re-render here, tagged with the tab it lives in; apply() only runs the hooks of the
@@ -523,7 +523,7 @@ function gbarInit(){
   $('#gWk').onchange=()=>{G.week=+$('#gWk').value;G.slates.clear();G.game='';apply()};
   $('#gTeam').onchange=()=>{G.team=$('#gTeam').value;apply()};
   const owners=[...new Set(Object.values(OWNER))].sort();
-  $('#gOwner').innerHTML=`<option value="">all rosters</option>`+owners.map(o=>`<option value="${esc(o)}" ${o===G.owner?'selected':''}>${esc(o)}</option>`).join('');
+  $('#gOwner').innerHTML=`<option value="">all rosters</option><option value="__FA__" ${G.owner==='__FA__'?'selected':''}>free agents (unrostered)</option>`+owners.map(o=>`<option value="${esc(o)}" ${o===G.owner?'selected':''}>${esc(o)}</option>`).join('');
   $('#gOwner').onchange=()=>{G.owner=$('#gOwner').value;apply()};
   $('#gGame').onchange=()=>{G.game=$('#gGame').value;apply()};
   $('#gClear').onclick=()=>{G.slates.clear();G.pos.clear();G.game='';G.team='';G.owner='';$('#gTeam').value='';$('#gOwner').value='';apply()};
@@ -553,7 +553,7 @@ function apply(){
   const tg=G.team?gameOf(G.team,G.week):null;
   $('#gSum').innerHTML=`wk ${G.week} · ${nG} game${nG===1?'':'s'} · ${nT} team${nT===1?'':'s'}`
     +(G.team&&!tg?' · <span class="inj0">'+G.team+' on BYE</span>':tg?' · '+tg[GM.vis]+' @ '+tg[GM.home]+' '+kickLbl(tg):'')
-    +(!ACT&&byes.length?' · bye: '+byes.join(' '):'')+(G.pos.size?' · pos: '+[...G.pos].join('+'):'')+(G.owner?' · roster: <b>'+esc(G.owner)+'</b>':'');
+    +(!ACT&&byes.length?' · bye: '+byes.join(' '):'')+(G.pos.size?' · pos: '+[...G.pos].join('+'):'')+(G.owner?' · roster: <b>'+(G.owner==='__FA__'?'free agents':esc(G.owner))+'</b>':'');
   $('#gbar').classList.toggle('live',!!ACT||!!G.pos.size||!!G.owner);
   $('#gTog').innerHTML='&#9881; '+(G.slates.size||G.pos.size||G.game||G.team||G.owner?'filters <b style="color:#000;background:var(--cyan);padding:0 4px;border-radius:2px">on</b>':'filters');
   if(G.game&&!gl.some(g=>g[GM.vis]+'@'+g[GM.home]===G.game)){G.game='';recompute();}
@@ -1073,7 +1073,7 @@ function chamber(){
       const u=starter(off,g);
       const v=(D[def]||{comps:{}}).comps[g];
       const inj=u&&u.inj==='0'?' <span class="inj0">Q</span>':u&&u.inj==='-1'?' <span class="injm1">OUT</span>':'';
-      const own=u&&OWNER[u.player+'|'+u.team];const mine=G.owner&&own===G.owner;
+      const own=u&&OWNER[u.player+'|'+u.team];const mine=G.owner&&(G.owner==='__FA__'?u&&!own:own===G.owner);
       return `<tr class="${G.owner?(mine?'mine':'notmine'):''}"><td>${slotchip(g)}</td><td class="pp plink" data-p="${u?u.player:''}" title="${own?'owner: '+esc(own):'undrafted / FA'}">${u?esc(u.player):'—'}${inj}${own&&!G.owner?` <span class="ownr">${esc(own.split(' ')[0].slice(0,8))}</span>`:''}</td>`+
         `${allowCells(def,g,D)}<td>${sparkWave(series(def,J.primary[g]),vivid(def),80,18)}</td></tr>`}).join('');
     const avg=mean(RW.map(g=>(D[def]||{comps:{}}).comps[g]).filter(v=>v!=null));
@@ -1098,7 +1098,7 @@ function chamber(){
           <span class="f">${date} &middot; ${kickLbl(g)} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
         ${fieldTilt(vis,home,+dot)}
         <p class="mini" style="margin:2px 0 6px">${tcell(vis)} D &rarr; ${schemeLine(vis)||'<span class="dim">no scheme data</span>'} ${trustPill(vis)} &nbsp;&nbsp; ${tcell(home)} D &rarr; ${schemeLine(home)||'<span class="dim">no scheme data</span>'} ${trustPill(home)}<br>${envLine(vis,home,wk)}</p>
-        ${(()=>{const sb=storyBlock(g,wk,{compact:true,limit:4});return sb?`<details class="storyd" ${storyCount(g,wk).riv?'open':''}><summary class="mini">storylines &middot; ${(x=>[x.riv?x.riv+' rivalry':'',x.alum?x.alum+' alumni':'',x.conn?x.conn+' connections':''].filter(Boolean).join(' · '))(storyCount(g,wk))}</summary>${sb}</details>`:''})()}
+        ${(()=>{const sb=storyBlock(g,wk,{compact:true,limit:4});return sb?`<details class="storyd"><summary class="mini">storylines &middot; ${(x=>[x.riv?x.riv+' rivalry':'',x.alum?x.alum+' alumni':'',x.conn?x.conn+' connections':''].filter(Boolean).join(' · '))(storyCount(g,wk))}</summary>${sb}</details>`:''})()}
         <div class="grid2">${A.html}${B.html}</div></div>`}).join('')
       +(byes.length?`<p class="note">out of phase this week (bye): ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
   }
@@ -1274,7 +1274,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.ge
 function dchart(){
   const teams=[...new Set(J.depth.map(d=>d.team))].sort();
   const topt=(sel,none)=>(none?`<option value="">— one team only —</option>`:'')+teams.map(t=>`<option ${t===sel?'selected':''}>${t}</option>`).join('');
-  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand &middot; two teams side by side &middot; follows the game / team in the filter bar &middot; ESPN snapshot ${J.depthDate||'?'} &middot; Q = questionable, OUT = out/IR</span></h3>
+  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand / collapse &middot; two teams side by side &middot; follows the game / team in the filter bar &middot; ESPN snapshot ${J.depthDate||'?'} &middot; Q = questionable, OUT = out/IR</span></h3>
    <div id="dcBody" hidden><div class="controls" style="margin-top:8px">
      <select id="dcGame" title="pick a game of the selected week"></select>
      <select id="dcTeam">${topt(teams[0])}</select><span class="mini">vs</span><select id="dcTeam2">${topt('',true)}</select>
@@ -1309,7 +1309,7 @@ function dchart(){
     const rows=ORDER.filter(([p])=>A[p]||(B&&B[p]));
     $('#dcOut').innerHTML=`<div class="dcmatch${B?'':' one'}">
       <div class="dctop">${head(a)}${B?`<div class="dcmid">${same?`${g[GM.vis]} @ ${g[GM.home]}<br><span class="mini">wk ${G.week} &middot; ${kickLbl(g)}</span>`:`<span class="mini">not playing each other in wk ${G.week}</span>`}</div>${head(b,true)}`:''}</div>
-      ${b?(()=>{const sb=same?storyBlock(g,G.week,{compact:true}):cl.riv.map(r=>rivLine(r,a,b)).join('')+cl.alum.map(x=>alumLine(x,a,b)).join('');return sb?`<details class="storyd" open><summary class="mini">storylines</summary>${sb}</details>`:''})():''}
+      ${b?(()=>{const sb=same?storyBlock(g,G.week,{compact:true}):cl.riv.map(r=>rivLine(r,a,b)).join('')+cl.alum.map(x=>alumLine(x,a,b)).join('');return sb?`<details class="storyd"><summary class="mini">storylines &middot; click to expand</summary>${sb}</details>`:''})():''}
       <table class="dct"><tbody>${rows.map(([p,pp])=>`<tr><td class="dcl">${cell(A[p])}</td><td class="dcpos" style="color:${POSC[pp]}">${posIcon(pp,11)} ${p}</td>${B?`<td class="dcr">${cell(B[p],true)}</td>`:''}</tr>`).join('')}</tbody></table></div>`;
     $('#dcOut').querySelectorAll('.plink:not(.pp)').forEach(el=>el.onclick=()=>playerPop(el.dataset.p));
     gameOpts();
@@ -1319,7 +1319,7 @@ function dchart(){
   $('#dcSwap').onclick=()=>{const a=$('#dcTeam').value,b=$('#dcTeam2').value;if(!b)return;$('#dcTeam').value=b;$('#dcTeam2').value=a;render()};
   $('#dcGame').onchange=()=>{const k=$('#dcGame').value;if(!k)return;const [v,h]=k.split('@');$('#dcTeam').value=v;$('#dcTeam2').value=h;render()};
   RR.push(()=>{
-    if(G.game){const [v,h]=G.game.split('@');$('#dcTeam').value=v;$('#dcTeam2').value=h;open(true)}
+    if(G.game){const [v,h]=G.game.split('@');$('#dcTeam').value=v;$('#dcTeam2').value=h}
     else if(G.team){$('#dcTeam').value=G.team;$('#dcTeam2').value=oppOf(G.team)}
     else if(!$('#dcTeam2').value){$('#dcTeam2').value=oppOf($('#dcTeam').value)}
     render()});
@@ -1665,10 +1665,33 @@ function conv(player,team,def,grp,wk){wk=wk||G.week;const D=J.dvp.combined;const
   const W=parts.reduce((a,p)=>a+p[2],0);const s=Math.round(parts.reduce((a,p)=>a+p[1]*p[2],0)/W);
   return {s,parts,tip:parts.map(p=>`${p[0]}: ${Math.round(p[1])} (w ${p[2]})`).join(' · ')}}
 const convBadge=c=>{if(!c)return '<span class="dim">—</span>';const rank=1+(100-c.s)/100*31;return `<span class="badge" style="background:${gradeColor(rank)}" title="Ψ+ conviction ${c.s}/100 — ${c.tip}">${c.s}</span>`};
+/* ---------- WAIVER RADAR: unrostered players (not in the Master Key draft results) ranked for pickup ----------
+   score = 0.4 × this week's projection + 0.6 × mean projection of the next 3 weeks (byes count 0) + role bonus
+   (last game snap share above his season average: +10 PPR-pts per +100 pp, capped ±2) — the board for a waiver claim. */
+const LASTSNP=(()=>{const m={};J.logs.forEach(l=>{if(l[LOG.season]!==USG._se||l[LOG.snp]==null)return;const c=m[l[LOG.player]];if(!c||l[LOG.week]>c.w)m[l[LOG.player]]={w:l[LOG.week],s:l[LOG.snp],t:l[LOG.tsh]}});return m})();
+function waiverRows(wk){
+  // only players with a real role: the QB1, or a skill player who is a depth-chart starter or is playing (≥25% season / ≥30% last-game snaps)
+  const role=u=>{const ug=USG[u.player]||{},ls=LASTSNP[u.player];if(u.grp==='QB')return u.slot==='QB1';return +u.depth===1||(ug.snp||0)>=.25||(ls&&ls.s>=.3)};
+  return UNIVERSE.filter(u=>u.grp&&!OWNER[u.player+'|'+u.team]&&u.inj!=='-1'&&inF(u.team)&&inP(u.pos)&&role(u)).map(u=>{
+    const pr=projection(u,wk);const nx=[1,2,3].map(d=>{const o=oppFor(u.team,wk+d);return !o||o==='BYE'||wk+d>18?0:((projection(u,wk+d)||{}).p||0)});
+    const ug=USG[u.player]||{},ls=LASTSNP[u.player];const roleD=ls&&ug.snp!=null?ls.s-ug.snp:0;
+    const nx3=mean(nx);const p=pr?pr.p:0;const score=.4*p+.6*nx3+Math.max(-2,Math.min(2,roleD*10));
+    return {u,pr,nx,nx3,ug,ls,roleD,score}}).filter(r=>r.pr||r.nx3>0).sort((a,b)=>b.score-a.score)}
+function waiver(slot,full){const wk=G.week;const R=waiverRows(wk);const N=full?60:8;
+  const row=(r,i)=>{const u=r.u,inj=u.inj==='0'?' <span class="inj0">Q</span>':'';
+    return `<tr><td class="mini">${i+1}</td><td class="pp plink" data-p="${esc(u.player)}" style="text-align:left">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>${full?`<td>${ccell(u.player)}</td>`:''}
+      <td>${oppcell(oppFor(u.team,wk))}</td><td title="${r.pr?esc(r.pr.tip):''}"><b>${r.pr?r.pr.p.toFixed(1):'—'}</b></td>
+      <td class="mini">${r.nx.map((v,k)=>{const o=oppFor(u.team,wk+k+1);return o==='BYE'?'<span class="inj0">bye</span>':v.toFixed(1)}).join(' · ')}</td><td><b style="color:var(--cyan)">${r.score.toFixed(1)}</b></td>
+      <td class="mini">${r.ug.snp!=null?(100*r.ug.snp).toFixed(0)+'%':'—'}${r.ls?` <span class="${r.roleD>=.08?'rise':r.roleD<=-.08?'fall':'dim'}" title="last game ${(100*r.ls.s).toFixed(0)}% snaps (wk ${r.ls.w})">→${(100*r.ls.s).toFixed(0)}%</span>`:''}</td>
+      <td class="mini">${r.ug.tsh!=null?(100*r.ug.tsh).toFixed(0)+'%':'—'}</td></tr>`};
+  slot.innerHTML=`<div class="panel lineup"><h3>waiver radar — wk ${wk} <span class="f">players on no roster in the draft results with a real role (QB1s; skill players who start or play ≥25% of snaps), ranked = 0.4 × PROJ this week + 0.6 × avg PROJ next 3 wks + role trend (last-game snaps vs season) &middot; ${R.length} candidates${full?'':' &middot; set ROSTER → <a href="#" id="wvAll">free agents</a> for the full board (every tab narrows to FAs)'}</span></h3>
+   <table class="fx lineupTbl"><thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th>${full?'<th>college</th>':''}<th>opp</th><th>PROJ</th><th title="projection for the next 3 weeks">next 3</th><th>score</th><th title="season snap share → last game">snp%</th><th>tgt%</th></tr></thead>
+   <tbody>${R.slice(0,N).map(row).join('')}</tbody></table></div>`;
+  const a=$('#wvAll');if(a)a.onclick=e=>{e.preventDefault();G.owner='__FA__';$('#gOwner').value='__FA__';apply()}}
 /* ---------- MY LINEUP: the selected roster's week, ranked by conviction ---------- */
 function lineup(){
   RR.push(render);
-  function render(){const slot=$('#lineupSlot');if(!slot)return;if(!G.owner){slot.innerHTML='';return}
+  function render(){const slot=$('#lineupSlot');if(!slot)return;if(!G.owner||G.owner==='__FA__'){waiver(slot,G.owner==='__FA__');return}
     const wk=G.week,D=J.dvp.combined;
     const mine=UNIVERSE.filter(u=>OWNER[u.player+'|'+u.team]===G.owner);
     const rows=mine.map(u=>{const o=oppFor(u.team,wk),bye=o==='BYE',def=o&&!bye?o.replace('@',''):'';const g=def?gameOf(u.team,wk):null;
