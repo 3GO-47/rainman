@@ -121,6 +121,10 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — Depth charts show two teams side by side (mirrored by position: QB · RB · WR1-3 · TE · FB, depth #,
+  college logo, Q/OUT), with a game picker, a vs-team picker and a swap button. Picking a team auto-loads its opponent;
+  the chart follows the filter bar — a selected GAME loads both teams (and opens the panel), a selected TEAM loads it vs
+  its opponent that week. Names open the player card.
 - 2026-10-05 — **College layer.** Every player's final college (nflverse rosters; first school listed = last attended,
   earlier stops shown as "also attended") with the ESPN college logo, school color bar, conference badge and a tier tint
   (gold = Power-4/Notre Dame · teal = G5 · slate = FCS · magenta = D2/D3/NAIA small school). Shown in the player card
