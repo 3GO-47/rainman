@@ -134,6 +134,13 @@ canvas.chart{max-height:260px}
 .tdbar .fill{height:100%;border-radius:7px 0 0 7px;animation:grow .9s cubic-bezier(.2,.8,.2,1)}
 .tdbar .tick{position:absolute;top:0;bottom:0;width:2px;background:#e6e6e6;opacity:.75}
 .tdbar .val{position:absolute;right:7px;top:0;font-size:9.5px;color:#dfe6ec;line-height:15px}
+td:has(>.cchip){text-align:left}
+.cchip{display:inline-flex;align-items:center;gap:5px;padding:1px 6px 1px 3px;border-left:3px solid var(--cc);background:linear-gradient(90deg,var(--cb),transparent 85%);white-space:nowrap;font-size:11px;color:var(--txt)}
+.clg{object-fit:contain;vertical-align:middle;filter:drop-shadow(0 0 1px rgba(255,255,255,.25))}
+.cinit{display:inline-grid;place-items:center;border-radius:50%;font-size:7px;font-weight:700;letter-spacing:-.3px}
+.cconf{font-size:8.5px;padding:0 3px;border:1px solid;border-radius:2px;letter-spacing:.4px;line-height:13px}
+.cbig{display:flex;align-items:center;gap:12px;margin:6px 0 4px;padding:6px 10px;border-left:4px solid var(--cc);background:linear-gradient(90deg,var(--cb),transparent 70%)}
+.cbig .cname{font-size:14px;color:var(--txt);font-weight:600}.ctier{font-size:10px;text-transform:uppercase;letter-spacing:.6px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:36px 16px;overflow:auto}
 .modalbox{background:#060606;border:1px solid var(--edge2);max-width:920px;width:100%;padding:14px 18px;position:relative;box-shadow:0 0 40px rgba(0,0,0,.9)}
 .mclose{cursor:pointer;color:var(--dim);border:1px solid var(--edge);padding:2px 8px;background:#000;font:inherit}
@@ -327,6 +334,30 @@ function logoPt(t,px=22){const k=t+'_'+px;if(LCACHE[k])return LCACHE[k];
   im.src=LOGO(t);return cv;}
 const hex2rgba=(h,a)=>{const v=parseInt(h.slice(1),16);return `rgba(${v>>16},${(v>>8)&255},${v&255},${a})`};
 const vivid=t=>TEAM[t]?TEAM[t].c1:'#61dcff';
+/* ---------- college layer (nflverse rosters x ESPN college-football ids/colors/conferences) ---------- */
+const CONF={sec:['SEC','#f2c14e'],big10:['B1G','#5b9cff'],acc:['ACC','#29b6f6'],big12:['BIG 12','#ff7043'],ind:['IND','#c9a227'],
+  American:['AAC','#26c6a8'],mwest:['MW','#26c6a8'],belt:['SUN BELT','#26c6a8'],usa:['CUSA','#26c6a8'],midam:['MAC','#26c6a8'],pac12:['PAC-12','#26c6a8']};
+const P4C=new Set(['sec','big10','acc','big12']);
+const TIER={1:['power','#f2c14e','Power-4 (SEC · Big Ten · ACC · Big 12) or Notre Dame'],2:['G5','#26c6a8','Group of 5 / other FBS'],3:['FCS','#8fa3b8','FCS (I-AA)'],4:['small','#e040fb','Division II / III / NAIA / non-FBS — small-school product']};
+const lum=h=>{if(!h||h.length<6)return 0;const v=parseInt(h,16);return (.299*(v>>16)+.587*((v>>8)&255)+.114*(v&255))/255};
+const CI={};
+function cinfo(n){if(n in CI)return CI[n];const p=J.college&&J.college.p[n];if(!p)return CI[n]=null;
+  const [id,disp,ab,c,ac,conf]=J.college.s[p[0]]||[];const [cf,div]=(conf||'').split('/');
+  const tier=P4C.has(cf)||(cf==='ind'&&id==='87')?1:div==='FBS'?2:div==='FCS'?3:4;
+  const col=lum(c)>.16?'#'+c:lum(ac)>.16?'#'+ac:TIER[tier][1];
+  const confL=CONF[cf]?CONF[cf][0]:div==='FCS'?'FCS':(conf||'').toUpperCase()||'—';
+  const confC=CONF[cf]?CONF[cf][1]:TIER[tier][1];
+  return CI[n]={key:p[0],id,disp:disp||p[0],ab:ab||p[0].slice(0,4).toUpperCase(),col,tier,confL,confC,year:p[1],pick:p[2],club:p[3],prev:p[4]};}
+const clogo=(ci,px=16)=>ci.id?`<img class="clg" src="https://a.espncdn.com/i/teamlogos/ncaa/500-dark/${ci.id}.png" onerror="this.onerror=null;this.src='https://a.espncdn.com/i/teamlogos/ncaa/500/${ci.id}.png'" style="width:${px}px;height:${px}px" alt="" loading="lazy">`
+  :`<span class="cinit" style="width:${px}px;height:${px}px;background:${ci.col}33;color:${ci.col}">${esc(ci.ab.slice(0,3))}</span>`;
+const confBadge=ci=>`<span class="cconf" style="color:${ci.confC};border-color:${ci.confC}66" title="${esc(TIER[ci.tier][2])}">${ci.confL}</span>`;
+const draftTxt=ci=>ci.pick?`${ci.year} draft &middot; #${ci.pick} overall${ci.club?' ('+ci.club+')':''}`:ci.year?`undrafted &middot; entered ${ci.year}`:'';
+function ccell(n){const ci=cinfo(n);if(!ci)return '<span class="dim">—</span>';
+  return `<span class="cchip" style="--cc:${ci.col};--cb:${TIER[ci.tier][1]}1f" title="${esc(ci.disp)} · ${ci.confL} · ${TIER[ci.tier][0]}${ci.prev?' · also '+esc(ci.prev):''}${ci.pick||ci.year?' · '+draftTxt(ci).replace(/&middot;/g,'·'):''}">${clogo(ci)}<span>${esc(ci.disp)}</span>${confBadge(ci)}</span>`}
+function cbig(n){const ci=cinfo(n);if(!ci)return '';
+  return `<div class="cbig" style="--cc:${ci.col};--cb:${TIER[ci.tier][1]}22">${clogo(ci,44)}<div><div class="cname">${esc(ci.disp)} ${confBadge(ci)} <span class="ctier" style="color:${TIER[ci.tier][1]}">${TIER[ci.tier][0]}</span></div>
+  <div class="mini">${draftTxt(ci)}${ci.prev?` &middot; also attended ${esc(ci.prev)}`:''}</div></div></div>`}
+const csort=n=>{const ci=cinfo(n);return ci?ci.disp:'zzz'};
 document.querySelector('.sub').innerHTML=document.querySelector('.sub').innerHTML
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend).replace('__SEASONS__',[...new Set(J.logs.map(l=>l[2]))].sort().map(s=>String(s).slice(2)+'/'+String(s+1).slice(2)).join(' + ')).replace('__GAMES__',Math.round(J.weekly.length/2)).replace('__ROWS__',J.logs.length.toLocaleString());
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
@@ -480,7 +511,9 @@ function lab(){
     <select id="labSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
     <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
-    <input id="labQ" placeholder="search player..." size="18">
+    <select id="labCol" title="filter by college tier / conference / school">${(()=>{const t={},c={},sc={};UNIVERSE.forEach(u=>{const ci=cinfo(u.player);if(!ci)return;t[ci.tier]=(t[ci.tier]||0)+1;c[ci.confL]=(c[ci.confL]||0)+1;sc[ci.disp]=(sc[ci.disp]||0)+1});
+      return `<option value="">all colleges</option><optgroup label="tier">${Object.keys(TIER).filter(k=>t[k]).map(k=>`<option value="t:${k}">${TIER[k][0]} (${t[k]})</option>`).join('')}</optgroup><optgroup label="conference">${Object.keys(c).sort().map(k=>`<option value="c:${k}">${k} (${c[k]})</option>`).join('')}</optgroup><optgroup label="school">${Object.keys(sc).sort().map(k=>`<option value="s:${esc(k)}">${esc(k)} (${sc[k]})</option>`).join('')}</optgroup>`})()}</select>
+    <input id="labQ" placeholder="search player / college..." size="18">
     <span class="note">position buttons toggle and combine (ALL = every position) &middot; starred cols = opponent's DvP rank for that stat (week / slate / game / team / roster from the global filter bar) &middot; with several positions selected the stats sit in a shared grid (PaYd · PaTD · RuYd · Rec · RcYd · TD · P+R/R+Y) — every column sorts, blanks mean the stat doesn't apply to that slot &middot; &Psi; = mean of ranks &middot; PROJ = projected PPR &middot; click a player name for his card &middot; click headers to sort</span>
   </div><div id="labTbl"></div>`;
   let posSet=new Set(['QB']),sortK='psi',sortA=true;
@@ -496,7 +529,9 @@ function lab(){
       &&inU(u)
       &&(!dep||u.depth<=+dep)
       &&(hin!=='x'||u.inj!=='-1')
-      &&(!q||u.player.toLowerCase().includes(q)))
+      &&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q))
+      &&(()=>{const f=$('#labCol').value;if(!f)return true;const ci=cinfo(u.player);if(!ci)return false;const [k,v]=[f.slice(0,1),f.slice(2)];
+        return k==='t'?ci.tier==+v:k==='c'?ci.confL===v:ci.disp===v})())
     .map(u=>{
       const stats=LABDEF[u.pos].stats(u.grp);
       const wk=G.week;
@@ -505,7 +540,7 @@ function lab(){
       const d=opp&&D[opp]?D[opp]:null;
       const gm=gameOf(u.team,wk);
       const ug=USG[u.player]||{};const pr=opp?projection(u,wk):null;
-      return {...u,oppRaw,opp,statset:stats,heads:LABDEF[u.pos].heads,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
+      return {...u,college:csort(u.player),oppRaw,opp,statset:stats,heads:LABDEF[u.pos].heads,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
         snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,pr,proj:pr?pr.p:null,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
@@ -529,12 +564,12 @@ function lab(){
       else if(sortK==='cv'){x=a.cv?-a.cv.s:99;y=b.cv?-b.cv.s:99}
       else {x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
-    const common=`<th data-k="player">Player</th><th data-k="team">Tm</th>${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
+    const common=`<th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="college" title="final college · logo, conference badge; tint = tier (gold power-4 · teal G5 · slate FCS · magenta small school)">College</th>${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
       <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th><th data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th>`;
     const tail=`<th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
     const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
-      return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td>${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}</td>
+      return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${ccell(u.player)}</td>${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
       <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td><td>${u.opp?edgeChip(u.opp,u.grp):'—'}</td>`};
     const rowTail=u=>`<td>${psi(u.psi)}</td><td>${convBadge(u.cv)}</td><td title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
@@ -573,7 +608,7 @@ function lab(){
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
     else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
     if(/^[rvuw]/.test(sortK))sortK='psi';paint();render()});
-  ['labSrc','labDepth','labInj'].forEach(id=>$('#'+id).onchange=render);
+  ['labSrc','labDepth','labInj','labCol'].forEach(id=>$('#'+id).onchange=render);
   $('#labQ').oninput=render;
   RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>{if(b.dataset.p!=='ALL')b.hidden=!inP(b.dataset.p)});
     if(!active().length){const f=POS4.find(p=>inP(p));if(f)posSet=new Set([f])}paint();render()});
@@ -1110,6 +1145,7 @@ window.playerPop=function(n){
   const html=`<div class="modal" id="ppModal"><div class="modalbox">
    <button class="mclose" id="ppX">ESC &#10005;</button>
    <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk ${G.week}, 26/27)${opp?' &middot; '+kickLbl(gameOf(team,G.week)):''}</span></h3>
+   ${cbig(n)}
    ${rkT?`<div class="tabs" style="margin-top:6px"><button id="ppT1" class="on">player card</button><button id="ppT2">${grp} dvp rankings</button></div>`:''}
    <div id="ppV1">
    ${opp?`<p class="mini" style="margin:4px 0 8px">${schemeLine(opp)} ${trustPill(opp)}${grp?` &middot; scheme edge vs ${grp}: ${edgeChip(opp,grp)} &middot; &Psi;+ ${convBadge(conv(n,team,opp,grp))}`:''}${(()=>{const u=UNIVERSE.find(x=>x.player===n&&x.team===team);const pr=u?projection(u):null;return pr?`<br><span title="${esc(pr.tip)}">PROJ <b style="color:var(--txt);font-size:13px">${pr.p.toFixed(1)}</b> PPR (range ${pr.floor.toFixed(1)}-${pr.ceil.toFixed(1)}) = base ${pr.base.toFixed(1)} &times; match ${fmtX(pr.mR)} &times; scheme ${fmtX(pr.sR)} &times; env ${fmtX(pr.eR)} &times; role ${fmtX(pr.rR)}</span>`:''})()}${(()=>{const ug=USG[n];return ug?` &middot; ${USG._se} role: <b style="color:var(--txt)">${(100*ug.snp).toFixed(0)}%</b> snaps${usageArrow(n)}${ug.tsh!=null?` · <b style="color:var(--txt)">${(100*ug.tsh).toFixed(0)}%</b> tgt share`:''}${ug.adot!=null?` · aDOT ${ug.adot.toFixed(1)}`:''}`:''})()}</p>`:''}
@@ -1150,8 +1186,9 @@ function dchart(){
     $('#dcOut').innerHTML=`<div style="display:grid;grid-template-columns:repeat(${order.filter(p=>by[p]).length},1fr);gap:10px">
      ${order.filter(p=>by[p]).map(p=>{const c=POSC[posOf(p)];
       return `<div><p class="mini" style="color:${c}">${posIcon(posOf(p),11)} ${p}</p><table><tbody>
-      ${by[p].sort((a,b)=>a.depth-b.depth).map(d=>`<tr><td class="mini">${d.depth}</td><td>${esc(d.player)}${d.injury==='0'?' <span class="inj0">Q</span>':d.injury==='-1'?' <span class="injm1">OUT</span>':''}</td></tr>`).join('')}
+      ${by[p].sort((a,b)=>a.depth-b.depth).map(d=>`<tr><td class="mini">${d.depth}</td><td class="plink" data-p="${esc(d.player)}">${(c2=>c2?clogo(c2,14)+' ':'')(cinfo(d.player))}${esc(d.player)}${d.injury==='0'?' <span class="inj0">Q</span>':d.injury==='-1'?' <span class="injm1">OUT</span>':''}</td></tr>`).join('')}
       </tbody></table></div>`}).join('')}</div>`;
+    $('#dcOut').querySelectorAll('.plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
   }
   $('#dcTeam').onchange=render;RR.push(()=>{if(G.team)$('#dcTeam').value=G.team;render()});
 }
@@ -1665,7 +1702,7 @@ function board(){
   <div class="controls">
    <select id="bbDepth"><option value="1" selected>starters (slot = role)</option><option value="">every depth-chart player</option></select>
    <select id="bbInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
-   <input id="bbQ" placeholder="search player / team..." size="18">
+   <input id="bbQ" placeholder="search player / team / college..." size="20">
    <button id="bbCsv" class="mclose" style="position:static" title="download this board as CSV">&#8681; csv</button>
    <span class="note">PROJ = his own PPR/gm (this season 2&times;, last 8 of '25) shrunk to the slot mean, &times; what the opponent allows to his slot (shrunk by defense trust) &times; scheme family &times; game environment &times; role trend &middot; range = his own 25th-80th percentile game scaled to the projection &middot; &#9679; projection, &#9675; baseline &middot; hover PROJ for the arithmetic &middot; click headers to sort, names for cards</span>
   </div><div id="modelLab"></div><div id="bbTbl"></div>`;
@@ -1674,12 +1711,12 @@ function board(){
   $('#bbTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#bbTabs').children].forEach(x=>x.classList.toggle('on',x===b));pos=b.dataset.p;render()};
   ['bbDepth','bbInj'].forEach(id=>$('#'+id).onchange=render);$('#bbQ').oninput=render;
   let lastRows=[];
-  $('#bbCsv').onclick=()=>{const hdr=['rank','pos_rank','player','team','slot','opp','kick','proj','floor','ceiling','baseline','matchup_x','scheme_x','env_x','role_x','psi','psi_plus','trust','snap_pct','tgt_share','owner'];
-    const csv=[hdr.join(',')].concat(lastRows.map((x,i)=>[i+1,x.pr,x.u.player,x.u.team,x.u.dslot,x.r.o,x.r.g?x.r.g[GM.slate]:'',x.r.p.toFixed(1),x.r.floor.toFixed(1),x.r.ceil.toFixed(1),x.r.base.toFixed(1),x.r.mR.toFixed(2),x.r.sR.toFixed(2),x.r.eR.toFixed(2),x.r.rR.toFixed(2),x.r.psiV??'',x.r.c?x.r.c.s:'',x.r.t?x.r.t.s:'',x.ug.snp!=null?(100*x.ug.snp).toFixed(0):'',x.ug.tsh!=null?(100*x.ug.tsh).toFixed(0):'',x.u.owner||''].map(v=>/[",]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':v).join(','))).join('\n');
+  $('#bbCsv').onclick=()=>{const hdr=['rank','pos_rank','player','team','slot','opp','kick','proj','floor','ceiling','baseline','matchup_x','scheme_x','env_x','role_x','psi','psi_plus','trust','snap_pct','tgt_share','owner','college','conference'];
+    const csv=[hdr.join(',')].concat(lastRows.map((x,i)=>[i+1,x.pr,x.u.player,x.u.team,x.u.dslot,x.r.o,x.r.g?x.r.g[GM.slate]:'',x.r.p.toFixed(1),x.r.floor.toFixed(1),x.r.ceil.toFixed(1),x.r.base.toFixed(1),x.r.mR.toFixed(2),x.r.sR.toFixed(2),x.r.eR.toFixed(2),x.r.rR.toFixed(2),x.r.psiV??'',x.r.c?x.r.c.s:'',x.r.t?x.r.t.s:'',x.ug.snp!=null?(100*x.ug.snp).toFixed(0):'',x.ug.tsh!=null?(100*x.ug.tsh).toFixed(0):'',x.u.owner||'',(cinfo(x.u.player)||{}).disp||'',(cinfo(x.u.player)||{}).confL||''].map(v=>/[",]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':v).join(','))).join('\n');
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`rainman_wk${G.week}_${pos}.csv`;a.click()};
   function rows(){const wk=G.week,q=$('#bbQ').value.trim().toLowerCase(),dep=$('#bbDepth').value,hin=$('#bbInj').value;
     return UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&(pos==='ALL'||pos==='FLEX'?['RB','WR','TE'].includes(u.pos)||pos==='ALL':u.pos===pos)
-      &&(!dep||u.slot===(u.grp==='QB'?'QB1':u.grp))&&(!hin||u.inj!=='-1')&&(!q||(u.player+' '+u.team).toLowerCase().includes(q)))
+      &&(!dep||u.slot===(u.grp==='QB'?'QB1':u.grp))&&(!hin||u.inj!=='-1')&&(!q||(u.player+' '+u.team+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q)))
       .map(u=>{const r=projection(u,wk);return r?{u,r,ug:USG[u.player]||{}}:null}).filter(Boolean)}
   function render(){let R=rows();
     // position ranks are computed on the unfiltered-by-search, all-depth pool so #s are stable
@@ -1687,18 +1724,18 @@ function board(){
     Object.values(pool).forEach(a=>a.sort((x,y)=>y.v-x.v));const prOf=(u)=>{const a=pool[u.pos]||[];const i=a.findIndex(x=>x.p===u.player);return i<0?'':u.pos+(i+1)};
     R.forEach(x=>x.pr=prOf(x.u));
     const val=x=>{switch(sortK){case 'p':return x.r.p;case 'floor':return x.r.floor;case 'ceil':return x.r.ceil;case 'base':return x.r.base;case 'lift':return x.r.p-x.r.base;case 'm':return x.r.mR;case 's':return x.r.sR;case 'e':return x.r.eR;case 'role':return x.r.rR;
-      case 'psi':return x.r.psiV==null?99:-x.r.psiV;case 'cv':return x.r.c?x.r.c.s:-1;case 'trust':return x.r.t?x.r.t.s:-1;case 'snp':return x.ug.snp??-1;case 'tsh':return x.ug.tsh??-1;case 'player':return x.u.player;case 'team':return x.u.team;case 'owner':return x.u.owner||'zzz';default:return x.r.p}};
+      case 'psi':return x.r.psiV==null?99:-x.r.psiV;case 'cv':return x.r.c?x.r.c.s:-1;case 'trust':return x.r.t?x.r.t.s:-1;case 'snp':return x.ug.snp??-1;case 'tsh':return x.ug.tsh??-1;case 'player':return x.u.player;case 'team':return x.u.team;case 'college':return csort(x.u.player);case 'owner':return x.u.owner||'zzz';default:return x.r.p}};
     R.sort((a,b)=>{const x=val(a),y=val(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)});lastRows=R;
     const mx=Math.max(1,...R.map(x=>x.r.ceil));
-    const cols=[['#',''],['pos#',''],['player','player'],['tm','team'],['slot',''],['opp',''],['kick',''],['PROJ','p','projected PPR points'],['range','','25th-80th percentile of his own games, scaled'],['floor','floor'],['ceil','ceil'],['base','base','his own PPR/gm, shrunk to the slot mean'],['lift','lift','projection minus baseline = what this week adds or takes'],['match','m','PPR the opponent allows to his slot vs league, shrunk by trust'],['schm','s','scheme family × slot'],['env','e','game environment'],['role','role','last-game snap share vs season'],['Ψ','psi'],['Ψ+','cv'],['trust','trust'],['snp%','snp'],['tgt%','tsh'],['owner','owner']];
+    const cols=[['#',''],['pos#',''],['player','player'],['tm','team'],['college','college','final college · tint = tier'],['slot',''],['opp',''],['kick',''],['PROJ','p','projected PPR points'],['range','','25th-80th percentile of his own games, scaled'],['floor','floor'],['ceil','ceil'],['base','base','his own PPR/gm, shrunk to the slot mean'],['lift','lift','projection minus baseline = what this week adds or takes'],['match','m','PPR the opponent allows to his slot vs league, shrunk by trust'],['schm','s','scheme family × slot'],['env','e','game environment'],['role','role','last-game snap share vs season'],['Ψ','psi'],['Ψ+','cv'],['trust','trust'],['snp%','snp'],['tgt%','tsh'],['owner','owner']];
     $('#bbTbl').innerHTML=`<table class="fx bb"><thead><tr>${cols.map(([l,k,tip])=>`<th ${k?`data-k="${k}" style="cursor:pointer"`:''} title="${tip||''}">${l}${k&&sortK===k?(sortA?' &#9650;':' &#9660;'):''}</th>`).join('')}</tr></thead><tbody>
      ${R.map((x,i)=>{const u=x.u,r=x.r,inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';const lift=r.p-r.base;
-      return `<tr class="${u.inj==='-1'?'outrow':''}"><td class="mini">${i+1}</td><td class="mini" style="color:${POSC[u.pos]}">${x.pr}</td><td class="pp plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td><td>${oppcell(r.o)}</td><td>${r.g?slateChip(r.g[GM.slate]):''}</td>
+      return `<tr class="${u.inj==='-1'?'outrow':''}"><td class="mini">${i+1}</td><td class="mini" style="color:${POSC[u.pos]}">${x.pr}</td><td class="pp plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${ccell(u.player)}</td><td>${slotchip(u.dslot)}</td><td>${oppcell(r.o)}</td><td>${r.g?slateChip(r.g[GM.slate]):''}</td>
       <td title="${esc(r.tip)}"><b style="font-size:13px;color:${gradeColor(1+(1-clamp(r.p/mx,0,1))*31)}">${r.p.toFixed(1)}</b></td><td>${rangeBar(r,mx)}</td><td class="mini">${r.floor.toFixed(1)}</td><td class="mini">${r.ceil.toFixed(1)}</td><td class="mini">${r.base.toFixed(1)}${r.n<4?'<sup class="dim" title="thin history — leaning on the slot mean">†</sup>':''}</td>
       <td class="${lift>=1?'rise':lift<=-1?'fall':'mini'}">${lift>0?'+':''}${lift.toFixed(1)}</td><td>${fmtX(r.mR)}</td><td>${fmtX(r.sR)}</td><td>${fmtX(r.eR)}</td><td>${fmtX(r.rR)}</td>
       <td>${r.psiV==null?'—':psi(r.psiV)}</td><td>${convBadge(r.c)}</td><td>${trustPill(r.def,true)}</td><td class="mini">${x.ug.snp!=null?(100*x.ug.snp).toFixed(0)+'%'+usageArrow(u.player):'—'}</td><td class="mini">${x.ug.tsh!=null?(100*x.ug.tsh).toFixed(0)+'%':'—'}</td><td class="mini">${esc(u.owner||'')}</td></tr>`}).join('')}
     </tbody></table><p class="note">${R.length} players &middot; wk ${G.week} &middot; ${J.blend} DvP &middot; † = fewer than 4 weighted games of history &middot; projections are a transparent model, not a consensus — every factor is in the columns</p>`;
-    $('#bbTbl').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=['player','team','owner'].includes(k)}render()});
+    $('#bbTbl').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=['player','team','owner','college'].includes(k)}render()});
   }
   RR.push(()=>{for(const k in PCACHE)delete PCACHE[k];render()});
 }

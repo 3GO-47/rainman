@@ -103,6 +103,49 @@ def bets_payload():
     return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
             'propsWeek': int(props[0]['week']) if props else None}
 
+def college_payload(logs):
+    """College for every player in the logs / depth chart: nflverse rosters (college, draft) x ESPN college-football
+    team ids/colors/conference (data/raw/colleges_espn.txt, pulled via Chrome). First school listed = final school."""
+    src = 'data/raw/colleges_espn.txt'
+    if not os.path.exists(src): return {'s': {}, 'p': {}}
+    S = {}
+    for line in open(src, encoding='utf-8'):
+        if line.startswith('#') or not line.strip(): continue
+        f = line.rstrip('\n').split('|')
+        S[re.sub(r'\s+', ' ', f[0]).strip()] = f[1:7]
+    cols = ['pfr_id', 'full_name', 'team', 'college', 'entry_year', 'draft_number', 'draft_club']
+    R = pd.concat([pd.read_parquet(f'data/raw/nflverse/roster_{y}.parquet', columns=cols) for y in (2026, 2025, 2024)
+                   if os.path.exists(f'data/raw/nflverse/roster_{y}.parquet')])
+    R = R[R.college.notna()]
+    by_id = R.dropna(subset=['pfr_id']).drop_duplicates('pfr_id').set_index('pfr_id')
+    by_name = R.drop_duplicates('full_name').set_index('full_name')
+    P, miss = {}, set()
+    def add(name, r):
+        if name in P: return
+        allc = [re.sub(r'\s+', ' ', c).strip() for c in str(r.college).split(';')]
+        key = allc[0]
+        if key not in S: miss.add(key); return
+        num = lambda v: int(v) if pd.notna(v) else None
+        P[name] = [key, num(r.entry_year), num(r.draft_number), r.draft_club if isinstance(r.draft_club, str) else '',
+                   ' / '.join(allc[1:])]
+    for l in logs:
+        if l[1] in by_id.index: add(l[0], by_id.loc[l[1]])
+    dcp = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
+    norm = lambda n: re.sub(r'[^a-z]', '', re.sub(r'\b(jr|sr|ii|iii|iv|v)\b\.?', '', str(n).lower()))
+    by_norm = {norm(n): r for n, r in by_name.iterrows()}
+    R2 = R.assign(last=R.full_name.str.split().str[-1].str.lower())
+    for r in csv.DictReader(open(dcp, encoding='utf-8')):
+        n = r['player']; alias = {'Hollywood Brown': 'Marquise Brown'}.get(n)
+        if alias in by_name.index: add(n, by_name.loc[alias]); continue
+        if n in by_name.index: add(n, by_name.loc[n]); continue
+        if norm(n) in by_norm: add(n, by_norm[norm(n)]); continue
+        last = [w for w in n.lower().replace('.', '').split() if w not in ('jr', 'sr', 'ii', 'iii', 'iv')][-1]
+        c = R2[(R2['last'] == last) & (R2.team.replace({'LA': 'LAR'}) == r['team'])].drop_duplicates('full_name')
+        if len(c) == 1: add(n, c.iloc[0])
+    used = {v[0] for v in P.values()}
+    if miss: print('  colleges missing from colleges_espn.txt:', sorted(miss))
+    return {'s': {k: v for k, v in S.items() if k in used}, 'p': P}
+
 def main():
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
             'groupStats': GROUP_STATS, 'primary': PRIMARY}
@@ -134,6 +177,7 @@ def main():
     data['logs'] = logs
     data['intel'] = intel_payload()
     data['bets'] = bets_payload()
+    data['college'] = college_payload(logs)
 
     data['matchups'] = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8')))
     sched = {}
