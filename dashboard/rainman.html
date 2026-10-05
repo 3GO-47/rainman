@@ -135,6 +135,19 @@ canvas.chart{max-height:260px}
 .tdbar .tick{position:absolute;top:0;bottom:0;width:2px;background:#e6e6e6;opacity:.75}
 .tdbar .val{position:absolute;right:7px;top:0;font-size:9.5px;color:#dfe6ec;line-height:15px}
 td:has(>.cchip){text-align:left}
+.dcmatch{margin-top:6px}.dctop{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;margin-bottom:6px}
+.dcmatch.one .dctop{grid-template-columns:1fr}
+.dchead{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--tc);padding:4px 2px}.dchead.r{flex-direction:row-reverse;text-align:right}
+.dcmid{text-align:center;font-size:12px;color:var(--txt)}
+table.dct{width:100%;border-collapse:collapse}table.dct td{vertical-align:top;padding:4px 6px;border-bottom:1px solid var(--edge)}
+table.dct td.dcl{text-align:left;width:46%}table.dct td.dcr{text-align:right;width:46%}
+table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
+.dcrow{display:flex;align-items:center;gap:6px;line-height:19px}.dcrow.r{flex-direction:row-reverse}
+.dcd{width:12px;text-align:center}.dcp{cursor:pointer}.dc1{color:var(--txt);font-weight:600}
+.dcmatch.one table.dct td.dcl{width:85%}
+@media (max-width:840px){table.dct{table-layout:fixed;font-size:11px}table.dct td{white-space:normal!important;padding:3px 2px}
+ table.dct td.dcl,table.dct td.dcr{width:43%}table.dct td.dcpos{width:14%;font-size:10px}.dcrow{align-items:flex-start;line-height:15px;margin:2px 0}
+ .dcp{word-break:break-word}.dctop{gap:4px}.dchead .mini{display:none}.dcmid{font-size:10px}}
 .cchip{display:inline-flex;align-items:center;gap:5px;padding:1px 6px 1px 3px;border-left:3px solid var(--cc);background:linear-gradient(90deg,var(--cb),transparent 85%);white-space:nowrap;font-size:11px;color:var(--txt)}
 .clg{object-fit:contain;vertical-align:middle;filter:drop-shadow(0 0 1px rgba(255,255,255,.25))}
 .cinit{display:inline-grid;place-items:center;border-radius:50%;font-size:7px;font-weight:700;letter-spacing:-.3px}
@@ -1176,21 +1189,49 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.ge
 /* ---------- Depth chart viewer (Players tab) ---------- */
 function dchart(){
   const teams=[...new Set(J.depth.map(d=>d.team))].sort();
-  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand &middot; ESPN snapshot ${J.depthDate||'?'} &middot; re-pulled weekly in-season &middot; Q = questionable, OUT = out/IR</span></h3>
-   <div id="dcBody" hidden><div class="controls" style="margin-top:8px"><select id="dcTeam">${teams.map(t=>`<option>${t}</option>`).join('')}</select></div><div id="dcOut"></div></div>`;
-  $('#dcToggle').onclick=()=>{const b=$('#dcBody');b.hidden=!b.hidden;$('#dcArr').innerHTML=b.hidden?'&#9656;':'&#9662;'};
+  const topt=(sel,none)=>(none?`<option value="">— one team only —</option>`:'')+teams.map(t=>`<option ${t===sel?'selected':''}>${t}</option>`).join('');
+  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand &middot; two teams side by side &middot; follows the game / team in the filter bar &middot; ESPN snapshot ${J.depthDate||'?'} &middot; Q = questionable, OUT = out/IR</span></h3>
+   <div id="dcBody" hidden><div class="controls" style="margin-top:8px">
+     <select id="dcGame" title="pick a game of the selected week"></select>
+     <select id="dcTeam">${topt(teams[0])}</select><span class="mini">vs</span><select id="dcTeam2">${topt('',true)}</select>
+     <button id="dcSwap" class="mclose" style="position:static" title="swap sides">&#8644;</button></div><div id="dcOut"></div></div>`;
+  const body=$('#dcBody'),arr=$('#dcArr');
+  const open=v=>{body.hidden=!v;arr.innerHTML=v?'&#9662;':'&#9656;'};
+  $('#dcToggle').onclick=()=>open(body.hidden);
+  const oppOf=t=>{const g=gameOf(t,G.week);return g?(g[GM.vis]===t?g[GM.home]:g[GM.vis]):''};
+  function gameOpts(){const gs=GAMES(G.week);const a=$('#dcTeam').value,b=$('#dcTeam2').value;
+    $('#dcGame').innerHTML=`<option value="">wk ${G.week} games…</option>`+gs.map(g=>{const k=g[GM.vis]+'@'+g[GM.home];
+      const on=(g[GM.vis]===a&&g[GM.home]===b)||(g[GM.vis]===b&&g[GM.home]===a);
+      return `<option value="${k}" ${on?'selected':''}>${g[GM.vis]} @ ${g[GM.home]} · ${g[GM.day]} ${g[GM.time]||'TBD'}</option>`}).join('')}
+  const ORDER=[['QB','QB'],['RB','RB'],['WR1','WR'],['WR2','WR'],['WR3','WR'],['TE','TE'],['FB','RB']];
+  function side(t){const by={};J.depth.filter(d=>d.team===t).forEach(d=>{(by[d.pos_row]=by[d.pos_row]||[]).push(d)});
+    Object.values(by).forEach(a=>a.sort((x,y)=>x.depth-y.depth));return by}
+  function cell(list,right){if(!list||!list.length)return '<span class="dim">—</span>';
+    return list.map(d=>{const inj=d.injury==='0'?'<span class="inj0">Q</span>':d.injury==='-1'?'<span class="injm1">OUT</span>':'';
+      const ci=cinfo(d.player);const lg=ci?clogo(ci,13):'';
+      const nm=`<span class="plink dcp${+d.depth===1?' dc1':''}" data-p="${esc(d.player)}" title="${ci?esc(ci.disp):''}">${right?`${inj} ${esc(d.player)} ${lg}`:`${lg} ${esc(d.player)} ${inj}`}</span>`;
+      return `<div class="dcrow${right?' r':''}"><span class="mini dcd">${d.depth}</span>${nm}</div>`}).join('')}
+  function head(t,right){if(!t)return '';const g=gameOf(t,G.week);const at=g&&g[GM.home]===t?'home':g?'away':'';
+    return `<div class="dchead${right?' r':''}" style="--tc:${vivid(t)}">${tlogo(t,26)}<b style="color:${vivid(t)}">${t}</b><span class="mini">${TEAM[t]?TEAM[t].n:''}${at?' · '+at:''}</span></div>`}
   function render(){
-    const t=$('#dcTeam').value,by={};
-    J.depth.filter(d=>d.team===t).forEach(d=>{(by[d.pos_row]=by[d.pos_row]||[]).push(d)});
-    const order=['QB','RB','WR1','WR2','WR3','TE','FB'];
-    $('#dcOut').innerHTML=`<div style="display:grid;grid-template-columns:repeat(${order.filter(p=>by[p]).length},1fr);gap:10px">
-     ${order.filter(p=>by[p]).map(p=>{const c=POSC[posOf(p)];
-      return `<div><p class="mini" style="color:${c}">${posIcon(posOf(p),11)} ${p}</p><table><tbody>
-      ${by[p].sort((a,b)=>a.depth-b.depth).map(d=>`<tr><td class="mini">${d.depth}</td><td class="plink" data-p="${esc(d.player)}">${(c2=>c2?clogo(c2,14)+' ':'')(cinfo(d.player))}${esc(d.player)}${d.injury==='0'?' <span class="inj0">Q</span>':d.injury==='-1'?' <span class="injm1">OUT</span>':''}</td></tr>`).join('')}
-      </tbody></table></div>`}).join('')}</div>`;
-    $('#dcOut').querySelectorAll('.plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
+    const a=$('#dcTeam').value,b=$('#dcTeam2').value,A=side(a),B=b?side(b):null;
+    const g=b?gameOf(a,G.week):null;const same=g&&(g[GM.vis]===b||g[GM.home]===b);
+    const rows=ORDER.filter(([p])=>A[p]||(B&&B[p]));
+    $('#dcOut').innerHTML=`<div class="dcmatch${B?'':' one'}">
+      <div class="dctop">${head(a)}${B?`<div class="dcmid">${same?`${g[GM.vis]} @ ${g[GM.home]}<br><span class="mini">wk ${G.week} &middot; ${kickLbl(g)}</span>`:`<span class="mini">not playing each other in wk ${G.week}</span>`}</div>${head(b,true)}`:''}</div>
+      <table class="dct"><tbody>${rows.map(([p,pp])=>`<tr><td class="dcl">${cell(A[p])}</td><td class="dcpos" style="color:${POSC[pp]}">${posIcon(pp,11)} ${p}</td>${B?`<td class="dcr">${cell(B[p],true)}</td>`:''}</tr>`).join('')}</tbody></table></div>`;
+    $('#dcOut').querySelectorAll('.plink').forEach(el=>el.onclick=()=>playerPop(el.dataset.p));
+    gameOpts();
   }
-  $('#dcTeam').onchange=render;RR.push(()=>{if(G.team)$('#dcTeam').value=G.team;render()});
+  $('#dcTeam').onchange=()=>{$('#dcTeam2').value=oppOf($('#dcTeam').value);render()};
+  $('#dcTeam2').onchange=render;
+  $('#dcSwap').onclick=()=>{const a=$('#dcTeam').value,b=$('#dcTeam2').value;if(!b)return;$('#dcTeam').value=b;$('#dcTeam2').value=a;render()};
+  $('#dcGame').onchange=()=>{const k=$('#dcGame').value;if(!k)return;const [v,h]=k.split('@');$('#dcTeam').value=v;$('#dcTeam2').value=h;render()};
+  RR.push(()=>{
+    if(G.game){const [v,h]=G.game.split('@');$('#dcTeam').value=v;$('#dcTeam2').value=h;open(true)}
+    else if(G.team){$('#dcTeam').value=G.team;$('#dcTeam2').value=oppOf(G.team)}
+    else if(!$('#dcTeam2').value){$('#dcTeam2').value=oppOf($('#dcTeam').value)}
+    render()});
 }
 /* ---------- TD Board: composite TD rankings, all players ---------- */
 var tdChart,psChart;
