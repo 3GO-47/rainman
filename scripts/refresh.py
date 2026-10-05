@@ -65,6 +65,7 @@ def main():
     if glob.glob('data/raw/espn_birthplaces_*.txt'):
         run(['scripts/build_connections.py'])
     run(['scripts/build_dashboard.py'])
+    run(['scripts/build_dashboard_v2.py'])
 
     # summary + anomaly report
     st = json.load(open('notes/scrape_state.json'))
