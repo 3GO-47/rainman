@@ -88,3 +88,11 @@ rest, roof, QBs for every game) -> data/processed/game_lines.csv. Then scripts/b
    (espn_id -> pfr_id via data/raw/nflverse/roster_2026.parquet).
 Timing: DK posts main props progressively — Tuesday only the early/TNF games have them (6/16 in wk 4); re-pull Fri/Sat for the
 full slate. The ledger freezes a lean the first time it is seen and grades it from game logs after the refresh.
+
+## ESPN birthplaces + college venues (Chrome, on demand)
+- From an espn.com tab: `fetch('https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/{espn_id}')`
+  -> `.birthPlace {city,state,country}`; ids = nflverse roster espn_id for players with 2025-26 logs or on the depth chart.
+- College venue: `.../college-football/teams/{id}` -> `venue.$ref` (switch to https) -> `address {city,state}`.
+- javascript_tool output truncates near 1 KB: write results with document.write('<pre>...') and read with get_page_text.
+- Save as data/raw/espn_birthplaces_YYYY-MM-DD.txt (`id|city|state|country`) and data/raw/colleges_venues.txt; then
+  `python3 scripts/build_connections.py` (needs `pip install geonamescache`).

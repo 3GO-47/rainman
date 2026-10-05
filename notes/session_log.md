@@ -155,3 +155,18 @@
 - dchart() rewritten: #dcGame (week's games) · #dcTeam vs #dcTeam2 · swap; mirrored table.dct (left team | position | right
   team), header with logos, home/away and kickoff. RR hook syncs to G.game (both teams + auto-expand) or G.team (+ its
   opponent via gameOf). Mobile: fixed layout, names wrap, no horizontal overflow at 390 px. 0 JS errors.
+
+## 2026-10-05 (c) — Locker Room: birthdays, rivalries, player-venue connections
+- ESPN core API in Chrome: athletes/{espn_id}.birthPlace for 735 players (2025-26 logs + depth chart) ->
+  data/raw/espn_birthplaces_2026-10-05.txt; college-football teams/{id}.venue -> data/raw/colleges_venues.txt (Illinois
+  venue corrected: ESPN returned Foster Stadium, Lexington VA). Stadium coords: data/raw/nfl_venues.csv (38 incl. 8
+  international). Device + cloud proxies block ESPN, and GitHub's CSP blocks fetches from the upload page, so Chrome
+  results were read via get_page_text and saved as files.
+- scripts/build_connections.py (in refresh.py): geonamescache (pop >= 500) geocodes 600/600 birthplaces (9 small places
+  mapped to the nearest GeoNames town); per 2026 game: homecoming <=100 mi, home state, college town <=100 mi, revenge
+  (2024/2025 roster team or draft club = opponent), birthday game. 825 rows. Players = box score for played weeks,
+  depth chart for upcoming weeks.
+- Dashboard: J.college.bd (birth dates), J.conn (connections + birthplaces). JS: RIVALS (85 pairs, MARQUEE 38), clashPair()
+  cached per team pair from depth charts; key clash = marquee + a starter on both sides (wk 4: 12; season: 212).
+  F10 view (Storylines / Birthdays / Rivalries), Home social slot, chamber storyline <details>, depth-chart tags, popup
+  line. 0 JS errors; mobile 390 px no overflow.
