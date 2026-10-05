@@ -150,6 +150,7 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
  .dcp{word-break:break-word}.dctop{gap:4px}.dchead .mini{display:none}.dcmid{font-size:10px}}
 .ctag{display:inline-block;font-size:8.5px;letter-spacing:.5px;padding:0 4px;border:1px solid;border-radius:2px;line-height:14px;vertical-align:1px;white-space:nowrap}
 .storyd{margin:4px 0 8px;padding:4px 8px;border-left:2px solid #f2c14e55}.storyd summary{cursor:pointer}
+.storymore{margin-top:6px}.storymore summary{cursor:pointer;color:var(--dim);font-size:11px}
 .rivln.minor{opacity:.75}.rivln{margin:3px 0;line-height:19px;font-size:12px}.rivln .plink{cursor:pointer}
 .panel.story h3{margin-bottom:4px}.bdtoday{padding:6px 10px;border-left:3px solid #ffd54f;background:rgba(255,213,79,.07)}
 tr.bdrow td{background:rgba(255,213,79,.06)}
@@ -441,11 +442,14 @@ function storyBlock(g,wk,opts={}){const v=g[GM.vis],h=g[GM.home];const {c,cn}=st
   const cs=cn.slice().sort((a,b)=>(CORD[a[5]]??9)-(CORD[b[5]]??9)||(a[7]??999)-(b[7]??999));
   const main=cs.filter(r=>r[5]!=='home state'),hs=cs.filter(r=>r[5]==='home state');
   const lim=opts.limit||99;
-  const rv=opts.compact?c.riv.filter(r=>r.st&&(r.mq||opts.all)):c.riv;
+  const rv=opts.compact?c.riv.filter(r=>r.st&&(r.mq||opts.all)):c.riv.filter(r=>r.mq&&r.top);
   let html=rv.map(r=>rivLine(r,v,h)).join('')+main.slice(0,lim).map(connLine).join('');
   if(opts.compact&&c.riv.length>rv.length)html+=`<div class="mini">+${c.riv.length-rv.length} regional / backup-level rivalry links on F10</div>`;
   if(main.length>lim)html+=`<div class="mini">+${main.length-lim} more connections</div>`;
-  if(!opts.compact){html+=c.alum.map(a=>alumLine(a,v,h)).join('');if(hs.length)html+=`<div class="rivln">${ctag('home state')} <span class="mini">${hs.map(r=>`<span class="plink pp" data-p="${esc(r[2])}">${esc(pshort(r[2]))}</span> (${r[3]})`).join(', ')}</span></div>`}
+  if(!opts.compact){const rest=c.riv.filter(r=>!(r.mq&&r.top));
+    const more=rest.map(r=>rivLine(r,v,h)).join('')+c.alum.map(a=>alumLine(a,v,h)).join('')+(hs.length?`<div class="rivln">${ctag('home state')} <span class="mini">${hs.map(r=>`<span class="plink pp" data-p="${esc(r[2])}">${esc(pshort(r[2]))}</span> (${r[3]})`).join(', ')}</span></div>`:'');
+    const lab=[rest.length?rest.length+' more rivalr'+(rest.length>1?'ies':'y'):'',c.alum.length?c.alum.length+' alumni':'',hs.length?hs.length+' home-state':''].filter(Boolean).join(' · ');
+    if(more)html+=`<details class="storymore"><summary>${lab}</summary>${more}</details>`}
   else if(c.alum.length)html+=`<div class="rivln">${ctag('alumni')} <span class="mini">${c.alum.filter(a=>a.top).concat(c.alum.filter(a=>!a.top)).slice(0,6).map(a=>`${clogo(a.A[0].ci,12)} ${esc(a.school)} ×${a.A.length+a.B.length}`).join(' · ')}</span></div>`;
   return html}
 const bindP=el=>{}; // player links in storylines use the global .pp click delegation
