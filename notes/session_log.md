@@ -194,3 +194,13 @@
 - Bugs caught: #home{display:flex} overrode [hidden] (home rendered under every tab); regex /board — best/ matched
   "smash board — best matchup"; custom-toggle h3s (#mlToggle/#dcToggle) excluded from collapse.
 - Template: storyBlock non-compact = marquee&top rivalries + connections, rest in <details class="storymore">.
+
+## 2026-10-05 (g) — betting layer + Bet Board
+- New: build_adjusted_dvp.py, build_prop_model.py, build_bets.py, fetch_odds_api.py (key only in .env). Template DSRC =
+  'adjusted' default for every matchup ranking view (15 usages); betting_payload() → J.betting.
+- Bet Board module (template, before BOOT): tabs Props/TD/SGP/Ledger/Model; Gaussian copula (Cholesky + seeded
+  mulberry RNG, 40k sims) with corr fallback RB2→RB1, WR3→WR2→WR1; same-player legs ρ=.55; localStorage rm.slip,
+  rm.bets, rm.bankroll, rm.kelly, rm.sgpPrice. Name clash: `BT` already used by Model Lab → BETS.
+- v2: lands on Bet Board unless hash contains "home"; KPI "best prop edge" (n_eff≥3); 6-col KPI grid.
+- model_validation.md rewritten: DvP backtest table + props section replaced in place by build_prop_model (markers).
+- Playwright: v1/v2/mobile all tabs 0 JS errors, 390 px no overflow. Wk4 lines are DK (unpriced); wk5 after Tuesday refresh.
