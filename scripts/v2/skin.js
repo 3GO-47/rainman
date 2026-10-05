@@ -11,6 +11,7 @@ const I={home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0
  sked:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',
  intel:'<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
  games:'<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8.5"/>',
+ bets:'<path d="M4 7h16v10H4z"/><path d="M8 7v10M16 7v10"/><circle cx="12" cy="12" r="1.8"/>',
  locker:'<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
  help:'<circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1.1.9-1.1 1.6v.6M12 17h.01"/>'};
 const ico=k=>`<svg class="ico" viewBox="0 0 24 24">${I[k]||I.home}</svg>`;
@@ -26,7 +27,7 @@ function shell(){
     <dt>depth charts</dt><dd>${J.depthDate}</dd><dt>DvP blend</dt><dd>${J.blend}</dd><dt>built</dt><dd>${J.built}</dd></dl><a class="v1link" href="https://3go-47.github.io/rainman/v1/">← classic view (v1)</a>`;
   rail.appendChild(meta);document.body.prepend(rail);
   nav.querySelectorAll('button[data-v]').forEach(b=>{const fk=b.querySelector('.fk');const label=[...b.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
-    const SHORT={chamber:'Matchups',games:'Games',locker:'Locker',defenses:'Defense'};
+    const SHORT={bets:'Bets',chamber:'Matchups',games:'Games',locker:'Locker',defenses:'Defense'};
     b.innerHTML=ico(b.dataset.v)+`<span class="lbl" data-s="${SHORT[b.dataset.v]||label}">${label}</span>`+(fk?fk.outerHTML:'');b.title=label});
   const h=$('#gHelp');if(h){h.innerHTML=ico('help')+'<span class="lbl">Glossary</span><span class="fk">?</span>';h.style.marginLeft='0'}
   const ind=document.createElement('div');ind.className='ind';nav.prepend(ind);
@@ -83,7 +84,7 @@ function hookRender(){const o=window.runView;if(typeof o!=='function')return;win
 const VIEWS={home:['Home','This week at a glance — projections, matchups, storylines, waiver targets.'],board:['Big Board','Every player projected for the week, with the full factor breakdown and the walk-forward Model Lab.'],
  chamber:['Weekly Matchups','Every game: each offense’s slot owners against the opposing defense’s allowed-stats field.'],players:['Players','Depth charts, the matchup lab across positions, and full player deep dives.'],
  defenses:['Defenses','Rankings, the 32 × slot matrix and each defense’s weekly observatory.'],tdb:['TD Board','Who faces the defenses that give up touchdowns to their role.'],sked:['Schedule','Season grid and strength of schedule by slot.'],
- intel:['Intel','Scheme tags, tendencies, coaching and starter turnover, usage.'],games:['Games & Picks','Market lines vs the model, frozen picks ledger, player props.'],locker:['Locker Room','Rivalries, alumni reunions, homecomings, revenge games and birthdays.']};
+ intel:['Intel','Scheme tags, tendencies, coaching and starter turnover, usage.'],games:['Games & Picks','Market lines vs the model, frozen picks ledger, player props.'],bets:['Bet Board','Props, anytime TDs and correlated parlays priced from the matchup rankings and player form — model edges anchored to the market, every pick graded.'],locker:['Locker Room','Rivalries, alumni reunions, homecomings, revenge games and birthdays.']};
 function heroFor(v){const d=$('#'+v);if(!d)return;let h=d.querySelector(':scope>.v2hero');if(!h){h=document.createElement('div');h.className='v2hero';d.prepend(h)}
   const [t,sub]=VIEWS[v]||[v,''];const sum=($('#gSum')||{}).textContent||'';
   h.innerHTML=`<div><h1>${t}</h1><p>${sub}</p></div>`;
@@ -97,18 +98,20 @@ function kpis(d){let k=d.querySelector(':scope>.kpis');if(!k){k=document.createE
   const cd=next?(()=>{const s=(next.t-now)/1000,dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600),mm=Math.floor(s%3600/60);return dd?`${dd}d ${hh}h`:hh?`${hh}h ${mm}m`:`${mm}m`})():'';
   const st=UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp));
   let top=null;st.forEach(u=>{const r=projection(u,wk);if(r&&(!top||r.p>top.r.p))top={u,r}});
-  const D=J.dvp.combined;let smash=null;st.forEach(u=>{const o=(J.sched26[u.team]||[])[wk-1];if(!o||o==='BYE')return;const def=o.replace('@','');const v=D[def]&&D[def].comps[u.grp];if(v!=null&&(!smash||v<smash.v))smash={u,v,def}});
+  const D=J.dvp[typeof DSRC!=='undefined'?DSRC:'combined'];let smash=null;st.forEach(u=>{const o=(J.sched26[u.team]||[])[wk-1];if(!o||o==='BYE')return;const def=o.replace('@','');const v=D[def]&&D[def].comps[u.grp];if(v!=null&&(!smash||v<smash.v))smash={u,v,def}});
   let wv=null;try{wv=waiverRows(wk)[0]}catch(e){}
+  const BTk=J.betting;const edge=BTk?BTk.lines.filter(l=>inF(l.team)&&l.n_eff>=3).sort((a,b)=>b.ev-a.ev)[0]:null;
   let riv=0,bd=0;try{gs.forEach(g=>riv+=storyCount(g,wk).riv);bd=bdUniverse().filter(x=>x.bd.days===0&&inF(x.team)).length}catch(e){}
   const T=(key,go,lab,val,sub,kc)=>`<div class="kpi" data-go="${go}" style="--kc:${kc}"><div class="k">${lab}</div><div class="v">${val}</div><div class="s">${sub}</div></div>`;
   k.innerHTML=T('wk','chamber',`week ${wk}`,`${gs.length} games`,next?`next kick <b>${next.g[GM.vis]} @ ${next.g[GM.home]}</b> in <b>${cd}</b>`:'all games kicked off','rgba(143,163,255,.25)')
    +T('top','board','top projection',top?top.r.p.toFixed(1)+' <span style="font-size:13px;color:var(--dim);font-weight:500">PPR</span>':'—',top?`<b>${esc(top.u.player)}</b> ${top.u.team} · ${top.u.dslot||top.u.slot}`:'','rgba(63,220,154,.22)')
    +T('smash','players','smash spot',smash?'Ψ '+smash.v.toFixed(1):'—',smash?`<b>${esc(smash.u.player)}</b> ${smash.u.grp} vs ${smash.def}`:'','rgba(95,214,228,.22)')
+   +(edge?T('edge','bets','best prop edge',(edge.ev>0?'+':'')+edge.ev+'%',`<b>${esc(edge.player)}</b> ${edge.side==='Over'?'o':'u'}${edge.line} ${edge.market.replace(/_/g,' ')}`,'rgba(63,220,154,.3)'):'')
    +T('wv','home','waiver #1',wv?esc(wv.u.player.split(' ').slice(-1)[0]):'—',wv?`${wv.u.team} ${wv.u.dslot} · score <b>${wv.score.toFixed(1)}</b>`:'','rgba(182,156,255,.24)')
    +T('st','locker','storylines',`${riv} rivalries`,bd?`<b>${bd}</b> birthday${bd>1?'s':''} today`:'marquee clashes between starters','rgba(242,193,78,.22)');
   k.querySelectorAll('.kpi').forEach(t=>t.onclick=()=>{const go=t.dataset.go;if(go==='home'){const s=$('#lineupSlot');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});return}const b=$(`nav button[data-v="${go}"]`);if(b)b.click()})}
 
 const _enter=enter;enter=function(){const v=visible();if(v)heroFor(v.id);_enter()};
-shell();hookRender();tilt();setTimeout(()=>{enter();polish()},0);/* setTimeout, not rAF: rAF never fires while the tab loads in the background */mo.observe(document.querySelector('main'),{childList:true,subtree:true});addEventListener('resize',()=>{const v=visible();if(v)overflow(v)});
+shell();hookRender();tilt();setTimeout(()=>{const bb=$('nav button[data-v="bets"]');if(bb&&!/(^|[#&])home/.test(location.hash))bb.click();enter();polish()},0);/* setTimeout, not rAF: rAF never fires while the tab loads in the background */mo.observe(document.querySelector('main'),{childList:true,subtree:true});addEventListener('resize',()=>{const v=visible();if(v)overflow(v)});
 setInterval(()=>{const v=visible();if(v&&v.id==='home')kpis(v)},60000);
 })();

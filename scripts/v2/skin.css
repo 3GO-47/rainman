@@ -127,7 +127,7 @@ a{color:var(--acc)}
 .v2hero h1{font:700 26px/1.1 Inter,system-ui;letter-spacing:-.02em;margin:0;color:#fff}
 .v2hero p{margin:6px 0 0;color:var(--dim);font-size:13px;max-width:900px}
 .v2hero .wk{font:600 11px/1 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:8px}
-.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin:0 0 18px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin:0 0 18px}
 .kpi{position:relative;overflow:hidden;cursor:pointer;border-radius:16px;padding:14px 16px 15px;border:1px solid var(--edge);
  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.01)),var(--panel);transition:transform .5s var(--spring),border-color .25s,box-shadow .35s}
 .kpi:hover{transform:translateY(-3px);border-color:var(--edge2);box-shadow:0 18px 40px -18px rgba(0,0,0,.8)}
