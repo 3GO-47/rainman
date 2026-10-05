@@ -40,6 +40,13 @@ copies it, so a bookmark or a pasted link reopens the exact view. Home also has 
 Matchups groups its game cards under slate headers, and the Matchup Lab / TD Board carry a
 sortable kick column.
 
+## Reverting the UI (kept on purpose)
+- Classic v1 UI is always live at **/v1/** (rebuilt every refresh from `scripts/dashboard_template.html`).
+- Frozen snapshots served at **/archive/**: `rainman_v1_2026-10-05.html` (last v1-as-main build, commit f13c159) and
+  `rainman_v2.0_2026-10-05.html` (first v2 build, commit e57433e).
+- One-step revert of the main site to v1: in `.github/workflows/pages.yml` change the root copy to
+  `cp dashboard/rainman.html _site/index.html` (or `git revert` the commits after f13c159). Git history keeps every build.
+
 ## Live deploy
 `.github/workflows/pages.yml` publishes `dashboard/rainman.html` to GitHub Pages on every push
 to main (one-time: Settings → Pages → Source = *GitHub Actions*). Live at
@@ -121,6 +128,13 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — **v2 refinement pass.** Home reorganized into a purposeful order (KPIs → storylines & birthdays → top
+  projections → smash board → waiver radar / lineup → intel brief → slate map → deep-dive analytics, collapsed); the
+  redundant system panel removed (its facts live in the sidebar). Every panel title collapses its card (remembered per
+  browser). Long explanatory paragraphs sit behind "How to read this" chips. Column headers align with their data;
+  tables size to content and scroll inside their card with edge shadows instead of truncating; game cards stack their
+  two sides when narrow; Chart.js themed to the UI; Locker Room cards lead with marquee rivalries + connections, the
+  rest behind "+ more". Mobile: swipeable KPI strip, short tab labels, no duplicate eyebrow. Revert path documented.
 - 2026-10-05 — **New UI (v2) is now the main site**; the classic terminal UI stays live at `/v1/`. v2 is a new shell
   and design system layered over the same engine (`scripts/build_dashboard_v2.py` = v1 build + `scripts/v2/skin.css`
   + `scripts/v2/skin.js`), so every number is identical: sidebar navigation with a spring-physics active indicator
