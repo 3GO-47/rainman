@@ -109,6 +109,6 @@ function kpis(d){let k=d.querySelector(':scope>.kpis');if(!k){k=document.createE
   k.querySelectorAll('.kpi').forEach(t=>t.onclick=()=>{const go=t.dataset.go;if(go==='home'){const s=$('#lineupSlot');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});return}const b=$(`nav button[data-v="${go}"]`);if(b)b.click()})}
 
 const _enter=enter;enter=function(){const v=visible();if(v)heroFor(v.id);_enter()};
-shell();hookRender();tilt();requestAnimationFrame(()=>{enter();polish()});mo.observe(document.querySelector('main'),{childList:true,subtree:true});addEventListener('resize',()=>{const v=visible();if(v)overflow(v)});
+shell();hookRender();tilt();setTimeout(()=>{enter();polish()},0);/* setTimeout, not rAF: rAF never fires while the tab loads in the background */mo.observe(document.querySelector('main'),{childList:true,subtree:true});addEventListener('resize',()=>{const v=visible();if(v)overflow(v)});
 setInterval(()=>{const v=visible();if(v&&v.id==='home')kpis(v)},60000);
 })();
