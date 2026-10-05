@@ -139,3 +139,14 @@
 - Measured (Playwright iPhone 13, Chart.js stubbed): load 908 ms (was 2913), apply 138 ms (was 598), board 464 ms,
   chamber 108 ms; perr/smoke8 0 JS errors. Screenshots home/filters/board/chamber/players/games verified.
 - Next: RAINMAN v2 (new UI shell) — prompt at notes/rainman_v2_prompt.md; v1 stays live at the root.
+
+## 2026-10-05 — College layer
+- ESPN site.api blocked from the cloud proxy and CORS-blocked in Chrome; sports.core.api.espn.com works in Chrome:
+  817 college-football teams (id, color, alt color) + 2025 FBS(80)/FCS(81) group children -> conference. Matched the
+  184 nflverse college strings (first-listed school) by location + a 40-entry alias table -> data/raw/colleges_espn.txt.
+  Large JS results: write to document.body and read with get_page_text (javascript_tool output truncates ~1 KB).
+- build_dashboard.college_payload(): pfr_id -> roster 2026/25/24 college, entry_year, draft_number, draft_club; depth-chart
+  names matched exactly, then suffix-normalized, then last name + team, plus alias (Hollywood Brown -> Marquise Brown).
+  Coverage: 888 players, depth chart 567/567.
+- UI: cinfo/ccell/cbig/clogo helpers (500-dark logo variant with fallback to 500); Players lab College column + #labCol
+  filter; Big Board College column + CSV cols; depth-chart logos (names now open the player card). 0 JS errors.
