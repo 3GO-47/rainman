@@ -148,6 +148,11 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
 @media (max-width:840px){table.dct{table-layout:fixed;font-size:11px}table.dct td{white-space:normal!important;padding:3px 2px}
  table.dct td.dcl,table.dct td.dcr{width:43%}table.dct td.dcpos{width:14%;font-size:10px}.dcrow{align-items:flex-start;line-height:15px;margin:2px 0}
  .dcp{word-break:break-word}.dctop{gap:4px}.dchead .mini{display:none}.dcmid{font-size:10px}}
+.ctag{display:inline-block;font-size:8.5px;letter-spacing:.5px;padding:0 4px;border:1px solid;border-radius:2px;line-height:14px;vertical-align:1px;white-space:nowrap}
+.storyd{margin:4px 0 8px;padding:4px 8px;border-left:2px solid #f2c14e55}.storyd summary{cursor:pointer}
+.rivln.minor{opacity:.75}.rivln{margin:3px 0;line-height:19px;font-size:12px}.rivln .plink{cursor:pointer}
+.panel.story h3{margin-bottom:4px}.bdtoday{padding:6px 10px;border-left:3px solid #ffd54f;background:rgba(255,213,79,.07)}
+tr.bdrow td{background:rgba(255,213,79,.06)}
 .cchip{display:inline-flex;align-items:center;gap:5px;padding:1px 6px 1px 3px;border-left:3px solid var(--cc);background:linear-gradient(90deg,var(--cb),transparent 85%);white-space:nowrap;font-size:11px;color:var(--txt)}
 .clg{object-fit:contain;vertical-align:middle;filter:drop-shadow(0 0 1px rgba(255,255,255,.25))}
 .cinit{display:inline-grid;place-items:center;border-radius:50%;font-size:7px;font-weight:700;letter-spacing:-.3px}
@@ -210,6 +215,7 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
 <button data-v="sked"><span class="fk">F7</span>Schedule</button>
 <button data-v="intel"><span class="fk">F8</span>Intel</button>
 <button data-v="games"><span class="fk">F9</span>Games &amp; Picks</button>
+<button data-v="locker"><span class="fk">F10</span>Locker Room</button>
 <button id="gHelp" title="glossary (?)" style="margin-left:auto">?</button>
 </nav>
 <div id="gbar" title="global filter — applies to every tab"><button id="gTog" class="mob" title="show / hide filters">&#9881; filters</button>
@@ -225,7 +231,7 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
 <span id="gSum"></span>
 </div></div>
 <main>
-<div id="home"><div id="homeTop"></div><div id="insights"></div></div>
+<div id="home"><div id="homeTop"></div><div id="socialSlot"></div><div id="insights"></div></div>
 <div id="chamber" hidden></div>
 <div id="players" hidden><div id="dcView" class="panel"></div><div id="lab"></div><hr class="sep"><div id="player"></div></div>
 <div id="defenses" hidden><div class="tabs" id="defTabs">
@@ -236,6 +242,7 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="games" hidden></div>
+<div id="locker" hidden></div>
 </main>
 <script>
 const J = __DATA__;
@@ -371,13 +378,84 @@ function cbig(n){const ci=cinfo(n);if(!ci)return '';
   return `<div class="cbig" style="--cc:${ci.col};--cb:${TIER[ci.tier][1]}22">${clogo(ci,44)}<div><div class="cname">${esc(ci.disp)} ${confBadge(ci)} <span class="ctier" style="color:${TIER[ci.tier][1]}">${TIER[ci.tier][0]}</span></div>
   <div class="mini">${draftTxt(ci)}${ci.prev?` &middot; also attended ${esc(ci.prev)}`:''}</div></div></div>`}
 const csort=n=>{const ci=cinfo(n);return ci?ci.disp:'zzz'};
+/* ---------- storylines: birthdays, college rivalries, alumni, homecomings, revenge (build_connections.py) ---------- */
+const BD=(J.college&&J.college.bd)||{};
+const TODAY=(()=>{const d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())})();
+const pdate=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const fmtD=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+function bday(n){const s=BD[n];if(!s)return null;const b=pdate(s);
+  let nx=new Date(TODAY.getFullYear(),b.getMonth(),b.getDate());if(nx<TODAY)nx=new Date(TODAY.getFullYear()+1,b.getMonth(),b.getDate());
+  const days=Math.round((nx-TODAY)/864e5),turns=nx.getFullYear()-b.getFullYear();
+  return {born:s,b,next:nx,days,turns,age:days===0?turns:turns-1}}
+const RIVALS=[['Michigan','Ohio State','The Game'],['Texas','Oklahoma','Red River Rivalry'],['Alabama','Auburn','Iron Bowl'],['Alabama','LSU','Alabama–LSU'],
+ ['Alabama','Tennessee','Third Saturday in October'],['Georgia','Florida','World\'s Largest Outdoor Cocktail Party'],['Georgia','Auburn','Deep South\'s Oldest Rivalry'],
+ ['Georgia','Georgia Tech','Clean, Old-Fashioned Hate'],['Florida','Florida State','Sunshine Showdown'],['Florida','Tennessee','Florida–Tennessee'],['Miami','Florida State','Miami–FSU'],
+ ['Miami','Florida','Miami–Florida'],['Miami','Notre Dame','Catholics vs. Convicts'],['USC','UCLA','Crosstown Showdown'],['USC','Notre Dame','Jeweled Shillelagh'],
+ ['Notre Dame','Michigan','Notre Dame–Michigan'],['Notre Dame','Stanford','Legends Trophy'],['Notre Dame','Boston College','Holy War'],['Navy','Notre Dame','Navy–Notre Dame'],
+ ['Oregon','Oregon State','Civil War'],['Washington','Washington State','Apple Cup'],['Oregon','Washington','Border War'],['Stanford','California','The Big Game'],
+ ['Clemson','South Carolina','Palmetto Bowl'],['North Carolina','Duke','Victory Bell'],['North Carolina','NC State','UNC–NC State'],['Virginia','Virginia Tech','Commonwealth Clash'],
+ ['Pittsburgh','West Virginia','Backyard Brawl'],['Penn State','Pittsburgh','Keystone Classic'],['Penn State','Ohio State','Penn State–Ohio State'],['Michigan','Michigan State','Paul Bunyan Trophy'],
+ ['Minnesota','Wisconsin','Paul Bunyan\'s Axe'],['Iowa','Iowa State','Cy-Hawk'],['Iowa','Minnesota','Floyd of Rosedale'],['Iowa','Wisconsin','Heartland Trophy'],['Iowa','Nebraska','Heroes Game'],
+ ['Kansas','Kansas State','Sunflower Showdown'],['Kansas','Missouri','Border War'],['Oklahoma','Oklahoma State','Bedlam'],['Texas','Texas A&M','Lone Star Showdown'],['Texas','Baylor','Texas–Baylor'],
+ ['Texas','Texas Tech','Chancellor\'s Spurs'],['Texas','Arkansas','Southwest Classic (old SWC)'],['Arizona','Arizona State','Territorial Cup'],['Utah','BYU','Holy War'],['Utah','Utah State','Battle of the Brothers'],
+ ['Colorado','Nebraska','Colorado–Nebraska'],['Colorado','Colorado State','Rocky Mountain Showdown'],['Nebraska','Oklahoma','Nebraska–Oklahoma'],['Ole Miss','Mississippi State','Egg Bowl'],
+ ['LSU','Ole Miss','Magnolia Bowl'],['LSU','Texas A&M','LSU–Texas A&M'],['LSU','Arkansas','Battle for the Boot'],['LSU','Florida','LSU–Florida'],['Arkansas','Texas A&M','Southwest Classic'],
+ ['Missouri','Arkansas','Battle Line Rivalry'],['Kentucky','Louisville','Governor\'s Cup'],['Tennessee','Vanderbilt','Tennessee–Vanderbilt'],['Tennessee','Kentucky','Tennessee–Kentucky'],
+ ['Indiana','Purdue','Old Oaken Bucket'],['Illinois','Northwestern','Land of Lincoln Trophy'],['Cincinnati','Louisville','Keg of Nails'],['TCU','Baylor','The Revivalry'],['TCU','SMU','Iron Skillet'],
+ ['Harvard','Yale','The Game (Ivy)'],['Princeton','Yale','Princeton–Yale'],['North Dakota State','South Dakota State','Dakota Marker'],['UCF','South Florida','War on I-4'],
+ ['Florida Atlantic','Florida International','Shula Bowl'],['App State','Georgia Southern','Deeper Than Hate'],['Boise State','Fresno State','Milk Can'],['Army','Navy','Army–Navy'],
+ ['Alabama','Georgia','Alabama–Georgia'],['Auburn','LSU','Tiger Bowl'],['Ohio State','Notre Dame','Ohio State–Notre Dame'],['Wisconsin','Ohio State','Wisconsin–Ohio State'],
+ ['Houston','Rice','Bayou Bucket'],['Memphis','Ole Miss','Memphis–Ole Miss'],['Marshall','West Virginia','Friends of Coal'],['Toledo','Bowling Green','Battle of I-75'],
+ ['Central Michigan','Western Michigan','Michigan MAC Trophy'],['Central Michigan','Eastern Michigan','Michigan MAC Trophy'],['Oklahoma','Texas A&M','Oklahoma–Texas A&M']];
+const RIVK={};RIVALS.forEach(([a,b,n])=>{RIVK[a+'|'+b]=RIVK[b+'|'+a]=n});
+// marquee = the rivalries with a trophy-level, decades-long annual history; the rest are tracked as "regional"
+const MARQUEE=new Set(['The Game','Red River Rivalry','Iron Bowl','Alabama–LSU','Third Saturday in October','World\'s Largest Outdoor Cocktail Party','Deep South\'s Oldest Rivalry','Clean, Old-Fashioned Hate','Sunshine Showdown','Miami–FSU','Catholics vs. Convicts','Crosstown Showdown','Jeweled Shillelagh','Notre Dame–Michigan','Civil War','Apple Cup','The Big Game','Palmetto Bowl','Victory Bell','Commonwealth Clash','Backyard Brawl','Paul Bunyan Trophy','Paul Bunyan\'s Axe','Cy-Hawk','Floyd of Rosedale','Sunflower Showdown','Bedlam','Lone Star Showdown','Territorial Cup','Holy War','Egg Bowl','Governor\'s Cup','Old Oaken Bucket','The Game (Ivy)','Army–Navy','Dakota Marker','Florida–Tennessee','Border War']);
+const CLASHC={};
+function clashPair(tA,tB){const k=tA+'|'+tB;if(CLASHC[k])return CLASHC[k];
+  const pl=t=>J.depth.filter(d=>d.team===t).map(d=>({p:d.player,t,dep:+d.depth,ci:cinfo(d.player)})).filter(x=>x.ci);
+  const A=pl(tA),B=pl(tB),riv={},alum={};
+  A.forEach(x=>B.forEach(y=>{const sx=x.ci.disp,sy=y.ci.disp;
+    const n=RIVK[sx+'|'+sy];
+    if(n){const key=[sx,sy].sort().join(' vs ');const r=riv[key]=riv[key]||{name:n,mq:MARQUEE.has(n),schools:[sx,sy].sort(),A:new Map(),B:new Map()};r.A.set(x.p,x);r.B.set(y.p,y)}
+    else if(sx===sy){const a=alum[sx]=alum[sx]||{school:sx,A:new Map(),B:new Map()};a.A.set(x.p,x);a.B.set(y.p,y)}}));
+  const fin=o=>Object.values(o).map(r=>{const A=[...r.A.values()].sort((a,b)=>a.dep-b.dep),B=[...r.B.values()].sort((a,b)=>a.dep-b.dep);
+    return {...r,A,B,top:A[0].dep<=2&&B[0].dep<=2,st:A[0].dep===1&&B[0].dep===1}});
+  const rv=fin(riv).sort((a,b)=>(b.mq-a.mq)||(b.top-a.top));
+  return CLASHC[k]={riv:rv,key:rv.filter(r=>r.mq&&r.st),alum:fin(alum).sort((a,b)=>(b.top-a.top)||(b.A.length+b.B.length)-(a.A.length+a.B.length))}}
+const CONNI={};((J.conn&&J.conn.rows)||[]).forEach(r=>{const k=r[0]+'|'+r[1];(CONNI[k]=CONNI[k]||[]).push(r)});
+const connFor=(wk,game)=>CONNI[wk+'|'+game]||[];
+const CT={homecoming:['HOMECOMING','#ff9f43','born within 100 miles of the stadium'],'college town':['ALMA MATER','#c39bff','his college campus is within 100 miles of the stadium'],
+  'home state':['HOME STATE','#8fa3b8','born in the state the game is played in'],revenge:['REVENGE','#ff5c7a','faces a team he played for in 2024-25, or the team that drafted him'],
+  birthday:['BIRTHDAY','#ffd54f','plays on his birthday'],rivalry:['RIVALRY','#f2c14e','opposing players from rival colleges'],alumni:['ALUMNI','#26c6a8','opposing players from the same college']};
+const ctag=(t,extra='')=>{const c=CT[t]||[t,'#8b98a5',''];return `<span class="ctag" style="color:${c[1]};border-color:${c[1]}66" title="${c[2]}">${c[0]}${extra}</span>`};
+const tab=t=>`<b class="tab" style="color:${vivid(t)}">${t}</b>`;
+const pshort=n=>{const p=n.split(' ');return p.length>1?p[0][0]+'. '+p.slice(1).join(' '):n};
+const plinkS=(x,cls='')=>`<span class="plink pp ${cls}" data-p="${esc(x.p)}">${x.dep===1?'<b>':''}${esc(pshort(x.p))}${x.dep===1?'</b>':''}</span>`;
+function rivLine(r,tA,tB){return `<div class="rivln${r.mq?'':' minor'}">${ctag('rivalry',r.mq?'':' · regional')} <b>${esc(r.name)}</b> <span class="mini">${esc(r.schools.join(' vs '))}</span> &mdash; ${tab(tA)} ${r.A.map(x=>`${clogo(x.ci,13)} ${plinkS(x)}`).join(', ')} <span class="mini">vs</span> ${tab(tB)} ${r.B.map(x=>`${clogo(x.ci,13)} ${plinkS(x)}`).join(', ')}</div>`}
+function alumLine(a,tA,tB){const ci=a.A[0].ci;return `<div class="rivln">${ctag('alumni')} ${clogo(ci,13)} <b>${esc(a.school)}</b> &mdash; ${tab(tA)} ${a.A.map(x=>plinkS(x)).join(', ')} <span class="mini">vs</span> ${tab(tB)} ${a.B.map(x=>plinkS(x)).join(', ')}</div>`}
+function connLine(r){return `<div class="rivln">${ctag(r[5])} ${tab(r[3])} <span class="plink pp" data-p="${esc(r[2])}">${esc(r[2])}</span> <span class="mini">${esc(r[6])}</span></div>`}
+const CORD={birthday:0,homecoming:1,revenge:2,'college town':3,'home state':4};
+function storyCount(g,wk){const [v,h]=[g[GM.vis],g[GM.home]];const c=clashPair(v,h);const cn=connFor(wk,v+'@'+h);
+  return {riv:c.key.length,rivAll:c.riv.length,alum:c.alum.filter(a=>a.top).length,conn:cn.filter(r=>r[5]!=='home state').length,c,cn}}
+function storyBlock(g,wk,opts={}){const v=g[GM.vis],h=g[GM.home];const {c,cn}=storyCount(g,wk);
+  const cs=cn.slice().sort((a,b)=>(CORD[a[5]]??9)-(CORD[b[5]]??9)||(a[7]??999)-(b[7]??999));
+  const main=cs.filter(r=>r[5]!=='home state'),hs=cs.filter(r=>r[5]==='home state');
+  const lim=opts.limit||99;
+  const rv=opts.compact?c.riv.filter(r=>r.st&&(r.mq||opts.all)):c.riv;
+  let html=rv.map(r=>rivLine(r,v,h)).join('')+main.slice(0,lim).map(connLine).join('');
+  if(opts.compact&&c.riv.length>rv.length)html+=`<div class="mini">+${c.riv.length-rv.length} regional / backup-level rivalry links on F10</div>`;
+  if(main.length>lim)html+=`<div class="mini">+${main.length-lim} more connections</div>`;
+  if(!opts.compact){html+=c.alum.map(a=>alumLine(a,v,h)).join('');if(hs.length)html+=`<div class="rivln">${ctag('home state')} <span class="mini">${hs.map(r=>`<span class="plink pp" data-p="${esc(r[2])}">${esc(pshort(r[2]))}</span> (${r[3]})`).join(', ')}</span></div>`}
+  else if(c.alum.length)html+=`<div class="rivln">${ctag('alumni')} <span class="mini">${c.alum.filter(a=>a.top).concat(c.alum.filter(a=>!a.top)).slice(0,6).map(a=>`${clogo(a.A[0].ci,12)} ${esc(a.school)} ×${a.A.length+a.B.length}`).join(' · ')}</span></div>`;
+  return html}
+const bindP=el=>{}; // player links in storylines use the global .pp click delegation
 document.querySelector('.sub').innerHTML=document.querySelector('.sub').innerHTML
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend).replace('__SEASONS__',[...new Set(J.logs.map(l=>l[2]))].sort().map(s=>String(s).slice(2)+'/'+String(s+1).slice(2)).join(' + ')).replace('__GAMES__',Math.round(J.weekly.length/2)).replace('__ROWS__',J.logs.length.toLocaleString());
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  ['home','chamber','players','defenses','sked','tdb','intel','board','games'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
+  ['home','chamber','players','defenses','sked','tdb','intel','board','games','locker'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
   if(DIRTY.has(b.dataset.v))runView(b.dataset.v);b.scrollIntoView({block:'nearest',inline:'nearest'});});
-addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6','F7','F8','F9'].indexOf(e.key);
+addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10'].indexOf(e.key);
   if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21,snaps:22,snp:23,tsh:24,adot:25,rsh:26,wopr:27};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
@@ -1020,6 +1098,7 @@ function chamber(){
           <span class="f">${date} &middot; ${kickLbl(g)} &middot; field tilt: ${tcell(favT)} +${Math.abs(diff).toFixed(1)}&Psi;</span></h3>
         ${fieldTilt(vis,home,+dot)}
         <p class="mini" style="margin:2px 0 6px">${tcell(vis)} D &rarr; ${schemeLine(vis)||'<span class="dim">no scheme data</span>'} ${trustPill(vis)} &nbsp;&nbsp; ${tcell(home)} D &rarr; ${schemeLine(home)||'<span class="dim">no scheme data</span>'} ${trustPill(home)}<br>${envLine(vis,home,wk)}</p>
+        ${(()=>{const sb=storyBlock(g,wk,{compact:true,limit:4});return sb?`<details class="storyd" ${storyCount(g,wk).riv?'open':''}><summary class="mini">storylines &middot; ${(x=>[x.riv?x.riv+' rivalry':'',x.alum?x.alum+' alumni':'',x.conn?x.conn+' connections':''].filter(Boolean).join(' · '))(storyCount(g,wk))}</summary>${sb}</details>`:''})()}
         <div class="grid2">${A.html}${B.html}</div></div>`}).join('')
       +(byes.length?`<p class="note">out of phase this week (bye): ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
   }
@@ -1159,6 +1238,11 @@ window.playerPop=function(n){
    <button class="mclose" id="ppX">ESC &#10005;</button>
    <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk ${G.week}, 26/27)${opp?' &middot; '+kickLbl(gameOf(team,G.week)):''}</span></h3>
    ${cbig(n)}
+   ${(()=>{const b=bday(n),bp=(J.conn&&J.conn.born||{})[n];const g=team?gameOf(team,G.week):null;const cn=g?connFor(G.week,g[GM.vis]+'@'+g[GM.home]).filter(r=>r[2]===n):[];
+     const rv=g?(c=>[...c.riv.filter(r=>r.A.concat(r.B).some(x=>x.p===n)).map(r=>ctag('rivalry')+' '+esc(r.name)),...c.alum.filter(a=>a.A.concat(a.B).some(x=>x.p===n)).map(a=>ctag('alumni')+' '+esc(a.school)+' vs '+(a.A.some(x=>x.p===n)?a.B:a.A).map(x=>esc(pshort(x.p))).join(', '))])(clashPair(g[GM.vis],g[GM.home])):[];
+     if(!b&&!bp&&!cn.length&&!rv.length)return '';
+     return `<p class="mini" style="margin:2px 0 6px">${bp?'born in <b style="color:var(--txt)">'+esc(bp)+'</b>':''}${b?`${bp?' &middot; ':''}${b.born} &middot; age <b style="color:var(--txt)">${b.age}</b>${b.days===0?' &middot; '+ctag('birthday',' TODAY'):b.days<=14?` &middot; birthday in ${b.days}d (turns ${b.turns})`:''}`:''}
+       ${cn.length||rv.length?`<br>wk ${G.week}: ${cn.map(r=>ctag(r[5])+' <span>'+esc(r[6])+'</span>').concat(rv).join(' &middot; ')}`:''}</p>`})()}
    ${rkT?`<div class="tabs" style="margin-top:6px"><button id="ppT1" class="on">player card</button><button id="ppT2">${grp} dvp rankings</button></div>`:''}
    <div id="ppV1">
    ${opp?`<p class="mini" style="margin:4px 0 8px">${schemeLine(opp)} ${trustPill(opp)}${grp?` &middot; scheme edge vs ${grp}: ${edgeChip(opp,grp)} &middot; &Psi;+ ${convBadge(conv(n,team,opp,grp))}`:''}${(()=>{const u=UNIVERSE.find(x=>x.player===n&&x.team===team);const pr=u?projection(u):null;return pr?`<br><span title="${esc(pr.tip)}">PROJ <b style="color:var(--txt);font-size:13px">${pr.p.toFixed(1)}</b> PPR (range ${pr.floor.toFixed(1)}-${pr.ceil.toFixed(1)}) = base ${pr.base.toFixed(1)} &times; match ${fmtX(pr.mR)} &times; scheme ${fmtX(pr.sR)} &times; env ${fmtX(pr.eR)} &times; role ${fmtX(pr.rR)}</span>`:''})()}${(()=>{const ug=USG[n];return ug?` &middot; ${USG._se} role: <b style="color:var(--txt)">${(100*ug.snp).toFixed(0)}%</b> snaps${usageArrow(n)}${ug.tsh!=null?` · <b style="color:var(--txt)">${(100*ug.tsh).toFixed(0)}%</b> tgt share`:''}${ug.adot!=null?` · aDOT ${ug.adot.toFixed(1)}`:''}`:''})()}</p>`:''}
@@ -1208,19 +1292,26 @@ function dchart(){
     Object.values(by).forEach(a=>a.sort((x,y)=>x.depth-y.depth));return by}
   function cell(list,right){if(!list||!list.length)return '<span class="dim">—</span>';
     return list.map(d=>{const inj=d.injury==='0'?'<span class="inj0">Q</span>':d.injury==='-1'?'<span class="injm1">OUT</span>':'';
-      const ci=cinfo(d.player);const lg=ci?clogo(ci,13):'';
-      const nm=`<span class="plink dcp${+d.depth===1?' dc1':''}" data-p="${esc(d.player)}" title="${ci?esc(ci.disp):''}">${right?`${inj} ${esc(d.player)} ${lg}`:`${lg} ${esc(d.player)} ${inj}`}</span>`;
+      const ci=cinfo(d.player);const lg=ci?clogo(ci,13):'';const tg=(TAGS[d.player]||[]).join(' ');
+      const nm=`<span class="plink dcp${+d.depth===1?' dc1':''}" data-p="${esc(d.player)}" title="${ci?esc(ci.disp):''}">${right?`${tg} ${inj} ${esc(d.player)} ${lg}`:`${lg} ${esc(d.player)} ${inj} ${tg}`}</span>`;
       return `<div class="dcrow${right?' r':''}"><span class="mini dcd">${d.depth}</span>${nm}</div>`}).join('')}
   function head(t,right){if(!t)return '';const g=gameOf(t,G.week);const at=g&&g[GM.home]===t?'home':g?'away':'';
     return `<div class="dchead${right?' r':''}" style="--tc:${vivid(t)}">${tlogo(t,26)}<b style="color:${vivid(t)}">${t}</b><span class="mini">${TEAM[t]?TEAM[t].n:''}${at?' · '+at:''}</span></div>`}
+  let TAGS={};
   function render(){
     const a=$('#dcTeam').value,b=$('#dcTeam2').value,A=side(a),B=b?side(b):null;
     const g=b?gameOf(a,G.week):null;const same=g&&(g[GM.vis]===b||g[GM.home]===b);
+    const TT={};const tag=(p,t,tip)=>{const m=TT[p]=TT[p]||{};(m[t]=m[t]||[]).push(tip)};
+    const cl=b?clashPair(a,b):{riv:[],alum:[]};
+    cl.riv.forEach(r=>r.A.concat(r.B).forEach(x=>tag(x.p,'rivalry',r.name)));cl.alum.forEach(r=>r.A.concat(r.B).forEach(x=>tag(x.p,'alumni',r.school)));
+    if(same)connFor(G.week,g[GM.vis]+'@'+g[GM.home]).filter(r=>r[5]!=='home state').forEach(r=>tag(r[2],r[5],r[6]));
+    TAGS={};Object.entries(TT).forEach(([p,m])=>TAGS[p]=Object.entries(m).map(([t,tips])=>ctag(t,tips.length>1?' ×'+tips.length:'').replace('title="','title="'+esc([...new Set(tips)].join(' · '))+' — ')));
     const rows=ORDER.filter(([p])=>A[p]||(B&&B[p]));
     $('#dcOut').innerHTML=`<div class="dcmatch${B?'':' one'}">
       <div class="dctop">${head(a)}${B?`<div class="dcmid">${same?`${g[GM.vis]} @ ${g[GM.home]}<br><span class="mini">wk ${G.week} &middot; ${kickLbl(g)}</span>`:`<span class="mini">not playing each other in wk ${G.week}</span>`}</div>${head(b,true)}`:''}</div>
+      ${b?(()=>{const sb=same?storyBlock(g,G.week,{compact:true}):cl.riv.map(r=>rivLine(r,a,b)).join('')+cl.alum.map(x=>alumLine(x,a,b)).join('');return sb?`<details class="storyd" open><summary class="mini">storylines</summary>${sb}</details>`:''})():''}
       <table class="dct"><tbody>${rows.map(([p,pp])=>`<tr><td class="dcl">${cell(A[p])}</td><td class="dcpos" style="color:${POSC[pp]}">${posIcon(pp,11)} ${p}</td>${B?`<td class="dcr">${cell(B[p],true)}</td>`:''}</tr>`).join('')}</tbody></table></div>`;
-    $('#dcOut').querySelectorAll('.plink').forEach(el=>el.onclick=()=>playerPop(el.dataset.p));
+    $('#dcOut').querySelectorAll('.plink:not(.pp)').forEach(el=>el.onclick=()=>playerPop(el.dataset.p));
     gameOpts();
   }
   $('#dcTeam').onchange=()=>{$('#dcTeam2').value=oppOf($('#dcTeam').value);render()};
@@ -1796,7 +1887,7 @@ function glossary(){
    ['props','DraftKings lines from ESPN\'s public odds feed. PROJ = own weighted stat average shrunk to the slot mean × trust-shrunk DvP at the Big Board\'s position weights; L10 = share of the last 10 games over the line; a lean needs a 10% gap, L10 agreement and 6+ games.']];
   const open=()=>{if($('#glModal'))return;document.body.insertAdjacentHTML('beforeend',`<div id="glModal" class="modal"><div class="modalbox" style="max-width:760px"><button class="mclose" id="glX">ESC &times;</button><h3>glossary <span class="f">every number traces to data/game_logs + nflverse; hover any badge for its derivation</span></h3>
     <table><tbody>${G2.map(([k,v])=>`<tr><td style="white-space:nowrap;color:var(--amber)"><b>${k}</b></td><td style="white-space:normal;line-height:1.5">${v}</td></tr>`).join('')}</tbody></table>
-    <p class="note">keys: F1-F9 tabs &middot; ctrl-K / "/" find &middot; ? glossary &middot; esc close &middot; click any team code to filter to it</p></div></div>`);
+    <p class="note">keys: F1-F10 tabs &middot; ctrl-K / "/" find &middot; ? glossary &middot; esc close &middot; click any team code to filter to it</p></div></div>`);
     $('#glX').onclick=()=>$('#glModal').remove();$('#glModal').onclick=e=>{if(e.target.id==='glModal')e.target.remove()}};
   $('#gHelp').onclick=open;
   addEventListener('keydown',e=>{const tag=(e.target.tagName||'').toLowerCase();if(e.key==='?'&&tag!=='input'&&tag!=='select'&&tag!=='textarea'){e.preventDefault();open()}else if(e.key==='Escape'){const m=$('#glModal');if(m)m.remove()}});
@@ -1869,8 +1960,68 @@ function games(){
     if(tab==='P'){$('#prLean').onchange=render;$('#prQ').oninput=()=>{const v=$('#prQ').value;render();$('#prQ').value=v;$('#prQ').focus();$('#prQ').setSelectionRange(v.length,v.length)};$('#gmOut').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{window._prSort=th.dataset.k;render()})}}
   RR.push(render);
 }
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games]];
+/* ---------- F10 Locker Room: storylines · birthdays · rivalries ---------- */
+let BDU=null;
+function bdUniverse(){if(BDU)return BDU;const seen=new Map();const nk=n=>n.toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g,'').replace(/[^a-z]/g,'');
+  J.depth.forEach(d=>{const k=nk(d.player);if(!seen.has(k))seen.set(k,{player:d.player,team:d.team,slot:d.slot,inj:d.injury})});
+  J.logs.forEach(l=>{const k=nk(l[LOG.player]);if(l[LOG.season]===2026&&!seen.has(k))seen.set(k,{player:l[LOG.player],team:l[LOG.team],slot:l[LOG.slot]})});
+  return BDU=[...seen.values()].map(x=>({...x,bd:bday(x.player)})).filter(x=>x.bd)}
+function _unused(){const seen=new Map();
+  return [...seen.values()].map(x=>({...x,bd:bday(x.player)})).filter(x=>x.bd)}
+function bdGames(x){const md=x.bd.born.slice(5);return J.games26.filter(g=>(g[GM.vis]===x.team||g[GM.home]===x.team)&&g[GM.date].slice(5)===md)}
+function locker(){
+  $('#locker').innerHTML=`<div class="tabs" id="lkTabs"><button data-t="S" class="on">Storylines</button><button data-t="B">Birthdays</button><button data-t="R">Rivalries</button></div><div id="lkOut"></div>`;
+  let tab='S',bSort='days',bAsc=true;
+  $('#lkTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#lkTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;render()};
+  function stories(){const wk=G.week;const gs=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
+    const tot=gs.map(g=>storyCount(g,wk));
+    return `<p class="note">wk ${G.week} &middot; every game's off-field threads: ${ctag('rivalry')} rival colleges across the line &middot; ${ctag('alumni')} same college, opposite sidelines &middot; ${ctag('homecoming')} born ≤100 mi from the stadium &middot; ${ctag('college town')} his campus ≤100 mi away &middot; ${ctag('revenge')} faces a 2024-25 team or the club that drafted him &middot; ${ctag('birthday')} plays on his birthday &middot; ${ctag('home state')} &middot; players = skill-position depth charts (upcoming weeks) or the actual box score (played weeks; rivalries/alumni always use the current depth chart)</p>
+    <p class="mini">this week: ${tot.reduce((a,b)=>a+b.riv,0)} marquee rivalry clashes between starters (${tot.reduce((a,b)=>a+b.rivAll,0)} incl. regional rivalries &amp; backups) &middot; ${tot.reduce((a,b)=>a+b.alum,0)} alumni reunions &middot; ${tot.reduce((a,b)=>a+b.conn,0)} player-to-venue connections</p>
+    <div class="grid2">${gs.map(g=>`<div class="panel story"><h3>${tlogo(g[GM.vis],18)} ${g[GM.vis]} @ ${tlogo(g[GM.home],18)} ${g[GM.home]} <span class="f">${kickLbl(g)}</span></h3>${storyBlock(g,wk)||'<p class="dim mini">no threads found</p>'}</div>`).join('')}</div>`}
+  function birthdays(){const win=$('#bdWin')?$('#bdWin').value:'30',q=($('#bdQ')?$('#bdQ').value:'').toLowerCase(),onlyG=$('#bdG')&&$('#bdG').checked;
+    let R=bdUniverse().filter(x=>inF(x.team)&&inP(posOf(x.slot))&&(win==='all'||x.bd.days<=+win)&&(!q||(x.player+' '+x.team).toLowerCase().includes(q)));
+    R.forEach(x=>{x.bg=bdGames(x);x.ci=cinfo(x.player)});if(onlyG)R=R.filter(x=>x.bg.length);
+    const val=x=>bSort==='days'?x.bd.days:bSort==='age'?x.bd.age+x.bd.days/400:bSort==='player'?x.player:bSort==='team'?x.team:bSort==='born'?x.bd.born:bSort==='college'?(x.ci?x.ci.disp:'zzz'):bSort==='game'?(x.bg[0]?x.bg[0][GM.date]:'9'):x.bd.days;
+    R.sort((a,b)=>{const p=val(a),q2=val(b);return (p<q2?-1:p>q2?1:0)*(bAsc?1:-1)});
+    const today=R.filter(x=>x.bd.days===0);
+    const cols=[['days','in'],['player','player'],['team','tm'],['','slot'],['college','college'],['born','born'],['age','age'],['','turns'],['','next'],['game','birthday game 2026']];
+    return `<div class="controls"><select id="bdWin"><option value="7">next 7 days</option><option value="14">next 14 days</option><option value="30" selected>next 30 days</option><option value="90">next 90 days</option><option value="all">all players (365)</option></select>
+      <label class="mini"><input type="checkbox" id="bdG"> birthday games only</label><input id="bdQ" placeholder="search player / team..." size="18">
+      <span class="note">every player with a 2026 box score or on the current depth chart &middot; birth dates: nflverse rosters &middot; ages computed live from today (${fmtD(TODAY)}) &middot; birthday game = his team plays on his birthday this season</span></div>
+      ${today.length?`<p class="bdtoday">${ctag('birthday')} today: ${today.map(x=>`<span class="plink pp" data-p="${esc(x.player)}">${esc(x.player)}</span> ${tcell(x.team)} turns ${x.bd.turns}`).join(' &middot; ')}</p>`:''}
+      <table class="fx"><thead><tr>${cols.map(([k,l])=>`<th ${k?`data-k="${k}" style="cursor:pointer"`:''}>${l}${k&&k===bSort?(bAsc?' &#9650;':' &#9660;'):''}</th>`).join('')}</tr></thead><tbody>
+      ${R.map(x=>`<tr class="${x.bd.days===0?'bdrow':''}"><td class="mini">${x.bd.days===0?'<b style="color:#ffd54f">TODAY</b>':x.bd.days+'d'}</td><td style="text-align:left" class="plink pp" data-p="${esc(x.player)}">${esc(x.player)}</td><td>${tcell(x.team)}</td><td>${x.slot?slotchip(x.slot):''}</td><td>${ccell(x.player)}</td>
+        <td class="mini">${x.bd.born}</td><td>${x.bd.age}</td><td class="mini">${x.bd.turns}</td><td class="mini">${fmtD(x.bd.next)}</td>
+        <td>${x.bg.map(g=>`${ctag('birthday')} wk ${g[GM.wk]} ${g[GM.vis]===x.team?'@'+g[GM.home]:'vs '+g[GM.vis]} <span class="mini">${g[GM.date]}</span>`).join(' ')||'<span class="dim">—</span>'}</td></tr>`).join('')}</tbody></table>
+      <p class="note">${R.length} players</p>`}
+  function rivalries(){const wk=G.week;
+    const season=[];for(let w=1;w<=18;w++)GAMES(w).forEach(g=>{const c=clashPair(g[GM.vis],g[GM.home]);c.riv.filter(r=>r.mq&&r.st).forEach(r=>season.push({w,g,r}))});
+    const cur=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home])).map(g=>({g,c:clashPair(g[GM.vis],g[GM.home])})).filter(x=>x.c.riv.length||x.c.alum.length);
+    return `<p class="note">rival colleges facing off across an NFL line — ${RIVALS.length} tracked college rivalries &middot; built from the current depth charts (QB/RB/WR/TE) &middot; bold = starter</p>
+     <h3>wk ${wk}</h3>${cur.length?cur.map(({g,c})=>`<div class="panel story"><h3>${tlogo(g[GM.vis],18)} ${g[GM.vis]} @ ${tlogo(g[GM.home],18)} ${g[GM.home]} <span class="f">${kickLbl(g)}</span></h3>${c.riv.map(r=>rivLine(r,g[GM.vis],g[GM.home])).join('')}${c.alum.map(a=>alumLine(a,g[GM.vis],g[GM.home])).join('')}</div>`).join(''):'<p class="dim">none this week for the current filter</p>'}
+     <h3 style="margin-top:14px">2026 season rivalry calendar <span class="f">${season.length} marquee clashes with a starter on both sides &middot; regional rivalries and backups are listed per game above</span></h3>
+     <table class="fx"><thead><tr><th>wk</th><th>game</th><th>rivalry</th><th>schools</th><th>players</th></tr></thead><tbody>
+     ${season.map(({w,g,r})=>`<tr class="${w===wk?'mine':''}"><td class="mini">${w}</td><td>${tcell(g[GM.vis])} @ ${tcell(g[GM.home])}</td><td><b>${esc(r.name)}</b></td><td class="mini">${esc(r.schools.join(' vs '))}</td>
+       <td class="mini" style="text-align:left">${r.A.map(x=>plinkS(x)).join(', ')} <span class="dim">vs</span> ${r.B.map(x=>plinkS(x)).join(', ')}</td></tr>`).join('')}</tbody></table>
+     <details style="margin-top:10px"><summary class="mini">tracked rivalries (${RIVALS.length})</summary><p class="mini">${RIVALS.map(r=>`${esc(r[2])} (${esc(r[0])}–${esc(r[1])})`).join(' &middot; ')}</p></details>`}
+  function render(){$('#lkOut').innerHTML=tab==='S'?stories():tab==='B'?birthdays():rivalries();bindP($('#lkOut'));
+    if(tab==='B'){const keep=['bdWin','bdQ','bdG'];['bdWin','bdG'].forEach(id=>$('#'+id).onchange=()=>{const st={w:$('#bdWin').value,g:$('#bdG').checked,q:$('#bdQ').value};render();$('#bdWin').value=st.w;$('#bdG').checked=st.g;$('#bdQ').value=st.q;render()});
+      $('#bdQ').oninput=()=>{const st={w:$('#bdWin').value,g:$('#bdG').checked,q:$('#bdQ').value};render();$('#bdWin').value=st.w;$('#bdG').checked=st.g;$('#bdQ').value=st.q;render();$('#bdQ').focus()};
+      $('#lkOut').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const st={w:$('#bdWin').value,g:$('#bdG').checked,q:$('#bdQ').value};const k=th.dataset.k;if(bSort===k)bAsc=!bAsc;else{bSort=k;bAsc=true}render();$('#bdWin').value=st.w;$('#bdG').checked=st.g;$('#bdQ').value=st.q;render()})}}
+  RR.push(render);
+}
+/* home: storylines + birthdays strip */
+function socialHome(){RR.push(()=>{const el=$('#socialSlot');if(!el)return;const wk=G.week;
+  const gs=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
+  const items=[];gs.forEach(g=>{const {c,cn}=storyCount(g,wk);c.key.forEach(r=>items.push({o:0,h:rivLine(r,g[GM.vis],g[GM.home])}));
+    cn.filter(r=>['birthday','homecoming','revenge'].includes(r[5])).forEach(r=>items.push({o:1+(CORD[r[5]]||0),h:connLine(r)}))});
+  items.sort((a,b)=>a.o-b.o);
+  const B=bdUniverse().filter(x=>x.bd.days<=14&&inF(x.team)).sort((a,b)=>a.bd.days-b.bd.days);
+  el.innerHTML=`<div class="grid2"><div class="panel"><h3>wk ${wk} storylines <span class="f">rivalries · homecomings · revenge · birthday games &middot; full list on F10</span></h3>${items.slice(0,10).map(x=>x.h).join('')||'<p class="dim mini">none for this filter</p>'}${items.length>10?`<p class="mini">+${items.length-10} more on <a href="#" id="toLocker">F10 Locker Room</a></p>`:''}</div>
+   <div class="panel"><h3>upcoming birthdays <span class="f">next 14 days</span></h3>${B.slice(0,12).map(x=>`<div class="rivln">${x.bd.days===0?ctag('birthday',' TODAY'):`<span class="mini" style="display:inline-block;width:34px">${x.bd.days}d</span>`} ${tcell(x.team)} <span class="plink pp" data-p="${esc(x.player)}">${esc(x.player)}</span> <span class="mini">${fmtD(x.bd.next)} &middot; turns ${x.bd.turns}${bdGames(x).some(g=>g[GM.date]===x.bd.next.toISOString().slice(0,10))?' &middot; <b style="color:#ffd54f">game day</b>':''}</span></div>`).join('')||'<p class="dim mini">none in the next 14 days</p>'}</div></div>`;
+  bindP(el);const tl=$('#toLocker');if(tl)tl.onclick=e=>{e.preventDefault();document.querySelector('nav button[data-v="locker"]').click()}})}
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['locker',locker],['home',socialHome]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
-['chamber','players','defenses','sked','tdb','intel','board','games'].forEach(v=>DIRTY.add(v));
+['chamber','players','defenses','sked','tdb','intel','board','games','locker'].forEach(v=>DIRTY.add(v));
 gbarInit();
 </script></body></html>

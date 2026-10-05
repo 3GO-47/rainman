@@ -62,6 +62,8 @@ def main():
         print('!! data/processed/game_lines.csv missing — run scripts/fetch_games.py (cloud) for lines / results / picks')
     if glob.glob('data/raw/props_*.txt'):
         run(['scripts/build_props.py'])
+    if glob.glob('data/raw/espn_birthplaces_*.txt'):
+        run(['scripts/build_connections.py'])
     run(['scripts/build_dashboard.py'])
 
     # summary + anomaly report

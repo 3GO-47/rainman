@@ -113,15 +113,16 @@ def college_payload(logs):
         if line.startswith('#') or not line.strip(): continue
         f = line.rstrip('\n').split('|')
         S[re.sub(r'\s+', ' ', f[0]).strip()] = f[1:7]
-    cols = ['pfr_id', 'full_name', 'team', 'college', 'entry_year', 'draft_number', 'draft_club']
+    cols = ['pfr_id', 'full_name', 'team', 'college', 'entry_year', 'draft_number', 'draft_club', 'birth_date']
     R = pd.concat([pd.read_parquet(f'data/raw/nflverse/roster_{y}.parquet', columns=cols) for y in (2026, 2025, 2024)
                    if os.path.exists(f'data/raw/nflverse/roster_{y}.parquet')])
-    R = R[R.college.notna()]
+    R = R[R.college.notna() | R.birth_date.notna()]
     by_id = R.dropna(subset=['pfr_id']).drop_duplicates('pfr_id').set_index('pfr_id')
     by_name = R.drop_duplicates('full_name').set_index('full_name')
-    P, miss = {}, set()
+    P, miss, BD = {}, set(), {}
     def add(name, r):
-        if name in P: return
+        if pd.notna(r.birth_date) and name not in BD: BD[name] = str(r.birth_date)[:10]
+        if name in P or not isinstance(r.college, str): return
         allc = [re.sub(r'\s+', ' ', c).strip() for c in str(r.college).split(';')]
         key = allc[0]
         if key not in S: miss.add(key); return
@@ -144,7 +145,7 @@ def college_payload(logs):
         if len(c) == 1: add(n, c.iloc[0])
     used = {v[0] for v in P.values()}
     if miss: print('  colleges missing from colleges_espn.txt:', sorted(miss))
-    return {'s': {k: v for k, v in S.items() if k in used}, 'p': P}
+    return {'s': {k: v for k, v in S.items() if k in used}, 'p': P, 'bd': BD}
 
 def main():
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
@@ -178,6 +179,13 @@ def main():
     data['intel'] = intel_payload()
     data['bets'] = bets_payload()
     data['college'] = college_payload(logs)
+    # player <-> game connections (build_connections.py): homecoming / college town / home state / revenge / birthday
+    data['conn'] = {'rows': [], 'born': {}}
+    if os.path.exists('data/processed/connections_2026.csv'):
+        for r in csv.DictReader(open('data/processed/connections_2026.csv', encoding='utf-8')):
+            data['conn']['rows'].append([int(r['week']), r['game'], r['player'], r['team'], r['opp'], r['type'], r['detail'], int(r['miles']) if r['miles'] else None])
+        for r in csv.DictReader(open('data/processed/player_geo.csv', encoding='utf-8')):
+            if r['birthplace']: data['conn']['born'][r['player']] = r['birthplace']
 
     data['matchups'] = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8')))
     sched = {}
