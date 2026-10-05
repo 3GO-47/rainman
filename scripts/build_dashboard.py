@@ -103,6 +103,22 @@ def bets_payload():
     return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
             'propsWeek': int(props[0]['week']) if props else None}
 
+def betting_payload():
+    """Bet board: priced prop lines, anytime-TD fair prices, SGP correlations, model validation, graded ledger."""
+    P = 'data/processed/'
+    if not os.path.exists(P + 'bet_lines.csv'): return None
+    def rows(f):
+        if not os.path.exists(P + f): return []
+        df = pd.read_csv(P + f)
+        return json.loads(df.to_json(orient='records'))
+    M = json.load(open(P + 'prop_model.json'))
+    meta = json.load(open(P + 'dvp_adjusted_meta.json')) if os.path.exists(P + 'dvp_adjusted_meta.json') else {}
+    td = rows('bet_td.csv')[:260]
+    return {'lines': rows('bet_lines.csv'), 'td': td, 'corr': json.load(open(P + 'bet_corr.json')),
+            'model': {k: {kk: vv for kk, vv in v.items()} for k, v in M['markets'].items()}, 'dists': M['dists'],
+            'ledger': rows('bet_ledger.csv'), 'dvpMeta': meta,
+            'week': int(pd.read_csv(P + 'prop_projections.csv').week.iloc[0]) if os.path.exists(P + 'prop_projections.csv') else None}
+
 def college_payload(logs):
     """College for every player in the logs / depth chart: nflverse rosters (college, draft) x ESPN college-football
     team ids/colors/conference (data/raw/colleges_espn.txt, pulled via Chrome). First school listed = final school."""
@@ -154,6 +170,8 @@ def main():
     for f in sorted(glob.glob('data/processed/dvp_season_[0-9]*.csv')):
         data['dvp'][f.split('_')[-1].split('.')[0]] = dvp_table(f)
     data['dvp']['combined'] = dvp_table('data/processed/dvp_combined.csv')
+    if os.path.exists('data/processed/dvp_adjusted.csv'):
+        data['dvp']['adjusted'] = dvp_table('data/processed/dvp_adjusted.csv')
     data['blend'] = pd.read_csv('data/processed/dvp_combined.csv')['seasons_blended'].iloc[0]
 
     wk = pd.read_csv('data/processed/dvp_weekly.csv')
@@ -179,6 +197,7 @@ def main():
     data['intel'] = intel_payload()
     data['bets'] = bets_payload()
     data['college'] = college_payload(logs)
+    data['betting'] = betting_payload()
     # player <-> game connections (build_connections.py): homecoming / college town / home state / revenge / birthday
     data['conn'] = {'rows': [], 'born': {}}
     if os.path.exists('data/processed/connections_2026.csv'):

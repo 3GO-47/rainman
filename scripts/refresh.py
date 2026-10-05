@@ -62,6 +62,14 @@ def main():
         print('!! data/processed/game_lines.csv missing — run scripts/fetch_games.py (cloud) for lines / results / picks')
     if glob.glob('data/raw/props_*.txt'):
         run(['scripts/build_props.py'])
+    # betting layer: opponent-adjusted DvP -> prop model (walk-forward tuned) -> priced lines / TD board / ledger
+    # FanDuel prices (The Odds API) — only when a key is configured in .env / the environment; never fails the refresh
+    if os.environ.get('ODDS_API_KEY') or (os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read()):
+        r = subprocess.run([sys.executable, 'scripts/fetch_odds_api.py'])
+        if r.returncode: print('!! fetch_odds_api failed — continuing with unpriced lines')
+    run(['scripts/build_adjusted_dvp.py'])
+    run(['scripts/build_prop_model.py'])
+    run(['scripts/build_bets.py'])
     if glob.glob('data/raw/espn_birthplaces_*.txt'):
         run(['scripts/build_connections.py'])
     run(['scripts/build_dashboard.py'])
