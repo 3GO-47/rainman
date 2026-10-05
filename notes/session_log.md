@@ -170,3 +170,9 @@
   cached per team pair from depth charts; key clash = marquee + a starter on both sides (wk 4: 12; season: 212).
   F10 view (Storylines / Birthdays / Rivalries), Home social slot, chamber storyline <details>, depth-chart tags, popup
   line. 0 JS errors; mobile 390 px no overflow.
+
+## 2026-10-05 (d) — collapsible depth charts + waiver radar
+- dchart RR hook no longer calls open(true) on G.game; storyd <details> default closed (chamber + depth chart).
+- G.owner='__FA__' = unrostered (inO / chamber mine / gSum label); lineup() renders waiver(slot,full) when no roster
+  (top 8) or FA (top 60). Role gate excludes backup QBs/no-snap players (projection fell back to slot means for them).
+- Deploy note: Actions run #20 failed with "job was not acquired by Runner of type hosted" (GitHub-side); re-run queued.
