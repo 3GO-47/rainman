@@ -121,6 +121,11 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — Depth charts stay collapsed until you open them (a game/team filter swaps the teams but no longer
+  forces the panel open); storyline strips start collapsed. **Waiver radar**: ROSTER filter gains *free agents
+  (unrostered)* — every tab narrows to players on no roster in the draft results, and Home shows the radar (QB1s and
+  skill players who start or play ≥25% of snaps, ranked 0.4 × PROJ this week + 0.6 × avg PROJ next 3 weeks + role
+  trend); with no roster selected Home shows the top 8.
 - 2026-10-05 — **F10 Locker Room: storylines, birthdays, rivalries** (birthdays were out of scope in the original
   brief; added on request). *Storylines* per game: college **rivalries** across the line (85 tracked, 38 marquee),
   **alumni** reunions (same college, opposite sidelines), **homecomings** (born ≤100 mi from the stadium), **alma mater**
