@@ -121,6 +121,13 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — **College layer.** Every player's final college (nflverse rosters; first school listed = last attended,
+  earlier stops shown as "also attended") with the ESPN college logo, school color bar, conference badge and a tier tint
+  (gold = Power-4/Notre Dame · teal = G5 · slate = FCS · magenta = D2/D3/NAIA small school). Shown in the player card
+  header (with draft year + overall pick), as a sortable College column on Players (Matchup Lab) and the Big Board, as
+  logos in the depth charts, in the Big Board CSV, and as a Players-tab filter (tier / conference / school) + search.
+  School ids/colors/conferences: `data/raw/colleges_espn.txt` (ESPN core API via Chrome; 184 schools, 4 without an ESPN
+  football program fall back to initials).
 - 2026-10-02 — Mobile + performance pass. Views render lazily: only the visible tab re-renders on a filter change, the
   others are marked dirty and rebuilt when opened (mobile load 2.9 s → 0.9 s, filter apply 600 → 140 ms). ≤840 px:
   the filter bar collapses behind a ⚙ FILTERS toggle, nav scrolls horizontally, tables scroll inside their cards,
