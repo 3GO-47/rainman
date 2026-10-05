@@ -29,6 +29,8 @@ jobs:
           mkdir -p _site/v1 _site/v2
           cp dashboard/rainman.html _site/v1/index.html
           cp dashboard/rainman.html _site/rainman.html
+          # frozen snapshots for one-step revert / side-by-side comparison: /archive/<file>.html
+          if [ -d dashboard/archive ]; then mkdir -p _site/archive && cp -r dashboard/archive/. _site/archive/; fi
           if [ -f dashboard/v2/index.html ]; then cp dashboard/v2/index.html _site/index.html; cp -r dashboard/v2/. _site/v2/; else cp dashboard/rainman.html _site/index.html; fi
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
