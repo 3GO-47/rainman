@@ -121,6 +121,15 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-05 — **F10 Locker Room: storylines, birthdays, rivalries** (birthdays were out of scope in the original
+  brief; added on request). *Storylines* per game: college **rivalries** across the line (85 tracked, 38 marquee),
+  **alumni** reunions (same college, opposite sidelines), **homecomings** (born ≤100 mi from the stadium), **alma mater**
+  games (campus ≤100 mi away), **home-state** games, **revenge** games (faces a 2024-25 team or the club that drafted
+  him) and **birthday games**. *Birthdays*: every 2026 player — next birthday, age, turns, birthday games this season,
+  today banner. *Rivalries*: this week + the 2026 rivalry calendar (marquee, starter vs starter). Also surfaced on Home
+  (storylines + next-14-day birthdays), each Weekly Matchups card, the two-team depth chart (tags next to names) and the
+  player card (birthplace, age, this week's threads). Sources: ESPN athlete birthPlace (Chrome), ESPN college venues,
+  nflverse rosters (birth date, team history, draft club), offline GeoNames geocoding (`pip install geonamescache`).
 - 2026-10-05 — Depth charts show two teams side by side (mirrored by position: QB · RB · WR1-3 · TE · FB, depth #,
   college logo, Q/OUT), with a game picker, a vs-team picker and a swap button. Picking a team auto-loads its opponent;
   the chart follows the filter bar — a selected GAME loads both teams (and opens the panel), a selected TEAM loads it vs
