@@ -112,3 +112,27 @@ const row=(e,wk,o)=>{const c=e.competitions[0],h=c.competitors.find(t=>t.homeAwa
 Dump with document.body.innerHTML='<pre>LINES_BEGIN\n'+lines.join('\n')+'\nLINES_END</pre>' and read with get_page_text; the
 javascript_tool return value is filtered when it looks like query strings, so never return the lines directly. 'OFF' = no line.
 Then `python3 scripts/ncaa/refresh.py` (or build_lines.py + build_dashboard.py --league ncaa).
+
+## Kalshi NFL markets (exchange prices: moneyline, spread + total ladders, player ladders, anytime TD) — 2026-10-06
+Reachable only through Chrome (the sandbox and the device VM have no network; DraftKings' own APIs are blocked for Chrome).
+1. Navigate the Chrome tab to https://kalshi.com/ (same-origin page that is allowed to fetch the API; the raw API URL itself
+   refuses fetch from its JSON view).
+2. javascript_tool — fetch every open market of these series and aggregate ladders per subject:
+```js
+const S=['GAME','SPREAD','TOTAL','PASSYDS','PASSATT','PASSTDS','PASSCOMP','PASSINT','RSHYDS','RSHATT','REC','RECYDS','TD','FIRSTTD','LADDERREC','LADDERRECYDS','LADDERRSHYDS'];
+const out=[];for(const s of S){let cur='';for(let i=0;i<10;i++){const r=await fetch(`https://api.elections.kalshi.com/trade-api/v2/markets?limit=200&status=open&series_ticker=KXNFL${s}`+(cur?`&cursor=${cur}`:''));if(!r.ok)break;const j=await r.json();
+ (j.markets||[]).forEach(m=>out.push(['KL',s,m.ticker,m.event_ticker,(m.title||'').replace(/\|/g,'/'),(m.yes_sub_title||'').replace(/\|/g,'/'),m.floor_strike??m.cap_strike??'',m.strike_type||'',m.yes_bid_dollars??'',m.yes_ask_dollars??'',m.last_price_dollars??'',m.volume_fp??'',m.open_interest_fp??'',m.close_time||''].join('|')));cur=j.cursor||'';if(!cur)break}}
+const G={};for(const l of out){const f=l.split('|');const [_,s,tk,ev,title,sub,strike,st,bid,ask,last,vol,oi,close]=f;const evs=ev.split('-')[1]||ev;
+ let subj=sub||title;subj=subj.replace(/:.*$/,'').replace(/ wins.*$/,'').replace(/^Over .*$/,'TOTAL').replace(/ wins by over.*$/,'').trim();if(s==='TOTAL')subj='TOTAL';if(s==='TD'||s==='FIRSTTD'){subj=title.replace(/:.*$/,'').replace(/ scores.*$/,'').replace(/ to score.*$/,'').trim()}
+ const k=s+'|'+evs+'|'+subj;const g=G[k]=G[k]||{close,r:[]};g.r.push((strike||'')+':'+(+bid).toFixed(2)+'/'+(+ask).toFixed(2)+'/'+Math.round(+vol||0))}
+window.__KC=Object.entries(G).map(([k,g])=>'K|'+k+'|'+g.r.join(';')+'|'+g.close.slice(0,10)).join('\n');
+document.body.innerHTML='<pre id="kc"></pre>';document.getElementById('kc').textContent=window.__KC.replace(/[?&=]/g,' ');return 'groups='+Object.keys(G).length
+```
+3. get_page_text → save the K| lines to data/raw/kalshi_YYYY-MM-DD.txt (≈32 KB for a full slate); then
+   `python3 scripts/build_kalshi.py` (or the full refresh). Format: K|series|event(26OCT08TBDAL)|subject|strike:bid/ask/vol;…|close.
+   build_kalshi maps events to games/weeks, subjects to teams / depth-chart players, and derives the implied line (50% rung).
+Pull Thursday (TNF + early week-ahead markets), Saturday (full slate posted) and Sunday morning (closing prices, for grading).
+
+## DraftKings DFS salaries (optional, for capped mock lineups)
+DK's DFS endpoints are blocked in both environments. Josh can export the lobby CSV from any Classic contest ("Export to CSV")
+and drop it at data/raw/dk_salaries_wk{N}.csv — build_dfs.py picks it up automatically; without it entries are built uncapped.

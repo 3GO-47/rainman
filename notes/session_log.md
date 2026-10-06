@@ -316,3 +316,19 @@
   edge table (offense × role, starter named). Locker: thread matrix + sorted collapsible cards. Bets: #r11Kpi + market chips
   (old #r11Mk hidden).
 - Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
+
+## 2026-10-06 (m) — v4: markets, Kalshi, stat projections, unified picks + DFS, signal audit, logos
+- Josh's seven asks: autonomous loop; logos with every player + correct color semantics; pull lines from DK / FanDuel / Kalshi /
+  Polymarket; Ψ is undefined and untracked — smash spots must name the market; projected stats not fantasy points + DFS mock
+  entries tracked; all picks (ML/ATS/totals/props/TD/DFS) on Games & Picks; Intel tabs must grade their contribution; redo Bets.
+- Sources: Kalshi public API works from a kalshi.com tab in Chrome (DK sportsbook + DFS APIs are blocked for Chrome; FanDuel
+  blocked; Polymarket reachable but has no NFL game markets under the nfl tag). Sandbox + device VM have no network at all.
+  First pull: 1,190 open markets → data/raw/kalshi_2026-10-06.txt (aggregated, 32 KB) → build_kalshi.py (322 subjects).
+- New scripts: build_kalshi.py, build_signals.py (7,479 starter-games: env +24% lift, dvp +9%, scheme +6.5%, psi +5.2%,
+  role +4.5%; Ψ 1–5 band ratio 1.048 vs 28–32 0.946), build_dfs.py (5 slates, uncapped until a DK salary CSV exists),
+  build_picks.py (picks_all.csv: ML vs Kalshi ≥.06, ATS/TOTAL carried, PROP carried, TD vs Kalshi ≥.08/.12, DFS). refresh.py
+  runs them (skip signals with --no-signals). Dashboard payload: kalshi, picksAll, dfs, signals.
+- Template v4 module: MKT market map, marketRows() (own avg × allowed/league), bets11 rewritten (Markets tables, TD table,
+  game lines with Kalshi vs DK vs model), board() rewritten (stat projections), picksTab() for Games & Picks sub-tabs,
+  signalsPanel() on Intel (default tab), homeBoard() = market board (Ψ smash/avoid tiles + PPR table removed), logoize()
+  observer adds team logos to every .plink/.pp, .up/.dn colors fixed (▲ = green = good for the offense).
