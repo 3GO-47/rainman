@@ -291,45 +291,42 @@ table.r11t{width:100%;border-collapse:collapse;font-size:11.5px}.r11t td,.r11t t
    type: Inter for UI chrome, JetBrains Mono for data · one accent (amber) · muted surfaces
    ============================================================ */
 #legacyNav{display:none}
-#app{display:flex;min-height:100vh}
-#side{width:var(--side);flex:none;background:var(--panel);border-right:1px solid var(--edge);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;font-family:var(--ui);z-index:20}
-#body{flex:1;min-width:0}
-.brand{display:flex;align-items:center;gap:6px;padding:14px 10px 10px 12px;font:700 14px/1 var(--ui);letter-spacing:.1em;color:var(--txt);white-space:nowrap}
-.brand .lgsw{margin-left:auto}
-.lgsw{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden}
+#app{min-height:100vh;display:flex;flex-direction:column}
+main{flex:1}
+/* row 1: brand · section tabs · find / week / tools */
+#hdr{display:flex;align-items:stretch;gap:0;padding:0 20px;height:46px;border-bottom:1px solid var(--edge);font-family:var(--ui)}
+.brand{display:flex;align-items:center;gap:8px;padding-right:16px;margin-right:6px;border-right:1px solid var(--edge);font:700 13.5px/1 var(--ui);letter-spacing:.12em;color:var(--txt);white-space:nowrap}
+.lgsw{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden;margin-left:4px}
 .lgsw a{padding:3px 7px;font:600 10px/1.2 var(--ui);letter-spacing:.06em;color:var(--dim);text-decoration:none;border-right:1px solid var(--edge2)}
 .lgsw a:last-child{border-right:0}.lgsw a:hover{color:var(--txt)}.lgsw a.on{background:var(--accent);color:#1a1200}
-#gFind{margin:4px 12px 10px;background:var(--s2);border:1px solid var(--edge2);color:var(--dim);padding:7px 10px;font:500 12px/1.2 var(--ui);text-align:left;border-radius:6px;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:0}
-#gFind:hover{border-color:var(--accent);color:var(--txt)}#gFind kbd{margin-left:auto;font:500 10px/1 var(--mono);color:var(--dim2);border:1px solid var(--edge2);border-radius:3px;padding:2px 5px}
-#snav{flex:1;overflow-y:auto;padding:0 8px 8px;scrollbar-width:thin}
-#snav .sec{margin:6px 0 10px}
-#snav .sech{font:600 10px/1.2 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--dim2);padding:8px 8px 5px}
-#snav .sitem{display:block;position:relative;padding:5px 26px 5px 10px;margin:1px 0;border-radius:6px;color:var(--txt);text-decoration:none;border-left:2px solid transparent}
-#snav .sitem:hover{background:var(--s2)}
-#snav .sitem.on{background:var(--s3);border-left-color:var(--accent)}
-#snav .sitem .sl{display:block;font:500 12.5px/1.3 var(--ui)}
-#snav .sitem.on .sl{color:var(--accent);font-weight:600}
-#snav .sitem .sd{display:block;font:400 10.5px/1.35 var(--ui);color:var(--dim);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#snav .sitem.on .sd{white-space:normal}
-#snav .sitem kbd{position:absolute;right:8px;top:8px;font:500 10px/1 var(--mono);color:var(--dim2);border:1px solid var(--edge);border-radius:3px;padding:2px 4px}
-.sfoot{border-top:1px solid var(--edge);padding:10px 14px 12px;font:400 10.5px/1.5 var(--ui);color:var(--dim2)}
-.sfoot .sub{display:block;font-size:10px;letter-spacing:.02em;color:var(--dim2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sfoot .sub b{color:var(--dim);font-weight:600}
-.sfl{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
-.sfl button,.sfl a{background:var(--s2);border:1px solid var(--edge2);color:var(--dim);padding:4px 8px;font:500 10.5px/1.2 var(--ui);border-radius:4px;cursor:pointer;text-decoration:none}
-.sfl button:hover,.sfl a:hover{color:var(--txt);border-color:var(--accent)}
-#sideClose{display:none}
+#tnav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
+#tnav button{background:none;border:0;border-bottom:2px solid transparent;border-top:2px solid transparent;color:var(--dim);padding:0 14px;font:500 12.5px/1 var(--ui);letter-spacing:.01em;cursor:pointer;white-space:nowrap}
+#tnav button:hover{color:var(--txt)}#tnav button.on{color:var(--txt);border-bottom-color:var(--accent);font-weight:600}
+.hright{margin-left:auto;display:flex;align-items:center;gap:8px;padding-left:12px}
+.hright .gl{margin-left:4px}
+#gFind{background:var(--s2);border:1px solid var(--edge2);color:var(--dim);padding:5px 9px;font:500 11.5px/1.2 var(--ui);border-radius:5px;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:0;white-space:nowrap}
+#gFind:hover{border-color:var(--accent);color:var(--txt)}#gFind kbd{font:500 9.5px/1 var(--mono);color:var(--dim2);border:1px solid var(--edge2);border-radius:3px;padding:2px 4px}
+#gHelp,#gShare{background:var(--s2);border:1px solid var(--edge2);color:var(--dim);width:28px;height:28px;border-radius:5px;cursor:pointer;font:600 12px/1 var(--ui)}
+#gHelp:hover,#gShare:hover{color:var(--txt);border-color:var(--accent)}
+/* row 2: views of the active section · one-line description of the current view */
+#sub{display:flex;align-items:stretch;gap:14px;padding:0 20px;height:36px;background:var(--panel);border-bottom:1px solid var(--edge);font-family:var(--ui)}
+#snav{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;min-width:0;flex:none;max-width:100%}
+#snav .sitem{display:flex;align-items:center;gap:6px;padding:0 12px;color:var(--dim);text-decoration:none;font:500 12px/1 var(--ui);border-bottom:2px solid transparent;border-top:2px solid transparent;white-space:nowrap}
+#snav .sitem:hover{color:var(--txt);background:var(--s2)}
+#snav .sitem.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+#snav .sitem kbd{font:500 9.5px/1 var(--mono);color:var(--dim2);border:1px solid var(--edge2);border-radius:3px;padding:2px 4px}
+#snav .sitem.on kbd{color:var(--accent);border-color:var(--accent)}
+#crumb{display:flex;align-items:center;min-width:0;flex:1;color:var(--dim);font:400 11.5px/1.3 var(--ui)}
+#crumb span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* footer: data provenance */
+.sfoot{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:10px 20px 14px;border-top:1px solid var(--edge);font:400 10.5px/1.4 var(--ui);color:var(--dim2)}
+.sfoot .sub{white-space:nowrap}.sfoot .sub b{color:var(--dim);font-weight:600}
+.sfoot a{color:var(--dim);text-decoration:none;border:1px solid var(--edge2);border-radius:4px;padding:2px 8px}.sfoot a:hover{color:var(--txt);border-color:var(--accent)}
 /* top bar + filters */
-#top{position:sticky;top:0;z-index:15;background:rgba(10,12,16,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--edge)}
-#hdr{display:flex;align-items:center;gap:12px;padding:10px 20px 8px;font-family:var(--ui)}
-#crumb{display:flex;align-items:baseline;gap:8px;min-width:0;flex-wrap:wrap}
-#crumb .cs{color:var(--dim);font:500 12px/1.2 var(--ui);letter-spacing:.02em}
-#crumb .sep{color:var(--dim2)}
-#crumb b{font:600 17px/1.2 var(--ui);color:var(--txt);letter-spacing:-.01em}
-#crumb .cd{color:var(--dim);font:400 12px/1.3 var(--ui);flex-basis:100%}
-#hdr .gl{margin-left:auto}
-#gSum{font:400 11px/1.3 var(--ui);color:var(--dim);margin-left:0;max-width:40vw;text-align:right}
+#top{position:sticky;top:0;z-index:15;background:rgba(10,12,16,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--edge)}
+#gSum{font:400 11px/1.3 var(--ui);color:var(--dim);margin-left:auto;max-width:40vw;text-align:right}
 .gl{color:var(--dim2);font:600 9.5px/1 var(--ui);letter-spacing:.14em}
-#gbar{display:flex;gap:8px;align-items:center;padding:6px 20px 9px;flex-wrap:wrap;border-bottom:0;background:transparent}
+#gbar{display:flex;gap:8px;align-items:center;padding:6px 20px 7px;flex-wrap:wrap;border-bottom:0;background:transparent}
 #gbar.live{border-bottom:0}#gbar.has #gClear{color:var(--accent);border-color:var(--accent)}
 #gbar .gl{margin-left:6px}#gbar .gl:first-child{margin-left:0}
 .fanonly{display:none}body.fan .fanonly{display:inline-block}body.fan select.fanonly{display:inline-block}
@@ -394,33 +391,32 @@ tr:hover td{background:var(--s2)}
 .pq{display:flex;align-items:center;gap:6px;width:100%;background:var(--s2);border:1px solid var(--edge);color:var(--txt);padding:5px 8px;margin:3px 0;border-radius:5px;font:500 11.5px/1.3 var(--ui);cursor:pointer;text-align:left}.pq:hover{border-color:var(--accent)}.pq em{margin-left:auto;font:500 11px/1 var(--mono);color:var(--dim)}
 .panel,#inOut,#bbTbl,#gmOut,#tdTbl,#labTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#matrixWrap,#mDrill{overflow-x:auto}
 th{position:static}
-#sideMin{margin-left:6px;background:none;border:1px solid var(--edge2);border-radius:4px;color:var(--dim);width:22px;height:22px;cursor:pointer;font-size:12px;line-height:1}#sideMin:hover{color:var(--txt);border-color:var(--accent)}
-#rail{display:none}
-body.side-min #side{width:44px}body.side-min #side>*:not(#rail){display:none}body.side-min #rail{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 0}
-#rail .rb{width:28px;height:28px;border-radius:5px;background:var(--s2);border:1px solid var(--edge2);color:var(--dim);font:600 11px/1 var(--mono);cursor:pointer}#rail .rb:hover{border-color:var(--accent);color:var(--txt)}#rail .rb.on{background:var(--accent);color:#1a1200;border-color:var(--accent)}
-#rail #railOpen{margin-bottom:8px;font-size:13px}
 main{container-type:inline-size}
 @container (max-width:1340px){#chamber .gamecard .grid2{grid-template-columns:1fr}}
-@media (max-width:840px){#sideMin{display:none}body.side-min #side{width:min(300px,86vw)}body.side-min #side>*:not(#rail){display:revert}body.side-min #rail{display:none}}
 /* legacy chrome leftovers */
 header,#legacyNav nav{display:none}
-#gTog{display:none}
 /* dark scrollbars */
 *{scrollbar-color:var(--edge2) transparent}
 /* responsive */
-@media (max-width:1100px){:root{--side:220px}}
+@media (max-width:1100px){#tnav button{padding:0 10px}#snav .sitem{padding:0 9px}}
 @media (max-width:840px){
- #side{position:fixed;left:0;top:0;transform:translateX(-100%);transition:transform .18s ease;box-shadow:0 0 0 100vw rgba(0,0,0,0);width:min(300px,86vw)}
- body.side-open #side{transform:none;box-shadow:0 0 0 100vw rgba(0,0,0,.55)}
- #sideClose{display:inline-block;margin-left:auto;background:none;border:0;color:var(--dim);font-size:14px;cursor:pointer}
- .brand .lgsw{margin-left:8px}
- #gTog{display:inline-flex;align-items:center;justify-content:center;background:var(--s2);border:1px solid var(--edge2);color:var(--txt);width:34px;height:32px;border-radius:6px;font-size:15px;cursor:pointer;flex:none}
- #hdr{padding:8px 10px 6px;gap:8px}#crumb b{font-size:15px}#crumb .cd{display:none}#hdr .gl{display:none}#gSum{display:none}
+ #hdr{padding:0 10px;height:auto;flex-wrap:wrap}
+ .brand{font-size:12.5px;padding-right:0;margin-right:0;border-right:0;height:40px}
+ .brand .lgsw a{padding:3px 5px}
+ #tnav{order:3;flex-basis:100%;height:34px;border-top:1px solid var(--edge);justify-content:flex-start}
+ #tnav button{padding:0 10px;font-size:11.5px}
+ .hright{gap:6px;padding-left:6px;height:40px}
+ #gFind .fl,#gFind kbd,#gShare{display:none}#gFind{padding:5px 7px}
+ .hright .gl{display:none}
+ #sub{padding:0 10px;height:34px}#snav .sitem{padding:0 9px;font-size:11.5px}#snav .sitem kbd{display:none}
+ #crumb{display:none}
  #gbar{padding:0 10px 8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#gbar>*{flex:none}
  #gbar:not(.open)>*:not(#gTog):not(#gSum){display:initial}
+ #gSum{display:none}
  .chips{flex-wrap:nowrap}
  main{padding:10px 10px 40px}
  .panel{padding:10px;border-radius:6px}
+ .sfoot{gap:10px;padding:8px 10px 12px}
 }
 </style></head><body>
 <div id="legacyNav" hidden><nav>
@@ -437,17 +433,13 @@ header,#legacyNav nav{display:none}
 <button data-v="bets"><span class="fk">F11</span>Bets</button>
 </nav></div>
 <div id="app">
-<aside id="side">
- <div class="brand"><svg width="18" height="18" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN <span class="lgsw" id="lgSw"></span><button id="sideClose" class="mob" title="close">&#10005;</button><button id="sideMin" title="collapse the sidebar (full-width tables)">&#171;</button></div>
- <div id="rail"></div>
- <button id="gFind" title="jump to any player or team (Ctrl-K or /)">&#9906; find player / team <kbd>ctrl-K</kbd></button>
- <nav id="snav"></nav>
- <div class="sfoot"><span class="sub">__LEAGUE_NAME__</span><span class="sub"><b>__SEASONS__</b> &middot; <b>__GAMES__</b> games &middot; <b>__ROWS__</b> rows</span><span class="sub">built <b>__BUILT__</b> &middot; blend <b>__BLEND__</b></span><span class="sub">rank <b>1</b>/<span id="ntHdr">32</span> = most allowed</span>
-  <div class="sfl"><button id="gHelp" title="glossary (?)">? glossary</button><a href="archive/" title="frozen snapshots of earlier builds">archive</a><button id="gShare" title="copy a link that opens the dashboard with this exact view / week / filters">&#128279; share view</button></div></div>
-</aside>
-<div id="body">
 <div id="top">
-<div id="hdr"><button id="gTog" class="mob" title="menu">&#9776;</button><div id="crumb"></div><span class="gl">WEEK</span><select id="gWk"></select><span id="gSum"></span></div>
+<div id="hdr">
+ <div class="brand"><svg width="18" height="18" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN <span class="lgsw" id="lgSw"></span></div>
+ <nav id="tnav" aria-label="sections"></nav>
+ <div class="hright"><button id="gFind" title="jump to any player or team (Ctrl-K or /)">&#9906; <span class="fl">find player / team</span> <kbd>ctrl-K</kbd></button><span class="gl">WEEK</span><select id="gWk"></select><button id="gHelp" title="glossary (?)">?</button><button id="gShare" title="copy a link that opens the dashboard with this exact view / week / filters">&#128279;</button></div>
+</div>
+<div id="sub"><nav id="snav" aria-label="views"></nav><div id="crumb"></div></div>
 <div id="gbar" title="global filter — applies to every view">
 <span class="gl">SLATE</span><div class="chips" id="gSlates"></div>
 <span class="gl">POS</span><div class="chips" id="gPos"></div>
@@ -455,7 +447,7 @@ header,#legacyNav nav{display:none}
 <span class="gl lgncaa" hidden>CONF</span><select class="lgncaa" id="gConf" hidden></select>
 <span class="gl">TEAM</span><select id="gTeam"></select>
 <span class="gl lgnfl fanonly">ROSTER</span><select class="lgnfl fanonly" id="gOwner" title="draft-results owner — every board narrows to that roster"></select>
-<button id="gClear">&#10005; clear</button>
+<button id="gClear">&#10005; clear</button><span id="gSum"></span>
 </div></div>
 <main>
 <div id="home"><div id="homeTop"></div><div id="socialSlot" data-sub="overview"></div><div id="insights" data-sub="insights"></div></div>
@@ -472,7 +464,8 @@ header,#legacyNav nav{display:none}
 <div id="locker" hidden></div>
 <div id="bets" hidden></div>
 </main>
-</div></div>
+<footer class="sfoot"><span class="sub"><b>__LEAGUE_NAME__</b></span><span class="sub"><b>__SEASONS__</b> &middot; <b>__GAMES__</b> games &middot; <b>__ROWS__</b> rows</span><span class="sub">built <b>__BUILT__</b> &middot; blend <b>__BLEND__</b></span><span class="sub">rank <b>1</b>/<span id="ntHdr">32</span> = most allowed</span><a href="archive/" title="frozen snapshots of earlier builds">archive</a></footer>
+</div>
 <script>
 const J = __DATA__;
 const LG=J.league||{code:'nfl'};const NWK=LG.weeks||18;const IS_NFL=LG.code!=='ncaa';const NT=LG.nTeams||32,MID=(NT+1)/2,HALF=(NT-1)/2,RS=NT/32;
@@ -719,9 +712,13 @@ const SECTIONS=[
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
-function buildSide(){$('#snav').innerHTML=SECTIONS.map(sec=>{const its=sec.items.filter(itemOK);if(!its.length)return '';
-  return `<div class="sec"><div class="sech">${sec.label}</div>${its.map(it=>`<a class="sitem" data-i="${it.id}" href="#v=${it.id}" title="${esc(it.desc)}"><span class="sl">${it.label}</span><span class="sd">${it.desc}</span>${it.key?`<kbd>${it.key}</kbd>`:''}</a>`).join('')}</div>`}).join('');
-  $('#snav').querySelectorAll('.sitem').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.i);document.body.classList.remove('side-open')})}
+const SEC_LAST={};
+function buildSide(){const secs=SECTIONS.filter(sec=>sec.items.some(itemOK));
+  $('#tnav').innerHTML=secs.map(sec=>`<button data-s="${sec.id}" title="${esc(sec.items.filter(itemOK).map(i=>i.label).join(' · '))}">${sec.label}</button>`).join('');
+  $('#tnav').querySelectorAll('button').forEach(bt=>bt.onclick=()=>{const sec=SECTIONS.find(x=>x.id===bt.dataset.s);go(SEC_LAST[sec.id]||sec.items.find(itemOK).id)})}
+function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;
+  nav.innerHTML=sec.items.filter(itemOK).map(it=>`<a class="sitem" data-i="${it.id}" href="#v=${it.id}" title="${esc(it.desc)}">${it.label}${it.key?`<kbd>${it.key}</kbd>`:''}</a>`).join('');
+  nav.querySelectorAll('.sitem').forEach(el=>el.onclick=e=>{e.preventDefault();go(el.dataset.i)})}
 function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='home')document.querySelectorAll('#home [data-sub]').forEach(e=>e.hidden=e.dataset.sub!==it.sub);
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
@@ -732,9 +729,12 @@ function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return
   const b=document.querySelector(`#legacyNav nav button[data-v="${it.c}"]`);if(b)b.click();
   if(it.c==='defenses'){const t=document.querySelector(`#defTabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
   if(it.c==='bets'){const t=document.querySelector(`#r11Tabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
-  syncSub();
+  syncSub();SEC_LAST[it.sec.id]=it.id;
+  document.querySelectorAll('#tnav button').forEach(bt=>bt.classList.toggle('on',bt.dataset.s===it.sec.id));
+  if($('#snav').dataset.sec!==it.sec.id)buildSub(it.sec);
   document.querySelectorAll('#snav .sitem').forEach(a=>a.classList.toggle('on',a.dataset.i===it.id));
-  $('#crumb').innerHTML=`<span class="cs">${it.sec.label}</span><span class="sep">›</span><b>${it.label}</b><span class="cd">${it.desc}</span>`;
+  document.querySelectorAll('#tnav .on,#snav .on').forEach(e=>{try{e.scrollIntoView({block:'nearest',inline:'nearest'})}catch(_){}});
+  $('#crumb').innerHTML=`<span>${it.desc}</span>`;
   document.title=`RAINMAN · ${it.label}`;if(!opts.silent)writeHash();window.scrollTo({top:0})}
 addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea'))return;const i=['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11'].indexOf(e.key);
   if(i>=0){e.preventDefault();const b=document.querySelectorAll('#legacyNav nav button')[i];if(b&&!b.hidden)b.click();return}
@@ -2625,11 +2625,5 @@ BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
 buildSide();go(CUR_ITEM,{silent:true});
-(()=>{const set=v=>{document.body.classList.toggle('side-min',v);try{localStorage.setItem('rm.side',v?'1':'0')}catch(e){}};
-  $('#rail').innerHTML=`<button class="rb" id="railOpen" title="expand the sidebar">&#187;</button>`+Object.values(ITEMS).filter(it=>it.key&&itemOK(it)).map(it=>`<button class="rb rk" data-i="${it.id}" title="${it.label} — ${esc(it.desc)}">${it.key}</button>`).join('');
-  $('#rail').querySelectorAll('.rk').forEach(b=>b.onclick=()=>go(b.dataset.i));$('#railOpen').onclick=()=>set(false);$('#sideMin').onclick=()=>set(true);
-  try{if(localStorage.getItem('rm.side')==='1'&&innerWidth>840)set(true)}catch(e){}
-  const syncRail=()=>$('#rail').querySelectorAll('.rk').forEach(b=>b.classList.toggle('on',b.dataset.i===CUR_ITEM));syncRail();const _go=go;window.go=(id,o)=>{_go(id,o);syncRail()}})();
-$('#gTog').onclick=()=>document.body.classList.toggle('side-open');$('#sideClose').onclick=()=>document.body.classList.remove('side-open');
 addEventListener('hashchange',()=>{const h=new URLSearchParams(location.hash.replace(/^#/,''));const v=h.get('v')||'overview';if(ITEMS[v]&&v!==CUR_ITEM)go(v,{silent:true})});
 </script></body></html>
