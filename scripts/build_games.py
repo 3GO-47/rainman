@@ -157,6 +157,8 @@ if len(new):
     led = pd.concat([led, new], ignore_index=True)
 # grade previously frozen picks with today's results (results/grades only — picks and lines stay as frozen)
 res = GM.set_index('game_id')
+for c in ['res_ats', 'res_total', 'res_ml']:   # all-empty columns read back as float — keep them text
+    if c in led: led[c] = led[c].astype(object).where(led[c].notna(), '')
 for i, r in led.iterrows():
     if r.game_id in res.index and pd.notna(res.loc[r.game_id, 'result']):
         g = res.loc[r.game_id]

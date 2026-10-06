@@ -17,6 +17,8 @@ MK = {'Passing Yards': 'pass_yds', 'Pass Completions': 'completions', 'Passing T
 # The book's line already contains information the model doesn't (injuries, role news, sharp money). Until the graded
 # ledger can estimate it, the model's probability is shrunk toward the market's ~50% at the line: p = .5 + W_MODEL*(p_model-.5)
 W_MODEL = 0.35
+N_FULL = 4.0   # the model earns its full weight only with >= 4 recency-weighted games of the player's own history in this role
+wt = lambda neff: W_MODEL * min(1.0, float(neff or 0) / N_FULL) if neff == neff else 0.0
 dec = lambda am: 1 + (am / 100 if am > 0 else 100 / -am)
 def fair(p):
     if p <= 0 or p >= 1: return None
@@ -53,14 +55,14 @@ def main():
         pm = .5
         if x['over'] and x['under']:
             io, iu = 1 / dec(x['over']), 1 / dec(x['under']); pm = io / (io + iu)
-        pao = pm + W_MODEL * (po - pm); pau = 1 - pao
+        pao = pm + wt(r.n_eff) * (po - pm); pau = 1 - pao
         evo, evu = pao * dec(ov) - 1, pau * dec(un) - 1
         side = 'Over' if evo >= evu else 'Under'
         out.append(dict(week=int(r.week), player=r.player, team=r.team, opp=r.opp, slot=r.slot, market=x['market'], book=x['book'],
                         line=x['line'], over_price=x['over'], under_price=x['under'], priced=x['over'] is not None,
                         proj=round(mu, 1), q10=r.q10, q50=r.q50, q90=r.q90, p_over_model=round(po, 3), p_over=round(pao, 3), p_under=round(pau, 3),
                         fair_over=fair(pao), fair_under=fair(pau), side=side, ev=round(100 * max(evo, evu), 1),
-                        matchup_x=r.matchup_x, game_x=r.game_x, team_implied=r.team_implied, n_eff=r.n_eff,
+                        matchup_x=r.matchup_x, game_x=r.game_x, team_implied=r.team_implied, n_eff=r.n_eff, w_model=round(wt(r.n_eff), 3),
                         skill=M['markets'][x['market']]['skill'], open=x['open'], updated=x['updated']))
     B = pd.DataFrame(out)
     B.to_csv('data/processed/bet_lines.csv', index=False)
@@ -74,9 +76,10 @@ def main():
     for r in T.itertuples():
         p = float(r.p_yes); pr = prices.get(r.k, {}); bk, best = (max(pr.items(), key=lambda kv: kv[1]) if pr else (None, None))
         pm = (1 / dec(best)) / 1.045 if best else None                     # ~4.5% hold removed from a one-sided price
-        pa = pm + W_MODEL * (p - pm) if pm else p
+        w_ = wt(getattr(r, 'n_eff', N_FULL))
+        pa = pm + w_ * (p - pm) if pm else p
         rows.append(dict(week=r.week, player=r.player, team=r.team, opp=r.opp, slot=r.slot, lam=r.proj, p_model=round(p, 3), p=round(pa, 3),
-                         fair=fair(p), book=bk, price=best, ev=round(100 * (pa * dec(best) - 1), 1) if best else None,
+                         fair=fair(p), book=bk, price=best, ev=round(100 * (pa * dec(best) - 1), 1) if best else None, w_model=round(w_, 3),
                          matchup_x=r.matchup_x, game_x=r.game_x, team_implied=r.team_implied))
     pd.DataFrame(rows).sort_values('p_model', ascending=False).to_csv('data/processed/bet_td.csv', index=False)
     print(f'bet_td.csv: {len(rows)} anytime-TD prices ({sum(1 for x in rows if x["price"])} with a book price)')
@@ -89,7 +92,7 @@ def ledger(B):
     This is the honest record: it is what tunes W_MODEL and shows whether the edges are real."""
     LP = 'data/processed/bet_ledger.csv'
     cols = ['frozen_on', 'week', 'player', 'team', 'opp', 'market', 'book', 'line', 'over_price', 'under_price', 'proj', 'p_over_model',
-            'p_over', 'side', 'ev', 'actual', 'result']
+            'p_over', 'side', 'ev', 'n_eff', 'actual', 'result']
     led = pd.read_csv(LP) if os.path.exists(LP) else pd.DataFrame(columns=cols)
     k = lambda d: d.week.astype(str) + '|' + d.player + '|' + d.market + '|' + d.book + '|' + d.line.astype(str)
     new = B[~k(B).isin(set(k(led)) if len(led) else set())].copy()

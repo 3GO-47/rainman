@@ -2124,8 +2124,8 @@ function betboard(){
   $('#bets').innerHTML=`<div class="panel betstatus"><h3>Lines &amp; model status <span class="f">wk ${BETS.week} &middot; ${BETS.lines.length} prop lines (${books.join(', ')||'none'}) &middot; ${BETS.td.length} anytime-TD prices</span></h3>
     <div class="bsrow"><span class="ctag" style="color:${priced?'var(--green)':'#ffd54f'};border-color:currentColor">${priced?'PRICED FEED':'NO PRICES'}</span> ${priced?'book prices loaded':'DraftKings lines come without prices — EV assumes −110. Add a free The Odds API key (.env → ODDS_API_KEY) and run scripts/fetch_odds_api.py for FanDuel prices.'}</div>
     <div class="bsrow"><span class="ctag" style="color:var(--amber);border-color:currentColor">MATCHUPS</span> matchup ranks = opponent-adjusted DvP, recency half-life ${BETS.dvpMeta.half_life_weeks||12} wk (rank 1 = allows most above what the offense normally does) &middot; through ${BETS.dvpMeta.through||''}</div>
-    <div class="bsrow"><span class="ctag" style="color:var(--dim);border-color:currentColor">HONESTY</span> probabilities are anchored to the market at the line (model weight 35%) until the graded ledger proves the edge &mdash; see Model and Ledger</div></div>
-   <div class="tabs" id="btTabs"><button data-t="P" class="on">Props</button><button data-t="T">Anytime TD</button><button data-t="S">Parlay / SGP <span class="n" id="slipN">${SLIP.length||''}</span></button><button data-t="L">Ledger</button><button data-t="M">Model</button></div>
+    <div class="bsrow"><span class="ctag" style="color:var(--dim);border-color:currentColor">HONESTY</span> probabilities are anchored to the market at the line — the model gets up to 35% weight, scaled down when the player has under 4 games of history in his current role — until the graded ledger proves a bigger edge &mdash; see Model and Ledger</div></div>
+   <div class="tabs" id="btTabs"><button data-t="P" class="on">Props</button><button data-t="T">Anytime TD</button><button data-t="S">Parlay / SGP <span class="n" id="slipN">${SLIP.length||''}</span></button><button data-t="G">Sides &amp; totals</button><button data-t="L">Ledger</button><button data-t="M">Model</button></div>
    <div id="btOut"></div>`;
   let tab='P',sortK='ev',sortA=false;
   $('#btTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#btTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;render()};
@@ -2154,11 +2154,11 @@ function betboard(){
      <p class="note">${R.length} lines</p>`}
   function tds(){const R=BETS.td.filter(t=>inF(t.team)&&inP(posOf(t.slot))&&(!st.q||(t.player+' '+t.team).toLowerCase().includes(st.q)));
     return `<div class="controls"><input id="bfQ" placeholder="search player / team" value="${esc(st.q)}" size="18">
-      <span class="note">P(TD) = 1 − e^(−λ): λ = his recency-weighted TD rate × the market-implied team total (walk-forward calibrated: predicted 64% → 65% hit) &middot; fair = the price at which the bet breaks even &middot; type the book's price to see EV (anchored 35% model / 65% market)</span></div>
+      <span class="note">P(TD) = 1 − e^(−λ): λ = his recency-weighted TD rate × the market-implied team total (walk-forward calibrated: predicted 64% → 65% hit) &middot; fair = the price at which the bet breaks even &middot; type the book's price to see EV (model weight up to 35%, less for players with thin history)</span></div>
      <table class="fx btbl"><thead><tr><th>Player</th><th>Tm</th><th>Opp</th><th>Slot</th><th title="opponent's adjusted TD rank vs his slot">TD matchup rk</th><th title="market-implied team points">Team total</th><th>λ</th><th>P(TD)</th><th>Fair</th><th>Book price</th><th>EV</th><th></th></tr></thead><tbody>
      ${R.map(t=>`<tr><td class="pp plink" data-p="${esc(t.player)}" style="text-align:left">${esc(t.player)}</td><td>${tcell(t.team)}</td><td>${oppcell(t.opp)}</td><td>${slotchip(t.slot)}</td><td>${rkB(mrank('anytime_td',t.slot,t.opp))}</td>
        <td class="mini">${t.team_implied||'—'}</td><td class="mini">${(+t.lam).toFixed(2)}</td><td><b>${(100*t.p_model).toFixed(0)}%</b></td><td>${fmtAm(t.fair)}</td>
-       <td><input class="tdpx" data-pm="${t.p_model}" value="${t.price!=null?t.price:''}" placeholder="+150" size="5"></td><td class="tdev">${t.ev!=null?(t.ev>0?'+':'')+t.ev+'%':'—'}</td>
+       <td><input class="tdpx" data-pm="${t.p_model}" data-w="${t.w_model??.35}" value="${t.price!=null?t.price:''}" placeholder="+150" size="5"></td><td class="tdev">${t.ev!=null?(t.ev>0?'+':'')+t.ev+'%':'—'}</td>
        <td><button class="addtd" data-i="${BETS.td.indexOf(t)}" title="add to parlay">+</button></td></tr>`).join('')}</tbody></table>`}
   function slip(){const legs=SLIP;const br=LS.get('rm.bankroll',1000),kf=LS.get('rm.kelly',.25);
     const L=legs.map(l=>({...l,dir:l.dir,p:l.p}));const ind=L.reduce((x,l)=>x*l.p,1);const jp=L.length>1?jointP(L):ind;
@@ -2179,25 +2179,48 @@ function betboard(){
       <p class="note">Same-game parlays are priced with the book's own correlation plus extra hold; this shows whether the price beats a fair correlated price. Stakes are capped at 2% of bankroll — the model's edges are small and the sample is short.</p>
       <div class="kv"><span>stake to log</span><input id="stk" value="${kelly?Math.max(1,Math.round(Math.min(kelly,.02)*br)):10}" size="6"></div>
       <button class="btn pri" id="logBet" ${legs.length&&price?'':'disabled'}>log this bet</button></div></div>`}
-  function ledger(){const G=(BETS.ledger||[]).filter(r=>r.result==='W'||r.result==='L');const w=G.filter(r=>r.result==='W').length;
+  function ledger(){const A=BETS.ledger||[];const G=A.filter(r=>r.result==='W'||r.result==='L');
+    const rec=X=>{const w=X.filter(r=>r.result==='W').length,n=X.length;return {w,l:n-w,n,pct:n?100*w/n:null,roi:n?100*(w*(100/110)-(n-w))/n:null}};
+    const fmtR=r=>r.n?`<b>${r.w}-${r.l}</b> <span class="mini">${r.pct.toFixed(1)}% &middot; ROI ${r.roi>0?'+':''}${r.roi.toFixed(1)}% at −110</span>`:'<span class="dim">—</span>';
+    const plays=G.filter(r=>r.ev>=3),all=rec(G),pl=rec(plays);
+    const bk=[[10,1e9,'EV ≥ 10%'],[6,10,'EV 6–10%'],[3,6,'EV 3–6%'],[-1e9,3,'EV < 3% (not plays)']].map(([lo,hi,l])=>[l,rec(G.filter(r=>r.ev>=lo&&r.ev<hi))]);
+    const mk=[...new Set(G.map(r=>r.market))].map(m=>[MKL[m]||m,rec(plays.filter(r=>r.market===m)),rec(G.filter(r=>r.market===m))]).sort((a,b)=>b[2].n-a[2].n);
+    const wks=[...new Set(A.map(r=>r.week))].sort((a,b)=>b-a);const wsel=st.lw??(wks[0]??'');const showAll=!!st.lall;
+    const T=A.filter(r=>(wsel===''||r.week==wsel)&&(showAll||r.ev>=3)).sort((a,b)=>b.ev-a.ev);
     const MY=LS.get('rm.bets',[]);MY.forEach(b=>{const rs=b.legs.map(legResult);b.res=rs.includes('L')?'L':rs.every(r=>r==='W'||r==='P')?(rs.every(r=>r==='P')?'P':'W'):null});
-    const pl=MY.reduce((s,b)=>s+(b.res==='W'?b.stake*(am2dec(+b.price)-1):b.res==='L'?-b.stake:0),0),risk=MY.filter(b=>b.res==='W'||b.res==='L').reduce((s,b)=>s+b.stake,0);
-    return `<div class="grid2"><div class="panel"><h3>Model ledger <span class="f">every priced line frozen when first seen, graded from the box score</span></h3>
-      <p><b style="font-size:20px">${w}-${G.length-w}</b> <span class="mini">${G.length?`${(100*w/G.length).toFixed(1)}% · break-even at −110 is 52.4%`:'nothing graded yet — results land after the Tuesday refresh'}</span></p>
-      <table class="fx"><thead><tr><th>Wk</th><th>Player</th><th>Market</th><th>Line</th><th>Side</th><th>EV</th><th>Actual</th><th></th></tr></thead><tbody>
-      ${(BETS.ledger||[]).slice().sort((a,b)=>b.ev-a.ev).slice(0,80).map(r=>`<tr><td class="mini">${r.week}</td><td style="text-align:left">${esc(r.player)}</td><td style="text-align:left">${MKL[r.market]||r.market}</td><td>${r.line}</td><td>${r.side}</td><td class="mini">${r.ev}%</td><td>${r.actual??'—'}</td><td>${r.result?`<b class="${r.result==='W'?'rise':r.result==='L'?'fall':''}">${r.result}</b>`:''}</td></tr>`).join('')}</tbody></table></div>
+    const pnl=MY.reduce((s,b)=>s+(b.res==='W'?b.stake*(am2dec(+b.price)-1):b.res==='L'?-b.stake:0),0),risk=MY.filter(b=>b.res==='W'||b.res==='L').reduce((s,b)=>s+b.stake,0);
+    return `<div class="grid2"><div class="panel"><h3>Model ledger <span class="f">every line frozen the first time it is seen, graded from the box score &middot; a "play" = EV ≥ 3%</span></h3>
+      <div class="kv"><span>plays (EV ≥ 3%)</span><span>${fmtR(pl)}</span></div><div class="kv"><span>every line, model side</span><span>${fmtR(all)}</span></div>
+      <table class="fx"><thead><tr><th style="text-align:left">by edge</th><th>record</th></tr></thead><tbody>${bk.map(([l,r])=>`<tr><td style="text-align:left">${l}</td><td>${fmtR(r)}</td></tr>`).join('')}</tbody></table>
+      <p class="note">Break-even at −110 is 52.4%. If the edge is real, the record should improve as EV rises; if the top buckets don't beat 52.4% over a few hundred plays, the model weight (35%) comes down. One week is noise — judge it over a season.</p>
+      <details class="storymore"><summary>by market</summary><table class="fx"><thead><tr><th style="text-align:left">market</th><th>plays</th><th>all lines</th></tr></thead><tbody>${mk.map(([m,a,b])=>`<tr><td style="text-align:left">${m}</td><td>${fmtR(a)}</td><td>${fmtR(b)}</td></tr>`).join('')}</tbody></table></details>
+      <div class="controls" style="margin-top:10px"><select id="lgWk"><option value="">all weeks</option>${wks.map(w=>`<option value="${w}" ${w==wsel?'selected':''}>wk ${w}</option>`).join('')}</select><label class="mini"><input type="checkbox" id="lgAll" ${showAll?'checked':''}> include non-plays</label></div>
+      <table class="fx"><thead><tr><th>Wk</th><th>Player</th><th>Market</th><th>Line</th><th>Side</th><th>Proj</th><th>EV</th><th>Actual</th><th></th></tr></thead><tbody>
+      ${T.slice(0,150).map(r=>`<tr><td class="mini">${r.week}</td><td style="text-align:left">${esc(r.player)}</td><td style="text-align:left">${MKL[r.market]||r.market}</td><td>${r.line}</td><td>${r.side==='Over'?'O':'U'}</td><td class="mini">${r.proj??''}</td><td class="mini">${r.ev}%</td><td>${r.actual??'—'}</td><td>${r.result?`<b class="${r.result==='W'?'rise':r.result==='L'?'fall':''}">${r.result}</b>`:''}</td></tr>`).join('')||'<tr><td colspan="9" class="note">none</td></tr>'}</tbody></table></div>
      <div class="panel"><h3>My bets <span class="f">stored in this browser &middot; auto-graded from the box scores</span></h3>
-      <p><b style="font-size:20px;color:${pl>=0?'var(--green)':'var(--red)'}">${pl>=0?'+':''}$${pl.toFixed(2)}</b> <span class="mini">${risk?`ROI ${(100*pl/risk).toFixed(1)}% on $${risk.toFixed(0)} settled`:'no settled bets yet'}</span></p>
+      <p><b style="font-size:20px;color:${pnl>=0?'var(--green)':'var(--red)'}">${pnl>=0?'+':''}$${pnl.toFixed(2)}</b> <span class="mini">${risk?`ROI ${(100*pnl/risk).toFixed(1)}% on $${risk.toFixed(0)} settled`:'no settled bets yet'}</span></p>
       <table class="fx"><thead><tr><th>Logged</th><th>Ticket</th><th>Price</th><th>Stake</th><th>Result</th><th></th></tr></thead><tbody>
       ${MY.map((b,i)=>`<tr><td class="mini">${b.when}</td><td style="text-align:left">${b.legs.map(l=>`${esc(l.player)} ${l.label}`).join(' + ')}</td><td>${fmtAm(+b.price)}</td><td>$${b.stake}</td><td>${b.res?`<b class="${b.res==='W'?'rise':b.res==='L'?'fall':''}">${b.res}</b>`:'<span class="dim">open</span>'}</td><td><button class="rmbet" data-i="${i}">×</button></td></tr>`).join('')||'<tr><td colspan="6" class="note">log bets from the Parlay / SGP tab</td></tr>'}</tbody></table>
       <button class="btn" id="betCsv">export CSV</button></div></div>`}
+  function sides(){const wk=G.week,bt=BET.backtest||{};const gs=BET.games.filter(g=>g.week===wk&&(inF(g.away_team)||inF(g.home_team))).sort((a,b)=>a.gameday<b.gameday?-1:a.gameday>b.gameday?1:0);
+    const fr=BET.ledger.filter(r=>r.res_ats||r.res_total);const ats=recTxt(fr,'res_ats'),tot=recTxt(fr,'res_total');
+    const imp=(g,h)=>g.total_line==null||g.spread_line==null?null:(h?g.total_line/2+g.spread_line/2:g.total_line/2-g.spread_line/2);
+    return `<p class="note">Market = DraftKings-consensus line. Model = opponent-adjusted margin rating (details and power ratings on F10 Games &amp; Picks). Honest record: the spread model did <b>not</b> beat the market in the 2024-25 backtest; totals were mildly positive — treat side/total picks as a second opinion, and use the implied team totals below mainly for player props and TD bets. Frozen picks this season: ATS ${ats} &middot; totals ${tot}.</p>
+     <table class="fx btbl"><thead><tr><th style="text-align:left">Game</th><th>Kick</th><th>Spread</th><th>Total</th><th title="market-implied points: total/2 ± spread/2">Implied pts</th><th>Model spread</th><th>Edge</th><th>Model total</th><th>Edge</th><th>Pick</th><th>Result</th></tr></thead><tbody>
+     ${gs.map(g=>{const h=g.home_team,a=g.away_team,ih=imp(g,1),ia=imp(g,0),played=g.result!=null&&g.result!=='';const fav=g.model_spread>0?h:a;
+       const sp=g.spread_line==null?'—':(g.spread_line>0?`${h} −${g.spread_line}`:g.spread_line<0?`${a} −${-g.spread_line}`:'PK');
+       const pk=[g.pick_ats?esc(g.pick_ats)+' '+resChip(g.res_ats):'',g.pick_total?esc(g.pick_total)+' '+resChip(g.res_total):''].filter(Boolean).join('<br>')||'<span class="dim">—</span>';
+       return `<tr><td style="text-align:left">${tcell(a)} @ ${tcell(h)}</td><td class="mini">${g.gameday.slice(5)}</td><td>${sp}</td><td>${g.total_line??'—'}</td><td class="mini">${ia!=null?`${a} ${ia.toFixed(1)} · ${h} ${ih.toFixed(1)}`:'—'}</td>
+        <td>${fav} ${Math.abs(g.model_spread).toFixed(1)}</td><td class="${Math.abs(g.edge_spread)>=3?'rise':'mini'}">${g.edge_spread>0?'+':''}${g.edge_spread}</td><td>${g.model_total}</td><td class="${Math.abs(g.edge_total)>=3?'rise':'mini'}">${g.edge_total>0?'+':''}${g.edge_total}</td>
+        <td class="mini" style="text-align:left">${pk}</td><td class="mini">${played?`${a} ${g.away_score} – ${h} ${g.home_score}`:''}</td></tr>`}).join('')||'<tr><td colspan="11" class="note">no games for this week / filter</td></tr>'}</tbody></table>
+     ${bt?`<p class="note">2024-25 walk-forward backtest (picks at edge ≥ 3 pts): ATS ${bt.ats?`${bt.ats.W}-${bt.ats.L}-${bt.ats.P} (${wpct(bt.ats.W,bt.ats.L)})`:'—'} &middot; totals ${bt.total?`${bt.total.W}-${bt.total.L}-${bt.total.P} (${wpct(bt.total.W,bt.total.L)})`:'—'} &middot; spread error: model ${bt.mae_model} vs market ${bt.mae_market} pts</p>`:''}`}
   function model(){const M=BETS.model;
     return `<div class="panel"><h3>How good is the model? <span class="f">walk-forward: every QB/RB/WR/TE game 2025 wk 3 → latest, projected with only earlier data</span></h3>
       <p class="note">Skill = share of game-to-game variance explained beyond "average player in his slot". Player form carries almost all of it; the matchup layer (opponent-adjusted DvP) and the market-implied team total add a little on top. Raw DvP — what a defense allowed, unadjusted — did <b>not</b> predict next week better than the league average in testing, which is why the rankings now use the adjusted version.</p>
       <table class="fx"><thead><tr><th>Market</th><th>Games</th><th>Form only</th><th>Form + matchup + game</th><th>Matchup β</th><th>Team-total γ</th><th>Half-life</th><th>Calibration (predicted → hit)</th></tr></thead><tbody>
       ${Object.entries(M).map(([m,v])=>`<tr><td style="text-align:left">${MKL[m]||m}</td><td class="mini">${v.n}</td><td>${v.skill_form_only.toFixed(1)}%</td><td><b>${v.skill.toFixed(1)}%</b></td><td class="mini">${v.beta}</td><td class="mini">${v.gamma}</td><td class="mini">${v.H_P} wk</td>
         <td class="mini" style="text-align:left">${(v.calibration||[]).map(c=>`${Math.round(100*c.p)}→${Math.round(100*c.hit)}`).join(' · ')}</td></tr>`).join('')}</tbody></table></div>`}
-  function render(){$('#btOut').innerHTML=tab==='P'?props():tab==='T'?tds():tab==='S'?slip():tab==='L'?ledger():model();bind()}
+  function render(){$('#btOut').innerHTML=tab==='P'?props():tab==='T'?tds():tab==='S'?slip():tab==='L'?ledger():tab==='G'?sides():model();bind()}
   function bind(){const o=$('#btOut');
     o.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=k==='player'||k==='rk'}render()});
     const mk=$('#bfMk');if(mk)mk.onchange=()=>{st.mk=mk.value;render()};const ev=$('#bfEv');if(ev)ev.onchange=()=>{st.minEv=ev.value;render()};
@@ -2206,7 +2229,7 @@ function betboard(){
       addLeg({id:`${l.player}|${l.market}|${l.side}`,player:l.player,team:l.team,opp:l.opp,slot:l.slot,market:l.market,line:l.line,week:l.week,dir:ov?1:-1,p:ov?l.p_over:l.p_under,price:ov?l.over_price:l.under_price,label:`${ov?'o':'u'}${l.line} ${MKL[l.market]}`})});
     o.querySelectorAll('.addtd').forEach(b=>b.onclick=()=>{const t=BETS.td[+b.dataset.i];addLeg({id:`${t.player}|anytime_td`,player:t.player,team:t.team,opp:t.opp,slot:t.slot,market:'anytime_td',line:.5,week:t.week,dir:1,p:t.p,price:t.price,label:'anytime TD'})});
     o.querySelectorAll('.tdpx').forEach(inp=>inp.oninput=()=>{const v=+inp.value,td=inp.closest('tr').querySelector('.tdev');if(!v||Math.abs(v)<100){td.textContent='—';return}
-      const pm=+inp.dataset.pm,mk=(1/am2dec(v))/1.045,p=mk+.35*(pm-mk),e=100*(p*am2dec(v)-1);td.innerHTML=`<b style="color:${e>0?'var(--green)':'var(--red)'}">${e>0?'+':''}${e.toFixed(1)}%</b>`});
+      const pm=+inp.dataset.pm,mk=(1/am2dec(v))/1.045,p=mk+(+inp.dataset.w)*(pm-mk),e=100*(p*am2dec(v)-1);td.innerHTML=`<b style="color:${e>0?'var(--green)':'var(--red)'}">${e>0?'+':''}${e.toFixed(1)}%</b>`});
     o.querySelectorAll('.lgpx').forEach(inp=>inp.onchange=()=>{SLIP[+inp.dataset.i].price=inp.value?+inp.value:null;LS.set('rm.slip',SLIP);render()});
     o.querySelectorAll('.rmleg').forEach(b=>b.onclick=()=>{SLIP.splice(+b.dataset.i,1);LS.set('rm.slip',SLIP);$('#slipN').textContent=SLIP.length||'';render()});
     const sp=$('#sgpPx');if(sp)sp.onchange=()=>{LS.set('rm.sgpPrice',sp.value);render()};
@@ -2215,6 +2238,7 @@ function betboard(){
     const lb=$('#logBet');if(lb)lb.onclick=()=>{const MY=LS.get('rm.bets',[]);MY.unshift({when:new Date().toISOString().slice(0,10),legs:SLIP,price:LS.get('rm.sgpPrice',''),stake:+$('#stk').value||0});LS.set('rm.bets',MY);toast('bet logged');tab='L';
       [...$('#btTabs').children].forEach(x=>x.classList.toggle('on',x.dataset.t==='L'));render()};
     o.querySelectorAll('.rmbet').forEach(b=>b.onclick=()=>{const MY=LS.get('rm.bets',[]);MY.splice(+b.dataset.i,1);LS.set('rm.bets',MY);render()});
+    const lw=$('#lgWk');if(lw)lw.onchange=()=>{st.lw=lw.value;render()};const la=$('#lgAll');if(la)la.onchange=()=>{st.lall=la.checked;render()};
     const ex=$('#betCsv');if(ex)ex.onclick=()=>{const MY=LS.get('rm.bets',[]);const csv=['logged,ticket,price,stake,result'].concat(MY.map(b=>[b.when,'"'+b.legs.map(l=>l.player+' '+l.label).join(' + ')+'"',b.price,b.stake,b.res||'open'].join(','))).join('\n');
       const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='rainman_bets.csv';a.click()}}
   RR.push(render);

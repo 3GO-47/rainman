@@ -39,6 +39,27 @@ def grp(slot):
     if s.startswith('WR'): return s if s in ('WR1', 'WR2', 'WR3') else 'WR4+'
     if s.startswith('TE'): return 'TE1' if s == 'TE1' else 'TE2'
     return ''
+def gprior(slot):
+    """prior group: like grp but starters and backup QBs are separate (a QB1's prior must not include backups' garbage time)"""
+    s = str(slot); return ('QB1' if s == 'QB1' else 'QB2') if s.startswith('QB') else grp(s)
+def role(slot):
+    """role identity for history weighting: exact slot, WR4+ collapsed"""
+    s = str(slot); return 'WR4+' if s.startswith('WR') and s not in ('WR1', 'WR2', 'WR3') else s
+
+def effective_slots(dc):
+    """Next man up: within each team's position row, players listed OUT (injury -1) are skipped and the active players
+    behind them move up (QB/RB/TE renumbered by depth; each WR row's first active player is that row's starter).
+    The weekly snapshot keeps the injured starter in slot 1, which would project his replacement as a backup."""
+    dc = dc.copy(); dc['eslot'] = dc.slot
+    act = dc[dc.injury.astype(str) != '-1']
+    for (team, row), d in act.groupby(['team', 'pos_row']):
+        d = d.sort_values('depth')
+        if row.startswith('WR'):
+            dc.loc[d.index, 'eslot'] = 'WR4+'; dc.loc[d.index[0], 'eslot'] = row
+        elif row in ('QB', 'RB', 'TE'):
+            for k, ix in enumerate(d.index): dc.loc[ix, 'eslot'] = f'{row}{k + 1}'
+    return dc
+
 def dvpcol(market, g):
     m = MARKETS[market][2]
     if g in m: return m[g]
@@ -50,6 +71,7 @@ L = L[L.slot.astype(str).str.match(r'^(QB|RB|WR|TE)')].copy()
 s0 = L.season.min()
 L['t'] = (L.season - s0) * (18 + GAP) + L.week
 L['g'] = L.slot.map(grp); L['pos'] = L.slot.str[:2]
+L['gp'] = L.slot.map(gprior); L['rl'] = L.slot.map(role)
 for m, (cols, _, _) in MARKETS.items(): L['y_' + m] = L[cols].sum(axis=1)
 L['y_anytime_td'] = (L['y_anytime_td'] > 0).astype(float)
 L['tdn'] = L[['rush_td', 'rec_td']].sum(axis=1)
@@ -76,31 +98,35 @@ def defense_effects(ti):
         for d, e in eff.items(): res[(d, c)] = (e, lm)
     return res
 
-def baseline(hist_y, hist_t, ti, prior):
+RW = 1.0
+def baseline(hist_y, hist_t, ti, prior, rm=None):
     w = 0.5 ** ((ti - hist_t) / H_P)
+    if rm is not None: w = w * np.where(rm, 1.0, RW)
     return (np.sum(w * hist_y) + K_P * prior) / (w.sum() + K_P), w.sum()
 
-def base_hk(y, t, ti, prior, h, k):
+def base_hk(y, t, ti, prior, h, k, rm=None, rw=1.0):
     w = 0.5 ** ((ti - t) / h)
+    if rm is not None: w = w * np.where(rm, 1.0, rw)   # games played in a different role count rw as much
     return (np.sum(w * y) + k * prior) / (w.sum() + k)
 
 def slot_priors(P, m):
     y = P['y_' + m] if m != 'anytime_td' else P['tdn']
-    return y.groupby(P.g).mean().to_dict()
+    return y.groupby(P.gp).mean().to_dict()
 
-def project(P, row_player, g, opp, ti, m, eff, prior_by_slot, beta):
+def project(P, row_player, g, opp, ti, m, eff, prior_by_slot, beta, gp=None, rl=None):
     """P = this player's prior games. Returns (mu, base, matchup, n_eff)."""
     ycol = 'y_' + m if m != 'anytime_td' else 'tdn'
-    prior = prior_by_slot.get(g, np.nan)
+    prior = prior_by_slot.get(gp or g, np.nan)
     if np.isnan(prior): return None
-    base, neff = baseline(P[ycol].values.astype(float), P.t.values, ti, prior) if len(P) else (prior, 0.0)
+    rm = (P.rl.values == rl) if (rl is not None and len(P)) else None
+    base, neff = baseline(P[ycol].values.astype(float), P.t.values, ti, prior, rm) if len(P) else (prior, 0.0)
     col = dvpcol(m, g); mx = 1.0
     if col and (opp, col) in eff:
         e, lm = eff[(opp, col)]
         if lm > 0: mx = max(0.6, min(1.4, 1 + beta * e / lm))
     return base * mx, base, mx, neff
 
-GRID_H, GRID_K = (4.0, 8.0, 16.0), (1.5, 3.0, 6.0)
+GRID_H, GRID_K, GRID_R = (4.0, 8.0, 16.0), (1.5, 3.0, 6.0), (1.0, 0.5, 0.25)
 def backtest():
     """Per target game store the components so every parameter combination is scored without recomputing."""
     targets = L[((L.season == 2025) & (L.week >= 3)) | (L.season == 2026)]
@@ -116,16 +142,17 @@ def backtest():
             ir = imp / IMP_AVG if imp else 1.0
             for m, (cols, poss, _) in MARKETS.items():
                 if r.pos not in poss: continue
-                prior = pri[m].get(r.g, np.nan)
+                prior = pri[m].get(r.gp, np.nan)
                 if np.isnan(prior): continue
                 ycol = 'y_' + m if m != 'anytime_td' else 'tdn'
                 hy, ht = H[ycol].values.astype(float), H.t.values
-                bases = [base_hk(hy, ht, ti, prior, hh, kk) for hh in GRID_H for kk in GRID_K]
+                rm = H.rl.values == r.rl
+                bases = [base_hk(hy, ht, ti, prior, hh, kk, rm, rr) for hh in GRID_H for kk in GRID_K for rr in GRID_R]
                 col = dvpcol(m, r.g); er = 0.0
                 if col and (r.opponent, col) in eff:
                     e, lm = eff[(r.opponent, col)]; er = e / lm if lm > 0 else 0.0
                 rows.append((m, getattr(r, 'y_' + m), prior, er, ir, *bases))
-    cols = ['m', 'y', 'prior', 'er', 'ir'] + [f'b_{hh:g}_{kk:g}' for hh in GRID_H for kk in GRID_K]
+    cols = ['m', 'y', 'prior', 'er', 'ir'] + [f'b_{hh:g}_{kk:g}_{rr:g}' for hh in GRID_H for kk in GRID_K for rr in GRID_R]
     return pd.DataFrame(rows, columns=cols)
 
 def combine(x, bcol, beta, gamma):
@@ -139,8 +166,9 @@ def main():
         if not len(x): continue
         best = None
         for hh in GRID_H:
-            for kk in GRID_K:
-                bcol = f'b_{hh:g}_{kk:g}'
+          for kk in GRID_K:
+            for rr in GRID_R:
+                bcol = f'b_{hh:g}_{kk:g}_{rr:g}'
                 for beta in (0.0, 0.5, 1.0, 1.5):
                     for gamma in (0.0, 0.5, 1.0):
                         mu = combine(x, bcol, beta, gamma)
@@ -148,12 +176,14 @@ def main():
                             for c in np.arange(0.6, 1.81, 0.1):
                                 p = np.clip(1 - np.exp(-c * mu), 1e-4, 1 - 1e-4)
                                 ll = -np.mean(x.y * np.log(p) + (1 - x.y) * np.log(1 - p))
-                                if best is None or ll < best[0]: best = (ll, hh, kk, beta, gamma, c)
+                                if best is None or ll < best[0]: best = (ll, hh, kk, beta, gamma, c, rr)
                         else:
                             e = np.mean((x.y.values - mu) ** 2)
-                            if best is None or e < best[0]: best = (e, hh, kk, beta, gamma, None)
-        _, hh, kk, beta, gamma, c = best
-        bcol = f'b_{hh:g}_{kk:g}'; mu = combine(x, bcol, beta, gamma)
+                            if best is None or e < best[0]: best = (e, hh, kk, beta, gamma, None, rr)
+        _, hh, kk, beta, gamma, c, rr = best
+        bcol = f'b_{hh:g}_{kk:g}_{rr:g}'; mu = combine(x, bcol, beta, gamma)
+        sc = float(x.y.sum() / mu.sum()) if m != 'anytime_td' and mu.sum() > 0 else 1.0   # remove the small shrinkage bias (mean actual / mean projection)
+        mu = mu * sc
         mu_form = combine(x, bcol, 0.0, 0.0)
         if m == 'anytime_td':
             def ll(mu_, cc):
@@ -163,7 +193,7 @@ def main():
         else:
             base = np.mean((x.y.values - x.prior.values) ** 2)
             sk, sk_form = 1 - np.mean((x.y.values - mu) ** 2) / base, 1 - np.mean((x.y.values - mu_form) ** 2) / base
-        params[m] = {'H_P': hh, 'K_P': kk, 'beta': beta, 'gamma': gamma, 'skill': round(100 * sk, 2), 'skill_form_only': round(100 * sk_form, 2), 'n': int(len(x))}
+        params[m] = {'H_P': hh, 'K_P': kk, 'RW': rr, 'scale': round(sc, 4), 'beta': beta, 'gamma': gamma, 'skill': round(100 * sk, 2), 'skill_form_only': round(100 * sk_form, 2), 'n': int(len(x))}
         if c is not None: params[m]['c_td'] = round(float(c), 2)
         if m == 'anytime_td':
             p = 1 - np.exp(-c * mu); bins = np.clip((p * 10).astype(int), 0, 9)
@@ -183,7 +213,7 @@ def main():
             bins = np.clip((pp * 10).astype(int), 0, 9)
             params[m]['calibration'] = [{'p': round(float(pp[bins == k].mean()), 3), 'hit': round(float(hit[bins == k].mean()), 3), 'n': int((bins == k).sum())} for k in range(10) if (bins == k).sum() >= 30]
             params[m]['brier'] = round(float(np.mean((pp - hit) ** 2)), 4)
-        report.append(f"| {m} | {params[m]['n']} | {params[m]['skill_form_only']:+.2f}% | {params[m]['skill']:+.2f}% | H={hh:g} K={kk:g} β={beta} γ={gamma}{' c=' + str(params[m].get('c_td')) if c else ''} |")
+        report.append(f"| {m} | {params[m]['n']} | {params[m]['skill_form_only']:+.2f}% | {params[m]['skill']:+.2f}% | H={hh:g} K={kk:g} role-w={rr:g} β={beta} γ={gamma}{' c=' + str(params[m].get('c_td')) if c else ''} |")
     json.dump({'params': {'H_DEF': H_DEF, 'K_DEF': K_DEF, 'GAP': GAP, 'IMP_AVG': round(IMP_AVG, 2)}, 'markets': params, 'dists': dists},
               open('data/processed/prop_model.json', 'w'))
     print('\n'.join(report))
@@ -204,6 +234,9 @@ def current(params, dists):
     eff = defense_effects(ti)
     pri = {m: slot_priors(L, m) for m in MARKETS}
     dc = pd.read_csv(sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1])
+    dc = effective_slots(dc)
+    moved = dc[(dc.eslot != dc.slot) & (dc.injury.astype(str) != '-1') & dc.eslot.str.match(r'^(QB1|RB1|WR[123]$|TE1)')]
+    if len(moved): print('next man up: ' + ', '.join(f'{r.player} {r.team} {r.slot}->{r.eslot}' for r in moved.itertuples()))
     sched = pd.read_csv('data/processed/schedule_2026.csv').set_index('team')
     mt = pd.read_csv('data/processed/matchups_current.csv')
     wk = int(mt.week.iloc[0]) if len(mt) else int(L[L.season == L.season.max()].week.max()) + 1
@@ -211,6 +244,7 @@ def current(params, dists):
     name2id = L.drop_duplicates('player', keep='last').set_index('player').player_id.to_dict()
     out = []
     for r in dc.itertuples():
+        r = r._replace(slot=r.eslot)
         g = grp(r.slot); pos = str(r.slot)[:2]
         if not g or str(getattr(r, 'injury', '1')) == '-1': continue
         o = str(sched.loc[r.team, f'week_{wk}']) if r.team in sched.index else 'BYE'
@@ -219,12 +253,12 @@ def current(params, dists):
         pid = name2id.get(r.player); H = hist.get(pid, L.iloc[0:0])
         for m, (cols, poss, _) in MARKETS.items():
             if pos not in poss or m not in params: continue
-            P_ = params[m]; globals()['H_P'], globals()['K_P'] = P_['H_P'], P_['K_P']
-            pr = project(H, r.player, g, opp, ti, m, eff, pri[m], P_['beta'])
+            P_ = params[m]; globals()['H_P'], globals()['K_P'], globals()['RW'] = P_['H_P'], P_['K_P'], P_.get('RW', 1.0)
+            pr = project(H, r.player, g, opp, ti, m, eff, pri[m], P_['beta'], gprior(r.slot), role(r.slot))
             if pr is None: continue
             mu, base, mx, neff = pr
             imp = IMP.get((2026, wk, r.team)); ix = (imp / IMP_AVG) ** P_['gamma'] if imp else 1.0
-            mu *= ix
+            mu *= ix * P_.get('scale', 1.0)
             row = dict(week=wk, player=r.player, team=r.team, opp=o, slot=r.slot, market=m, proj=round(mu, 2), base=round(base, 2),
                        matchup_x=round(mx, 3), game_x=round(ix, 3), team_implied=round(imp, 1) if imp else '', n_eff=round(neff, 1), games=len(H))
             if m == 'anytime_td':
