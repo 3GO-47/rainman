@@ -221,3 +221,11 @@
   #homeBot (brief + slate map). Deleted: homeBoard(), socialHome(), home best/worst, momentum, volatility, SOS, system panel,
   games props() + BET.props payload, betboard sides() -> global sidesTable() at top of games matchups().
 - v2: VIEWS per pane, KPIs on bets (games/plays/edge/smash/storylines), homeOrder + order CSS removed, betstatus collapsed by default.
+
+## 2026-10-06 (c) — v3 redesign
+- skin.css rewritten (tokens: --money #19e68c, --signal, --hot, --ice; fonts Barlow Condensed + Inter). skin.js: header#hdr
+  (brand, nav moved in, sliding .ind, search + glossary), #ticker (EV>=3 lines, duplicated run for loop, click -> playerPop),
+  footer#ftr (data meta), notes clamp (.v2note) instead of infob chips, countUp only on .kpi .v (table numbers no longer animate).
+- Template: hs() headshots (J.ph name->espn id from roster_2026 via pfr_id / name+team), PLOG/MSTAT/mhist/hitStrip/mAvg,
+  playsStrip() top-plays cards, props columns Last 10 + L5 avg, popup lines block, smash board + depth-chart starter headshots,
+  LOG.cmp (index 28). Local screenshots: npm @fontsource fonts served through playwright routes (google fonts blocked here).
