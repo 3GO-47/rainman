@@ -279,3 +279,14 @@
   Player props/Anytime TD/Game lines); single-view tabs hide the sub row's tabs. F1–F11 route through go(); number keys
   dropped. F-key labels and the find-button text hide under 1750 px so all eleven tabs fit at 1500. Item ids unchanged
   (hashes still work; lines2 aliases glines). Matchup Lab stays the landing view.
+
+## 2026-10-06 (j) — pro skin: black background
+- Josh: "the only rule is black background. everything else is up to you. make it professional."
+- Tokens: --bg #000, --panel #0b0b0c, --s2/--s3 graphite, --edge #1d1e21 / #2a2b30, neutral greys (no blue tint),
+  accent #e8b339 used only for active tab underline / league switch / links; selected chips are white-filled.
+- Rank badges: gradeStyle() tinted pills (hue from gradeH, translucent bg + colored figure + inset hairline) replace solid
+  blocks; gradeColor desaturated; matrix bands muted; POSC muted. Panels radius 4, no fade animation, th 9.5px caps.
+- Slate map packs windows into CSS columns (.smap) instead of a 3-col grid with tall empty cells.
+- foldNotes(): any .controls > .note over 90 chars becomes a ? hint chip (hover / tap shows the text); MutationObserver
+  re-folds after re-renders.
+- Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
