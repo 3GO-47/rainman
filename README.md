@@ -11,8 +11,9 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 Players · Defenses · TD Board · Schedule · Intel · Games & Picks · Locker Room · Bets (F1–F11), row 2 is that tab's
 views (Players: Matchup Lab · Player Explorer · Depth Charts; Defenses: Rankings · Matrix · Observatory; Bets: Player
 props · Anytime TD · Game lines; Home: Overview · Insights · Fantasy) with a one-line description of the open view.
-Content gets the full width. Type: Inter for chrome, JetBrains Mono for data; one amber accent; rank colors unchanged
-(green = allows the most = best matchup).
+Content gets the full width. Skin: pure black background, graphite panels with hairline borders, Inter for chrome and
+JetBrains Mono for data, one amber accent (active tab / league), white-filled selected chips, rank badges as tinted
+pills (green = allows the most = best matchup, red = stingiest). Long how-to-read paragraphs fold into a `?` chip.
 The landing view is the **Matchup Lab** (Players › Matchup Lab): every starter this week with his own per-game
 averages (this season, and cumulative across every scraped season — 2024–26) beside what the opponent allows to his
 slot, the opponent's DvP rank per stat, Ψ, Ψ+ and projection; every column sorts, every filter (position, depth, injury,
