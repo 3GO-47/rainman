@@ -114,7 +114,23 @@ def betting_payload():
     M = json.load(open(P + 'prop_model.json'))
     meta = json.load(open(P + 'dvp_adjusted_meta.json')) if os.path.exists(P + 'dvp_adjusted_meta.json') else {}
     td = rows('bet_td.csv')[:260]
-    return {'lines': rows('bet_lines.csv'), 'td': td, 'corr': json.load(open(P + 'bet_corr.json')),
+    # every projected player x market (not just posted DK lines) so F11 can research any prop at any line
+    proj = []
+    if os.path.exists(P + 'prop_projections.csv'):
+        PJ = pd.read_csv(P + 'prop_projections.csv')
+        PJ = PJ[(PJ.market != 'anytime_td') & (PJ.games > 0) & ~PJ.slot.isin(['QB3', 'QB4', 'RB4'])]
+        proj = [[r.player, r.team, r.opp, r.slot, r.market, round(float(r.proj), 1), r.q10, r.q50, r.q90, round(float(r.n_eff), 1),
+                 round(float(r.matchup_x), 3), round(float(r.game_x), 3)]
+                for r in PJ.itertuples()]
+    # three seasons of closing lines + scores for team trend charts (ATS margin, team / game totals vs today's numbers)
+    glh = []
+    if os.path.exists(P + 'game_lines.csv'):
+        GL = pd.read_csv(P + 'game_lines.csv')
+        for r in GL.itertuples():
+            sc = r.away_score == r.away_score
+            glh.append([int(r.season), int(r.week), r.away_team, r.home_team, int(r.away_score) if sc else None,
+                        int(r.home_score) if sc else None, r.spread_line, r.total_line])
+    return {'lines': rows('bet_lines.csv'), 'td': td, 'proj': proj, 'glh': glh, 'corr': json.load(open(P + 'bet_corr.json')),
             'model': {k: {kk: vv for kk, vv in v.items()} for k, v in M['markets'].items()}, 'dists': M['dists'],
             'ledger': rows('bet_ledger.csv'), 'dvpMeta': meta,
             'week': int(pd.read_csv(P + 'prop_projections.csv').week.iloc[0]) if os.path.exists(P + 'prop_projections.csv') else None}
