@@ -290,3 +290,17 @@
 - foldNotes(): any .controls > .note over 90 chars becomes a ? hint chip (hover / tap shows the text); MutationObserver
   re-folds after re-renders.
 - Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
+
+## 2026-10-06 (k) — effective depth charts + player averages on every player tab
+- Josh: rosters must reflect long-term injuries (Daniels QB1 for TB while Mayfield is out; Kamara RB1 with Etienne on IR,
+  Miller vs Donaldson for RB2), then bring every tab to the Matchup Lab's level of detail.
+- build_depth_chart.py rewritten: effective slots (OUT last, usage-adjacent swaps for RB/TE/WR rows, WR starters ordered by
+  L2 targets), note / trend / l2 / se / gp / espn_depth / log_name columns. 10-06 snapshot rebuilt from the raw ESPN dump:
+  53 effective changes (TB QB Daniels, CHI QB Bagent, WAS QB Kaliakmanis, NYJ RB Allen, PHI TE Ertz, MIN WR Felton, ...).
+  NO backfield unchanged by rule (Miller 16 vs Donaldson 6 opps L2) — the trend glyphs carry the story instead.
+- build_prop_model.effective_slots() trusts a snapshot that already has espn_depth (no second re-slotting).
+- Template: UNIVERSE gains ln/note/trend/l2/se/gp/espn; PLOGS/USG joins use the log name (Kenny -> Kenneth Gainwell,
+  "Jr." suffixes); trendGlyph() on Lab, Big Board, TD Board, Weekly Matchups, Depth Charts. Weekly Matchups cells show
+  "his <avg> ▲/▼" under what the defense allows; TD Board gets his TD/gm (season · all · gp); Big Board gets PPR/gm
+  (season · all · gp); Depth Charts show effective order, strike-through OUT, workload 12/9, "esp N" when ESPN differs.
+- Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
