@@ -261,3 +261,14 @@
   footer .sfoot carries the data provenance. Removed #side, #rail, side-min/side-open, #gTog. Clicking a section tab
   returns to the last view used in it (SEC_LAST). Mobile: section tabs wrap onto their own scrollable row.
 - Verified: Playwright tour of every view, NFL + NCAA, 1500 and 390 px: 0 JS errors, scrollWidth == viewport.
+
+## 2026-10-06 (h) — Matchup board is the landing view; player averages
+- Josh: the filterable / sortable player list vs opposing defensive ranks is the most valuable part; wants player
+  averages for the current season and cumulative 2024-26, NFL + NCAA.
+- `lab` renamed "Matchup board", moved to This week as key 1 (overview 2, insights 3, matchups 4, lines 5, explorer 6);
+  default view (no hash) = lab. Column groups: opp DvP rank | model (Ψ Ψ+ PROJ) | player avg / gm | opp allows / gm | ω.
+- Player averages: statOf(col, logRow) maps every DvP stat column to the player's own game-log stat (QB TD = rush+rec TD,
+  P+R, R+R); avgOf over PLOGS[player] for LAST_SE (current season) and all seasons; #labAvg picks which leads the cell
+  and sorts (the other sits small); ▲/▼ compares the lead average to the opponent's allowed/gm; GP = season · all.
+  Multi-position grid gets the same via the unified columns (x0..x6). Sticky player column; College column NFL-only.
+- Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow (board scrolls inside its panel).
