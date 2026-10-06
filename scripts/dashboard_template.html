@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
-:root{--bg:#0a0c10;--panel:#10141a;--s2:#151b23;--s3:#1b222c;--edge:#222932;--edge2:#303945;--txt:#e7ebf0;--dim:#8b95a5;--dim2:#5f6977;
---amber:#f0b429;--accent:#f0b429;--green:#2fd36f;--red:#ff5a4e;--cyan:#5cc8f5;--violet:#b39ddb;
+:root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--txt:#e6e6e8;--dim:#9a9ca4;--dim2:#60626a;
+--amber:#e8b339;--accent:#e8b339;--green:#3fb950;--red:#f0564a;--cyan:#8ab4d8;--violet:#a99bd6;
 --ui:Inter,"Segoe UI",system-ui,sans-serif;--mono:"JetBrains Mono","IBM Plex Mono",Consolas,"Cascadia Code",monospace;--side:248px}
 *{box-sizing:border-box}
 html{background:var(--bg)}
@@ -434,6 +434,78 @@ header,#legacyNav nav{display:none}
  .panel{padding:10px;border-radius:6px}
  .sfoot{gap:10px;padding:8px 10px 12px}
 }
+
+/* ============================================================
+   RAINMAN pro skin — pure black, graphite surfaces, hairlines, one accent
+   ============================================================ */
+html,body{background:#000}
+body{font-size:12.5px}
+#top{background:rgba(0,0,0,.94);border-bottom:1px solid var(--edge)}
+#hdr{height:48px;border-bottom:1px solid var(--edge)}
+.brand{font:600 13px/1 var(--ui);letter-spacing:.18em;color:var(--txt);border-right:1px solid var(--edge)}
+.lgsw{border-radius:3px}.lgsw a.on{background:var(--accent);color:#000}
+#tnav button{font:500 12.5px/1 var(--ui);color:var(--dim)}#tnav button:hover{color:var(--txt)}
+#tnav button.on{color:var(--txt);font-weight:600;border-bottom-color:var(--accent)}
+#tnav button .fk{color:var(--dim2)}#tnav button.on .fk{color:var(--accent)}
+#sub{background:#000;height:34px;border-bottom:1px solid var(--edge)}
+#snav .sitem{font:500 12px/1 var(--ui);color:var(--dim)}#snav .sitem:hover{background:transparent;color:var(--txt)}
+#snav .sitem.on{color:var(--txt);border-bottom-color:var(--accent);font-weight:600}
+#crumb{color:var(--dim2)}
+#gbar{padding:7px 20px 8px;background:#000}
+.gl{color:var(--dim2);font:600 9.5px/1 var(--ui);letter-spacing:.14em}
+#gFind,#gHelp,#gShare,#gClear,select,input,.chips button,.tabs button,.sfl button,.sfl a,.r11seg button,.r11mk button,.r11lc button,.r11chips button,.r11p,.r11alt button,.pq,.sfoot a{background:var(--panel);border:1px solid var(--edge2);border-radius:3px;color:var(--dim)}
+#gFind:hover,#gHelp:hover,#gShare:hover,.chips button:hover,.tabs button:hover,.r11chips button:hover,.pq:hover{border-color:#4a4b52;color:var(--txt)}
+select,input{color:var(--txt)}select:focus,input:focus{border-color:var(--accent)}
+.chips button{padding:3px 9px;font:500 10.5px/1.3 var(--ui);letter-spacing:.03em}
+.chips button.on,.tabs button.on,.r11chips button.on,.r11side button.on,.lgsw a.on{background:var(--txt);color:#000;border-color:var(--txt);font-weight:600}
+.chips button .n{color:var(--dim2)}.chips button.on .n{color:#333}
+.r11seg button.on,.r11mk button.on{background:var(--s3);color:var(--txt);border-color:#4a4b52}
+#gClear:hover{color:var(--red);border-color:var(--red)}#gbar.has #gClear{color:var(--txt);border-color:#4a4b52}
+#gSum{color:var(--dim2)}
+/* content surfaces */
+main{padding:16px 20px 48px}
+.panel,.r11list,.r11det,.r11box,.r11lc,.r11sum>div,.r11mg>div,.r11ld,.b11tot,.b11mdl,.gamecard,.modalbox,.palbox{background:var(--panel);border:1px solid var(--edge);border-radius:4px}
+.panel{padding:12px 14px;margin-bottom:12px}
+main>div{animation:none}
+h3{font:600 12.5px/1.3 var(--ui);color:var(--txt);border-bottom:1px solid var(--edge);padding-bottom:8px;margin-bottom:10px}
+h3 .f{color:var(--dim2);font:400 11px/1.4 var(--ui)}
+.note,.mini{color:var(--dim2)}.note{font:400 11px/1.5 var(--ui)}
+/* tables */
+table{font-size:11.5px}
+th{color:var(--dim2);background:var(--panel);font:600 9.5px/1.3 var(--ui);letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid var(--edge2)}
+th.rk,th.pa{color:var(--dim)}
+th,td{border-bottom:1px solid var(--edge)}
+tr:hover td{background:var(--s2)}
+.badge{min-width:26px;border-radius:3px;font:600 11px/1.6 var(--mono);padding:0 5px}
+.psi{font-weight:600}
+.slate{border:1px solid var(--edge2);color:var(--dim);background:transparent;border-radius:3px;font:600 9.5px/1.5 var(--ui);letter-spacing:.06em}
+.tag{border-color:var(--edge2);background:transparent;color:var(--dim);border-radius:3px;font:500 10px/1.5 var(--ui)}
+.pos{border-radius:3px;font:600 10px/15px var(--ui);letter-spacing:.04em;background:transparent}
+.inj0{color:var(--amber)}.injm1{color:var(--red)}
+.plink:hover,.pp:hover{color:var(--accent)}
+/* matchup board */
+#labTbl tr.grp th{background:#000;color:var(--dim2);border-left:1px solid var(--edge2)}
+#labTbl tr.grp th.pa{color:var(--dim)}#labTbl tr.grp th.pa b{color:var(--txt)}
+#labTbl tbody td:first-child,#labTbl thead tr:not(.grp) th:first-child{background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
+#labTbl td.pa b{color:var(--txt)}
+/* bets module */
+.r11row{border-bottom-color:var(--edge)}.r11row:hover{background:var(--s2)}.r11row.on{background:var(--s3)}
+.r11rg button.on{border-bottom-color:var(--accent)}
+#r11Ln{color:var(--accent);border-color:var(--accent)}
+.r11prof{color:var(--accent)}
+/* footer */
+.sfoot{border-top:1px solid var(--edge);color:var(--dim2);background:#000}
+.sfoot .sub b{color:var(--dim)}
+/* scrollbars */
+*{scrollbar-color:#2a2b30 transparent}
+.smap{display:block;columns:3;column-gap:14px}.smap>div{break-inside:avoid;margin-bottom:14px}.smap table{width:100%}
+@media (max-width:1100px){.smap{columns:2}}@media (max-width:700px){.smap{columns:1}}
+/* long how-to-read paragraphs under control rows collapse into a ? chip (hover / tap for the text) */
+.hint{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1px solid var(--edge2);border-radius:3px;color:var(--dim2);font:600 10.5px/1 var(--ui);cursor:help;flex:none;position:relative}
+.hint:hover{color:var(--txt);border-color:#4a4b52}
+.hint .hb{display:none;position:absolute;left:0;top:24px;z-index:30;width:min(520px,80vw);background:var(--s2);border:1px solid var(--edge2);border-radius:4px;padding:8px 10px;font:400 11px/1.5 var(--ui);color:var(--dim);text-align:left;white-space:normal;box-shadow:0 12px 30px rgba(0,0,0,.6)}
+.hint:hover .hb,.hint.open .hb{display:block}
+@media (max-width:840px){#hdr{height:auto}#sub{height:34px}}
 </style></head><body>
 <div id="legacyNav" hidden><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
@@ -490,15 +562,19 @@ const $=q=>document.querySelector(q);
 const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
 const stdev=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)*(x-m))))};
-function gradeColor(rank,n=NT){const t=Math.max(0,Math.min(1,(rank-1)/(n-1)));
-  const h=t<.5?145-(t*2)*85:60-((t-.5)*2)*60;return `hsl(${h},52%,${45-t*4}%)`}
+const gradeT=(rank,n=NT)=>Math.max(0,Math.min(1,(rank-1)/(n-1)));
+const gradeH=t=>t<.5?145-(t*2)*85:60-((t-.5)*2)*60;
+function gradeColor(rank,n=NT){const t=gradeT(rank,n);const h=gradeH(t);return `hsl(${h},${h>100?45:60}%,${h>100?48:58}%)`}
+// tinted pill: colored figure on a translucent tint of the same hue — reads on pure black without shouting
+function gradeStyle(rank,n=NT){const t=gradeT(rank,n);const h=gradeH(t);const sat=h>100?45:62;
+  return `background:hsla(${h},${sat}%,45%,.17);color:hsl(${h},${sat}%,${h>100?55:64}%);box-shadow:inset 0 0 0 1px hsla(${h},${sat}%,50%,.32)`}
 function gradeBg(rank){ // 6 discrete bands: greens -> slate middle -> reds
-  if(rank<=5*RS)  return 'hsla(145,70%,38%,.85)';
-  if(rank<=10*RS) return 'hsla(150,45%,29%,.85)';
-  if(rank<=16*RS) return 'hsla(210,16%,30%,.85)';
-  if(rank<=21*RS) return 'hsla(222,18%,22%,.85)';
-  if(rank<=27*RS) return 'hsla(8,45%,33%,.85)';
-  return 'hsla(2,70%,42%,.85)';}
+  if(rank<=5*RS)  return 'hsla(145,55%,34%,.9)';
+  if(rank<=10*RS) return 'hsla(150,38%,25%,.9)';
+  if(rank<=16*RS) return 'hsla(220,6%,20%,.9)';
+  if(rank<=21*RS) return 'hsla(220,6%,14%,.9)';
+  if(rank<=27*RS) return 'hsla(8,42%,30%,.9)';
+  return 'hsla(4,58%,40%,.9)';}
 const SCACHE={};
 function series(def,stat){const se=TREND_SE;const k=def+'|'+stat;
   if(SCACHE[k])return SCACHE[k];
@@ -546,7 +622,7 @@ function fieldTilt(vis,home,pos){
    <ellipse cx="${cx.toFixed(1)}" cy="9" rx="5.2" ry="3.4" fill="#5c3a1e" stroke="#cfd8dc" stroke-width=".6"/>
    <line x1="${(cx-2.4).toFixed(1)}" y1="9" x2="${(cx+2.4).toFixed(1)}" y2="9" stroke="#e6e6e6" stroke-width=".8"/></svg>`;}
 function badge(rank){if(rank===''||rank==null||isNaN(rank))return '<span class="dim">—</span>';
-  return `<span class="badge" style="background:${gradeColor(+rank)}">${(+rank).toFixed(+rank%1?1:0)}</span>`}
+  return `<span class="badge" style="${gradeStyle(+rank)}">${(+rank).toFixed(+rank%1?1:0)}</span>`}
 function psi(v){if(v==null||isNaN(v))return '—';
   return `<span class="psi" style="color:${gradeColor(+v)}">${(+v).toFixed(1)}</span>`}
 function spec(v,max){const w=max>0?Math.min(100,100*v/max):0;
@@ -573,7 +649,7 @@ const HEAD=id=>IS_NFL?`https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/pla
 const tlogo=(t,px=17)=>TEAM[t]?`<img class="tl" src="${LOGO(t)}" style="width:${px}px;height:${px}px" alt="">`:'';
 const tcell=t=>TEAM[t]?`<span class="tc">${tlogo(t)}<span style="color:${TEAM[t].c1}">${t}</span></span>`:esc(t||'');
 const oppcell=o=>!o||o==='BYE'?(o||'—'):(o[0]==='@'?'@':'')+tcell(o.replace('@',''));
-const POSC={QB:'#4fc3f7',RB:'#b388ff',FB:'#b388ff',WR:'#f06292',TE:'#ffd600','D/ST':'#90a4ae'};
+const POSC={QB:'#6db3e8',RB:'#a78bfa',FB:'#a78bfa',WR:'#ef7fb0',TE:'#e3b341','D/ST':'#9aa5b1'};
 const posOf=x=>!x?'':(x[0]==='D'?'D/ST':x.slice(0,2));
 function posIcon(p,px=12){const c=POSC[p]||'#8b98a5';
   const G={QB:`<ellipse cx="8" cy="8" rx="6" ry="3.7" transform="rotate(-28 8 8)" fill="none" stroke="${c}" stroke-width="1.2"/><path d="M6.2 9.4 L9.8 6.6 M7 9.9 L7.6 8.4 M8.4 7.8 L9 6.3" stroke="${c}" stroke-width="1" fill="none"/>`,
@@ -1516,7 +1592,7 @@ function home(){
     const a=f(g[GM.vis],g[GM.home]),b=f(g[GM.home],g[GM.vis]);const d=b-a;return {fav:d>0?g[GM.vis]:g[GM.home],mag:Math.abs(d),a,b}};
   const bySlate={};gsw.forEach(g=>(bySlate[g[GM.slate]]=bySlate[g[GM.slate]]||[]).push(g));
   const slateMap=`<div class="panel"><h3>wk ${wk} slate map <span class="f">every kickoff window &middot; ET / CT &middot; tilt = which offense sits in the softer field (mean &Psi; of its QB/RB/WR/TE roles vs the opposing D) &middot; click a window to filter every tab to it</span></h3>
-   <div class="grid3">${SLATE_ORDER.filter(s=>bySlate[s]).map(s=>`<div><p class="mini" style="cursor:pointer" data-slate="${s}">${slateChip(s)} <span style="color:var(--txt)">${SLATE_TIP[s]}</span> &middot; ${bySlate[s].length}</p>
+   <div class="grid3 smap">${SLATE_ORDER.filter(s=>bySlate[s]).map(s=>`<div><p class="mini" style="cursor:pointer" data-slate="${s}">${slateChip(s)} <span style="color:var(--txt)">${SLATE_TIP[s]}</span> &middot; ${bySlate[s].length}</p>
      <table><tbody>${bySlate[s].map(g=>{const t=tilt(g);return `<tr><td>${tcell(g[GM.vis])} @ ${tcell(g[GM.home])}</td><td class="mini">${g[GM.time]?g[GM.time].replace(' ','')+'/'+ctTime(g[GM.time]).replace(' CT','').replace(' ',''):'TBD'}</td><td>${tcell(t.fav)} <span class="mini">+${t.mag.toFixed(1)}&Psi;</span></td></tr>`}).join('')}</tbody></table></div>`).join('')}</div>
    ${gsw.length?'':'<p class="note">no games in the current filter</p>'}</div>`;
   $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+slateMap+'<div id="bbHomeSlot"></div>'+curvature+'<div id="briefSlot"></div></div><div data-sub="insights">'+`<div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
@@ -2004,7 +2080,7 @@ function conv(player,team,def,grp,wk){wk=wk||G.week;const D=J.dvp.combined;const
   const parts=[['DvP Ψ '+psiV+(t?' × trust '+t.s:''),dvpAdj,.55],['scheme edge',sch,.15],['environment',env,.15],['role (snap+tgt share)',role,.15]].filter(p=>p[1]!=null);
   const W=parts.reduce((a,p)=>a+p[2],0);const s=Math.round(parts.reduce((a,p)=>a+p[1]*p[2],0)/W);
   return {s,parts,tip:parts.map(p=>`${p[0]}: ${Math.round(p[1])} (w ${p[2]})`).join(' · ')}}
-const convBadge=c=>{if(!c)return '<span class="dim">—</span>';const rank=1+(100-c.s)/100*31;return `<span class="badge" style="background:${gradeColor(rank)}" title="Ψ+ conviction ${c.s}/100 — ${c.tip}">${c.s}</span>`};
+const convBadge=c=>{if(!c)return '<span class="dim">—</span>';const rank=1+(100-c.s)/100*31;return `<span class="badge" style="${gradeStyle(rank)}" title="Ψ+ conviction ${c.s}/100 — ${c.tip}">${c.s}</span>`};
 /* ---------- WAIVER RADAR: unrostered players (not in the Master Key draft results) ranked for pickup ----------
    score = 0.4 × this week's projection + 0.6 × mean projection of the next 3 weeks (byes count 0) + role bonus
    (last game snap share above his season average: +10 PPR-pts per +100 pp, capped ±2) — the board for a waiver claim. */
@@ -2261,7 +2337,7 @@ function homeBoard(){RR.push(()=>{const slot=$('#bbHomeSlot');if(!slot)return;co
   const R=UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>({u,r:projection(u,wk)})).filter(x=>x.r).sort((a,b)=>b.r.p-a.r.p);
   const top=R.slice(0,12),mx=Math.max(1,...top.map(x=>x.r.ceil));const lifts=[...R].sort((a,b)=>(b.r.p-b.r.base)-(a.r.p-a.r.base));
   const row=x=>`<tr><td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(x.u.team)}</td><td>${slotchip(x.u.dslot)}</td><td>${oppcell(x.r.o)}</td><td title="${esc(x.r.tip)}"><b>${x.r.p.toFixed(1)}</b></td><td>${rangeBar(x.r,mx)}</td><td class="${x.r.p-x.r.base>=1?'rise':x.r.p-x.r.base<=-1?'fall':'mini'}">${x.r.p-x.r.base>0?'+':''}${(x.r.p-x.r.base).toFixed(1)}</td></tr>`;
-  slot.innerHTML=R.length?`<div class="panel"><h3>wk ${wk} big board — top projections <span class="f">projected PPR from every layer &middot; lift = projection minus his own baseline &middot; full board under Research a player → Projections</span></h3>
+  slot.innerHTML=R.length?`<div class="panel"><h3>wk ${wk} big board — top projections <span class="f">projected PPR from every layer &middot; lift = projection minus his own baseline &middot; full board under Big Board (F2)</span></h3>
    <div class="grid2"><div><p class="mini">highest projections</p><table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>proj</th><th>range</th><th>lift</th></tr></thead><tbody>${top.map(row).join('')}</tbody></table></div>
    <div><p class="mini">biggest matchup lifts <span class="dim">(and drags)</span></p><table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>proj</th><th>range</th><th>lift</th></tr></thead><tbody>${lifts.slice(0,7).map(row).join('')}${lifts.slice(-5).reverse().map(row).join('')}</tbody></table></div></div></div>`:''})}
 /* ---------- GAMES & PICKS: market lines vs the RAINMAN game model, frozen picks ledger, player props ---------- */
@@ -2668,6 +2744,11 @@ const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
+function foldNotes(root=document){root.querySelectorAll('.controls > .note:not(.kept), .controls > span.note').forEach(n=>{if(n.textContent.trim().length<90){n.classList.add('kept');return}
+  const h=document.createElement('span');h.className='hint';h.title='how to read this view';h.innerHTML='?<span class="hb"></span>';h.querySelector('.hb').append(...n.childNodes);n.replaceWith(h);
+  h.onclick=e=>{e.stopPropagation();h.classList.toggle('open')}})}
+foldNotes();new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1)foldNotes(n.parentNode||document)}).observe($('main'),{childList:true,subtree:true});
+addEventListener('click',()=>document.querySelectorAll('.hint.open').forEach(h=>h.classList.remove('open')));
 buildSide();go(CUR_ITEM,{silent:true});
 addEventListener('hashchange',()=>{const h=new URLSearchParams(location.hash.replace(/^#/,''));const v=h.get('v')||'lab';if(ITEMS[v]&&v!==CUR_ITEM)go(v,{silent:true})});
 </script></body></html>
