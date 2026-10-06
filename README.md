@@ -50,7 +50,7 @@ Pipeline (all in `refresh.py`, all reproducible from `data/game_logs/`):
    distributions from historical residuals. Results in `notes/model_validation.md`.
 3. `build_bets.py` → `bet_lines.csv` (lines + model + EV), `bet_td.csv` (anytime-TD fair prices), `bet_ledger.csv`
    (every line frozen when first seen, graded from box scores), `bet_corr.json` (same-game correlations for SGPs).
-   Probability = 35% model + 65% no-vig market, until the ledger shows a bigger edge.
+   Probability = market + w·(model − market), w up to 35% and scaled down for players with < 4 games of history in the role, until the ledger shows a bigger edge.
 4. Prices: DraftKings lines via ESPN arrive without prices (EV assumes −110). For **FanDuel prices**, put a free
    The Odds API key in `.env` (`ODDS_API_KEY=...`, git-ignored); `refresh.py` then runs `fetch_odds_api.py`.
 
@@ -149,6 +149,11 @@ player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcu
 (viewport meta + media queries); click any player name anywhere for his card.
 
 ## Changelog
+- 2026-10-06 — **Week 4 graded, week 5 loaded, prop model fixed.** First ledger week: plays (EV ≥ 3%) 27-20, record rising
+  with edge (details in `notes/model_validation.md`). Fixes: QB1/QB2 priors split (QB projection error −24–28%), role-weighted
+  history, mean-bias scale, next-man-up projections for OUT starters, model weight scaled by the player's history. Bet Board
+  gains a **Sides & totals** tab (spreads/totals, implied team points, model edges, honest backtest) and a ledger broken
+  down by edge bucket and market with week filter.
 - 2026-10-05 — **Betting-first: Bet Board (F2).** Matchup rankings now opponent-adjusted + recency-weighted (half-life
   12 wk) because raw DvP failed a walk-forward test; per-market prop model (form × matchup × implied team total) with
   honest skill numbers; priced props, anytime-TD fair prices, correlated SGP pricer with Kelly staking, frozen + graded
