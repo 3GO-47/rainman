@@ -304,3 +304,15 @@
   "his <avg> ▲/▼" under what the defense allows; TD Board gets his TD/gm (season · all · gp); Big Board gets PPR/gm
   (season · all · gp); Depth Charts show effective order, strike-through OUT, workload 12/9, "esp N" when ESPN differs.
 - Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
+
+## 2026-10-06 (l) — v3 visuals: Home, TD Board, Schedule, Games & Picks, Intel, Locker Room, Bets
+- Josh: "far too much wasted space and unholistic views on the homepage. make new visuals. drastic improvements" to the
+  seven tabs above.
+- Primitives: kpi(), hbar(), tiltBar(), heatCell(), meanPsi(); CSS .kpis/.kpi, .hg2/.hg2b/.hg3, .srow/.rrow, .heat, .tdcards,
+  .sk heat grid, .gboard, .wkbars, .tagmx, .mkchips. Home composition rewritten (slate map + smash board + two projection
+  tables → KPI strip, slate board, role board, movers, single projections table with PPR/gm, DvP field heat). TD board:
+  fields by role + anytime cards (rush+rec rate × field) + folded plots. Schedule: lens/sort/summary columns, abbr cells.
+  Games: board table, <details> cards (open for the filtered game), weekly bars, props tab retired. Intel: #inWeek scheme
+  edge table (offense × role, starter named). Locker: thread matrix + sorted collapsible cards. Bets: #r11Kpi + market chips
+  (old #r11Mk hidden).
+- Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow.
