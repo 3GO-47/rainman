@@ -203,8 +203,37 @@ tr.bdrow td{background:rgba(255,213,79,.06)}
  .modalbox{padding:10px 8px}
  canvas.chart{max-height:220px}
 }
-.b11s{overflow-x:auto;max-width:100%}.b11s table{width:100%}.b11s td,.b11s th{white-space:nowrap}
-.hit11{display:inline-flex;gap:2px;vertical-align:middle}.hit11 i{width:6px;height:11px;background:#4a2326}.hit11 i.y{background:#00c853}
+/* F11 bets */
+#bets th{position:static}
+#bets .b11slate{margin-top:16px;border-bottom:1px solid var(--edge2)}
+.b11gh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.b11gh b{font-size:13px;letter-spacing:1px}.b11gh .f{margin-left:8px}
+.b11gl{display:grid;grid-template-columns:minmax(0,1fr) 210px 260px;gap:14px;align-items:stretch;margin:6px 0 4px}
+.b11sbw{overflow-x:auto}.b11sb{width:100%;border-collapse:collapse}.b11sb td{padding:7px 8px;vertical-align:middle;white-space:nowrap}.b11sb th{white-space:nowrap}
+.b11tm{text-align:left}.b11tm img{vertical-align:middle;margin-right:6px}.b11tm>div{display:inline-block;vertical-align:middle}.b11tm b{font-size:13px;letter-spacing:1px}.b11tm .mini{display:block}
+.b11big{font-size:15px;font-weight:bold;color:#fff}
+.b11sub{display:block;font-size:9.5px;color:var(--dim)}
+.b11last{text-align:left}.b11res{display:inline-block;min-width:46px;margin-right:3px;padding:1px 4px;border:1px solid var(--edge2);font-size:10px;text-align:center;font-weight:bold}
+.b11res.w{color:#00c853;border-color:#1e5a33}.b11res.l{color:#ff5252;border-color:#5a1e22}.b11res em{display:block;font-style:normal;color:var(--dim);font-size:9px;font-weight:normal}
+.b11tot,.b11mdl{border:1px solid var(--edge);padding:8px 10px;background:#030303}
+.b11tot .k,.b11mdl .k{color:var(--dim);font-size:9.5px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.b11tot .v{font-size:30px;font-weight:bold;color:#fff;line-height:1.05}
+.b11split{display:flex;height:17px;margin:7px 0 6px;gap:2px}.b11split i{font-style:normal;font-size:10px;color:#000;font-weight:bold;text-align:center;line-height:17px}
+.b11mdl div{margin:4px 0}.b11mdl b{color:#fff}
+.b11fl{margin:8px 0 0}
+.b11final{margin-top:6px;padding:5px 8px;border-left:3px solid var(--amber);background:#06101c}
+.b11pt{width:100%;border-collapse:collapse}.b11pt td,.b11pt th{white-space:nowrap;padding:5px 7px;vertical-align:middle}
+.b11grp tr:first-child td{border-top:1px solid var(--edge2)}
+.b11who{text-align:left!important;vertical-align:top!important;padding-left:8px!important;min-width:150px}.b11who .pp{display:block;font-weight:bold;color:#fff;font-size:12px}.b11who .mini{display:block;margin-top:3px}
+.b11mk{text-align:left}
+.b11bars,.b11rng{vertical-align:middle;display:inline-block}
+.b11pb{display:inline-block;width:70px;height:7px;background:#161b22;vertical-align:middle;margin-right:5px}.b11pb i{display:block;height:100%;background:var(--amber)}
+.b11dots{display:inline-flex;gap:2px;vertical-align:middle}.b11dots i{width:11px;height:11px;border-radius:50%;font-style:normal;font-size:8px;line-height:11px;text-align:center;color:#000;font-weight:bold}
+.b11dots i.y{background:#00c853}.b11dots i.n{background:#2a1416;border:1px solid #4a2326}.b11dots i.e{border:1px dashed #262626}
+.b11side{display:flex;align-items:center;gap:6px;padding:4px 2px;margin-bottom:4px}.b11side b{font-size:13px;letter-spacing:1px}.b11side .mini{margin-left:auto}
+.b11lead{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}.b11ld{border:1px solid var(--edge);padding:7px 9px;display:flex;flex-direction:column;gap:3px;background:#030303}.b11ld>b{color:#fff;font-size:13px}
+.b11s{overflow-x:auto;max-width:100%}
+@media(max-width:1100px){.b11gl{grid-template-columns:1fr 1fr}.b11sbw{grid-column:1/-1}}
+@media(max-width:700px){.b11gl{grid-template-columns:1fr}}
 </style></head><body>
 <header><h1><svg width="17" height="17" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN</h1><span class="sub">DVP TERMINAL &middot; NFL DEFENSE-VS-POSITION &middot; DATA <b>__SEASONS__</b> (__GAMES__ GM &middot; __ROWS__ ROWS) &middot; SCHED <b>26/27</b> &middot; BUILT <b>__BUILT__</b> &middot; BLEND <b>__BLEND__</b> &middot; RANK <b>1</b>/32 = MOST ALLOWED &middot; p&#8407; = m&middot;v&#8407;</span></header>
 <div id="top"><nav>
@@ -2050,73 +2079,147 @@ function socialHome(){RR.push(()=>{const el=$('#socialSlot');if(!el)return;const
   el.innerHTML=`<div class="grid2"><div class="panel"><h3>wk ${wk} storylines <span class="f">rivalries · homecomings · revenge · birthday games &middot; full list on F10</span></h3>${items.slice(0,10).map(x=>x.h).join('')||'<p class="dim mini">none for this filter</p>'}${items.length>10?`<p class="mini">+${items.length-10} more on <a href="#" id="toLocker">F10 Locker Room</a></p>`:''}</div>
    <div class="panel"><h3>upcoming birthdays <span class="f">next 14 days</span></h3>${B.slice(0,12).map(x=>`<div class="rivln">${x.bd.days===0?ctag('birthday',' TODAY'):`<span class="mini" style="display:inline-block;width:34px">${x.bd.days}d</span>`} ${tcell(x.team)} <span class="plink pp" data-p="${esc(x.player)}">${esc(x.player)}</span> <span class="mini">${fmtD(x.bd.next)} &middot; turns ${x.bd.turns}${bdGames(x).some(g=>g[GM.date]===x.bd.next.toISOString().slice(0,10))?' &middot; <b style="color:#ffd54f">game day</b>':''}</span></div>`).join('')||'<p class="dim mini">none in the next 14 days</p>'}</div></div>`;
   bindP(el);const tl=$('#toLocker');if(tl)tl.onclick=e=>{e.preventDefault();document.querySelector('nav button[data-v="locker"]').click()}})}
-/* ---------- F11 BETS: game lines · player props · anytime TD — the data behind each market, model odds as a reference column ---------- */
+/* ---------- F11 BETS: game lines · player props · anytime TD ----------
+   Every market laid out with the data behind it (lines, line moves, team results, the player's game-by-game history against
+   the line, what the opponent allows to his slot) and the model's numbers as a labeled reference — nothing here is a pick. */
 const BT11=J.betting||{lines:[],td:[],week:null};
 const B11=(()=>{const P={};J.logs.forEach(l=>(P[l[LOG.player]]=P[l[LOG.player]]||[]).push(l));Object.values(P).forEach(a=>a.sort((x,y)=>x[LOG.season]-y[LOG.season]||x[LOG.week]-y[LOG.week]));
+  // name variants (Kenny / Kenneth, suffixes): fall back to a unique same-team, same-last-name match in the 2026 logs
+  const LN={};J.logs.forEach(l=>{if(l[LOG.season]!==2026)return;const k=l[LOG.team]+'|'+String(l[LOG.player]).replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'').split(' ').pop().toLowerCase();(LN[k]=LN[k]||new Set()).add(l[LOG.player])});
+  const TM={};BT11.lines.concat(BT11.td).forEach(x=>TM[x.player]=x.team);
+  const PL=n=>{if(P[n])return P[n];const b=String(n).replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'');if(P[b])return P[b];const s=LN[(TM[n]||'')+'|'+b.split(' ').pop().toLowerCase()];return s&&s.size===1?P[[...s][0]]:[]};
   const ST={pass_yds:l=>l[LOG.py],pass_td:l=>l[LOG.ptd],pass_att:l=>l[LOG.patt],completions:l=>l[28]||0,interceptions:l=>l[LOG.int],rush_yds:l=>l[LOG.ry],rush_att:l=>l[LOG.ra],
     receptions:l=>l[LOG.rec],rec_yds:l=>l[LOG.recy],rush_rec_yds:l=>l[LOG.ry]+l[LOG.recy],pass_rush_yds:l=>l[LOG.py]+l[LOG.ry],td:l=>l[LOG.rtd]+l[LOG.rectd]};
-  const LBL={pass_yds:'Pass yds',pass_td:'Pass TD',pass_att:'Pass att',completions:'Completions',interceptions:'INT',rush_yds:'Rush yds',rush_att:'Carries',receptions:'Receptions',rec_yds:'Rec yds',rush_rec_yds:'Rush+Rec yds',pass_rush_yds:'Pass+Rush yds'};
+  const LBL={pass_yds:'Pass yds',pass_td:'Pass TD',pass_att:'Pass att',completions:'Completions',interceptions:'Interceptions',rush_yds:'Rush yds',rush_att:'Carries',receptions:'Receptions',rec_yds:'Rec yds',rush_rec_yds:'Rush + rec yds',pass_rush_yds:'Pass + rush yds'};
+  const MORD=['pass_yds','pass_att','completions','pass_td','interceptions','pass_rush_yds','rush_yds','rush_att','rush_rec_yds','receptions','rec_yds'];
   const sg=s=>{s=String(s||'');if(s.startsWith('QB'))return 'QB';if(s==='RB1')return 'RB1';if(s.startsWith('RB'))return 'RB2';if(['WR1','WR2','WR3'].includes(s))return s;if(s.startsWith('WR'))return 'WR4+';if(s==='TE1')return 'TE1';if(s.startsWith('TE'))return 'TE2';return ''};
-  // the DvP stat column behind each market for the player's slot (same columns as the rankings on F5)
+  const SORD={QB1:0,QB2:1,RB1:2,RB2:3,RB3:4,WR1:5,WR2:6,WR3:7,'WR4+':8,TE1:9,TE2:10,TE3:11};
   const COL={pass_yds:{QB:'QB PY'},pass_att:{QB:'QB PY'},completions:{QB:'QB PY'},pass_rush_yds:{QB:'QB P+R'},pass_td:{QB:'P TD'},
     rush_yds:{QB:'QB RY',RB1:'RB1 RY',RB2:'RB2+ RY'},rush_att:{QB:'QB RY',RB1:'RB1 RY',RB2:'RB2+ RY'},rush_rec_yds:{RB1:'RB R+R',RB2:'RB R+R'},
     receptions:{RB1:'RB1 Recep',RB2:'RB2 Recep',WR1:'WR1 Recep',WR2:'WR2 Recep',WR3:'WR3 Recep','WR4+':'WR4+ Recep',TE1:'TE1 Recep',TE2:'TE2 Recep'},
     rec_yds:{RB1:'RB1 RecY',RB2:'RB2 RecY',WR1:'WR1 RecY',WR2:'WR2 RecY',WR3:'WR3 RecY','WR4+':'WR4+ RecY',TE1:'TE1 RecY',TE2:'TE2 RecY'},
     td:{QB:'QB TD',RB1:'RB1 TD',RB2:'RB2 TD',WR1:'WR1 TD',WR2:'WR2 TD',WR3:'WR3 TD','WR4+':'WR4+ TD',TE1:'TE1 TD',TE2:'TE2 TD'}};
-  const rank=(m,slot,opp)=>{const c=(COL[m]||{})[sg(slot)],d=J.dvp.combined[String(opp||'').replace('@','')];const o=c&&d&&d.stats[c];return o?{rk:o.rank,avg:+o.avg,col:c}:null};
-  const PL=n=>P[n]||P[String(n).replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'')]||[];
-  const hist=(n,m,k)=>{const f=ST[m],L=PL(n);return f?L.slice(-k).map(l=>({v:f(l),s:l[LOG.season],w:l[LOG.week],o:l[LOG.opp]})):[]};
-  const avg=(n,m,se)=>{const f=ST[m],L=PL(n).filter(l=>!se||l[LOG.season]===se);return L.length&&f?mean(L.map(f)):null};
-  const strip=(H,ok)=>H.length?`<span class="hit11" title="${H.map(h=>`${h.s} wk${h.w} ${h.o}: ${h.v}`).join(' | ')}">${H.map(h=>`<i class="${ok(h)?'y':'n'}"></i>`).join('')}</span> <span class="mini">${H.filter(ok).length}/${H.length}</span>`:'<span class="dim">—</span>';
-  const am=p=>p<=0||p>=1?'—':p>=.5?String(Math.round(-100*p/(1-p))):'+'+Math.round(100*(1-p)/p);
-  return {P,PL,ST,LBL,rank,hist,avg,strip,am,sg}})();
+  const rank=(m,slot,opp)=>{const c=(COL[m]||{})[sg(slot)],d=J.dvp.combined[String(opp||'').replace('@','')];const o=c&&d&&d.stats[c];return o?{rk:+o.rank,avg:+o.avg,col:c}:null};
+  const hist=(n,m,k)=>{const f=ST[m];return f?PL(n).slice(-k).map(l=>({v:f(l),s:l[LOG.season],w:l[LOG.week],o:l[LOG.opp],ha:l[LOG.ha]})):[]};
+  const avg=(n,m,se,k)=>{const f=ST[m];let L=PL(n).filter(l=>!se||l[LOG.season]===se);if(k)L=L.slice(-k);return L.length&&f?{v:mean(L.map(f)),n:L.length}:null};
+  const am=p=>p<=0||p>=1||isNaN(p)?'—':p>=.5?String(Math.round(-100*p/(1-p))):'+'+Math.round(100*(1-p)/p);
+  const nv=(a,b)=>{const d=x=>x>0?1+x/100:1+100/-x;if(a==null||b==null||a===''||b==='')return null;const ia=1/d(+a),ib=1/d(+b);return ia/(ia+ib)};
+  const f1=v=>v==null||isNaN(v)?'—':(+v).toFixed(1);
+  const sgn=v=>(v>0?'+':v<0?'−':'')+Math.abs(+v).toFixed(1).replace(/\.0$/,'');
+  // last-N chart: one bar per game, dashed line = the posted line, green = cleared it
+  const bars=(H,line,w=104,h=26)=>{if(!H.length)return '<span class="dim mini">no games logged</span>';const mx=Math.max(...H.map(x=>x.v),line*1.5,1),bw=w/10;
+    const y=v=>h-2-(v/mx)*(h-5);return `<svg class="b11bars" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><title>${H.map(x=>`${x.s} wk${x.w} ${x.ha==='A'?'@':'vs'} ${x.o}: ${x.v}`).join('\n')}</title>`+
+      H.map((x,i)=>{const yy=y(x.v),c=x.v>line?'#00c853':x.v<line?'#7a2b2f':'#7d7d7d';return `<rect x="${(i+(10-H.length))*bw+1}" y="${yy.toFixed(1)}" width="${bw-2}" height="${Math.max(1,h-2-yy).toFixed(1)}" fill="${c}"/>`}).join('')+
+      `<line x1="0" x2="${w}" y1="${y(line).toFixed(1)}" y2="${y(line).toFixed(1)}" stroke="#ffd54f" stroke-dasharray="3,2" stroke-width="1"/></svg>`};
+  // projection range: 10th–90th pct band, yellow tick = line, white dot = projection
+  const rng=(q10,q90,line,proj,w=120)=>{const lo=Math.min(q10,line,proj),hi=Math.max(q90,line,proj),x=v=>4+(w-8)*((v-lo)/((hi-lo)||1));
+    return `<svg class="b11rng" width="${w}" height="14" viewBox="0 0 ${w} 14"><title>model range ${q10} – ${q90} · projection ${proj} · line ${line}</title><rect x="0" y="5" width="${w}" height="4" fill="#161b22"/>
+      <rect x="${x(q10).toFixed(1)}" y="4" width="${Math.max(1,x(q90)-x(q10)).toFixed(1)}" height="6" fill="#2a4a6b"/><rect x="${(x(line)-1).toFixed(1)}" y="1" width="2" height="12" fill="#ffd54f"/>
+      <circle cx="${x(proj).toFixed(1)}" cy="7" r="3.2" fill="#fff"/></svg>`};
+  const pbar=(p,w=70)=>`<span class="b11pb"><i style="width:${(Math.max(0,Math.min(1,p))*w).toFixed(0)}px"></i></span>`;
+  const dots=H=>H.length?`<span class="b11dots" title="${H.map(x=>`${x.s} wk${x.w} ${x.o}: ${x.v} TD`).join(' | ')}">${'<i class="e"></i>'.repeat(10-H.length)}${H.map(x=>`<i class="${x.v>0?'y':'n'}">${x.v>1?x.v:''}</i>`).join('')}</span>`:'<span class="dim mini">—</span>';
+  return {P,PL,ST,LBL,MORD,SORD,rank,hist,avg,am,nv,f1,sgn,bars,rng,pbar,dots,sg}})();
 function bets11(){
-  const el=$('#bets');let tab='G',sk=null,sa=false;const st={mk:'',q:''};
+  const el=$('#bets');let tab='G',sk=null,sa=false;const st={mk:'',q:'',pv:'game',tv:'game'};
   el.innerHTML=`<div class="tabs" id="b11Tabs"><button data-t="G" class="on">Game lines</button><button data-t="P">Player props</button><button data-t="T">Anytime TD</button></div><div id="b11Out"></div>`;
   $('#b11Tabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#b11Tabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;sk=null;render()};
-  const sortT=(rows,cols)=>{if(sk!=null){const c=cols.find(c=>c[0]===sk);if(c&&c[2])rows.sort((a,b)=>{const x=c[2](a),y=c[2](b);return (x==null)-(y==null)||((x<y?-1:x>y?1:0)*(sa?1:-1))})}
-    return `<thead><tr>${cols.map(c=>`<th ${c[2]?`data-k="${c[0]}" style="cursor:pointer"`:''} ${c[3]?`title="${c[3]}"`:''}>${c[1]}${c[0]===sk?(sa?' ▲':' ▼'):''}</th>`).join('')}</tr></thead>`};
-  const teamRec=(()=>{const R={};(BET.games||[]).filter(g=>g.season===2026&&g.result!=null&&g.result!=='').forEach(g=>{const res=+g.result,tot=+g.total;
-    [[g.home_team,+g.home_score,+g.away_score,res-(+g.spread_line)],[g.away_team,+g.away_score,+g.home_score,-(res-(+g.spread_line))]].forEach(([t,pf,pa,cov])=>{const r=R[t]=R[t]||{g:0,pf:0,pa:0,aw:0,al:0,ov:0,un:0};
-      r.g++;r.pf+=pf;r.pa+=pa;if(cov>0)r.aw++;else if(cov<0)r.al++;if(tot>+g.total_line)r.ov++;else if(tot<+g.total_line)r.un++})});return R})();
-  function games(){const wk=G.week;const gs=(BET.games||[]).filter(g=>g.week===wk&&g.season===2026&&(inF(g.away_team)||inF(g.home_team))).sort((a,b)=>a.gameday<b.gameday?-1:a.gameday>b.gameday?1:0);
-    const tr=t=>{const r=teamRec[t];return r?`${(r.pf/r.g).toFixed(1)} / ${(r.pa/r.g).toFixed(1)}`:'—'},ats=t=>{const r=teamRec[t];return r?`${r.aw}-${r.al}`:'—'},ou=t=>{const r=teamRec[t];return r?`${r.ov}-${r.un}`:'—'};
-    const ml=v=>v==null||v===''?'—':(+v>0?'+':'')+Math.round(+v);
-    return `<p class="note">wk ${wk} &middot; market = DraftKings-consensus line (nflverse) &middot; implied = total/2 &plusmn; spread/2 &middot; PF/PA, ATS and O/U = each team's 2026 results to date &middot; model columns are the game model's numbers for reference (the Games &amp; Picks tab has its picks and record)</p>
-    <div class="b11s"><table><thead><tr><th>kick</th><th style="text-align:left">team</th><th>spread</th><th>total</th><th>ML</th><th title="market-implied points">implied</th><th title="points for / against per game, 2026">PF / PA</th><th>ATS</th><th title="games over / under the closing total">O/U</th><th title="model line, home perspective">model spread</th><th>model total</th><th title="model vs market win probability">win %</th><th>final</th></tr></thead><tbody>
-    ${gs.map(g=>{const h=g.home_team,a=g.away_team,sp=+g.spread_line,tot=+g.total_line,ih=tot/2+sp/2,ia=tot/2-sp/2,k=gameOf(h,wk),played=g.result!=null&&g.result!=='';
-      const row=(t,isH)=>`<td style="text-align:left">${isH?'@ ':'&nbsp;&nbsp;'}${tcell(t)}</td><td>${g.spread_line==null?'—':(isH?(sp>0?'−'+sp:sp<0?'+'+(-sp):'PK'):(sp>0?'+'+sp:sp<0?'−'+(-sp):'PK'))}</td>`;
-      return `<tr style="border-top:1px solid var(--edge2)"><td class="mini" rowspan="2">${k?kickLbl(k):g.gameday}</td>${row(a,false)}<td rowspan="2"><b>${g.total_line??'—'}</b></td><td>${ml(g.away_moneyline)}</td><td>${isNaN(ia)?'—':ia.toFixed(1)}</td><td class="mini">${tr(a)}</td><td class="mini">${ats(a)}</td><td class="mini">${ou(a)}</td>
-        <td rowspan="2" class="mini">${g.model_spread!=null?(g.model_spread>0?h:a)+' '+Math.abs(g.model_spread).toFixed(1):'—'}</td><td rowspan="2" class="mini">${g.model_total??'—'}</td><td class="mini">${g.win_prob_home!=null?(100*(1-g.win_prob_home)).toFixed(0)+'% <span class="dim">mkt '+(100*(1-g.imp_home_fair)).toFixed(0)+'%</span>':'—'}</td><td>${played?g.away_score:''}</td></tr>
-        <tr>${row(h,true)}<td>${ml(g.home_moneyline)}</td><td>${isNaN(ih)?'—':ih.toFixed(1)}</td><td class="mini">${tr(h)}</td><td class="mini">${ats(h)}</td><td class="mini">${ou(h)}</td><td class="mini">${g.win_prob_home!=null?(100*g.win_prob_home).toFixed(0)+'% <span class="dim">mkt '+(100*g.imp_home_fair).toFixed(0)+'%</span>':''}</td><td>${played?g.home_score:''}</td></tr>`}).join('')||'<tr><td colspan="13" class="dim">no games for this week / filter</td></tr>'}</tbody></table></div>`}
-  function props(){const L=BT11.lines.filter(l=>inF(l.team)&&inP(posOf(l.slot))&&(!st.mk||l.market===st.mk)&&(!st.q||(l.player+' '+l.team).toLowerCase().includes(st.q)));
-    const R=L.map(l=>{const H=B11.hist(l.player,l.market,10),rk=B11.rank(l.market,l.slot,l.opp);return {l,H,rk,ov:H.length?H.filter(h=>h.v>l.line).length/H.length:null,a5:B11.avg(l.player,l.market,null)!=null?mean(B11.hist(l.player,l.market,5).map(h=>h.v)):null,a26:B11.avg(l.player,l.market,2026)}});
-    const cols=[['p','player',r=>r.l.player],['t','tm'],['o','opp'],['m','market',r=>r.l.market],['line','line',r=>r.l.line],['mv','move',r=>r.l.open!=null?r.l.line-r.l.open:0,'current line minus opening line'],
-      ['a26','2026 avg',r=>r.a26],['a5','L5 avg',r=>r.a5],['h','last 10 vs line',r=>r.ov,'green = went over this line'],['rk','opp rank',r=>r.rk?r.rk.rk:null,'opponent rank allowing this stat to his slot (1 = allows the most), combined DvP'],
-      ['al','opp allows/gm',r=>r.rk?r.rk.avg:null],['proj','model proj',r=>r.l.proj,'model projection (10th–90th pct range)'],['po','model P(over)',r=>r.l.p_over_model,'model-only probability of the over'],['f','fair O / U',null,'fair American odds from the model probability']];
-    if(sk==null)R.sort((a,b)=>a.l.team.localeCompare(b.l.team)||a.l.player.localeCompare(b.l.player)||a.l.market.localeCompare(b.l.market));
-    const head=sortT(R,cols);const mks=[...new Set(BT11.lines.map(l=>l.market))];
-    return `<div class="controls"><select id="b11Mk"><option value="">all markets</option>${mks.map(m=>`<option value="${m}" ${st.mk===m?'selected':''}>${B11.LBL[m]||m}</option>`).join('')}</select><input id="b11Q" placeholder="player / team" value="${esc(st.q)}" size="16">
-      <span class="note">wk ${BT11.week} DraftKings lines (via ESPN, no prices exposed) &middot; ${BT11.lines.length} lines &middot; DK posts most games Thu–Sat &middot; click any column to sort</span></div>
-     <div class="b11s"><table>${head}<tbody>${R.map(r=>{const l=r.l,mv=l.open!=null&&l.open!==l.line?l.line-l.open:0;
-       return `<tr><td class="pp plink" data-p="${esc(l.player)}" style="text-align:left">${esc(l.player)} <span class="mini">${l.slot}</span></td><td>${tcell(l.team)}</td><td>${oppcell(l.opp)}</td><td style="text-align:left">${B11.LBL[l.market]||l.market}</td><td><b>${l.line}</b></td>
-        <td class="${mv>0?'rise':mv<0?'fall':'mini'}">${mv?(mv>0?'+':'')+(+mv.toFixed(1)):''}</td><td>${r.a26!=null?r.a26.toFixed(1):'—'}</td><td>${r.a5!=null?r.a5.toFixed(1):'—'}</td><td>${B11.strip(r.H,h=>h.v>l.line)}</td>
-        <td>${r.rk?badge(r.rk.rk):'<span class="dim">—</span>'}</td><td class="mini">${r.rk?r.rk.avg.toFixed(1):'—'}</td><td>${l.proj} <span class="mini">${l.q10}–${l.q90}</span></td><td>${(100*l.p_over_model).toFixed(0)}%</td><td class="mini">${B11.am(l.p_over_model)} / ${B11.am(1-l.p_over_model)}</td></tr>`}).join('')||'<tr><td colspan="14" class="dim">no lines for this filter</td></tr>'}</tbody></table></div>`}
-  function tds(){const T=BT11.td.filter(t=>inF(t.team)&&inP(posOf(t.slot))&&(!st.q||(t.player+' '+t.team).toLowerCase().includes(st.q)));
-    const R=T.map(t=>{const L=B11.PL(t.player),L26=L.filter(l=>l[LOG.season]===2026),H=B11.hist(t.player,'td',10),rk=B11.rank('td',t.slot,t.opp);
-      return {t,H,rk,g26:L26.length,td26:L26.reduce((s,l)=>s+B11.ST.td(l),0),gw26:L26.filter(l=>B11.ST.td(l)>0).length,rate:L.length?L.filter(l=>B11.ST.td(l)>0).length/L.length:null,n:L.length}});
-    const cols=[['p','player',r=>r.t.player],['t','tm'],['o','opp'],['s','slot',r=>r.t.slot],['td26','2026 TDs',r=>r.td26],['gw','2026 games w/ TD',r=>r.g26?r.gw26/r.g26:null],['h','last 10 games',r=>r.H.length?r.H.filter(h=>h.v>0).length/r.H.length:null,'green = scored'],
-      ['rate','TD game rate (all logs)',r=>r.rate,'share of all his logged games (2024–26) with a rushing/receiving TD'],['rk','opp rank TD',r=>r.rk?r.rk.rk:null,'opponent rank allowing TDs to his slot (1 = most), combined DvP'],['imp','team implied pts',r=>+r.t.team_implied||null],
-      ['pm','model P(TD)',r=>r.t.p_model],['f','fair price',null],['bk','book price',r=>r.t.price]];
-    if(sk==null){sk='pm';sa=false}const head=sortT(R,cols);
-    return `<div class="controls"><input id="b11Q" placeholder="player / team" value="${esc(st.q)}" size="16"><span class="note">wk ${BT11.week} &middot; ${BT11.td.length} players &middot; rushing + receiving TDs only &middot; model P(TD) = his recency-weighted TD rate scaled by the market-implied team total &middot; book prices appear once a priced feed (FanDuel key) is connected</span></div>
-     <div class="b11s"><table>${head}<tbody>${R.slice(0,300).map(r=>{const t=r.t;return `<tr><td class="pp plink" data-p="${esc(t.player)}" style="text-align:left">${esc(t.player)}</td><td>${tcell(t.team)}</td><td>${oppcell(t.opp)}</td><td>${slotchip(t.slot)}</td>
-       <td>${r.td26}</td><td class="mini">${r.gw26}/${r.g26}</td><td>${B11.strip(r.H,h=>h.v>0)}</td><td>${r.rate!=null?(100*r.rate).toFixed(0)+'% <span class="dim">of '+r.n+'</span>':'—'}</td>
-       <td>${r.rk?badge(r.rk.rk):'<span class="dim">—</span>'}</td><td class="mini">${t.team_implied||'—'}</td><td><b>${(100*t.p_model).toFixed(0)}%</b></td><td class="mini">${B11.am(+t.p_model)}</td><td class="mini">${t.price!=null&&t.price!==''?(+t.price>0?'+':'')+t.price:'—'}</td></tr>`}).join('')||'<tr><td colspan="13" class="dim">no players for this filter</td></tr>'}</tbody></table></div>`}
+  const GB=()=>{const m={};(BET.games||[]).filter(g=>g.season===2026).forEach(g=>m[g.week+'|'+g.away_team+'|'+g.home_team]=g);return m};
+  const TR=(()=>{const R={};(BET.games||[]).filter(g=>g.season===2026&&g.result!=null&&g.result!=='').sort((a,b)=>a.week-b.week).forEach(g=>{const res=+g.result,tot=+g.total,sp=+g.spread_line;
+    [[g.home_team,+g.home_score,+g.away_score,res-sp,g.away_team,''],[g.away_team,+g.away_score,+g.home_score,-(res-sp),g.home_team,'@']].forEach(([t,pf,pa,cov,o,at])=>{const r=R[t]=R[t]||{g:0,pf:0,pa:0,aw:0,al:0,ap:0,ov:0,un:0,last:[]};
+      r.g++;r.pf+=pf;r.pa+=pa;cov>0?r.aw++:cov<0?r.al++:r.ap++;tot>+g.total_line?r.ov++:tot<+g.total_line?r.un++:0;r.last.push({w:g.week,o:at+o,pf,pa,res:pf>pa?'W':pf<pa?'L':'T'})})});return R})();
+  const slateHdr=(g,arr)=>`<h3 class="b11slate">${slateChip(g[GM.slate])} <span class="f">${SLATE_TIP[g[GM.slate]]||''} &middot; ${arr.filter(x=>x[GM.slate]===g[GM.slate]).length} game${arr.filter(x=>x[GM.slate]===g[GM.slate]).length===1?'':'s'}</span></h3>`;
+  const gHead=(a,h,g,extra)=>`<h3 class="b11gh">${tlogo(a,22)}<b style="color:${vivid(a)}">${a}</b> <span class="dim">@</span> ${tlogo(h,22)}<b style="color:${vivid(h)}">${h}</b><span class="f">${g?g[GM.date]+' &middot; '+kickLbl(g):''}${extra||''}</span></h3>`;
+  /* ---------- game lines ---------- */
+  function games(){const wk=G.week,gb=GB(),arr=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));let last=null;
+    const head=`<div class="controls"><span class="note">wk ${wk} &middot; market = DraftKings-consensus closing / current line (nflverse) &middot; implied points = total ÷ 2 ± spread ÷ 2 &middot; moneyline % = no-vig market win probability &middot; PF, PA, ATS, O/U and last 3 = 2026 results to date &middot; the field bar shows which offense draws the softer defense (mean &Psi; of its QB/RB/WR/TE roles) &middot; model numbers are reference only — its picks and record live on F9</span></div>`;
+    return head+(arr.map(g=>{const a=g[GM.vis],h=g[GM.home],m=gb[wk+'|'+a+'|'+h];const hd=g[GM.slate]!==last?slateHdr(g,arr):'';last=g[GM.slate];
+      if(!m)return hd+`<div class="panel gamecard">${gHead(a,h,g)}<p class="note">no market line loaded yet</p></div>`;
+      const sp=+m.spread_line,tot=+m.total_line,ih=tot/2+sp/2,ia=tot/2-sp/2,fav=sp>0?h:sp<0?a:null,pH=B11.nv(m.home_moneyline,m.away_moneyline),played=m.result!=null&&m.result!=='';
+      const spT=(isH)=>{const v=isH?-sp:sp;return v<0?'−'+Math.abs(v):v>0?'+'+v:'PK'};
+      const ml=v=>v==null||v===''?'—':(+v>0?'+':'')+Math.round(+v);
+      const tr=(t,isH)=>{const r=TR[t]||{g:0,last:[]};const qb=isH?m.home_qb_name:m.away_qb_name,rest=isH?m.home_rest:m.away_rest;const p=pH==null?null:isH?pH:1-pH;
+        return `<tr><td class="b11tm" style="border-left:3px solid ${vivid(t)}">${tlogo(t,24)}<div><b style="color:${vivid(t)}">${isH?'@ ':''}${t}</b><span class="mini">${esc(qb||'')}${rest!=null&&rest!==''?' &middot; '+rest+'d rest':''}</span></div></td>
+          <td class="b11big">${spT(isH)}</td><td><b>${ml(isH?m.home_moneyline:m.away_moneyline)}</b><span class="mini b11sub">${p!=null?(100*p).toFixed(0)+'%':''}</span></td>
+          <td class="b11big" style="color:${vivid(t)}">${isNaN(isH?ih:ia)?'—':(isH?ih:ia).toFixed(1)}</td>
+          <td>${r.g?(r.pf/r.g).toFixed(1):'—'}</td><td>${r.g?(r.pa/r.g).toFixed(1):'—'}</td><td>${r.g?`${r.aw}-${r.al}${r.ap?'-'+r.ap:''}`:'—'}</td><td>${r.g?`${r.ov}-${r.un}`:'—'}</td>
+          <td class="b11last">${r.last.slice(-3).map(x=>`<span class="b11res ${x.res==='W'?'w':x.res==='L'?'l':''}" title="wk ${x.w} ${x.o}: ${x.pf}-${x.pa}">${x.res}<em>${x.pf}-${x.pa}</em></span>`).join('')||'<span class="dim">—</span>'}</td></tr>`};
+      const D=J.dvp.combined,fld=(off,def)=>mean(['QB','RB1','RB2','WR1','WR2','WR3','TE1'].map(x=>(D[def]||{comps:{}}).comps[x]).filter(v=>v!=null));
+      const fa=fld(a,h),fh=fld(h,a),dif=fa-fh,soft=dif<0?a:h;
+      const ra=TR[a],rh=TR[h],gt=t=>{const r=TR[t];return r&&r.g?(r.pf+r.pa)/r.g:null};
+      const mdS=m.model_spread!=null?+m.model_spread:null,mdT=m.model_total!=null?+m.model_total:null;
+      const res=played?(()=>{const cov=+m.result-sp,ou=+m.total-tot;return `<div class="b11final"><b>FINAL</b> ${a} ${m.away_score} &ndash; ${h} ${m.home_score} &middot; ${cov===0?'push':(cov>0?h:a)+' covered'} &middot; total ${m.total} ${ou>0?'OVER':ou<0?'UNDER':'PUSH'}</div>`})():'';
+      return hd+`<div class="panel gamecard b11g" style="border-top:2px solid ${fav?vivid(fav):'var(--edge2)'}">${gHead(a,h,g,`${m.roof?' &middot; '+esc(m.roof):''}`)}
+        <div class="b11gl"><div class="b11sbw"><table class="b11sb"><thead><tr><th style="text-align:left">team</th><th>spread</th><th>moneyline</th><th title="market-implied points">implied</th><th title="points scored per game, 2026">PF/g</th><th title="points allowed per game, 2026">PA/g</th><th title="record against the spread, 2026">ATS</th><th title="games over-under the total, 2026">O/U</th><th style="text-align:left">last 3</th></tr></thead>
+          <tbody>${tr(a,false)}${tr(h,true)}</tbody></table></div>
+          <div class="b11tot"><div class="k">total</div><div class="v">${isNaN(tot)?'—':tot}</div>
+            <div class="b11split">${isNaN(ia)?'':`<i style="flex:${ia};background:${vivid(a)}">${ia.toFixed(1)}</i><i style="flex:${ih};background:${vivid(h)}">${ih.toFixed(1)}</i>`}</div>
+            <div class="mini">avg game total in 2026: ${a} ${gt(a)!=null?gt(a).toFixed(1):'—'} &middot; ${h} ${gt(h)!=null?gt(h).toFixed(1):'—'}</div></div>
+          <div class="b11mdl"><div class="k">model (reference)</div>
+            <div>spread <b>${mdS==null?'—':(mdS>0?h:a)+' '+Math.abs(mdS).toFixed(1)}</b> <span class="mini">vs market ${fav?fav+' '+Math.abs(sp):'PK'}</span></div>
+            <div>total <b>${mdT==null?'—':mdT.toFixed(1)}</b> <span class="mini">${mdT==null||isNaN(tot)?'':'(' + B11.sgn(mdT-tot)+' vs market)'}</span></div>
+            <div>win % <b>${m.win_prob_home!=null?h+' '+(100*m.win_prob_home).toFixed(0)+'%':'—'}</b> <span class="mini">${pH!=null?'market '+(100*pH).toFixed(0)+'%':''}</span></div></div></div>
+        <p class="mini b11fl">matchup field: <b style="color:${vivid(a)}">${a}</b> offense faces mean &Psi; ${isNaN(fa)?'—':fa.toFixed(1)} &middot; <b style="color:${vivid(h)}">${h}</b> offense faces ${isNaN(fh)?'—':fh.toFixed(1)} &middot; softer draw: ${tcell(soft)} (lower &Psi; = softer)</p>
+        ${fieldTilt(a,h,50-Math.max(-45,Math.min(45,(fh-fa)*6)))}
+        <p class="mini">${envLine(a,h,wk)||''}</p>${res}</div>`}).join('')||'<p class="note">no games for this week / filter</p>')}
+  /* ---------- player props ---------- */
+  function propRows(L,group){return L.map(l=>{const H=B11.hist(l.player,l.market,10),rk=B11.rank(l.market,l.slot,l.opp),a26=B11.avg(l.player,l.market,2026),a5=B11.avg(l.player,l.market,null,5);
+      return {l,H,rk,a26,a5,hit:H.length?H.filter(h=>h.v>l.line).length:null,mv:l.open!=null&&l.open!==''&&+l.open!==+l.line?+l.line-+l.open:0}})}
+  const propCells=r=>{const l=r.l;return `<td class="b11mk">${B11.LBL[l.market]||l.market}</td><td class="b11big">${l.line}</td>
+      <td>${r.mv?`<span class="${r.mv>0?'rise':'fall'}">${r.mv>0?'▲':'▼'} ${B11.sgn(r.mv)}</span><span class="mini b11sub">open ${l.open}</span>`:'<span class="dim">—</span>'}</td>
+      <td>${r.a26?B11.f1(r.a26.v)+`<span class="mini b11sub">${r.a26.n} g</span>`:'—'}</td><td>${r.a5?B11.f1(r.a5.v):'—'}</td>
+      <td>${B11.bars(r.H,+l.line)}</td><td>${r.hit!=null?`<b class="${r.hit/r.H.length>=.6?'rise':r.hit/r.H.length<=.4?'fall':''}">${r.hit}/${r.H.length}</b>`:'—'}</td>
+      <td>${r.rk?`${badge(r.rk.rk)} <span class="mini">${B11.f1(r.rk.avg)}/g</span>`:'<span class="dim">—</span>'}</td>
+      <td>${B11.rng(+l.q10,+l.q90,+l.line,+l.proj)}<span class="mini b11sub">${l.proj} <span class="dim">(${l.q10}–${l.q90})</span></span></td>
+      <td>${(100*l.p_over_model).toFixed(0)}%</td><td class="mini">${B11.am(+l.p_over_model)} / ${B11.am(1-l.p_over_model)}</td>`};
+  const PH=`<th>market</th><th>line</th><th title="current line minus opening line">move</th><th title="his 2026 average in this stat">2026 avg</th><th title="his last 5 games">L5</th><th title="last 10 games: bars = his result, dashed = this line, green = cleared it">last 10 vs line</th><th>over</th><th title="opponent rank allowing this stat to his slot (1 = most) · per game">opp allows</th><th title="model projection: band = 10th-90th pct, white dot = projection, yellow = line">model range</th><th title="model-only probability of the over">model P(o)</th><th title="fair American odds over / under from the model probability">fair o / u</th>`;
+  function props(){const wk=BT11.week;const L=BT11.lines.filter(l=>inF(l.team)&&inP(posOf(l.slot))&&(!st.mk||l.market===st.mk)&&(!st.q||(l.player+' '+l.team).toLowerCase().includes(st.q)));
+    const mks=B11.MORD.filter(m=>BT11.lines.some(l=>l.market===m));const ev=new Set(BT11.lines.map(l=>l.team)).size;
+    const ctl=`<div class="controls"><select id="b11Pv"><option value="game" ${st.pv==='game'?'selected':''}>grouped by game</option><option value="all" ${st.pv==='all'?'selected':''}>every line, sortable</option></select>
+      <select id="b11Mk"><option value="">all markets</option>${mks.map(m=>`<option value="${m}" ${st.mk===m?'selected':''}>${B11.LBL[m]}</option>`).join('')}</select><input id="b11Q" placeholder="player / team" value="${esc(st.q)}" size="16">
+      <span class="note">wk ${wk} DraftKings lines via ESPN (no prices exposed) &middot; ${BT11.lines.length} lines from ${ev} teams — DK posts most games Thu–Sat &middot; bars = his last 10 games, dashed line = today's line, green = cleared it &middot; opp allows = combined DvP rank vs his slot (1 = allows the most) &middot; model columns are reference only</span></div>`;
+    if(!L.length)return ctl+'<p class="note">no lines for this filter</p>';
+    const R=propRows(L);
+    if(st.pv==='all'){const cols=[['p','player',r=>r.l.player],['m','market',r=>r.l.market],['line','line',r=>+r.l.line],['mv','move',r=>r.mv],['a26','2026 avg',r=>r.a26?r.a26.v:null],['a5','L5',r=>r.a5?r.a5.v:null],['h','last 10',null],['hit','over',r=>r.hit!=null?r.hit/r.H.length:null],['rk','opp allows',r=>r.rk?r.rk.rk:null],['pr','model range',r=>+r.l.proj-+r.l.line],['po','model P(o)',r=>+r.l.p_over_model],['f','fair o / u',null]];
+      if(sk!=null){const c=cols.find(c=>c[0]===sk);if(c&&c[2])R.sort((a,b)=>{const x=c[2](a),y=c[2](b);return (x==null)-(y==null)||((x<y?-1:x>y?1:0)*(sa?1:-1))})}
+      return ctl+`<div class="b11s"><table class="b11pt"><thead><tr><th style="text-align:left">player</th>${cols.slice(1).map(c=>`<th ${c[2]?`data-k="${c[0]}" style="cursor:pointer"`:''}>${c[1]}${c[0]===sk?(sa?' ▲':' ▼'):''}</th>`).join('')}</tr></thead><tbody>
+        ${R.map(r=>`<tr><td class="b11who"><span class="pp plink" data-p="${esc(r.l.player)}">${esc(r.l.player)}</span><span class="mini">${tcell(r.l.team)} ${r.l.slot} ${String(r.l.opp)[0]==='@'?'@':'vs'} ${String(r.l.opp).replace('@','')}</span></td>${propCells(r)}</tr>`).join('')}</tbody></table></div>`}
+    const arr=GAMES(wk).filter(g=>R.some(r=>r.l.team===g[GM.vis]||r.l.team===g[GM.home]));const gb=GB();
+    return ctl+arr.map(g=>{const a=g[GM.vis],h=g[GM.home],m=gb[wk+'|'+a+'|'+h];
+      const rs=R.filter(r=>r.l.team===a||r.l.team===h);const by={};rs.forEach(r=>(by[r.l.player]=by[r.l.player]||[]).push(r));
+      const players=Object.keys(by).sort((x,y)=>{const rx=by[x][0].l,ry=by[y][0].l;return (rx.team===a?0:1)-(ry.team===a?0:1)||(B11.SORD[rx.slot]??20)-(B11.SORD[ry.slot]??20)||x.localeCompare(y)});
+      const sp=m?+m.spread_line:null,mk=m?`${sp>0?h+' −'+sp:sp<0?a+' −'+(-sp):'PK'} &middot; total ${m.total_line} &middot; implied ${a} ${(m.total_line/2-sp/2).toFixed(1)} / ${h} ${(m.total_line/2+sp/2).toFixed(1)}`:'';
+      return `<div class="panel gamecard b11g">${gHead(a,h,g,mk?' &middot; '+mk:'')}<div class="b11s"><table class="b11pt"><thead><tr><th style="text-align:left">player</th>${PH}</tr></thead>
+        ${players.map(p=>{const rr=by[p].sort((x,y)=>B11.MORD.indexOf(x.l.market)-B11.MORD.indexOf(y.l.market)),l0=rr[0].l;
+          return `<tbody class="b11grp">${rr.map((r,i)=>`<tr>${i?'':`<td class="b11who" rowspan="${rr.length}" style="border-left:3px solid ${vivid(l0.team)}"><span class="pp plink" data-p="${esc(p)}">${esc(p)}</span><span class="mini">${tlogo(l0.team,14)}${l0.team} &middot; ${slotchip(l0.slot)} ${String(l0.opp)[0]==='@'?'@':'vs'} ${String(l0.opp).replace('@','')}</span></td>`}${propCells(r)}</tr>`).join('')}</tbody>`}).join('')}</table></div></div>`}).join('')}
+  /* ---------- anytime TD ---------- */
+  function tdRows(T){return T.map(t=>{const L=B11.PL(t.player),L26=L.filter(l=>l[LOG.season]===2026),H=B11.hist(t.player,'td',10),rk=B11.rank('td',t.slot,t.opp);
+    return {t,H,rk,g26:L26.length,td26:L26.reduce((s,l)=>s+B11.ST.td(l),0),gw26:L26.filter(l=>B11.ST.td(l)>0).length,rate:L.length?L.filter(l=>B11.ST.td(l)>0).length/L.length:null,n:L.length,p:+t.p_model}})}
+  const tdCells=r=>{const t=r.t;return `<td>${r.td26}<span class="mini b11sub">${r.gw26}/${r.g26} g</span></td><td>${B11.dots(r.H)}</td><td>${r.rate!=null?(100*r.rate).toFixed(0)+'%<span class="mini b11sub">'+r.n+' g</span>':'—'}</td>
+      <td>${r.rk?`${badge(r.rk.rk)} <span class="mini">${r.rk.avg.toFixed(2)}/g</span>`:'<span class="dim">—</span>'}</td><td>${B11.pbar(r.p)} <b>${(100*r.p).toFixed(0)}%</b></td><td class="mini">${B11.am(r.p)}</td>
+      <td class="mini">${t.price!=null&&t.price!==''?(+t.price>0?'+':'')+t.price:'—'}</td>`};
+  const TH=`<th title="2026 rushing + receiving TDs · games with a TD">2026 TD</th><th title="last 10 games: filled = scored (number = multi-TD game)">last 10</th><th title="share of all his logged games 2024-26 with a TD">TD rate</th><th title="opponent rank allowing TDs to his slot (1 = most) · TDs per game">opp allows</th><th title="model probability of 1+ rushing/receiving TD (reference)">model P(TD)</th><th title="fair American odds from the model probability">fair</th><th>book</th>`;
+  function tds(){const wk=BT11.week,T=BT11.td.filter(t=>inF(t.team)&&inP(posOf(t.slot))&&(!st.q||(t.player+' '+t.team).toLowerCase().includes(st.q)));
+    const ctl=`<div class="controls"><select id="b11Tv"><option value="game" ${st.tv==='game'?'selected':''}>grouped by game</option><option value="all" ${st.tv==='all'?'selected':''}>every player, sortable</option></select><input id="b11Q" placeholder="player / team" value="${esc(st.q)}" size="16">
+      <span class="note">wk ${wk} &middot; rushing + receiving TDs &middot; dots = his last 10 games (filled = scored) &middot; opp allows = combined DvP rank allowing TDs to his slot &middot; model P(TD) = his recency-weighted TD rate scaled by the market-implied team total (reference) &middot; book prices appear once a priced feed (FanDuel key) is connected</span></div>`;
+    const R=tdRows(T);if(!R.length)return ctl+'<p class="note">no players for this filter</p>';
+    if(st.tv==='all'){const cols=[['p','player',r=>r.t.player],['td','2026 TD',r=>r.td26],['h','last 10',r=>r.H.filter(x=>x.v>0).length],['rate','TD rate',r=>r.rate],['rk','opp allows',r=>r.rk?r.rk.rk:null],['pm','model P(TD)',r=>r.p],['f','fair',null],['b','book',null]];
+      if(sk==null){sk='pm';sa=false}const c=cols.find(c=>c[0]===sk);if(c&&c[2])R.sort((a,b)=>{const x=c[2](a),y=c[2](b);return (x==null)-(y==null)||((x<y?-1:x>y?1:0)*(sa?1:-1))});
+      return ctl+`<div class="b11s"><table class="b11pt"><thead><tr><th style="text-align:left">player</th>${cols.slice(1).map(c=>`<th ${c[2]?`data-k="${c[0]}" style="cursor:pointer"`:''}>${c[1]}${c[0]===sk?(sa?' ▲':' ▼'):''}</th>`).join('')}</tr></thead><tbody>
+        ${R.slice(0,300).map(r=>`<tr><td class="b11who" style="border-left:3px solid ${vivid(r.t.team)}"><span class="pp plink" data-p="${esc(r.t.player)}">${esc(r.t.player)}</span><span class="mini">${tlogo(r.t.team,14)}${r.t.team} &middot; ${slotchip(r.t.slot)} ${String(r.t.opp)[0]==='@'?'@':'vs'} ${String(r.t.opp).replace('@','')}</span></td>${tdCells(r)}</tr>`).join('')}</tbody></table></div>`}
+    const top=[...R].sort((a,b)=>b.p-a.p).slice(0,10);
+    const lead=`<div class="panel"><h3>slate leaders <span class="f">highest model P(TD) this week &middot; reference numbers next to the data behind them</span></h3><div class="b11lead">${top.map((r,i)=>`<div class="b11ld" style="border-top:2px solid ${vivid(r.t.team)}"><span class="mini">#${i+1} &middot; ${r.t.team} ${String(r.t.opp)[0]==='@'?'@':'vs'} ${String(r.t.opp).replace('@','')}</span><b class="pp plink" data-p="${esc(r.t.player)}">${esc(r.t.player)}</b><span>${slotchip(r.t.slot)} <b class="b11big">${(100*r.p).toFixed(0)}%</b> <span class="mini">fair ${B11.am(r.p)}</span></span><span class="mini">${r.td26} TD in ${r.g26} g &middot; opp rk ${r.rk?r.rk.rk:'—'}</span></div>`).join('')}</div></div>`;
+    const gb=GB();const arr=GAMES(wk).filter(g=>R.some(r=>r.t.team===g[GM.vis]||r.t.team===g[GM.home]));
+    return ctl+lead+arr.map(g=>{const a=g[GM.vis],h=g[GM.home],m=gb[wk+'|'+a+'|'+h];const imp=t=>m?(t===h?m.total_line/2+m.spread_line/2:m.total_line/2-m.spread_line/2):null;
+      const side=t=>{const rs=R.filter(r=>r.t.team===t).sort((x,y)=>y.p-x.p);const show=rs.filter((r,i)=>i<6||r.p>=.15);const opp=t===a?h:a;
+        return `<div><div class="b11side" style="border-bottom:2px solid ${vivid(t)}">${tlogo(t,20)}<b style="color:${vivid(t)}">${t}</b><span class="mini">implied ${imp(t)!=null?imp(t).toFixed(1):'—'} pts &middot; vs ${opp} D</span></div>
+          <table class="b11pt"><thead><tr><th style="text-align:left">player</th>${TH}</tr></thead><tbody>${show.map(r=>`<tr><td class="b11who"><span class="pp plink" data-p="${esc(r.t.player)}">${esc(r.t.player)}</span><span class="mini">${slotchip(r.t.slot)}</span></td>${tdCells(r)}</tr>`).join('')||'<tr><td colspan="8" class="dim">—</td></tr>'}</tbody></table>
+          ${rs.length>show.length?`<p class="mini">+${rs.length-show.length} more under 15% &mdash; switch to "every player" to see them</p>`:''}</div>`};
+      return `<div class="panel gamecard b11g">${gHead(a,h,g,m?` &middot; total ${m.total_line} &middot; ${m.spread_line>0?h+' −'+m.spread_line:m.spread_line<0?a+' −'+(-m.spread_line):'PK'}`:'')}<div class="grid2">${side(a)}${side(h)}</div></div>`}).join('')}
   function render(){const o=$('#b11Out');o.innerHTML=tab==='G'?games():tab==='P'?props():tds();
     o.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sk===k)sa=!sa;else{sk=k;sa=k==='p'||k==='rk'}render()});
     const mk=$('#b11Mk');if(mk)mk.onchange=()=>{st.mk=mk.value;render()};
-    const q=$('#b11Q');if(q)q.oninput=()=>{st.q=q.value.toLowerCase();render();const n=$('#b11Q');n.focus();n.setSelectionRange(n.value.length,n.value.length)};}
+    const pv=$('#b11Pv');if(pv)pv.onchange=()=>{st.pv=pv.value;sk=null;render()};const tv=$('#b11Tv');if(tv)tv.onchange=()=>{st.tv=tv.value;sk=null;render()};
+    const q=$('#b11Q');if(q)q.oninput=()=>{st.q=q.value.toLowerCase();render();const n=$('#b11Q');n.focus();n.setSelectionRange(n.value.length,n.value.length)}}
   RR.push(render);
 }
 
