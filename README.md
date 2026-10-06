@@ -33,6 +33,23 @@ ledger (the duplicate props tab moved to Bets). Intel: "this week's scheme edges
 family it faces. Locker Room: thread matrix (game × kind) over collapsible cards sorted by thread count. Bets: KPI
 strip (cleared ≥70% / ≤30% L10, biggest line move) and market chips with counts and hit bars.
 
+**v4 model & markets (2026-10-06):** the dashboard now tracks positions, not just matchups.
+*Markets (Bets tab)* — one dense table per market (pass yds / TD / att, rush yds / att, receptions, rec yds, anytime TD, game
+lines): his per-game averages, what the opponent allows to his slot (rank), volume × matchup (the ranking), the model's
+projection with its 10–90% band, the posted line (DraftKings or the Kalshi ladder's implied line), model P(over), his
+L10 over-rate at that line, the Kalshi exchange price and the model–exchange gap; click a row for game-by-game bars.
+*Projections (Big Board)* — projected statistics per starter and market (median + band) and the DK-points translation;
+PPR is no longer the headline. *Games & Picks* — one unified ledger (`data/processed/picks_all.csv`) with sub-tabs for
+Moneyline (model vs Kalshi mid, ≥6 pts), Spreads and Totals (game model vs DK, ≥3 pts), Props (prop model EV at −110),
+Anytime TD (model vs Kalshi, ≥8 pts) and DFS mock entries (one DK Classic lineup per slate — main / early / afternoon /
+primetime / full — frozen and graded on real DK points; capped when `data/raw/dk_salaries_wk{N}.csv` is present, uncapped
+otherwise); every row carries the market reference it was judged against and is graded in place. *Intel › Signals* — a
+walk-forward audit (`scripts/build_signals.py`) of what each input is worth: top-third vs bottom-third lift in actual ÷
+baseline for DvP rank, Ψ, scheme family, environment and role trend, per market, plus a Ψ-band table and the prop model's
+skill by market. Ψ is kept but no longer labels anything a "smash spot"; the Home market board ranks by volume × stat
+matchup. *Kalshi* — `scripts/build_kalshi.py` parses the exchange pull (notes/scrape_recipe.md) into implied lines and
+probabilities. Every player reference carries his team logo; ▲/green always means more production for the offense.
+
 **Effective depth charts (2026-10-06):** ESPN leaves injured starters in their slot for weeks (Baker Mayfield "QB1 · O"),
 which mis-slots the real starter. `scripts/build_depth_chart.py` now derives the *effective* chart: OUT/IR players drop to
 the bottom of their row and the next man holds the slot (Jalon Daniels QB1); within RB/TE/WR rows a player who has taken
