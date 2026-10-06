@@ -27,6 +27,8 @@ jobs:
           mkdir -p _site
           cp dashboard/rainman.html _site/index.html
           cp dashboard/rainman.html _site/rainman.html
+          if [ -f dashboard/ncaa.html ]; then cp dashboard/ncaa.html _site/ncaa.html; fi
+          if [ -d dashboard/archive ]; then mkdir -p _site/archive && cp -r dashboard/archive/. _site/archive/; fi
           # v2 (in progress) is served side-by-side at /v2/ ; the root stays v1 until v2 is signed off
           if [ -d dashboard/v2 ]; then mkdir -p _site/v2 && cp -r dashboard/v2/. _site/v2/; fi
           touch _site/.nojekyll
