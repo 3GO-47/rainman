@@ -6,16 +6,24 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 **rank 1 = most allowed = best matchup** (legacy RANK.AVG).
 
 ## The product
-`dashboard/rainman.html` — single self-contained file, open in any browser. Views:
-- **Ψ Matchup Lab** — every depth-chart player with his opponent's per-stat DvP ranks, raw
-  allowed/gm, and composite Ψ, for any 2026/27 week (the legacy 2025QB/RB/WR/TE sheets, live)
-- **DvP Rankings** — 32 defenses × every stat (rank + raw) per slot, plus an ALL-stats field
-- **Field Matrix** — 32×10 Ψ heatmap with per-defense radar fingerprint drill-down
-- **Spacetime Grid** — all 32 offenses × 18 weeks of 2026/27, colored by opponent softness per slot
-- **Defense Observatory** — worldline vs league μ±σ, two-defense interference radar, energy
-  spectrum of all 32 logos, phase portrait (collapsing vs tightening), momentum/uncertainty table
-- **Player Collider** — full multi-season game logs, PPR/usage charts, next-4 trajectory
-- **Grand Unified Insights** — week-aware smash/avoid, momentum shifts, volatility, schedule geodesics
+`dashboard/rainman.html` (NFL) and `dashboard/ncaa.html` (NCAA FBS) — single self-contained files, same template.
+**v2 shell (2026-10-06):** a left sidebar organizes every view by what you are doing; each entry shows a one-line
+description of what it holds, so nothing has to be guessed from a tab name. Keys 1–9 jump to the numbered views,
+ctrl-K finds any player or team, the sidebar collapses to a rail (≪) for full-width tables, and the week / slate /
+position / game / team filter bar at the top applies to every view. Type: Inter for chrome, JetBrains Mono for data;
+one amber accent; rank colors unchanged (green = allows the most = best matchup).
+
+| section | views (all legacy content kept) |
+|---|---|
+| This week | Overview (slate map, smash board, top projections, storylines) · Insights (best / worst per role, field extremes, momentum, volatility, schedule strength, system) |
+| Research a game | Matchups (every game, both offenses vs the opposing D) · Lines & totals · Storylines (NFL) · Model picks & record (NFL) |
+| Research a player | Player explorer (opens with this season's top scorers as quick picks) · Matchup lab · Depth charts · Projections (Big Board) · TD board · Fantasy (NFL: rosters, waiver radar, lineup) |
+| Research a defense | Rankings · Matrix · Defense detail (observatory) · Schedule strength · Scheme & personnel (NFL) |
+| Place a bet | Player props · Anytime TD · Game lines |
+
+The legacy F1–F11 tab buttons still exist hidden (`#legacyNav`) as the routing model — every old cross-link and
+re-render path works unchanged; the sidebar's `go(view)` clicks them and then selects the sub-panel. The URL hash
+carries `v=<view>` plus the filters, so a shared link opens the exact screen.
 
 ## Global filter bar (every tab)
 The sticky bar under the nav drives every view at once:
