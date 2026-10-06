@@ -286,6 +286,17 @@ def main():
     data['bets'] = bets_payload()
     data['college'] = college_payload(logs)
     data['betting'] = betting_payload()
+    # v4: exchange prices, unified picks ledger, DFS entries, signal efficacy
+    def rows_of(path, flt=None):
+        if not os.path.exists(path): return []
+        R = list(csv.DictReader(open(path, encoding='utf-8')))
+        return [r for r in R if flt is None or flt(r)]
+    _m = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8'))) if os.path.exists('data/processed/matchups_current.csv') else []
+    cur_week = int(_m[0]['week']) if _m else 1
+    data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
+    data['picksAll'] = rows_of('data/processed/picks_all.csv')
+    data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
+    data['signals'] = json.load(open('data/processed/signals.json')) if os.path.exists('data/processed/signals.json') else None
     # player <-> game connections (build_connections.py): homecoming / college town / home state / revenge / birthday
     data['conn'] = {'rows': [], 'born': {}}
     if os.path.exists('data/processed/connections_2026.csv'):

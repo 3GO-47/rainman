@@ -70,6 +70,12 @@ def main():
     run(['scripts/build_adjusted_dvp.py'])
     run(['scripts/build_prop_model.py'])
     run(['scripts/build_bets.py'])
+    if glob.glob('data/raw/kalshi_*.txt'):
+        run(['scripts/build_kalshi.py'])
+    run(['scripts/build_dfs.py', '--week', str(week)])
+    run(['scripts/build_picks.py', '--week', str(week)])
+    if '--no-signals' not in sys.argv:
+        run(['scripts/build_signals.py'])
     if glob.glob('data/raw/espn_birthplaces_*.txt'):
         run(['scripts/build_connections.py'])
     run(['scripts/build_dashboard.py'])
