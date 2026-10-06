@@ -150,7 +150,7 @@ table.dct td.dcpos{text-align:center;white-space:nowrap;font-size:11px;width:8%}
  .dcp{word-break:break-word}.dctop{gap:4px}.dchead .mini{display:none}.dcmid{font-size:10px}}
 .ctag{display:inline-block;font-size:8.5px;letter-spacing:.5px;padding:0 4px;border:1px solid;border-radius:2px;line-height:14px;vertical-align:1px;white-space:nowrap}
 .storyd{margin:4px 0 8px;padding:4px 8px;border-left:2px solid #f2c14e55}.storyd summary{cursor:pointer}
-.storymore{margin-top:6px}.storymore summary{cursor:pointer;color:var(--dim);font-size:11px}
+.storymore{margin-top:6px}.storymore summary{cursor:pointer;color:var(--dim);font-size:11px}.gcards>summary{font-size:12px;color:var(--amber);padding:8px 0}
 .rivln.minor{opacity:.75}.rivln{margin:3px 0;line-height:19px;font-size:12px}.rivln .plink{cursor:pointer}
 .panel.story h3{margin-bottom:4px}.bdtoday{padding:6px 10px;border-left:3px solid #ffd54f;background:rgba(255,213,79,.07)}
 tr.bdrow td{background:rgba(255,213,79,.06)}
@@ -222,17 +222,11 @@ tr.bdrow td{background:rgba(255,213,79,.06)}
 </style></head><body>
 <header><h1><svg width="17" height="17" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN</h1><span class="sub">DVP TERMINAL &middot; NFL DEFENSE-VS-POSITION &middot; DATA <b>__SEASONS__</b> (__GAMES__ GM &middot; __ROWS__ ROWS) &middot; SCHED <b>26/27</b> &middot; BUILT <b>__BUILT__</b> &middot; BLEND <b>__BLEND__</b> &middot; RANK <b>1</b>/32 = MOST ALLOWED &middot; p&#8407; = m&middot;v&#8407;</span></header>
 <div id="top"><nav>
-<button data-v="home" class="on"><span class="fk">F1</span>Home</button>
-<button data-v="bets"><span class="fk">F2</span>Bet Board</button>
-<button data-v="board"><span class="fk">F3</span>Big Board</button>
-<button data-v="chamber"><span class="fk">F4</span>Weekly Matchups</button>
-<button data-v="players"><span class="fk">F5</span>Players</button>
-<button data-v="defenses"><span class="fk">F6</span>Defenses</button>
-<button data-v="tdb"><span class="fk">F7</span>TD Board</button>
-<button data-v="sked"><span class="fk">F8</span>Schedule</button>
-<button data-v="intel"><span class="fk">F9</span>Intel</button>
-<button data-v="games"><span class="fk">F10</span>Games &amp; Picks</button>
-<button data-v="locker"><span class="fk">F11</span>Locker Room</button>
+<button data-v="bets" data-sec="bets" class="on"><span class="fk">F1</span>Bets</button>
+<button data-v="games" data-sec="games"><span class="fk">F2</span>Games</button>
+<button data-v="home" data-sec="match"><span class="fk">F3</span>Matchups</button>
+<button data-v="defenses" data-sec="def"><span class="fk">F4</span>Defenses</button>
+<button data-v="players" data-sec="plyr"><span class="fk">F5</span>Players</button>
 <button id="gHelp" title="glossary (?)" style="margin-left:auto">?</button>
 </nav>
 <div id="gbar" title="global filter — applies to every tab"><button id="gTog" class="mob" title="show / hide filters">&#9881; filters</button>
@@ -246,21 +240,24 @@ tr.bdrow td{background:rgba(255,213,79,.06)}
 <button id="gFind" title="jump to any player or team (Ctrl-K or /)">&#9906; <kbd>ctrl-K</kbd></button>
 <button id="gShare" title="copy a link that opens the dashboard with this exact week / slate / game / team">&#128279;</button>
 <span id="gSum"></span>
-</div></div>
+</div><div id="subnav" class="tabs" hidden></div></div>
 <main>
-<div id="home"><div id="homeTop"></div><div id="socialSlot"></div><div id="insights"></div></div>
+<div id="bets"></div>
+<div id="games" hidden></div>
 <div id="chamber" hidden></div>
-<div id="players" hidden><div id="dcView" class="panel"></div><div id="lab"></div><hr class="sep"><div id="player"></div></div>
+<div id="locker" hidden></div>
+<div id="home" hidden><div id="homeTop"></div><div id="insights"></div><div id="homeBot"></div></div>
+<div id="mlab" hidden><div id="lab"></div></div>
+<div id="tdb" hidden></div>
+<div id="board" hidden></div>
 <div id="defenses" hidden><div class="tabs" id="defTabs">
 <button data-t="ranks" class="on">Rankings</button><button data-t="matrix">Matrix</button><button data-t="defense">Observatory</button></div>
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
+<div id="trends" hidden></div>
 <div id="sked" hidden></div>
-<div id="tdb" hidden></div>
 <div id="intel" hidden></div>
-<div id="board" hidden></div>
-<div id="games" hidden></div>
-<div id="locker" hidden></div>
-<div id="bets" hidden></div>
+<div id="players" hidden><div id="dcView" class="panel"></div><div id="player"></div></div>
+<div id="fantasy" hidden><div id="lineupSlot"></div></div>
 </main>
 <script>
 const J = __DATA__;
@@ -463,7 +460,7 @@ function storyBlock(g,wk,opts={}){const v=g[GM.vis],h=g[GM.home];const {c,cn}=st
   const lim=opts.limit||99;
   const rv=opts.compact?c.riv.filter(r=>r.st&&(r.mq||opts.all)):c.riv.filter(r=>r.mq&&r.top);
   let html=rv.map(r=>rivLine(r,v,h)).join('')+main.slice(0,lim).map(connLine).join('');
-  if(opts.compact&&c.riv.length>rv.length)html+=`<div class="mini">+${c.riv.length-rv.length} regional / backup-level rivalry links on F11</div>`;
+  if(opts.compact&&c.riv.length>rv.length)html+=`<div class="mini">+${c.riv.length-rv.length} regional / backup-level rivalry links under Games → Storylines</div>`;
   if(main.length>lim)html+=`<div class="mini">+${main.length-lim} more connections</div>`;
   if(!opts.compact){const rest=c.riv.filter(r=>!(r.mq&&r.top));
     const more=rest.map(r=>rivLine(r,v,h)).join('')+c.alum.map(a=>alumLine(a,v,h)).join('')+(hs.length?`<div class="rivln">${ctag('home state')} <span class="mini">${hs.map(r=>`<span class="plink pp" data-p="${esc(r[2])}">${esc(pshort(r[2]))}</span> (${r[3]})`).join(', ')}</span></div>`:'');
@@ -474,12 +471,26 @@ function storyBlock(g,wk,opts={}){const v=g[GM.vis],h=g[GM.home];const {c,cn}=st
 const bindP=el=>{}; // player links in storylines use the global .pp click delegation
 document.querySelector('.sub').innerHTML=document.querySelector('.sub').innerHTML
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend).replace('__SEASONS__',[...new Set(J.logs.map(l=>l[2]))].sort().map(s=>String(s).slice(2)+'/'+String(s+1).slice(2)).join(' + ')).replace('__GAMES__',Math.round(J.weekly.length/2)).replace('__ROWS__',J.logs.length.toLocaleString());
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  ['home','bets','chamber','players','defenses','sked','tdb','intel','board','games','locker'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
-  if(DIRTY.has(b.dataset.v))runView(b.dataset.v);b.scrollIntoView({block:'nearest',inline:'nearest'});});
-addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11'].indexOf(e.key);
-  if(i>=0){e.preventDefault();document.querySelectorAll('nav button')[i].click();}});
+/* ---------- navigation: 5 sections, each with its views (panes) ---------- */
+const SECS=[['bets','Bets',[['bets','Bet board']]],
+  ['games','Games',[['games','Lines & model'],['chamber','Slot matchups'],['locker','Storylines']]],
+  ['match','Matchups',[['home','This week'],['mlab','Matchup lab'],['tdb','TD matchups'],['board','Projections']]],
+  ['def','Defenses',[['defenses','Rankings'],['trends','Trends'],['sked','Schedule'],['intel','Scheme & usage']]],
+  ['plyr','Players',[['players','Depth charts & cards'],['fantasy','Fantasy roster']]]];
+const SECOF={},VLBL={},ALLV=[];SECS.forEach(([s,l,vs])=>vs.forEach(([v,n])=>{SECOF[v]=s;VLBL[v]=n;ALLV.push(v)}));
+let CURVIEW='bets';const LASTV={};
+function go(v){if(!SECOF[v])v='bets';const s=SECOF[v];LASTV[s]=v;CURVIEW=v;
+  document.querySelectorAll('nav button[data-sec]').forEach(b=>{const on=b.dataset.sec===s;b.classList.toggle('on',on);if(on)b.dataset.v=v});
+  const sec=SECS.find(x=>x[0]===s),sn=$('#subnav');sn.hidden=sec[2].length<2;
+  sn.innerHTML=sec[2].map(([x,n])=>`<button data-v="${x}" class="${x===v?'on':''}">${n}</button>`).join('');
+  ALLV.forEach(x=>{const el=$('#'+x);if(el)el.hidden=x!==v});window.scrollTo({top:0});
+  if(DIRTY.has(v))runView(v);document.dispatchEvent(new CustomEvent('rm:view',{detail:v}));
+  document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px')}
+window.go=go;
+document.querySelectorAll('nav button[data-sec]').forEach(b=>b.onclick=()=>go(LASTV[b.dataset.sec]||SECS.find(x=>x[0]===b.dataset.sec)[2][0][0]));
+$('#subnav').onclick=e=>{const b=e.target.closest('button[data-v]');if(b)go(b.dataset.v)};
+addEventListener('keydown',e=>{const i=['F1','F2','F3','F4','F5'].indexOf(e.key);
+  if(i>=0){e.preventDefault();document.querySelectorAll('nav button[data-sec]')[i].click();}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21,snaps:22,snp:23,tsh:24,adot:25,rsh:26,wopr:27};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
 // TREND_SE: the season used for waveforms / momentum / volatility — the latest season with >=4 weeks
@@ -583,7 +594,7 @@ function apply(){
   writeHash();
   document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px');
   if(typeof PCACHE!=='undefined')for(const k in PCACHE)delete PCACHE[k];
-  const vis=[...document.querySelectorAll('nav button')].find(b=>b.classList.contains('on'));const v=vis?vis.dataset.v:'home';
+  const v=CURVIEW;
   new Set(RRV.map(e=>e.v)).forEach(x=>{if(x!==v)DIRTY.add(x)});runView(v);
 }
 /* ---------- player universe (depth chart + owners + wk1 opponents) ---------- */
@@ -681,7 +692,7 @@ function lab(){
     const common=`<th data-k="player">Player</th><th data-k="team">Tm</th><th data-k="college" title="final college · logo, conference badge; tint = tier (gold power-4 · teal G5 · slate FCS · magenta small school)">College</th>${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
       <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th><th data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th>`;
-    const tail=`<th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
+    const tail=`<th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th data-k="proj" title="projected PPR (Matchups → Projections model)">PROJ</th>`;
     const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${ccell(u.player)}</td>${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
@@ -932,7 +943,7 @@ let pChart1,pChart2;
 function player(){
   const names=[...new Set(J.logs.map(l=>l[LOG.player]))].sort();
   $('#player').innerHTML=`<div class="controls">
-    <input id="pIn" list="pList" placeholder="collide a player..." size="30">
+    <input id="pIn" list="pList" placeholder="search any player — full card, game log, schedule…" size="30">
     <datalist id="pList">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</datalist></div><div id="pOut"></div>`;
   $('#pIn').onchange=()=>{
     const n=$('#pIn').value;
@@ -983,7 +994,7 @@ function insights(){
     <span class="note"><b style="color:var(--cyan)">HOW TO READ THIS</b> — &Psi; = the opponent defense's average rank in the stats that matter for that role
 (QB: pass yds / rush yds / pass+rush / pass TD / total TD &middot; RB: rush yds / catches / rec yds / rush+rec / TD &middot; WR &amp; TE: catches / rec yds / TD).
 Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actual per-game production the opponent defense gives up to that role, its league rank per stat, whether the defense is trending softer or tighter, its weekly waveform, and the player's own recent scoring. Recomputed live from depth charts + the 26/27 schedule; OUT players excluded.</span></div>
-    <div id="inSm"></div><div id="inRest"></div>`;
+    <div id="inSm"></div>`;
   const groups=['QB','RB1','RB2','WR1','WR2','WR3','TE1'];
   function smRender(){
     const wk=G.week,D=J.dvp[DSRC];
@@ -1017,6 +1028,10 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
       <table class="fx">${CG}<thead>${hdr(g)}</thead><tbody>${rows.slice(-5).reverse().map(line).join('')}</tbody></table>
       </div>`}).join('');
   }
+  RR.push(smRender);
+}
+/* ---------- Trends (Defenses): momentum, predictability, season schedule strength ---------- */
+function trendsView(){
   function rest(){
   const season=TREND_SE;
   const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
@@ -1048,9 +1063,9 @@ Rank 1 of 32 = that defense has given up the MOST of it. Each row shows the actu
     return `<div class="panel"><h3 style="color:${POSC[posOf(sl)]}">${posIcon(posOf(sl),13)} ${sl} geodesics — full 2026 schedule strength</h3><div class="grid2">
     <div><p class="mini">DOWNHILL (easiest)</p><table>${per.slice(0,5).map(line).join('')}</table></div>
     <div><p class="mini">UPHILL (hardest)</p><table>${per.slice(-5).reverse().map(line).join('')}</table></div></div></div>`}).join('');
-  $('#inRest').innerHTML=mv+un+ss+`<p class="note"><b>momentum</b> = defenses trending softer/harder RIGHT NOW (recent form the season rank hasn't caught up to — target/fade before the market does) &middot; <b>uncertainty</b> = how trustworthy a defense's rank is week to week &middot; <b>geodesics</b> = full-season strength of schedule per role (planning signal, not a weekly call)</p>`;
+  $('#trends').innerHTML=mv+un+ss+`<p class="note"><b>momentum</b> = defenses trending softer/harder RIGHT NOW (recent form the season rank hasn't caught up to — target/fade before the market does) &middot; <b>uncertainty</b> = how trustworthy a defense's rank is week to week &middot; <b>geodesics</b> = full-season strength of schedule per role (planning signal, not a weekly call)</p>`;
   }
-  RR.push(()=>{smRender();rest()});
+  RR.push(rest);
 }
 /* ---------- Spacetime Grid: 32 offenses x 18 weeks of 2026/27 ---------- */
 function sked(){
@@ -1171,9 +1186,6 @@ function home(){
     <div>ROLE</div><div>PLAYER &middot; OPPONENT</div><div>PRIMARY VS LEAGUE</div>
     <div style="text-align:right">YDS/VOL</div><div style="text-align:right">REC/RUYD</div><div style="text-align:right">YDS2/PATD</div><div style="text-align:right">TD</div><div style="text-align:right">&Psi;</div></div>
    ${srows.map(smRow).join('')}</div>`;
-  const board=['QB','RB1','RB2','WR1','WR2','WR3','TE1'].filter(g=>inP(posOf(g))).map(g=>{const {best,worst}=pick(g);
-    const cell=x=>x?`<td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}</td><td>${tcell(x.u.team)}</td><td>${oppcell(x.o)}</td>${allowCells(x.def,g,D)}`:'<td colspan="7"></td>';
-    return `<tr><td>${slotchip(g)}</td>${cell(best)}${cell(worst)}</tr>`}).join('');
   const ext=J.slots.filter(x=>inP(posOf(x))).map(sl=>{
     const list=Object.keys(D).filter(inD).map(t=>({t,v:D[t].comps[sl]})).filter(x=>x.v!=null).sort((a,b)=>a.v-b.v);
     if(!list.length)return '';
@@ -1183,20 +1195,6 @@ function home(){
       <td>${sparkWave(series(soft.t,pr),vivid(soft.t),80,18)}</td>
       <td>${tcell(hard.t)}</td><td>${cellv(hard.t)}</td><td>${psi(hard.v)}</td>
       <td>${sparkWave(series(hard.t,pr),vivid(hard.t),80,18)}</td></tr>`}).join('');
-  const defs=[...new Set(J.weekly.map(r=>r[0]))].filter(inD);
-  const mv=[],vol=[];
-  defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((a,b)=>a[2]-b[2]);
-    J.slots.filter(x=>inP(posOf(x))).forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
-      const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
-      if(m>2){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});
-  mv.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));vol.sort((a,b)=>b.cv-a.cv);
-  const sos=g=>{const per=Object.keys(J.sched26).filter(inF).map(t=>({t,avg:mean(J.sched26[t].filter(o=>o!=='BYE')
-      .map(o=>(D[o.replace('@','')]||{comps:{}}).comps[g]).filter(v=>v!=null))})).sort((a,b)=>a.avg-b.avg);
-    return {easy:per.slice(0,3),hard:per.slice(-3).reverse()}};
-  const sosRow=(r,tag)=>`<tr><td>${tcell(r.t)}</td><td>${psi(r.avg)}</td><td class="mini">${tag}</td></tr>`;
-  const sq=sos('QB'),sw=sos('WR1'),sr=sos('RB1'),st2=sos('TE1');
-  const sosTbl=(o,name)=>`<div class="panel"><h3>${name} — 26/27 season slate</h3><table><tbody>
-    ${o.easy.map(r=>sosRow(r,'easiest')).join('')}${o.hard.map(r=>sosRow(r,'hardest')).join('')}</tbody></table></div>`;
   const gsw=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
   const tilt=g=>{const f=(off,def)=>mean(['QB','RB1','RB2','WR1','WR2','WR3','TE1'].map(x=>(D[def]||{comps:{}}).comps[x]).filter(v=>v!=null));
     const a=f(g[GM.vis],g[GM.home]),b=f(g[GM.home],g[GM.vis]);const d=b-a;return {fav:d>0?g[GM.vis]:g[GM.home],mag:Math.abs(d),a,b}};
@@ -1205,24 +1203,11 @@ function home(){
    <div class="grid3">${SLATE_ORDER.filter(s=>bySlate[s]).map(s=>`<div><p class="mini" style="cursor:pointer" data-slate="${s}">${slateChip(s)} <span style="color:var(--txt)">${SLATE_TIP[s]}</span> &middot; ${bySlate[s].length}</p>
      <table><tbody>${bySlate[s].map(g=>{const t=tilt(g);return `<tr><td>${tcell(g[GM.vis])} @ ${tcell(g[GM.home])}</td><td class="mini">${g[GM.time]?g[GM.time].replace(' ','')+'/'+ctTime(g[GM.time]).replace(' CT','').replace(' ',''):'TBD'}</td><td>${tcell(t.fav)} <span class="mini">+${t.mag.toFixed(1)}&Psi;</span></td></tr>`}).join('')}</tbody></table></div>`).join('')}</div>
    ${gsw.length?'':'<p class="note">no games in the current filter</p>'}</div>`;
-  $('#homeTop').innerHTML='<div id="lineupSlot"></div><div id="bbHomeSlot"></div>'+curvature+'<div id="briefSlot"></div>'+slateMap+`
-  <div class="panel"><h3>system <span class="f">built ${J.built} &middot; blend ${J.blend} &middot; ${Math.round(J.weekly.length/2)} games &middot; ${J.logs.length.toLocaleString()} player-game rows &middot; 26/27 schedule + kickoffs &middot; depth charts ${J.depthDate} &middot; rank 1/32 = most allowed</span></h3>
-  <p class="note">${['QB','RB','WR','TE','D/ST'].map(x=>`<span style="color:${POSC[x]}">${posIcon(x,11)} ${x}</span>`).join(' &nbsp; ')}</p>
-  <p class="note">F2 TD board &middot; F3 all 16 games each week &middot; F4 players + depth charts &middot; F5 defenses &middot; F6 season schedule &middot; click any player name anywhere for his popup card &middot; the filter bar above (week / slate / game / team) applies to every tab &middot; below: wk-${wk} board, field extremes, movers, and the full week-by-week insight screens</p></div>
-  <div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
-  <table class="fx"><colgroup><col style="width:58px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
-  <th style="color:var(--red)">avoid</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th></tr></thead><tbody>${board}</tbody></table></div>
-  <div class="panel"><h3>field extremes — every slot <span class="f">(${J.blend})</span></h3>
+  $('#homeTop').innerHTML=curvature+`<div class="panel"><h3>field extremes — every slot <span class="f">softest and toughest defense per slot (${J.blend}) &middot; &omega; = weekly waveform of the primary stat</span></h3>
   <table><thead><tr><th>slot</th><th style="color:var(--green)">bleeds most</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th>
-  <th style="color:var(--red)">locks down</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th></tr></thead><tbody>${ext}</tbody></table></div>
-  <div class="grid2">
-  <div class="panel"><h3>momentum — L3 vs season ${se}</h3><table><tbody>
-  ${mv.slice(0,6).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="${x.pct>0?'up':'dn'}">${x.pct>0?'&#9650;+':'&#9660;'}${x.pct.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>
-  <div class="panel"><h3>least trustworthy ranks — volatility ${se}</h3><table><tbody>
-  ${vol.slice(0,6).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td>&sigma;/&mu; ${x.cv.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>
-  </div>
-  <div class="grid2">${[['QB',sq],['RB1',sr],['WR1',sw],['TE1',st2]].filter(x=>inP(posOf(x[0]))).map(x=>sosTbl(x[1],x[0])).join('')}</div>`;
-  document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
+  <th style="color:var(--red)">locks down</th><th>allows/gm</th><th class="rk">&Psi;</th><th>&omega;</th></tr></thead><tbody>${ext}</tbody></table></div>`;
+  $('#homeBot').innerHTML='<div id="briefSlot"></div>'+slateMap;
+  document.querySelectorAll('#homeBot [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
   }
 }
 document.querySelectorAll('#defTabs button').forEach(b=>b.onclick=()=>{
@@ -1230,7 +1215,7 @@ document.querySelectorAll('#defTabs button').forEach(b=>b.onclick=()=>{
   ['ranks','matrix','defense'].forEach(t=>$('#'+t).hidden=t!==b.dataset.t)});
 /* ---------- Player popup card ---------- */
 window.ppDeep=function(n){const m=document.getElementById('ppModal');if(m)m.remove();
-  document.querySelector('nav button[data-v="players"]').click();
+  go('players');
   const inp=$('#pIn');inp.value=n;inp.onchange();
   setTimeout(()=>{try{$('#pOut').scrollIntoView({behavior:'smooth'})}catch(e){}},60);};
 window.playerPop=function(n){
@@ -1297,8 +1282,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.ge
 function dchart(){
   const teams=[...new Set(J.depth.map(d=>d.team))].sort();
   const topt=(sel,none)=>(none?`<option value="">— one team only —</option>`:'')+teams.map(t=>`<option ${t===sel?'selected':''}>${t}</option>`).join('');
-  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9656;</span> depth charts <span class="f">click to expand / collapse &middot; two teams side by side &middot; follows the game / team in the filter bar &middot; ESPN snapshot ${J.depthDate||'?'} &middot; Q = questionable, OUT = out/IR</span></h3>
-   <div id="dcBody" hidden><div class="controls" style="margin-top:8px">
+  $('#dcView').innerHTML=`<h3 id="dcToggle" style="cursor:pointer;margin-bottom:0"><span id="dcArr">&#9662;</span> depth charts <span class="f">click to expand / collapse &middot; two teams side by side &middot; follows the game / team in the filter bar &middot; ESPN snapshot ${J.depthDate||'?'} &middot; Q = questionable, OUT = out/IR</span></h3>
+   <div id="dcBody"><div class="controls" style="margin-top:8px">
      <select id="dcGame" title="pick a game of the selected week"></select>
      <select id="dcTeam">${topt(teams[0])}</select><span class="mini">vs</span><select id="dcTeam2">${topt('',true)}</select>
      <button id="dcSwap" class="mclose" style="position:static" title="swap sides">&#8644;</button></div><div id="dcOut"></div></div>`;
@@ -1933,38 +1918,44 @@ function glossary(){
    ['&omega;','That defense\'s weekly allowed waveform for the stat (latest season with 4+ weeks), dashed line = its mean.'],
    ['slate chips','TNF / SUN 1P / SUN 4P / SNF / MNF etc. — click any chip in the bar to filter every tab to that window; combine several.'],
    ['game model','Opponent-adjusted margin rating (last 17 games, prior season ×0.6, shrunk) + 1.6 home field + rest; a pick needs a 3-point disagreement with the market. Picks are frozen when first built and graded against that line. Backtest: does not beat the closing spread; totals 54.6% on a small sample.'],
-   ['props','DraftKings lines from ESPN\'s public odds feed. PROJ = own weighted stat average shrunk to the slot mean × trust-shrunk DvP at the Big Board\'s position weights; L10 = share of the last 10 games over the line; a lean needs a 10% gap, L10 agreement and 6+ games.']];
+   ['PROJ (props)','Bet Board projection per market: the player\'s recency-weighted output in his current role, shrunk to his slot\'s average, × the opponent-adjusted matchup × the market-implied team total. The 10-90 range comes from how past projections missed. Walk-forward skill per market is on Bets → Model.']];
   const open=()=>{if($('#glModal'))return;document.body.insertAdjacentHTML('beforeend',`<div id="glModal" class="modal"><div class="modalbox" style="max-width:760px"><button class="mclose" id="glX">ESC &times;</button><h3>glossary <span class="f">every number traces to data/game_logs + nflverse; hover any badge for its derivation</span></h3>
     <table><tbody>${G2.map(([k,v])=>`<tr><td style="white-space:nowrap;color:var(--amber)"><b>${k}</b></td><td style="white-space:normal;line-height:1.5">${v}</td></tr>`).join('')}</tbody></table>
-    <p class="note">keys: F1-F11 tabs &middot; ctrl-K / "/" find &middot; ? glossary &middot; esc close &middot; click any team code to filter to it</p></div></div>`);
+    <p class="note">keys: F1-F5 sections &middot; ctrl-K / "/" find &middot; ? glossary &middot; esc close &middot; click any team code to filter to it</p></div></div>`);
     $('#glX').onclick=()=>$('#glModal').remove();$('#glModal').onclick=e=>{if(e.target.id==='glModal')e.target.remove()}};
   $('#gHelp').onclick=open;
   addEventListener('keydown',e=>{const tag=(e.target.tagName||'').toLowerCase();if(e.key==='?'&&tag!=='input'&&tag!=='select'&&tag!=='textarea'){e.preventDefault();open()}else if(e.key==='Escape'){const m=$('#glModal');if(m)m.remove()}});
 }
 
 /* Home: top of the big board, one line per player */
-function homeBoard(){RR.push(()=>{const slot=$('#bbHomeSlot');if(!slot)return;const wk=G.week;
-  const R=UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>({u,r:projection(u,wk)})).filter(x=>x.r).sort((a,b)=>b.r.p-a.r.p);
-  const top=R.slice(0,12),mx=Math.max(1,...top.map(x=>x.r.ceil));const lifts=[...R].sort((a,b)=>(b.r.p-b.r.base)-(a.r.p-a.r.base));
-  const row=x=>`<tr><td class="pp plink" data-p="${x.u.player}">${esc(x.u.player)}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(x.u.team)}</td><td>${slotchip(x.u.dslot)}</td><td>${oppcell(x.r.o)}</td><td title="${esc(x.r.tip)}"><b>${x.r.p.toFixed(1)}</b></td><td>${rangeBar(x.r,mx)}</td><td class="${x.r.p-x.r.base>=1?'rise':x.r.p-x.r.base<=-1?'fall':'mini'}">${x.r.p-x.r.base>0?'+':''}${(x.r.p-x.r.base).toFixed(1)}</td></tr>`;
-  slot.innerHTML=R.length?`<div class="panel"><h3>wk ${wk} big board — top projections <span class="f">projected PPR from every layer &middot; lift = projection minus his own baseline &middot; full board with every factor on F3</span></h3>
-   <div class="grid2"><div><p class="mini">highest projections</p><table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>proj</th><th>range</th><th>lift</th></tr></thead><tbody>${top.map(row).join('')}</tbody></table></div>
-   <div><p class="mini">biggest matchup lifts <span class="dim">(and drags)</span></p><table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>proj</th><th>range</th><th>lift</th></tr></thead><tbody>${lifts.slice(0,7).map(row).join('')}${lifts.slice(-5).reverse().map(row).join('')}</tbody></table></div></div></div>`:''})}
 /* ---------- GAMES & PICKS: market lines vs the RAINMAN game model, frozen picks ledger, player props ---------- */
-const BET=J.bets||{games:[],backtest:null,ledger:[],retro:[],ratings:[],props:[],propsLedger:[]};
+const BET=J.bets||{games:[],backtest:null,ledger:[],retro:[],ratings:[]};
 const RATE=(()=>{const m={};BET.ratings.forEach(r=>m[r.week+'|'+r.team]=r);return m})();
 const spreadTxt=(g,side)=>{const s=g.spread_line;if(s==null)return '—';const v=side==='home'?-s:s;return (v>0?'+':'')+v.toFixed(1).replace('.0','')};
 const mlTxt=v=>v==null?'—':(v>0?'+':'')+Math.round(v);
 const recTxt=(rs,col)=>{const w=rs.filter(r=>r[col]==='W').length,l=rs.filter(r=>r[col]==='L').length,p=rs.filter(r=>r[col]==='PUSH').length;return w+l+p?`${w}-${l}${p?'-'+p:''}`:'—'};
 const wpct=(w,l)=>w+l?(100*w/(w+l)).toFixed(0)+'%':'—';
 const resChip=r=>r==='W'?'<span class="badge" style="background:#00c853">W</span>':r==='L'?'<span class="badge" style="background:#ff5252">L</span>':r==='PUSH'?'<span class="badge" style="background:#7d7d7d">P</span>':'';
+function sidesTable(){const wk=G.week,bt=BET.backtest||{};const gs=BET.games.filter(g=>g.week===wk&&(inF(g.away_team)||inF(g.home_team))).sort((a,b)=>a.gameday<b.gameday?-1:a.gameday>b.gameday?1:0);
+    const fr=BET.ledger.filter(r=>r.res_ats||r.res_total);const ats=recTxt(fr,'res_ats'),tot=recTxt(fr,'res_total');
+    const imp=(g,h)=>g.total_line==null||g.spread_line==null?null:(h?g.total_line/2+g.spread_line/2:g.total_line/2-g.spread_line/2);
+    return `<div class="panel"><h3>wk ${wk} board — spreads, totals, implied points <span class="f">sorted by kickoff</span></h3><p class="note">Market = DraftKings-consensus line. Model = opponent-adjusted margin rating (game cards with power ratings below). Honest record: the spread model did <b>not</b> beat the market in the 2024-25 backtest; totals were mildly positive — treat side/total picks as a second opinion, and use the implied team totals below mainly for player props and TD bets. Frozen picks this season: ATS ${ats} &middot; totals ${tot} (full record under Picks record).</p>
+     <table class="fx btbl"><thead><tr><th style="text-align:left">Game</th><th>Kick</th><th>Spread</th><th>Total</th><th title="market-implied points: total/2 ± spread/2">Implied pts</th><th>Model spread</th><th>Edge</th><th>Model total</th><th>Edge</th><th>Pick</th><th>Result</th></tr></thead><tbody>
+     ${gs.map(g=>{const h=g.home_team,a=g.away_team,ih=imp(g,1),ia=imp(g,0),played=g.result!=null&&g.result!=='';const fav=g.model_spread>0?h:a;
+       const sp=g.spread_line==null?'—':(g.spread_line>0?`${h} −${g.spread_line}`:g.spread_line<0?`${a} −${-g.spread_line}`:'PK');
+       const pk=[g.pick_ats?esc(g.pick_ats)+' '+resChip(g.res_ats):'',g.pick_total?esc(g.pick_total)+' '+resChip(g.res_total):''].filter(Boolean).join('<br>')||'<span class="dim">—</span>';
+       return `<tr><td style="text-align:left">${tcell(a)} @ ${tcell(h)}</td><td class="mini">${g.gameday.slice(5)}</td><td>${sp}</td><td>${g.total_line??'—'}</td><td class="mini">${ia!=null?`${a} ${ia.toFixed(1)} · ${h} ${ih.toFixed(1)}`:'—'}</td>
+        <td>${fav} ${Math.abs(g.model_spread).toFixed(1)}</td><td class="${Math.abs(g.edge_spread)>=3?'rise':'mini'}">${g.edge_spread>0?'+':''}${g.edge_spread}</td><td>${g.model_total}</td><td class="${Math.abs(g.edge_total)>=3?'rise':'mini'}">${g.edge_total>0?'+':''}${g.edge_total}</td>
+        <td class="mini" style="text-align:left">${pk}</td><td class="mini">${played?`${a} ${g.away_score} – ${h} ${g.home_score}`:''}</td></tr>`}).join('')||'<tr><td colspan="11" class="note">no games for this week / filter</td></tr>'}</tbody></table>
+     ${bt?`<p class="note">2024-25 walk-forward backtest (picks at edge ≥ 3 pts): ATS ${bt.ats?`${bt.ats.W}-${bt.ats.L}-${bt.ats.P} (${wpct(bt.ats.W,bt.ats.L)})`:'—'} &middot; totals ${bt.total?`${bt.total.W}-${bt.total.L}-${bt.total.P} (${wpct(bt.total.W,bt.total.L)})`:'—'} &middot; spread error: model ${bt.mae_model} vs market ${bt.mae_market} pts</p>`:''}</div>`}
 function games(){
-  $('#games').innerHTML=`<div class="tabs" id="gmTabs"><button data-t="M" class="on">Matchups &middot; lines vs model</button><button data-t="L">Picks ledger</button><button data-t="P">Player props</button></div><div id="gmOut"></div>`;
+  $('#games').innerHTML=`<div class="tabs" id="gmTabs"><button data-t="M" class="on">This week</button><button data-t="L">Picks record</button></div><div id="gmOut"></div>`;
   let tab='M';$('#gmTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#gmTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;render()};
   const bt=BET.backtest;
   function matchups(){const wk=G.week;const gs=BET.games.filter(g=>g.week===wk&&(inF(g.away_team)||inF(g.home_team))).sort((a,b)=>(a.gameday<b.gameday?-1:a.gameday>b.gameday?1:0));
     const led=new Set(BET.ledger.map(r=>r.game_id));
     return `<p class="note">market = closing/current DraftKings-consensus line from nflverse (spread shown from each team's side; total; moneyline) &middot; model = opponent-adjusted margin rating (last 17 games, prior season &times;0.6) + 1.6 home field + rest &middot; a <b>pick</b> needs the model to disagree with the market by &ge;3 points (spread or total) &middot; picks for the upcoming week are <b>frozen</b> the first time the week is built and graded later against that frozen line &middot; honest backtest 2024-25: ATS ${bt?bt.ats.W+'-'+bt.ats.L:'—'} (${bt?wpct(bt.ats.W,bt.ats.L):''}), totals ${bt?bt.total.W+'-'+bt.total.L:'—'} (${bt?wpct(bt.total.W,bt.total.L):''}), spread MAE model ${bt?bt.mae_model:''} vs market ${bt?bt.mae_market:''} — the market is the better forecaster; treat picks as tracked hypotheses, not edges</p>
+    <details class="storymore gcards"><summary>game cards — model detail, power ratings, environment, defensive scheme (${gs.length})</summary>
     ${gs.map(g=>{const home=g.home_team,away=g.away_team,played=g.result!=null;const rh=RATE[wk+'|'+home]||{},ra=RATE[wk+'|'+away]||{};const kick=gameOf(away,wk);
       const fav=g.model_spread>0?home:away;const edgeS=g.edge_spread,edgeT=g.edge_total;const cov=played?(g.result-g.spread_line):null,ov=played?(g.total-g.total_line):null;
       const pickRow=[g.pick_ats?`<b>${esc(g.pick_ats)}</b> ${resChip(g.res_ats)}`:'',g.pick_total?`<b>${esc(g.pick_total)}</b> ${resChip(g.res_total)}`:''].filter(Boolean).join(' &middot; ');
@@ -1983,7 +1974,7 @@ function games(){
         <tr><td>${tcell(away)}</td><td>${ra.srs!=null?(ra.srs>0?'+':'')+ra.srs.toFixed(1):'—'}</td><td>${ra.off_epa!=null?sgn(ra.off_epa,3):'—'}</td><td>${ra.def_epa!=null?`<span style="color:${ra.def_epa<0?'#00c853':ra.def_epa>0?'#ff5252':'var(--dim)'}">${ra.def_epa>0?'+':''}${ra.def_epa.toFixed(3)}</span>`:'—'}</td><td class="mini">${ra.games_in_window??''}</td></tr>
         <tr><td>${tcell(home)}</td><td>${rh.srs!=null?(rh.srs>0?'+':'')+rh.srs.toFixed(1):'—'}</td><td>${rh.off_epa!=null?sgn(rh.off_epa,3):'—'}</td><td>${rh.def_epa!=null?`<span style="color:${rh.def_epa<0?'#00c853':rh.def_epa>0?'#ff5252':'var(--dim)'}">${rh.def_epa>0?'+':''}${rh.def_epa.toFixed(3)}</span>`:'—'}</td><td class="mini">${rh.games_in_window??''}</td></tr></tbody></table>
         <p class="mini" style="margin-top:6px">${envLine(away,home,wk)}</p><p class="mini">${tcell(away)} D ${schemeLine(away)} ${trustPill(away,true)}<br>${tcell(home)} D ${schemeLine(home)} ${trustPill(home,true)}</p></div>
-      </div></div>`}).join('')||'<p class="note">no games in the current filter</p>'}`}
+      </div></div>`}).join('')||'<p class="note">no games in the current filter</p>'}</details>`}
   function ledger(){const L=BET.ledger,R=BET.retro;const wks=[...new Set([...L,...R].map(r=>r.week))].sort((a,b)=>a-b);
     const row=(r,frozen)=>`<tr><td class="mini">wk${r.week}</td><td>${tcell(r.away_team)} @ ${tcell(r.home_team)}</td><td class="mini">${r.result!=null?`${r.away_score}-${r.home_score}`:'<span class="dim">pending</span>'}</td><td>${r.spread_line!=null?`${r.home_team} ${(-r.spread_line>0?'+':'')}${-r.spread_line}`:''}</td><td>${r.model_spread!=null?`${r.model_spread>0?r.home_team:r.away_team} ${Math.abs(r.model_spread).toFixed(1)}`:''}</td><td>${r.pick_ats?esc(r.pick_ats):'<span class="dim">—</span>'}</td><td>${resChip(r.res_ats)}</td><td>${r.total_line??''}</td><td>${r.model_total??''}</td><td>${r.pick_total?esc(r.pick_total):'<span class="dim">—</span>'}</td><td>${resChip(r.res_total)}</td><td class="mini">${frozen?'frozen '+r.frozen_on:'<span style="color:var(--amber)">retro</span>'}</td></tr>`;
     const hdr=`<thead><tr><th>wk</th><th>game</th><th>score</th><th>market</th><th>model</th><th>ATS pick</th><th></th><th>total</th><th>model</th><th>total pick</th><th></th><th>status</th></tr></thead>`;
@@ -1995,21 +1986,10 @@ function games(){
      <tr><td class="dim">backtest 2024-25 (same rule)</td><td>${bt?bt.ats.W+'-'+bt.ats.L+(bt.ats.P?'-'+bt.ats.P:''):'—'}</td><td>${bt?wpct(bt.ats.W,bt.ats.L):''}</td><td>${bt?bt.total.W+'-'+bt.total.L+(bt.total.P?'-'+bt.total.P:''):'—'}</td><td>${bt?wpct(bt.total.W,bt.total.L):''}</td><td class="mini">${bt?bt.n+' games':''}</td></tr></tbody></table>
      <p class="note">break-even at -110 is 52.4%. The 2024-25 backtest says the spread model does not beat the closing line (it is ~0.6 pts/game less accurate); totals ran 54.6% on a 209-pick sample, which is suggestive, not proven. Moneyline picks were removed: the model's win probabilities lost to the moneyline market 41-101.</p></div>
      <div class="panel"><h3>every logged pick</h3><table class="fx bb">${hdr}<tbody>${[...L.map(r=>row(r,true)),...R.map(r=>row(r,false))].join('')||'<tr><td class="dim">none yet</td></tr>'}</tbody></table></div>`}
-  function props(){const P=BET.props.filter(p=>inF(p.team)||inF(p.opp)).filter(p=>inP(p.pos));const wk=BET.propsWeek;const PL=BET.propsLedger;
-    const rec=PL.filter(r=>r.result);const w=rec.filter(r=>r.result==='W').length,l=rec.filter(r=>r.result==='L').length;
-    const only=$('#prLean')?$('#prLean').value:'lean';const q=($('#prQ')?$('#prQ').value:'').toLowerCase();
-    let R=P.filter(p=>(only!=='lean'||p.lean)&&(!q||(p.player+' '+p.team+' '+p.market).toLowerCase().includes(q)));
-    const sk=window._prSort||'edge';R.sort((a,b)=>sk==='edge'?Math.abs(b.edge_pct)-Math.abs(a.edge_pct):sk==='player'?a.player.localeCompare(b.player):sk==='kick'?a.kick.localeCompare(b.kick):(b[sk]??-1)-(a[sk]??-1));
-    return `<div class="controls"><select id="prLean"><option value="lean" ${only==='lean'?'selected':''}>leans only</option><option value="all" ${only==='all'?'selected':''}>every market</option></select><input id="prQ" placeholder="player / team / market" size="20" value="${esc(q)}">
-      <span class="note">DraftKings lines via ESPN's public odds feed (no prices exposed — assume -110) &middot; wk ${wk} &middot; ${BET.props.length} markets, ${new Set(BET.props.map(p=>p.event)).size} of 16 games have main props posted (DK posts the rest Thu-Sat — re-pull with the props recipe) &middot; PROJ = own weighted stat average shrunk to the slot mean &times; trust-shrunk DvP for that stat at the Big Board's position weights &middot; L10 = share of his last 10 games over this line &middot; a lean needs 10% edge + L10 agreement + 6 games &middot; frozen leans: ${w}-${l} graded, ${PL.length-rec.length} pending</span></div>
-     <table class="fx bb"><thead><tr>${[['kick','kick'],['player','player'],['tm',''],['opp',''],['slot',''],['market',''],['line','line'],['open',''],['move','move'],['own avg',''],['base',''],['match',''],['PROJ','proj'],['edge','edge'],['L10 over','l10_over'],['DvP rk','dvp_rank'],['lean','']].map(([l,k])=>`<th ${k?`data-k="${k}" style="cursor:pointer"`:''}>${l}</th>`).join('')}</tr></thead><tbody>
-     ${R.map(p=>`<tr><td class="mini">${p.kick.slice(5,16).replace('T',' ')}Z</td><td class="pp plink" data-p="${p.player}">${esc(p.player)}</td><td>${tcell(p.team)}</td><td>${tcell(p.opp)}</td><td>${slotchip(p.slot)}</td><td style="text-align:left">${esc(p.market)}</td><td><b>${p.line}</b></td><td class="mini">${p.open??''}</td><td class="${p.move>0?'rise':p.move<0?'fall':'mini'}">${p.move?(p.move>0?'+':'')+p.move:''}</td><td class="mini">${p.own_avg??''}<sup class="dim" title="games of history">${p.n_games}</sup></td><td class="mini">${p.base}</td><td>${fmtX(p.matchup_x,3)}</td><td><b>${p.proj}</b></td><td class="${p.edge_pct>=10?'rise':p.edge_pct<=-10?'fall':'mini'}">${p.edge_pct>0?'+':''}${p.edge_pct}%</td><td>${p.l10_over!=null?`<span style="color:${p.l10_over>=.6?'#00c853':p.l10_over<=.4?'#ff5252':'var(--txt)'}">${(100*p.l10_over).toFixed(0)}%</span>`:'—'}</td><td>${p.dvp_rank?badge(p.dvp_rank):'<span class="dim">—</span>'}</td><td>${p.lean?`<span class="tag" style="color:${p.lean==='OVER'?'#00c853':'#ff5252'}">${p.lean}</span>`:''}</td></tr>`).join('')||'<tr><td colspan="17" class="dim">no markets match</td></tr>'}</tbody></table>
-     <p class="note">DvP rk = opponent's league rank for this stat vs the player's slot (1 = allows the most). Lines with no price are not a full edge calculation: a 10% projection gap at -110 is roughly break-even on yardage markets, so leans are ideas to verify against the actual juice, not bets.</p>`}
-  function render(){$('#gmOut').innerHTML=tab==='M'?matchups():tab==='L'?ledger():props();
-    if(tab==='P'){$('#prLean').onchange=render;$('#prQ').oninput=()=>{const v=$('#prQ').value;render();$('#prQ').value=v;$('#prQ').focus();$('#prQ').setSelectionRange(v.length,v.length)};$('#gmOut').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{window._prSort=th.dataset.k;render()})}}
+  function render(){$('#gmOut').innerHTML=tab==='M'?sidesTable()+matchups():ledger()}
   RR.push(render);
 }
-/* ---------- F11 Locker Room: storylines · birthdays · rivalries ---------- */
+/* ---------- Games → Storylines: rivalries · homecomings · birthdays ---------- */
 let BDU=null;
 function bdUniverse(){if(BDU)return BDU;const seen=new Map();const nk=n=>n.toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g,'').replace(/[^a-z]/g,'');
   J.depth.forEach(d=>{const k=nk(d.player);if(!seen.has(k))seen.set(k,{player:d.player,team:d.team,slot:d.slot,inj:d.injury})});
@@ -2060,15 +2040,6 @@ function locker(){
   RR.push(render);
 }
 /* home: storylines + birthdays strip */
-function socialHome(){RR.push(()=>{const el=$('#socialSlot');if(!el)return;const wk=G.week;
-  const gs=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
-  const items=[];gs.forEach(g=>{const {c,cn}=storyCount(g,wk);c.key.forEach(r=>items.push({o:0,h:rivLine(r,g[GM.vis],g[GM.home])}));
-    cn.filter(r=>['birthday','homecoming','revenge'].includes(r[5])).forEach(r=>items.push({o:1+(CORD[r[5]]||0),h:connLine(r)}))});
-  items.sort((a,b)=>a.o-b.o);
-  const B=bdUniverse().filter(x=>x.bd.days<=14&&inF(x.team)).sort((a,b)=>a.bd.days-b.bd.days);
-  el.innerHTML=`<div class="grid2"><div class="panel"><h3>wk ${wk} storylines <span class="f">rivalries · homecomings · revenge · birthday games &middot; full list on F11</span></h3>${items.slice(0,10).map(x=>x.h).join('')||'<p class="dim mini">none for this filter</p>'}${items.length>10?`<p class="mini">+${items.length-10} more on <a href="#" id="toLocker">F11 Locker Room</a></p>`:''}</div>
-   <div class="panel"><h3>upcoming birthdays <span class="f">next 14 days</span></h3>${B.slice(0,12).map(x=>`<div class="rivln">${x.bd.days===0?ctag('birthday',' TODAY'):`<span class="mini" style="display:inline-block;width:34px">${x.bd.days}d</span>`} ${tcell(x.team)} <span class="plink pp" data-p="${esc(x.player)}">${esc(x.player)}</span> <span class="mini">${fmtD(x.bd.next)} &middot; turns ${x.bd.turns}${bdGames(x).some(g=>g[GM.date]===x.bd.next.toISOString().slice(0,10))?' &middot; <b style="color:#ffd54f">game day</b>':''}</span></div>`).join('')||'<p class="dim mini">none in the next 14 days</p>'}</div></div>`;
-  bindP(el);const tl=$('#toLocker');if(tl)tl.onclick=e=>{e.preventDefault();document.querySelector('nav button[data-v="locker"]').click()}})}
 /* ---------- BET BOARD: priced props, anytime-TD fair prices, correlated SGP pricing, ledger, model honesty ----------
    Probabilities come from build_prop_model.py (walk-forward tuned) and are anchored to the market at the line
    (build_bets.py W_MODEL) — the model alone over-states edges because books know about injuries and roles it doesn't. */
@@ -2125,7 +2096,7 @@ function betboard(){
     <div class="bsrow"><span class="ctag" style="color:${priced?'var(--green)':'#ffd54f'};border-color:currentColor">${priced?'PRICED FEED':'NO PRICES'}</span> ${priced?'book prices loaded':'DraftKings lines come without prices — EV assumes −110. Add a free The Odds API key (.env → ODDS_API_KEY) and run scripts/fetch_odds_api.py for FanDuel prices.'}</div>
     <div class="bsrow"><span class="ctag" style="color:var(--amber);border-color:currentColor">MATCHUPS</span> matchup ranks = opponent-adjusted DvP, recency half-life ${BETS.dvpMeta.half_life_weeks||12} wk (rank 1 = allows most above what the offense normally does) &middot; through ${BETS.dvpMeta.through||''}</div>
     <div class="bsrow"><span class="ctag" style="color:var(--dim);border-color:currentColor">HONESTY</span> probabilities are anchored to the market at the line — the model gets up to 35% weight, scaled down when the player has under 4 games of history in his current role — until the graded ledger proves a bigger edge &mdash; see Model and Ledger</div></div>
-   <div class="tabs" id="btTabs"><button data-t="P" class="on">Props</button><button data-t="T">Anytime TD</button><button data-t="S">Parlay / SGP <span class="n" id="slipN">${SLIP.length||''}</span></button><button data-t="G">Sides &amp; totals</button><button data-t="L">Ledger</button><button data-t="M">Model</button></div>
+   <div class="tabs" id="btTabs"><button data-t="P" class="on">Props</button><button data-t="T">Anytime TD</button><button data-t="S">Parlay / SGP <span class="n" id="slipN">${SLIP.length||''}</span></button><button data-t="L">Ledger</button><button data-t="M">Model</button></div>
    <div id="btOut"></div>`;
   let tab='P',sortK='ev',sortA=false;
   $('#btTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#btTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;render()};
@@ -2202,25 +2173,13 @@ function betboard(){
       <table class="fx"><thead><tr><th>Logged</th><th>Ticket</th><th>Price</th><th>Stake</th><th>Result</th><th></th></tr></thead><tbody>
       ${MY.map((b,i)=>`<tr><td class="mini">${b.when}</td><td style="text-align:left">${b.legs.map(l=>`${esc(l.player)} ${l.label}`).join(' + ')}</td><td>${fmtAm(+b.price)}</td><td>$${b.stake}</td><td>${b.res?`<b class="${b.res==='W'?'rise':b.res==='L'?'fall':''}">${b.res}</b>`:'<span class="dim">open</span>'}</td><td><button class="rmbet" data-i="${i}">×</button></td></tr>`).join('')||'<tr><td colspan="6" class="note">log bets from the Parlay / SGP tab</td></tr>'}</tbody></table>
       <button class="btn" id="betCsv">export CSV</button></div></div>`}
-  function sides(){const wk=G.week,bt=BET.backtest||{};const gs=BET.games.filter(g=>g.week===wk&&(inF(g.away_team)||inF(g.home_team))).sort((a,b)=>a.gameday<b.gameday?-1:a.gameday>b.gameday?1:0);
-    const fr=BET.ledger.filter(r=>r.res_ats||r.res_total);const ats=recTxt(fr,'res_ats'),tot=recTxt(fr,'res_total');
-    const imp=(g,h)=>g.total_line==null||g.spread_line==null?null:(h?g.total_line/2+g.spread_line/2:g.total_line/2-g.spread_line/2);
-    return `<p class="note">Market = DraftKings-consensus line. Model = opponent-adjusted margin rating (details and power ratings on F10 Games &amp; Picks). Honest record: the spread model did <b>not</b> beat the market in the 2024-25 backtest; totals were mildly positive — treat side/total picks as a second opinion, and use the implied team totals below mainly for player props and TD bets. Frozen picks this season: ATS ${ats} &middot; totals ${tot}.</p>
-     <table class="fx btbl"><thead><tr><th style="text-align:left">Game</th><th>Kick</th><th>Spread</th><th>Total</th><th title="market-implied points: total/2 ± spread/2">Implied pts</th><th>Model spread</th><th>Edge</th><th>Model total</th><th>Edge</th><th>Pick</th><th>Result</th></tr></thead><tbody>
-     ${gs.map(g=>{const h=g.home_team,a=g.away_team,ih=imp(g,1),ia=imp(g,0),played=g.result!=null&&g.result!=='';const fav=g.model_spread>0?h:a;
-       const sp=g.spread_line==null?'—':(g.spread_line>0?`${h} −${g.spread_line}`:g.spread_line<0?`${a} −${-g.spread_line}`:'PK');
-       const pk=[g.pick_ats?esc(g.pick_ats)+' '+resChip(g.res_ats):'',g.pick_total?esc(g.pick_total)+' '+resChip(g.res_total):''].filter(Boolean).join('<br>')||'<span class="dim">—</span>';
-       return `<tr><td style="text-align:left">${tcell(a)} @ ${tcell(h)}</td><td class="mini">${g.gameday.slice(5)}</td><td>${sp}</td><td>${g.total_line??'—'}</td><td class="mini">${ia!=null?`${a} ${ia.toFixed(1)} · ${h} ${ih.toFixed(1)}`:'—'}</td>
-        <td>${fav} ${Math.abs(g.model_spread).toFixed(1)}</td><td class="${Math.abs(g.edge_spread)>=3?'rise':'mini'}">${g.edge_spread>0?'+':''}${g.edge_spread}</td><td>${g.model_total}</td><td class="${Math.abs(g.edge_total)>=3?'rise':'mini'}">${g.edge_total>0?'+':''}${g.edge_total}</td>
-        <td class="mini" style="text-align:left">${pk}</td><td class="mini">${played?`${a} ${g.away_score} – ${h} ${g.home_score}`:''}</td></tr>`}).join('')||'<tr><td colspan="11" class="note">no games for this week / filter</td></tr>'}</tbody></table>
-     ${bt?`<p class="note">2024-25 walk-forward backtest (picks at edge ≥ 3 pts): ATS ${bt.ats?`${bt.ats.W}-${bt.ats.L}-${bt.ats.P} (${wpct(bt.ats.W,bt.ats.L)})`:'—'} &middot; totals ${bt.total?`${bt.total.W}-${bt.total.L}-${bt.total.P} (${wpct(bt.total.W,bt.total.L)})`:'—'} &middot; spread error: model ${bt.mae_model} vs market ${bt.mae_market} pts</p>`:''}`}
   function model(){const M=BETS.model;
     return `<div class="panel"><h3>How good is the model? <span class="f">walk-forward: every QB/RB/WR/TE game 2025 wk 3 → latest, projected with only earlier data</span></h3>
       <p class="note">Skill = share of game-to-game variance explained beyond "average player in his slot". Player form carries almost all of it; the matchup layer (opponent-adjusted DvP) and the market-implied team total add a little on top. Raw DvP — what a defense allowed, unadjusted — did <b>not</b> predict next week better than the league average in testing, which is why the rankings now use the adjusted version.</p>
       <table class="fx"><thead><tr><th>Market</th><th>Games</th><th>Form only</th><th>Form + matchup + game</th><th>Matchup β</th><th>Team-total γ</th><th>Half-life</th><th>Calibration (predicted → hit)</th></tr></thead><tbody>
       ${Object.entries(M).map(([m,v])=>`<tr><td style="text-align:left">${MKL[m]||m}</td><td class="mini">${v.n}</td><td>${v.skill_form_only.toFixed(1)}%</td><td><b>${v.skill.toFixed(1)}%</b></td><td class="mini">${v.beta}</td><td class="mini">${v.gamma}</td><td class="mini">${v.H_P} wk</td>
         <td class="mini" style="text-align:left">${(v.calibration||[]).map(c=>`${Math.round(100*c.p)}→${Math.round(100*c.hit)}`).join(' · ')}</td></tr>`).join('')}</tbody></table></div>`}
-  function render(){$('#btOut').innerHTML=tab==='P'?props():tab==='T'?tds():tab==='S'?slip():tab==='L'?ledger():tab==='G'?sides():model();bind()}
+  function render(){$('#btOut').innerHTML=tab==='P'?props():tab==='T'?tds():tab==='S'?slip():tab==='L'?ledger():model();bind()}
   function bind(){const o=$('#btOut');
     o.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=k==='player'||k==='rk'}render()});
     const mk=$('#bfMk');if(mk)mk.onchange=()=>{st.mk=mk.value;render()};const ev=$('#bfEv');if(ev)ev.onchange=()=>{st.minEv=ev.value;render()};
@@ -2245,8 +2204,8 @@ function betboard(){
 }
 function toast(msg){let t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.textContent=msg;t.classList.remove('on');void t.offsetWidth;t.classList.add('on')}
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['locker',locker],['home',socialHome],['bets',betboard]];
-BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
-['bets','chamber','players','defenses','sked','tdb','intel','board','games','locker'].forEach(v=>DIRTY.add(v));
+const BOOT=[['home',home],['players',dchart],['mlab',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['trends',trendsView],['intel',intel],['home',brief],['fantasy',lineup],['board',board],['games',games],['locker',locker],['bets',betboard]];
+BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='bets';palette();glossary();
+ALLV.filter(v=>v!=='bets').forEach(v=>DIRTY.add(v));
 gbarInit();
 </script></body></html>

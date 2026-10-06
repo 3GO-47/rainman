@@ -98,10 +98,7 @@ def bets_payload():
     ledger = rows(P + 'picks_ledger.csv') if os.path.exists(P + 'picks_ledger.csv') else []
     retro = rows(P + 'picks_retro.csv') if os.path.exists(P + 'picks_retro.csv') else []
     rt = rows(P + 'team_ratings.csv', lambda r: r['season'] == '2026')
-    props = rows(P + 'props_current.csv') if os.path.exists(P + 'props_current.csv') else []
-    pledger = rows(P + 'props_ledger.csv') if os.path.exists(P + 'props_ledger.csv') else []
-    return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
-            'propsWeek': int(props[0]['week']) if props else None}
+    return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt}
 
 def betting_payload():
     """Bet board: priced prop lines, anytime-TD fair prices, SGP correlations, model validation, graded ledger."""

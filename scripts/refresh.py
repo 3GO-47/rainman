@@ -60,8 +60,7 @@ def main():
         run(['scripts/build_games.py'])
     else:
         print('!! data/processed/game_lines.csv missing — run scripts/fetch_games.py (cloud) for lines / results / picks')
-    if glob.glob('data/raw/props_*.txt'):
-        run(['scripts/build_props.py'])
+    # (scripts/build_props.py — the v1 prop leans — is retired: build_bets.py prices the same DK lines with the walk-forward prop model)
     # betting layer: opponent-adjusted DvP -> prop model (walk-forward tuned) -> priced lines / TD board / ledger
     # FanDuel prices (The Odds API) — only when a key is configured in .env / the environment; never fails the refresh
     if os.environ.get('ODDS_API_KEY') or (os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read()):
