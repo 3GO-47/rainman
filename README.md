@@ -21,6 +21,18 @@ college, slate, game, team, roster) narrows it. ▲/▼ in an avg cell = the opp
 averages. F1–F11 jump between tabs, ctrl-K finds any player or team, and
 the week / slate / position / game / team filter bar underneath applies to every view. Type: Inter for chrome,
 JetBrains Mono for data; one amber accent; rank colors unchanged (green = allows the most = best matchup).
+**v3 visuals (2026-10-06):** the tabs that used to be loose stacks of tables are now dense, one-screen views built from a
+shared set of primitives (KPI tiles, field-tilt bars, heat cells, thread matrices). Home: KPI strip (smash / avoid /
+softest & stingiest D playing / movers / highest total / biggest spread / props posted) → slate board (spread, total,
+field tilt, environment rank, storylines, props per game; click filters everything) beside best & worst per role and
+movers → top projections beside the DvP field heat for the defenses on the slate → intel brief. TD Board: KPI strip,
+TD fields by role, an anytime-TD card board (rush + rec TD rate × end-zone softness), plots folded, table below.
+Schedule: lens (next 4 / rest of season / playoffs 15-17), N4 / ROS / PO / Σ columns, sort, legible opponent cells,
+sticky team column. Games & Picks: KPI strip + one board table over collapsible game cards, weekly W-L bars on the
+ledger (the duplicate props tab moved to Bets). Intel: "this week's scheme edges" — every offense × role vs the scheme
+family it faces. Locker Room: thread matrix (game × kind) over collapsible cards sorted by thread count. Bets: KPI
+strip (cleared ≥70% / ≤30% L10, biggest line move) and market chips with counts and hit bars.
+
 **Effective depth charts (2026-10-06):** ESPN leaves injured starters in their slot for weeks (Baker Mayfield "QB1 · O"),
 which mis-slots the real starter. `scripts/build_depth_chart.py` now derives the *effective* chart: OUT/IR players drop to
 the bottom of their row and the next man holds the slot (Jalon Daniels QB1); within RB/TE/WR rows a player who has taken
