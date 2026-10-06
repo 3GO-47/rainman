@@ -51,6 +51,8 @@ def effective_slots(dc):
     behind them move up (QB/RB/TE renumbered by depth; each WR row's first active player is that row's starter).
     The weekly snapshot keeps the injured starter in slot 1, which would project his replacement as a backup."""
     dc = dc.copy(); dc['eslot'] = dc.slot
+    if 'espn_depth' in dc.columns:   # snapshot built by build_depth_chart.py >= 2026-10-06 is already effective (OUT last, usage-adjusted)
+        return dc
     act = dc[dc.injury.astype(str) != '-1']
     for (team, row), d in act.groupby(['team', 'pos_row']):
         d = d.sort_values('depth')
