@@ -265,10 +265,17 @@
 ## 2026-10-06 (h) — Matchup board is the landing view; player averages
 - Josh: the filterable / sortable player list vs opposing defensive ranks is the most valuable part; wants player
   averages for the current season and cumulative 2024-26, NFL + NCAA.
-- `lab` renamed "Matchup board", moved to This week as key 1 (overview 2, insights 3, matchups 4, lines 5, explorer 6);
-  default view (no hash) = lab. Column groups: opp DvP rank | model (Ψ Ψ+ PROJ) | player avg / gm | opp allows / gm | ω.
+- `lab` is the default view (no hash). (Briefly renamed "Matchup board" / moved under "This week" — reverted, see (i).) Column groups: opp DvP rank | model (Ψ Ψ+ PROJ) | player avg / gm | opp allows / gm | ω.
 - Player averages: statOf(col, logRow) maps every DvP stat column to the player's own game-log stat (QB TD = rush+rec TD,
   P+R, R+R); avgOf over PLOGS[player] for LAST_SE (current season) and all seasons; #labAvg picks which leads the cell
   and sorts (the other sits small); ▲/▼ compares the lead average to the opponent's allowed/gm; GP = season · all.
   Multi-position grid gets the same via the unified columns (x0..x6). Sticky player column; College column NFL-only.
 - Verified: both leagues, 1500 + 390 px, 0 JS errors, no page overflow (board scrolls inside its panel).
+
+## 2026-10-06 (i) — original tab names back
+- Josh: "just go back to the old tab header names". Top row = the eleven v1 tabs with their F-key labels (Home, Big
+  Board, Weekly Matchups, Players, Defenses, TD Board, Schedule, Intel, Games & Picks, Locker Room, Bets); row 2 = the
+  original sub-tabs (Overview/Insights/Fantasy · Matchup Lab/Player Explorer/Depth Charts · Rankings/Matrix/Observatory ·
+  Player props/Anytime TD/Game lines); single-view tabs hide the sub row's tabs. F1–F11 route through go(); number keys
+  dropped. F-key labels and the find-button text hide under 1750 px so all eleven tabs fit at 1500. Item ids unchanged
+  (hashes still work; lines2 aliases glines). Matchup Lab stays the landing view.
