@@ -204,3 +204,12 @@
 - v2: lands on Bet Board unless hash contains "home"; KPI "best prop edge" (n_eff≥3); 6-col KPI grid.
 - model_validation.md rewritten: DvP backtest table + props section replaced in place by build_prop_model (markers).
 - Playwright: v1/v2/mobile all tabs 0 JS errors, 390 px no overflow. Wk4 lines are DK (unpriced); wk5 after Tuesday refresh.
+
+## 2026-10-06 (a) — Tuesday refresh (wk 4 partial) + prop-model fixes
+- PFR wk 4 box scores (15/16; MNF ATL@NO pending) appended to box_lines_2026.txt (306 lines, checksum verified);
+  scrape_state boxscores_done lists them. ESPN depth 2026-10-06 (578 rows). DK wk 5 props (TNF + PHI@JAX only so far;
+  ESPN core API names now carry " (incl. overtime)" — stripped; timestamp field is lastUpdated).
+- build_games.py: ledger res_* columns read back as float when empty -> cast to object before grading.
+- build_prop_model: gprior (QB1/QB2 split), role() weighting grid GRID_R, per-market mean scale, effective_slots() next man up.
+- build_bets: wt(n_eff) evidence-scaled model weight; ledger gains n_eff; wk 5 rows frozen pre-fix were removed and refrozen
+  (no games played yet). Template: ledger by EV bucket/market + week filter; Sides & totals tab.
