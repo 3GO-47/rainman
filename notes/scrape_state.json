@@ -1,120 +1,122 @@
 {
-  "created": "2026-07-13",
-  "seasons": {
-    "2024": {
-      "status": "complete",
-      "weeks_done": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18
-      ],
-      "boxscores_done": []
-    },
-    "2025": {
-      "status": "complete",
-      "weeks_done": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18
-      ],
-      "boxscores_done": []
-    },
-    "2026": {
-      "status": "in_progress",
-      "weeks_done": [
-        1,
-        2,
-        3
-      ],
-      "boxscores_done": [
-        "202610010cle",
-        "202610040was",
-        "202610040buf",
-        "202610040chi",
-        "202610040cin",
-        "202610040htx",
-        "202610040nyg",
-        "202610040phi",
-        "202610040rav",
-        "202610040tam",
-        "202610040min",
-        "202610040rai",
-        "202610040sea",
-        "202610040sfo",
-        "202610040car"
-      ],
-      "note": "wk4 partial: MNF 202610050nor pending"
-    }
+ "created": "2026-07-13",
+ "seasons": {
+  "2024": {
+   "status": "complete",
+   "weeks_done": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+   ],
+   "boxscores_done": []
   },
-  "depth_charts": {
-    "last_pull": "2026-10-06",
-    "teams_done": [
-      "ARI",
-      "ATL",
-      "BAL",
-      "BUF",
-      "CAR",
-      "CHI",
-      "CIN",
-      "CLE",
-      "DAL",
-      "DEN",
-      "DET",
-      "GB",
-      "HOU",
-      "IND",
-      "JAX",
-      "KC",
-      "LAC",
-      "LAR",
-      "LV",
-      "MIA",
-      "MIN",
-      "NE",
-      "NO",
-      "NYG",
-      "NYJ",
-      "PHI",
-      "PIT",
-      "SEA",
-      "SF",
-      "TB",
-      "TEN",
-      "WAS"
-    ]
+  "2025": {
+   "status": "complete",
+   "weeks_done": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18
+   ],
+   "boxscores_done": []
   },
-  "schedule_2026": {
-    "status": "published_and_built",
-    "games": 272
+  "2026": {
+   "status": "in_progress",
+   "weeks_done": [
+    1,
+    2,
+    3,
+    4
+   ],
+   "boxscores_done": [
+    "202610010cle",
+    "202610040was",
+    "202610040buf",
+    "202610040chi",
+    "202610040cin",
+    "202610040htx",
+    "202610040nyg",
+    "202610040phi",
+    "202610040rav",
+    "202610040tam",
+    "202610040min",
+    "202610040rai",
+    "202610040sea",
+    "202610040sfo",
+    "202610040car",
+    "202610050nor"
+   ],
+   "note": "wk4 complete 2026-10-06"
   }
+ },
+ "depth_charts": {
+  "last_pull": "2026-10-06",
+  "teams_done": [
+   "ARI",
+   "ATL",
+   "BAL",
+   "BUF",
+   "CAR",
+   "CHI",
+   "CIN",
+   "CLE",
+   "DAL",
+   "DEN",
+   "DET",
+   "GB",
+   "HOU",
+   "IND",
+   "JAX",
+   "KC",
+   "LAC",
+   "LAR",
+   "LV",
+   "MIA",
+   "MIN",
+   "NE",
+   "NO",
+   "NYG",
+   "NYJ",
+   "PHI",
+   "PIT",
+   "SEA",
+   "SF",
+   "TB",
+   "TEN",
+   "WAS"
+  ]
+ },
+ "schedule_2026": {
+  "status": "published_and_built",
+  "games": 272
+ }
 }
