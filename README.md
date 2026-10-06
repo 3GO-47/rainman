@@ -21,6 +21,15 @@ college, slate, game, team, roster) narrows it. ▲/▼ in an avg cell = the opp
 averages. F1–F11 jump between tabs, ctrl-K finds any player or team, and
 the week / slate / position / game / team filter bar underneath applies to every view. Type: Inter for chrome,
 JetBrains Mono for data; one amber accent; rank colors unchanged (green = allows the most = best matchup).
+**Effective depth charts (2026-10-06):** ESPN leaves injured starters in their slot for weeks (Baker Mayfield "QB1 · O"),
+which mis-slots the real starter. `scripts/build_depth_chart.py` now derives the *effective* chart: OUT/IR players drop to
+the bottom of their row and the next man holds the slot (Jalon Daniels QB1); within RB/TE/WR rows a player who has taken
+≥25% more opportunities than the man above him over the team's last two games (and a real workload) moves up, and the three
+WR starters are ordered by last-two-games targets. Every row carries `note` (why he moved), `trend` (▲ rising / ▼ fading
+workload vs his season rate), `l2`/`se` (opps per game, last 2 · season), `gp`, `espn_depth` and `log_name` (game-log
+spelling, so averages join). The dashboard shows ▲▼● glyphs next to names (hover for the reason) and the Depth Charts view
+shows workload and the ESPN listing where it differs.
+
 The legacy F1–F11 tab buttons still exist hidden (`#legacyNav`) as the routing model — every old cross-link and
 re-render path works unchanged; the top bar's `go(view)` clicks them and then selects the sub-panel. The URL hash
 carries `v=<view>` plus the filters, so a shared link opens the exact screen.
