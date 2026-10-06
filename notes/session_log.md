@@ -240,3 +240,17 @@
   paths, slates, NWK, NT-scaled rank colors, conference filter, hidden tabs); NFL page byte-identical in behavior (0 errors).
 - Sandbox cannot reach ESPN; GitHub raw/releases can. 2026 lines = ESPN odds pulled in Chrome (448 games: wk 6 scoreboard +
   wk 1-5 summary pickcenter). pages.yml now also publishes ncaa.html + archive/.
+
+## 2026-10-06 (f) — v2 shell: task-based navigation + restyle
+- Restore point first: dashboard/archive/rainman_v1.2_2026-10-06.html + ncaa_v1.0_2026-10-06.html, scripts/archive template copy,
+  notes/restore_points.md (commit 8d03e1d / tag v1.2-pre-revamp).
+- Shell: #app = #side (brand + league switch, find, SECTIONS nav with descriptions, footer) + #body (#top sticky: breadcrumb
+  header with view description, week, summary; #gbar filters) + main (containers unchanged). Legacy nav kept hidden in
+  #legacyNav as the routing model; go(id) clicks it, then selects sub-panels (players: #dcView/#lab/#player; defenses:
+  #defTabs; bets: #r11Tabs; home: [data-sub] wrappers overview / insights / fantasy). Hash gains v=<view>. Keys 1-9.
+- Sidebar collapses to a numbered rail (localStorage rm.side). Container query stacks the two matchup tables when main
+  < 1340px so player names never truncate. Panels scroll horizontally instead of the page; th no longer sticky.
+- Style: tokens (--bg #0a0c10, --panel, --s2/--s3, --edge, --accent #f0b429), Inter + JetBrains Mono via Google Fonts,
+  rounded cards, uppercase mono th, chips/selects/tabs restyled; F11 r11* components mapped to tokens.
+- Explorer opens with quick picks (this season's top PPR scorers per position); depth charts auto-expand in their view.
+- Verified: Playwright tour of every sidebar item, NFL + NCAA, 1500 and 390 px: 0 JS errors, scrollWidth == viewport.
