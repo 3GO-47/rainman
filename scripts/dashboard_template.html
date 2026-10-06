@@ -299,9 +299,11 @@ main{flex:1}
 .lgsw{display:inline-flex;border:1px solid var(--edge2);border-radius:4px;overflow:hidden;margin-left:4px}
 .lgsw a{padding:3px 7px;font:600 10px/1.2 var(--ui);letter-spacing:.06em;color:var(--dim);text-decoration:none;border-right:1px solid var(--edge2)}
 .lgsw a:last-child{border-right:0}.lgsw a:hover{color:var(--txt)}.lgsw a.on{background:var(--accent);color:#1a1200}
-#tnav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0}
-#tnav button{background:none;border:0;border-bottom:2px solid transparent;border-top:2px solid transparent;color:var(--dim);padding:0 14px;font:500 12.5px/1 var(--ui);letter-spacing:.01em;cursor:pointer;white-space:nowrap}
+#tnav{display:flex;flex-wrap:nowrap;gap:0;overflow-x:auto;scrollbar-width:none;min-width:0;padding:0}
+#tnav button{background:none;border:0;border-bottom:2px solid transparent;border-top:2px solid transparent;border-radius:0;color:var(--dim);padding:0 10px;font:500 12.5px/1 var(--ui);letter-spacing:.01em;text-transform:none;cursor:pointer;white-space:nowrap;flex:none}
 #tnav button:hover{color:var(--txt)}#tnav button.on{color:var(--txt);border-bottom-color:var(--accent);font-weight:600}
+#tnav button .fk{display:inline;font:500 9px/1 var(--mono);color:var(--dim2);margin-right:5px;letter-spacing:0}#tnav button.on .fk{color:var(--accent)}
+#snav[hidden]{display:none}
 .hright{margin-left:auto;display:flex;align-items:center;gap:8px;padding-left:12px}
 .hright .gl{margin-left:4px}
 #gFind{background:var(--s2);border:1px solid var(--edge2);color:var(--dim);padding:5px 9px;font:500 11.5px/1.2 var(--ui);border-radius:5px;cursor:pointer;display:flex;align-items:center;gap:6px;letter-spacing:0;white-space:nowrap}
@@ -410,18 +412,20 @@ header,#legacyNav nav{display:none}
 /* dark scrollbars */
 *{scrollbar-color:var(--edge2) transparent}
 /* responsive */
-@media (max-width:1100px){#tnav button{padding:0 10px}#snav .sitem{padding:0 9px}}
+@media (max-width:1750px){#tnav button .fk{display:none}#gFind .fl{display:none}#gFind{padding:5px 7px}}
+@media (max-width:1100px){#tnav button{padding:0 9px}#snav .sitem{padding:0 9px}}
 @media (max-width:840px){
  #hdr{padding:0 10px;height:auto;flex-wrap:wrap}
  .brand{font-size:12.5px;padding-right:0;margin-right:0;border-right:0;height:40px}
  .brand .lgsw a{padding:3px 5px}
  #tnav{order:3;flex-basis:100%;height:34px;border-top:1px solid var(--edge);justify-content:flex-start}
- #tnav button{padding:0 10px;font-size:11.5px}
+ #tnav button{padding:0 9px;font-size:11.5px}#tnav button .fk{display:none}
  .hright{gap:6px;padding-left:6px;height:40px}
  #gFind .fl,#gFind kbd,#gShare{display:none}#gFind{padding:5px 7px}
  .hright .gl{display:none}
  #sub{padding:0 10px;height:34px}#snav .sitem{padding:0 9px;font-size:11.5px}#snav .sitem kbd{display:none}
  #crumb{display:none}
+ #sub:has(#snav[hidden]){display:none}
  #gbar{padding:0 10px 8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#gbar>*{flex:none}
  #gbar:not(.open)>*:not(#gTog):not(#gSum){display:initial}
  #gSum{display:none}
@@ -696,40 +700,45 @@ document.querySelectorAll('#legacyNav nav button').forEach(b=>b.onclick=()=>{
   if(DIRTY.has(b.dataset.v))runView(b.dataset.v);});
 /* ---------- task-based navigation: every legacy view / sub-panel has exactly one home in the sidebar ---------- */
 const SECTIONS=[
- {id:'week',label:'This week',items:[
-   {id:'lab',label:'Matchup board',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks, Ψ — filter and sort any column',c:'players',sub:'lab',key:'1'},
-   {id:'overview',label:'Overview',desc:'slate map, smash board, top projections, storylines',c:'home',sub:'overview',key:'2'},
-   {id:'insights',label:'Insights',desc:'best / worst matchup per role, field extremes, momentum, volatility, schedule strength',c:'home',sub:'insights',key:'3'}]},
- {id:'game',label:'Research a game',items:[
-   {id:'matchups',label:'Matchups',desc:'both offenses vs the opposing defense — every slot, every game of the week',c:'chamber',key:'4'},
-   {id:'glines',label:'Lines & totals',desc:'spread, total, moneyline, ATS / O-U records, team scoring trends',c:'bets',sub:'G',key:'5'},
-   {id:'storylines',label:'Storylines',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
-   {id:'picks',label:'Model picks & record',desc:'the game model, frozen picks and the graded ledger',c:'games',nfl:true}]},
- {id:'player',label:'Research a player',items:[
-   {id:'explorer',label:'Player explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player',key:'6'},
-   {id:'depth',label:'Depth charts',desc:'two teams side by side — slots and injury flags',c:'players',sub:'dchart'},
-   {id:'projections',label:'Projections',desc:'Big Board: projected PPR from every layer, lifts and drags',c:'board'},
-   {id:'tdboard',label:'TD board',desc:'touchdown rates, TD matchups, red-zone roles',c:'tdb'},
+ {id:'home',fk:'F1',label:'Home',items:[
+   {id:'overview',label:'Overview',desc:'slate map, smash board, top projections, storylines',c:'home',sub:'overview'},
+   {id:'insights',label:'Insights',desc:'best / worst matchup per role, field extremes, momentum, volatility, schedule strength',c:'home',sub:'insights'},
    {id:'fantasy',label:'Fantasy',desc:'league rosters, waiver radar, lineup optimizer',c:'home',sub:'fantasy',nfl:true}]},
- {id:'defense',label:'Research a defense',items:[
-   {id:'ranks',label:'Rankings',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks',key:'7'},
+ {id:'board',fk:'F2',label:'Big Board',items:[
+   {id:'projections',label:'Big Board',desc:'projected PPR from every layer, lifts and drags',c:'board'}]},
+ {id:'chamber',fk:'F3',label:'Weekly Matchups',items:[
+   {id:'matchups',label:'Weekly Matchups',desc:'both offenses vs the opposing defense — every slot, every game of the week',c:'chamber'}]},
+ {id:'players',fk:'F4',label:'Players',items:[
+   {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks, Ψ — filter and sort any column',c:'players',sub:'lab'},
+   {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
+   {id:'depth',label:'Depth Charts',desc:'two teams side by side — slots and injury flags',c:'players',sub:'dchart'}]},
+ {id:'defenses',fk:'F5',label:'Defenses',items:[
+   {id:'ranks',label:'Rankings',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks'},
    {id:'matrix',label:'Matrix',desc:'all defenses × slots heatmap with drill-down',c:'defenses',sub:'matrix'},
-   {id:'observatory',label:'Defense detail',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
-   {id:'schedule',label:'Schedule strength',desc:'offenses × weeks, colored by opponent softness',c:'sked'},
-   {id:'scheme',label:'Scheme & personnel',desc:'coverage, personnel, starter turnover, coaching changes',c:'intel',nfl:true}]},
- {id:'bet',label:'Place a bet',items:[
-   {id:'props',label:'Player props',desc:'hit rates vs the line, last-10 chart, alt lines, opponent allowed',c:'bets',sub:'P',key:'8',props:true},
-   {id:'td',label:'Anytime TD',desc:'TD rates by range, opponent TDs allowed, model reference',c:'bets',sub:'T',key:'9',props:true},
-   {id:'lines2',label:'Game lines',desc:'same market view as Lines & totals',c:'bets',sub:'G'}]}];
-const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));
+   {id:'observatory',label:'Observatory',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'}]},
+ {id:'tdb',fk:'F6',label:'TD Board',items:[
+   {id:'tdboard',label:'TD Board',desc:'touchdown rates, TD matchups, red-zone roles',c:'tdb'}]},
+ {id:'sked',fk:'F7',label:'Schedule',items:[
+   {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'}]},
+ {id:'intel',fk:'F8',label:'Intel',items:[
+   {id:'scheme',label:'Intel',desc:'coverage, personnel, starter turnover, coaching changes',c:'intel',nfl:true}]},
+ {id:'games',fk:'F9',label:'Games & Picks',items:[
+   {id:'picks',label:'Games & Picks',desc:'the game model, frozen picks and the graded ledger',c:'games',nfl:true}]},
+ {id:'locker',fk:'F10',label:'Locker Room',items:[
+   {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true}]},
+ {id:'bets',fk:'F11',label:'Bets',items:[
+   {id:'props',label:'Player props',desc:'hit rates vs the line, last-10 chart, alt lines, opponent allowed',c:'bets',sub:'P',props:true},
+   {id:'td',label:'Anytime TD',desc:'TD rates by range, opponent TDs allowed, model reference',c:'bets',sub:'T',props:true},
+   {id:'glines',label:'Game lines',desc:'spread, total, moneyline, ATS / O-U records, team scoring trends',c:'bets',sub:'G'}]}];
+const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines;
 let CUR_ITEM='lab';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
 const SEC_LAST={};
 function buildSide(){const secs=SECTIONS.filter(sec=>sec.items.some(itemOK));
-  $('#tnav').innerHTML=secs.map(sec=>`<button data-s="${sec.id}" title="${esc(sec.items.filter(itemOK).map(i=>i.label).join(' · '))}">${sec.label}</button>`).join('');
+  $('#tnav').innerHTML=secs.map(sec=>`<button data-s="${sec.id}" title="${esc(sec.items.filter(itemOK).map(i=>i.label).join(' · '))}"><span class="fk">${sec.fk}</span>${sec.label}</button>`).join('');
   $('#tnav').querySelectorAll('button').forEach(bt=>bt.onclick=()=>{const sec=SECTIONS.find(x=>x.id===bt.dataset.s);go(SEC_LAST[sec.id]||sec.items.find(itemOK).id)})}
-function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;
-  nav.innerHTML=sec.items.filter(itemOK).map(it=>`<a class="sitem" data-i="${it.id}" href="#v=${it.id}" title="${esc(it.desc)}">${it.label}${it.key?`<kbd>${it.key}</kbd>`:''}</a>`).join('');
+function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec.items.filter(itemOK);nav.hidden=its.length<2;
+  nav.innerHTML=its.map(it=>`<a class="sitem" data-i="${it.id}" href="#v=${it.id}" title="${esc(it.desc)}">${it.label}</a>`).join('');
   nav.querySelectorAll('.sitem').forEach(el=>el.onclick=e=>{e.preventDefault();go(el.dataset.i)})}
 function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='home')document.querySelectorAll('#home [data-sub]').forEach(e=>e.hidden=e.dataset.sub!==it.sub);
@@ -749,8 +758,7 @@ function go(id,opts={}){const it=ITEMS[id]||ITEMS.lab;if(!itemOK(it))return go('
   $('#crumb').innerHTML=`<span>${it.desc}</span>`;
   document.title=`RAINMAN · ${it.label}`;if(!opts.silent)writeHash();window.scrollTo({top:0})}
 addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea'))return;const i=['F1','F2','F3','F4','F5','F6','F7','F8','F9','F10','F11'].indexOf(e.key);
-  if(i>=0){e.preventDefault();const b=document.querySelectorAll('#legacyNav nav button')[i];if(b&&!b.hidden)b.click();return}
-  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&/^[1-9]$/.test(e.key)){const it=Object.values(ITEMS).find(x=>x.key===e.key&&itemOK(x));if(it){e.preventDefault();go(it.id)}}});
+  if(i>=0){e.preventDefault();const sec=SECTIONS[i];if(sec&&sec.items.some(itemOK))go(SEC_LAST[sec.id]||sec.items.find(itemOK).id);return}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21,snaps:22,snp:23,tsh:24,adot:25,rsh:26,wopr:27};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
 // TREND_SE: the season used for waveforms / momentum / volatility — the latest season with >=4 weeks
