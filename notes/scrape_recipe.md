@@ -96,3 +96,19 @@ full slate. The ledger freezes a lean the first time it is seen and grades it fr
 - javascript_tool output truncates near 1 KB: write results with document.write('<pre>...') and read with get_page_text.
 - Save as data/raw/espn_birthplaces_YYYY-MM-DD.txt (`id|city|state|country`) and data/raw/colleges_venues.txt; then
   `python3 scripts/build_connections.py` (needs `pip install geonamescache`).
+
+## NCAA game lines — ESPN odds (Chrome, in-page on any espn.com tab; weekly, ~2 min)
+No key and no sandbox access, so one scoreboard fetch for the current week (DraftKings open/close spread, total, moneylines) and,
+for weeks already played, one summary fetch per event (pickcenter closing lines). Write `GL|...` lines to
+`ncaa/data/raw/espn_lines_2026_YYYY-MM-DD.txt` (header comment lists the columns; later files win in build_lines.py):
+```
+const cl=(x,k)=>x&&x[k]&&x[k].line!=null?String(x[k].line).replace(/^[ou]/,''):'';const od=(x,k)=>x&&x[k]&&x[k].odds!=null?String(x[k].odds).replace('+',''):'';
+const row=(e,wk,o)=>{const c=e.competitions[0],h=c.competitors.find(t=>t.homeAway==='home'),a=c.competitors.find(t=>t.homeAway==='away');
+  return ['GL',2026,wk,e.id,a.team.id,h.team.id,a.team.abbreviation,h.team.abbreviation,o?cl(o.pointSpread.home,'close'):'',o?cl(o.pointSpread.home,'open'):'',
+    o?cl(o.total.over,'close'):'',o?cl(o.total.over,'open'):'',o?od(o.moneyline.home,'close'):'',o?od(o.moneyline.away,'close'):'',o&&o.provider?o.provider.name:'',e.date,e.status.type.name].join('|')};
+// current week W: scoreboard?dates=2026&seasontype=2&week=W&groups=80&limit=400 -> events[].competitions[0].odds[0]
+// played week: summary?event={id} -> pickcenter (prefer provider DraftKings) — fields spread/overUnder or pointSpread/total/moneyline
+```
+Dump with document.body.innerHTML='<pre>LINES_BEGIN\n'+lines.join('\n')+'\nLINES_END</pre>' and read with get_page_text; the
+javascript_tool return value is filtered when it looks like query strings, so never return the lines directly. 'OFF' = no line.
+Then `python3 scripts/ncaa/refresh.py` (or build_lines.py + build_dashboard.py --league ncaa).

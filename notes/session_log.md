@@ -229,3 +229,14 @@
 - Template: hs() headshots (J.ph name->espn id from roster_2026 via pfr_id / name+team), PLOG/MSTAT/mhist/hitStrip/mAvg,
   playsStrip() top-plays cards, props columns Last 10 + L5 avg, popup lines block, smash board + depth-chart starter headshots,
   LOG.cmp (index 28). Local screenshots: npm @fontsource fonts served through playwright routes (google fonts blocked here).
+
+## 2026-10-06 (e) — revert to v1 + F11 Bets + NCAA layer
+- Main site = original v1 terminal (f13c159 template) + additive F11 Bets tab (prop-research layout: list of hit-rate pills,
+  research pane with game-by-game chart vs an adjustable line, alt-line ladder, splits, opponent panel, model as labeled
+  reference; "every starter" research mode defaults to the player's last-10 median line). Games & Picks keeps the model.
+- NCAA FBS: `ncaa/` league root + `scripts/ncaa/` (fetch_cfb, build_game_logs, build_schedule, compute_dvp, build_lines,
+  build_depth_matchups, refresh). 50,176 player-game rows 2024-26 (2,742 FBS-involved games), 138 defenses, DvP ties out
+  to the box (OSU wk1 2025 QB PY allowed 170 = Arch Manning). Template is league-aware via J.league (TEAM map, LOGO/HEAD
+  paths, slates, NWK, NT-scaled rank colors, conference filter, hidden tabs); NFL page byte-identical in behavior (0 errors).
+- Sandbox cannot reach ESPN; GitHub raw/releases can. 2026 lines = ESPN odds pulled in Chrome (448 games: wk 6 scoreboard +
+  wk 1-5 summary pickcenter). pages.yml now also publishes ncaa.html + archive/.
