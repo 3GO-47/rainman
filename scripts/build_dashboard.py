@@ -2,8 +2,10 @@
 Usage: python3 build_dashboard.py
 Every number traces to data/game_logs/ via the derived CSVs. Rerun after any data refresh.
 """
-import re, csv, glob, json, os, datetime
+import re, csv, glob, json, os, sys, datetime
 import pandas as pd
+REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+LEAGUE = sys.argv[sys.argv.index('--league') + 1] if '--league' in sys.argv else 'nfl'
 
 STAT_COLS = ['QB PY','P TD','QB RY','RB1 RY','RB2+ RY','WR RY','RB1 Recep','RB1 RecY',
  'RB2 Recep','RB2 RecY','WR1 Recep','WR1 RecY','WR2 Recep','WR2 RecY','WR3 Recep','WR3 RecY',
@@ -89,7 +91,7 @@ def bets_payload():
             out.append(o)
         return out
     gm = rows(P + 'game_model.csv', lambda r: r['season'] == '2026')
-    bt = [r for r in csv.DictReader(open(P + 'game_model.csv', encoding='utf-8')) if r['season'] in ('2024', '2025') and r['result'] not in ('', 'nan')]
+    bt = [r for r in csv.DictReader(open(P + 'game_model.csv', encoding='utf-8')) if r['season'] in ('2024', '2025') and r['result'] not in ('', 'nan') and r['model_spread'] not in ('', 'nan')]
     def rec(rs, col): return {'W': sum(r[col] == 'W' for r in rs), 'L': sum(r[col] == 'L' for r in rs), 'P': sum(r[col] == 'PUSH' for r in rs)}
     mae = lambda rs, col: round(sum(abs(float(r[col]) - float(r['result'])) for r in rs) / max(1, len(rs)), 2)
     backtest = {'n': len(bt), 'ats': rec(bt, 'res_ats'), 'total': rec(bt, 'res_total'), 'mae_model': mae(bt, 'model_spread'), 'mae_market': mae(bt, 'spread_line'),
@@ -97,7 +99,7 @@ def bets_payload():
                 'mae_total_market': round(sum(abs(float(r['total_line']) - float(r['total'])) for r in bt if r['total_line'] not in ('', 'nan')) / max(1, len(bt)), 2)}
     ledger = rows(P + 'picks_ledger.csv') if os.path.exists(P + 'picks_ledger.csv') else []
     retro = rows(P + 'picks_retro.csv') if os.path.exists(P + 'picks_retro.csv') else []
-    rt = rows(P + 'team_ratings.csv', lambda r: r['season'] == '2026')
+    rt = rows(P + 'team_ratings.csv', lambda r: r['season'] == '2026') if os.path.exists(P + 'team_ratings.csv') else []
     props = rows(P + 'props_current.csv') if os.path.exists(P + 'props_current.csv') else []
     pledger = rows(P + 'props_ledger.csv') if os.path.exists(P + 'props_ledger.csv') else []
     return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
@@ -106,7 +108,13 @@ def bets_payload():
 def betting_payload():
     """Bet board: priced prop lines, anytime-TD fair prices, SGP correlations, model validation, graded ledger."""
     P = 'data/processed/'
-    if not os.path.exists(P + 'bet_lines.csv'): return None
+    if not os.path.exists(P + 'bet_lines.csv'):
+        if not os.path.exists(P + 'game_lines.csv'): return None
+        GL = pd.read_csv(P + 'game_lines.csv')
+        glh = [[int(r.season), int(r.week), r.away_team, r.home_team, int(r.away_score) if r.away_score == r.away_score else None,
+                int(r.home_score) if r.home_score == r.home_score else None, r.spread_line if r.spread_line == r.spread_line else None,
+                r.total_line if r.total_line == r.total_line else None] for r in GL.itertuples()]
+        return {'lines': [], 'td': [], 'proj': [], 'glh': glh, 'corr': {}, 'model': {}, 'dists': {}, 'ledger': [], 'dvpMeta': {}, 'week': None}
     def rows(f):
         if not os.path.exists(P + f): return []
         df = pd.read_csv(P + f)
@@ -200,7 +208,50 @@ def headshots(logs, depth):
         if e: out[d['player']] = e
     return out
 
+def league_config():
+    """Per-league UI config embedded as J.league. NFL keeps the template's built-in team map / slates; NCAA injects its own."""
+    if LEAGUE == 'nfl':
+        return {'code': 'nfl', 'title': 'NFL DEFENSE-VS-POSITION', 'other': {'code': 'ncaa', 'label': 'NCAA', 'href': 'ncaa.html'}}
+    def hx(h):
+        h = str(h or '').lstrip('#')
+        return h if re.fullmatch(r'[0-9a-fA-F]{6}', h) else None
+    def lum(h):
+        h = hx(h)
+        if not h: return 0
+        v = int(h, 16)
+        r, g, b_ = v >> 16, (v >> 8) & 255, v & 255
+        return (0.2126 * r + 0.7152 * g + 0.0722 * b_) / 255
+    def readable(c1, c2):
+        """ESPN primary colors are often near-black on a black terminal: prefer the brighter of the two, then lighten toward white."""
+        c1, c2 = (('#' + hx(c1)) if hx(c1) else '#58a6ff'), (('#' + hx(c2)) if hx(c2) else '#444444')
+        if lum(c1) >= 0.22: return c1                                   # bright enough as is (Texas orange, Georgia red)
+        v2 = int(c2.lstrip('#'), 16); sat2 = max(v2 >> 16, (v2 >> 8) & 255, v2 & 255) - min(v2 >> 16, (v2 >> 8) & 255, v2 & 255)
+        if 0.12 <= lum(c2) <= 0.8 and sat2 > 40: return c2             # a real secondary color (Michigan maize, Navy gold, Ole Miss red)
+        c = c1; l = lum(c)                                              # otherwise lighten the dark primary toward white
+        v = int(c.lstrip('#'), 16); t = (0.30 - l) / (1 - l) * 1.1
+        mix = lambda x: int(x + (255 - x) * min(1, t))
+        return '#%02x%02x%02x' % (mix(v >> 16), mix((v >> 8) & 255), mix(v & 255))
+    teams = {}
+    for r in csv.DictReader(open('data/processed/teams.csv', encoding='utf-8')):
+        teams[r['code']] = {'n': r['school'], 's': r['team_id'], 'c1': readable(r['color'], r['alt_color']), 'c2': r['alt_color'], 'conf': r['conference'], 'fbs': r['classification'] == 'fbs'}
+    return {'code': 'ncaa', 'title': 'NCAA FBS DEFENSE-VS-POSITION', 'other': {'code': 'nfl', 'label': 'NFL', 'href': 'rainman.html'},
+            'teams': teams, 'weeks': 20, 'nTeams': sum(1 for t in teams.values() if t['fbs']),
+            'slateLbl': {'MIDWK': 'MIDWEEK', 'THU': 'THU', 'FRI': 'FRI', 'SAT_AM': 'SAT NOON', 'SAT_PM': 'SAT AFT', 'SAT_NT': 'SAT NIGHT', 'SAT_LT': 'LATE NIGHT', 'SUNMON': 'SUN/MON', 'TBD': 'TBD'},
+            'slateTip': {'MIDWK': 'Tuesday / Wednesday games (MACtion)', 'THU': 'Thursday', 'FRI': 'Friday', 'SAT_AM': 'Saturday kickoffs before 2 PM ET', 'SAT_PM': 'Saturday 2:00-6:59 PM ET',
+                         'SAT_NT': 'Saturday 7:00-9:59 PM ET', 'SAT_LT': 'Saturday 10 PM ET and later', 'SUNMON': 'Sunday / Monday games', 'TBD': 'kickoff time not set yet (TV windows are announced 6-12 days out)'},
+            'slateOrder': ['MIDWK', 'THU', 'FRI', 'SAT_AM', 'SAT_PM', 'SAT_NT', 'SAT_LT', 'SUNMON', 'TBD'],
+            'hideTabs': ['intel', 'games', 'locker'], 'depthNote': 'usage-derived (carries + receptions / attempts over the last 3 games) — no public college depth-chart feed'}
+
+def ncaa_headshots():
+    """{display name: ESPN college athlete id} from players.csv (CFBD roster headshot urls carry the ESPN id)."""
+    out = {}
+    for r in csv.DictReader(open('data/processed/players.csv', encoding='utf-8')):
+        m = re.search(r'/(\d+)\.png', r['headshot'] or '')
+        if m and r['player'] not in out: out[r['player']] = m.group(1)
+    return out
+
 def main():
+    if LEAGUE != 'nfl': os.chdir(os.path.join(REPO, LEAGUE))
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
             'groupStats': GROUP_STATS, 'primary': PRIMARY}
     data['dvp'] = {}
@@ -246,7 +297,8 @@ def main():
     data['matchups'] = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8')))
     sched = {}
     for r in csv.DictReader(open('data/processed/schedule_2026.csv')):
-        sched[r['team']] = [r[f'week_{i}'] for i in range(1, 19)]
+        nwk = sum(1 for k in r if k.startswith('week_'))
+        sched[r['team']] = [r[f'week_{i}'] for i in range(1, nwk + 1)]
     data['sched26'] = sched
     # games26 row: [week, vis, home, date, day, time_et, slate] — kickoff cols from kickoffs_2026.csv
     kick = {}
@@ -261,7 +313,8 @@ def main():
     dcp = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     data['depth'] = list(csv.DictReader(open(dcp, encoding='utf-8')))
     data['depthDate'] = dcp.split('_')[-1][:10]
-    data['ph'] = headshots(logs, data['depth'])
+    data['ph'] = headshots(logs, data['depth']) if LEAGUE == 'nfl' else ncaa_headshots()
+    data['league'] = league_config()
 
     def np_default(o):
         import numpy as np
@@ -269,11 +322,12 @@ def main():
         if isinstance(o, np.floating): return float(o)
         raise TypeError(type(o))
     payload = json.dumps(data, separators=(',', ':'), default=np_default)
-    template = open('scripts/dashboard_template.html', encoding='utf-8').read()
-    html = template.replace('__DATA__', payload)
-    os.makedirs('dashboard', exist_ok=True)
-    open('dashboard/rainman.html', 'w', encoding='utf-8').write(html)
-    print(f'dashboard/rainman.html written: {len(html)//1024} KB, logs={len(logs)}, '
+    template = open(os.path.join(REPO, 'scripts/dashboard_template.html'), encoding='utf-8').read()
+    html = template.replace('__DATA__', payload).replace('__LEAGUE_NAME__', data['league']['title'])
+    out = os.path.join(REPO, 'dashboard', 'rainman.html' if LEAGUE == 'nfl' else f'{LEAGUE}.html')
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    open(out, 'w', encoding='utf-8').write(html)
+    print(f'{os.path.relpath(out, REPO)} written: {len(html)//1024} KB, logs={len(logs)}, '
           f'weekly={len(data["weekly"])}, matchups={len(data["matchups"])}')
 
 if __name__ == '__main__':
