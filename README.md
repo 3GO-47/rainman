@@ -140,15 +140,24 @@ Everything is client-side in `dashboard_template.html` (`projection()`), so the 
   (team / promoted / rookie).
 - **Player usage** = game_logs ⋈ nflverse snap counts on PFR id; target/rush/air-yard shares from pbp per game.
 
-## Views (final)
-Home (smash board + full insight screens) · TD Board (phase-space + collider scatters, filters,
-true WR1-WR12 labels) · Weekly Matchups (16 game cards, gridiron tilt) · Players (collapsible
-depth charts, depth/injury filters, popup player cards, deep dives) · Defenses (rankings /
-matrix / observatory) · Schedule (6-band heat grid) · Intel (DC/OC scheme tags, tendencies, turnover,
-player usage) · Big Board (projections + rankings, CSV). F1-F8 keyboard shortcuts; ? glossary; ctrl-K find; mobile-responsive
-(viewport meta + media queries); click any player name anywhere for his card.
+## Views (2026-10-06 — 5 sections)
+Navigation is five sections (F1–F5); each section has a small sub-navigation for its views:
+- **Bets** (landing) — Props · Anytime TD · Parlay / SGP · Ledger · Model. Week tiles on top (games, plays, best edge, smash spot, storylines).
+- **Games** — Lines & model (spreads, totals, implied team points, model edges, frozen picks; game cards collapsed below) ·
+  Slot matchups (each offense's slot owners vs the opposing defense) · Storylines (rivalries, homecomings, birthdays).
+- **Matchups** — This week (smash board, target/avoid per role, field extremes, intel brief, slate map) · Matchup lab (every
+  player × opponent per-stat ranks, sortable) · TD matchups · Projections (PPR board + Model Lab).
+- **Defenses** — Rankings / Matrix / Observatory · Trends (momentum, predictability, season schedule strength) · Schedule · Scheme & usage.
+- **Players** — Depth charts (two teams, open by default) + full player card · Fantasy roster (lineup or waiver radar).
+Removed as duplicates: the old Home page (its unique panels moved above; top-projections, storylines, birthdays, momentum,
+volatility and season-slate panels were copies of other views), the v1 "Player props" table (superseded by Bets → Props),
+and the Bet Board "Sides & totals" tab (now the top of Games → Lines & model). The global filter bar applies everywhere.
 
 ## Changelog
+- 2026-10-06 — **Consolidated navigation: 11 tabs → 5 sections.** Bets · Games · Matchups · Defenses · Players, each with
+  sub-views; duplicate panels removed (old Home copies, legacy prop leans, second sides/totals table); depth charts open by
+  default; game cards fold under the lines table; status notes collapse; payload −50 KB. `build_props.py` retired from the
+  refresh (its ledger file is kept as history).
 - 2026-10-06 — **Week 4 graded, week 5 loaded, prop model fixed.** First ledger week: plays (EV ≥ 3%) 27-20, record rising
   with edge (details in `notes/model_validation.md`). Fixes: QB1/QB2 priors split (QB projection error −24–28%), role-weighted
   history, mean-bias scale, next-man-up projections for OUT starters, model weight scaled by the player's history. Bet Board
