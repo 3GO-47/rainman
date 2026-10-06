@@ -154,6 +154,13 @@ volatility and season-slate panels were copies of other views), the v1 "Player p
 and the Bet Board "Sides & totals" tab (now the top of Games → Lines & model). The global filter bar applies everywhere.
 
 ## Changelog
+- 2026-10-06 — **v3 "storm terminal" redesign + betting depth.** Broadcast header (condensed type, section tabs with a
+  sliding indicator), a live ticker of the week's plays, scoreboard tiles, and money-green for edges. Player headshots
+  (ESPN, mapped from nflverse ids) on plays, props, smash board, depth-chart starters and the player card. **Top plays**
+  cards on the Bet Board; every prop shows his **last 10 games against the line** (hit squares + count) and L5 average;
+  the player card lists his lines for the week with hit history. Explanatory notes are visible again (clamped to two
+  lines, click to expand) instead of hidden behind chips. Completions now graded (cmp added to the log payload).
+  Previous UI frozen at `/archive/rainman_v2.1_2026-10-06.html`; `/archive/` now has an index page.
 - 2026-10-06 — **Consolidated navigation: 11 tabs → 5 sections.** Bets · Games · Matchups · Defenses · Players, each with
   sub-views; duplicate panels removed (old Home copies, legacy prop leans, second sides/totals table); depth charts open by
   default; game cards fold under the lines table; status notes collapse; payload −50 KB. `build_props.py` retired from the
