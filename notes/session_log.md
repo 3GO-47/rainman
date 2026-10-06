@@ -254,3 +254,10 @@
   rounded cards, uppercase mono th, chips/selects/tabs restyled; F11 r11* components mapped to tokens.
 - Explorer opens with quick picks (this season's top PPR scorers per position); depth charts auto-expand in their view.
 - Verified: Playwright tour of every sidebar item, NFL + NCAA, 1500 and 390 px: 0 JS errors, scrollWidth == viewport.
+
+## 2026-10-06 (g) — top bar replaces the sidebar
+- Josh: "i dont like the sidebar" -> chose a two-row top bar. #hdr = brand + league switch, #tnav section tabs, find /
+  week / glossary / share; #sub = #snav views of the active section + #crumb one-line description; #gbar unchanged;
+  footer .sfoot carries the data provenance. Removed #side, #rail, side-min/side-open, #gTog. Clicking a section tab
+  returns to the last view used in it (SEC_LAST). Mobile: section tabs wrap onto their own scrollable row.
+- Verified: Playwright tour of every view, NFL + NCAA, 1500 and 390 px: 0 JS errors, scrollWidth == viewport.
