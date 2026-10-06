@@ -160,6 +160,27 @@ def college_payload(logs):
     if miss: print('  colleges missing from colleges_espn.txt:', sorted(miss))
     return {'s': {k: v for k, v in S.items() if k in used}, 'p': P, 'bd': BD}
 
+def headshots(logs, depth):
+    """{display name: espn athlete id} for every player in the logs or on the depth chart -> ESPN headshot CDN URLs in the UI."""
+    import re, unicodedata
+    f = 'data/raw/nflverse/roster_2026.parquet'
+    if not os.path.exists(f): return {}
+    R = pd.read_parquet(f, columns=['full_name', 'team', 'espn_id', 'pfr_id', 'week']).dropna(subset=['espn_id'])
+    R = R.sort_values('week').drop_duplicates('espn_id', keep='last')
+    nk = lambda n: re.sub(r'\s+(jr|sr|ii|iii|iv|v)$', '', re.sub(r"[^a-z ]", '', unicodedata.normalize('NFKD', str(n)).encode('ascii', 'ignore').decode().lower()).strip())
+    by_pfr = {r.pfr_id: str(int(float(r.espn_id))) for r in R.itertuples() if isinstance(r.pfr_id, str)}
+    by_nt, by_n = {}, {}
+    for r in R.itertuples():
+        e = str(int(float(r.espn_id))); by_nt[(nk(r.full_name), r.team)] = e; by_n.setdefault(nk(r.full_name), set()).add(e)
+    out = {}
+    for l in logs:
+        if l[0] not in out and l[1] in by_pfr: out[l[0]] = by_pfr[l[1]]
+    for d in depth:
+        if d['player'] in out: continue
+        k = nk(d['player']); e = by_nt.get((k, d['team'].replace('WSH', 'WAS'))) or (next(iter(by_n[k])) if len(by_n.get(k, ())) == 1 else None)
+        if e: out[d['player']] = e
+    return out
+
 def main():
     data = {'built': str(datetime.date.today()), 'statCols': STAT_COLS, 'slots': SLOTS,
             'groupStats': GROUP_STATS, 'primary': PRIMARY}
@@ -189,7 +210,7 @@ def main():
                 int(r['pass_att']), int(r['int']), int(r['rush_att']), int(r['rush_yds']), int(r['rush_td']),
                 int(r['targets']), int(r['rec']), int(r['rec_yds']), int(r['rec_td']),
                 float(r['fantasy_pts_std']), float(r['fantasy_pts_ppr'])]
-                + usage.get((int(r['season']), int(r['week']), r['player_id']), [None] * 6))
+                + usage.get((int(r['season']), int(r['week']), r['player_id']), [None] * 6) + [int(r['cmp'] or 0)])
     data['logs'] = logs
     data['intel'] = intel_payload()
     data['bets'] = bets_payload()
@@ -221,6 +242,7 @@ def main():
     dcp = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     data['depth'] = list(csv.DictReader(open(dcp, encoding='utf-8')))
     data['depthDate'] = dcp.split('_')[-1][:10]
+    data['ph'] = headshots(logs, data['depth'])
 
     def np_default(o):
         import numpy as np
