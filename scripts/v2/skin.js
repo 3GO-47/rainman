@@ -1,4 +1,4 @@
-/* RAINMAN v2 shell: sidebar rail with spring indicator, view transitions, staggered cards, count-up numbers, card tilt. */
+/* RAINMAN v3 shell: broadcast header (sections + sliding indicator), live plays ticker, sub-navigation, view transitions, clamped notes, scoreboard tiles. */
 (function(){
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -17,31 +17,42 @@ const I={home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0
 const ico=k=>`<svg class="ico" viewBox="0 0 24 24">${I[k]||I.home}</svg>`;
 function shell(){
   const nav=$('#top nav');if(!nav)return;
-  const sub=$('header .sub');
-  const rail=document.createElement('aside');rail.id='rail';
-  rail.innerHTML=`<div class="brand"><i><svg width="16" height="16" viewBox="0 0 16 16"><ellipse cx="8" cy="8" rx="6.6" ry="4.1" transform="rotate(-28 8 8)" fill="#0b0d14"/><path d="M5.8 9.7 L10.2 6.3" stroke="#fff" stroke-width="1.1"/></svg></i><div>RAINMAN<small>defense-vs-position</small></div></div>`;
-  rail.appendChild(nav);
-  const meta=document.createElement('div');meta.className='meta';
-  const seasons=[...new Set(J.logs.map(l=>l[2]))].sort().map(x=>`'${String(x).slice(2)}`).join(' ');
-  meta.innerHTML=`<dl><dt>data</dt><dd>${seasons}</dd><dt>games</dt><dd>${Math.round(J.weekly.length/2)}</dd><dt>player rows</dt><dd>${J.logs.length.toLocaleString()}</dd>
-    <dt>depth charts</dt><dd>${J.depthDate}</dd><dt>DvP blend</dt><dd>${J.blend}</dd><dt>built</dt><dd>${J.built}</dd></dl><a class="v1link" href="https://3go-47.github.io/rainman/v1/">← classic view (v1)</a>`;
-  rail.appendChild(meta);document.body.prepend(rail);
-  nav.querySelectorAll('button[data-v]').forEach(b=>{const fk=b.querySelector('.fk');const label=[...b.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
-    const SHORT={home:'Matchups',bets:'Bets',chamber:'Matchups',games:'Games',locker:'Locker',defenses:'Defense'};
-    b.innerHTML=ico(b.dataset.v)+`<span class="lbl" data-s="${SHORT[b.dataset.v]||label}">${label}</span>`+(fk?fk.outerHTML:'');b.title=label});
-  const h=$('#gHelp');if(h){h.innerHTML=ico('help')+'<span class="lbl">Glossary</span><span class="fk">?</span>';h.style.marginLeft='0'}
-  const ind=document.createElement('div');ind.className='ind';nav.prepend(ind);
-  const place=()=>{const on=nav.querySelector('button.on');if(!on)return;ind.style.transform=`translateY(${on.offsetTop}px)`;ind.style.height=on.offsetHeight+'px'};
+  const hdr=document.createElement('header');hdr.id='hdr';
+  hdr.innerHTML=`<a class="brand" href="#" title="RAINMAN"><svg viewBox="0 0 32 32"><defs><linearGradient id="rmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5cc8ff"/><stop offset="1" stop-color="#19e68c"/></linearGradient></defs>
+    <path d="M16 2c5 6.6 9 11.4 9 16.4A9 9 0 0 1 7 18.4C7 13.4 11 8.6 16 2z" fill="url(#rmg)"/><path d="M17.6 11 12.8 19h3.6l-1.8 6.4 5.6-8.6h-3.8z" fill="#06080b"/></svg>
+    <div><b>RAINMAN</b><small>NFL betting terminal</small></div></a><div class="hdr-r"><button id="hSearch" title="find any player or team">${ico('intel')}<span class="lbl">Search</span><kbd>Ctrl K</kbd></button></div>`;
+  hdr.insertBefore(nav,hdr.querySelector('.hdr-r'));
+  document.body.prepend(hdr);
+  hdr.querySelector('.brand').onclick=e=>{e.preventDefault();if(window.go)go('bets')};
+  $('#hSearch').onclick=()=>{const f=$('#gFind');if(f)f.click()};
+  const h=$('#gHelp');if(h){h.innerHTML=ico('help');h.title='glossary (?)';h.style.marginLeft='0';hdr.querySelector('.hdr-r').appendChild(h);h.className='hbtn'}
+  nav.querySelectorAll('button[data-sec]').forEach(b=>{const fk=b.querySelector('.fk');const label=[...b.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
+    b.innerHTML=ico(b.dataset.v)+`<span class="lbl">${label}</span>`+(fk?fk.outerHTML:'');b.title=label});
+  const ind=document.createElement('div');ind.className='ind';nav.appendChild(ind);
+  const place=()=>{const on=nav.querySelector('button.on');if(!on)return;const lb=on.querySelector('.lbl')||on;ind.style.width=lb.offsetWidth+'px';ind.style.transform=`translateX(${on.offsetLeft+lb.offsetLeft}px)`};
   document.addEventListener('rm:view',()=>requestAnimationFrame(()=>{place();enter()}));
-  addEventListener('resize',place);setTimeout(place,30);
+  addEventListener('resize',place);setTimeout(place,60);if(document.fonts)document.fonts.ready.then(place);
+  ticker(hdr);footer();
   const sticky=()=>document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px');sticky();addEventListener('resize',sticky);
 }
+function ticker(hdr){const B=J.betting;if(!B||!B.lines)return;
+  const P=B.lines.filter(l=>l.ev>=3).sort((a,b)=>b.ev-a.ev).slice(0,24);if(!P.length)return;
+  const MK={pass_yds:'pass yds',pass_td:'pass TD',pass_att:'attempts',completions:'completions',interceptions:'INT',rush_yds:'rush yds',rush_att:'carries',receptions:'rec',rec_yds:'rec yds',rush_rec_yds:'rush+rec',pass_rush_yds:'pass+rush'};
+  const item=l=>`<span class="tk" data-p="${esc(l.player)}">${typeof hs==='function'?hs(l.player):''}<b>${esc(l.player)}</b><span class="tk-s ${l.side==='Over'?'o':'u'}">${l.side==='Over'?'O':'U'} ${l.line}</span>${MK[l.market]||l.market}<em>+${l.ev}%</em></span>`;
+  const t=document.createElement('div');t.id='ticker';
+  t.innerHTML=`<span class="tk-l">wk ${B.week} plays</span><div class="tk-run" style="--tkd:${Math.max(30,P.length*5)}s">${P.map(item).join('')}${P.map(item).join('')}</div>`;
+  hdr.after(t);t.addEventListener('click',e=>{const k=e.target.closest('.tk');if(k&&window.playerPop)playerPop(k.dataset.p)})}
+function footer(){const m=$('main');if(!m)return;const f=document.createElement('footer');f.id='ftr';
+  const seasons=[...new Set(J.logs.map(l=>l[2]))].sort().map(x=>`'${String(x).slice(2)}`).join(' ');
+  f.innerHTML=`<span>data <b>${seasons}</b></span><span><b>${Math.round(J.weekly.length/2)}</b> games</span><span><b>${J.logs.length.toLocaleString()}</b> player-game rows</span>
+   <span>depth charts <b>${J.depthDate}</b></span><span>DvP <b>${J.blend}</b></span><span>built <b>${J.built}</b></span><a href="https://3go-47.github.io/rainman/v1/">classic terminal (v1)</a><a href="https://3go-47.github.io/rainman/archive/">archived builds</a>`;
+  m.after(f)}
 function visible(){return $$('main>div').find(d=>!d.hidden)}
 let enter=function(){const v=visible();if(!v||RM)return;v.classList.remove('v2enter');void v.offsetWidth;v.classList.add('v2enter');stagger(v);countUp(v)};
 function stagger(root){const ps=[...root.querySelectorAll('.panel')].filter(p=>p.offsetParent).slice(0,14);
   ps.forEach((p,i)=>{p.classList.remove('v2stagger');void p.offsetWidth;p.style.setProperty('--i',i);p.classList.add('v2stagger')})}
 const NUM=/^[+-]?\d{1,4}(\.\d{1,2})?$/;
-function countUp(root){if(RM)return;const els=[...root.querySelectorAll('td>b, .sm-psi, .psi')].filter(e=>e.offsetParent&&NUM.test(e.textContent.trim())).slice(0,160);
+function countUp(root){if(RM)return;const els=[...root.querySelectorAll('.kpi .v')].filter(e=>e.offsetParent&&NUM.test(e.textContent.trim())).slice(0,160);
   const t0=performance.now(),D=650;const data=els.map(e=>{const s=e.textContent.trim();return {e,v:+s,dp:(s.split('.')[1]||'').length,s,pre:s[0]==='+'?'+':''}});
   const tick=t=>{const k=Math.min(1,(t-t0)/D),q=1-Math.pow(1-k,4);data.forEach(d=>{d.e.textContent=k<1?d.pre+(d.v*q).toFixed(d.dp):d.s});if(k<1)requestAnimationFrame(tick)};requestAnimationFrame(tick)}
 
@@ -58,8 +69,7 @@ function alignHeads(root){root.querySelectorAll('table').forEach(t=>{if(t.datase
 function overflow(root){root.querySelectorAll('table').forEach(t=>{const p=t.parentElement;if(!p||p.tagName==='TD')return;const over=t.scrollWidth>p.clientWidth+2;p.classList.toggle('hscroll',over)})}
 function notes(root){root.querySelectorAll('.note, .controls>.note').forEach(n=>{if(n.dataset.v2n)return;n.dataset.v2n=1;const txt=n.textContent.trim();
   if(txt.length<150||/^\d+ (players|defenses|games|rows)/.test(txt))return;
-  const b=document.createElement('button');b.className='infob';b.type='button';b.innerHTML=INFO+'How to read this';n.classList.add('v2note');n.before(b);
-  b.onclick=()=>{const o=n.classList.toggle('open');b.classList.toggle('on',o);b.lastChild.textContent=o?'Hide notes':'How to read this'}})}
+  n.classList.add('v2note');n.title='click to expand';n.addEventListener('click',e=>{if(e.target.closest('a,button,.plink,.pp,.tc'))return;n.classList.toggle('open')})})}
 const HOMEDEEP=/best &(amp;)? worst|best & worst|field extremes|momentum|least trustworthy|season slate|uncertainty|geodesics|— wk #$|predictable|system/;
 function collapsible(root){root.querySelectorAll('.panel>h3').forEach(h=>{const p=h.parentElement;const k=(root.id||'')+':'+hkey(h);
   if(!h.classList.contains('v2h')){if(h.id||h.querySelector('select,input,button'))return;h.classList.add('v2h');h.addEventListener('click',e=>{if(e.target.closest('a,button,select,input,.plink,.pp,.tc'))return;const c=p.classList.toggle('v2col');COL[k]=c?1:0;saveCol()})}
@@ -93,7 +103,8 @@ const VIEWS={bets:['Bet Board','Props, anytime TDs and correlated parlays priced
  fantasy:['Fantasy roster','Your roster’s matchups — or the waiver radar when no roster is selected.']};
 function heroFor(v){const d=$('#'+v);if(!d)return;let h=d.querySelector(':scope>.v2hero');if(!h){h=document.createElement('div');h.className='v2hero';d.prepend(h)}
   const [t,sub]=VIEWS[v]||[v,''];const sum=($('#gSum')||{}).textContent||'';
-  h.innerHTML=`<div><h1>${t}</h1><p>${sub}</p></div>`;
+  const sec=typeof SECOF!=='undefined'?SECOF[v]:'';const SN={bets:'Bets',games:'Games',match:'Matchups',def:'Defenses',plyr:'Players'}[sec]||'';
+  h.innerHTML=`<div><div class="eb">${SN} &middot; week ${G.week}</div><h1>${t}</h1><p>${sub}</p></div>`;
   if(v==='bets')kpis(d)}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function kickTime(g){try{const [hm,ap]=(g[GM.time]||'1:00 PM').split(' ');let [H,M]=hm.split(':').map(Number);if(ap==='PM'&&H<12)H+=12;if(ap==='AM'&&H===12)H=0;
