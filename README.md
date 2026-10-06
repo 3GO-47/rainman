@@ -10,7 +10,11 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 **v2 shell (2026-10-06, top-bar revision):** a two-row top bar organizes every view by what you are doing — row 1 is
 the five sections (This week · Research a game · Research a player · Research a defense · Place a bet), row 2 is that
 section's views, with a one-line description of the open view beside them, so nothing has to be guessed from a tab
-name and the content gets the full width. Keys 1–9 jump to the numbered views, ctrl-K finds any player or team, and
+name and the content gets the full width. The landing view is the **Matchup board** (This week › Matchup board): every starter this week with his own per-game
+averages (this season, and cumulative across every scraped season — 2024–26) beside what the opponent allows to his
+slot, the opponent's DvP rank per stat, Ψ, Ψ+ and projection; every column sorts, every filter (position, depth, injury,
+college, slate, game, team, roster) narrows it. ▲/▼ in an avg cell = the opponent allows more / less than the player
+averages. Keys 1–9 jump to the numbered views, ctrl-K finds any player or team, and
 the week / slate / position / game / team filter bar underneath applies to every view. Type: Inter for chrome,
 JetBrains Mono for data; one amber accent; rank colors unchanged (green = allows the most = best matchup).
 The legacy F1–F11 tab buttons still exist hidden (`#legacyNav`) as the routing model — every old cross-link and
