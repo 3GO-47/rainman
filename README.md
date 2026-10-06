@@ -69,9 +69,44 @@ The v2 site opens on the Bet Board; Home is one click away.
   `cp dashboard/rainman.html _site/index.html` (or `git revert` the commits after f13c159). Git history keeps every build.
 
 ## Live deploy
-`.github/workflows/pages.yml` publishes `dashboard/rainman.html` to GitHub Pages on every push
-to main (one-time: Settings → Pages → Source = *GitHub Actions*). Live at
-https://3go-47.github.io/rainman/ once enabled (v2 UI; classic v1 at /v1/).
+`.github/workflows/pages.yml` publishes `dashboard/rainman.html` (root), `dashboard/ncaa.html`
+(/ncaa.html), `dashboard/v2/` and `dashboard/archive/` to GitHub Pages on every push to main.
+Live at https://3go-47.github.io/rainman/ — the original terminal UI; the NFL | NCAA switch in
+the header carries the current tab / week / filters across (hash is preserved).
+
+## NCAA FBS layer (`ncaa/`, `scripts/ncaa/`) — same terminal, 138 defenses
+`dashboard/ncaa.html` is the same template fed college data. Everything lives under a league
+root `ncaa/data/{raw,game_logs,processed}` with the NFL schemas, so `compute_dvp` logic, the
+dashboard builder and every tab are shared; `scripts/build_dashboard.py --league ncaa` injects
+`J.league` (team map / logos / colors, 20-week calendar, kickoff slates, conference filter,
+tabs to hide). Hidden for college: Intel (nflverse scheme data), Games & Picks (no college pick
+model), Locker Room (NFL-only connections); Bets shows game lines only until a college prop
+feed exists.
+
+Sources (all public, no key; `scripts/ncaa/fetch_cfb.py`):
+- player box scores: ESPN via the sportsdataverse-data `espn_cfb_player_box` releases, 2024-26
+  (one row per player × stat category; two upstream passing schemas handled)
+- schedules / scores / FBS-FCS flags / kickoffs / TBD flags: cfbfastR-data schedules (CFBD)
+- team ids, abbreviations, colors, conference, classification: cfbfastR-data team_info
+- positions + headshots: cfbfastR-data rosters · lines 2024-25: cfbfastR-data `cfb_line_odds`
+  (DraftKings > ESPN Bet > Bovada) · lines 2026: ESPN scoreboard / summary odds pulled in Chrome
+  (`ncaa/data/raw/espn_lines_2026_*.txt`, recipe in notes/scrape_recipe.md)
+
+Conventions that differ from the NFL layer (all documented in the script headers):
+- slots are usage rank within team-week, cumulative through that week (no public college depth
+  charts) — the same method the NFL layer uses for historical seasons; the depth-chart snapshot
+  is the last-3-games usage ranking (most recent game ×2); injury flags are unknown (1)
+- week 0 games (the earlier of a team's two "week 1" games) are week 0; postseason = 17 (bowls +
+  CFP first round), 18 (quarterfinals), 19 (semis), 20 (title) so no team has two games in a week
+- every offense that faced an FBS defense counts toward that defense's allowed stats (FCS
+  opponents included, per-game legacy convention); FCS defenses get no DvP row; blend 2024+2025+2026×2
+- no targets or snap counts exist in college box scores (targets = 0; usage columns blank)
+- team colors: ESPN primaries that are too dark on black fall back to a real secondary color or
+  are lightened (build_dashboard.readable)
+
+Refresh: `python3 scripts/ncaa/refresh.py` (fetch → logs → schedule → DvP → lines → depth /
+matchups → dashboard; `--no-fetch` to rebuild offline). The mirror updates Sat 16:00 / 20:15
+and Sun + Mon 06:30 UTC in season; current-week odds need the Chrome pull.
 
 ## Data flow (every number traces to data/game_logs/)
 ```
