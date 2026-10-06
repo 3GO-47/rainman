@@ -213,3 +213,11 @@
 - build_prop_model: gprior (QB1/QB2 split), role() weighting grid GRID_R, per-market mean scale, effective_slots() next man up.
 - build_bets: wt(n_eff) evidence-scaled model weight; ledger gains n_eff; wk 5 rows frozen pre-fix were removed and refrozen
   (no games played yet). Template: ledger by EV bucket/market + week filter; Sides & totals tab.
+
+## 2026-10-06 (b) — IA consolidation
+- Template nav = 5 section buttons (data-sec) + #subnav (inside #top) built by go(v); SECS/SECOF/VLBL/ALLV/CURVIEW/LASTV;
+  go() dispatches 'rm:view' (v2 skin listens for indicator + hero). apply() uses CURVIEW. F1–F5 = sections.
+- New panes: mlab (lab moved out of players), trends (insights rest() -> trendsView()), fantasy (#lineupSlot), home gets
+  #homeBot (brief + slate map). Deleted: homeBoard(), socialHome(), home best/worst, momentum, volatility, SOS, system panel,
+  games props() + BET.props payload, betboard sides() -> global sidesTable() at top of games matchups().
+- v2: VIEWS per pane, KPIs on bets (games/plays/edge/smash/storylines), homeOrder + order CSS removed, betstatus collapsed by default.
