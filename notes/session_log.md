@@ -358,3 +358,7 @@
   custom th[data-k] sorters kept; ranks() handlers limited to data-k headers — the old handler crashed on the ω column);
   Defenses Rankings + Matrix got a "compare with" second data set (ranks side by side with the shift, two matrices);
   depth-chart field is now an X-and-O diagram in team colors with college logos (no turf, no headshots).
+- (n3) "keep building": Player Explorer's empty state is now a starter index per position (season line, L5, usage, MATCH,
+  all sortable); Matchups cards carry each starter's own season averages under his name; depth-chart field falls back
+  to the list on pages without unit charts (NCAA); Layer 0 shows the NFL model's softest matchups per market (top three
+  matchup multipliers among the 40 highest-volume starters, from prop_projections.csv) when NFL is selected.
