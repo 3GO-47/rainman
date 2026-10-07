@@ -30,7 +30,7 @@ should show — but it is one week. The model leaned Under on 91 of 118 lines an
 Result for the wk 5 lines: 34 Over / 36 Under (wk 4: 27 Over / 91 Under), 9 plays.
 
 <!-- props:start -->
-## Player props — walk-forward backtest (2026-10-06)
+## Player props — walk-forward backtest (2026-10-07)
 Skill = 1 − MSE / MSE(slot-mean) for yardage/count markets; anytime TD = 1 − logloss / logloss(slot-mean rate).
 Targets: every QB/RB/WR/TE game with ≥2 prior games, 2025 wk 3 → latest 2026 week; projections use only earlier data.
 "form + matchup + game" adds the opponent-adjusted defense effect (β) and the market-implied team total (γ).
@@ -42,11 +42,11 @@ Targets: every QB/RB/WR/TE game with ≥2 prior games, 2025 wk 3 → latest 2026
 | pass_att | 700 | +10.44% | +11.35% | H=4 K=1.5 role-w=0.25 β=1.0 γ=0.0 |
 | completions | 700 | +11.33% | +13.64% | H=8 K=1.5 role-w=0.25 β=1.5 γ=0.0 |
 | interceptions | 700 | -0.51% | -0.52% | H=4 K=6 role-w=0.5 β=0.0 γ=0.0 |
-| rush_yds | 4476 | +12.83% | +13.44% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
-| rush_att | 2199 | +19.36% | +19.35% | H=4 K=1.5 role-w=0.25 β=0.0 γ=0.0 |
-| receptions | 4997 | +14.48% | +14.79% | H=8 K=3 role-w=0.5 β=0.5 γ=0.0 |
-| rec_yds | 4997 | +9.91% | +10.87% | H=16 K=6 role-w=0.5 β=0.5 γ=0.5 |
-| rush_rec_yds | 1499 | +14.56% | +15.25% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
+| rush_yds | 4476 | +12.89% | +13.50% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
+| rush_att | 2204 | +19.44% | +19.43% | H=4 K=1.5 role-w=0.25 β=0.0 γ=0.0 |
+| receptions | 4997 | +14.47% | +14.79% | H=8 K=3 role-w=0.5 β=0.5 γ=0.0 |
+| rec_yds | 4997 | +9.90% | +10.86% | H=16 K=6 role-w=0.5 β=0.5 γ=0.5 |
+| rush_rec_yds | 1504 | +14.63% | +15.31% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
 | pass_rush_yds | 700 | +10.44% | +14.80% | H=4 K=3 role-w=0.5 β=1.0 γ=0.5 |
-| anytime_td | 5697 | +2.00% | +2.47% | H=16 K=6 role-w=0.5 β=0.0 γ=1.0 c=0.9 |
+| anytime_td | 5697 | +2.01% | +2.47% | H=16 K=6 role-w=0.5 β=0.0 γ=1.0 c=0.9 |
 <!-- props:end -->

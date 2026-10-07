@@ -380,7 +380,25 @@
 - Live check (Chrome): index / nba / nhl / wnba all 200 with the 06:35–06:36 builds; NHL page J.logs 57,478 rows, 127 games next 14 days.
 - Still shells: MLB, NCAAB, soccer — no browser-free player box-score source found yet (sportsdataverse MBB release 404, baseballr = NCAA only). Next candidate: ESPN scoreboard/boxscore recipe through Chrome, same transport as the slate.
 
-## 2026-10-07 (n6) — daily sports run (scheduled, 12:43 CDT)
-- Multi-sport slate re-pulled through Chrome (ESPN scoreboard, 14 leagues × 20261007–20261014, 0 fetch errors) and diffed in-page against the 06:35 file fetched from raw.githubusercontent: 291 games both times, 0 added / 0 removed, 83 rows changed (spreads/moneylines 52, totals 27, records 17, broadcast 10, provider 9, headline 1); only the changed fields were carried over, so `slate_all_2026-10-07.txt` is now the midday state. Two Serie A broadcast diffs (Paramount+ vs CBSSN ordering) left as first pulled.
-- fetch_sdv: new nba_schedule_2027, nhl 2027 box/team/schedule, wnba_schedule_2026 parquets. sports/build: NBA 55 games next 14 d (5 lines), NHL 118 (14 lines), WNBA 10 (2 lines); ledgers NHL 38 (+11), WNBA 7 (+1), NBA 0 — nothing graded yet (all open). build_landing: 291 games / 13 leagues.
-- Sandbox needed `pip install pyarrow` (fresh container) before sports/build.py; no script changes.
+### (n6) local loop replaces the Claude scheduled tasks — 2026-10-07
+- Josh: scheduled tasks burn too much usage → run locally or gate on in-season/games, ignore preseason. Built scripts/local/
+  (common, pull_box [PFR + nflverse fallback], pull_espn [depth via core depthcharts+roster injuries, DK props, slate, NCAA lines],
+  pull_kalshi, gate, loop, rainman.cmd, install.ps1). Validated: nflverse fallback == PFR on 3 week-4 games (61 lines, 0 diffs);
+  ESPN depthcharts JSON (slot=row, rank=order) reproduces the 10-06 Chrome pull for NE exactly.
+- Preseason dropped from the slate (pull), landing and sport pages; slate-only games now 'reg'. Season gate per league.
+- positions_2026.csv now also filled from the nflverse roster (+375 ids): 16 fullback/TE rows across 2024-26 moved WR→RB/TE.
+- All five Claude tasks disabled (weekly refresh, midweek lines, Saturday slate, pregame freeze, daily sports). Not deleted.
+
+### (n7) dashboard revision: insight-first pass — 2026-10-07
+- Backup first: tag `backup-v5-2026-10-07`, branch `backup/v5-2026-10-07`, zip at C:\Users\jwlar\rainman\backups\rainman_backup_v5_2026-10-07.zip (backups/ is git-ignored).
+- Home/Overview: + standings (8 divisions, W-L, div record, PF/PA, ±, streak, L5 dots, conference seed today), + season leaders (9 categories, top 5, bars, per-game),
+  + every defense ranked by position (all 32 × 9 slots, two side-by-side tables, this week's opponent, μ; replaces the 12-team "DvP field"), movers widened to 14.
+  Removed: birthdays panel (out of scope per project rules) and the storylines duplicate (Locker Room has them). Intel brief tables got headers and plain titles.
+- Insights: removed the duplicated storylines / momentum / "uncertainty principle" / "geodesics" panels; one schedule-strength table for every slot (rest of season), volatility table kept; "how to read" shortened.
+- Big Board: bubble cloud → position lanes (x = MATCH rank, dot = volume, median tick, three softest / toughest named per lane).
+- Picks: 9 internal tabs + 3 sub-tabs → ONE page: record by type KPIs, this week's card (all types, type chips, sorted by edge), game model board, graded history (collapsed), DFS lineups (collapsed). Section now has two items: Picks · Markets (markets / anytime TD / game lines are chips inside Markets).
+- Intel: default view "This week" (what each defense's style gives up per position), then How each defense plays · How each offense plays · Defense style vs position · Player usage · Model audit (last). Column labels and notes rewritten in plain language; the signal-audit page now opens with a sentence explaining what it measures.
+- Observatory: worldline / interference / energy spectrum / phase portrait / FUSION / EVENT HORIZON → "allowed by week", "head to head", "where every defense sits", "season vs last 3 games", "allows the most / least".
+- Sport pages (NBA/NHL/WNBA): standings & ratings table sorted by record (+ win%, ±/g), season leaders per market (min 3 games).
+- Every table on every view is sortable (59/59 NFL, 47/47 NCAA checked); fixed a latent crash in Matchups cards (lbl(null) on padded stat columns).
+- Not deployed by web upload (usage): committed locally + synced to the PC; `git push` from the PC publishes.

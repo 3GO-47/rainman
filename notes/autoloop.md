@@ -1,5 +1,9 @@
 # RAINMAN autoloop — the standing runbook for every scheduled run
 
+> **2026-10-07: the Claude scheduled tasks are PAUSED.** The same loop now runs locally on Josh's PC without a Claude session
+> (`scripts/local/loop.py`, Task Scheduler 06:50 daily, season-gated, preseason ignored) — see `notes/local_loop.md`.
+> This runbook stays as the fallback if a task is ever re-enabled.
+
 Every scheduled task starts a fresh session and reads this file first. Follow it literally; the recipes it points to are
 in `notes/scrape_recipe.md`. Nothing here needs credentials: data comes through Josh's signed-in Chrome, the push is a
 GitHub web upload in that Chrome, and the device sync is a git bundle written into the connected folder.
