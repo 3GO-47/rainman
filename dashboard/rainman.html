@@ -647,6 +647,11 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 /* big board quadrants */
 .quads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media (max-width:1000px){.quads{grid-template-columns:1fr}}.dfsl{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:10px}.dfsl .panel{margin:0}.quad{border:1px solid var(--edge);border-radius:8px;padding:6px 8px;background:var(--panel)}.qh{font:700 12px var(--mono);letter-spacing:1px;margin-bottom:4px}.qrow{display:grid;grid-template-columns:14px minmax(150px,1.3fr) 44px minmax(120px,1fr) 60px;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.qn{display:flex;flex-direction:column;min-width:0}.qn i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qk{font-size:11px;color:var(--dim)}.qk b{color:var(--txt)}.qp{text-align:right}.qp b{font-size:13px}.qp i{font-style:normal;font-size:9px;color:var(--dim);margin-left:3px}
 .bbfull>summary{cursor:pointer;list-style:none}.bbfull>summary::-webkit-details-marker{display:none}
+
+.pintro{display:flex;flex-direction:column;gap:5px;padding:10px 12px;margin:0 0 12px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
+.hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb{display:block}.hint.fi.blk:hover .hb{display:block}
+#crumb{flex:1}
+.standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
 </style></head><body>
 <div id="legacyNav" hidden><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
@@ -928,14 +933,12 @@ const SECTIONS=[
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
    {id:'tdboard',label:'TD Board',desc:'touchdown rates, TD matchups, red-zone roles, the Kalshi anytime price',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
-   {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
  {id:'intel',fk:'F4',label:'Intel',items:[
    {id:'scheme',label:'Intel',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true},
    {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
    {id:'ranks',label:'Defenses',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks'},
-   {id:'matrix',label:'Matrix',desc:'all defenses × slots heatmap with drill-down',c:'defenses',sub:'matrix'},
    {id:'observatory',label:'Observatory',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
    {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'}]},
  {id:'picksec',fk:'F5',label:'Picks',items:[
@@ -957,7 +960,28 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
   document.body.classList.toggle('fan',it.id==='fantasy')}
-function go(id,opts={}){const it=ITEMS[id]||ITEMS.lab;if(!itemOK(it))return go('overview');CUR_ITEM=it.id;
+/* ---------- plain-English page intros: what the page shows and how to read it ---------- */
+const INTRO={
+ overview:{what:'The week at a glance: the slate with lines, the standings, who leads the league, and every defense ranked by how much it gives up to each position.',how:['green = good for the offense / fantasy player, red = bad','rank 1 of 32 = that defense allows the MOST to that slot','μ = average rank across the slots','click a game tile to open its matchup, a defense to open its detail']},
+ insights:{what:'Charts only. Which starters have the softest and hardest matchups this week, which defenses sit at the extremes for each slot, and whose ranks are too volatile to trust.',how:['Ψ ("psi") = the opponent\'s average rank in the stats that matter for a slot — 1 is the softest field, 32 the hardest','bar length = how soft the matchup is','click any name for his card and the opponent\'s game log']},
+ fantasy:{what:'DraftKings Classic pick\'ems: the frozen optimal lineup for each slate, QB stacks with a bring-back, and the top plays at every roster spot.',how:['DK pts = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','MATCH = average opponent rank across his markets, 1 = softest','players who barely play are filtered out']},
+ projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
+ matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
+ tdboard:{what:'Touchdowns. Who scores, how often, and which end zones are softest this week.',how:['TD/gm = his touchdowns per game','rank 1 = the defense allows the most touchdowns to that slot','model % = our probability of a touchdown this week']},
+ explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
+ depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
+ scheme:{what:'How every defense and offense plays — coverage, blitz, pace, personnel — and what that style gives up to each position.',how:['+8 = that type of defense gives up 8% more fantasy points than average to the position','trust = how far last season\'s profile still describes this unit','click a row for the full profile and what changed']},
+ storylines:{what:'The off-field threads around each game: rivalries, teammates reunited, homecomings, revenge games, birthdays.',how:['each tab is one kind of storyline','miles = distance from the player\'s hometown or campus to the stadium']},
+ ranks:{what:'Every defense ranked for one slot: the composite Ψ, the rank and amount allowed per stat, and the weekly waveform. Pick a second data set to compare side by side.',how:['rank 1 = allows the most (best matchup for the offense), 32 = allows the least','Ψ = average of the stat ranks for the slot','click a defense for its game-by-game log: who held the slot against it and what he did']},
+ observatory:{what:'One defense in depth: what it has allowed week by week against the league, where it sits among all 32, and whether it is trending softer or tighter.',how:['Δ = change over the last four weeks vs the season','σ = how much the weekly numbers swing','above the diagonal = allowing more lately']},
+ schedule:{what:'Every offense\'s remaining schedule, colored by how soft each opponent is for the chosen slot.',how:['green = soft opponent, red = tough','μ = average over the remaining games','sort by the lens to find the easiest and hardest paths']},
+ picks:{what:'The model\'s frozen positions for this week in one table, the game model against the market, and the graded record.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','break-even at −110 is 52.4%']},
+ props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
+function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML=`<span>${it.desc}</span>`;
+  let el=$('#pageIntro');if(!el){el=document.createElement('div');el.id='pageIntro';const m=$('main');m.insertBefore(el,m.firstChild)}
+  if(!x){el.innerHTML='';return}
+  el.innerHTML=`<div class="pintro"><div class="pw"><b>${it.label}</b> — ${x.what}</div><div class="ph">${x.how.map(h=>`<span>${h}</span>`).join('')}</div></div>`}
+function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return go('overview');CUR_ITEM=it.id;
   const b=document.querySelector(`#legacyNav nav button[data-v="${it.c}"]`);if(b)b.click();
   if(it.c==='defenses'){const t=document.querySelector(`#defTabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
   if(it.c==='bets'){const t=document.querySelector(`#r11Tabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
@@ -966,7 +990,7 @@ function go(id,opts={}){const it=ITEMS[id]||ITEMS.lab;if(!itemOK(it))return go('
   if($('#snav').dataset.sec!==it.sec.id)buildSub(it.sec);
   document.querySelectorAll('#snav .sitem').forEach(a=>a.classList.toggle('on',a.dataset.i===it.id));
   document.querySelectorAll('#tnav .on,#snav .on').forEach(e=>{try{e.scrollIntoView({block:'nearest',inline:'nearest'})}catch(_){}});
-  $('#crumb').innerHTML=`<span>${it.desc}</span>`;
+  renderIntro(it);
   document.title=`RAINMAN · ${it.label}`;if(!opts.silent)writeHash();window.scrollTo({top:0})}
 addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea'))return;const i=['F1','F2','F3','F4','F5'].indexOf(e.key);
   if(i>=0){e.preventDefault();const sec=SECTIONS[i];if(sec&&sec.items.some(itemOK))go(SEC_LAST[sec.id]||sec.items.find(itemOK).id);return}});
@@ -1497,17 +1521,16 @@ let pChart1,pChart2;
 function player(){
   const names=[...new Set(J.logs.map(l=>l[LOG.player]))].sort();
   $('#player').innerHTML=`<div class="controls">
-    <input id="pIn" list="pList" placeholder="collide a player..." size="30">
+    <input id="pIn" list="pList" placeholder="search a player..." size="30">
     <datalist id="pList">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</datalist></div><div id="pOut"></div>`;
-  window.pEmpty=()=>{if($('#pIn').value||!$('#pOut')||$('#pOut').innerHTML)return;const wk=G.week,D=J.dvp.combined;
-    const STATS={QB:[['PaYd',l=>l[LOG.py],0],['PaTD',l=>l[LOG.ptd],1],['Att',l=>l[LOG.patt],0],['RuYd',l=>l[LOG.ry],0],['TD',l=>l[LOG.rtd],1]],RB:[['RuAtt',l=>l[LOG.ra],0],['RuYd',l=>l[LOG.ry],0],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]],WR:[['Tgt',l=>l[LOG.tgt],1],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]],TE:[['Tgt',l=>l[LOG.tgt],1],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]]};
-    const rows=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&['QB','RB','WR','TE'].includes(u.pos)&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>{const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE),L5=L.slice(-5);const o=oppFor(u.team,wk);const d=o&&o!=='BYE'&&D[o.replace('@','')];
-      const cols=ORDER[u.grp]||[];const rk=d?cols.map(c=>d.stats[c]?+d.stats[c].rank:null).filter(v=>v!=null):[];return {u,Lc,L5,Lall:L,o,match:rk.length?mean(rk):null}}).filter(r=>r.Lc.length||r.Lall.length);
-    const tbl=p=>{const R=rows.filter(r=>r.u.pos===p).sort((a,b)=>(a.match??99)-(b.match??99));const ST=STATS[p];if(!R.length)return '';
-      return `<div class="panel"><h3 style="color:${POSC[p]}">${posIcon(p,12)} ${p} <span class="f">starters · season averages (${LAST_SE}) · L5 = last five games · MATCH = mean opponent rank across his slot's stats this week (1 = softest) · every header sorts · click a name for his full card</span></h3>
-        <table class="mkt"><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>GP</th><th>MATCH</th>${ST.map(([k])=>`<th>${k}</th>`).join('')}<th>L5 ${ST[{QB:0,RB:1,WR:2,TE:2}[p]][0]}</th><th>opps L2 / se</th><th>trend</th></tr></thead><tbody>
-        ${R.map(r=>{const L=r.Lc.length?r.Lc:r.Lall;const prim=ST[{QB:0,RB:1,WR:2,TE:2}[p]];const l5=r.L5.length?mean(r.L5.map(prim[1])):null;return `<tr><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${L.length}</td><td>${r.match==null?'<span class="dim">·</span>':`<span class="hc big" style="${gradeStyle(r.match)}">${r.match.toFixed(1)}</span>`}</td>${ST.map(([k,f,d])=>`<td><b>${L.length?mean(L.map(f)).toFixed(d):'·'}</b></td>`).join('')}<td>${l5==null?'·':`<b>${l5.toFixed(prim[2])}</b>`}</td><td class="mini">${r.u.gp?`${r.u.l2} / ${r.u.se}`:''}</td><td>${trendGlyph(r.u)}</td></tr>`}).join('')}</tbody></table></div>`};
-    $('#pOut').innerHTML=`<p class="note">type a name above or click any player anywhere on the site &middot; below: every starter by position with his season line and this week's matchup</p>`+['QB','RB','WR','TE'].map(tbl).join('');
+  window.pEmpty=()=>{if($('#pIn').value||!$('#pOut')||$('#pOut').innerHTML)return;const wk=G.week;
+    const rows=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&['QB','RB','WR','TE'].includes(u.pos)&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>{const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE),L5=L.slice(-5);const g=USG[u.ln||u.player]||{};
+      return {u,gp:Lc.length,ppr:Lc.length?mean(Lc.map(l=>l[LOG.fppr])):null,l5:L5.length?mean(L5.map(l=>l[LOG.fppr])):null,snp:g.snp,tsh:g.tsh,o:oppFor(u.team,wk)}}).filter(r=>r.gp||r.l5!=null);
+    const tbl=p=>{const R=rows.filter(r=>r.u.pos===p).sort((a,b)=>(b.ppr??-1)-(a.ppr??-1));if(!R.length)return '';
+      return `<div class="panel"><h3 style="color:${POSC[p]}">${posIcon(p,12)} ${p} <span class="f">starters · PPR points per game this season · L5 = last five games · click a name to open him</span></h3>
+        <table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>wk ${wk}</th><th>GP</th><th>PPR/g</th><th>L5</th><th>snap%</th><th>tgt%</th><th>form</th></tr></thead><tbody>
+        ${R.map(r=>`<tr><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${r.gp}</td><td><b>${r.ppr==null?'—':r.ppr.toFixed(1)}</b></td><td>${r.l5==null?'—':r.l5.toFixed(1)}</td><td class="mini">${r.snp!=null?(100*r.snp).toFixed(0)+'%':''}</td><td class="mini">${r.tsh!=null&&p!=='QB'?(100*r.tsh).toFixed(0)+'%':''}</td><td>${sparkWave((PLOGS[r.u.ln||r.u.player]||[]).slice(-8).map(l=>l[LOG.fppr]),POSC[p],70,16)}</td></tr>`).join('')}</tbody></table></div>`};
+    $('#pOut').innerHTML=`<p class="note">type a name above or click any player anywhere on the site</p><div class="grid2">${['QB','RB'].map(tbl).join('')}</div><div class="grid2">${['WR','TE'].map(tbl).join('')}</div>`;
     logoize($('#pOut'))};
   $('#pIn').onchange=()=>{
     const n=$('#pIn').value;
@@ -1583,8 +1606,7 @@ function insights(){
     const rowsS=Object.keys(J.sched26).filter(inF).map(t=>{const cells=weeks.map(w=>{const o=J.sched26[t][w-1];if(!o||o==='BYE')return {w,o:o||'',v:null};const d=o.replace('@','');return {w,o,d,v:(D[d]||{comps:{}}).comps[sl0]}});const vs=cells.map(c=>c.v).filter(v=>v!=null);return {t,cells,avg:vs.length?mean(vs):null}}).filter(r=>r.avg!=null).sort((a,b)=>a.avg-b.avg);
     const sked=`<div class="panel"><h3>rest-of-season schedule — ${sl0} <span class="f">every offense's remaining opponents colored by what they allow to the ${sl0} slot (green = soft) · sorted easiest → hardest · ${chips}</span></h3>
       <table class="heat skh"><thead><tr><th>off</th><th>μ</th>${weeks.map(w=>`<th>w${w}</th>`).join('')}</tr></thead><tbody>${rowsS.map(r=>`<tr><td style="text-align:left">${tcell(r.t)}</td><td><b>${r.avg.toFixed(1)}</b></td>${r.cells.map(c=>c.v==null?`<td class="dim">${c.o==='BYE'?'bye':''}</td>`:`<td title="wk ${c.w} ${c.o}: Ψ ${c.v.toFixed(1)}"><span class="c" style="background:${gradeBg(c.v)}">${c.o.replace('@','@')}</span></td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-    $('#inRest').innerHTML=`<div class="panel"><h3>defense extremes by slot <span class="f">for each slot: the defense that gives up the most of the slot's primary stat and the one that gives up the least, on a shared scale around the league average (tick) · second-most / second-least as small logos</span></h3><div class="dumbs">${ext}</div></div><div class="grid2 hgl">${sked}${volH}</div>`;
-    $('#insSlots').onclick=e=>{const b=e.target.closest('button');if(!b)return;window._insSlot=b.dataset.s;smRender()};
+    $('#inRest').innerHTML=`<div class="grid2 hgl"><div class="panel"><h3>defense extremes by slot <span class="f">for each slot: the defense that gives up the most of the slot's primary stat and the one that gives up the least, on a shared scale around the league average (tick) · second-most / second-least as small logos</span></h3><div class="dumbs">${ext}</div></div>${volH}</div>`;
     logoize($('#insights'));sortableAll($('#insights'))}
   RR.push(smRender);
 }
@@ -1678,8 +1700,9 @@ function chamber(){
   function render(){const wk=G.week,D=J.dvp[$('#chSrc').value];
     const games=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
     const byes=Object.keys(J.sched26).filter(t=>J.sched26[t][wk-1]==='BYE');
-    $('#chJump').innerHTML=games.map(g=>`<button data-j="g_${g[GM.vis]}_${g[GM.home]}" title="${g[GM.day]} ${g[GM.time]||''}">${g[GM.vis]}@${g[GM.home]}</button>`).join('');
-    $('#chJump').onclick=e=>{const b=e.target.closest('button');if(!b)return;const el=document.getElementById(b.dataset.j);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})};
+    if(games.length>16){$('#chJump').innerHTML=`<select id="chJumpSel"><option value="">jump to a game… (${games.length})</option>${games.map(g=>`<option value="g_${g[GM.vis]}_${g[GM.home]}">${g[GM.vis]} @ ${g[GM.home]} · ${g[GM.day]} ${g[GM.time]||''}</option>`).join('')}</select>`;$('#chJumpSel').onchange=()=>{const el=document.getElementById($('#chJumpSel').value);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}}
+    else{$('#chJump').innerHTML=games.map(g=>`<button data-j="g_${g[GM.vis]}_${g[GM.home]}" title="${g[GM.day]} ${g[GM.time]||''}">${g[GM.vis]}@${g[GM.home]}</button>`).join('');
+    $('#chJump').onclick=e=>{const b=e.target.closest('button');if(!b)return;const el=document.getElementById(b.dataset.j);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}}
     $('#chOut').innerHTML=(games.length?'':'<p class="note">no games match the current filter</p>')+games.map(g=>card(g,D)).join('')
       +(byes.length?`<p class="note">on bye: ${byes.map(t=>tcell(t)).join(' &nbsp;')}</p>`:'');
     logoize($('#chOut'))}
@@ -1687,7 +1710,8 @@ function chamber(){
 }
 /* ---------- Home: the command center ---------- */
 /* ---------- Home: standings · season leaders · every defense ranked by position ---------- */
-function standingsPanel(){const G26=(BET.games||[]).filter(g=>g.result!=null&&g.away_score!=null);const DIVS=J.div||{};
+function standingsPanel(){const G26=(BET.games||[]).filter(g=>g.result!=null&&g.away_score!=null);
+  let DIVS=J.div||{};if(!IS_NFL){DIVS={};Object.keys(TEAM).filter(t=>TEAM[t].fbs&&TEAM[t].conf&&inF(t)).forEach(t=>(DIVS[TEAM[t].conf]=DIVS[TEAM[t].conf]||[]).push(t));Object.keys(DIVS).forEach(k=>{if(DIVS[k].length<4)delete DIVS[k]})}
   if(!Object.keys(DIVS).length||!G26.length)return '';
   const T={};const mk=t=>T[t]=T[t]||{t,w:0,l:0,ti:0,pf:0,pa:0,dw:0,dl:0,last:[],hw:0,hl:0,aw:0,al:0};
   const divOf={};Object.entries(DIVS).forEach(([d,ts])=>ts.forEach(t=>divOf[t]=d));
@@ -1696,15 +1720,15 @@ function standingsPanel(){const G26=(BET.games||[]).filter(g=>g.result!=null&&g.
   const pct=x=>(x.w+.5*x.ti)/Math.max(1,x.w+x.l+x.ti);
   const streak=x=>{if(!x.last.length)return '';const c=x.last[x.last.length-1];let n=0;for(let i=x.last.length-1;i>=0&&x.last[i]===c;i--)n++;return `<span style="color:${c==='W'?'var(--green)':c==='L'?'var(--red)':'var(--dim)'}">${c}${n}</span>`};
   const dots=x=>`<span class="l5">${x.last.slice(-5).map(r=>`<i class="${r}"></i>`).join('')}</span>`;
-  const seedOf={};['AFC','NFC'].forEach(cf=>{const ts=Object.entries(DIVS).filter(([d])=>d.startsWith(cf)).flatMap(([,ts])=>ts).map(t=>T[t]||mk(t));
+  const seedOf={};if(IS_NFL)['AFC','NFC'].forEach(cf=>{const ts=Object.entries(DIVS).filter(([d])=>d.startsWith(cf)).flatMap(([,ts])=>ts).map(t=>T[t]||mk(t));
     const leaders=Object.entries(DIVS).filter(([d])=>d.startsWith(cf)).map(([,ts])=>ts.map(t=>T[t]||mk(t)).sort((a,b)=>pct(b)-pct(a)||(b.pf-b.pa)-(a.pf-a.pa))[0]);
     const order=[...leaders.sort((a,b)=>pct(b)-pct(a)||(b.pf-b.pa)-(a.pf-a.pa)),...ts.filter(x=>!leaders.includes(x)).sort((a,b)=>pct(b)-pct(a)||(b.pf-b.pa)-(a.pf-a.pa))];
     order.forEach((x,i)=>seedOf[x.t]=i+1)});
   const divTbl=(d,ts)=>{const R=ts.map(t=>T[t]||mk(t)).sort((a,b)=>pct(b)-pct(a)||(b.dw-b.dl)-(a.dw-a.dl)||(b.pf-b.pa)-(a.pf-a.pa));
-    return `<table class="stand"><thead><tr><th style="text-align:left">${d}</th><th>W-L</th><th>div</th><th>PF</th><th>PA</th><th>±</th><th>strk</th><th>L5</th><th title="conference seed if the season ended today (division winners first)">seed</th></tr></thead><tbody>${R.map((x,i)=>{const diff=x.pf-x.pa;return `<tr class="${i===0?'lead':''}"><td style="text-align:left">${tcell(x.t)}</td><td><b>${x.w}-${x.l}${x.ti?'-'+x.ti:''}</b></td><td class="mini">${x.dw}-${x.dl}</td><td class="mini">${x.pf}</td><td class="mini">${x.pa}</td><td style="color:${diff>0?'var(--green)':diff<0?'var(--red)':'var(--dim)'}">${diff>0?'+':''}${diff}</td><td>${streak(x)}</td><td>${dots(x)}</td><td class="mini">${seedOf[x.t]<=7?`<b style="color:${seedOf[x.t]<=4?'var(--acc)':'var(--txt)'}">${seedOf[x.t]}</b>`:'<span class="dim">'+seedOf[x.t]+'</span>'}</td></tr>`}).join('')}</tbody></table>`};
+    return `<table class="stand"><thead><tr><th style="text-align:left">${d}</th><th>W-L</th><th>div</th><th>PF</th><th>PA</th><th>±</th><th>strk</th><th>L5</th>${IS_NFL?'<th title="conference seed if the season ended today (division winners first)">seed</th>':''}</tr></thead><tbody>${R.map((x,i)=>{const diff=x.pf-x.pa;return `<tr class="${i===0?'lead':''}"><td style="text-align:left">${tcell(x.t)}</td><td><b>${x.w}-${x.l}${x.ti?'-'+x.ti:''}</b></td><td class="mini">${x.dw}-${x.dl}</td><td class="mini">${x.pf}</td><td class="mini">${x.pa}</td><td style="color:${diff>0?'var(--green)':diff<0?'var(--red)':'var(--dim)'}">${diff>0?'+':''}${diff}</td><td>${streak(x)}</td><td>${dots(x)}</td>${IS_NFL?`<td class="mini">${seedOf[x.t]<=7?`<b style="color:${seedOf[x.t]<=4?'var(--acc)':'var(--txt)'}">${seedOf[x.t]}</b>`:'<span class="dim">'+seedOf[x.t]+'</span>'}</td>`:''}</tr>`}).join('')}</tbody></table>`};
   const wkMax=Math.max(...G26.map(g=>+g.week));
   return `<div class="panel" id="standings"><h3>standings <span class="f">through wk ${wkMax} · ± = point differential · strk = current streak · L5 = last five · seed = conference seed today (1-4 division leaders, 5-7 wild cards) · click a team to filter</span></h3>
-    <div class="standgrid">${['AFC','NFC'].map(cf=>`<div>${Object.entries(DIVS).filter(([d])=>d.startsWith(cf)).map(([d,ts])=>divTbl(d,ts)).join('')}</div>`).join('')}</div></div>`}
+    ${IS_NFL?`<div class="standgrid">${['AFC','NFC'].map(cf=>`<div>${Object.entries(DIVS).filter(([d])=>d.startsWith(cf)).map(([d,ts])=>divTbl(d,ts)).join('')}</div>`).join('')}</div>`:`<div class="standconf">${Object.entries(DIVS).sort((a,b)=>b[1].length-a[1].length).map(([d,ts])=>divTbl(d,ts)).join('')}</div>`}</div>`}
 function leadersPanel(){const S=Math.max(...J.logs.map(l=>l[LOG.season]));const by={};
   J.logs.forEach(l=>{if(l[LOG.season]!==S)return;const a=by[l[LOG.player]+'|'+l[LOG.team]]=by[l[LOG.player]+'|'+l[LOG.team]]||{p:l[LOG.player],t:l[LOG.team],pos:l[LOG.pos],g:0,py:0,ptd:0,ry:0,rtd:0,rec:0,recy:0,rectd:0,tgt:0,ppr:0,int:0};
     a.g++;a.py+=l[LOG.py];a.ptd+=l[LOG.ptd];a.ry+=l[LOG.ry];a.rtd+=l[LOG.rtd];a.rec+=l[LOG.rec];a.recy+=l[LOG.recy];a.rectd+=l[LOG.rectd];a.tgt+=l[LOG.tgt];a.ppr+=l[LOG.fppr];a.int+=l[LOG.int]});
@@ -1830,8 +1854,14 @@ function home(){
       <div class="stln mono">${sp!=null?`<b>${sp>0?h:v} -${Math.abs(sp).toFixed(1).replace('.0','')}</b>`:'<span class="dim">no line</span>'}${tot!=null?` · O/U ${tot}`:''}${kml!=null?` · <span title="Kalshi: ${h} to win">K ${(kml*100).toFixed(0)}%</span>`:''}</div>
       <div class="sttl"><span class="mini" style="color:${vivid(v)}">${v}</span>${tiltBar(t.a,t.b)}<span class="mini" style="color:${vivid(h)}">${h}</span></div>
       <div class="stf mini">${e?`<span style="color:${e.scoreP>=.8?'var(--green)':e.scoreP<=.2?'var(--red)':'var(--dim)'}">env #${e.rank}</span>`:''}${riv?` · <span style="color:var(--acc)">${esc(riv.headline)}</span>`:''}${rev?` · revenge ×${rev}`:''}${sc.riv+sc.alum+sc.conn?` · ${sc.riv+sc.alum+sc.conn} st`:''}</div></div>`};
-  const slateBoard=`<div class="panel" id="slateBoard"><h3>wk ${wk} slate <span class="f">implied team totals under the logos · DK spread and total · K = Kalshi home win price · tilt bar leans toward the offense in the softer field · env = scoring-environment rank · click a game to open it</span></h3>
-    <div class="sribbon">${gsw.map(stile).join('')||'<p class="note">no games in the current filter</p>'}</div></div>`;
+  const P4=t=>/^(SEC|Big Ten|Big 12|ACC)/i.test((TEAM[t]||{}).conf||'');
+  const gscore=g=>{const v=g[GM.vis],h=g[GM.home],b=bg(v,h)||{};return (b.total_line!=null?b.total_line:38)-(b.spread_line!=null?Math.abs(b.spread_line):24)+(P4(v)?8:0)+(P4(h)?8:0)};
+  const MANY=gsw.length>20;const marquee=MANY?gsw.slice().sort((a,b)=>gscore(b)-gscore(a)).slice(0,8):gsw;
+  const grow=g=>{const v=g[GM.vis],h=g[GM.home],t=tilt(g),b=bg(v,h)||{},e=envOfG(g);const sp=b.spread_line,tot=b.total_line;const impH=sp!=null&&tot!=null?(tot-sp)/2:null;
+    return `<tr class="gb" data-game="${v}@${h}" style="cursor:pointer"><td class="mini">${slateChip(g[GM.slate])} ${g[GM.day]} ${g[GM.time]||'TBD'}</td><td style="text-align:left">${tcell(v)} <span class="mini">@</span> ${tcell(h)}</td><td>${sp!=null?`<span class="mini">${sp>0?h:v}</span> −${Math.abs(sp)}`:'<span class="dim">—</span>'}</td><td>${tot??'<span class="dim">—</span>'}</td><td class="mini">${impH!=null?`${(tot-impH).toFixed(1)} / ${impH.toFixed(1)}`:''}</td><td>${tcell(t.fav)} <span class="mini">+${t.mag.toFixed(1)}Ψ</span></td><td class="mini">${e?`<span style="color:${e.scoreP>=.8?'var(--green)':e.scoreP<=.2?'var(--red)':'var(--dim)'}">#${e.rank}</span>`:'—'}</td></tr>`};
+  const slateBoard=`<div class="panel" id="slateBoard"><h3>wk ${wk} ${MANY?'marquee games':'slate'} <span class="f">implied team totals under the logos · DK spread and total · K = Kalshi home win price · tilt bar leans toward the offense in the softer field · env = scoring-environment rank · click a game to open it${MANY?' · marquee = closest spreads, highest totals, power-conference teams':''}</span></h3>
+    <div class="sribbon">${marquee.map(stile).join('')||'<p class="note">no games in the current filter</p>'}</div>
+    ${MANY?`<table class="gboard slatetbl"><thead><tr><th>kick</th><th>game</th><th>spread</th><th>total</th><th>implied</th><th>softer field</th><th title="scoring environment rank">env</th></tr></thead><tbody>${gsw.map(grow).join('')}</tbody></table>`:''}</div>`;
   const rrow=g=>{const {best,worst}=pick(g);const who=(x,tone)=>x?`<span class="who"><span class="pp plink" data-p="${x.u.player}"><b>${esc(x.u.player)}</b></span><span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)}</span>${psi(x.v)}</span>`:'<span class="dim">—</span>';
     return `<div class="rrow">${slotchip(g)}${who(best)}${who(worst)}</div>`};
   const roleBoard=`<div class="panel" id="roleBoard"><h3>best &amp; worst matchup per role <span class="f">by the opponent's Ψ for that slot (${J.blend}) · click a name for his card</span></h3>
@@ -1846,7 +1876,7 @@ function home(){
   $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+kpis+slateBoard+standingsPanel()+'<div class="grid2 hgl">'+leadersPanel()+movers+'</div>'+dvpAll+'</div><div data-sub="insights"></div>';
   if(typeof syncSub==='function')syncSub();
   document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
-  document.querySelectorAll('#slateBoard .stile[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;G.game=k;G.slates.clear();apply();go('matchups')});
+  document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;G.game=k;G.slates.clear();apply();go('matchups')});
   document.querySelectorAll('#defHeat tr.dlink').forEach(el=>el.onclick=()=>{go('observatory');const sel=$('#dDef');if(sel){sel.value=el.dataset.d;sel.dispatchEvent(new Event('change'))}});
   }
 }
@@ -1973,7 +2003,7 @@ function tdboard(){
      <option>QB</option><option>RB1</option><option>RB2</option><option>WR1</option><option>WR2</option><option>WR3</option><option>WR4+</option><option>TE1</option><option>TE2</option></select>
    <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
    <div id="tdKpi"></div>
-   <div class="hg2"><div class="panel" id="tdFields"></div><div class="panel" id="tdCands"></div></div>
+   <div class="panel" id="tdFields"></div><div id="tdCands" hidden></div>
    <div id="tdTbl"></div>`;
   /* TD phase space: defense-level scatter of the TD rankings (static across weeks) */
   (function(){
@@ -3265,7 +3295,11 @@ BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 gbarInit();
 function foldNotes(root=document){root.querySelectorAll('.controls > .note:not(.kept), .controls > span.note').forEach(n=>{if(n.textContent.trim().length<90){n.classList.add('kept');return}
   const h=document.createElement('span');h.className='hint';h.title='how to read this view';h.innerHTML='?<span class="hb"></span>';h.querySelector('.hb').append(...n.childNodes);n.replaceWith(h);
-  h.onclick=e=>{e.stopPropagation();h.classList.toggle('open')}})}
+  h.onclick=e=>{e.stopPropagation();h.classList.toggle('open')}});
+  // long panel subtitles and footnotes collapse into an ⓘ — the page intro carries the explanation, the panel stays clean
+  root.querySelectorAll('.panel h3 > .f:not(.kept), .panel > p.note:not(.kept), .panel > .note:not(.kept), #pOut > p.note:not(.kept)').forEach(n=>{const t=n.textContent.trim();if(t.length<70||n.closest('.hint')){n.classList.add('kept');return}
+    const h=document.createElement('span');h.className='hint fi'+(n.tagName==='P'?' blk':'');h.title='details';h.innerHTML='ⓘ<span class="hb"></span>';h.querySelector('.hb').append(...n.childNodes);n.replaceWith(h);
+    h.onclick=e=>{e.stopPropagation();h.classList.toggle('open')}})}
 foldNotes();logoize();sortableAll();new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1){foldNotes(n.parentNode||document);logoize(n.parentNode||document);sortableAll(n.parentNode||document)}}).observe($('main'),{childList:true,subtree:true});
 document.addEventListener('click',()=>setTimeout(()=>{const m=document.getElementById('ppModal');if(m)logoize(m)},50));
 addEventListener('click',()=>document.querySelectorAll('.hint.open').forEach(h=>h.classList.remove('open')));
