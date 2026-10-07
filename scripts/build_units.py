@@ -35,7 +35,7 @@ def main():
         ht = ''
         if x.height == x.height and x.height: ht = f"{int(x.height) // 12}-{int(x.height) % 12}"
         bio[x.key] = dict(player=x.full_name, team=x.team, pos=x.position, jersey='' if x.jersey_number != x.jersey_number else int(x.jersey_number),
-                          college=str(x.college if isinstance(x.college, str) else '').split(';')[-1].strip(), colleges=(x.college if isinstance(x.college, str) else ''), height=ht, weight='' if x.weight != x.weight else int(x.weight), years_exp=x.years_exp,
+                          college=str(x.college if isinstance(x.college, str) else '').split(';')[0].strip(), colleges=(x.college if isinstance(x.college, str) else ''), height=ht, weight='' if x.weight != x.weight else int(x.weight), years_exp=x.years_exp,
                           age=age, draft_club=(x.draft_club or '') if isinstance(x.draft_club, str) else '', draft_number='' if x.draft_number != x.draft_number else int(x.draft_number),
                           entry_year='' if x.entry_year != x.entry_year else int(x.entry_year), status=x.status, headshot=x.headshot_url if isinstance(x.headshot_url, str) else '', espn_id='' if x.espn_id != x.espn_id else int(x.espn_id))
     UNIT = {'3WR 1TE': 'OFF', 'Base 4-3 D': 'DEF', 'Base 3-4 D': 'DEF', 'Special Teams': 'ST'}

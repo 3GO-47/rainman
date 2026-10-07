@@ -184,6 +184,10 @@ def college_payload(logs):
         c = R2[(R2['last'] == last) & (R2.team.replace({'LA': 'LAR'}) == r['team'])].drop_duplicates('full_name')
         if len(c) == 1: add(n, c.iloc[0])
     used = {v[0] for v in P.values()}
+    if os.path.exists('data/processed/units_2026.csv'):   # schools of the defensive / OL starters too (depth-chart field)
+        for r in csv.DictReader(open('data/processed/units_2026.csv', encoding='utf-8')):
+            c = re.sub(r'\s+', ' ', (r.get('college') or '')).strip()
+            if c in S: used.add(c)
     if miss: print('  colleges missing from colleges_espn.txt:', sorted(miss))
     return {'s': {k: v for k, v in S.items() if k in used}, 'p': P, 'bd': BD}
 
