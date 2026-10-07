@@ -409,3 +409,11 @@
 - Defense game logs: `defLogBlock(def, slot)` from J.logs (who held the slot vs that defense each week + his line + PPR, per-game averages, prior seasons collapsed).
   Player popup: the opponent's log vs his slot under "what X allows"; in the DvP-rankings tab every defense row expands to its log. Defenses tab: click any defense → its logs for the selected slot (or every slot in ALL).
 - Every table still sortable (55/55 NFL, 43/43 NCAA, popup tables included).
+
+### (n9) five-point redo — 2026-10-07
+1. Locker Room: Birthdays back (Josh's call), grouped by distance from the player's NEXT game with a ± window (1/3/7/14/30 d), list format; new tabs Alumni · Homecoming · Alma mater · Home state · Revenge (one table each from build_connections rows).
+2. Big Board: usage gate (QB ≥50% snaps · RB ≥30% snaps or 8 touches/g · WR/TE ≥45% snaps and ≥10% tgt share or 3.5 tgt/g; toggle to "everyone"); four quadrants (QB/RB/WR/TE) with the 8 best matchups ranked by DK points × softness, showing snap/tgt share, MATCH, softest market and DK pts; full board collapsed below.
+3. Matchups rebuilt: one game per screen (min-height 100vh), header with logos/records/implied totals/lines/Kalshi/env/storyline chips, a per-slot Ψ strip (which offense has the softer field at each of 9 slots), both sides with QB·RB1·RB2·WR1·WR2·WR3·WR4+·TE1·TE2: player + usage (snap %, tgt %, opp/g), his 2026 line, the defense's rank+allowed per stat, projection with floor–ceiling band; defense style lines; storylines collapsed; jump chips per game.
+4. Depth charts: field drawing removed; clean lists — offense QB/RB/WR1-3/TE depth 1-4 (college logo, Q/OUT, trend, snap %, opp/g), defense LB/CB/S starters + next up from nflverse units (no OL/DL); game picker, two teams side by side.
+5. Insights: all tables replaced by visuals — per-role bar charts (five softest / five hardest fields), defense extremes dumbbells per slot on a league-average scale, rest-of-season schedule heat strip with slot chips, volatility bars + waveforms.
+6. Fantasy → DFS (DraftKings Classic): frozen optimal lineup per slate (value per $1k when salaries exist), stacks + bring-backs, top plays per roster spot (usage-filtered), DK scoring note; league-roster filter hidden.
