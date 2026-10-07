@@ -221,20 +221,38 @@ Everything is client-side in `dashboard_template.html` (`projection()`), so the 
   (team / promoted / rookie).
 - **Player usage** = game_logs ⋈ nflverse snap counts on PFR id; target/rush/air-yard shares from pbp per game.
 
-## Views (2026-10-06 — 5 sections)
-Navigation is five sections (F1–F5); each section has a small sub-navigation for its views:
-- **Bets** (landing) — Props · Anytime TD · Parlay / SGP · Ledger · Model. Week tiles on top (games, plays, best edge, smash spot, storylines).
-- **Games** — Lines & model (spreads, totals, implied team points, model edges, frozen picks; game cards collapsed below) ·
-  Slot matchups (each offense's slot owners vs the opposing defense) · Storylines (rivalries, homecomings, birthdays).
-- **Matchups** — This week (smash board, target/avoid per role, field extremes, intel brief, slate map) · Matchup lab (every
-  player × opponent per-stat ranks, sortable) · TD matchups · Projections (PPR board + Model Lab).
-- **Defenses** — Rankings / Matrix / Observatory · Trends (momentum, predictability, season schedule strength) · Schedule · Scheme & usage.
-- **Players** — Depth charts (two teams, open by default) + full player card · Fantasy roster (lineup or waiver radar).
-Removed as duplicates: the old Home page (its unique panels moved above; top-projections, storylines, birthdays, momentum,
-volatility and season-slate panels were copies of other views), the v1 "Player props" table (superseded by Bets → Props),
-and the Bet Board "Sides & totals" tab (now the top of Games → Lines & model). The global filter bar applies everywhere.
+## Layers (2026-10-07)
+**Layer 0 — `dashboard/index.html`** (the site root): every sport as a selectable bubble (a small physics field — bubbles
+sized by games this week, spring + collision), with the next seven days of games per sport underneath: logos, records, AP
+ranks, Central-time kickoff, broadcast, DraftKings spread / moneyline and total, venue and headline (London game, playoff
+round, NBA China game …). NFL and CFB open the full model; NBA, NCAAB, WNBA, MLB, NHL and Soccer (EPL, MLS, UCL, La Liga,
+Bundesliga, Serie A, Ligue 1) open a schedule shell on the same framework with the pipeline status board. Everything comes
+from `data/raw/slate_all_<date>.txt` (ESPN scoreboard, see notes/scrape_recipe.md) via `scripts/build_landing.py`.
+
+**Layer 1 — `rainman.html` (NFL) and `ncaa.html` (CFB)**: five major tabs (F1–F5), each with minor tabs:
+- **Home** — Overview (KPIs · slate ribbon of game tiles with implied team totals, DK and Kalshi lines, tilt, env rank and
+  the game's narrative chip · market board · DvP field · movers) · Insights (storylines of the week, best/worst per role,
+  field extremes, momentum, volatility, schedule strength) · Fantasy.
+- **Matchups** — Big Board (matchup rankings: the opponent's rank in every market the player lives on, MATCH = mean rank,
+  projection bands, and the force-simulated matchup map — x = matchup, y = yards percentile within position, size = volume)
+  · Matchups (every game of the week on one screen: both offenses vs the opposing defense as heat strips with the softest
+  stat per starter, lines, tilt, narratives; any card opens to the full slot-by-slot tables) · TD Board (now with the Kalshi
+  anytime price on every card).
+- **Players** — Matchup Lab · Player Explorer · Depth Charts (the field: both defenses in their base front and both
+  offenses in 3WR-1TE, built from nflverse/ESPN units with college, size, experience, usage and injury on every chip;
+  gold ring = alumni link across the line, red = college rivalry; the game's rivalry / streak / coach-revenge / rematch
+  chips on top; list view kept as a toggle).
+- **Intel** — Intel (scheme, personnel, turnover, coaching, signal audit) · Locker Room · Defenses · Matrix · Observatory · Schedule.
+- **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-07 — **v5: Layer 0 + five-tab Layer 1.** Multi-sport landing (`index.html`, 13 leagues, 291 games) with
+  sport shells; navigation collapsed from eleven tabs to Home / Matchups / Players / Intel / Picks; the Matchups grid
+  (every game at once); the depth-chart field (full units from nflverse: OL, 4-3 / 3-4 fronts, special teams, bios);
+  game narratives (`build_narratives.py`: division, curated rivalries, last meeting, streaks, playoff rematches, coaches
+  vs former teams, player revenge); Big Board matchup rankings + force-simulated matchup map; home slate ribbon.
+  New scripts: build_units.py, build_narratives.py, build_landing.py (all in refresh.py). Pages workflow serves every
+  dashboard/*.html with index.html as the root.
 - 2026-10-06 — **v3 "storm terminal" redesign + betting depth.** Broadcast header (condensed type, section tabs with a
   sliding indicator), a live ticker of the week's plays, scoreboard tiles, and money-green for edges. Player headshots
   (ESPN, mapped from nflverse ids) on plays, props, smash board, depth-chart starters and the player card. **Top plays**
