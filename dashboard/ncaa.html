@@ -567,26 +567,26 @@ tr.mkx td{background:var(--panel);padding:8px 10px;border-bottom:1px solid var(-
 img.tl{vertical-align:-3px}
 
 /* ---- v5 matchups grid ---- */
-.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(520px,1fr));gap:12px;align-items:start}
-.mcard{padding:10px 12px 8px;cursor:default}.mcard.open{grid-column:1/-1}
+.mgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-items:start}
+.mcard{padding:12px 14px 10px;cursor:default}.mcard.open{grid-column:1/-1}
 .mtop{display:flex;justify-content:space-between;align-items:center;font-size:14px;cursor:pointer}.mtop b{letter-spacing:.02em}
 .mtop2{display:flex;justify-content:space-between;align-items:center;margin:4px 0 2px;font-family:var(--mono);font-size:11px;color:var(--dim)}.mlines b{color:var(--txt)}
 .mnarr{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 2px}.nchip{font-family:var(--mono);font-size:10px;padding:1px 7px;border:1px solid var(--edge2);border-radius:10px;color:var(--dim);background:var(--s2)}
 .nchip.riv{border-color:#6b5415;color:var(--acc)}.nchip.hot{border-color:#5a2a2a;color:#f0a0a0}.nchip.co{border-color:#2b4a6b;color:#8cc4ff}
-.msides{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}.mside{min-width:0}
+.msides{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}.mside{min-width:0}
 .mhead{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;border-bottom:1px solid var(--edge);padding-bottom:4px;margin-bottom:4px}.mpsi{margin-left:auto;color:var(--dim)}
-.mrow{display:grid;grid-template-columns:40px minmax(0,1fr) auto auto;gap:6px;align-items:center;padding:2px 0;border-bottom:1px dotted var(--edge);font-size:12px}.mrow:last-child{border-bottom:0}
+.mrow{display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:5px 0;border-bottom:1px dotted var(--edge);font-size:13px}.mrow:last-child{border-bottom:0}
 .mname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hcs{display:flex;gap:2px}.hc{display:inline-flex;flex-direction:column;align-items:center;min-width:27px;padding:1px 3px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:700;line-height:1.05}.hc i{font-style:normal;font-weight:400;font-size:8px;opacity:.8;letter-spacing:.02em}.hc.dim{background:none}
-.mbest{font-family:var(--mono);font-size:10px;white-space:nowrap;min-width:54px;text-align:right}
+.hcs{display:flex;gap:4px}.hc{display:inline-flex;flex-direction:column;align-items:center;min-width:58px;padding:2px 5px;border-radius:4px;font-family:var(--mono);font-size:13px;font-weight:700;line-height:1.1}.hc i{font-style:normal;font-weight:400;font-size:9px;opacity:.85;letter-spacing:.02em;white-space:nowrap}.hc.dim{background:none}
+.mbest{font-family:var(--mono);font-size:11px;white-space:nowrap;min-width:70px;text-align:right}
 .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px}.mfoot .mini{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .mopen{background:none;border:1px solid var(--edge2);color:var(--dim);border-radius:6px;padding:3px 9px;font-family:var(--mono);font-size:10px;cursor:pointer;white-space:nowrap}.mopen:hover{color:var(--txt);border-color:var(--acc)}
 .mfull{margin-top:10px;border-top:1px solid var(--edge);padding-top:8px}
-@media(max-width:1100px){.mgrid{grid-template-columns:1fr}}@media(max-width:700px){.msides{grid-template-columns:1fr}.mrow{grid-template-columns:40px minmax(0,1fr) auto}.mbest{display:none}}
+@media(max-width:700px){.msides{grid-template-columns:1fr}.mrow{grid-template-columns:40px minmax(0,1fr) auto}.mbest{display:none}}
 
 /* ---- v5 depth-chart field ---- */
-.dcfwrap{margin-top:6px}.dcfield{width:100%;height:auto;display:block;border:1px solid var(--edge2);border-radius:10px;background:#0d2a16}
-.dcchip{cursor:pointer}.dcchip:hover circle{stroke-width:3;filter:drop-shadow(0 0 6px rgba(232,179,57,.6))}
+.dcfwrap{margin-top:6px}.dcfield{width:100%;height:auto;display:block;border:1px solid var(--edge2);border-radius:10px;background:#0b0b0c}
+.dcchip{cursor:pointer}.dcchip:hover circle,.dcchip:hover path{filter:drop-shadow(0 0 6px rgba(232,179,57,.7))}
 
 /* ---- v5 big board map ---- */
 .bbmap{position:relative;border:1px solid var(--edge2);border-radius:10px;background:linear-gradient(90deg,rgba(63,185,80,.07),rgba(0,0,0,0) 45%,rgba(240,86,74,.07));margin:8px 0;overflow:hidden}
@@ -605,6 +605,7 @@ img.tl{vertical-align:-3px}
 .stln{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stln b{color:var(--txt)}.sttl{display:flex;align-items:center;gap:4px;margin:3px 0}.sttl .tilt{flex:1}
 .stf{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nwrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:4px 16px}.nrow{display:grid;grid-template-columns:96px 70px 1fr;gap:8px;align-items:center;padding:3px 0;border-bottom:1px dotted var(--edge);font-size:12px}.ng{font-family:var(--mono);font-size:11px;display:flex;align-items:center;gap:3px}
+th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}th.srt-asc::after{content:' ▲';font-size:9px;color:var(--acc)}th.srt-desc::after{content:' ▼';font-size:9px;color:var(--acc)}
 </style></head><body>
 <div id="legacyNav" hidden><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
@@ -883,7 +884,7 @@ const SECTIONS=[
    {id:'fantasy',label:'Fantasy',desc:'league rosters, waiver radar, lineup optimizer',c:'home',sub:'fantasy',nfl:true}]},
  {id:'match',fk:'F2',label:'Matchups',items:[
    {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
-   {id:'matchups',label:'Matchups',desc:'every game of the week on one screen — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
+   {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
    {id:'tdboard',label:'TD Board',desc:'touchdown rates, TD matchups, red-zone roles, the Kalshi anytime price',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
    {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
@@ -1229,7 +1230,8 @@ function ranks(){
   $('#ranks').innerHTML=`
   <div class="tabs" id="rkTabs">${tabs.map((s,i)=>`<button data-s="${s}" class="${i===0?'on':''}">${s==='ALL'?s:posIcon(posOf(s),11)+' '+s}</button>`).join('')}</div>
   <div class="controls"><select id="rkSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-  <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed &middot; with a filter active: the filtered teams' defenses + the defenses they face this week</span></div>
+  <span class="mini">vs</span><select id="rkSrcB"><option value="">— compare with —</option>${srcs.map(s=>`<option>${s}</option>`).join('')}</select>
+  <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed &middot; pick a second data set to see both rankings side by side with the shift (A − B; negative = softer in A) &middot; every header sorts</span></div>
   <div id="rkTbl"></div>`;
   let slot='QB',sortK='psi',sortA=true;
   function render(){
@@ -1240,11 +1242,12 @@ function ranks(){
         avgPsi:mean(Object.values(D[d].comps))}));
       R.sort((a,b)=>(sortK==='d'?(a.d<b.d?-1:1):a.avgPsi-b.avgPsi)*(sortA?1:-1));
       const keep=J.statCols.map(c=>inP(c.startsWith('P TD')?'QB':posOf(c)));
+      const B=$('#rkSrcB').value&&J.dvp[$('#rkSrcB').value];
       $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th>
-        ${J.statCols.filter((c,i)=>keep[i]).map(c=>`<th class="rk">${c}</th>`).join('')}</tr></thead><tbody>
-        ${R.map(r=>`<tr><td>${tcell(r.d)}</td>${r.ranks.filter((x,i)=>keep[i]).map(x=>`<td>${badge(x)}</td>`).join('')}</tr>`).join('')}
+        ${J.statCols.filter((c,i)=>keep[i]).map(c=>B?`<th class="rk" colspan="3">${c}<div class="mini">${src} · ${$('#rkSrcB').value} · Δ</div></th>`:`<th class="rk">${c}</th>`).join('')}</tr></thead><tbody>
+        ${R.map(r=>`<tr><td>${tcell(r.d)}</td>${J.statCols.filter((c,i)=>keep[i]).map(c=>{const a=D[r.d].stats[c].rank,b=B&&B[r.d]?B[r.d].stats[c].rank:null;return B?`<td>${badge(a)}</td><td>${badge(b)}</td><td class="mini ${b!=null&&a-b<0?'rise':b!=null&&a-b>0?'fall':''}">${b==null?'':(a-b>0?'+':'')+(a-b).toFixed(0)}</td>`:`<td>${badge(a)}</td>`}).join('')}</tr>`).join('')}
         </tbody></table>`;
-      document.querySelectorAll('#rkTbl th').forEach(th=>th.onclick=()=>{
+      document.querySelectorAll('#rkTbl th[data-k]').forEach(th=>th.onclick=()=>{
         sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k||'psi';render()});
       return;
     }
@@ -1258,20 +1261,21 @@ function ranks(){
       else if(sortK.startsWith('r')){const i=+sortK.slice(1);x=a.ranks[i];y=b.ranks[i]}
       else{const i=+sortK.slice(1);x=a.raws[i];y=b.raws[i]}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
-    $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th><th class="rk" data-k="psi">&Psi;</th><th>&omega; ${J.primary[slot]} wkly</th>
-      ${stats.map((c,i)=>`<th class="rk" data-k="r${i}">*${c}*</th>`).join('')}
-      ${stats.map((c,i)=>`<th data-k="v${i}">${c}</th>`).join('')}</tr></thead><tbody>
-      ${R.map(r=>`<tr><td>${tcell(r.d)}</td><td>${psi(r.psi)}</td><td>${sparkWave(series(r.d,J.primary[slot]),vivid(r.d))}</td>
-      ${r.ranks.map(x=>`<td>${badge(x)}</td>`).join('')}
-      ${r.raws.map((v,i)=>`<td>${spec(v,colmax[i]||1)}</td>`).join('')}</tr>`).join('')}
+    const Bsrc=$('#rkSrcB').value,B=Bsrc&&J.dvp[Bsrc];
+    $('#rkTbl').innerHTML=`<table><thead><tr><th data-k="d">Defense</th><th class="rk" data-k="psi">&Psi;${B?' '+src:''}</th>${B?`<th class="rk">&Psi; ${Bsrc}</th>`:''}<th class="nosort">&omega; ${J.primary[slot]} wkly</th>
+      ${stats.map((c,i)=>B?`<th class="rk" data-k="r${i}">*${c}* ${src}</th><th class="rk">*${c}* ${Bsrc}</th><th class="rk">Δ</th>`:`<th class="rk" data-k="r${i}">*${c}*</th>`).join('')}
+      ${stats.map((c,i)=>B?`<th data-k="v${i}">${c} ${src}</th><th>${c} ${Bsrc}</th>`:`<th data-k="v${i}">${c}</th>`).join('')}</tr></thead><tbody>
+      ${R.map(r=>`<tr><td>${tcell(r.d)}</td><td>${psi(r.psi)}</td>${B?`<td>${psi(B[r.d]?B[r.d].comps[slot]:null)}</td>`:''}<td>${sparkWave(series(r.d,J.primary[slot]),vivid(r.d))}</td>
+      ${r.ranks.map((x,i)=>{if(!B)return `<td>${badge(x)}</td>`;const b=B[r.d]?B[r.d].stats[stats[i]].rank:null;const dl=b==null?null:x-b;return `<td>${badge(x)}</td><td>${badge(b)}</td><td class="mini ${dl<0?'rise':dl>0?'fall':''}">${dl==null?'':(dl>0?'+':'')+dl.toFixed(0)}</td>`}).join('')}
+      ${r.raws.map((v,i)=>B?`<td>${spec(v,colmax[i]||1)}</td><td>${spec(B[r.d]?B[r.d].stats[stats[i]].avg:0,colmax[i]||1)}</td>`:`<td>${spec(v,colmax[i]||1)}</td>`).join('')}</tr>`).join('')}
       </tbody></table>`;
-    document.querySelectorAll('#rkTbl th').forEach(th=>th.onclick=()=>{
+    document.querySelectorAll('#rkTbl th[data-k]').forEach(th=>th.onclick=()=>{
       sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k;render()});
   }
   document.querySelectorAll('#rkTabs button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#rkTabs button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');slot=b.dataset.s;sortK=slot==='ALL'?'psi':'psi';sortA=true;render()});
-  $('#rkSrc').onchange=render;
+  $('#rkSrc').onchange=render;$('#rkSrcB').onchange=render;
   RR.push(()=>{const tabs=[...document.querySelectorAll('#rkTabs button')];tabs.forEach(b=>b.hidden=b.dataset.s!=='ALL'&&!inP(posOf(b.dataset.s)));
     if(slot!=='ALL'&&!inP(posOf(slot))){const f=tabs.find(b=>!b.hidden);if(f){f.click();return}}render()});
 }
@@ -1281,18 +1285,23 @@ function matrix(){
   const srcs=Object.keys(J.dvp);
   $('#matrix').innerHTML=`<div class="controls">
     <select id="mSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-    <span class="note">&Psi; per slot &middot; green wells attract fantasy points, red ridges repel &middot; click a cell for the defense's full fingerprint</span></div>
-    <div class="grid2"><div id="matrixWrap"></div>
-    <div class="panel" id="mDrill" hidden></div></div>`;
+    <span class="mini">vs</span><select id="mSrcB"><option value="">— compare with —</option>${srcs.map(s=>`<option>${s}</option>`).join('')}</select>
+    <span class="note">&Psi; per slot &middot; green wells attract fantasy points, red ridges repel &middot; pick a second data set for two matrices side by side (same defense order) &middot; click a cell for the defense's full fingerprint &middot; headers sort</span></div>
+    <div class="grid2" id="mGrid"><div id="matrixWrap"></div>
+    <div class="panel" id="mDrill" hidden></div></div><div id="matrixWrapB" hidden></div>`;
   function render(){
-    const src=$('#mSrc').value,D=J.dvp[src];
+    const src=$('#mSrc').value,D=J.dvp[src];const srcB=$('#mSrcB').value,DB=srcB&&J.dvp[srcB];
     const defs=Object.keys(D).filter(inD).sort();
     const SL=J.slots.filter(x=>inP(posOf(x)));
-    $('#matrixWrap').innerHTML=`<table id="matrixTbl"><thead><tr><th>DEF</th>
+    const tbl=(DD,id,label)=>`${label?`<h3 style="margin:0 0 4px">${label}</h3>`:''}<table id="${id}"><thead><tr><th>DEF</th>
       ${SL.map(s=>`<th style="color:${POSC[posOf(s)]}">${s}</th>`).join('')}</tr></thead><tbody>
-      ${defs.map(d=>`<tr><td>${tcell(d)}</td>${SL.map(s=>{const v=D[d].comps[s];
+      ${defs.map(d=>`<tr><td>${tcell(d)}</td>${SL.map(s=>{const v=DD[d]?DD[d].comps[s]:null;
         return v==null?'<td></td>':`<td class="cell" data-d="${d}">${badge(v)}</td>`}).join('')}</tr>`).join('')}
       </tbody></table>`;
+    if(DB){$('#mGrid').hidden=true;$('#matrixWrapB').hidden=false;$('#matrixWrapB').innerHTML=`<div class="grid2">${tbl(D,'matrixTbl',src)}${tbl(DB,'matrixTblB',srcB)}</div><div class="panel" id="mDrill2" hidden></div>`;
+      $('#matrixWrapB').querySelectorAll('#matrixTbl .cell').forEach(td=>td.onclick=()=>drill(td.dataset.d,src));$('#matrixWrapB').querySelectorAll('#matrixTblB .cell').forEach(td=>td.onclick=()=>drill(td.dataset.d,srcB));return}
+    $('#mGrid').hidden=false;$('#matrixWrapB').hidden=true;
+    $('#matrixWrap').innerHTML=tbl(D,'matrixTbl','');
     document.querySelectorAll('#matrixTbl .cell').forEach(td=>td.onclick=()=>drill(td.dataset.d,src));
   }
   function drill(d,src){
@@ -1311,7 +1320,7 @@ function matrix(){
     $('#mStats').innerHTML=`<table><thead><tr><th>stat</th><th>allowed/gm</th><th class="rk">rank</th></tr></thead>
       <tbody>${J.statCols.map(c=>`<tr><td>${c}</td><td>${D.stats[c].avg}</td><td>${badge(D.stats[c].rank)}</td></tr>`).join('')}</tbody></table>`;
   }
-  $('#mSrc').onchange=render;
+  $('#mSrc').onchange=render;$('#mSrcB').onchange=render;
   RR.push(render);
 }
 /* ---------- Defense Observatory: comparative field physics ---------- */
@@ -1604,7 +1613,7 @@ function chamber(){
     <div id="chOut" class="mgrid"></div>`;
   const ROWS=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'],CORE=['QB','RB1','WR1','WR2','WR3','TE1'];
   const starter=(t,g)=>UNIVERSE.filter(u=>u.team===t&&u.slot===(g==='QB'?'QB1':g)).sort((a,b)=>(a.ord||9)-(b.ord||9))[0];
-  const hc=(d,c)=>{const o=d&&d.stats[c];if(!o)return '<span class="hc dim">·</span>';return `<span class="hc" style="${gradeStyle(+o.rank)}" title="${c}: ${def(d)} allows ${(+o.avg).toFixed(1)} per game — rank ${o.rank} of 32 (1 = most allowed)">${(+o.rank).toFixed(0)}<i>${lbl(c)}</i></span>`};
+  const hc=(d,c)=>{const o=d&&d.stats[c];if(!o)return '<span class="hc dim">·</span>';return `<span class="hc" style="${gradeStyle(+o.rank)}" title="${c}: ${def(d)} allows ${(+o.avg).toFixed(1)} per game — rank ${o.rank} of 32 (1 = most allowed)">${(+o.rank).toFixed(0)}<i>${lbl(c)} ${(+o.avg).toFixed(lbl(c)==='TD'||lbl(c)==='PaTD'?1:0)}</i></span>`};
   const def=d=>d&&d.team||'';
   // compact side: the core starters with heat cells + the softest stat
   function mini(off,dd,D){const d=D[dd];if(d)d.team=dd;
@@ -1612,7 +1621,7 @@ function chamber(){
       const best=cols.map(c=>({c,o:d&&d.stats[c]})).filter(x=>x.o).sort((x,y)=>+x.o.rank-+y.o.rank)[0];
       const inj=u&&u.inj==='0'?' <span class="inj0">Q</span>':u&&u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       const own=u&&OWNER[u.player+'|'+u.team];const mine=G.owner&&(G.owner==='__FA__'?u&&!own:own===G.owner);
-      return `<div class="mrow ${G.owner?(mine?'mine':'notmine'):''}">${slotchip(g)}<span class="pp plink mname" data-p="${u?esc(u.player):''}" title="${u&&u.note?esc(u.note):''}">${u?esc(pshort(u.player)):'<span class="dim">—</span>'}${inj}${trendGlyph(u)}</span><span class="hcs">${cols.map(c=>hc(d,c)).join('')}</span>${best?`<span class="mbest" style="color:${gradeColor(+best.o.rank)}" title="softest stat for this slot">${lbl(best.c)} #${(+best.o.rank).toFixed(0)}</span>`:''}</div>`}).join('');
+      return `<div class="mrow ${G.owner?(mine?'mine':'notmine'):''}">${slotchip(g)}<span class="pp plink mname" data-p="${u?esc(u.player):''}" title="${u&&u.note?esc(u.note):''}">${u?esc(u.player):'<span class="dim">—</span>'}${inj}${trendGlyph(u)}</span><span class="hcs">${cols.map(c=>hc(d,c)).join('')}</span>${best?`<span class="mbest" style="color:${gradeColor(+best.o.rank)}" title="softest stat for this slot">${lbl(best.c)} #${(+best.o.rank).toFixed(0)}</span>`:''}</div>`}).join('');
     const avg=mean(CORE.map(g=>(d||{comps:{}}).comps[g]).filter(v=>v!=null));
     return {html:`<div class="mside"><div class="mhead">${tcell(off)} <span class="mini">offense vs</span> ${tcell(dd)} <span class="mini">D</span><span class="mpsi" title="mean Ψ of the core slots — lower = softer field">Ψ ${avg.toFixed(1)}</span></div>${rows}</div>`,avg}}
   // full side (the original slot-by-slot table) for the opened state
@@ -1908,35 +1917,37 @@ function dchart(){
   const UN=(()=>{const C=J.unitCols||[];const idx=Object.fromEntries(C.map((c,i)=>[c,i]));const by={};(J.units||[]).forEach(r=>{const t=r[idx.team];(by[t]=by[t]||[]).push(Object.fromEntries(C.map((c,i)=>[c,r[i]])))});return by})();
   const nkey=n=>String(n||'').replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'').toLowerCase().replace(/[^a-z0-9]/g,'');
   const bioOf=(name,t)=>{const rows=UN[t]||[];const k=nkey(name);return rows.find(r=>nkey(r.player)===k)||null};
-  const OFFX={WR1:[80,292],WR3:[220,300],LT:[360,292],LG:[430,292],C:[500,292],RG:[570,292],RT:[640,292],TE1:[720,292],WR2:[920,292],QB1:[500,372],RB1:[400,372]};
+  const OFFX={WR1:[70,292],WR3:[200,300],LT:[340,292],LG:[420,292],C:[500,292],RG:[580,292],RT:[660,292],TE1:[750,292],WR2:[925,292],QB1:[500,372],RB1:[400,372]};
   const DEF43={RDE:[330,200],RDT:[440,200],LDT:[560,200],LDE:[670,200],WLB:[370,140],MLB:[500,140],SLB:[630,140],RCB:[90,130],NB:[235,140],LCB:[910,130],FS:[440,52],SS:[650,58]};
   const DEF34={RDE:[380,200],NT:[500,200],LDE:[620,200],WLB:[270,185],RILB:[440,140],LILB:[560,140],SLB:[740,185],RCB:[90,130],NB:[200,140],LCB:[910,130],FS:[440,52],SS:[650,58]};
-  function chip(x,y,p,opts){const b=p.bio||{};const id=b.espn||(J.ph||{})[p.name]||'';const col=opts.color;const ring=p.tag==='alumni'?'#e8b339':p.tag==='rivalry'?'#f0564a':col;
-    const parts=(p.name||'').replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'').split(' ');const last=parts.slice(-1)[0],first=parts[0];const nm=p.name.length>13?last:p.name;
-    const inj=p.inj==='-1'?'<text x="14" y="-12" font-size="8" fill="#f0564a" font-weight="700">OUT</text>':p.inj==='0'?'<text x="14" y="-12" font-size="8" fill="#e8b339" font-weight="700">Q</text>':'';
-    const face=`<text y="4" text-anchor="middle" font-size="11" fill="#cfd2d8" font-weight="700">${esc((first[0]||'')+(last[0]||''))}</text>`+(id?`<image href="${HEAD(id)}" x="-19" y="-21" width="38" height="38" clip-path="url(#dcClip)" preserveAspectRatio="xMidYMid slice"/>`:'');
-    const ttl=[p.name,p.pos,b.college?'college: '+b.college:'',b.height?`${b.height} ${b.weight} lb`:'',b.exp!=null&&b.exp!==''?`${b.exp} yrs exp`:'',b.age?`age ${b.age}`:'',b.jersey!==''&&b.jersey!=null?'#'+b.jersey:'',p.usage||'',p.note||''].filter(Boolean).join(' · ');
-    return `<g class="dcchip plink" data-p="${esc(p.name)}" transform="translate(${x},${y})"><title>${esc(ttl)}</title><circle r="19" fill="#0b0b0c" stroke="${ring}" stroke-width="${p.tag?2.5:1.5}"/>${face}${inj}
-      <text y="-24" text-anchor="middle" font-size="7.5" fill="${col}" font-weight="700" letter-spacing=".06em">${esc(p.pos)}</text>
-      <text y="31" text-anchor="middle" font-size="9" fill="#e6e6e9" font-weight="600">${esc(nm)}</text>
-      <text y="40" text-anchor="middle" font-size="7" fill="#8b8d94">${esc((b.college||'').slice(0,22))}</text></g>`}
+  const schoolOf=p=>{const ci=cinfo(p.name);if(ci)return ci;const c=p.bio&&p.bio.college;const S=J.college&&J.college.s&&J.college.s[c];return S?{id:S[0],disp:S[1]||c}:(c?{id:'',disp:c}:null)};
+  function chip(x,y,p,opts){const b=p.bio||{};const col=opts.color;const ring=p.tag==='alumni'?'#e8b339':p.tag==='rivalry'?'#f0564a':col;
+    const parts=(p.name||'').replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'').split(' ');const last=parts.slice(-1)[0];const nm=p.name.length>14?(parts[0][0]+'. '+last):p.name;
+    const sc=schoolOf(p);const slogo=sc&&sc.id?`<image href="https://a.espncdn.com/i/teamlogos/ncaa/500/${sc.id}.png" x="-40" y="-12" width="24" height="24"/>`:'';
+    const inj=p.inj==='-1'?'<text x="14" y="-14" font-size="8" fill="#f0564a" font-weight="700">OUT</text>':p.inj==='0'?'<text x="14" y="-14" font-size="8" fill="#e8b339" font-weight="700">Q</text>':'';
+    const glyph=opts.x?`<path d="M-9 -9 L9 9 M-9 9 L9 -9" stroke="${ring}" stroke-width="3.2" stroke-linecap="round" fill="none"/>`:`<circle r="11" fill="none" stroke="${ring}" stroke-width="3"/>`;
+    const ttl=[p.name,p.pos,sc?'college: '+sc.disp:'',b.height?`${b.height} ${b.weight} lb`:'',b.exp!=null&&b.exp!==''?`${b.exp} yrs exp`:'',b.age?`age ${b.age}`:'',b.jersey!==''&&b.jersey!=null?'#'+b.jersey:'',p.usage||'',p.note||''].filter(Boolean).join(' · ');
+    return `<g class="dcchip plink" data-p="${esc(p.name)}" transform="translate(${x},${y})"><title>${esc(ttl)}</title><rect x="-44" y="-30" width="88" height="66" fill="transparent"/>${slogo}${glyph}${inj}
+      <text y="-19" text-anchor="middle" font-size="8" fill="${col}" font-weight="700" letter-spacing=".08em">${esc(p.pos)}</text>
+      <text y="25" text-anchor="middle" font-size="9.5" fill="#e6e6e9" font-weight="600">${esc(nm)}</text>
+      <text y="34" text-anchor="middle" font-size="7" fill="#8b8d94">${esc((sc?sc.disp:'').slice(0,22))}</text></g>`}
   function fieldSVG(off,dd){const oc=vivid(off),dc=vivid(dd);const units=UN[dd]||[];const front=(units.find(u=>u.unit==='DEF')||{}).front||'';const is34=/3-4/.test(front);const DX=is34?DEF34:DEF43;
     const starters=[];const u1=sl=>UNIVERSE.filter(u=>u.team===off&&u.slot===sl).sort((a,b)=>(a.ord||9)-(b.ord||9))[0];
     ['QB1','RB1','WR1','WR2','WR3','TE1'].forEach(sl=>{const u=u1(sl);if(!u)return;const b=bioOf(u.player,off);starters.push({name:u.player,pos:sl,bio:b,inj:u.inj,tag:(TAGS[u.player]||[]).some(t=>t.includes('alumni'))?'alumni':(TAGS[u.player]||[]).some(t=>t.includes('rivalry'))?'rivalry':'',usage:u.gp?`${u.l2} opps/gm last 2 · ${u.se} season`:'',note:u.note,xy:OFFX[sl]})});
-    ['LT','LG','C','RG','RT'].forEach(ps=>{const r=units.length?null:null;const row=(UN[off]||[]).find(u=>u.unit==='OFF'&&u.pos===ps&&u.rank===1);if(row)starters.push({name:row.player,pos:ps,bio:row,inj:row.status==='RES'||row.status==='INA'?'-1':'',xy:OFFX[ps]})});
+    ['LT','LG','C','RG','RT'].forEach(ps=>{const row=(UN[off]||[]).find(u=>u.unit==='OFF'&&u.pos===ps&&u.rank===1);if(row)starters.push({name:row.player,pos:ps,bio:row,inj:row.status==='RES'||row.status==='INA'?'-1':'',xy:OFFX[ps]})});
     const defs=[];Object.keys(DX).forEach(ps=>{const row=units.find(u=>u.unit==='DEF'&&u.pos===ps&&u.rank===1);if(row)defs.push({name:row.player,pos:ps,bio:row,inj:row.status==='RES'||row.status==='INA'?'-1':'',tag:(TAGS[row.player]||[]).some(t=>t.includes('alumni'))?'alumni':(TAGS[row.player]||[]).some(t=>t.includes('rivalry'))?'rivalry':'',xy:DX[ps]})});
-    let yards='';for(let y=20;y<=400;y+=50){yards+=`<line x1="12" y1="${y}" x2="988" y2="${y}" stroke="#1f4a2b" stroke-width="1"/>`;for(let x=40;x<988;x+=30)yards+=`<line x1="${x}" y1="${y-4}" x2="${x}" y2="${y+4}" stroke="#1f4a2b" stroke-width="1"/>`}
-    yards+=`<line x1="12" y1="250" x2="988" y2="250" stroke="#9fd3a8" stroke-width="2" stroke-dasharray="6 4"/>`;
-    return `<svg class="dcfield" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="dcClip"><circle r="18"/></clipPath><linearGradient id="turf" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0d2a16"/><stop offset=".6" stop-color="#113a1d"/><stop offset="1" stop-color="#0d2a16"/></linearGradient></defs>
-      <rect width="1000" height="420" rx="10" fill="url(#turf)"/><rect x="0" y="0" width="1000" height="14" rx="6" fill="${dc}" opacity=".45"/><rect x="0" y="412" width="1000" height="8" rx="4" fill="${oc}" opacity=".45"/>
-      ${yards}<image href="${LOGO(dd)}" x="880" y="24" width="90" height="90" opacity=".16"/><image href="${LOGO(off)}" x="30" y="316" width="90" height="90" opacity=".16"/>
-      <text x="16" y="34" font-size="12" fill="${dc}" font-weight="700" letter-spacing=".12em">${dd} DEFENSE · ${is34?'3-4':'4-3'} BASE</text><text x="984" y="400" font-size="12" fill="${oc}" font-weight="700" letter-spacing=".12em" text-anchor="end">${off} OFFENSE · 3WR 1TE</text>
-      <text x="16" y="262" font-size="8" fill="#9fd3a8" letter-spacing=".2em" opacity=".8">LINE OF SCRIMMAGE</text>
-      ${defs.map(p=>chip(p.xy[0],p.xy[1],p,{color:dc})).join('')}${starters.map(p=>chip(p.xy[0],p.xy[1],p,{color:oc})).join('')}</svg>`}
+    let grid='';for(let y=70;y<=400;y+=60)grid+=`<line x1="12" y1="${y}" x2="988" y2="${y}" stroke="#1a1a1d" stroke-width="1"/>`;
+    grid+=`<line x1="12" y1="250" x2="988" y2="250" stroke="#3a3b42" stroke-width="1.5" stroke-dasharray="6 5"/>`;
+    return `<svg class="dcfield" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid meet">
+      <rect width="1000" height="420" rx="10" fill="#0b0b0c"/><rect x="0" y="0" width="1000" height="4" rx="2" fill="${dc}" opacity=".7"/><rect x="0" y="416" width="1000" height="4" rx="2" fill="${oc}" opacity=".7"/>
+      ${grid}<image href="${LOGO(dd)}" x="16" y="16" width="30" height="30"/><image href="${LOGO(off)}" x="954" y="374" width="30" height="30"/>
+      <text x="54" y="36" font-size="12" fill="${dc}" font-weight="700" letter-spacing=".12em">${dd} DEFENSE · ${is34?'3-4':'4-3'} BASE · X</text><text x="944" y="394" font-size="12" fill="${oc}" font-weight="700" letter-spacing=".12em" text-anchor="end">${off} OFFENSE · 3WR 1TE · O</text>
+      <text x="16" y="262" font-size="8" fill="#5c5e66" letter-spacing=".2em">LINE OF SCRIMMAGE</text>
+      ${defs.map(p=>chip(p.xy[0],p.xy[1],p,{color:dc,x:true})).join('')}${starters.map(p=>chip(p.xy[0],p.xy[1],p,{color:oc})).join('')}</svg>`}
   function narrStrip(a,b,g){const wk=G.week;const N=(J.narr||[]).filter(n=>+n.week===wk&&g&&n.game===g[GM.vis]+'@'+g[GM.home]);if(!N.length)return '';
     const kind={rivalry:'riv',streak:'hot',coach:'co'};return `<div class="mnarr" style="margin:6px 0">${N.map(n=>`<span class="nchip ${kind[n.kind]||''}" title="${esc(n.detail||'')}">${esc(n.headline)}</span>`).join('')}</div>`}
   function renderField(a,b,g,same){if(MODE!=='field'||!b){$('#dcField').innerHTML='';return}
-    $('#dcField').innerHTML=`<div class="dcfwrap">${narrStrip(a,b,same?g:null)}<p class="mini" style="margin:2px 0 6px">ring: <span style="color:#e8b339">gold</span> = alumni link with someone across the line · <span style="color:#f0564a">red</span> = college rivalry · Q / OUT from the depth chart · hover a player for college, size, experience and usage · click for his explorer card · defense = base front from the latest nflverse / ESPN depth chart</p>
+    $('#dcField').innerHTML=`<div class="dcfwrap">${narrStrip(a,b,same?g:null)}<p class="mini" style="margin:2px 0 6px">O = offense, X = defense in team colors · college logo beside each player · <span style="color:#e8b339">gold</span> = alumni link with someone across the line · <span style="color:#f0564a">red</span> = college rivalry · Q / OUT from the depth chart · hover for college, size, experience and usage · click for his explorer card · defense = base front from the latest nflverse / ESPN depth chart</p>
       ${fieldSVG(a,b)}<div style="height:8px"></div>${fieldSVG(b,a)}</div>`;
     $('#dcField').querySelectorAll('.dcchip').forEach(el=>el.onclick=()=>playerPop(el.dataset.p))}
   function render(){
@@ -3066,6 +3077,18 @@ const KAL=J.kalshi||[],PICKS=J.picksAll||[],DFS=J.dfs||{entries:[],summary:[]},S
 const PTEAM=(()=>{const m={};J.depth.forEach(d=>{m[d.player]=d.team;if(d.log_name)m[d.log_name]=d.team});J.logs.forEach(l=>{if(l[LOG.season]===LAST_SE&&!m[l[LOG.player]])m[l[LOG.player]]=l[LOG.team]});return m})();
 const pn=(name,team,short)=>`${tlogo(team||PTEAM[name]||'',13)} <span class="pp plink" data-p="${esc(name)}">${esc(short?pshort(name):name)}</span>`;
 // every player reference carries his team's logo: any .plink / .pp without one gets it (idempotent, runs after each render)
+
+/* ---- universal table sorting: every <th> of every table sorts its column (numbers parsed out of badges / pills, text otherwise); custom sorters (th[data-k]) keep theirs ---- */
+function sortableAll(root){(root||document).querySelectorAll('table').forEach(t=>{const head=t.tHead||t.querySelector('thead');if(!head||t.dataset.srt)return;t.dataset.srt='1';
+  const hrows=[...head.rows];const last=hrows[hrows.length-1];
+  hrows.forEach((hr,ri)=>{let col=0;[...hr.cells].forEach(th=>{const span=th.colSpan||1,c0=col;col+=span;if(th.dataset.k||th.dataset.s||th.onclick||th.classList.contains('nosort'))return;if(!th.textContent.trim()&&span===1)return;
+    th.classList.add('srt');th.title=(th.title?th.title+' · ':'')+'click to sort';
+    th.addEventListener('click',e=>{e.stopPropagation();const asc=th.dataset.dir!=='asc';head.querySelectorAll('th.srt').forEach(x=>{x.classList.remove('srt-asc','srt-desc');delete x.dataset.dir});th.dataset.dir=asc?'asc':'desc';th.classList.add(asc?'srt-asc':'srt-desc');
+      const tb=t.tBodies[0];if(!tb)return;const rows=[...tb.rows];const num=v=>{const m=String(v).replace(/,/g,'').match(/-?\d+(\.\d+)?/);return m?parseFloat(m[0]):null};
+      const val=r=>{const c=r.cells[Math.min(c0,r.cells.length-1)];if(!c)return '';if(c.dataset.v!=null)return c.dataset.v;const b=c.querySelector('.badge,.hc,.psi,b');const txt=(b?b.textContent:c.textContent).trim();return txt};
+      const vs=rows.map(r=>({r,v:val(r)}));const nums=vs.filter(x=>num(x.v)!=null).length;const numeric=nums>=Math.max(1,vs.length*.5);
+      vs.sort((a,b)=>{if(numeric){const x=num(a.v),y=num(b.v);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return asc?x-y:y-x}const x=String(a.v).toLowerCase(),y=String(b.v).toLowerCase();return asc?x.localeCompare(y):y.localeCompare(x)});
+      vs.forEach(x=>tb.appendChild(x.r))})})})})}
 function logoize(root){(root||document).querySelectorAll('.plink[data-p],.pp[data-p]').forEach(el=>{if(el.dataset.lg||el.closest('.tdc,.r11row,.r11who,.dchead,.kpi'))return;el.dataset.lg='1';
   if(el.querySelector('img.tl')||(el.previousSibling&&el.previousSibling.nodeType===1&&el.previousSibling.classList&&el.previousSibling.classList.contains('tl')))return;
   const t=PTEAM[el.dataset.p];if(!t||!TEAM[t])return;el.insertAdjacentHTML('afterbegin',`<img class="tl" src="${LOGO(t)}" style="width:13px;height:13px;margin-right:3px;vertical-align:-2px" alt="">`)})}
@@ -3286,7 +3309,7 @@ gbarInit();
 function foldNotes(root=document){root.querySelectorAll('.controls > .note:not(.kept), .controls > span.note').forEach(n=>{if(n.textContent.trim().length<90){n.classList.add('kept');return}
   const h=document.createElement('span');h.className='hint';h.title='how to read this view';h.innerHTML='?<span class="hb"></span>';h.querySelector('.hb').append(...n.childNodes);n.replaceWith(h);
   h.onclick=e=>{e.stopPropagation();h.classList.toggle('open')}})}
-foldNotes();logoize();new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1){foldNotes(n.parentNode||document);logoize(n.parentNode||document)}}).observe($('main'),{childList:true,subtree:true});
+foldNotes();logoize();sortableAll();new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1){foldNotes(n.parentNode||document);logoize(n.parentNode||document);sortableAll(n.parentNode||document)}}).observe($('main'),{childList:true,subtree:true});
 document.addEventListener('click',()=>setTimeout(()=>{const m=document.getElementById('ppModal');if(m)logoize(m)},50));
 addEventListener('click',()=>document.querySelectorAll('.hint.open').forEach(h=>h.classList.remove('open')));
 buildSide();go(CUR_ITEM,{silent:true});
