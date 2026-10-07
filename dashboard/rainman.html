@@ -95,7 +95,7 @@ h3 .f{color:var(--dim);text-transform:none;letter-spacing:0;font-weight:normal}
 .tabs button{background:#000;border:1px solid var(--edge);color:var(--amber);padding:3px 11px;cursor:pointer;font:inherit;font-size:11px;text-transform:uppercase}
 .tabs button.on{background:var(--amber);color:#000;font-weight:bold;border-color:var(--amber)}
 .cell{cursor:pointer}
-#matrixTbl td{text-align:center}
+#matrixTbl td{text-align:center}#matrixTbl,#matrixTblB{width:100%}#mGrid{display:grid;grid-template-columns:1fr;gap:12px}#mGrid:has(#mDrill:not([hidden])){grid-template-columns:1fr 1fr}
 .mini{font-size:10.5px;color:var(--dim)}
 .tl{vertical-align:-4px;margin-right:4px}
 .tc{display:inline-flex;align-items:center;gap:2px}
@@ -618,6 +618,8 @@ table.dvpall td,table.dvpall th{padding:1px 3px}table.dvpall td .c{min-width:24p
 details.panel>summary{cursor:pointer;list-style:none}details.panel>summary::-webkit-details-marker{display:none}
 .bblanes .ax{font:500 9px var(--mono);fill:var(--dim)}.bblanes .ax.g{fill:var(--green)}.bblanes .ax.r{fill:var(--red)}.bblanes .grid{stroke:var(--edge2);stroke-width:1}.bblanes .lane{fill:var(--panel);stroke:var(--edge)}
 .bblanes .lb{font:700 11px var(--mono)}.bblanes .med{stroke:var(--dim);stroke-dasharray:3 3}.bblanes .dot{stroke-width:1;cursor:pointer;opacity:.92}.bblanes .dot:hover{opacity:1;stroke-width:2}.bblanes .nm{font:600 9.5px var(--sans);cursor:pointer}.bblanes .nm:hover{text-decoration:underline}
+table.dlog{font-size:10.5px}table.dlog td,table.dlog th{padding:1px 5px;text-align:center}table.dlog td:nth-child(-n+4){text-align:left}table.dlog tr.avg td{border-top:1px solid var(--edge2);color:var(--dim)}
+.dlogprior{margin-top:4px}.dlogprior>summary{cursor:pointer;list-style:none}.dlogprior>summary::-webkit-details-marker{display:none}tr.dlx>td{background:var(--s2);padding:6px 10px}
 </style></head><body>
 <div id="legacyNav" hidden><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
@@ -1095,6 +1097,23 @@ UNIVERSE.forEach(u=>{if(!u.dslot){u.dslot=u.slot;u.ord=u.depth;}});
 /* ---------- Ψ Matchup Lab: the workbook position sheets, live ---------- */
 /* a player's own per-game production for any DvP stat column, from his game-log rows */
 const LAST_SE=J.logs.reduce((m,l)=>l[LOG.season]>m?l[LOG.season]:m,0);
+/* ---------- defense game logs: what a defense actually allowed to a slot, game by game, and who did it ---------- */
+const DL_COLS={QB:[['att',l=>l[LOG.patt]],['pass yds',l=>l[LOG.py]],['pass TD',l=>l[LOG.ptd]],['int',l=>l[LOG.int]],['car',l=>l[LOG.ra]],['rush yds',l=>l[LOG.ry]],['rush TD',l=>l[LOG.rtd]]],
+  RB:[['car',l=>l[LOG.ra]],['rush yds',l=>l[LOG.ry]],['rush TD',l=>l[LOG.rtd]],['tgt',l=>l[LOG.tgt]],['rec',l=>l[LOG.rec]],['rec yds',l=>l[LOG.recy]],['rec TD',l=>l[LOG.rectd]]],
+  WR:[['tgt',l=>l[LOG.tgt]],['rec',l=>l[LOG.rec]],['rec yds',l=>l[LOG.recy]],['rec TD',l=>l[LOG.rectd]],['car',l=>l[LOG.ra]],['rush yds',l=>l[LOG.ry]]]};
+DL_COLS.TE=DL_COLS.WR;
+function defLogRows(def,grp,seasons){return J.logs.filter(l=>l[LOG.opp]===def&&SLOTG(l[LOG.slot])===grp&&(!seasons||seasons.includes(l[LOG.season]))).sort((a,b)=>b[LOG.season]-a[LOG.season]||b[LOG.week]-a[LOG.week]||b[LOG.fppr]-a[LOG.fppr])}
+function defLogTable(def,grp,seasons,opts={}){const rows=defLogRows(def,grp,seasons);if(!rows.length)return `<p class="note">no ${grp} game logs vs ${def}${seasons?' in '+seasons.join('/'):''}</p>`;
+  const pos=posOf(grp)||'WR';const cols=DL_COLS[pos]||DL_COLS.WR;const num=v=>v==null||v===''?'':v;
+  const games=new Set(rows.map(l=>l[LOG.season]+'-'+l[LOG.week])).size;
+  const sums=cols.map(([,f])=>{const vs=rows.map(f).map(Number).filter(v=>!isNaN(v));return vs.length?vs.reduce((a,b)=>a+b,0)/games:null});
+  const avgP=rows.reduce((a,l)=>a+l[LOG.fppr],0)/games;
+  return `<table class="dlog ${opts.cls||''}"><thead><tr>${seasons&&seasons.length===1?'':'<th>ssn</th>'}<th>wk</th><th>offense</th><th>${grp} that week</th>${cols.map(c=>`<th>${c[0]}</th>`).join('')}<th>PPR</th></tr></thead><tbody>
+    ${rows.map(l=>`<tr>${seasons&&seasons.length===1?'':`<td class="mini">${l[LOG.season]}</td>`}<td class="mini">${l[LOG.week]}</td><td>${tcell(l[LOG.team])} <span class="mini">${l[LOG.ha]==='A'?'@':'vs'} ${def}</span></td><td>${pn(l[LOG.player],l[LOG.team])}${opts.hl&&l[LOG.player]===opts.hl?' <span class="mini" style="color:var(--acc)">◀ him</span>':''}</td>${cols.map(([,f])=>`<td>${num(f(l))}</td>`).join('')}<td><b style="color:${l[LOG.fppr]>=20?'var(--green)':l[LOG.fppr]<8?'var(--red)':'var(--txt)'}">${l[LOG.fppr].toFixed(1)}</b></td></tr>`).join('')}
+    <tr class="avg"><td colspan="${seasons&&seasons.length===1?3:4}" class="mini">per game · ${games} games</td>${sums.map(v=>`<td class="mini">${v==null?'':(Math.round(v*10)/10)}</td>`).join('')}<td class="mini"><b>${avgP.toFixed(1)}</b></td></tr></tbody></table>`}
+function defLogBlock(def,grp,hl){const cur=LAST_SE;const prior=[...new Set(J.logs.map(l=>l[LOG.season]))].filter(s=>s!==cur).sort((a,b)=>b-a);
+  return `<div class="dlogwrap"><p class="mini" style="margin:8px 0 4px">${tlogo(def,14)} <b style="color:var(--txt)">${def}</b> vs ${slotchip(grp)} — game log ${cur} <span class="dim">· every ${grp} who faced this defense and what he did; the PPR column is what the slot produced that day</span></p>${defLogTable(def,grp,[cur],{hl})}
+   ${prior.length?`<details class="dlogprior"><summary class="mini">${prior.join(' + ')} game log vs ${grp} · ${defLogRows(def,grp,prior).length} games · expand</summary>${defLogTable(def,grp,prior,{hl})}</details>`:''}</div>`}
 const ALL_SE=[...new Set(J.logs.map(l=>l[LOG.season]))].sort();
 function statOf(c,l){if(c==='QB PY')return l[LOG.py];if(c==='P TD')return l[LOG.ptd];if(c==='QB RY')return l[LOG.ry];if(c==='QB P+R')return l[LOG.py]+l[LOG.ry];if(c==='QB TD')return l[LOG.rtd]+l[LOG.rectd];
   if(c==='RB R+R')return l[LOG.ry]+l[LOG.recy];if(/ RY$/.test(c))return l[LOG.ry];if(/Recep$/.test(c))return l[LOG.rec];if(/RecY$/.test(c))return l[LOG.recy];if(/ TD$/.test(c))return l[LOG.rtd]+l[LOG.rectd];return 0}
@@ -1242,8 +1261,12 @@ function ranks(){
   <div class="controls"><select id="rkSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
   <span class="mini">vs</span><select id="rkSrcB"><option value="">— compare with —</option>${srcs.map(s=>`<option>${s}</option>`).join('')}</select>
   <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed &middot; pick a second data set to see both rankings side by side with the shift (A − B; negative = softer in A) &middot; every header sorts</span></div>
-  <div id="rkTbl"></div>`;
-  let slot='QB',sortK='psi',sortA=true;
+  <div id="rkTbl"></div><div id="rkDrill"></div>`;
+  let slot='QB',sortK='psi',sortA=true,drillD=null;
+  function drill(){const el=$('#rkDrill');if(!drillD){el.innerHTML='';return}
+    const slots=slot==='ALL'?J.slots.filter(x=>x!=='D/ST'&&inP(posOf(x))):[slot];
+    el.innerHTML=`<div class="panel" style="border-left:3px solid ${vivid(drillD)}"><h3>${tlogo(drillD,20)} ${drillD} defense — game logs <span class="f">every game this defense played, by slot: the player who held the slot that week and his line · sortable · <span class="plink" id="rkDrillX" style="cursor:pointer;color:var(--acc)">close ✕</span></span></h3>
+      ${slots.map(g=>defLogBlock(drillD,g)).join('')}</div>`;sortableAll(el);logoize(el);$('#rkDrillX').onclick=()=>{drillD=null;drill()}}
   function render(){
     const src=$('#rkSrc').value,D=J.dvp[src];
     const defs=Object.keys(D).filter(inD);
@@ -1282,6 +1305,7 @@ function ranks(){
     document.querySelectorAll('#rkTbl th[data-k]').forEach(th=>th.onclick=()=>{
       sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k;render()});
   }
+  const render0=render;render=function(){render0();$('#rkTbl').querySelectorAll('tbody tr').forEach(tr=>{const t=tr.querySelector('td');if(!t)return;const d=t.textContent.trim().split(/\s+/).pop();tr.style.cursor='pointer';tr.title='click for the game logs';tr.onclick=e=>{if(e.target.closest('.pp'))return;drillD=drillD===d?null:d;drill();if(drillD)$('#rkDrill').scrollIntoView({behavior:'smooth',block:'start'})}});drill()};
   document.querySelectorAll('#rkTabs button').forEach(b=>b.onclick=()=>{
     document.querySelectorAll('#rkTabs button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');slot=b.dataset.s;sortK=slot==='ALL'?'psi':'psi';sortA=true;render()});
@@ -1297,7 +1321,7 @@ function matrix(){
     <select id="mSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
     <span class="mini">vs</span><select id="mSrcB"><option value="">— compare with —</option>${srcs.map(s=>`<option>${s}</option>`).join('')}</select>
     <span class="note">&Psi; per slot &middot; green wells attract fantasy points, red ridges repel &middot; pick a second data set for two matrices side by side (same defense order) &middot; click a cell for the defense's full fingerprint &middot; headers sort</span></div>
-    <div class="grid2" id="mGrid"><div id="matrixWrap"></div>
+    <div id="mGrid"><div id="matrixWrap"></div>
     <div class="panel" id="mDrill" hidden></div></div><div id="matrixWrapB" hidden></div>`;
   function render(){
     const src=$('#mSrc').value,D=J.dvp[src];const srcB=$('#mSrcB').value,DB=srcB&&J.dvp[srcB];
@@ -1799,7 +1823,7 @@ function home(){
   const movers=`<div class="panel" id="moverSlot"><h3>movers <span class="f">last 3 games vs season ${se} · primary stat for the slot</span></h3><table><thead><tr><th>def</th><th>slot</th><th>L3 vs season</th><th>weekly</th></tr></thead><tbody>
     ${mv.slice(0,14).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="${x.pct>0?'up':'dn'}">${x.pct>0?'&#9650;+':'&#9660;'}${x.pct.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>`;
   const dvpAll=dvpAllPanel(D,wk);
-  $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+kpis+slateBoard+standingsPanel()+'<div id="bbHomeSlot"></div><div class="grid2 hgl">'+leadersPanel()+movers+'</div>'+dvpAll+'<div id="briefSlot"></div></div><div data-sub="insights">'+`<div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
+  $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+kpis+slateBoard+standingsPanel()+'<div class="grid2 hgl">'+leadersPanel()+movers+'</div>'+dvpAll+'</div><div data-sub="insights">'+`<div class="panel"><h3>wk ${wk} board — best &amp; worst matchup per role</h3>
   <table class="fx"><colgroup><col style="width:58px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:150px"><col style="width:54px"><col style="width:60px"><col style="width:104px"><col style="width:104px"><col style="width:104px"><col style="width:104px"></colgroup><thead><tr><th>role</th><th style="color:var(--green)">target</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th>
   <th style="color:var(--red)">avoid</th><th>tm</th><th>opp</th><th colspan="4">def allows /gm (rk)</th></tr></thead><tbody>${board}</tbody></table></div>
   <div class="panel"><h3>field extremes — every slot <span class="f">(${J.blend})</span></h3>
@@ -1845,15 +1869,15 @@ window.playerPop=function(n){
       .filter(d2=>d2.psi!=null).sort((a2,b2)=>a2.psi-b2.psi);
     return `<p class="mini">all ${NT} defenses vs ${grp} — combined ${J.blend} &middot; his wk-${G.week} opponent outlined</p>
     <table><thead><tr><th>#</th><th>defense</th><th class="rk">&Psi;</th>${stats.map(c2=>`<th>${lbl(c2)} (rk)</th>`).join('')}</tr></thead><tbody>
-    ${defs.map((d2,i2)=>`<tr style="${d2.t2===opp?'outline:1px solid #4dd0e1;background:rgba(77,208,225,.08)':''}">
+    ${defs.map((d2,i2)=>`<tr class="dlrow" data-d="${d2.t2}" data-g="${grp}" title="click for this defense's game log vs ${grp}" style="cursor:pointer;${d2.t2===opp?'outline:1px solid #4dd0e1;background:rgba(77,208,225,.08)':''}">
       <td class="mini">${i2+1}</td><td>${tcell(d2.t2)}</td><td>${psi(d2.psi)}</td>
       ${d2.st.map(o3=>`<td>${(+o3.avg).toFixed(1)} ${badge(o3.rank)}</td>`).join('')}</tr>`).join('')}
-    </tbody></table>`})():'';
+    </tbody></table><p class="note">click any defense for its game-by-game log vs ${grp}: who played the slot against it and what he did</p>`})():'';
   const html=`<div class="modal" id="ppModal"><div class="modalbox">
    <button class="mclose" id="ppX">ESC &#10005;</button>
    <h3>${tlogo(team,20)} ${esc(n)} <span class="f">${team||'?'} ${slot?'&middot; ':''}${slot?slotchip((UNIVERSE.find(u2=>u2.player===n&&u2.team===team)||{}).dslot||slot):''} &middot; next: ${opp?oppcell(oppRaw):'—'} (wk ${G.week}, 26/27)${opp?' &middot; '+kickLbl(gameOf(team,G.week)):''}</span></h3>
    ${cbig(n)}
-   ${(()=>{const b=bday(n),bp=(J.conn&&J.conn.born||{})[n];const g=team?gameOf(team,G.week):null;const cn=g?connFor(G.week,g[GM.vis]+'@'+g[GM.home]).filter(r=>r[2]===n):[];
+   ${(()=>{const b=null,bp=(J.conn&&J.conn.born||{})[n];const g=team?gameOf(team,G.week):null;const cn=g?connFor(G.week,g[GM.vis]+'@'+g[GM.home]).filter(r=>r[2]===n):[];
      const rv=g?(c=>[...c.riv.filter(r=>r.A.concat(r.B).some(x=>x.p===n)).map(r=>ctag('rivalry')+' '+esc(r.name)),...c.alum.filter(a=>a.A.concat(a.B).some(x=>x.p===n)).map(a=>ctag('alumni')+' '+esc(a.school)+' vs '+(a.A.some(x=>x.p===n)?a.B:a.A).map(x=>esc(pshort(x.p))).join(', '))])(clashPair(g[GM.vis],g[GM.home])):[];
      if(!b&&!bp&&!cn.length&&!rv.length)return '';
      return `<p class="mini" style="margin:2px 0 6px">${bp?'born in <b style="color:var(--txt)">'+esc(bp)+'</b>':''}${b?`${bp?' &middot; ':''}${b.born} &middot; age <b style="color:var(--txt)">${b.age}</b>${b.days===0?' &middot; '+ctag('birthday',' TODAY'):b.days<=14?` &middot; birthday in ${b.days}d (turns ${b.turns})`:''}`:''}
@@ -1870,7 +1894,7 @@ window.playerPop=function(n){
      return `<p class="mini" style="margin-top:8px">wk ${BET.propsWeek} DraftKings lines &middot; line, where it opened, his average, how often he went over this line in his last 10 games, and ${opp||'the opponent'}'s rank allowing that stat</p>
      <table><thead><tr><th>market</th><th>line</th><th>open</th><th>move</th><th>his avg</th><th>L10 over</th><th>opp rank</th></tr></thead><tbody>${P.map(p=>`<tr><td style="text-align:left">${esc(p.market)}</td><td><b>${p.line}</b></td><td class="mini">${p.open??''}</td><td class="${p.move>0?'rise':p.move<0?'fall':'mini'}">${p.move?(p.move>0?'+':'')+p.move:''}</td><td>${p.own_avg??'—'}</td><td>${p.l10_over!=null&&p.l10_over!==''?(100*p.l10_over).toFixed(0)+'%':'—'}</td><td>${p.dvp_rank?badge(p.dvp_rank):'<span class="dim">—</span>'}</td></tr>`).join('')}</tbody></table>`})()}
    ${opp?`<p class="mini">history vs ${opp}</p>${vs.length?`<table><thead>${ghead}</thead><tbody>${vs.map(gr).join('')}</tbody></table>`:`<p class="note">no games vs ${opp} in 2024-25</p>`}
-   ${grp?`<p class="mini" style="margin-top:8px">what ${opp} allows to ${grp}s /gm (league rank)</p><p>${allowLine(opp,grp,J.dvp.combined)}</p>`:''}`:''}
+   ${grp?`<p class="mini" style="margin-top:8px">what ${opp} allows to ${grp}s /gm (league rank)</p><p>${allowLine(opp,grp,J.dvp.combined)}</p>${defLogBlock(opp,grp,n)}`:''}`:''}
    ${L.length?(()=>{const se3=Math.max(...L.map(l=>l[LOG.season]));const F=L.filter(l=>l[LOG.season]===se3);
    return `<p class="mini" style="margin-top:8px">full ${se3} game log (${F.length} games) &middot; ${se3>2024?'2024 in the deep dive':''}</p>
    <table><thead>${ghead}</thead><tbody>${F.map(gr).join('')}</tbody></table>`})():''}
@@ -1885,6 +1909,9 @@ window.playerPop=function(n){
     document.getElementById('ppV1').hidden=!a3;document.getElementById('ppV2').hidden=a3;};
    t1.onclick=()=>sw(true);t2.onclick=()=>sw(false);}
   document.getElementById('ppModal').onclick=e=>{if(e.target.id==='ppModal')e.target.remove()};
+  document.querySelectorAll('#ppV2 tr.dlrow').forEach(tr=>tr.onclick=e=>{if(e.target.closest('.pp'))return;const nx=tr.nextElementSibling;if(nx&&nx.classList.contains('dlx')){nx.remove();return}
+    tr.insertAdjacentHTML('afterend',`<tr class="dlx"><td colspan="${tr.children.length}" style="text-align:left">${defLogBlock(tr.dataset.d,tr.dataset.g,n)}</td></tr>`);sortableAll(tr.nextElementSibling);logoize(tr.nextElementSibling)});
+  sortableAll(document.getElementById('ppModal'));logoize(document.getElementById('ppModal'));
 };
 document.addEventListener('click',e=>{const t=e.target.closest('.pp');if(t&&t.dataset.p)playerPop(t.dataset.p)});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=document.getElementById('ppModal');if(m)m.remove()}});
@@ -1994,13 +2021,7 @@ function tdboard(){
    <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
    <div id="tdKpi"></div>
    <div class="hg2"><div class="panel" id="tdFields"></div><div class="panel" id="tdCands"></div></div>
-   <details class="panel" id="tdPlots"><summary class="mini">plots · TD phase space (every defense, air vs ground TDs) · the TD collider (field softness × his own TD rate) — click to expand</summary>
-   <div class="grid2" style="margin-top:10px">
-   <div><h3>TD phase space <span class="f">all ${NT} defenses by air vs ground TDs conceded &middot; &Sigma; contours = total TDs/gm</span></h3><canvas id="psCanvas" style="max-height:320px"></canvas></div>
-   <div><h3>TD collider <span class="f">x &rarr; softer TD field this week &middot; y &uarr; his own TD rate</span></h3><canvas id="tdCanvas" style="max-height:320px"></canvas></div>
-   </div></details>
    <div id="tdTbl"></div>`;
-  $('#tdPlots').ontoggle=()=>{if($('#tdPlots').open){try{psChart&&psChart.resize();tdChart&&tdChart.resize()}catch(e){}}};
   /* TD phase space: defense-level scatter of the TD rankings (static across weeks) */
   (function(){
     const acc={};
@@ -2021,7 +2042,7 @@ function tdboard(){
       ctx.beginPath();ctx.moveTo(x2.left,y3.getPixelForValue(YM2));ctx.lineTo(x2.right,y3.getPixelForValue(YM2));ctx.stroke();
       ctx.restore();}};
     if(psChart)psChart.destroy();
-    psChart=new Chart($('#psCanvas'),{type:'scatter',
+    psChart=$('#psCanvas')&&new Chart($('#psCanvas'),{type:'scatter',
       data:{datasets:[{data:ps,parsing:false,pointStyle:ps.map(p2=>logoPt(p2.t,19)),borderColor:'transparent'}]},
       options:{maintainAspectRatio:false,plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c2=>`${c2.raw.t}: ${c2.raw.x} air &middot; ${c2.raw.y} ground TD/gm — \u03a3 ${(c2.raw.x+c2.raw.y).toFixed(2)}`.replace(/&middot;/g,'·')}}},
@@ -2071,7 +2092,7 @@ function tdboard(){
       ctx.fillStyle='rgba(77,208,225,.75)';ctx.textAlign='right';
       ctx.fillText('OPEN FIELD, UNPROVEN',x2.right-8,y3.bottom-8);
       ctx.restore();}};
-    tdChart=new Chart($('#tdCanvas'),{type:'scatter',
+    tdChart=$('#tdCanvas')&&new Chart($('#tdCanvas'),{type:'scatter',
       data:{datasets:[{data:plot,parsing:false,pointStyle:plot.map(p2=>logoPt(p2.tm,17)),borderColor:'transparent'}]},
       options:{maintainAspectRatio:false,plugins:{legend:{display:false},
         tooltip:{callbacks:{label:c2=>`${c2.raw.t} (${c2.raw.g}) — TD field rank ${c2.raw.x} · ${c2.raw.y} TD/gm ${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)}`}}},
@@ -2381,21 +2402,35 @@ function waiverRows(wk){
     const ug=USG[u.ln||u.player]||{},ls=LASTSNP[u.player];const roleD=ls&&ug.snp!=null?ls.s-ug.snp:0;
     const nx3=mean(nx);const p=pr?pr.p:0;const score=.4*p+.6*nx3+Math.max(-2,Math.min(2,roleD*10));
     return {u,pr,nx,nx3,ug,ls,roleD,score}}).filter(r=>r.pr||r.nx3>0).sort((a,b)=>b.score-a.score)}
-function waiver(slot,full){const wk=G.week;const R=waiverRows(wk);const N=full?60:8;
+function waiver(slot,full,append){const wk=G.week;const R=waiverRows(wk);const N=full?60:8;
   const row=(r,i)=>{const u=r.u,inj=u.inj==='0'?' <span class="inj0">Q</span>':'';
     return `<tr><td class="mini">${i+1}</td><td class="pp plink" data-p="${esc(u.player)}" style="text-align:left">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td><td>${slotchip(u.dslot)}</td>${full?`<td>${ccell(u.player)}</td>`:''}
       <td>${oppcell(oppFor(u.team,wk))}</td><td title="${r.pr?esc(r.pr.tip):''}"><b>${r.pr?r.pr.p.toFixed(1):'—'}</b></td>
       <td class="mini">${r.nx.map((v,k)=>{const o=oppFor(u.team,wk+k+1);return o==='BYE'?'<span class="inj0">bye</span>':v.toFixed(1)}).join(' · ')}</td><td><b style="color:var(--cyan)">${r.score.toFixed(1)}</b></td>
       <td class="mini">${r.ug.snp!=null?(100*r.ug.snp).toFixed(0)+'%':'—'}${r.ls?` <span class="${r.roleD>=.08?'rise':r.roleD<=-.08?'fall':'dim'}" title="last game ${(100*r.ls.s).toFixed(0)}% snaps (wk ${r.ls.w})">→${(100*r.ls.s).toFixed(0)}%</span>`:''}</td>
       <td class="mini">${r.ug.tsh!=null?(100*r.ug.tsh).toFixed(0)+'%':'—'}</td></tr>`};
-  slot.innerHTML=`<div class="panel lineup"><h3>waiver radar — wk ${wk} <span class="f">players on no roster in the draft results with a real role (QB1s; skill players who start or play ≥25% of snaps), ranked = 0.4 × PROJ this week + 0.6 × avg PROJ next 3 wks + role trend (last-game snaps vs season) &middot; ${R.length} candidates${full?'':' &middot; set ROSTER → <a href="#" id="wvAll">free agents</a> for the full board (every tab narrows to FAs)'}</span></h3>
+  const _wh=`<div class="panel lineup"><h3>waiver radar — wk ${wk} <span class="f">players on no roster in the draft results with a real role (QB1s; skill players who start or play ≥25% of snaps), ranked = 0.4 × PROJ this week + 0.6 × avg PROJ next 3 wks + role trend (last-game snaps vs season) &middot; ${R.length} candidates${full?'':' &middot; set ROSTER → <a href="#" id="wvAll">free agents</a> for the full board (every tab narrows to FAs)'}</span></h3>
    <table class="fx lineupTbl"><thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th>${full?'<th>college</th>':''}<th>opp</th><th>PROJ</th><th title="projection for the next 3 weeks">next 3</th><th>score</th><th title="season snap share → last game">snp%</th><th>tgt%</th></tr></thead>
    <tbody>${R.slice(0,N).map(row).join('')}</tbody></table></div>`;
+  if(append)slot.insertAdjacentHTML('beforeend',_wh);else slot.innerHTML=_wh;
   const a=$('#wvAll');if(a)a.onclick=e=>{e.preventDefault();G.owner='__FA__';$('#gOwner').value='__FA__';apply()}}
 /* ---------- MY LINEUP: the selected roster's week, ranked by conviction ---------- */
 function lineup(){
   RR.push(render);
-  function render(){const slot=$('#lineupSlot');if(!slot)return;if(!IS_NFL){slot.innerHTML='';return}if(!G.owner||G.owner==='__FA__'){waiver(slot,G.owner==='__FA__');return}
+  function leagueBoard(){const wk=G.week,D=J.dvp.combined;const owners=[...new Set(Object.values(OWNER))].sort();if(!owners.length)return '';
+    const rows=owners.map(o=>{const mine=UNIVERSE.filter(u=>OWNER[u.player+'|'+u.team]===o);
+      const R=mine.map(u=>{const op=oppFor(u.team,wk),bye=op==='BYE',def=op&&!bye?op.replace('@',''):'';const pr=def&&u.inj!=='-1'?projection(u,wk):null;const psiV=def&&D[def]?D[def].comps[u.grp]:null;return {u,bye,def,pr,psiV,out:u.inj==='-1'}}).sort((a,b)=>(b.pr?b.pr.p:-1)-(a.pr?a.pr.p:-1));
+      const ok=r=>!r.bye&&!r.out&&r.pr;const start=[];[['QB',1],['RB',2],['WR',2],['TE',1]].forEach(([p,n])=>R.filter(r=>r.u.pos===p&&ok(r)).slice(0,n).forEach(r=>start.push(r)));
+      const flex=R.filter(r=>ok(r)&&['RB','WR','TE'].includes(r.u.pos)&&!start.includes(r))[0];if(flex)start.push(flex);
+      const tot=start.reduce((a,r)=>a+r.pr.p,0),lo=start.reduce((a,r)=>a+r.pr.floor,0),hi=start.reduce((a,r)=>a+r.pr.ceil,0);
+      const best=start.filter(r=>r.psiV!=null).sort((a,b)=>a.psiV-b.psiV)[0],worst=start.filter(r=>r.psiV!=null).sort((a,b)=>b.psiV-a.psiV)[0],top=start[0];
+      return {o,n:mine.length,tot,lo,hi,start:start.length,bye:R.filter(r=>r.bye).length,out:R.filter(r=>r.out).length,q:R.filter(r=>r.u.inj==='0').length,best,worst,top}}).sort((a,b)=>b.tot-a.tot);
+    return `<div class="panel"><h3>league board — wk ${wk} <span class="f">every roster's suggested lineup (1 QB · 2 RB · 2 WR · 1 TE · flex) by projected PPR · click a roster to open its lineup · pick "free agents" for the waiver radar</span></h3>
+      <table><thead><tr><th>#</th><th>roster</th><th>proj</th><th>range</th><th>starters</th><th>bye</th><th>out</th><th>Q</th><th>top projection</th><th style="color:var(--green)">softest matchup</th><th style="color:var(--red)">toughest matchup</th></tr></thead><tbody>
+      ${rows.map((r,i)=>`<tr class="own" data-o="${esc(r.o)}" style="cursor:pointer"><td class="mini">${i+1}</td><td><b>${esc(r.o)}</b> <span class="mini">${r.n}</span></td><td><b style="font-size:13px">${r.tot.toFixed(1)}</b></td><td class="mini">${r.lo.toFixed(0)}–${r.hi.toFixed(0)}</td><td class="mini">${r.start}/7</td><td class="${r.bye?'inj0':'mini'}">${r.bye||''}</td><td class="${r.out?'injm1':'mini'}">${r.out||''}</td><td class="mini">${r.q||''}</td>
+        <td>${r.top?`${pn(r.top.u.player,r.top.u.team)} <span class="mini">${r.top.pr.p.toFixed(1)}</span>`:''}</td><td>${r.best?`${pn(r.best.u.player,r.best.u.team)} <span class="mini">${r.best.u.grp} vs ${r.best.def}</span> ${psi(r.best.psiV)}`:''}</td><td>${r.worst?`${pn(r.worst.u.player,r.worst.u.team)} <span class="mini">${r.worst.u.grp} vs ${r.worst.def}</span> ${psi(r.worst.psiV)}`:''}</td></tr>`).join('')}</tbody></table></div>`}
+  function render(){const slot=$('#lineupSlot');if(!slot)return;if(!IS_NFL){slot.innerHTML='';return}if(G.owner==='__FA__'){waiver(slot,true);return}
+    if(!G.owner){slot.innerHTML=leagueBoard();waiver(slot,false,true);slot.querySelectorAll('tr.own').forEach(tr=>tr.onclick=e=>{if(e.target.closest('.pp'))return;const sel=$('#gOwner');if(sel){sel.value=tr.dataset.o;sel.dispatchEvent(new Event('change'))}else{G.owner=tr.dataset.o;apply()}});return}
     const wk=G.week,D=J.dvp.combined;
     const mine=UNIVERSE.filter(u=>OWNER[u.player+'|'+u.team]===G.owner);
     const rows=mine.map(u=>{const o=oppFor(u.team,wk),bye=o==='BYE',def=o&&!bye?o.replace('@',''):'';const g=def?gameOf(u.team,wk):null;
@@ -2689,12 +2724,12 @@ function _unused(){const seen=new Map();
   return [...seen.values()].map(x=>({...x,bd:bday(x.player)})).filter(x=>x.bd)}
 function bdGames(x){const md=x.bd.born.slice(5);return J.games26.filter(g=>(g[GM.vis]===x.team||g[GM.home]===x.team)&&g[GM.date].slice(5)===md)}
 function locker(){
-  $('#locker').innerHTML=`<div class="tabs" id="lkTabs"><button data-t="S" class="on">Storylines</button><button data-t="B">Birthdays</button><button data-t="R">Rivalries</button></div><div id="lkOut"></div>`;
+  $('#locker').innerHTML=`<div class="tabs" id="lkTabs"><button data-t="S" class="on">Storylines</button><button data-t="R">Rivalries</button></div><div id="lkOut"></div>`;
   let tab='S',bSort='days',bAsc=true;
   $('#lkTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#lkTabs').children].forEach(x=>x.classList.toggle('on',x===b));tab=b.dataset.t;render()};
   function stories(){const wk=G.week;const gs=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
     const tot=gs.map(g=>storyCount(g,wk));
-    const TAGS6=['rivalry','alumni','homecoming','college town','revenge','birthday'];
+    const TAGS6=['rivalry','alumni','homecoming','college town','revenge'];
     const cnt=gs.map(g=>{const sc=storyCount(g,wk);const m={rivalry:sc.riv,alumni:sc.alum};sc.cn.forEach(r=>{if(TAGS6.includes(r[5]))m[r[5]]=(m[r[5]]||0)+1});return {g,m,tot:TAGS6.reduce((a,t)=>a+(m[t]||0),0)}});
     const mxc=Math.max(1,...cnt.flatMap(x=>TAGS6.map(t=>x.m[t]||0)));
     const matrix=`<div class="panel"><h3>wk ${wk} thread matrix <span class="f">how many storylines each game carries, by kind · click a game to open its card</span></h3>
@@ -2742,7 +2777,7 @@ function locker(){
 function socialHome(){RR.push(()=>{const el=$('#socialSlot');if(!el)return;const wk=G.week;
   const gs=GAMES(wk).filter(g=>inF(g[GM.vis])||inF(g[GM.home]));
   const items=[];gs.forEach(g=>{const {c,cn}=storyCount(g,wk);c.key.forEach(r=>items.push({o:0,h:rivLine(r,g[GM.vis],g[GM.home])}));
-    cn.filter(r=>['birthday','homecoming','revenge'].includes(r[5])).forEach(r=>items.push({o:1+(CORD[r[5]]||0),h:connLine(r)}))});
+    cn.filter(r=>['homecoming','revenge'].includes(r[5])).forEach(r=>items.push({o:1+(CORD[r[5]]||0),h:connLine(r)}))});
   items.sort((a,b)=>a.o-b.o);
   const B=bdUniverse().filter(x=>x.bd.days<=14&&inF(x.team)).sort((a,b)=>a.bd.days-b.bd.days);
   el.innerHTML=`<div class="grid2"><div class="panel"><h3>wk ${wk} storylines <span class="f">rivalries · homecomings · revenge · birthday games &middot; full list on F10</span></h3>${items.slice(0,10).map(x=>x.h).join('')||'<p class="dim mini">none for this filter</p>'}${items.length>10?`<p class="mini">+${items.length-10} more on <a href="#" id="toLocker">F10 Locker Room</a></p>`:''}</div>
