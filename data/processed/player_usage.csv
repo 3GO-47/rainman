@@ -180,9 +180,9 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,1,Justin Jefferson,JeffJu00,MIN,NYG,WR1,WR,46.0,0.84,6,0.261,0,0.0,63.0,0.354,10.5,0.639
 2024,1,Jordan Addison,AddiJo00,MIN,NYG,WR2,WR,28.0,0.51,4,0.174,0,0.0,47.0,0.264,11.8,0.446
 2024,1,Josh Oliver,OlivJo00,MIN,NYG,TE2,TE,26.0,0.47,2,0.087,0,0.0,26.0,0.146,13.0,0.233
-2024,1,Jalen Nailor,NailJa00,MIN,NYG,WR4+,WR,26.0,0.47,1,0.043,0,0.0,21.0,0.118,21.0,0.147
+2024,1,Jalen Nailor,NailJa00,MIN,NYG,WR3,WR,26.0,0.47,1,0.043,0,0.0,21.0,0.118,21.0,0.147
 2024,1,Johnny Mundt,MundJo00,MIN,NYG,TE1,TE,29.0,0.53,3,0.13,0,0.0,13.0,0.073,4.3,0.246
-2024,1,C.J. Ham,HamxC.00,MIN,NYG,WR3,WR,19.0,0.35,2,0.087,0,0.0,5.0,0.028,2.5,0.15
+2024,1,C.J. Ham,HamxC.00,MIN,NYG,RB3,RB,19.0,0.35,2,0.087,0,0.0,5.0,0.028,2.5,0.15
 2024,1,Myles Gaskin,GaskMy00,MIN,NYG,RB3,RB,2.0,0.04,0,0.0,1,0.038,,,,0.0
 2024,1,Daniel Jones,JoneDa05,NYG,MIN,QB1,QB,71.0,1.0,0,0.0,6,0.286,,,,0.0
 2024,1,Devin Singletary,SingDe00,NYG,MIN,RB1,RB,50.0,0.7,5,0.132,10,0.476,-15.0,-0.083,-3.0,0.14
@@ -233,7 +233,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,1,Hayden Hurst,HursHa00,LAC,LV,TE1,TE,35.0,0.61,3,0.12,0,0.0,31.0,0.201,10.3,0.321
 2024,1,Josh Palmer,PalmJo00,LAC,LV,WR3,WR,46.0,0.81,4,0.16,0,0.0,39.0,0.253,9.8,0.417
 2024,1,Will Dissly,DissWi00,LAC,LV,TE2,TE,25.0,0.44,1,0.04,0,0.0,0.0,0.0,0.0,0.06
-2024,1,Scott Matlock,MatlSc00,LAC,LV,WR4+,WR,18.0,0.32,1,0.04,0,0.0,2.0,0.013,2.0,0.069
+2024,1,Scott Matlock,MatlSc00,LAC,LV,RB3,RB,18.0,0.32,1,0.04,0,0.0,2.0,0.013,2.0,0.069
 2024,1,Dak Prescott,PresDa01,DAL,CLE,QB1,QB,62.0,0.98,0,0.0,1,0.04,,,,0.0
 2024,1,Ezekiel Elliott,ElliEz00,DAL,CLE,RB1,RB,32.0,0.51,2,0.065,10,0.4,-4.0,-0.016,-2.0,0.086
 2024,1,Rico Dowdle,DowdRi01,DAL,CLE,RB2,RB,28.0,0.44,1,0.032,8,0.32,1.0,0.004,1.0,0.051
@@ -1171,7 +1171,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,4,Ladd McConkey,McCoLa00,LAC,KC,WR1,WR,43.0,0.77,7,0.259,0,0.0,45.0,0.233,6.4,0.552
 2024,4,Josh Palmer,PalmJo00,LAC,KC,WR3,WR,44.0,0.79,4,0.148,0,0.0,39.0,0.202,9.8,0.363
 2024,4,Will Dissly,DissWi00,LAC,KC,TE1,TE,20.0,0.36,3,0.111,0,0.0,2.0,0.01,0.7,0.174
-2024,4,Scott Matlock,MatlSc00,LAC,KC,WR4+,WR,18.0,0.32,1,0.037,0,0.0,2.0,0.01,2.0,0.062
+2024,4,Scott Matlock,MatlSc00,LAC,KC,RB3,RB,18.0,0.32,1,0.037,0,0.0,2.0,0.01,2.0,0.062
 2024,4,Hayden Hurst,HursHa00,LAC,KC,TE2,TE,35.0,0.63,3,0.111,0,0.0,6.0,0.031,2.0,0.188
 2024,4,Josh Allen,AlleJo02,BUF,BAL,QB1,QB,51.0,0.86,0,0.0,5,0.217,,,,0.0
 2024,4,Mitchell Trubisky,TrubMi00,BUF,BAL,QB2,QB,8.0,0.14,0,0.0,0,0.0,,,,0.0
@@ -2284,7 +2284,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,8,Josh Palmer,PalmJo00,LAC,NO,WR2,WR,51.0,0.77,4,0.133,0,0.0,78.0,0.339,19.5,0.437
 2024,8,Will Dissly,DissWi00,LAC,NO,TE1,TE,45.0,0.68,7,0.233,0,0.0,36.0,0.157,5.1,0.459
 2024,8,Jalen Reagor,ReagJa00,LAC,NO,WR4+,WR,20.0,0.3,2,0.067,0,0.0,18.0,0.078,9.0,0.155
-2024,8,Scott Matlock,MatlSc00,LAC,NO,WR4+,WR,27.0,0.41,1,0.033,0,0.0,3.0,0.013,3.0,0.059
+2024,8,Scott Matlock,MatlSc00,LAC,NO,RB3,RB,27.0,0.41,1,0.033,0,0.0,3.0,0.013,3.0,0.059
 2024,8,Simi Fehoko,FehoSi00,LAC,NO,WR3,WR,52.0,0.79,2,0.067,0,0.0,41.0,0.178,20.5,0.225
 2024,8,JK Scott,ScotJK00,LAC,NO,RB3,RB,0.0,0.0,0,0.0,1,0.034,,,,0.0
 2024,8,Eric Tomlinson,TomlEr01,LAC,NO,TE2,TE,25.0,0.38,1,0.033,0,0.0,7.0,0.03,7.0,0.07
@@ -3298,7 +3298,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,12,Justin Jefferson,JeffJu00,MIN,CHI,WR1,WR,70.0,0.99,5,0.156,0,0.0,63.0,0.238,12.6,0.401
 2024,12,Johnny Mundt,MundJo00,MIN,CHI,TE2,TE,33.0,0.46,1,0.031,0,0.0,3.0,0.011,3.0,0.054
 2024,12,Jalen Nailor,NailJa00,MIN,CHI,WR3,WR,28.0,0.39,2,0.062,0,0.0,16.0,0.06,8.0,0.135
-2024,12,C.J. Ham,HamxC.00,MIN,CHI,WR4+,WR,19.0,0.27,1,0.031,0,0.0,-5.0,-0.019,-5.0,0.033
+2024,12,C.J. Ham,HamxC.00,MIN,CHI,RB3,RB,19.0,0.27,1,0.031,0,0.0,-5.0,-0.019,-5.0,0.033
 2024,12,Caleb Williams,WillCa03,CHI,MIN,QB1,QB,76.0,1.0,0,0.0,6,0.273,,,,0.0
 2024,12,D.J. Moore,MoorD.00,CHI,MIN,WR1,WR,75.0,0.99,7,0.149,1,0.045,25.0,0.069,3.6,0.272
 2024,12,D'Andre Swift,SwifDA00,CHI,MIN,RB1,RB,42.0,0.55,4,0.085,13,0.591,16.0,0.044,4.0,0.158
@@ -3589,7 +3589,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,13,Quentin Johnston,JohnQu02,LAC,ATL,WR2,WR,31.0,0.67,4,0.167,0,0.0,23.0,0.139,5.8,0.348
 2024,13,Josh Palmer,PalmJo00,LAC,ATL,WR3,WR,29.0,0.63,1,0.042,0,0.0,11.0,0.066,11.0,0.109
 2024,13,Stone Smartt,SmarSt00,LAC,ATL,TE2,TE,7.0,0.15,2,0.083,0,0.0,10.0,0.06,5.0,0.166
-2024,13,Scott Matlock,MatlSc00,LAC,ATL,WR4+,WR,15.0,0.33,1,0.042,0,0.0,1.0,0.006,1.0,0.067
+2024,13,Scott Matlock,MatlSc00,LAC,ATL,RB3,RB,15.0,0.33,1,0.042,0,0.0,1.0,0.006,1.0,0.067
 2024,13,Tucker Fisk,FiskTu00,LAC,ATL,TE3,TE,20.0,0.43,1,0.042,0,0.0,-1.0,-0.006,-1.0,0.059
 2024,13,Will Dissly,DissWi00,LAC,ATL,TE1,TE,29.0,0.63,1,0.042,0,0.0,14.0,0.084,14.0,0.122
 2024,13,Hassan Haskins,HaskHa00,LAC,ATL,RB3,RB,7.0,0.15,0,0.0,1,0.059,,,,0.0
@@ -4401,7 +4401,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,16,Hassan Haskins,HaskHa00,LAC,DEN,RB3,RB,13.0,0.2,2,0.067,0,0.0,3.0,0.016,1.5,0.112
 2024,16,Stone Smartt,SmarSt00,LAC,DEN,TE1,TE,39.0,0.6,3,0.1,0,0.0,12.0,0.066,4.0,0.196
 2024,16,Quentin Johnston,JohnQu02,LAC,DEN,WR2,WR,44.0,0.68,6,0.2,0,0.0,24.0,0.132,4.0,0.392
-2024,16,Scott Matlock,MatlSc00,LAC,DEN,WR4+,WR,26.0,0.4,1,0.033,0,0.0,-1.0,-0.005,-1.0,0.046
+2024,16,Scott Matlock,MatlSc00,LAC,DEN,RB3,RB,26.0,0.4,1,0.033,0,0.0,-1.0,-0.005,-1.0,0.046
 2024,16,Tucker Fisk,FiskTu00,LAC,DEN,TE3,TE,28.0,0.43,1,0.033,0,0.0,4.0,0.022,4.0,0.065
 2024,16,Hayden Hurst,HursHa00,LAC,DEN,TE2,TE,8.0,0.12,1,0.033,0,0.0,5.0,0.027,5.0,0.068
 2024,16,Derius Davis,DaviDe02,LAC,DEN,WR4+,WR,8.0,0.12,2,0.067,1,0.036,13.0,0.071,6.5,0.15
@@ -4639,7 +4639,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,16,Justin Jefferson,JeffJu00,MIN,SEA,WR1,WR,64.0,0.97,13,0.371,0,0.0,155.0,0.578,11.9,0.961
 2024,16,Jordan Addison,AddiJo00,MIN,SEA,WR2,WR,59.0,0.89,8,0.229,0,0.0,56.0,0.209,7.0,0.49
 2024,16,T.J. Hockenson,HockTJ00,MIN,SEA,TE1,TE,46.0,0.7,5,0.143,0,0.0,45.0,0.168,9.0,0.332
-2024,16,C.J. Ham,HamxC.00,MIN,SEA,WR4+,WR,13.0,0.2,1,0.029,0,0.0,-2.0,-0.007,-2.0,0.039
+2024,16,C.J. Ham,HamxC.00,MIN,SEA,RB3,RB,13.0,0.2,1,0.029,0,0.0,-2.0,-0.007,-2.0,0.039
 2024,16,Jalen Nailor,NailJa00,MIN,SEA,WR3,WR,35.0,0.53,2,0.057,0,0.0,14.0,0.052,7.0,0.122
 2024,16,Josh Oliver,OlivJo00,MIN,SEA,TE2,TE,31.0,0.47,1,0.029,0,0.0,7.0,0.026,7.0,0.062
 2024,16,Geno Smith,SmitGe00,SEA,MIN,QB1,QB,64.0,1.0,0,0.0,1,0.067,,,,0.0
@@ -4896,7 +4896,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2024,17,Jalen Nailor,NailJa00,MIN,GB,WR3,WR,38.0,0.53,5,0.122,0,0.0,69.0,0.224,13.8,0.34
 2024,17,Jordan Addison,AddiJo00,MIN,GB,WR2,WR,65.0,0.9,8,0.195,0,0.0,107.0,0.347,13.4,0.535
 2024,17,T.J. Hockenson,HockTJ00,MIN,GB,TE1,TE,50.0,0.69,6,0.146,0,0.0,65.0,0.211,10.8,0.367
-2024,17,C.J. Ham,HamxC.00,MIN,GB,WR4+,WR,14.0,0.19,2,0.049,0,0.0,3.0,0.01,1.5,0.081
+2024,17,C.J. Ham,HamxC.00,MIN,GB,RB3,RB,14.0,0.19,2,0.049,0,0.0,3.0,0.01,1.5,0.081
 2024,17,Johnny Mundt,MundJo00,MIN,GB,TE2,TE,8.0,0.11,1,0.024,0,0.0,2.0,0.006,2.0,0.04
 2024,17,Aidan O'Connell,OConAi00,LV,NO,QB1,QB,77.0,1.0,0,0.0,3,0.079,,,,0.0
 2024,17,Ameer Abdullah,AbduAm00,LV,NO,RB2,RB,48.0,0.62,4,0.114,20,0.526,7.0,0.021,1.8,0.186
@@ -6407,7 +6407,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2025,4,Oronde Gadsden II,GadsOr01,LAC,NYG,TE1,TE,30.0,0.48,3,0.079,0,0.0,19.0,0.079,6.3,0.174
 2025,4,Ladd McConkey,McCoLa00,LAC,NYG,WR3,WR,58.0,0.92,6,0.158,0,0.0,57.0,0.238,9.5,0.404
 2025,4,Tyler Conklin,ConkTy00,LAC,NYG,TE2,TE,12.0,0.19,1,0.026,0,0.0,-4.0,-0.017,-4.0,0.027
-2025,4,Scott Matlock,MatlSc00,LAC,NYG,WR4+,WR,13.0,0.21,1,0.026,0,0.0,0.0,0.0,0.0,0.039
+2025,4,Scott Matlock,MatlSc00,LAC,NYG,RB2,RB,13.0,0.21,1,0.026,0,0.0,0.0,0.0,0.0,0.039
 2025,4,Tucker Fisk,FiskTu00,LAC,NYG,TE3,TE,13.0,0.21,1,0.026,0,0.0,4.0,0.017,4.0,0.051
 2025,4,Tre Harris,HarrTr03,LAC,NYG,WR4+,WR,12.0,0.19,1,0.026,0,0.0,-5.0,-0.021,-5.0,0.024
 2025,4,Jaxson Dart,DartJa00,NYG,LAC,QB2,QB,74.0,0.97,0,0.0,10,0.238,,,,0.0
@@ -7211,7 +7211,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2025,7,Jalen Nailor,NailJa00,MIN,PHI,WR3,WR,41.0,0.59,4,0.1,0,0.0,48.0,0.119,12.0,0.233
 2025,7,Adam Thielen,ThieAd00,MIN,PHI,WR4+,WR,8.0,0.12,2,0.05,0,0.0,12.0,0.03,6.0,0.096
 2025,7,Josh Oliver,OlivJo00,MIN,PHI,TE2,TE,32.0,0.46,1,0.025,0,0.0,3.0,0.007,3.0,0.042
-2025,7,C.J. Ham,HamxC.00,MIN,PHI,WR4+,WR,12.0,0.17,1,0.025,0,0.0,4.0,0.01,4.0,0.045
+2025,7,C.J. Ham,HamxC.00,MIN,PHI,RB3,RB,12.0,0.17,1,0.025,0,0.0,4.0,0.01,4.0,0.045
 2025,7,Bryce Young,YounBr01,CAR,NYJ,QB1,QB,49.0,0.69,0,0.0,2,0.056,,,,0.0
 2025,7,Andy Dalton,DaltAn00,CAR,NYJ,QB2,QB,22.0,0.31,0,0.0,2,0.056,,,,0.0
 2025,7,Rico Dowdle,DowdRi01,CAR,NYJ,RB1,RB,33.0,0.46,2,0.065,17,0.472,-7.0,-0.031,-3.5,0.076
@@ -7868,7 +7868,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2025,9,Keenan Allen,AlleKe00,LAC,TEN,WR1,WR,24.0,0.37,5,0.179,0,0.0,72.0,0.247,14.4,0.441
 2025,9,Tre Harris,HarrTr03,LAC,TEN,WR4+,WR,30.0,0.46,2,0.071,0,0.0,12.0,0.041,6.0,0.135
 2025,9,Tucker Fisk,FiskTu00,LAC,TEN,TE2,TE,31.0,0.48,1,0.036,0,0.0,0.0,0.0,0.0,0.054
-2025,9,Scott Matlock,MatlSc00,LAC,TEN,WR4+,WR,28.0,0.43,1,0.036,0,0.0,0.0,0.0,0.0,0.054
+2025,9,Scott Matlock,MatlSc00,LAC,TEN,RB3,RB,28.0,0.43,1,0.036,0,0.0,0.0,0.0,0.0,0.054
 2025,9,KeAndre Lambert-Smith,LambKe01,LAC,TEN,WR4+,WR,5.0,0.08,1,0.036,0,0.0,48.0,0.165,48.0,0.169
 2025,9,Cam Ward,WardCa00,TEN,LAC,QB1,QB,47.0,1.0,0,0.0,2,0.105,,,,0.0
 2025,9,Tony Pollard,PollTo00,TEN,LAC,RB1,RB,29.0,0.62,2,0.095,10,0.526,7.0,0.038,3.5,0.169
@@ -9533,7 +9533,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2025,15,Keenan Allen,AlleKe00,LAC,KC,WR1,WR,28.0,0.42,7,0.269,0,0.0,35.0,0.186,5.0,0.534
 2025,15,Ladd McConkey,McCoLa00,LAC,KC,WR2,WR,49.0,0.74,3,0.115,0,0.0,19.0,0.101,6.3,0.243
 2025,15,KeAndre Lambert-Smith,LambKe01,LAC,KC,WR4+,WR,21.0,0.32,1,0.038,0,0.0,16.0,0.085,16.0,0.116
-2025,15,Scott Matlock,MatlSc00,LAC,KC,WR4+,WR,36.0,0.55,2,0.077,0,0.0,0.0,0.0,0.0,0.115
+2025,15,Scott Matlock,MatlSc00,LAC,KC,RB3,RB,36.0,0.55,2,0.077,0,0.0,0.0,0.0,0.0,0.115
 2025,15,Trevor Penning,PennTr00,LAC,KC,WR4+,WR,31.0,0.47,1,0.038,0,0.0,,,,0.057
 2025,15,Patrick Mahomes,MahoPa00,KC,LAC,QB1,QB,56.0,0.92,0,0.0,2,0.095,,,,0.0
 2025,15,Gardner Minshew II,MinsGa00,KC,LAC,QB2,QB,5.0,0.08,0,0.0,0,0.0,,,,0.0
@@ -10513,7 +10513,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2025,18,Ty Chandler,ChanTy01,MIN,GB,RB3,RB,29.0,0.43,4,0.133,10,0.323,-20.0,-0.103,-5.0,0.127
 2025,18,Zavier Scott,ScotZa00,MIN,GB,RB2,RB,6.0,0.09,1,0.033,3,0.097,0.0,0.0,0.0,0.05
 2025,18,Justin Jefferson,JeffJu00,MIN,GB,WR1,WR,51.0,0.76,11,0.367,1,0.032,69.0,0.354,6.3,0.798
-2025,18,C.J. Ham,HamxC.00,MIN,GB,WR4+,WR,21.0,0.31,1,0.033,1,0.032,-2.0,-0.01,-2.0,0.042
+2025,18,C.J. Ham,HamxC.00,MIN,GB,RB3,RB,21.0,0.31,1,0.033,1,0.032,-2.0,-0.01,-2.0,0.042
 2025,18,Jalen Nailor,NailJa00,MIN,GB,WR3,WR,50.0,0.75,3,0.1,0,0.0,35.0,0.179,11.7,0.275
 2025,18,Josh Oliver,OlivJo00,MIN,GB,TE1,TE,31.0,0.46,2,0.067,0,0.0,6.0,0.031,3.0,0.122
 2025,18,Ben Sims,SimsBe00,MIN,GB,TE2,TE,23.0,0.34,4,0.133,0,0.0,66.0,0.338,16.5,0.436
@@ -11060,8 +11060,8 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2026,2,T.J. Hockenson,HockTJ00,MIN,CHI,TE1,TE,36.0,0.69,4,0.211,0,0.0,32.0,0.198,8.0,0.455
 2026,2,Josh Oliver,OlivJo00,MIN,CHI,TE2,TE,31.0,0.6,1,0.053,0,0.0,5.0,0.031,5.0,0.101
 2026,2,Jordan Addison,AddiJo00,MIN,CHI,WR2,WR,46.0,0.88,5,0.263,0,0.0,43.0,0.265,8.6,0.58
-2026,2,Demond Claiborne,ClaiDe00,MIN,CHI,WR3,WR,2.0,0.04,1,0.053,0,0.0,-7.0,-0.043,-7.0,0.049
-2026,2,Myles Price,PricMy00,MIN,CHI,WR4+,WR,26.0,0.5,1,0.053,0,0.0,2.0,0.012,2.0,0.088
+2026,2,Demond Claiborne,ClaiDe00,MIN,CHI,RB3,RB,2.0,0.04,1,0.053,0,0.0,-7.0,-0.043,-7.0,0.049
+2026,2,Myles Price,PricMy00,MIN,CHI,WR3,WR,26.0,0.5,1,0.053,0,0.0,2.0,0.012,2.0,0.088
 2026,2,Caleb Williams,WillCa03,CHI,MIN,QB1,QB,64.0,0.86,0,0.0,5,0.161,,,,0.0
 2026,2,Tyson Bagent,BageTy00,CHI,MIN,QB2,QB,10.0,0.14,0,0.0,0,0.0,,,,0.0
 2026,2,Kyle Monangai,MonaKy00,CHI,MIN,RB2,RB,25.0,0.34,2,0.067,10,0.323,1.0,0.006,0.5,0.105
@@ -11160,7 +11160,7 @@ season,week,player,player_id,team,opponent,slot,pos,snaps,snap_pct,targets,targe
 2026,2,Chris Olave,OlavCh00,NO,BAL,WR1,WR,57.0,0.84,10,0.312,0,0.0,104.0,0.542,10.4,0.847
 2026,2,Juwan Johnson,JohnJu02,NO,BAL,TE1,TE,36.0,0.53,4,0.125,0,0.0,11.0,0.057,2.8,0.227
 2026,2,Devaughn Vele,VeleDe00,NO,BAL,WR2,WR,65.0,0.96,7,0.219,0,0.0,69.0,0.359,9.9,0.58
-2026,2,Oscar Delp,DelpOs01,NO,BAL,WR4+,WR,9.0,0.13,1,0.031,0,0.0,7.0,0.036,7.0,0.072
+2026,2,Oscar Delp,DelpOs01,NO,BAL,TE2,TE,9.0,0.13,1,0.031,0,0.0,7.0,0.036,7.0,0.072
 2026,2,Bryce Lance,LancBr00,NO,BAL,WR3,WR,54.0,0.79,1,0.031,0,0.0,8.0,0.042,8.0,0.076
 2026,2,Kevin Austin,AustKe00,NO,BAL,WR4+,WR,5.0,0.07,1,0.031,0,0.0,6.0,0.031,6.0,0.068
 2026,2,Lamar Jackson,JackLa00,BAL,NO,QB1,QB,58.0,1.0,0,0.0,4,0.182,,,,0.0
