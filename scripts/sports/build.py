@@ -119,7 +119,7 @@ def load_slate(C):
     for line in open(files[-1], encoding='utf-8'):
         if not line.startswith('G|'): continue
         p = line.rstrip('\n').split('|')
-        if p[1] != C['slate_key']: continue
+        if p[1] != C['slate_key'] or p[22] == '1': continue      # preseason rows are ignored
         games.append(dict(eid=p[2], date=p[3], status=p[4], away=p[6], away_name=p[7], away_rec=p[8], away_logo=p[9], home=p[12], home_name=p[13], home_rec=p[14], home_logo=p[15],
                           venue=p[17], tv=p[18], odds=p[19], ou=p[20], neutral=p[23] == '1', note=p[25] if len(p) > 25 else ''))
     return games
@@ -265,11 +265,11 @@ def build(lg):
         games.append(dict(eid=r.gid, date=g.get('date', r.dt), day=r.date, away=r.away, home=r.home, venue=g.get('venue') or r.venue, tv=g.get('tv') or r.tv, odds=g.get('odds', ''), ou=g.get('ou', ''),
                           away_rec=g.get('away_rec', ''), home_rec=g.get('home_rec', ''), neutral=g.get('neutral', False), note=g.get('note', ''), stype=r.stype))
     seen = {(g['away'], g['home'], g['day']) for g in games}
-    for g in slate:                                   # slate games the schedule parquet doesn't carry yet (preseason, late adds)
+    for g in slate:                                   # slate games the schedule parquet doesn't carry yet (late adds; preseason is filtered out of the slate)
         d = g['date'][:10]
         if (g['away'], g['home'], d) in seen or d < str(TODAY.date()): continue
         games.append(dict(eid=g['eid'], date=g['date'], day=d, away=g['away'], home=g['home'], venue=g['venue'], tv=g['tv'], odds=g['odds'], ou=g['ou'], away_rec=g['away_rec'], home_rec=g['home_rec'],
-                          neutral=g['neutral'], note=g['note'], stype='pre'))
+                          neutral=g['neutral'], note=g['note'], stype='reg'))
     games.sort(key=lambda g: g['date'])
     games = game_model(games, R, C)
     PK, n_new = picks(lg, C, games, S)
