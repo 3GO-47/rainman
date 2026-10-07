@@ -229,6 +229,16 @@ round, NBA China game …). NFL and CFB open the full model; NBA, NCAAB, WNBA, M
 Bundesliga, Serie A, Ligue 1) open a schedule shell on the same framework with the pipeline status board. Everything comes
 from `data/raw/slate_all_<date>.txt` (ESPN scoreboard, see notes/scrape_recipe.md) via `scripts/build_landing.py`.
 
+**Layer 1 — the sportsdataverse leagues (`nba.html`, `nhl.html`, `wnba.html`)**: built by `scripts/sports/build.py` from
+the sportsdataverse GitHub release parquets (`scripts/sports/fetch_sdv.py`, daily, no browser): player box scores for the
+last two seasons + the current one, schedules and team box scores. Same five tabs on `scripts/sport_template.html`:
+Home (slate with DK lines + the model, softest matchups per market, defensive field, team ratings), Matchups (cards:
+both rotations vs the opposing defense with per-market ranks and projections; Big Board), Players (Matchup Lab with
+season / prior / last-10 beside the opponent's rank; Player Explorer game logs), Intel (defense-vs-slot rankings with a
+compare mode; ratings), Picks (game lines vs the model; frozen, graded ML / spread / total ledger). Slots: G/F/C for
+basketball, C/W/D/G for hockey (goalies carry saves / goals-against / shots-against markets). Defense-vs-slot = per game,
+the sum of the opposing players at that slot; combined = last season + this season weighted up as games accumulate.
+
 **Layer 1 — `rainman.html` (NFL) and `ncaa.html` (CFB)**: five major tabs (F1–F5), each with minor tabs:
 - **Home** — Overview (KPIs · slate ribbon of game tiles with implied team totals, DK and Kalshi lines, tilt, env rank and
   the game's narrative chip · market board · DvP field · movers) · Insights (storylines of the week, best/worst per role,
@@ -246,6 +256,9 @@ from `data/raw/slate_all_<date>.txt` (ESPN scoreboard, see notes/scrape_recipe.m
 - **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-07 — **other sports.** NBA, NHL and WNBA go live on the same framework: sportsdataverse parquets (GitHub) →
+  `scripts/sports/build.py` → `nba.html`, `nhl.html`, `wnba.html` with DvP by slot, projections, ratings, game-line picks
+  and a daily loop; Layer 0 marks them LIVE and shows their softest matchups.
 - 2026-10-07 — **v5: Layer 0 + five-tab Layer 1.** Multi-sport landing (`index.html`, 13 leagues, 291 games) with
   sport shells; navigation collapsed from eleven tabs to Home / Matchups / Players / Intel / Picks; the Matchups grid
   (every game at once); the depth-chart field (full units from nflverse: OL, 4-3 / 3-4 fronts, special teams, bios);
