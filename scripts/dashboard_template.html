@@ -3183,7 +3183,7 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
   $('#board').innerHTML=`<div class="tabs" id="bbTabs">${POS.map((p,i)=>`<button data-p="${p}" class="${i===0?'on':''}">${p==='ALL'?p:posIcon(p,12)+' '+p}</button>`).join('')}</div>
    <div class="controls"><select id="bbDepth"><option value="1" selected>starters</option><option value="">every depth-chart player</option></select><input id="bbQ" placeholder="search player / team..." size="20"><button id="bbCsv" class="mclose" style="position:static">&#8681; csv</button>
    <span class="tabs" id="bbView"><button data-v="both" class="on">map + table</button><button data-v="table">table</button></span>
-   <span class="note">matchup rankings for the week: the colored number in each market cell is the opponent's rank allowing that stat to his slot (1 = allows the most, green; 32 = stingiest, red) · the bold number is the model's median projection, the band its 10th–90th percentile · <b>MATCH</b> = mean rank across his markets (lower = softer week) · the map floats every starter by matchup (left = soft) and projected yards (up = more), bubble size = volume · click headers to sort, names or bubbles for cards</span></div>
+   <span class="note">matchup rankings for the week: the colored number in each market cell is the opponent's rank allowing that stat to his slot (1 = allows the most, green; 32 = stingiest, red) · the bold number is the model's median projection, the band its 10th–90th percentile · <b>MATCH</b> = mean rank across his markets (lower = softer week) · the map places every starter by matchup (left = soft) and projected yards (up = more), bubble size = volume · click headers to sort, names or bubbles for cards</span></div>
    <div id="bbKpi"></div><div id="bbMap"></div><div id="bbTbl"></div>`;
   let pos='ALL',sortK='match',sortA=true,lastRows=[],view='both';
   $('#bbTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#bbTabs').children].forEach(x=>x.classList.toggle('on',x===b));pos=b.dataset.p;render()};
@@ -3201,7 +3201,7 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
         return {u,pj,lam,pts:dkpts(pj,lam),o:oppFor(u.team,G.week),rk,match,yds,vol}}).filter(Boolean)}
   /* ---- the matchup map: a small force simulation — every bubble is pulled toward (matchup, yards), bubbles repel so nothing hides ---- */
   let SIM=null;
-  function drawMap(R){const el=$('#bbMap');if(view!=='both'){el.innerHTML='';if(SIM)cancelAnimationFrame(SIM.raf);SIM=null;return}
+  function drawMap(R){const el=$('#bbMap');if(view!=='both'){el.innerHTML='';SIM=null;return}
     const rows=R.filter(r=>r.match!=null&&r.yds>0).slice(0,160);if(!rows.length){el.innerHTML='';return}
     const W=el.clientWidth||1200,H=380,PAD=46;const ymax=Math.max(...rows.map(r=>r.yds))*1.08,vmax=Math.max(...rows.map(r=>r.vol));
     el.innerHTML=`<div class="bbmap" style="height:${H}px"><div class="bbaxis x"><span>soft matchup (rank 1)</span><span>mean rank across his markets</span><span>stingy (rank 32)</span></div><div class="bbaxis y">projected yards, percentile within his position ▲</div>${[1,8,16,24,32].map(v=>`<i class="bbgrid" style="left:${(PAD+(v-1)/31*(W-2*PAD)).toFixed(0)}px"><b>${v}</b></i>`).join('')}</div>`;
@@ -3209,12 +3209,12 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
       n.innerHTML=`${tlogo(r.u.team,Math.max(12,d*.55))}<span>${esc(r.u.player.split(' ').slice(-1)[0])}</span>`;n.title=`${r.u.player} · ${r.u.team} ${r.u.slot} ${r.o[0]==='@'?'@':'vs'} ${r.o.replace('@','')} · MATCH ${r.match.toFixed(1)} · ${r.yds.toFixed(0)} proj yds · ${Object.entries(r.rk).map(([k,v])=>`${(MKT_BY[k]||{label:k}).label} #${v.rank}`).join(' · ')}`;
       n.onclick=()=>playerPop(r.u.player);box.appendChild(n);
       return {r,n,d,tx:PAD+(r.match-1)/31*(W-2*PAD),ty:H-PAD-(r.ypct??.5)*(H-2*PAD),x:W/2+(Math.random()-.5)*200,y:H/2+(Math.random()-.5)*100,vx:0,vy:0}});
-    if(SIM)cancelAnimationFrame(SIM.raf);SIM={raf:0,t:performance.now(),nodes};
-    const step=now=>{const dt=Math.min(.05,(now-SIM.t)/1000);SIM.t=now;let moving=0;
-      for(const a of nodes){a.vx+=(a.tx-a.x)*6*dt;a.vy+=(a.ty-a.y)*6*dt}
-      for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y,dist=Math.hypot(dx,dy)||.01,min=(a.d+b.d)/2+2;if(dist<min){const f=(min-dist)*9*dt;dx/=dist;dy/=dist;a.vx-=dx*f;a.vy-=dy*f;b.vx+=dx*f;b.vy+=dy*f}}
-      for(const a of nodes){a.vx*=Math.pow(.05,dt);a.vy*=Math.pow(.05,dt);a.x+=a.vx*dt*60;a.y+=a.vy*dt*60;a.x=Math.max(a.d/2,Math.min(W-a.d/2,a.x));a.y=Math.max(a.d/2,Math.min(H-a.d/2,a.y));moving+=Math.abs(a.vx)+Math.abs(a.vy);a.n.style.transform=`translate(${(a.x-a.d/2).toFixed(1)}px,${(a.y-a.d/2).toFixed(1)}px)`}
-      if(moving>.5||now-SIM.t0<1500)SIM.raf=requestAnimationFrame(step)};SIM.t0=performance.now();SIM.raf=requestAnimationFrame(step)}
+    // static layout: relax the collisions synchronously, then place — nothing moves on screen
+    nodes.forEach(a=>{a.x=a.tx;a.y=a.ty});
+    for(let it=0;it<240;it++){for(const a of nodes){a.x+=(a.tx-a.x)*.08;a.y+=(a.ty-a.y)*.08}
+      for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y,dist=Math.hypot(dx,dy)||.01,min=(a.d+b.d)/2+2;if(dist<min){const f=(min-dist)/2;dx/=dist;dy/=dist;a.x-=dx*f;a.y-=dy*f;b.x+=dx*f;b.y+=dy*f}}
+      for(const a of nodes){a.x=Math.max(a.d/2,Math.min(W-a.d/2,a.x));a.y=Math.max(a.d/2,Math.min(H-a.d/2,a.y))}}
+    for(const a of nodes)a.n.style.transform=`translate(${(a.x-a.d/2).toFixed(1)}px,${(a.y-a.d/2).toFixed(1)}px)`;SIM={nodes}}
   function render(){let R=rows();const V={pts:r=>r.pts,player:r=>r.u.player,team:r=>r.u.team,td:r=>r.lam??-1,match:r=>r.match??99,yds:r=>r.yds};COLS.forEach(([k])=>V[k]=r=>r.pj[k]?r.pj[k].proj:-1);
     R.sort((a,b)=>{const x=(V[sortK]||V.pts)(a),y=(V[sortK]||V.pts)(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)||(b.yds-a.yds)});lastRows=R;
     // map y = his projected yards as a percentile within his position (so QBs don't push everyone else to the floor)
