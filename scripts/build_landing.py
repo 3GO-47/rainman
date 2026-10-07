@@ -13,11 +13,11 @@ NCAA_LOGO = 'https://upload.wikimedia.org/wikipedia/commons/d/dd/NCAA_logo.svg'
 LEAGUES = [  # key, label, sport group, page, status, logo (real league marks: ESPN CDN dark variants; NCAA mark for the college sports)
     ('nfl', 'NFL', 'football', 'rainman.html', 'live', CDN + 'teamlogos/leagues/500-dark/nfl.png'),
     ('cfb', 'College Football', 'football', 'ncaa.html', 'live', NCAA_LOGO),
-    ('nba', 'NBA', 'basketball', 'nba.html', 'shell', CDN + 'teamlogos/leagues/500-dark/nba.png'),
+    ('nba', 'NBA', 'basketball', 'nba.html', 'live', CDN + 'teamlogos/leagues/500-dark/nba.png'),
     ('ncaab', 'College Basketball', 'basketball', 'ncaab.html', 'shell', NCAA_LOGO),
-    ('wnba', 'WNBA', 'basketball', 'wnba.html', 'shell', CDN + 'teamlogos/leagues/500-dark/wnba.png'),
+    ('wnba', 'WNBA', 'basketball', 'wnba.html', 'live', CDN + 'teamlogos/leagues/500-dark/wnba.png'),
     ('mlb', 'MLB', 'baseball', 'mlb.html', 'shell', CDN + 'teamlogos/leagues/500-dark/mlb.png'),
-    ('nhl', 'NHL', 'hockey', 'nhl.html', 'shell', CDN + 'teamlogos/leagues/500-dark/nhl.png'),
+    ('nhl', 'NHL', 'hockey', 'nhl.html', 'live', CDN + 'teamlogos/leagues/500-dark/nhl.png'),
     ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png')]
 SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'laliga': 'La Liga', 'bund': 'Bundesliga', 'seriea': 'Serie A', 'ligue1': 'Ligue 1'}
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
@@ -42,6 +42,20 @@ def nfl_teaser():
         R.sort(key=lambda r: -float(r['matchup_x']))
         out[mk] = [dict(player=r['player'], team=r['team'], opp=r['opp'], slot=r['slot'], proj=round(float(r['proj']), 1), base=round(float(r['base']), 1), mx=round(float(r['matchup_x']), 2)) for r in R[:3]]
     return dict(week=wk, markets=out)
+
+def sport_teaser(lg, labels):
+    """Softest matchups per market for the sportsdataverse leagues (scripts/sports/build.py projections.csv)."""
+    f = f'data/sports/{lg}/processed/projections.csv'
+    if not os.path.exists(f): return None
+    import csv
+    rows = [r for r in csv.DictReader(open(f, encoding='utf-8')) if r['market'] in labels and r['opp_rank']]
+    if not rows: return None
+    out = {}
+    for mk in labels:
+        R = [r for r in rows if r['market'] == mk and float(r['base'] or 0) > 0]
+        R.sort(key=lambda r: -float(r['base'])); R = R[:40]; R.sort(key=lambda r: -(float(r['base']) * float(r['ratio'])))
+        out[mk] = [dict(player=r['player'], team=r['team'], opp=r['opp'], proj=round(float(r['proj']), 1), base=round(float(r['base']), 1), mx=round(float(r['ratio']), 2), rank=int(float(r['opp_rank']))) for r in R[:3]]
+    return dict(week='', markets={k: v for k, v in out.items() if v})
 
 def load_slate():
     files = sorted(glob.glob('data/raw/slate_all_*.txt'))
@@ -131,7 +145,7 @@ table.lb{width:100%;border-collapse:collapse;font-size:12px}.lb th{font-family:v
 """
 
 JS = r"""
-const G=J.games,LG=J.leagues,SUB=J.soccer,SUBLOGO=J.soccerLogo,TZD='America/Chicago',SHELL=!!J.shell;const MKL={pass_yds:'Pass yds',pass_td:'Pass TD',rush_yds:'Rush yds',rush_att:'Rush att',receptions:'Receptions',rec_yds:'Rec yds'};
+const G=J.games,LG=J.leagues,SUB=J.soccer,SUBLOGO=J.soccerLogo,TZD='America/Chicago',SHELL=!!J.shell;const MKL={pass_yds:'Pass yds',pass_td:'Pass TD',rush_yds:'Rush yds',rush_att:'Rush att',receptions:'Receptions',rec_yds:'Rec yds',pts:'Points',reb:'Rebounds',ast:'Assists',tpm:'3-pointers',pra:'P+R+A',sog:'Shots on goal',p:'Points',g:'Goals',a:'Assists',sv:'Saves'};
 const logo=p=>p?'https://a.espncdn.com/i/teamlogos/'+p:'';
 const fmtT=d=>new Date(d).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:TZD}).replace(':00','');
 const dayKey=d=>new Date(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:TZD});
@@ -198,7 +212,7 @@ function render(){const l=LGBY[SEL];let all=(byLg[SEL]||[]).slice().sort((a,b)=>
     <div><div class="k">biggest favorite</div><div class="v">${wide?lineTxt(wide.g):'—'}</div><div class="s">${wide?`${wide.g.away.abbr} @ ${wide.g.home.abbr}`:''}</div></div>
     <div><div class="k">model</div><div class="v" style="color:${l.status==='live'?'var(--acc)':'var(--dim)'}">${l.status==='live'?'LIVE':'SCHEDULE'}</div><div class="s">${l.status==='live'?'game logs · DvP · projections · markets · picks':'logs, DvP, projections follow the NFL framework'}</div></div></div></div>`;
   const mq=document.getElementById('marquee');if(mq)mq.innerHTML=marquee(all);
-  const te=document.getElementById('teaser');if(te){const N=J.nfl;te.innerHTML=(SEL==='nfl'&&N)?`<h2>softest matchups · wk ${N.week} <span>from the NFL model — the opponent's stat-specific defense vs the player's slot, among the 40 highest-volume starters in each market · full board on the NFL dashboard</span></h2>
+  const te=document.getElementById('teaser');if(te){const N=J.teasers&&J.teasers[SEL];te.innerHTML=N?`<h2>softest matchups${N.week?' · wk '+N.week:' · next game'} <span>from the ${LGBY[SEL].label} model — the opponent's stat-specific defense vs the player's slot, among the 40 highest-volume players in each market · full board on the dashboard</span></h2>
     <div class="tz">${Object.entries(N.markets).map(([mk,L])=>`<div class="tzc"><div class="k">${MKL[mk]||mk}</div>${L.map((p,i)=>`<div class="tzr"><span class="mono">${i+1}</span><span class="nm">${(n=>{const q=n.split(' ');return q.length>1?q[0][0]+'. '+q.slice(1).join(' '):n})(p.player)}</span><span class="mono dim">${p.team} ${p.opp[0]==='@'?'@':'vs'} ${p.opp.replace('@','')}</span><span class="mono"><b>${p.proj}</b> <small class="dim">×${p.mx.toFixed(2)}</small></span></div>`).join('')}</div>`).join('')}</div>`:''}
   const sr=document.getElementById('subrail');if(sr){sr.innerHTML=subs.length?`<div class="sub ${SUBSEL?'':'on'}" data-s=""><small>all leagues</small></div>`+subs.map(s=>`<div class="sub ${SUBSEL===s?'on':''}" data-s="${s}"><img src="${SUBLOGO[s]}" alt="">${SUB[s]||s}<small>${(byLg.soccer||[]).filter(g=>g.lg===s).length}</small></div>`).join(''):'';
     sr.querySelectorAll('.sub').forEach(c=>c.onclick=()=>{SUBSEL=c.dataset.s;render()})}
@@ -220,7 +234,10 @@ HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href=
 
 def page(games, pulled):
     leagues = [dict(key=k, label=l, group=g, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES]
-    J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, coming=COMING, pulled=pulled, nfl=nfl_teaser())
+    teasers = {'nfl': nfl_teaser(), 'nba': sport_teaser('nba', {'pts': 'Points', 'reb': 'Rebounds', 'ast': 'Assists', 'tpm': '3-pointers', 'pra': 'P+R+A'}),
+               'wnba': sport_teaser('wnba', {'pts': 'Points', 'reb': 'Rebounds', 'ast': 'Assists', 'tpm': '3-pointers', 'pra': 'P+R+A'}),
+               'nhl': sport_teaser('nhl', {'sog': 'Shots on goal', 'p': 'Points', 'g': 'Goals', 'a': 'Assists', 'sv': 'Saves'})}
+    J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, coming=COMING, pulled=pulled, teasers=teasers)
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES if s == 'live')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · every sport, this week</title>

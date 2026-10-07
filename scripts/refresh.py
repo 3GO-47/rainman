@@ -84,6 +84,11 @@ def main():
     run(['scripts/build_narratives.py'])
     run(['scripts/build_dashboard.py'])
     run(['scripts/build_dashboard_v2.py'])
+    # other sports (NBA / NHL / WNBA): sportsdataverse parquets from GitHub, then the generic Layer-1 builder
+    if '--no-sports' not in sys.argv:
+        r = subprocess.run([sys.executable, 'scripts/sports/fetch_sdv.py'])
+        if r.returncode: print('!! fetch_sdv failed — building the other sports from the cached parquets')
+        run(['scripts/sports/build.py'])
     if glob.glob('data/raw/slate_all_*.txt'):
         run(['scripts/build_landing.py'])
 
