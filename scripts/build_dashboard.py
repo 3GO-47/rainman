@@ -336,6 +336,8 @@ def main():
     data['depth'] = list(csv.DictReader(open(dcp, encoding='utf-8')))
     data['depthDate'] = dcp.split('_')[-1][:10]
     data['ph'] = headshots(logs, data['depth']) if LEAGUE == 'nfl' else ncaa_headshots()
+    data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
+                   'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}
     data['league'] = league_config()
 
     def np_default(o):

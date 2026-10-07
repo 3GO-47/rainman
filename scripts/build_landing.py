@@ -66,6 +66,7 @@ def load_slate():
         if not line.startswith('G|'): continue
         p = line.rstrip('\n').split('|')
         if len(p) < 26: continue
+        if p[22] == '1': continue            # preseason is ignored everywhere (Josh, 2026-10-07)
         lg = p[1]
         games.append(dict(lg=lg, sport='soccer' if lg in SOCCER else lg, sub=SOCCER.get(lg, ''), id=p[2], date=p[3], status=p[4],
                           away=dict(id=p[5], abbr=p[6], name=p[7], rec=p[8], logo=p[9], rank=p[10] if p[10] not in ('', '99') else ''),
