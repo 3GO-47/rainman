@@ -402,3 +402,10 @@
 - Sport pages (NBA/NHL/WNBA): standings & ratings table sorted by record (+ win%, ±/g), season leaders per market (min 3 games).
 - Every table on every view is sortable (59/59 NFL, 47/47 NCAA checked); fixed a latent crash in Matchups cards (lbl(null) on padded stat columns).
 - Not deployed by web upload (usage): committed locally + synced to the PC; `git push` from the PC publishes.
+
+### (n8) full-dash cull + defense game logs — 2026-10-07
+- Removed: Home market board and intel brief (Intel tab keeps that content), Locker Room Birthdays tab + birthday threads, popup birthday line, TD Board "phase space / collider" plots. Matrix table now full width (drill opens beside it).
+- Fantasy default (no roster picked) = league board: every roster's suggested lineup total, range, byes/outs, top projection, softest / toughest matchup; waiver radar below. Click a roster → its lineup.
+- Defense game logs: `defLogBlock(def, slot)` from J.logs (who held the slot vs that defense each week + his line + PPR, per-game averages, prior seasons collapsed).
+  Player popup: the opponent's log vs his slot under "what X allows"; in the DvP-rankings tab every defense row expands to its log. Defenses tab: click any defense → its logs for the selected slot (or every slot in ALL).
+- Every table still sortable (55/55 NFL, 43/43 NCAA, popup tables included).
