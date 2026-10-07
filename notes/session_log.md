@@ -417,3 +417,10 @@
 4. Depth charts: field drawing removed; clean lists — offense QB/RB/WR1-3/TE depth 1-4 (college logo, Q/OUT, trend, snap %, opp/g), defense LB/CB/S starters + next up from nflverse units (no OL/DL); game picker, two teams side by side.
 5. Insights: all tables replaced by visuals — per-role bar charts (five softest / five hardest fields), defense extremes dumbbells per slot on a league-average scale, rest-of-season schedule heat strip with slot chips, volatility bars + waveforms.
 6. Fantasy → DFS (DraftKings Classic): frozen optimal lineup per slate (value per $1k when salaries exist), stacks + bring-backs, top plays per roster spot (usage-filtered), DK scoring note; league-roster filter hidden.
+
+### (n10) public-facing clean-up — 2026-10-07
+- Every view opens with a plain-English intro box (what it shows + how-to-read chips); long panel subtitles and footnotes fold into ⓘ hovers. Filter bar untouched.
+- Removed redundant views: Matchup Lab (Big Board + Explorer cover it), Matrix (Home's all-32 grid + Defenses cover it). TD Board tiles dropped (table has them). Insights schedule heat strip dropped (Schedule tab is that).
+- Player Explorer landing = compact directory (PPR/g, L5, snap%, tgt%, form sparkline) — no more stat dump.
+- College home: the slate is 8 marquee tiles (closest spreads, highest totals, power conferences) + one sortable table of all 58 games instead of 58 tiles; standings by conference (FBS, no NFL divisions); Matchups jump becomes a select when >16 games.
+- Views: NFL 18 → Home (Overview·Insights·DFS) · Matchups (Big Board·Matchups·TD Board) · Players (Explorer·Depth) · Intel (Intel·Locker Room·Defenses·Observatory·Schedule) · Picks (Picks·Markets).
