@@ -221,6 +221,11 @@ Everything is client-side in `dashboard_template.html` (`projection()`), so the 
   (team / promoted / rookie).
 - **Player usage** = game_logs ⋈ nflverse snap counts on PFR id; target/rush/air-yard shares from pbp per game.
 
+## Running it without Claude
+`scripts/local/loop.py` is the whole weekly/daily loop as a plain Python job for Windows Task Scheduler: ESPN / PFR /
+nflverse / sportsdataverse / Kalshi pulls over HTTP, season-gated per league (preseason ignored), rebuild, commit, push if a
+credential helper exists. Setup: `scripts/local/install.ps1`; details: `notes/local_loop.md`.
+
 ## Layers (2026-10-07)
 **Layer 0 — `dashboard/index.html`** (the site root): every sport as a selectable bubble (a small physics field — bubbles
 sized by games this week, spring + collision), with the next seven days of games per sport underneath: logos, records, AP
