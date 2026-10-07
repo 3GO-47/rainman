@@ -351,3 +351,10 @@
   force-simulated matchup map; home Overview: slate tile ribbon full width above the market board; Insights: storylines
   panel; TD cards: Kalshi price. build_dashboard payload: units/unitCols/narr. Pages workflow copies dashboard/*.html.
 - Tested: Playwright tour of every view (NFL + NCAA, 1500 and 390) — no page errors; the new views verified by screenshot.
+- (n2) Josh's follow-ups: Layer 0 rebuilt twice (real league marks from ESPN's CDN dark set + the NCAA mark; no drawn icons,
+  no animation; calendar strip, today strip, hero + marquee, day/team/text filters, sortable lines board, team filter);
+  Big Board matchup map made static (collisions relaxed synchronously); Matchups = one card per row, two games per screen,
+  with the allowed amount inside every rank cell; universal table sorting (sortableAll: every <th> of every table sorts,
+  custom th[data-k] sorters kept; ranks() handlers limited to data-k headers — the old handler crashed on the ω column);
+  Defenses Rankings + Matrix got a "compare with" second data set (ranks side by side with the shift, two matrices);
+  depth-chart field is now an X-and-O diagram in team colors with college logos (no turf, no headshots).
