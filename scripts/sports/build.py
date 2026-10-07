@@ -295,14 +295,16 @@ def build(lg):
         for t in T:
             for slot in T[t]:
                 for k in keys: rows.append(dict(src=name, team=t, slot=slot, stat=k, avg=T[t][slot][k]['avg'], rank=T[t][slot][k].get('rank'), lg=T[t][slot][k].get('lg'), gp=T[t][slot]['_gp']))
-    pd.DataFrame(rows).to_csv(f'{out}/dvp.csv', index=False)
+    pd.DataFrame(rows).sort_values(['src', 'team', 'slot'], kind='stable').to_csv(f'{out}/dvp.csv', index=False)   # deterministic order (set iteration is not)
     # payload
     keep = L[L.season >= (prior or cur)] if prior else L
-    cols = ['season', 'stype', 'date', 'gid', 'player', 'pid', 'team', 'opp', 'ha', 'slot', 'starter'] + [k for k in keys if k not in ('pra', 'pr', 'pa', 'ra')]
+    cols = ['season', 'stype', 'date', 'player', 'pid', 'team', 'opp', 'ha', 'slot', 'starter'] + [k for k in keys if k not in ('pra', 'pr', 'pa', 'ra')]
     logs = keep[cols].copy()
     for k in [c for c in cols if c in keys]: logs[k] = logs[k].round(2)
-    logs_arr = logs.fillna('').values.tolist()
-    def nz(v): return None if (isinstance(v, float) and math.isnan(v)) else v
+    # compact payload: whole-number floats serialise as ints (0 not 0.0) — the page stays under GitHub's 10 MB upload cap
+    def compact(v): return int(v) if isinstance(v, float) and v == v and v.is_integer() else v
+    logs_arr = [[compact(v) for v in row] for row in logs.fillna('').values.tolist()]
+    def nz(v): return None if (isinstance(v, float) and math.isnan(v)) else (int(v) if isinstance(v, float) and v.is_integer() else v)
     J = dict(league=lg, label=C['label'], sport=C['sport'], logo=C['logo'], built=str(pd.Timestamp.now())[:16], seasons=sorted(int(x) for x in L.season.unique()), cur=int(cur), prior=int(prior) if prior else None,
              slots=C['slots'], stats=[dict(k=k, label=l, dec=d) for k, l, d, _ in C['stats']], markets=C['markets'], logCols=cols, logs=logs_arr,
              dvp=dvp, teams=teams, ratings=R, games=games, players=[{k: nz(v) for k, v in r.items()} for r in P.to_dict('records')],
