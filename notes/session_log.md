@@ -379,3 +379,8 @@
 - Scheduled task created: "RAINMAN daily sports" trig_018ZQT7m5DRWpvEk818mZfcb — CRON_TZ=America/Chicago 50 6 * * 0,1,3,5,6 (skips Tue weekly refresh / Thu midweek, which already run sports via refresh.py), device-bound, push on. Prompt = autoloop §1b.
 - Live check (Chrome): index / nba / nhl / wnba all 200 with the 06:35–06:36 builds; NHL page J.logs 57,478 rows, 127 games next 14 days.
 - Still shells: MLB, NCAAB, soccer — no browser-free player box-score source found yet (sportsdataverse MBB release 404, baseballr = NCAA only). Next candidate: ESPN scoreboard/boxscore recipe through Chrome, same transport as the slate.
+
+## 2026-10-07 (n6) — daily sports run (scheduled, 12:43 CDT)
+- Multi-sport slate re-pulled through Chrome (ESPN scoreboard, 14 leagues × 20261007–20261014, 0 fetch errors) and diffed in-page against the 06:35 file fetched from raw.githubusercontent: 291 games both times, 0 added / 0 removed, 83 rows changed (spreads/moneylines 52, totals 27, records 17, broadcast 10, provider 9, headline 1); only the changed fields were carried over, so `slate_all_2026-10-07.txt` is now the midday state. Two Serie A broadcast diffs (Paramount+ vs CBSSN ordering) left as first pulled.
+- fetch_sdv: new nba_schedule_2027, nhl 2027 box/team/schedule, wnba_schedule_2026 parquets. sports/build: NBA 55 games next 14 d (5 lines), NHL 118 (14 lines), WNBA 10 (2 lines); ledgers NHL 38 (+11), WNBA 7 (+1), NBA 0 — nothing graded yet (all open). build_landing: 291 games / 13 leagues.
+- Sandbox needed `pip install pyarrow` (fresh container) before sports/build.py; no script changes.
