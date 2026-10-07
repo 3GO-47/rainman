@@ -362,3 +362,13 @@
   all sortable); Matchups cards carry each starter's own season averages under his name; depth-chart field falls back
   to the list on pages without unit charts (NCAA); Layer 0 shows the NFL model's softest matchups per market (top three
   matchup multipliers among the 40 highest-volume starters, from prop_projections.csv) when NFL is selected.
+- (n4) Other sports. Discovery: the sandbox can reach github.com, and sportsdataverse publishes ESPN/NHL box scores as
+  GitHub release parquets (sportsdataverse/sportsdataverse-data: espn_nba_player_boxscores, nhl_player_boxscores,
+  espn_wnba_player_boxscores, schedules, team boxes) — so NBA / NHL / WNBA need no browser at all. New: scripts/sports/
+  {config,fetch_sdv,build}.py + scripts/sport_template.html → dashboard/{nba,nhl,wnba}.html (Home / Matchups / Players /
+  Intel / Picks). NBA 56,746 player-games (2024-25 + 2025-26; 2026-27 appears when hoopR publishes it), NHL 113,391
+  (three seasons incl. the first week of 2026-27), WNBA 12,757. Slots G/F/C (ESPN box positions) and C/W/D/G. Game
+  model = margin ratings + home edge; picks frozen vs DK lines from the slate (no preseason). data/sports/*/processed/
+  logs.csv is git-ignored (derived, ~10 MB). Layer 0: NBA/NHL/WNBA now LIVE with their own softest-matchup teasers.
+  Chrome downloads were tested again (trusted click on a visible link) and still do not land — the slate stays on the
+  <pre> + get_page_text path.

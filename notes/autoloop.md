@@ -26,6 +26,12 @@ GitHub web upload in that Chrome, and the device sync is a git bundle written in
   Chrome recipe. Feeds the full-unit depth charts (OL / defense fronts / special teams + bios) via build_units.py.
 Never re-scrape a page already cached in data/raw; respect the pacing in the recipes.
 
+## 1b. Other sports (NBA · NHL · WNBA) — no browser needed
+`python3 scripts/sports/fetch_sdv.py` pulls the sportsdataverse release parquets (player box scores, schedules, team box)
+from GitHub — the sandbox can reach github.com — and `python3 scripts/sports/build.py` rebuilds data/sports/<lg>/processed
+and dashboard/nba.html, nhl.html, wnba.html (refresh.py runs both unless --no-sports). Lines come from the multi-sport
+slate pull (§1), so pull the slate first when Chrome is available; without it the pages still build from the schedule.
+
 ## 2. Build
 `python3 scripts/refresh.py` (Tue: full, including `build_signals.py`; other days add `--no-signals` to save a minute).
 This rebuilds game logs → DvP → matchups → advanced → games → props → adjusted DvP → prop model → bets → Kalshi → DFS entries →
@@ -64,6 +70,7 @@ DFS actual vs projected). **Never post picks in the summary**; the Games & Picks
 | midweek lines | Thu 14:00 | depth charts, DK props, Kalshi | refresh --no-signals (TNF lines frozen) |
 | Saturday slate | Sat 11:00 | depth charts, DK props, Kalshi, NCAA odds + NCAA refresh, multi-sport slate | refresh --no-signals + ncaa dashboard + Layer 0 |
 | pregame freeze | Sun 10:30 | Kalshi (near-closing), depth charts (inactives) | refresh --no-signals (last chance to freeze week positions) |
+| daily sports | every day 06:50 (Mon/Wed/Fri/Sat/Sun — the others are covered) | multi-sport slate | fetch_sdv + sports/build + build_landing; deploy nba/nhl/wnba/index |
 
 ## 6. Guardrails
 - Keys live only in `.env` (git-ignored). `_up/` and root `*.png` stay out of git. Never add credentials anywhere.
