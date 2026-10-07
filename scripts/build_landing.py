@@ -24,6 +24,25 @@ SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea
 SOCCER_LOGO = {k: CDN + f'leaguelogos/soccer/500-dark/{v}.png' for k, v in SOCCER_LOGO.items()}
 COMING = [('f1', 'Formula 1', CDN + 'teamlogos/leagues/500-dark/f1.png'), ('ufc', 'UFC', CDN + 'teamlogos/leagues/500/ufc.png')]
 
+MK_LABEL = {'pass_yds': 'Pass yds', 'pass_td': 'Pass TD', 'rush_yds': 'Rush yds', 'rush_att': 'Rush att', 'receptions': 'Receptions', 'rec_yds': 'Rec yds'}
+def nfl_teaser():
+    """Softest NFL matchups per market this week from prop_projections.csv (matchup multiplier × projected volume)."""
+    f = 'data/processed/prop_projections.csv'
+    if not os.path.exists(f): return None
+    import csv
+    rows = list(csv.DictReader(open(f, encoding='utf-8')))
+    if not rows: return None
+    wk = max(int(r['week']) for r in rows); rows = [r for r in rows if int(r['week']) == wk and r['market'] in MK_LABEL]
+    out = {}
+    for mk in MK_LABEL:
+        R = [r for r in rows if r['market'] == mk and float(r['base'] or 0) > 0]
+        floor = sorted((float(r['base']) for r in R), reverse=True)[:40]
+        cut = floor[-1] if floor else 0
+        R = [r for r in R if float(r['base']) >= cut]
+        R.sort(key=lambda r: -float(r['matchup_x']))
+        out[mk] = [dict(player=r['player'], team=r['team'], opp=r['opp'], slot=r['slot'], proj=round(float(r['proj']), 1), base=round(float(r['base']), 1), mx=round(float(r['matchup_x']), 2)) for r in R[:3]]
+    return dict(week=wk, markets=out)
+
 def load_slate():
     files = sorted(glob.glob('data/raw/slate_all_*.txt'))
     if not files: raise SystemExit('no data/raw/slate_all_*.txt — pull the multi-sport slate first (notes/scrape_recipe.md)')
@@ -106,12 +125,13 @@ table.lb{width:100%;border-collapse:collapse;font-size:12px}.lb th{font-family:v
 .teams{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.team{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--panel);border:1px solid var(--edge);border-radius:8px;font-size:12px;cursor:pointer}.team:hover,.team.on{border-color:var(--acc)}
 .team img{width:26px;height:26px;object-fit:contain}.team small{display:block;color:var(--dim);font-family:var(--mono);font-size:10px}
 .pipe{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:10px}.pipe .card{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:12px 14px}.card .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}.card .v{font-family:var(--mono);font-size:20px;font-weight:700;margin:4px 0 2px}.card .s{color:var(--dim);font-size:11px}.pipe .ok{color:var(--green)}.pipe .todo{color:var(--mute)}
+.tz{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:8px}.tzc{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:10px 12px}.tzc .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);margin-bottom:6px}.tzr{display:grid;grid-template-columns:14px 1fr auto auto;gap:6px;align-items:baseline;padding:3px 0;border-bottom:1px dotted var(--edge);font-size:12px}.tzr:last-child{border:0}.tzr .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tzr small{font-size:10px}
 .foot{margin-top:40px;color:var(--mute);font-size:11px;font-family:var(--mono);border-top:1px solid var(--edge);padding-top:12px}
 @media(max-width:1100px){.rail{grid-template-columns:repeat(5,1fr)}.herow{grid-template-columns:1fr}.cal{grid-template-columns:repeat(4,1fr)}}@media(max-width:700px){.rail{grid-template-columns:repeat(3,1fr)}.hero{grid-template-columns:1fr}.hero .hs{grid-template-columns:1fr 1fr}.wrap{padding:12px 14px 40px}.lg img{height:40px}.cal{grid-template-columns:repeat(2,1fr)}}
 """
 
 JS = r"""
-const G=J.games,LG=J.leagues,SUB=J.soccer,SUBLOGO=J.soccerLogo,TZD='America/Chicago',SHELL=!!J.shell;
+const G=J.games,LG=J.leagues,SUB=J.soccer,SUBLOGO=J.soccerLogo,TZD='America/Chicago',SHELL=!!J.shell;const MKL={pass_yds:'Pass yds',pass_td:'Pass TD',rush_yds:'Rush yds',rush_att:'Rush att',receptions:'Receptions',rec_yds:'Rec yds'};
 const logo=p=>p?'https://a.espncdn.com/i/teamlogos/'+p:'';
 const fmtT=d=>new Date(d).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:TZD}).replace(':00','');
 const dayKey=d=>new Date(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:TZD});
@@ -178,6 +198,8 @@ function render(){const l=LGBY[SEL];let all=(byLg[SEL]||[]).slice().sort((a,b)=>
     <div><div class="k">biggest favorite</div><div class="v">${wide?lineTxt(wide.g):'—'}</div><div class="s">${wide?`${wide.g.away.abbr} @ ${wide.g.home.abbr}`:''}</div></div>
     <div><div class="k">model</div><div class="v" style="color:${l.status==='live'?'var(--acc)':'var(--dim)'}">${l.status==='live'?'LIVE':'SCHEDULE'}</div><div class="s">${l.status==='live'?'game logs · DvP · projections · markets · picks':'logs, DvP, projections follow the NFL framework'}</div></div></div></div>`;
   const mq=document.getElementById('marquee');if(mq)mq.innerHTML=marquee(all);
+  const te=document.getElementById('teaser');if(te){const N=J.nfl;te.innerHTML=(SEL==='nfl'&&N)?`<h2>softest matchups · wk ${N.week} <span>from the NFL model — the opponent's stat-specific defense vs the player's slot, among the 40 highest-volume starters in each market · full board on the NFL dashboard</span></h2>
+    <div class="tz">${Object.entries(N.markets).map(([mk,L])=>`<div class="tzc"><div class="k">${MKL[mk]||mk}</div>${L.map((p,i)=>`<div class="tzr"><span class="mono">${i+1}</span><span class="nm">${(n=>{const q=n.split(' ');return q.length>1?q[0][0]+'. '+q.slice(1).join(' '):n})(p.player)}</span><span class="mono dim">${p.team} ${p.opp[0]==='@'?'@':'vs'} ${p.opp.replace('@','')}</span><span class="mono"><b>${p.proj}</b> <small class="dim">×${p.mx.toFixed(2)}</small></span></div>`).join('')}</div>`).join('')}</div>`:''}
   const sr=document.getElementById('subrail');if(sr){sr.innerHTML=subs.length?`<div class="sub ${SUBSEL?'':'on'}" data-s=""><small>all leagues</small></div>`+subs.map(s=>`<div class="sub ${SUBSEL===s?'on':''}" data-s="${s}"><img src="${SUBLOGO[s]}" alt="">${SUB[s]||s}<small>${(byLg.soccer||[]).filter(g=>g.lg===s).length}</small></div>`).join(''):'';
     sr.querySelectorAll('.sub').forEach(c=>c.onclick=()=>{SUBSEL=c.dataset.s;render()})}
   const dl=[...new Set(all.map(g=>dayKey(g.date)))];
@@ -198,7 +220,7 @@ HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href=
 
 def page(games, pulled):
     leagues = [dict(key=k, label=l, group=g, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES]
-    J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, coming=COMING, pulled=pulled)
+    J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, coming=COMING, pulled=pulled, nfl=nfl_teaser())
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES if s == 'live')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · every sport, this week</title>
@@ -210,6 +232,7 @@ def page(games, pulled):
 <h2 id="todayH"></h2><div id="today" class="today"></div>
 <div id="herow" class="herow"><div id="hero" class="hero"></div><div id="marquee"></div></div><div id="subrail" class="subrail"></div>
 <div id="filt" class="filt"></div>
+<div id="teaser"></div>
 <h2 id="weekH"></h2><div id="week" class="days"></div>
 <h2 id="linesH"></h2><div id="lines"></div>
 <h2 id="teamsH"></h2><div id="teams" class="teams"></div>

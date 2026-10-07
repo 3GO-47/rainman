@@ -576,7 +576,7 @@ img.tl{vertical-align:-3px}
 .msides{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}.mside{min-width:0}
 .mhead{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;border-bottom:1px solid var(--edge);padding-bottom:4px;margin-bottom:4px}.mpsi{margin-left:auto;color:var(--dim)}
 .mrow{display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;gap:10px;align-items:center;padding:5px 0;border-bottom:1px dotted var(--edge);font-size:13px}.mrow:last-child{border-bottom:0}
-.mname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mnm{display:flex;flex-direction:column;min-width:0}.mhis{font-family:var(--mono);font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hcs{display:flex;gap:4px}.hc{display:inline-flex;flex-direction:column;align-items:center;min-width:58px;padding:2px 5px;border-radius:4px;font-family:var(--mono);font-size:13px;font-weight:700;line-height:1.1}.hc i{font-style:normal;font-weight:400;font-size:9px;opacity:.85;letter-spacing:.02em;white-space:nowrap}.hc.dim{background:none}
 .mbest{font-family:var(--mono);font-size:11px;white-space:nowrap;min-width:70px;text-align:right}
 .mfoot{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:8px}.mfoot .mini{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -1438,11 +1438,16 @@ function player(){
   $('#player').innerHTML=`<div class="controls">
     <input id="pIn" list="pList" placeholder="collide a player..." size="30">
     <datalist id="pList">${names.map(n=>`<option>${esc(n)}</option>`).join('')}</datalist></div><div id="pOut"></div>`;
-  window.pEmpty=()=>{if($('#pIn').value||!$('#pOut')||$('#pOut').innerHTML)return;const se=Math.max(...J.logs.map(l=>l[LOG.season]));const tot={};J.logs.forEach(l=>{if(l[LOG.season]===se)tot[l[LOG.player]]=(tot[l[LOG.player]]||0)+l[LOG.fppr]});
-    const by={};Object.entries(tot).sort((a,b)=>b[1]-a[1]).forEach(([n,v])=>{const d=J.depth.find(d=>d.player===n);const p=d?posOf(d.slot):'';if(!p||p==='D/')return;(by[p]=by[p]||[]).length<12&&by[p].push([n,v,d.team])});
-    $('#pOut').innerHTML=`<div class="panel"><h3>pick a player <span class="f">type a name above, click any name anywhere on the site, or start from this season's top scorers (${se} PPR)</span></h3>
-      <div class="grid2">${['QB','RB','WR','TE'].filter(p=>by[p]).map(p=>`<div><p class="mini" style="color:${POSC[p]}">${posIcon(p,11)} ${p}</p>${by[p].map(([n,v,t])=>`<button class="pq" data-n="${esc(n)}">${tlogo(t,14)} ${esc(n)} <em>${v.toFixed(0)}</em></button>`).join('')}</div>`).join('')}</div></div>`;
-    $('#pOut').querySelectorAll('.pq').forEach(b=>b.onclick=()=>{$('#pIn').value=b.dataset.n;$('#pIn').onchange()})};
+  window.pEmpty=()=>{if($('#pIn').value||!$('#pOut')||$('#pOut').innerHTML)return;const wk=G.week,D=J.dvp.combined;
+    const STATS={QB:[['PaYd',l=>l[LOG.py],0],['PaTD',l=>l[LOG.ptd],1],['Att',l=>l[LOG.patt],0],['RuYd',l=>l[LOG.ry],0],['TD',l=>l[LOG.rtd],1]],RB:[['RuAtt',l=>l[LOG.ra],0],['RuYd',l=>l[LOG.ry],0],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]],WR:[['Tgt',l=>l[LOG.tgt],1],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]],TE:[['Tgt',l=>l[LOG.tgt],1],['Rec',l=>l[LOG.rec],1],['RecY',l=>l[LOG.recy],0],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2]]};
+    const rows=UNIVERSE.filter(u=>u.grp&&u.inj!=='-1'&&['QB','RB','WR','TE'].includes(u.pos)&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>{const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE),L5=L.slice(-5);const o=oppFor(u.team,wk);const d=o&&o!=='BYE'&&D[o.replace('@','')];
+      const cols=ORDER[u.grp]||[];const rk=d?cols.map(c=>d.stats[c]?+d.stats[c].rank:null).filter(v=>v!=null):[];return {u,Lc,L5,Lall:L,o,match:rk.length?mean(rk):null}}).filter(r=>r.Lc.length||r.Lall.length);
+    const tbl=p=>{const R=rows.filter(r=>r.u.pos===p).sort((a,b)=>(a.match??99)-(b.match??99));const ST=STATS[p];if(!R.length)return '';
+      return `<div class="panel"><h3 style="color:${POSC[p]}">${posIcon(p,12)} ${p} <span class="f">starters · season averages (${LAST_SE}) · L5 = last five games · MATCH = mean opponent rank across his slot's stats this week (1 = softest) · every header sorts · click a name for his full card</span></h3>
+        <table class="mkt"><thead><tr><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>GP</th><th>MATCH</th>${ST.map(([k])=>`<th>${k}</th>`).join('')}<th>L5 ${ST[{QB:0,RB:1,WR:2,TE:2}[p]][0]}</th><th>opps L2 / se</th><th>trend</th></tr></thead><tbody>
+        ${R.map(r=>{const L=r.Lc.length?r.Lc:r.Lall;const prim=ST[{QB:0,RB:1,WR:2,TE:2}[p]];const l5=r.L5.length?mean(r.L5.map(prim[1])):null;return `<tr><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${L.length}</td><td>${r.match==null?'<span class="dim">·</span>':`<span class="hc big" style="${gradeStyle(r.match)}">${r.match.toFixed(1)}</span>`}</td>${ST.map(([k,f,d])=>`<td><b>${L.length?mean(L.map(f)).toFixed(d):'·'}</b></td>`).join('')}<td>${l5==null?'·':`<b>${l5.toFixed(prim[2])}</b>`}</td><td class="mini">${r.u.gp?`${r.u.l2} / ${r.u.se}`:''}</td><td>${trendGlyph(r.u)}</td></tr>`}).join('')}</tbody></table></div>`};
+    $('#pOut').innerHTML=`<p class="note">type a name above or click any player anywhere on the site &middot; below: every starter by position with his season line and this week's matchup</p>`+['QB','RB','WR','TE'].map(tbl).join('');
+    logoize($('#pOut'))};
   $('#pIn').onchange=()=>{
     const n=$('#pIn').value;
     const L=J.logs.filter(l=>l[LOG.player]===n).sort((a,b)=>a[LOG.season]-b[LOG.season]||a[LOG.week]-b[LOG.week]);
@@ -1621,7 +1626,8 @@ function chamber(){
       const best=cols.map(c=>({c,o:d&&d.stats[c]})).filter(x=>x.o).sort((x,y)=>+x.o.rank-+y.o.rank)[0];
       const inj=u&&u.inj==='0'?' <span class="inj0">Q</span>':u&&u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       const own=u&&OWNER[u.player+'|'+u.team];const mine=G.owner&&(G.owner==='__FA__'?u&&!own:own===G.owner);
-      return `<div class="mrow ${G.owner?(mine?'mine':'notmine'):''}">${slotchip(g)}<span class="pp plink mname" data-p="${u?esc(u.player):''}" title="${u&&u.note?esc(u.note):''}">${u?esc(u.player):'<span class="dim">—</span>'}${inj}${trendGlyph(u)}</span><span class="hcs">${cols.map(c=>hc(d,c)).join('')}</span>${best?`<span class="mbest" style="color:${gradeColor(+best.o.rank)}" title="softest stat for this slot">${lbl(best.c)} #${(+best.o.rank).toFixed(0)}</span>`:''}</div>`}).join('');
+      const Lc=u?(PLOGS[u.ln||u.player]||[]).filter(l=>l[LOG.season]===LAST_SE):[];const his=Lc.length?cols.map(c=>{const a=avgOf(Lc,c);return a==null?'':`${lbl(c)} ${a.toFixed(decOf(c))}`}).filter(Boolean).join(' · '):'';
+      return `<div class="mrow ${G.owner?(mine?'mine':'notmine'):''}">${slotchip(g)}<span class="mnm"><span class="pp plink mname" data-p="${u?esc(u.player):''}" title="${u&&u.note?esc(u.note):''}">${u?esc(u.player):'<span class="dim">—</span>'}${inj}${trendGlyph(u)}</span>${his?`<span class="mhis" title="his own per-game averages this season (${Lc.length} gp)">his ${his}</span>`:''}</span><span class="hcs">${cols.map(c=>hc(d,c)).join('')}</span>${best?`<span class="mbest" style="color:${gradeColor(+best.o.rank)}" title="softest stat for this slot">${lbl(best.c)} #${(+best.o.rank).toFixed(0)}</span>`:''}</div>`}).join('');
     const avg=mean(CORE.map(g=>(d||{comps:{}}).comps[g]).filter(v=>v!=null));
     return {html:`<div class="mside"><div class="mhead">${tcell(off)} <span class="mini">offense vs</span> ${tcell(dd)} <span class="mini">D</span><span class="mpsi" title="mean Ψ of the core slots — lower = softer field">Ψ ${avg.toFixed(1)}</span></div>${rows}</div>`,avg}}
   // full side (the original slot-by-slot table) for the opened state
@@ -1912,7 +1918,7 @@ function dchart(){
       return `<div class="dcrow${right?' r':''}${d.injury==='-1'?' dcout':''}">${right?`${mv}${wl}${gl}${nm}<span class="mini dcd">${d.depth}</span>`:`<span class="mini dcd">${d.depth}</span>${nm}${gl}${wl}${mv}`}</div>`}).join('')}
   function head(t,right){if(!t)return '';const g=gameOf(t,G.week);const at=g&&g[GM.home]===t?'home':g?'away':'';
     return `<div class="dchead${right?' r':''}" style="--tc:${vivid(t)}">${tlogo(t,26)}<b style="color:${vivid(t)}">${t}</b><span class="mini">${TEAM[t]?TEAM[t].n:''}${at?' · '+at:''}</span></div>`}
-  let TAGS={};let MODE='field';
+  let TAGS={};let MODE=(J.units&&J.units.length)?'field':'list';if(!(J.units&&J.units.length)){const m=$('#dcMode');if(m)m.hidden=true}
   /* ---- v5: the field — both offenses and both defenses in formation, with colleges and the game's narratives ---- */
   const UN=(()=>{const C=J.unitCols||[];const idx=Object.fromEntries(C.map((c,i)=>[c,i]));const by={};(J.units||[]).forEach(r=>{const t=r[idx.team];(by[t]=by[t]||[]).push(Object.fromEntries(C.map((c,i)=>[c,r[i]])))});return by})();
   const nkey=n=>String(n||'').replace(/\s+(Jr\.?|Sr\.?|II|III|IV|V)$/,'').toLowerCase().replace(/[^a-z0-9]/g,'');
