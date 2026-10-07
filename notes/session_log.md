@@ -372,3 +372,10 @@
   logs.csv is git-ignored (derived, ~10 MB). Layer 0: NBA/NHL/WNBA now LIVE with their own softest-matchup teasers.
   Chrome downloads were tested again (trusted click on a visible link) and still do not land — the slate stays on the
   <pre> + get_page_text path.
+
+### (n5) other sports deployed · daily task live — 2026-10-07
+- Deployed 234e77f..adc7858 via GitHub web upload (scripts/sports new dir, landing/template/refresh, nba/nhl/wnba raw parquets + processed, dashboard index/nba/nhl/wnba + shells, notes, README, .gitignore). Remote == local verified; device synced by bundle (notes/_sync_sports.bundle, removed).
+- nhl.html was 10.6 MB (> GitHub's 10 MB upload cap) → sports/build.py now drops the unused `gid` column and serialises whole-number floats as ints: nhl 9.1 MB, nba 7.9 MB, wnba 1.8 MB. dvp.csv rows now sorted (src, team, slot) so reruns are byte-stable.
+- Scheduled task created: "RAINMAN daily sports" trig_018ZQT7m5DRWpvEk818mZfcb — CRON_TZ=America/Chicago 50 6 * * 0,1,3,5,6 (skips Tue weekly refresh / Thu midweek, which already run sports via refresh.py), device-bound, push on. Prompt = autoloop §1b.
+- Live check (Chrome): index / nba / nhl / wnba all 200 with the 06:35–06:36 builds; NHL page J.logs 57,478 rows, 127 games next 14 days.
+- Still shells: MLB, NCAAB, soccer — no browser-free player box-score source found yet (sportsdataverse MBB release 404, baseballr = NCAA only). Next candidate: ESPN scoreboard/boxscore recipe through Chrome, same transport as the slate.
