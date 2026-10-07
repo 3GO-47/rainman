@@ -78,8 +78,14 @@ def main():
         run(['scripts/build_signals.py'])
     if glob.glob('data/raw/espn_birthplaces_*.txt'):
         run(['scripts/build_connections.py'])
+    # v5: full units + bios (nflverse), game narratives, Layer 0 landing + sport shells (multi-sport slate)
+    if os.path.exists('data/raw/nflverse/depth_charts_2026.parquet'):
+        run(['scripts/build_units.py'])
+    run(['scripts/build_narratives.py'])
     run(['scripts/build_dashboard.py'])
     run(['scripts/build_dashboard_v2.py'])
+    if glob.glob('data/raw/slate_all_*.txt'):
+        run(['scripts/build_landing.py'])
 
     # summary + anomaly report
     st = json.load(open('notes/scrape_state.json'))

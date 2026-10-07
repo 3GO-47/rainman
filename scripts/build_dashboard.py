@@ -297,6 +297,13 @@ def main():
     data['picksAll'] = rows_of('data/processed/picks_all.csv')
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     data['signals'] = json.load(open('data/processed/signals.json')) if os.path.exists('data/processed/signals.json') else None
+    # v5: full units (OL / defense fronts / special teams) with bios, and game narratives (build_units.py, build_narratives.py)
+    def unit_row(r):
+        return [r['team'], r['unit'], r['front'], r['pos'], int(r['slot']), int(r['rank']), r['player'], r['jersey'], r['college'], r['height'], r['weight'], r['years_exp'],
+                r['age'][:2] if r['age'] else '', r['status'], r['espn_id'].split('.')[0] if r['espn_id'] else '']
+    data['units'] = [unit_row(r) for r in rows_of('data/processed/units_2026.csv', lambda r: int(r['rank']) <= (2 if r['unit'] != 'ST' else 1))]
+    data['unitCols'] = ['team', 'unit', 'front', 'pos', 'slot', 'rank', 'player', 'jersey', 'college', 'height', 'weight', 'exp', 'age', 'status', 'espn']
+    data['narr'] = rows_of('data/processed/narratives_2026.csv')
     # player <-> game connections (build_connections.py): homecoming / college town / home state / revenge / birthday
     data['conn'] = {'rows': [], 'born': {}}
     if os.path.exists('data/processed/connections_2026.csv'):
