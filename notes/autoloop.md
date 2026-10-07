@@ -20,6 +20,10 @@ GitHub web upload in that Chrome, and the device sync is a git bundle written in
 - **DraftKings props** (Thu / Sat / Sun): ESPN core API recipe → `data/raw/props_2026_wk<W>_<today>.txt`.
 - **Kalshi** (Thu / Sat / Sun): recipe "Kalshi NFL markets" → `data/raw/kalshi_<today>.txt`.
 - **NCAA** (Sat): `scripts/ncaa/refresh.py` after the ESPN scoreboard/pickcenter odds pull (NCAA recipe).
+- **Multi-sport slate** (Tue + Sat): recipe "Multi-sport slate" -> `data/raw/slate_all_<today>.txt` (every league's next
+  seven days: NFL, CFB, NBA, NCAAB, WNBA, MLB, NHL, seven soccer leagues). Feeds Layer 0 (index.html) and the sport shells.
+- **nflverse** (Tue): `python3 scripts/fetch_nflverse.py` when it can reach GitHub releases from the sandbox; otherwise the
+  Chrome recipe. Feeds the full-unit depth charts (OL / defense fronts / special teams + bios) via build_units.py.
 Never re-scrape a page already cached in data/raw; respect the pacing in the recipes.
 
 ## 2. Build
@@ -37,13 +41,16 @@ grows or holds, never shrinks; `python3 scripts/verify_data.py` passes.
    file input button", `file_upload` the mirrored files of that directory (< 10 MB per call), wait 3 s (8 s for the 4–10 MB
    dashboards), then `javascript_tool`: set `#commit-summary-input`.value, dispatch `input`, `setTimeout(()=>button.js-blob-submit.click(),300)`.
    Do not sleep across the navigation in the same call. Order: scripts, data/raw, data/processed, notes, dashboard, README.
+   The dashboard folder now holds index.html (Layer 0) + rainman.html + ncaa.html + the sport shells; upload the big two
+   one per call (ncaa.html is ~9.5 MB), the small ones together.
 4. Verify: `git fetch -q origin && git diff --stat HEAD origin/main` prints nothing. Then `git reset -q --hard origin/main`.
 5. Sync the device: `git bundle create /mnt/user-data/outputs/_sync_<tag>.bundle <device_head>..origin/main`;
    `device_commit_files` it to `C:\Users\jwlar\rainman\notes\_sync_<tag>.bundle`; `device_bash`:
    `cd $HOME/mnt/rainman && rm -f .git/index.lock .git/objects/maintenance.lock && git fetch -q notes/_sync_<tag>.bundle refs/remotes/origin/main:refs/remotes/origin/main && git reset -q --hard origin/main && git update-ref refs/heads/main origin/main && rm -f notes/_sync_<tag>.bundle && git log --oneline -1`.
    (`<device_head>` = the device's current `git rev-parse HEAD`; if the bundle is refused for a missing base, bundle from the
    merge-base or copy the changed files with device_commit_files instead.)
-6. Pages deploys from `.github/workflows/pages.yml` within ~2 min; spot-check https://3go-47.github.io/rainman/ renders.
+6. Pages deploys from `.github/workflows/pages.yml` within ~2 min (it copies every dashboard/*.html; index.html is Layer 0);
+   spot-check https://3go-47.github.io/rainman/ (bubbles) and /rainman.html (NFL) render.
 
 ## 4. Report (SendUserMessage, short)
 Data only — what changed: box scores added, depth-chart moves (promotions, usage swaps, OUT list), new lines posted
@@ -53,9 +60,9 @@ DFS actual vs projected). **Never post picks in the summary**; the Games & Picks
 ## 5. Calendar (America/Chicago)
 | run | when | pulls | build |
 |---|---|---|---|
-| weekly refresh | Tue 09:00 | box scores of the finished week, depth charts | full refresh (grades every position + DFS entries) |
+| weekly refresh | Tue 09:00 | box scores of the finished week, depth charts, nflverse, multi-sport slate | full refresh (grades every position + DFS entries) + Layer 0 |
 | midweek lines | Thu 14:00 | depth charts, DK props, Kalshi | refresh --no-signals (TNF lines frozen) |
-| Saturday slate | Sat 11:00 | depth charts, DK props, Kalshi, NCAA odds + NCAA refresh | refresh --no-signals + ncaa dashboard |
+| Saturday slate | Sat 11:00 | depth charts, DK props, Kalshi, NCAA odds + NCAA refresh, multi-sport slate | refresh --no-signals + ncaa dashboard + Layer 0 |
 | pregame freeze | Sun 10:30 | Kalshi (near-closing), depth charts (inactives) | refresh --no-signals (last chance to freeze week positions) |
 
 ## 6. Guardrails

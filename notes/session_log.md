@@ -332,3 +332,22 @@
   game lines with Kalshi vs DK vs model), board() rewritten (stat projections), picksTab() for Games & Picks sub-tabs,
   signalsPanel() on Intel (default tab), homeBoard() = market board (Ψ smash/avoid tiles + PPR table removed), logoize()
   observer adds team logos to every .plink/.pp, .up/.dn colors fixed (▲ = green = good for the offense).
+
+## 2026-10-07 — (n) v5: Layer 0 landing + five-tab Layer 1
+- Josh's spec: Layer 0 = every sport as bubbles + the week's games; Layer 1.<sport> mirrors the NFL dashboard; NFL tabs
+  collapsed to Home (Overview/Insights/Fantasy), Matchups (Big Board/Matchups/TD Board), Players (Lab/Explorer/Depth
+  Charts as a football field with defenses, colleges, rivalries), Intel (+ Locker Room, Defenses, Schedule), Picks
+  (Games & Picks + Bets subtabs). "Make the data pop; use visualizations, physics, images; data first, picks later."
+- Data: data/raw/slate_all_2026-10-07.txt (ESPN scoreboard, 13 leagues × 8 days = 291 games, via Chrome on example.com —
+  date ranges 400, teams endpoint CORS-blocked, downloads unreliable → <pre> + get_page_text transport). nflverse
+  depth_charts/roster parquet already in the repo → build_units.py (2,325 unit rows, 2,576 bios; 19 teams run a 3-4
+  base, 13 a 4-3). build_narratives.py (600 rows: 209 rematches, 151 revenge, 104 rivalry, 96 division, 31 streaks,
+  9 coach-vs-former-team). build_landing.py → index.html + nba/ncaab/wnba/mlb/nhl/soccer.html shells.
+- Template: SECTIONS → five majors (default view = Home Overview; league switch gained an "all sports" link);
+  chamber() rewritten as the Matchups grid (cards: lines, implied totals, Kalshi ML, tilt, narrative chips, both
+  offenses' core starters with per-stat rank heat cells + best stat; expand → old tables); dchart() gained the field
+  mode (SVG 1000×420, vertical broadcast layout, chips with ESPN headshots + initials fallback, college, OUT/Q);
+  board() gained MATCH (mean opponent rank across markets), rank cells in every market, default sort by MATCH, and the
+  force-simulated matchup map; home Overview: slate tile ribbon full width above the market board; Insights: storylines
+  panel; TD cards: Kalshi price. build_dashboard payload: units/unitCols/narr. Pages workflow copies dashboard/*.html.
+- Tested: Playwright tour of every view (NFL + NCAA, 1500 and 390) — no page errors; the new views verified by screenshot.

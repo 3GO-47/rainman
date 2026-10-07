@@ -136,3 +136,18 @@ Pull Thursday (TNF + early week-ahead markets), Saturday (full slate posted) and
 ## DraftKings DFS salaries (optional, for capped mock lineups)
 DK's DFS endpoints are blocked in both environments. Josh can export the lobby CSV from any Classic contest ("Export to CSV")
 and drop it at data/raw/dk_salaries_wk{N}.csv — build_dfs.py picks it up automatically; without it entries are built uncapped.
+
+## Multi-sport slate — Layer 0 landing + sport shells (Chrome, weekly, ~90 s) — 2026-10-07
+ESPN's public scoreboard, one fetch per league per day (date RANGES return 400; `teams` endpoints are CORS-blocked — team
+lists come from the games themselves). Run on https://example.com/ (no CSP, fetch to site.api.espn.com is allowed from any
+origin). Leagues: nfl football/nfl · cfb football/college-football&groups=80 · nba basketball/nba · ncaab
+basketball/mens-college-basketball&groups=50 · wnba · mlb baseball/mlb · nhl hockey/nhl · soccer eng.1 usa.1 uefa.champions
+esp.1 ger.1 ita.1 fra.1. Days = today … today+7 as YYYYMMDD. Do NOT use setTimeout between fetches — a background tab
+throttles timers to one per minute; use Promise.all per league instead.
+Row (pipe-joined, '|' in names -> '/'):
+`G|league|eventId|dateUTC|status|awayId|awayAbbr|awayName|awayRecord|awayLogo|awayRank|homeId|homeAbbr|homeName|homeRecord|homeLogo|homeRank|venue|broadcast|odds.details|overUnder|week|seasonType|neutral|provider|headline`
+(logo = `team.logo` minus `https://a.espncdn.com/i/teamlogos/`; rank = curatedRank.current, 99/blank = unranked).
+Transport: `document.body.innerHTML='<pre>SL_BEGIN\n'+rows.join('\n')+'\nSL_END</pre>'` and get_page_text (≈60 KB; pass a
+larger max_chars or slice the pre into two reads). Chrome's "automatic downloads" only ever allowed one file per site
+in testing — the download channel is not reliable, the <pre> read is. Save as data/raw/slate_all_YYYY-MM-DD.txt, then
+`python3 scripts/build_landing.py` (also run by refresh.py) -> dashboard/index.html + nba/ncaab/wnba/mlb/nhl/soccer.html.
