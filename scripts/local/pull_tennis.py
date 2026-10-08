@@ -61,9 +61,10 @@ def load_state():
     try: return json.load(open(STATE))
     except Exception: return {}
 
-def espn_history(days=BACKFILL):
+def espn_history(days=None):
     """Walk ESPN's scoreboard backwards and keep every completed singles match, so the Elo history runs to yesterday
     even though the public archive stops in May. Only dates not already on file are fetched."""
+    if days is None: days = BACKFILL if os.path.exists(RESULTS) else 200    # first run closes the whole gap to the mirror, then 60 a day
     st = load_state(); done = set(st.get('days') or [])
     have = set()
     rows = []
