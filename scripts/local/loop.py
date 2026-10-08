@@ -13,7 +13,7 @@ Log: notes/local_runs.log · state: notes/local_state.json"""
 import datetime, glob, json, os, subprocess, sys, traceback
 sys.path.insert(0, os.path.dirname(__file__))
 from common import log, state, save_state, run, TODAY, TODAY_S
-import gate, pull_box, pull_espn, pull_kalshi, pull_markets
+import gate, pull_box, pull_espn, pull_kalshi, pull_markets, pull_tennis
 
 FORCE = '--force' in sys.argv
 WD = TODAY.weekday()            # Mon=0 … Sun=6
@@ -38,6 +38,7 @@ def markets_only(G, st):
         if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():
             if step('odds api', run, ['scripts/fetch_odds_api.py'], False): did.append('odds')
         if step('markets', pull_markets.main): did.append('exchanges')
+        if step('tennis markets', pull_tennis.markets) and step('tennis', run, ['scripts/tennis/build.py']) is not None: did.append('tennis')
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
@@ -56,6 +57,13 @@ def main():
     if '--dry' in sys.argv: return
     if '--markets' in sys.argv:                                                                     # the 6-hourly task: lines + exchanges + arb board only
         markets_only(G, st); return
+    if '--tennis' in sys.argv:                                                                      # one-off: tennis history + week + prices -> tennis.html + landing, then commit
+        step('tennis pull', pull_tennis.main); step('tennis', run, ['scripts/tennis/build.py']); step('landing', run, ['scripts/build_landing.py'])
+        git('add', '-A')
+        if git('status', '--porcelain').stdout.strip():
+            git('commit', '-q', '-m', f'tennis {TODAY_S}')
+            if '--no-push' not in sys.argv: git('push', '-q', 'origin', 'HEAD:main')
+        return
     nfl_changed = False
     # ---------------- NFL
     if G['nfl']['active']:
@@ -88,6 +96,8 @@ def main():
         if step('sports build', run, ['scripts/sports/build.py']) is not None: did += live
     elif live: did += live
     else: log('NBA/NHL/WNBA: no games around today — skipped')
+    # ---------------- Tennis (year-round): Sackmann history + ESPN week + exchange prices -> tennis.html
+    if step('tennis pull', pull_tennis.main) is not None and step('tennis', run, ['scripts/tennis/build.py']) is not None: did.append('tennis')
     if 'nfl' not in did and glob.glob('data/raw/slate_all_*.txt'):
         step('landing', run, ['scripts/build_landing.py'])
     # ---------------- Arb Engine: DK (ESPN) + Kalshi + Polymarket for every league with games in the window, then the board
