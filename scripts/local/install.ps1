@@ -9,5 +9,9 @@ $action  = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument "/c `"$repo\scri
 $trigger = New-ScheduledTaskTrigger -Daily -At 06:50
 $settings = New-ScheduledTaskSettingsSet -WakeToRun -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Hours 2) -MultipleInstances IgnoreNew
 Register-ScheduledTask -TaskName 'RAINMAN local loop' -Action $action -Trigger $trigger -Settings $settings -Description 'RAINMAN daily data loop (no Claude): slate, NFL box/depth/props/Kalshi, NCAA, NBA/NHL/WNBA, rebuild, commit, push if credentials exist' -Force | Out-Null
-Write-Host "Registered 'RAINMAN local loop' (daily 06:50). Test now with:  cd $repo; py -3 scripts\local\loop.py --dry"
+$action2  = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument "/c `"$repo\scripts\local\rainman.cmd`" --markets" -WorkingDirectory $repo
+$trigger2 = New-ScheduledTaskTrigger -Once -At 00:20 -RepetitionInterval (New-TimeSpan -Hours 6) -RepetitionDuration (New-TimeSpan -Days 3650)
+$settings2 = New-ScheduledTaskSettingsSet -StartWhenAvailable -ExecutionTimeLimit (New-TimeSpan -Minutes 30) -MultipleInstances IgnoreNew
+Register-ScheduledTask -TaskName 'RAINMAN markets' -Action $action2 -Trigger $trigger2 -Settings $settings2 -Description 'RAINMAN market pull every 6 hours (no Claude): The Odds API on its cadence, Kalshi, Polymarket, Arb Engine rebuild, commit' -Force | Out-Null
+Write-Host "Registered 'RAINMAN local loop' (daily 06:50) and 'RAINMAN markets' (every 6 hours; each run pulls only what the cadence says is due). Test now with:  cd $repo; py -3 scripts\local\loop.py --dry"
 Write-Host "To let it push to GitHub unattended, run ONE interactive push yourself (git push) so Git Credential Manager stores your login in Windows Credential Manager. Until then each run commits locally and skips the push."

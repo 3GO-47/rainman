@@ -32,6 +32,21 @@ def step(name, fn, *a):
     except Exception as e:
         log(f'!! {name} failed: {e}'); log(traceback.format_exc().strip().splitlines()[-1]); return None
 
+def markets_only(G, st):
+    did = []
+    if any(G[lg]['active'] for lg in G):
+        if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():
+            if step('odds api', run, ['scripts/fetch_odds_api.py'], False): did.append('odds')
+        if step('markets', pull_markets.main): did.append('exchanges')
+        if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
+        if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
+    git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
+    if chg:
+        git('commit', '-q', '-m', f'markets {datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}: ' + (', '.join(did) or 'state') + f' · {len(chg.splitlines())} files')
+        if '--no-push' not in sys.argv:
+            r = git('push', '-q', 'origin', 'HEAD:main'); log('pushed' if r.returncode == 0 else 'push skipped (no credential helper); commit kept locally')
+    log(f'=== markets run done: {", ".join(did) or "nothing due"}')
+
 def main():
     st = state(); did = []
     log(f'=== local loop {TODAY_S} ({DOW}){" FORCE" if FORCE else ""}')
@@ -39,6 +54,8 @@ def main():
     G = gate.all_leagues()
     log('gate: ' + json.dumps(G, default=str))
     if '--dry' in sys.argv: return
+    if '--markets' in sys.argv:                                                                     # the 6-hourly task: lines + exchanges + arb board only
+        markets_only(G, st); return
     nfl_changed = False
     # ---------------- NFL
     if G['nfl']['active']:
@@ -75,8 +92,8 @@ def main():
         step('landing', run, ['scripts/build_landing.py'])
     # ---------------- Arb Engine: DK (ESPN) + Kalshi + Polymarket for every league with games in the window, then the board
     if any(G[lg]['active'] for lg in G):
-        if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():                     # FanDuel / MGM / Caesars … (3 credits per league per day; NFL props weekly)
-            step('odds api', run, ['scripts/fetch_odds_api.py'] + (['--props'] if (FORCE or DOW == 'Thu') else []), False)
+        if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():                     # every US book; the script's own cadence decides what is due
+            step('odds api', run, ['scripts/fetch_odds_api.py'], False)
         if step('markets', pull_markets.main):
             if step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
         step('social', run, ['scripts/build_social.py'])
