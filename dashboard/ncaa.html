@@ -1196,7 +1196,7 @@ function lab(){
     <select id="labCol" class="lgnfl" title="filter by college tier / conference / school">${(()=>{const t={},c={},sc={};UNIVERSE.forEach(u=>{const ci=cinfo(u.player);if(!ci)return;t[ci.tier]=(t[ci.tier]||0)+1;c[ci.confL]=(c[ci.confL]||0)+1;sc[ci.disp]=(sc[ci.disp]||0)+1});
       return `<option value="">all colleges</option><optgroup label="tier">${Object.keys(TIER).filter(k=>t[k]).map(k=>`<option value="t:${k}">${TIER[k][0]} (${t[k]})</option>`).join('')}</optgroup><optgroup label="conference">${Object.keys(c).sort().map(k=>`<option value="c:${k}">${k} (${c[k]})</option>`).join('')}</optgroup><optgroup label="school">${Object.keys(sc).sort().map(k=>`<option value="s:${esc(k)}">${esc(k)} (${sc[k]})</option>`).join('')}</optgroup>`})()}</select>
     <input id="labQ" placeholder="search player / college..." size="18">
-    <span class="note">three blocks per row: the player (who, where, usage) · <b>his own averages per game</b> (big = the selected span, small = the other; ▲ / ▼ = the opponent allows more / less than he averages) · <b>what the opponent allows per game to his slot</b> with its rank among 32 defenses (1 = allows the most) · then the model (Ψ = mean rank, Ψ+ = conviction, PROJ = projected PPR) &middot; position buttons toggle and combine &middot; every column sorts &middot; click a name for his card</span>
+    <span class="note">three blocks per row: the player (who, where, usage) · <b>what the opponent allows per game to his slot</b> with its rank among 32 defenses (1 = allows the most) · <b>his own averages per game</b> (big = the selected span, small = the other; ▲ / ▼ = the opponent allows more / less than he averages) · then the model (Ψ = mean rank, Ψ+ = conviction, PROJ = projected PPR) &middot; position buttons toggle and combine &middot; every column sorts &middot; click a name for his card</span>
   </div><div id="labTbl"></div>`;
   let posSet=new Set(['QB']),sortK='psi',sortA=true;
   const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
@@ -1267,7 +1267,7 @@ function lab(){
       <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.ln||u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td>`};
     const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${convBadge(u.cv)}</td><td class="md">${u.opp?edgeChip(u.opp,u.grp):'—'}</td><td class="md" title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
     const oppCell=(v,r,c)=>v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(decOf(c))}</span>${badge(r)}`;
-    const nCommon=(single?8:9)-(IS_NFL?0:1);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${k}" class="pa">his averages per game · <b>${AV==='S'?spanS:spanC}</b> <span>· small = ${AV==='S'?spanC:spanS}</span></th><th colspan="${n}" class="op">opponent allows per game to his slot · rank of 32 · ${src}</th><th colspan="4" class="md">model</th></tr>`;
+    const nCommon=(single?8:9)-(IS_NFL?0:1);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${n}" class="op">opponent allows per game to his slot · rank of 32 · ${src}</th><th colspan="${k}" class="pa">his averages per game · <b>${AV==='S'?spanS:spanC}</b> <span>· small = ${AV==='S'?spanC:spanS}</span></th><th colspan="4" class="md">model</th></tr>`;
     let html;
     if(single){
       const heads=LABDEF[single].heads;
@@ -1277,21 +1277,21 @@ function lab(){
           .filter(g=>g.startsWith(single==='QB'?'QB':single)).map(g=>J.groupStats[g][i]).filter(Boolean);
         return Math.max(...alts.map(c=>d.stats[c]?d.stats[c].avg:0));})));
       html=`<table class="lab2"><thead>${grpRow(heads.length,heads.length+1)}<tr>${common}
-      ${heads.map((h,i)=>`<th class="pa${i===0?' gs':''}" data-k="a${i}" title="${esc(sampleStats[i])}: the player's own per-game average">${h.replaceAll('*','')}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
       ${heads.map((h,i)=>`<th class="op${i===0?' gs':''}" data-k="r${i}" title="${esc(sampleStats[i])} allowed per game to this slot · badge = rank of 32 (click sorts by rank)">${h.replaceAll('*','')}</th>`).join('')}
-      </tr></thead><tbody>
+      ${heads.map((h,i)=>`<th class="pa${i===0?' gs':''}" data-k="a${i}" title="${esc(sampleStats[i])}: the player's own per-game average">${h.replaceAll('*','')}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
+      ${tail}</tr></thead><tbody>
       ${R.map(u=>`<tr>${rowCommon(u)}
-      ${u.avgS.map((v,i)=>`<td class="pa${i===0?' gs':''}">${avgCell(v,u.avgC[i],u.raws[i],u.statset[i])}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
-      ${u.raws.map((v,i)=>`<td class="op${i===0?' gs':''}">${oppCell(v,u.ranks[i],u.statset[i])}</td>`).join('')}${rowTail(u)}</tr>`).join('')}</tbody></table>`;
+      ${u.raws.map((v,i)=>`<td class="op${i===0?' gs':''}">${oppCell(v,u.ranks[i],u.statset[i])}</td>`).join('')}
+      ${u.avgS.map((v,i)=>`<td class="pa${i===0?' gs':''}">${avgCell(v,u.avgC[i],u.raws[i],u.statset[i])}</td>`).join('')}<td class="pa">${gpCell(u)}</td>${rowTail(u)}</tr>`).join('')}</tbody></table>`;
     } else {
       // per-column max for the raw spectral bars across every slot that feeds the column
       const umax=UCOLS.map((_,k)=>Math.max(1,...R.map(u=>u.uV[k]==null?0:u.uV[k])));
       html=`<table class="fx labMulti lab2"><thead>${grpRow(UCOLS.length,UCOLS.length+1)}<tr>${common}
-      ${UCOLS.map(([h,tip],i)=>`<th class="pa${i===0?' gs':''}" data-k="x${i}" title="player's own per-game average: ${tip.replace(' allowed','')}">${h}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
-      ${UCOLS.map(([h,tip],i)=>`<th class="op${i===0?' gs':''}" data-k="u${i}" title="${tip} per game · badge = rank of 32 (click sorts by rank)">${h}</th>`).join('')}${tail}</tr></thead><tbody>
+      ${UCOLS.map(([h,tip],i)=>`<th class="op${i===0?' gs':''}" data-k="u${i}" title="${tip} per game · badge = rank of 32 (click sorts by rank)">${h}</th>`).join('')}
+      ${UCOLS.map(([h,tip],i)=>`<th class="pa${i===0?' gs':''}" data-k="x${i}" title="player's own per-game average: ${tip.replace(' allowed','')}">${h}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>${tail}</tr></thead><tbody>
       ${R.map(u=>`<tr>${rowCommon(u)}
-      ${u.uS.map((v,k)=>`<td class="pa${k===0?' gs':''}">${v==null&&u.uC[k]==null?'<span class="dim">·</span>':avgCell(v,u.uC[k],u.uV[k],k===1||k===5?'TD':'yd')}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
-      ${u.uV.map((v,k)=>`<td class="op${k===0?' gs':''}">${v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(k===1||k===5?2:1)}</span>${badge(u.uR[k])}`}</td>`).join('')}${rowTail(u)}</tr>`).join('')}</tbody></table>`;
+      ${u.uV.map((v,k)=>`<td class="op${k===0?' gs':''}">${v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(k===1||k===5?2:1)}</span>${badge(u.uR[k])}`}</td>`).join('')}
+      ${u.uS.map((v,k)=>`<td class="pa${k===0?' gs':''}">${v==null&&u.uC[k]==null?'<span class="dim">·</span>':avgCell(v,u.uC[k],u.uV[k],k===1||k===5?'TD':'yd')}</td>`).join('')}<td class="pa">${gpCell(u)}</td>${rowTail(u)}</tr>`).join('')}</tbody></table>`;
     }
     $('#labTbl').innerHTML=html+`<p class="note">${R.length} players &middot; ${act.join(' + ')||'no position selected'} &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
     document.querySelectorAll('#labTbl th[data-k]').forEach(th=>th.onclick=()=>{
