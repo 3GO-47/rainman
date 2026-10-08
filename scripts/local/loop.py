@@ -75,6 +75,8 @@ def main():
         step('landing', run, ['scripts/build_landing.py'])
     # ---------------- Arb Engine: DK (ESPN) + Kalshi + Polymarket for every league with games in the window, then the board
     if any(G[lg]['active'] for lg in G):
+        if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():                     # FanDuel / MGM / Caesars … (3 credits per league per day; NFL props weekly)
+            step('odds api', run, ['scripts/fetch_odds_api.py'] + (['--props'] if (FORCE or DOW == 'Thu') else []), False)
         if step('markets', pull_markets.main):
             if step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
         step('social', run, ['scripts/build_social.py'])
