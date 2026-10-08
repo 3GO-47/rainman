@@ -17,6 +17,9 @@ RAW = 'data/raw/tennis'
 TOURS = ('atp', 'wta')
 SURFACES = ('Hard', 'Clay', 'Grass')
 LEVEL_W = {'G': 1.1, 'M': 1.0, 'F': 1.0, 'A': 0.95, 'D': 0.85, 'C': 0.8, 'S': 0.8, 'PM': 1.0, 'P': 0.95, 'I': 0.9, 'T1': 1.0, 'T2': 0.95, 'W': 1.0}
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), '..'))
+import brand
 
 def norm(n):
     n = unicodedata.normalize('NFKD', str(n or '')).encode('ascii', 'ignore').decode().lower()
@@ -276,7 +279,7 @@ def build():
 # ------------------------------------------------------------------------------------------------ page
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">"""
 CSS = r"""
-:root{--bg:#000;--p:#0a0a0b;--p2:#111113;--p3:#17171a;--e:#1c1c20;--e2:#2a2a30;--fg:#e7e7ea;--dim:#8a8c93;--mute:#55575f;--acc:#e8b339;--g:#3fb950;--r:#f0564a;--b:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.4 var(--sans)}a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
 #hdr{display:flex;align-items:center;gap:14px;padding:0 18px;height:44px;border-bottom:1px solid var(--e);background:#050506;position:sticky;top:0;z-index:9}
 .brand{font:800 14px/1 var(--mono);letter-spacing:4px}.brand i{color:var(--acc);font-style:normal;margin-right:6px}.brand small{font:500 10px var(--mono);letter-spacing:2px;color:var(--dim);margin-left:8px}
@@ -308,6 +311,8 @@ td{padding:6px 8px;border-bottom:1px solid var(--e);vertical-align:middle;white-
 .toast{position:fixed;right:18px;bottom:18px;background:#15140f;border:1px solid var(--acc);color:var(--fg);padding:8px 12px;border-radius:6px;font:600 11px var(--mono);display:none;z-index:9}
 @media (max-width:1000px){.prof,.dr{grid-template-columns:1fr}.brand small{display:none}}
 """
+CSS, CSS_VARS = brand.themed_css(CSS)
+
 JS = r"""
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const M=J.matches,PL=J.players,TZ='America/Chicago';const CT=d=>new Date(d).toLocaleString('en-US',{weekday:'short',hour:'numeric',minute:'2-digit',timeZone:TZ}).replace(':00','');
@@ -368,8 +373,8 @@ foot();render();
 
 def page(J):
     cal = ''.join(f"<tr><td class='mono dim'>{int(c['lo']*100)}–{int(c['lo']*100)+10}%</td><td class='num'>{c['n']}</td><td class='num'>{'' if c['hit'] is None else str(round(100*c['hit']))+'%'}</td></tr>" for c in J['calib'])
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · Tennis</title>{HEAD}<style>{CSS}</style></head><body>
-<div id="hdr"><a class="brand" href="index.html"><i>◍</i>RAINMAN<small>TENNIS</small></a><div class="tabs" id="tabs"></div><div class="lg" id="lgs"></div><span class="hl"><a href="index.html">all sports</a><a href="arb.html">arb engine</a><a href="social.html">social</a></span><button class="q" id="q" title="how it works">?</button></div>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Tennis</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}</style></head><body>
+<div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN<small>TENNIS</small></a><div class="tabs" id="tabs"></div><div class="lg" id="lgs"></div><span class="hl"><a href="index.html">all sports</a><a href="arb.html">arb engine</a><a href="social.html">social</a></span>{brand.theme_switch_html()}<button class="q" id="q" title="how it works">?</button></div>
 <main><div id="view"></div><div class="foot" id="foot"></div></main>
 <div id="how"><div class="box"><h3>How the tennis page is built</h3>
 <h5>History</h5><p>Every tour-level singles match from Jeff Sackmann's open ATP and WTA files for the seasons on file, with serve statistics, rankings and surface.</p>
@@ -378,7 +383,7 @@ def page(J):
 <h5>Market</h5><p>Kalshi (one YES market per player; the ask is the price to buy) and Polymarket (one moneyline market per match). Market = the average of the exchange mid-points for the first-listed player. Δ = model − market: positive means Elo likes the first player more than the exchanges do. 5 points or more is worth a look; Elo knows nothing about injuries, fatigue or a retirement risk, so check the news before you act.</p>
 <h5>Form and records</h5><p>Form = the last ten tour matches, newest on the right; 12-month records overall and on the match surface; serve and return rates are the player's last 12 months against the tour average (gold tick).</p></div></div>
 <div id="toast" class="toast"></div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script></body></html>"""
+<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script></body></html>"""
 
 if __name__ == '__main__':
     build()
