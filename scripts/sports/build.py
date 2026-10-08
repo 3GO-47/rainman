@@ -317,11 +317,12 @@ def build(lg):
     tpl = open('scripts/sport_template.html', encoding='utf-8').read()
     _i = tpl.index('<style>') + 7; _j = tpl.index('</style>')
     _css, _blocks = brand.themed_css(tpl[_i:_j])
+    _tc = brand.team_color_css({k: (v.get('color') or '') for k, v in (teams or {}).items()})
     tpl = (tpl[:_i] + _css + tpl[_j:]
            .replace('__BRAND_BOOT__', brand.THEME_BOOT).replace('__BRAND_JS__', '<script>' + brand.THEME_JS + '</script>')
            .replace('__BRAND_MARK__', brand.mascot('counting', 20, 'rmask hdr')).replace('__BRAND_SWITCH__', brand.theme_switch_html()))
     tpl = tpl.replace('__BRAND_CSS__', brand.THEME_CSS + brand.alias_css('alt') + brand.SWITCH_CSS
-                      + '.brand .rmask{vertical-align:-5px;margin-right:3px}.right .rmsw{margin-left:8px}' + _blocks)
+                      + '.brand .rmask{vertical-align:-5px;margin-right:3px}.right .rmsw{margin-left:8px}' + _blocks + _tc)
     html = tpl.replace('__DATA__', json.dumps(J, separators=(',', ':'), default=lambda o: None if (isinstance(o, float) and math.isnan(o)) else (o.item() if hasattr(o, 'item') else str(o))))
     open(f'dashboard/{lg}.html', 'w', encoding='utf-8').write(html)
     print(f"{lg}: {len(L):,} log rows ({', '.join(str(s) for s in J['seasons'])}) · {len(P)} players · {len(games)} games in the next 14 days ({sum(1 for g in games if g.get('odds'))} with lines) · {len(PJ)} projections · picks {len(PK)} (+{n_new}) · dashboard/{lg}.html {os.path.getsize(f'dashboard/{lg}.html') // 1024} KB")
