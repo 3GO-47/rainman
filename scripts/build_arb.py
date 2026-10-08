@@ -19,8 +19,10 @@ import csv, glob, json, os, re
 from datetime import datetime
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 KALSHI_FEE, POLY_FEE = 0.07, 0.0
-SRC = {'DK': 'DraftKings', 'KAL': 'Kalshi', 'POLY': 'Polymarket'}
-KIND = {'DK': 'book', 'KAL': 'exchange', 'POLY': 'exchange'}
+BOOKS = {'fanduel': ('FD', 'FanDuel'), 'draftkings': ('DK', 'DraftKings'), 'betmgm': ('MGM', 'BetMGM'), 'caesars': ('CZR', 'Caesars'), 'fanatics': ('FAN', 'Fanatics'),
+         'espnbet': ('ESPN', 'ESPN BET'), 'betrivers': ('BR', 'BetRivers'), 'bet365': ('B365', 'bet365'), 'pinnacle': ('PIN', 'Pinnacle'), 'bovada': ('BOV', 'Bovada')}
+SRC = {'DK': 'DraftKings', 'KAL': 'Kalshi', 'POLY': 'Polymarket', **{c: n for c, n in BOOKS.values()}}
+KIND = {s: ('exchange' if s in ('KAL', 'POLY') else 'book') for s in SRC}
 KAL_ABBR = {'JAC': 'JAX', 'WAS': 'WSH', 'LAR': 'LAR', 'LAC': 'LAC', 'LV': 'LV'}          # Kalshi event abbreviations → ESPN slate abbreviations
 KAL_CITY = {'Washington': 'WSH', 'San Francisco': 'SF', 'Green Bay': 'GB', 'Dallas': 'DAL', 'Los Angeles C': 'LAC', 'Kansas City': 'KC', 'Las Vegas': 'LV', 'Buffalo': 'BUF',
             'Los Angeles R': 'LAR', 'Arizona': 'ARI', 'Tampa Bay': 'TB', 'Pittsburgh': 'PIT', 'Philadelphia': 'PHI', 'Carolina': 'CAR', 'New York G': 'NYG', 'New Orleans': 'NO',
@@ -133,6 +135,29 @@ def load_kalshi(G):
             rows.append(row(g, 'total', 'Over', pt, 'KAL', 1 / ask, ask, a_, f'yes {bid:.2f}/{ask:.2f}'))
             rows.append(row(g, 'total', 'Under', pt, 'KAL', 1 / (1 - bid), 1 - bid, a_, f'no @ {1 - bid:.2f}'))
     return rows
+
+def load_oddsapi(G):
+    """The Odds API game lines (FanDuel, BetMGM, Caesars, … and DraftKings) → rows; when it carries DraftKings, the ESPN DK rows are replaced by it."""
+    f = sorted(glob.glob('data/raw/markets/oddsapi_*.csv')); rows = []
+    if not f: return rows, False
+    f = f[-1]; a_ = asof(f); has_dk = False
+    by_lg = {}
+    for g in G.values(): by_lg.setdefault(g['lg'], []).append(g)
+    for r in csv.DictReader(open(f, encoding='utf-8')):
+        code = BOOKS.get(r['book'], (r['book'].upper()[:4], r['book']))[0]
+        if code not in SRC: SRC[code] = BOOKS.get(r['book'], (code, r['book']))[1]; KIND[code] = 'book'
+        g = find_game(G, r['league'], r['away'], r['home'], r['commence'][:10])
+        if not g: continue
+        try: dec = dec_from_american(r['price'])
+        except ValueError: continue
+        if code == 'DK': has_dk = True
+        if r['market'] == 'h2h':
+            if r['side'] in (g['away'], g['home']): rows.append(row(g, 'moneyline', r['side'], '', code, dec, asof_=a_))
+        elif r['market'] == 'spreads':
+            if r['side'] in (g['away'], g['home']) and r['point'] != '': rows.append(row(g, 'spread', r['side'], float(r['point']), code, dec, asof_=a_))
+        elif r['market'] == 'totals':
+            if r['side'] in ('Over', 'Under') and r['point'] != '': rows.append(row(g, 'total', r['side'], float(r['point']), code, dec, asof_=a_))
+    return rows, has_dk
 
 def load_poly(G):
     f = latest('polymarket'); rows = []
@@ -298,28 +323,33 @@ coverage();render();
 
 def page(G, lines, board, arbs, evs, asof_):
     games = {k: dict(lg=g['lg'], date=g['date'], away=g['away'], home=g['home'], away_logo=g['away_logo'], home_logo=g['home_logo'], tv=(g['tv'] or '').split(',')[0]) for k, g in G.items() if any(l['event_id'] == k for l in lines)}
-    src = {'DK': dict(name='DraftKings', kind='sportsbook', fee='', how='game lines with prices from ESPN\'s DraftKings feed (moneyline, spread, total); props carry no prices there'),
+    used = {l['source'] for l in lines}
+    src = {'DK': dict(name='DraftKings', kind='sportsbook', fee='', how='moneyline, spread and total with prices (The Odds API when a key is set, otherwise ESPN\'s DraftKings feed)'),
            'KAL': dict(name='Kalshi', kind='exchange', fee='7% × P × (1−P)', how='buy YES at the ask; the other side is NO at 1 − bid; the taker fee is added to the cost'),
            'POLY': dict(name='Polymarket', kind='exchange', fee='', how='away/favorite/Over outcome at the ask; the other side at 1 − bid; three lines nearest the main line kept')}
+    for c, n in BOOKS.values():
+        if c in used and c not in src: src[c] = dict(name=n, kind='sportsbook', fee='', how='moneyline, spread and total with prices from The Odds API')
+    src = {k: v for k, v in src.items() if k in used or k in ('DK', 'KAL', 'POLY')}
     J = dict(games=games, lines=lines, board=board, arbs=arbs, evs=evs, src=src, asof=asof_)
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · Arb Engine</title>{HEAD}<style>{CSS}</style></head><body>
 <div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><span class="tag">Arb Engine · every line, every source</span><span class="hl"><a href="index.html">all sports</a><a class="on" href="arb.html">Arb Engine</a><a href="social.html">Social</a></span><span class="right"><span id="plays"></span><span>pulled {asof_} · built {built}</span></span></div>
 <div class="wrap">
-<h1>Every line, every source, one number.<small>The same bet priced at DraftKings, Kalshi and Polymarket side by side. Each side gets a fair probability from the consensus of all sources (exchange mid-points, de-vigged book prices), so every price turns into an expected value. When the two sides of one market pay out more than 100% combined across sources, that's an arbitrage and the stake split is shown. Exchange fees are already in the prices.</small></h1>
+<h1>Every line, every source, one number.<small>The same bet priced at every book we can reach — DraftKings, FanDuel, BetMGM, Caesars and more through The Odds API — beside the Kalshi and Polymarket exchanges. Each side gets a fair probability from the consensus of all sources (exchange mid-points, de-vigged book prices), so every price turns into an expected value. When the two sides of one market pay out more than 100% combined across sources, that's an arbitrage and the stake split is shown. Exchange fees are already in the prices.</small></h1>
 <div class="pintro"><div class="pw"><b>How to read it</b> — gold chip = the best price for that side · the % on a chip = expected value at that price (green = you are paid more than fair, red = less) · fair = the consensus probability · click any chip to save it as a play.</div><div class="ph"><span>prices in American odds, fees included</span><span>Kalshi: YES at the ask, NO at 1 − bid, 7% × P × (1−P) taker fee</span><span>Polymarket: outcome at the ask, other side at 1 − bid</span><span>spreads and totals compare only at the same number</span><span>a pull is a snapshot — prices move</span></div></div>
 <div id="kpis" class="kpis"></div>
 <h2>coverage <span>how many lines each source contributes, by market — the quantification layer every other number is built on</span></h2><div id="cov" class="cov"></div>
 <h2>arbitrage <span>both sides covered across sources for a guaranteed return, fees included · stake split per $100</span></h2><div id="arbs" style="display:grid;gap:8px"></div>
 <h2>the board <span>every market priced at two or more sources, best price per side in gold, EV on every chip · sorted by the best edge in the game · single-source lines behind the toggle</span></h2><div id="filt" class="chips"></div><div id="wall" class="wall"></div>
 <h2>+EV plays <span>every price that beats the consensus by the threshold · sortable · ¼ Kelly = suggested stake as a share of bankroll</span></h2><div id="ev"></div>
-<div class="foot">RAINMAN · Arb Engine · lines from DraftKings (via ESPN), Kalshi (public trade API) and Polymarket (Gamma API), pulled {asof_}; no account, no key. Fair probabilities are a consensus, not a model — they move with the market. This is information, not advice; check the live price and your book's rules before placing anything.</div></div>
+<div class="foot">RAINMAN · Arb Engine · lines from the US books via The Odds API (plus DraftKings via ESPN when no key is set), Kalshi (public trade API) and Polymarket (Gamma API), pulled {asof_}; no account, no key. Fair probabilities are a consensus, not a model — they move with the market. This is information, not advice; check the live price and your book's rules before placing anything.</div></div>
 <div id="toast" class="toast"></div>
 <script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script></body></html>"""
 
 def main():
     G = slate()
-    lines = load_dk(G) + load_kalshi(G) + load_poly(G)
+    oa, has_dk = load_oddsapi(G)
+    lines = (load_dk(G) if not has_dk else []) + oa + load_kalshi(G) + load_poly(G)
     board, arbs, evs = analyse(lines, G)
     os.makedirs('data/processed', exist_ok=True)
     write_csv('data/processed/lines_all.csv', lines); write_csv('data/processed/arb_board.csv', board); write_csv('data/processed/arb_opps.csv', arbs); write_csv('data/processed/ev_opps.csv', evs)
