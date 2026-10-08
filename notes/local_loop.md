@@ -46,3 +46,8 @@ seasonType 1). Off-season leagues cost nothing: no pulls, no builds.
 ## Still manual / Claude-only
 Nothing in the weekly cadence. Things that still need a person or a session: new-season bootstraps (positions from PFR's
 fantasy page if roster ids are missing, schedule parse), MLB / NCAAB / soccer player data (no source yet), and anything UI.
+
+## Tennis (added 2026-10-08)
+- `scripts/local/pull_tennis.py` (runs in the daily loop; its `markets()` also runs in the 6-hourly markets task): Sackmann ATP/WTA match files 2023→ (cached under data/raw/tennis/, current season refreshed daily), ESPN tennis scoreboard for today + 7 days (singles), Kalshi KXATPMATCH/KXWTAMATCH and Polymarket ATP/WTA match prices.
+- `scripts/tennis/build.py` → dashboard/tennis.html + data/processed/tennis_matches.csv, tennis_elo.csv (Elo model, profiles, H2H, model vs market).
+- First run by hand: `py -3 scripts\local\loop.py --tennis` (pulls, builds, commits, pushes if the credential helper is primed). The landing's Tennis tile and tennis.html stay empty until then.
