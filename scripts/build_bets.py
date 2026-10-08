@@ -35,7 +35,7 @@ def main():
         for r in D.itertuples():
             m = MK.get(r.market)
             if m: lines.append(dict(player=r.player, market=m, book='DK', line=r.line, over=None, under=None, open=r.open, updated=r.updated))
-    for f in sorted(glob.glob('data/raw/odds_api/props_*.csv'))[-1:]:
+    for f in [f for f in ['data/raw/odds_api/props_current.csv'] if os.path.exists(f)]:
         O = pd.read_csv(f)
         for (pl, m, bk, ln), g in O.groupby(['player', 'market', 'book', 'line']):
             ov = g[g.side == 'Over'].price; un = g[g.side == 'Under'].price
@@ -69,7 +69,7 @@ def main():
     # anytime TD: every projected player, fair price from the model; book price + EV where a priced feed has it
     T = PJ[PJ.market == 'anytime_td'].copy()
     prices = {}
-    for f in sorted(glob.glob('data/raw/odds_api/props_*.csv'))[-1:]:
+    for f in [f for f in ['data/raw/odds_api/props_current.csv'] if os.path.exists(f)]:
         O = pd.read_csv(f); O = O[O.market == 'anytime_td']
         for r in O.itertuples(): prices.setdefault(key(r.player), {})[r.book] = float(r.price)
     rows = []

@@ -1895,8 +1895,8 @@ window.ppDeep=function(n){const m=document.getElementById('ppModal');if(m)m.remo
   setTimeout(()=>{try{$('#pOut').scrollIntoView({behavior:'smooth'})}catch(e){}},60);};
 window.playerPop=function(n){
   if(!n)return;const old=document.getElementById('ppModal');if(old)old.remove();
-  const L=J.logs.filter(l=>l[LOG.player]===n).sort((a,b)=>a[LOG.season]-b[LOG.season]||a[LOG.week]-b[LOG.week]);
-  const dc=J.depth.find(d=>d.player===n)||{};
+  const dc=J.depth.find(d=>d.player===n)||J.depth.find(d=>d.log_name===n)||{};const ln=dc.log_name||n;
+  const L=J.logs.filter(l=>l[LOG.player]===ln||l[LOG.player]===n).sort((a,b)=>a[LOG.season]-b[LOG.season]||a[LOG.week]-b[LOG.week]);
   const team=dc.team||(L.length?L[L.length-1][LOG.team]:'');
   const slot=dc.slot||(L.length?L[L.length-1][LOG.slot]:'');
   const grp=SLOTG(slot);

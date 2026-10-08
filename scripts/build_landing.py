@@ -18,7 +18,8 @@ LEAGUES = [  # key, label, sport group, page, status, logo (real league marks: E
     ('wnba', 'WNBA', 'basketball', 'wnba.html', 'live', CDN + 'teamlogos/leagues/500-dark/wnba.png'),
     ('mlb', 'MLB', 'baseball', 'mlb.html', 'shell', CDN + 'teamlogos/leagues/500-dark/mlb.png'),
     ('nhl', 'NHL', 'hockey', 'nhl.html', 'live', CDN + 'teamlogos/leagues/500-dark/nhl.png'),
-    ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png')]
+    ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png'),
+    ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', '')]          # ATP + WTA: no league mark on ESPN's CDN, so the tile carries the count only
 SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'laliga': 'La Liga', 'bund': 'Bundesliga', 'seriea': 'Serie A', 'ligue1': 'Ligue 1'}
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
 SOCCER_LOGO = {k: CDN + f'leaguelogos/soccer/500-dark/{v}.png' for k, v in SOCCER_LOGO.items()}
@@ -85,6 +86,16 @@ def load_slate():
                           away=dict(id=p[5], abbr=p[6], name=p[7], rec=p[8], logo=p[9], rank=p[10] if p[10] not in ('', '99') else ''),
                           home=dict(id=p[11], abbr=p[12], name=p[13], rec=p[14], logo=p[15], rank=p[16] if p[16] not in ('', '99') else ''),
                           venue=p[17], tv=p[18], odds=p[19], ou=p[20], week=p[21], neutral=p[23] == '1', book=p[24], note=p[25]))
+    tf = 'data/processed/tennis_matches.csv'                                  # scripts/tennis/build.py: the week's ATP / WTA singles
+    if os.path.exists(tf):
+        import csv
+        for r in csv.DictReader(open(tf, encoding='utf-8')):
+            if r['status'] not in ('STATUS_SCHEDULED', 'STATUS_IN_PROGRESS'): continue
+            side = lambda n, rk: dict(id='', abbr=n.split()[-1][:10], name=n, rec=f'#{rk}' if rk else '', logo='', rank='')
+            mp = r.get('model_p1'); kp = r.get('market_p1')
+            games.append(dict(lg='tennis', sport='tennis', sub=r['tour'].upper(), id='t' + r['id'], date=r['date'], status=r['status'],
+                              away=side(r['p1'], r['p1_rank']), home=side(r['p2'], r['p2_rank']), venue=r['tourney'], tv=r['round'], odds='', ou='', week='', neutral=True, book='',
+                              note=' · '.join(x for x in [f"{r['tourney']} {r['round']}", f'model {round(100*float(mp))}% {r["p1"].split()[-1]}' if mp else '', f'market {round(100*float(kp))}%' if kp else ''] if x)))
     return games, pulled
 
 def model_records():

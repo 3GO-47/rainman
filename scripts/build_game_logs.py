@@ -89,20 +89,36 @@ def main(season):
             'rec_yds':recyds,'rec_td':rectd,'fumbles_lost':fl,
             'fantasy_pts_std':round(std,2),'fantasy_pts_ppr':round(std+rec,2)})
 
-    # slot assignment: cumulative usage through current week
+    # slot assignment: usage RATE through the current week (per game played, shrunk toward last season's rate),
+    # so a starter who missed games is still the WR1 the week he returns — a cumulative count would rank the
+    # backup who played in his absence above him (Nico Collins WR2 behind Hutchinson in 2026 wk 4, Flowers WR2 wk 3).
     recs.sort(key=lambda r: r['week'])
-    cum = defaultdict(float)  # (pid) -> usage
-    by_week = defaultdict(list)
-    for r in recs: by_week[r['week']].append(r)
     USAGE = {'QB': lambda r: r['pass_att'], 'RB': lambda r: r['rush_att']+r['targets'],
              'WR': lambda r: r['targets'], 'TE': lambda r: r['targets']}
+    DEFAULT = {'QB': 20.0, 'RB': 6.0, 'WR': 3.0, 'TE': 2.5}          # prior rate for a player with no history
+    prior = {}
+    pf = f'data/game_logs/game_logs_{int(season)-1}.csv'
+    if os.path.exists(pf):
+        acc = defaultdict(lambda: [0.0, 0])
+        for r in csv.DictReader(open(pf, encoding='utf-8')):
+            if r['pos'] not in USAGE: continue
+            u = USAGE[r['pos']]({k: float(r[k] or 0) for k in ('pass_att', 'rush_att', 'targets')})
+            a_ = acc[r['player_id']]; a_[0] += u; a_[1] += 1
+        prior = {pid: v[0] / v[1] for pid, v in acc.items() if v[1]}
+    K = 2.0                                                            # games of prior weight
+    cum = defaultdict(float); gp = defaultdict(int)
+    by_week = defaultdict(list)
+    for r in recs: by_week[r['week']].append(r)
+    def rate(r):
+        pr = prior.get(r['player_id'], DEFAULT[r['pos']])
+        return (cum[r['player_id']] + K * pr) / (gp[r['player_id']] + K)
     for wk in sorted(by_week):
         for r in by_week[wk]:
-            cum[r['player_id']] += USAGE[r['pos']](r)
+            cum[r['player_id']] += USAGE[r['pos']](r); gp[r['player_id']] += 1
         teams = defaultdict(list)
         for r in by_week[wk]: teams[(r['team'], r['pos'])].append(r)
         for (t, p), lst in teams.items():
-            lst.sort(key=lambda r: -cum[r['player_id']])
+            lst.sort(key=lambda r: -rate(r))
             for i, r in enumerate(lst, 1):
                 if p == 'QB': r['slot'] = f'QB{min(i,2)}'
                 elif p == 'RB': r['slot'] = f'RB{min(i,3)}'
