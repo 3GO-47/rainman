@@ -19,26 +19,26 @@ THEMES = {
         'txt': '#e6e6e8', 'dim': '#9a9ca4', 'dim2': '#60626a',
         'accent': '#e8b339', 'accent-text': '#e8b339', 'on-accent': '#000',
         'amber': '#e8b339', 'green': '#3fb950', 'red': '#f0564a',
-        'cyan': '#8ab4d8', 'violet': '#a99bd6',
+        'cyan': '#8ab4d8', 'violet': '#a99bd6', 'blue': '#6c8cff', 'pink': '#e86fa8',
         'mark': '#e6e6e8', 'mark-shade': '#1a1a1d',
     },
-    'light': {
-        'bg': '#f3efe6', 'panel': '#ede8db', 's2': '#e8e2d3', 's3': '#ddd5c2',
-        'edge': '#cfc7b3', 'edge2': '#b9af97',
-        'txt': '#14213d', 'dim': '#5b6478', 'dim2': '#7a8296',
-        'accent': '#e8590c', 'accent-text': '#b8430a', 'on-accent': '#14213d',
-        'amber': '#b7791f', 'green': '#1e7f4f', 'red': '#c92a2a',
-        'cyan': '#1d6e8c', 'violet': '#5b4b9a',
+    'light': {  # paper. bg / txt / accent are the brand sheet's; the rest are tuned for contrast on paper
+        'bg': '#f3efe6', 'panel': '#fdfbf6', 's2': '#f6f2e9', 's3': '#e9e3d4',
+        'edge': '#d5cbb5', 'edge2': '#b9ad92',
+        'txt': '#14213d', 'dim': '#434c63', 'dim2': '#596072',
+        'accent': '#b8460b', 'accent-text': '#a8400a', 'on-accent': '#ffffff',
+        'amber': '#8f6410', 'green': '#157348', 'red': '#b32424',
+        'cyan': '#16627e', 'violet': '#53439b', 'blue': '#2743a8', 'pink': '#a8336c',
         'mark': '#14213d', 'mark-shade': '#f3efe6',
     },
-    'rain': {
-        'bg': '#0b1220', 'panel': '#0f182b', 's2': '#131d33', 's3': '#1b2a44',
-        'edge': '#24344f', 'edge2': '#33466a',
-        'txt': '#e6f1ff', 'dim': '#8fa3bf', 'dim2': '#5f7391',
+    'rain': {  # midnight. bg / accent are the brand sheet's; surfaces stepped so panels lift off the page
+        'bg': '#0b1220', 'panel': '#111c30', 's2': '#17243c', 's3': '#1f3050',
+        'edge': '#2a3d5c', 'edge2': '#3b5680',
+        'txt': '#e6f1ff', 'dim': '#a8bcd6', 'dim2': '#8196b2',
         'accent': '#19e3b1', 'accent-text': '#19e3b1', 'on-accent': '#0b1220',
-        'amber': '#f0c04a', 'green': '#5be38f', 'red': '#ff6b6b',
-        'cyan': '#6cb6ff', 'violet': '#a99bff',
-        'mark': '#e6f1ff', 'mark-shade': '#1b2a44',
+        'amber': '#f2c75c', 'green': '#4fe08a', 'red': '#ff7a7a',
+        'cyan': '#6cb6ff', 'violet': '#b3a6ff', 'blue': '#7f9cff', 'pink': '#ff86c0',
+        'mark': '#e6f1ff', 'mark-shade': '#1f3050',
     },
 }
 ORDER = ['dark', 'light', 'rain']
@@ -111,6 +111,44 @@ SWITCH_CSS = """
 def theme_switch_html(title='theme'):
     btns = ''.join(f'<button data-rmtheme="{t}" title="{LABEL[t]} theme">{t[0].upper()}</button>' for t in ORDER)
     return f'<span class="rmsw" role="group" aria-label="{title}">{btns}</span>'
+
+# ------------------------------------------------------------------ team colours
+# Real club colours are kept (that is the rule), but a colour picked to glow on black
+# is often invisible on paper. Each team ships as --tc-<ABBR>, re-leveled per theme, so
+# the page markup never has to know which theme is on.
+
+def _srgb(c):
+    c = c / 255
+    return c / 12.92 if c <= .03928 else ((c + .055) / 1.055) ** 2.4
+
+def _wl(rgb):
+    return .2126 * _srgb(rgb[0]) + .7152 * _srgb(rgb[1]) + .0722 * _srgb(rgb[2])
+
+def contrast(a, b):
+    la, lb = _wl(_hex2rgb(a)[:3] if isinstance(a, str) else a), _wl(_hex2rgb(b)[:3] if isinstance(b, str) else b)
+    return (max(la, lb) + .05) / (min(la, lb) + .05)
+
+def level(hexv, theme, target=4.5, on=None):
+    """Keep a colour's hue, move its lightness until it is legible on `on` (default: the theme's panel)."""
+    try: rgb = _hex2rgb(hexv)[:3]
+    except Exception: return hexv
+    bg = _hex2rgb(on or THEMES[theme]['panel'])[:3]
+    toward = (0, 0, 0) if _wl(bg) > .5 else (255, 255, 255)
+    best = rgb
+    for i in range(0, 41):                       # walk toward ink (on paper) or light (on a dark page)
+        c = _mix(rgb, toward, i / 50)
+        best = c
+        if contrast(tuple(c), bg) >= target: break
+    return _fmt(*best, 1.0)
+
+def team_color_css(teams, var='tc'):
+    """teams: {ABBR: '#rrggbb'} -> :root plus one override block per theme."""
+    teams = {k: v for k, v in teams.items() if isinstance(v, str) and v.startswith('#') and len(v) in (4, 7)}
+    if not teams: return ''
+    out = ':root{' + ''.join(f'--{var}-{k}:{v};' for k, v in teams.items()) + '}\n'
+    for t in ('light', 'rain'):
+        out += f'[data-theme="{t}"]{{' + ''.join(f'--{var}-{k}:{level(v, t)};' for k, v in teams.items()) + '}\n'
+    return out
 
 # ------------------------------------------------------------------ the mascot
 # A rain cloud wearing a visor, five drips hanging underneath, and a tally stroke counted across them.
@@ -222,24 +260,70 @@ def _hue(r, g, b):
 def _mix(c1, c2, t):
     return tuple(c1[i] + (c2[i] - c1[i]) * t for i in range(3))
 
+# ---- dark -> theme colour mapping -------------------------------------------------
+# Three rules, in order, so the result is designed rather than merely computed:
+#   1. a literal that IS one of dark's tokens becomes that token in the target theme (exact, by name)
+#   2. a grey rides an ANCHORED ramp: dark's own surface/text steps are the knots, so #0b0b0c lands on
+#      the theme's panel and #9a9ca4 on its dim -- surfaces keep their separation instead of collapsing
+#   3. anything saturated snaps to the nearest semantic token by hue, then keeps its EMPHASIS: a literal
+#      dimmer than dark's token fades toward the theme's bg by the same ratio, a brighter one pushes past it
+
+_EXACT = {}
+for _k, _v in THEMES['dark'].items():
+    _EXACT.setdefault(_v.lower(), _k)
+_EXACT['#e8b339'] = 'accent-text'   # the brand gold reads as TEXT more often than as a fill
+for _k, _v in LEAGUE_TAG['dark'].items():
+    _EXACT.setdefault(_v.lower(), 'lg-' + _k)
+
+def _tok(theme, name):
+    return _hex2rgb(LEAGUE_TAG[theme][name[3:]] if name.startswith('lg-') else THEMES[theme][name])[:3]
+
+# knots for the grey ramp: dark's structural greys, darkest first
+_RAMP = ['bg', 'panel', 's2', 's3', 'edge', 'edge2', 'dim2', 'dim', 'txt']
+_KNOTS = sorted(((_lum(*_tok('dark', n)), n) for n in _RAMP), key=lambda x: x[0])
+
+def _grey(L, theme):
+    ks = _KNOTS
+    if L <= ks[0][0]: return _tok(theme, ks[0][1])
+    if L >= ks[-1][0]:                                  # brighter than dark's text -> push to pure ink/paper
+        hi = _tok(theme, ks[-1][1])
+        return _mix(hi, (255, 255, 255) if _lum(*_tok(theme, 'bg')) < .5 else (0, 0, 0),
+                    min((L - ks[-1][0]) / max(1e-6, 1 - ks[-1][0]), 1) * .6)
+    for i in range(len(ks) - 1):
+        a, b = ks[i], ks[i + 1]
+        if a[0] <= L <= b[0]:
+            t = 0 if b[0] == a[0] else (L - a[0]) / (b[0] - a[0])
+            return _mix(_tok(theme, a[1]), _tok(theme, b[1]), t)
+    return _tok(theme, 'txt')
+
+# hue of each of dark's semantic colours -> the bucket an arbitrary saturated literal falls into
+_BUCKETS = [(_hue(*_hex2rgb(THEMES['dark'][n])[:3]), n)
+            for n in ('red', 'amber', 'green', 'cyan', 'blue', 'violet', 'pink')]
+
 def map_color(lit, theme):
     """One dark literal -> its counterpart in `theme`."""
     r, g, b, a = _parse(lit)
     T = THEMES[theme]
-    bg = _hex2rgb(T['bg'])[:3]; txt = _hex2rgb(T['txt'])[:3]
+    key = lit.lower()
+    if key.startswith('#'):                              # 1. a named token keeps its name
+        if len(key) == 4: key = '#' + ''.join(c * 2 for c in key[1:])
+        hit = _EXACT.get(key) or _EXACT.get(lit.lower())
+        if hit: return _fmt(*_tok(theme, hit), a)
     L, S = _lum(r, g, b), _sat(r, g, b)
-    # near-black and near-white are structure, not brand colour, however tinted they look
-    if S < 0.22 or (L < 0.22 and S < 0.62) or L > 0.86:
-        t = L ** 0.85                              # dark's black sits on the theme's bg, dark's white on its text
-        if theme == 'light': t = min(1.0, t * 1.08)
-        return _fmt(*_mix(bg, txt, t), a)
-    H = _hue(r, g, b)                              # saturated: snap to the nearest semantic token of this theme
-    NAMED = [('red', 10), ('amber', 45), ('green', 140), ('cyan', 205), ('accent', 48), ('violet', 262)]
-    best = min(NAMED, key=lambda kv: min(abs(H - kv[1]), 360 - abs(H - kv[1])))[0]
-    nr, ng, nb, _ = _hex2rgb(T[best])
-    if L < 0.14:                                   # a very dark tint of that colour (a filled chip back) stays a tint
-        return _fmt(*_mix(bg, (nr, ng, nb), 0.22), a)
-    return _fmt(nr, ng, nb, a)
+    if S < 0.22 or (L < 0.22 and S < 0.50) or L > 0.90:  # 2. structure: near-black / near-white / unsaturated
+        return _fmt(*_grey(L, theme), a)
+    H = _hue(r, g, b)                                    # 3. brand colour: nearest token, same emphasis
+    name = min(_BUCKETS, key=lambda kv: min(abs(H - kv[0]), 360 - abs(H - kv[0])))[1]
+    if name == 'amber' and S < .55: name = 'dim'         # a desaturated gold is a muted label, not the brand gold
+    if name == 'dim': return _fmt(*_grey(L, theme), a)
+    dk, th = _hex2rgb(THEMES['dark'][name])[:3], _tok(theme, name)
+    bg = _tok(theme, 'bg')
+    e = L / max(_lum(*dk), 1e-6)                         # how bright this literal is next to dark's own token
+    if e < 1:                                            # dimmer -> a tint of the theme colour over its bg
+        gamma = .85 if _lum(*bg) < .5 else 1.45          # paper takes a far lighter wash than a dark page
+        return _fmt(*_mix(bg, th, max(e, .06) ** gamma), a)
+    far = (255, 255, 255) if _lum(*bg) < .5 else (0, 0, 0)
+    return _fmt(*_mix(th, far, min((e - 1) * .55, .40)), a)
 
 def themed_css(css, prefix='k'):
     """Returns (css_with_vars, override_blocks). Dark is untouched: it defines none of the vars."""

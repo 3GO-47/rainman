@@ -308,7 +308,10 @@ CSS = r"""
 .hl a:hover{color:var(--fg);border-color:var(--acc)}.hl a.acc{color:var(--acc);border-color:#3a3322}
 main{max-width:1180px;margin:0 auto;padding:34px 20px 70px}
 h1{font:800 30px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 6px}
-.sub{color:var(--dim);font-size:13.5px;margin:0 0 26px}
+.sub{color:var(--dim);font-size:13.5px;margin:0}
+.hero{display:flex;align-items:center;gap:18px;margin:0 0 26px}
+.hero .rmask{flex:none;width:76px;height:76px}
+@media(max-width:640px){.hero{gap:12px}.hero .rmask{width:52px;height:52px}}
 h2{font:600 10.5px var(--mono);letter-spacing:2.2px;text-transform:uppercase;color:var(--mute);margin:34px 0 12px;display:flex;align-items:baseline;gap:10px}
 h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:var(--mute)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:10px}
@@ -336,7 +339,7 @@ tr.lg{cursor:pointer}tr.lg:hover td{background:var(--p)}
 .lgn{display:inline-flex;align-items:center;gap:8px;font-weight:600}.lgn img{width:17px;height:17px;object-fit:contain}
 .bar{display:inline-flex;align-items:center;gap:7px;font:600 11px var(--mono)}
 .bar .t{position:relative;width:84px;height:6px;background:var(--p3);border-radius:2px;overflow:hidden}
-.bar .t i{display:block;height:100%}.bar .t em{position:absolute;top:-2px;width:2px;height:10px;background:var(--acc)}
+.bar .t i{display:block;height:100%}.bar .t em{position:absolute;top:0;bottom:0;width:2px;background:var(--amber)}
 .seq{display:inline-flex;gap:2px}.seq i{width:5px;height:11px;border-radius:1px;display:block}
 .note{color:var(--mute);font:500 11px/1.65 var(--mono);margin:10px 0 0}
 .foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--e);color:var(--mute);font:500 10.5px/1.75 var(--mono)}
@@ -422,8 +425,8 @@ def page(games, pulled):
 {HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}{CSS_VARS}{CSS}</style>{brand.THEME_BOOT}</head><body>
 <div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a>{brand.theme_switch_html()}</span></div>
 <main>
-<h1>RAINMAN</h1>
-<p class="sub">Matchup intelligence, one dashboard per sport.</p>
+<div class="hero">{brand.mascot("counting", 76, "rmask")}<div><h1>RAINMAN</h1>
+<p class="sub">Matchup intelligence, one dashboard per sport.</p></div></div>
 <h2>sports <span>{nsport} with games in the window</span></h2>
 <div class="grid">{tiles}</div>
 <h2>model performance <span>every position the models froze, graded against the line it was frozen at · one unit risked per position</span></h2>

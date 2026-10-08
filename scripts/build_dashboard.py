@@ -355,9 +355,13 @@ def main():
     template = open(os.path.join(REPO, 'scripts/dashboard_template.html'), encoding='utf-8').read()
     _i = template.index('<style>') + 7; _j = template.index('</style>')
     _css, _blocks = brand.themed_css(template[_i:_j])          # dark keeps every literal; light and rain get mapped overrides
+    _lgt = (data.get('league') or {}).get('teams') or {}
+    if not _lgt:                                              # the NFL map lives in the template itself
+        _lgt = {k: {'c1': c} for k, c in re.findall(r"([A-Z]{2,4}):\{[^}]*?c1:'(#[0-9a-fA-F]{3,8})'", template)}
+    _tc = brand.team_color_css({k: (v.get('c1') or '') for k, v in _lgt.items()})
     template = template[:_i] + _css + template[_j:]
     html = (template.replace('__DATA__', payload).replace('__LEAGUE_NAME__', data['league']['title'])
-            .replace('__BRAND_CSS__', brand.THEME_CSS + brand.alias_css('dash') + brand.SWITCH_CSS + BRAND_EXTRA_CSS + _blocks)
+            .replace('__BRAND_CSS__', brand.THEME_CSS + brand.alias_css('dash') + brand.SWITCH_CSS + BRAND_EXTRA_CSS + _blocks + _tc)
             .replace('__BRAND_BOOT__', brand.THEME_BOOT)
             .replace('__BRAND_MARK__', brand.mascot('counting', 22, 'rmask hdr'))
             .replace('__BRAND_SWITCH__', brand.theme_switch_html())

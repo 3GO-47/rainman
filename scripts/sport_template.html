@@ -60,7 +60,7 @@ th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}th.srt-asc:
 const $=s=>document.querySelector(s),esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;const fmt=(v,d=1)=>v==null||isNaN(v)?'·':(+v).toFixed(d);
 const LC=Object.fromEntries(J.logCols.map((c,i)=>[c,i]));const STAT=Object.fromEntries(J.stats.map(s=>[s.k,s]));const NT=Object.keys(J.dvp.combined).length||30;
-const TEAM=J.teams;const logo=t=>TEAM[t]?`<img src="${TEAM[t].logo}" alt="" onerror="this.style.visibility='hidden'">`:'';const tc=t=>`<span class="tc">${logo(t)}<span style="color:${TEAM[t]&&TEAM[t].color||'#cfd2d8'}">${t}</span></span>`;
+const TEAM=J.teams;const logo=t=>TEAM[t]?`<img src="${TEAM[t].logo}" alt="" onerror="this.style.visibility='hidden'">`:'';const tc=t=>`<span class="tc">${logo(t)}<span style="color:${TEAM[t]&&TEAM[t].color?'var(--tc-'+t+','+TEAM[t].color+')':'var(--dim)'}">${t}</span></span>`;
 const tname=t=>TEAM[t]&&TEAM[t].name||t;
 const gradeT=r=>Math.max(0,Math.min(1,(r-1)/(NT-1)));const gradeStyle=r=>{if(r==null)return 'background:var(--s3);color:var(--dim)';const t=gradeT(r);const h=t<.5?145-(t/.5)*(145-48):48-((t-.5)/.5)*44;return `background:hsla(${h},${t<.5?55:60}%,${t<.5?30:36}%,.95);color:#f3f3f3`};
 const gradeColor=r=>{if(r==null)return 'var(--dim)';const t=gradeT(r);const h=t<.5?145-(t/.5)*(145-48):48-((t-.5)/.5)*44;return `hsl(${h},60%,55%)`};
