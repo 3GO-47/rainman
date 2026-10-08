@@ -2,7 +2,7 @@
 Usage: python3 build_dashboard.py
 Every number traces to data/game_logs/ via the derived CSVs. Rerun after any data refresh.
 """
-import re, csv, glob, json, os, sys, datetime
+import json, re, csv, glob, json, os, sys, datetime
 import pandas as pd
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LEAGUE = sys.argv[sys.argv.index('--league') + 1] if '--league' in sys.argv else 'nfl'
@@ -102,7 +102,10 @@ def bets_payload():
     rt = rows(P + 'team_ratings.csv', lambda r: r['season'] == '2026') if os.path.exists(P + 'team_ratings.csv') else []
     props = rows(P + 'props_current.csv') if os.path.exists(P + 'props_current.csv') else []
     pledger = rows(P + 'props_ledger.csv') if os.path.exists(P + 'props_ledger.csv') else []
-    return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger,
+    log = rows('notes/model_log.csv') if os.path.exists('notes/model_log.csv') else []
+    pm = json.load(open(P + 'prop_model.json', encoding='utf-8')) if os.path.exists(P + 'prop_model.json') else {}
+    skill = {k: {x: v.get(x) for x in ('skill', 'skill_form_only', 'n', 'brier', 'scale', 'calibration')} for k, v in (pm.get('markets') or {}).items()}
+    return {'games': gm, 'backtest': backtest, 'ledger': ledger, 'retro': retro, 'ratings': rt, 'props': props, 'propsLedger': pledger, 'modelLog': log, 'skill': skill,
             'propsWeek': int(props[0]['week']) if props else None}
 
 def betting_payload():
