@@ -13,7 +13,7 @@ Log: notes/local_runs.log · state: notes/local_state.json"""
 import datetime, glob, json, os, subprocess, sys, traceback
 sys.path.insert(0, os.path.dirname(__file__))
 from common import log, state, save_state, run, TODAY, TODAY_S
-import gate, pull_box, pull_espn, pull_kalshi
+import gate, pull_box, pull_espn, pull_kalshi, pull_markets
 
 FORCE = '--force' in sys.argv
 WD = TODAY.weekday()            # Mon=0 … Sun=6
@@ -73,6 +73,11 @@ def main():
     else: log('NBA/NHL/WNBA: no games around today — skipped')
     if 'nfl' not in did and glob.glob('data/raw/slate_all_*.txt'):
         step('landing', run, ['scripts/build_landing.py'])
+    # ---------------- Arb Engine: DK (ESPN) + Kalshi + Polymarket for every league with games in the window, then the board
+    if any(G[lg]['active'] for lg in G):
+        if step('markets', pull_markets.main):
+            if step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
+        step('social', run, ['scripts/build_social.py'])
     # ---------------- commit / push
     git('add', '-A')
     chg = git('status', '--porcelain').stdout.strip()
