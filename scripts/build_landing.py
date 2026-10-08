@@ -267,7 +267,7 @@ def page(games, pulled):
         if teasers.get(k): teasers[k]['labels'] = lab
     J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, pulled=pulled, teasers=teasers, records=model_records())
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
-    links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES)
+    links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES) + '<a href="arb.html" style="color:var(--acc)">Arb Engine</a><a href="social.html" style="color:var(--acc)">Social</a>'
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · every sport, one slate</title>
 {HEAD}<style>{CSS}</style></head><body>
 <div id="hdr"><span class="brand"><i>◍</i> RAINMAN</span><span class="tag">matchup intelligence for every sport</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}</span></div>
