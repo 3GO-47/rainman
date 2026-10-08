@@ -19,7 +19,7 @@ LEAGUES = [  # key, label, sport group, page, status, logo (real league marks: E
     ('mlb', 'MLB', 'baseball', 'mlb.html', 'shell', CDN + 'teamlogos/leagues/500-dark/mlb.png'),
     ('nhl', 'NHL', 'hockey', 'nhl.html', 'live', CDN + 'teamlogos/leagues/500-dark/nhl.png'),
     ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png'),
-    ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', '')]          # ATP + WTA: no league mark on ESPN's CDN, so the tile carries the count only
+    ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', CDN + 'espn/misc_logos/500-dark/tennis.png')]
 SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'laliga': 'La Liga', 'bund': 'Bundesliga', 'seriea': 'Serie A', 'ligue1': 'Ligue 1'}
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
 SOCCER_LOGO = {k: CDN + f'leaguelogos/soccer/500-dark/{v}.png' for k, v in SOCCER_LOGO.items()}
@@ -99,18 +99,33 @@ def load_slate():
     return games, pulled
 
 def model_records():
-    """W-L by pick type per league from the frozen ledgers (NFL picks_all.csv; sports/<lg>/processed/picks.csv). Data only — no picks."""
+    """Per league, the frozen positions and how they scored (NFL picks_all.csv; sports/<lg>/processed/picks.csv).
+    One unit risked per position: a win at -110 returns 0.909, a win on a priced moneyline / anytime TD returns its own price."""
     import csv
     out = {}
+    def units(r):
+        res = (r.get('result') or '').upper()
+        if res == 'W':
+            t = (r.get('type') or '').upper()
+            try: mp = float(r.get('market_ref') or 0)
+            except ValueError: mp = 0
+            return (1 / mp - 1) if t in ('ML', 'TD') and 0 < mp < 1 else 0.909
+        return -1.0 if res == 'L' else 0.0
     def tally(rows, lg):
-        by = {}; seq = []
+        by = {}; seq = []; u = 0.0; w = l = p_ = pend = 0
         rows = sorted(rows, key=lambda r: (r.get('frozen_on') or '', r.get('date') or '', str(r.get('week') or '').zfill(2)))
         for r in rows:
-            t = (r.get('type') or '').upper() or 'ALL'; b = by.setdefault(t, dict(W=0, L=0, P=0, pending=0))
+            t = (r.get('type') or '').upper() or 'ALL'
+            if t == 'DFS': continue
+            b = by.setdefault(t, dict(W=0, L=0, P=0, pending=0, u=0.0))
             res = (r.get('result') or '').upper()
-            if res in ('W', 'L', 'P'): b[res] += 1; seq.append(res)
-            else: b['pending'] += 1
-        if by: out[lg] = dict(by=by, seq=seq[-80:])
+            if res in ('W', 'L', 'P'):
+                b[res] += 1; seq.append(res); b['u'] += units(r); u += units(r)
+                w += res == 'W'; l += res == 'L'; p_ += res == 'P'
+            else: b['pending'] += 1; pend += 1
+        for b in by.values(): b['u'] = round(b['u'], 2)
+        if by: out[lg] = dict(by=by, seq=seq[-80:], W=w, L=l, P=p_, pending=pend, u=round(u, 2),
+                              hit=round(w / (w + l), 4) if w + l else None, roi=round(u / (w + l + p_), 4) if w + l + p_ else None)
     f = 'data/processed/picks_all.csv'
     if os.path.exists(f): tally(list(csv.DictReader(open(f, encoding='utf-8'))), 'nfl')
     for lg in ('nba', 'nhl', 'wnba'):
@@ -118,9 +133,20 @@ def model_records():
         if os.path.exists(f): tally(list(csv.DictReader(open(f, encoding='utf-8'))), lg)
     return out
 
-HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
+def game_model_backtest():
+    """The NFL game model's held-out 2024-25 record, for one honest line on the landing page."""
+    import csv
+    f = 'data/processed/game_model.csv'
+    if not os.path.exists(f): return None
+    R = [r for r in csv.DictReader(open(f, encoding='utf-8')) if r['season'] in ('2024', '2025') and r['res_ats']]
+    if not R: return None
+    w = sum(r['res_ats'] == 'W' for r in R); l = sum(r['res_ats'] == 'L' for r in R)
+    tw = sum(r['res_total'] == 'W' for r in R); tl = sum(r['res_total'] == 'L' for r in R)
+    return dict(n=len(R), ats=[w, l], total=[tw, tl])
 
-CSS = """
+SHEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
+
+SCSS = """
 :root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--fg:#e6e6e9;--dim:#8b8d94;--mute:#5c5e66;--acc:#e8b339;--green:#3fb950;--red:#f0564a;--blue:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:13px;line-height:1.45}a{color:inherit;text-decoration:none}img{-webkit-user-drag:none}
 #hdr{display:flex;align-items:center;gap:16px;padding:10px 24px;border-bottom:1px solid var(--edge);background:#050506;position:sticky;top:0;z-index:5}
@@ -172,7 +198,7 @@ table{border-collapse:collapse;width:100%;font-size:12px}th{font:600 9.5px var(-
 @media (max-width:760px){.wrap{padding:12px}h1{font-size:20px}#hdr .tag,#hdr .hl{display:none}.tlhead,.lane{grid-template-columns:90px 1fr}.bub{min-width:88px}}
 """
 
-JS = r"""
+SJS = r"""
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LG=J.leagues,LGBY={};LG.forEach(l=>LGBY[l.key]=l);const SHELL=!!J.shell;
 let SEL=SHELL?LG[0].key:(new URLSearchParams(location.hash.replace('#','')).get('lg')||'nfl');if(!LGBY[SEL])SEL=LG[0].key;
@@ -269,30 +295,140 @@ function render(){rail();timeline();week();edges();standings()}
 render();window.addEventListener('resize',()=>timeline());
 """
 
+HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">"""
+CSS = r"""
+:root{--bg:#000;--p:#0a0a0b;--p2:#111113;--p3:#17171a;--e:#1c1c20;--e2:#2a2a30;--fg:#e7e7ea;--dim:#8a8c93;--mute:#55575f;--acc:#e8b339;--g:#3fb950;--r:#f0564a;--b:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans)}a{color:inherit;text-decoration:none}img{-webkit-user-drag:none;user-select:none}
+#hdr{display:flex;align-items:center;gap:14px;padding:0 20px;height:48px;border-bottom:1px solid var(--e);background:#050506;position:sticky;top:0;z-index:5}
+.brand{font:800 15px/1 var(--mono);letter-spacing:5px}.brand i{color:var(--acc);font-style:normal;margin-right:7px}
+.hl{display:flex;gap:5px;margin-left:auto}.hl a{border:1px solid var(--e2);border-radius:4px;padding:4px 11px;font:600 10.5px var(--mono);letter-spacing:1px;color:var(--dim)}
+.hl a:hover{color:var(--fg);border-color:var(--acc)}.hl a.acc{color:var(--acc);border-color:#3a3322}
+main{max-width:1180px;margin:0 auto;padding:34px 20px 70px}
+h1{font:800 30px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 6px}
+.sub{color:var(--dim);font-size:13.5px;margin:0 0 26px}
+h2{font:600 10.5px var(--mono);letter-spacing:2.2px;text-transform:uppercase;color:var(--mute);margin:34px 0 12px;display:flex;align-items:baseline;gap:10px}
+h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:10px}
+.sp{display:flex;flex-direction:column;gap:9px;border:1px solid var(--e);border-radius:10px;background:var(--p);padding:14px 15px;transition:none;min-height:116px}
+.sp:hover{border-color:var(--acc);background:var(--p2)}
+.sp .t{display:flex;align-items:center;gap:10px;min-width:0}
+.sp .t img{width:30px;height:30px;object-fit:contain;flex:none}
+.sp .t b{font:700 16px/1.2 var(--sans);letter-spacing:-.2px}
+.sp .k{font:600 9.5px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--mute)}
+.sp .k i{font-style:normal;color:var(--acc)}
+.sp .m{margin-top:auto;display:flex;align-items:baseline;gap:8px;font:500 11.5px var(--mono);color:var(--dim)}
+.sp .m b{font-weight:700;color:var(--fg)}.sp .m .g{color:var(--g)}.sp .m .r{color:var(--r)}
+.sp.soon{opacity:.45}.sp.soon:hover{border-color:var(--e)}
+.perf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:12px}
+.perf>div{border:1px solid var(--e);border-radius:8px;background:var(--p);padding:11px 13px}
+.perf span{display:block;font:600 9px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--mute)}
+.perf b{display:block;font:700 21px/1.25 var(--mono);margin-top:3px}
+.perf small{display:block;font:500 10.5px var(--mono);color:var(--dim)}
+.perf b.g{color:var(--g)}.perf b.r{color:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:12.5px;border:1px solid var(--e);border-radius:8px;overflow:hidden}
+th{font:600 9.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--mute);text-align:left;padding:8px 11px;background:var(--p);border-bottom:1px solid var(--e2);white-space:nowrap}
+td{padding:8px 11px;border-bottom:1px solid var(--e);white-space:nowrap}tbody tr:last-child td{border-bottom:0}
+tr.lg{cursor:pointer}tr.lg:hover td{background:var(--p)}
+.r{text-align:right}.mono{font-family:var(--mono)}.dim{color:var(--dim)}.mute{color:var(--mute)}.g{color:var(--g)}.rd{color:var(--r)}
+.lgn{display:inline-flex;align-items:center;gap:8px;font-weight:600}.lgn img{width:17px;height:17px;object-fit:contain}
+.bar{display:inline-flex;align-items:center;gap:7px;font:600 11px var(--mono)}
+.bar .t{position:relative;width:84px;height:6px;background:var(--p3);border-radius:2px;overflow:hidden}
+.bar .t i{display:block;height:100%}.bar .t em{position:absolute;top:-2px;width:2px;height:10px;background:var(--acc)}
+.seq{display:inline-flex;gap:2px}.seq i{width:5px;height:11px;border-radius:1px;display:block}
+.note{color:var(--mute);font:500 11px/1.65 var(--mono);margin:10px 0 0}
+.foot{margin-top:40px;padding-top:14px;border-top:1px solid var(--e);color:var(--mute);font:500 10.5px/1.75 var(--mono)}
+.foot b{color:var(--dim);font-weight:500}
+@media(max-width:640px){main{padding:24px 14px 50px}h1{font-size:24px}.grid{grid-template-columns:1fr}}
+"""
+
 def page(games, pulled):
-    leagues = [dict(key=k, label=l, group=g, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES]
-    BB = {'pts': 'Points', 'reb': 'Rebounds', 'ast': 'Assists', 'tpm': '3-pointers', 'pra': 'P+R+A'}
-    HK = {'sog': 'Shots on goal', 'p': 'Points', 'g': 'Goals', 'a': 'Assists', 'sv': 'Saves'}
-    teasers = {'nfl': nfl_teaser(), 'nba': sport_teaser('nba', BB), 'wnba': sport_teaser('wnba', BB), 'nhl': sport_teaser('nhl', HK)}
-    for k, lab in (('nfl', MK_LABEL), ('nba', BB), ('wnba', BB), ('nhl', HK)):
-        if teasers.get(k): teasers[k]['labels'] = lab
-    J = dict(games=games, leagues=leagues, soccer=SOCCER, soccerLogo=SOCCER_LOGO, pulled=pulled, teasers=teasers, records=model_records())
+    """Layer 0: the sports, each linked to its dashboard, and how the models have actually scored. Nothing else."""
+    cnt = {}
+    for g in games: cnt[g['sport']] = cnt.get(g['sport'], 0) + 1
+    REC = model_records(); BT = game_model_backtest()
+    KIND = {'nfl': 'defense-vs-position · player model · picks', 'cfb': 'defense-vs-position · 138 FBS teams',
+            'nba': 'player model · matchups · picks', 'wnba': 'player model · matchups · picks', 'nhl': 'player model · matchups · picks',
+            'tennis': 'elo model · atp + wta · match prices', 'ncaab': 'schedule &amp; lines', 'mlb': 'schedule &amp; lines', 'soccer': 'schedule &amp; lines · 7 leagues'}
+    LGLBL = {'nfl': 'NFL', 'cfb': 'CFB', 'nba': 'NBA', 'nhl': 'NHL', 'wnba': 'WNBA'}
+    def rec_line(k):
+        r = REC.get(k)
+        if not r: return '<span class="mute">no graded positions yet</span>'
+        if not (r['W'] + r['L']): return '<span class="mute">%d live, none graded</span>' % r['pending']
+        tone = 'g' if r['u'] > 0 else 'r' if r['u'] < 0 else ''
+        wl = '%d-%d%s' % (r['W'], r['L'], '-%d' % r['P'] if r['P'] else '')
+        return '<b>%s</b> <span class="%s">%s%.2fu</span>' % (wl, tone, '+' if r['u'] >= 0 else '', r['u'])
+    def tile(k, label, pg, status, logo):
+        n = cnt.get(k, 0)
+        soon = status == 'shell' and not n
+        img = '<img src="%s" alt="" onerror="this.style.display=\'none\'">' % logo if logo else ''
+        gm = '<b>%d</b> this week' % n if n else '<span class="mute">no games in the window</span>'
+        rec = (' &middot; ' + rec_line(k)) if REC.get(k) else ''
+        return ('<a class="sp%s" href="%s"><span class="t">%s<b>%s</b></span><span class="k">%s</span><span class="m">%s%s</span></a>'
+                % (' soon' if soon else '', pg, img, label, KIND.get(k, ''), gm, rec))
+    tiles = ''.join(tile(k, l, p, s, i) for k, l, g, p, s, i in LEAGUES)
+    # ---- model performance, per league, from the frozen ledgers
+    BE = 0.5238
+    def bar(hit):
+        if hit is None: return '<span class="mute">—</span>'
+        x = max(0, min(100, (hit - 0.3) / 0.4 * 100))
+        return ('<span class="bar"><span class="t"><i style="width:%.0f%%;background:%s"></i><em style="left:%.0f%%"></em></span><b class="%s">%.1f%%</b></span>'
+                % (x, 'var(--g)' if hit >= BE else 'var(--r)', (BE - 0.3) / 0.4 * 100, 'g' if hit >= BE else 'rd', 100 * hit))
+    def seq(s):
+        if not s: return ''
+        col = lambda x: 'var(--g)' if x == 'W' else 'var(--r)' if x == 'L' else 'var(--mute)'
+        return '<span class="seq">' + ''.join('<i style="background:%s"></i>' % col(x) for x in s[-24:]) + '</span>'
+    LOGO = {k: i for k, l, g, p, s, i in LEAGUES}
+    PG = {k: p for k, l, g, p, s, i in LEAGUES}
+    rows = ''
+    for k in ('nfl', 'nba', 'nhl', 'wnba'):
+        r = REC.get(k)
+        if not r: continue
+        tone = 'g' if r['u'] > 0 else 'rd' if r['u'] < 0 else 'dim'
+        wl = '%d-%d%s' % (r['W'], r['L'], '-%d' % r['P'] if r['P'] else '')
+        roi = '' if r['roi'] is None else '%s%.1f%%' % ('+' if r['roi'] >= 0 else '', 100 * r['roi'])
+        rows += ('<tr class="lg" data-go="%s"><td><span class="lgn"><img src="%s" alt="" onerror="this.style.display=\'none\'">%s</span></td>'
+                 '<td class="r mono dim">%d</td><td class="r mono dim">%d</td><td class="mono">%s</td><td>%s</td>'
+                 '<td class="r mono %s">%s%.2f</td><td class="r mono %s">%s</td><td>%s</td></tr>'
+                 % (PG.get(k, ''), LOGO.get(k, ''), LGLBL.get(k, k.upper()), r['W'] + r['L'] + r['P'], r['pending'], wl, bar(r['hit']),
+                    tone, '+' if r['u'] >= 0 else '', r['u'], tone, roi, seq(r['seq'])))
+    tot = dict(W=sum(r['W'] for r in REC.values()), L=sum(r['L'] for r in REC.values()), P=sum(r['P'] for r in REC.values()),
+               u=round(sum(r['u'] for r in REC.values()), 2), pend=sum(r['pending'] for r in REC.values()))
+    dec = tot['W'] + tot['L']; hit = tot['W'] / dec if dec else None
+    graded = tot['W'] + tot['L'] + tot['P']
+    twl = '%d-%d%s' % (tot['W'], tot['L'], '-%d' % tot['P'] if tot['P'] else '')
+    utone = 'g' if tot['u'] > 0 else 'r' if tot['u'] < 0 else ''
+    per = '' if not graded else '%+.1f%% per position' % (100 * tot['u'] / graded)
+    htxt = '&mdash;' if hit is None else '%.1f%%' % (100 * hit)
+    htone = 'g' if hit and hit >= BE else 'r' if hit else ''
+    bts = '%d-%d' % (BT['ats'][0], BT['ats'][1]) if BT else '&mdash;'
+    btsub = 'ATS over %d held-out 2024-25 games' % BT['n'] if BT else 'no backtest on file'
+    kp = ('<div><span>record</span><b>%s</b><small>%d graded &middot; %d live</small></div>'
+          '<div><span>units</span><b class="%s">%s%.2f</b><small>%s</small></div>'
+          '<div><span>hit rate</span><b class="%s">%s</b><small>break-even 52.4%% at &minus;110</small></div>'
+          '<div><span>game model &middot; backtest</span><b>%s</b><small>%s</small></div>'
+          '<div><span>slate</span><b>%d</b><small>games in the window &middot; pulled %s</small></div>'
+          % (twl, graded, tot['pend'], utone, '+' if tot['u'] >= 0 else '', tot['u'], per, htone, htxt, bts, btsub, len(games), pulled))
+    table_html = ('<table><thead><tr><th>league</th><th class="r">graded</th><th class="r">live</th><th>record</th>'
+                  '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th>last 24</th></tr></thead><tbody>'
+                  + rows + '</tbody></table>') if rows else '<p class="note">No graded positions on file yet.</p>'
+    nsport = len([1 for k, l, g, p, s_, i in LEAGUES if cnt.get(k)])
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
-    links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES) + '<a href="arb.html" style="color:var(--acc)">Arb Engine</a><a href="social.html" style="color:var(--acc)">Social</a>'
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · every sport, one slate</title>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN</title>
 {HEAD}<style>{CSS}</style></head><body>
-<div id="hdr"><span class="brand"><i>◍</i> RAINMAN</span><span class="tag">matchup intelligence for every sport</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}</span></div>
-<div class="wrap">
-<h1>Every sport. One slate.<small>Pick a sport. Today's games sit on one clock, the week is a wall of matchups with the market's line on each, and the softest player matchups and the model's graded record sit underneath. Nothing here is typed in by hand — every number traces to game logs and the public schedule.</small></h1>
-<div id="sports" class="bubs"></div>
-<h2 id="tlH"></h2><div id="tl" class="tlwrap"></div>
-<h2 id="weekH"></h2><div id="filt" class="chips"></div><div id="week"></div>
-<h2 id="edgesH"></h2><div id="edges"></div>
-<h2 id="standH"></h2><div id="stand"></div>
-<div class="foot">RAINMAN · schedules, records, ranks, broadcasts and DraftKings lines from ESPN's public scoreboard (pulled {pulled}); implied team totals are derived from the spread and the total; player matchups and records come from each league's model (game logs from Pro Football Reference, ESPN, nflverse and sportsdataverse). Preseason is ignored everywhere. NFL · College Football · NBA · WNBA · NHL carry player models; College Basketball · MLB · Soccer show schedule and lines until a box-score source lands.</div>
-</div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script>
-<script>{JS}</script></body></html>"""
+<div id="hdr"><span class="brand"><i>◍</i>RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a></span></div>
+<main>
+<h1>RAINMAN</h1>
+<p class="sub">Matchup intelligence, one dashboard per sport.</p>
+<h2>sports <span>{nsport} with games in the window</span></h2>
+<div class="grid">{tiles}</div>
+<h2>model performance <span>every position the models froze, graded against the line it was frozen at · one unit risked per position</span></h2>
+<div class="perf">{kp}</div>
+{table_html}
+<p class="note">A win at −110 returns 0.909 and a loss costs 1, so 52.4% is break-even; the gold tick on each bar is that line. Records separate skill from variance somewhere past 300 positions — read these as a running tally, not a verdict. The NFL model's full breakdown, calibration and changelog live on <a href="rainman.html#v=pkhome" style="color:var(--acc)">its Model tab</a>.</p>
+<div class="foot">RAINMAN · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}) · player models from game logs (Pro Football Reference, ESPN, sportsdataverse, the Sackmann tennis archive) · built {built} · information, not advice</div>
+</main>
+<script>document.querySelectorAll('tr.lg[data-go]').forEach(t=>{{if(t.dataset.go)t.onclick=()=>location.href=t.dataset.go}});</script>
+</body></html>"""
 
 LEAGUES_BY = {k: dict(key=k, label=l, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES}
 
@@ -302,7 +438,7 @@ def shell(key, label, games, pulled, logo=''):
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES)
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · {label}</title>
-{HEAD}<style>{CSS}</style></head><body>
+{SHEAD}<style>{SCSS}</style></head><body>
 <div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><span class="tag">{label} · schedule &amp; lines</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}</span></div>
 <div class="wrap">
 <h1><img src="{logo}" alt="" style="height:34px;vertical-align:middle;margin-right:10px" onerror="this.style.display='none'">{label}<small>Every game in the slate window on one clock, then as a wall of matchups with the DraftKings line, total and implied scores, plus the records ESPN carries on the schedule. Player matchups and the pick model arrive for {label} when a box-score source is wired in.</small></h1>
@@ -314,7 +450,7 @@ def shell(key, label, games, pulled, logo=''):
 <div class="foot">RAINMAN · {label} · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}). <a href="index.html">← all sports</a></div>
 </div>
 <script>const J={json.dumps(J, separators=(',', ':'))};</script>
-<script>{JS}</script></body></html>"""
+<script>{SJS}</script></body></html>"""
 
 def main():
     games, pulled = load_slate()
