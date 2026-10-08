@@ -34,7 +34,7 @@ def slate():
 
 def draftkings(G):
     lines = ['# D|espnEventId|homeSpread|overUnder|homeML|awayML|homeSpreadOdds|awaySpreadOdds|overOdds|underOdds|league  (ESPN core odds provider 100 = DraftKings; pulled %s)' % TODAY]
-    lim = (datetime.datetime.utcnow() + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%MZ')
+    lim = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%MZ')
     for g in G:
         path = ESPN.get(g['lg'])
         if not path or g['date'] > lim: continue
@@ -75,7 +75,7 @@ def kalshi(G):
 def polymarket(G):
     leagues = {g['lg'] for g in G}
     lines = ['# P|eventSlug|kind|endDateUTC|marketId|question|sportsMarketType|line|outcomes|outcomePrices|bestBid|bestAsk|liquidity|volume  (gamma-api.polymarket.com; pulled %s)' % TODAY]
-    lim = (datetime.datetime.utcnow() + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%M:%SZ')
+    lim = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%M:%SZ')
     n = 0
     clean = lambda s: re.sub(r'[\[\]" ]', '', str(s or ''))
     for lg, sid in POLY_SERIES.items():
