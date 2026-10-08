@@ -192,11 +192,11 @@ def picks(lg, C, games, S):
     """freeze ML / spread / total positions vs the DK line once per game; grade from finished scores."""
     path = f'data/sports/{lg}/processed/picks.csv'
     old = pd.read_csv(path) if os.path.exists(path) else pd.DataFrame(columns=['type', 'date', 'frozen_on', 'ref', 'game', 'side', 'line', 'model', 'market_ref', 'edge', 'result', 'actual'])
-    keys = set(zip(old.type, old.ref)); new = []
+    keys = set(zip(old.type.astype(str), old.ref.astype(str))); new = []        # astype(str): pandas reads ref as int64, the slate carries it as a string, so the dedupe silently missed and re-froze every pick each run
     thr = dict(ml=0.06, spread=2.5 if C['sport'] == 'basketball' else 0.5, total=3.0 if C['sport'] == 'basketball' else 0.45)
     for g in games:
         if 'p_home' not in g or g.get('stype') == 'pre': continue           # no positions on preseason games
-        ref = g['eid']; gm = f"{g['away']}@{g['home']}"
+        ref = str(g['eid']); gm = f"{g['away']}@{g['home']}"
         def add(t, side, line, model, mref, edge):
             if (t, ref) in keys: return
             keys.add((t, ref)); new.append(dict(type=t, date=g['date'][:10], frozen_on=str(TODAY.date()), ref=ref, game=gm, side=side, line=line, model=model, market_ref=mref, edge=round(edge, 3), result='', actual=''))
@@ -210,6 +210,7 @@ def picks(lg, C, games, S):
             e = g['model_total'] - float(g['ou'])
             if abs(e) >= thr['total']: add('TOTAL', 'Over' if e > 0 else 'Under', float(g['ou']), g['model_total'], float(g['ou']), abs(e))
     allp = pd.concat([old, pd.DataFrame(new)], ignore_index=True) if new else old.copy()
+    if len(allp): allp = allp.drop_duplicates(subset=['type', 'ref', 'side'], keep='first').reset_index(drop=True)
     done = {f"{r.away}@{r.home}|{r.date}": r for r in S[S.done & S.home_score.notna()].itertuples()}
     for i, r in allp.iterrows():
         if isinstance(r.result, str) and r.result in ('W', 'L', 'P'): continue
