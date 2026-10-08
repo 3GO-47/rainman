@@ -33,7 +33,9 @@ MON = {m: i for i, m in enumerate(['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JU
 def latest(prefix):
     f = sorted(glob.glob(f'data/raw/markets/{prefix}_*.txt'))
     return f[-1] if f else None
-def asof(path): return re.search(r'(\d{4}-\d{2}-\d{2})', path).group(1) if path else ''
+def asof(path):
+    m = re.search(r'(\d{4}-\d{2}-\d{2})', path or '')
+    return m.group(1) if m else ''
 def dec_from_american(a):
     a = float(a); return 1 + a / 100 if a > 0 else 1 + 100 / -a
 def american(dec):
