@@ -933,12 +933,14 @@ const SECTIONS=[
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
    {id:'tdboard',label:'TD Board',desc:'touchdown rates, TD matchups, red-zone roles, the Kalshi anytime price',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
+   {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
  {id:'intel',fk:'F4',label:'Intel',items:[
    {id:'scheme',label:'Intel',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true},
    {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
    {id:'ranks',label:'Defenses',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks'},
+   {id:'matrix',label:'Matrix',desc:'all defenses × slots heatmap with drill-down to per-stat ranks and raw averages',c:'defenses',sub:'matrix'},
    {id:'observatory',label:'Observatory',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
    {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'}]},
  {id:'picksec',fk:'F5',label:'Picks',items:[
@@ -962,6 +964,8 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
+ matrix:{what:'All 32 defenses against every position slot in one heatmap. Click a cell for that defense\'s per-stat ranks and raw averages.',how:['green = allows the most to that slot (best matchup), red = the least','toggle current season, prior seasons or the combined blend']},
+ lab:{what:'Every starter this week in one sortable list: his own per-game averages (this season, and cumulative 2024–26) beside what his opponent allows to his slot, with the opponent\'s rank in every stat.',how:['rank 1 of 32 = the defense allows the most to that slot (best matchup)','▲ / ▼ next to an average = the opponent allows more / less than the player averages','every column sorts; position, depth, injury, college, slate, game and team filters narrow the list']},
  overview:{what:'The week at a glance: the slate with lines, the standings, who leads the league, and every defense ranked by how much it gives up to each position.',how:['green = good for the offense / fantasy player, red = bad','rank 1 of 32 = that defense allows the MOST to that slot','μ = average rank across the slots','click a game tile to open its matchup, a defense to open its detail']},
  insights:{what:'Charts only. Which starters have the softest and hardest matchups this week, which defenses sit at the extremes for each slot, and whose ranks are too volatile to trust.',how:['Ψ ("psi") = the opponent\'s average rank in the stats that matter for a slot — 1 is the softest field, 32 the hardest','bar length = how soft the matchup is','click any name for his card and the opponent\'s game log']},
  fantasy:{what:'DraftKings Classic pick\'ems: the frozen optimal lineup for each slate, QB stacks with a bring-back, and the top plays at every roster spot.',how:['DK pts = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','MATCH = average opponent rank across his markets, 1 = softest','players who barely play are filtered out']},
