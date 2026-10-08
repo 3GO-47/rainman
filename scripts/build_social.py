@@ -7,7 +7,7 @@ Inputs: data/raw/slate_all_<date>.txt (game picker, logos), data/processed/game_
 Output: dashboard/social.html
 """
 import csv, glob, json, os, re
-from datetime import datetime
+from datetime import datetime, timedelta
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 NFLV = {'WAS': 'WSH', 'LA': 'LAR', 'JAX': 'JAX'}   # nflverse → ESPN slate abbreviations
 
@@ -31,7 +31,25 @@ def results():
             d = datetime.fromisoformat(r['gameday']).date()
             for dd in (d, d.fromordinal(d.toordinal() + 1)):           # slate dates are UTC: a Sunday night game is Monday UTC
                 R[f"nfl|{a}|{h}|{dd.isoformat()}"] = (float(r['away_score']), float(r['home_score']))
+    f = 'ncaa/data/processed/games_2026.csv'                                   # FBS finals (ESPN abbreviations already)
+    if os.path.exists(f):
+        for r in csv.DictReader(open(f, encoding='utf-8')):
+            if r['completed'] != '1' or r['vis_pts'] == '' or r['home_pts'] == '': continue
+            R[f"cfb|{r['vis']}|{r['home']}|{r['kick_utc'][:10]}"] = (float(r['vis_pts']), float(r['home_pts']))
     return R
+
+def norm_name(n): return re.sub(r'[^a-z]', '', re.sub(r'\b(jr|sr|ii|iii|iv)\b', '', n.lower()))
+
+def prop_results(days=28):
+    """Player box lines for grading prop plays: {league: {date: {player: [pass_yds, pass_td, completions, pass_att, rush_yds, rush_att, receptions, rec_yds, anytime_td]}}} — last `days` of games."""
+    out = {}; since = (datetime.now() - timedelta(days=days)).date().isoformat()
+    for f, lg in (('data/game_logs/game_logs_2026.csv', 'nfl'), ('ncaa/data/game_logs/game_logs_2026.csv', 'cfb')):
+        if not os.path.exists(f): continue
+        for r in csv.DictReader(open(f, encoding='utf-8')):
+            if r['date'] < since: continue
+            v = lambda k: float(r[k] or 0)
+            out.setdefault(lg, {}).setdefault(r['date'], {})[norm_name(r['player'])] = [v('pass_yds'), v('pass_td'), v('cmp'), v('pass_att'), v('rush_yds'), v('rush_att'), v('rec'), v('rec_yds'), 1 if v('rush_td') + v('rec_td') > 0 else 0]
+    return out
 
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
 CSS = """
@@ -72,6 +90,9 @@ function grade(b){const g=b.gid&&GBY[b.gid];const key=g?`${g.lg}|${g.away}|${g.h
   if(b.market==='moneyline'){if(as===hs)return 'push';return (b.selection===g.away?as>hs:hs>as)?'won':'lost'}
   if(b.market==='spread'){const m=(b.selection===g.away?as-hs:hs-as)+pt;return m>0?'won':m<0?'lost':'push'}
   if(b.market==='total'){const t=as+hs;if(t===pt)return 'push';return (b.selection==='Over'?t>pt:t<pt)?'won':'lost'}
+  if(b.market==='prop'&&b.player&&b.stat){const idx={pass_yds:0,pass_td:1,completions:2,pass_att:3,rush_yds:4,rush_att:5,receptions:6,rec_yds:7,anytime_td:8}[b.stat];if(idx==null)return null;const nn=b.player.toLowerCase().replace(/\b(jr|sr|ii|iii|iv)\b/g,'').replace(/[^a-z]/g,'');const d0=new Date(g.date);
+    for(const off of [-1,0,1]){const d=new Date(d0.getTime()+off*864e5).toISOString().slice(0,10);const row=((J.props[g.lg]||{})[d]||{})[nn];if(row){const v=row[idx];if(b.stat==='anytime_td')return (b.side==='Yes'||b.selection.endsWith('Yes'))?(v?'won':'lost'):(v?'lost':'won');if(v===pt)return 'push';const over=b.side==='Over'||/\bOver\b/.test(b.selection);return (over?v>pt:v<pt)?'won':'lost'}}
+    return null}
   return null}
 const pnl=b=>b.status==='won'?+(b.stake*(b.dec-1)).toFixed(2):b.status==='lost'?-b.stake:0;
 function autograde(){let n=0;BETS.forEach(b=>{if(b.status==='open'){const s=grade(b);if(s){b.status=s;b.auto=true;n++}}});if(n){SV('rainman.bets',BETS)}}
@@ -87,7 +108,7 @@ function addForm(){const el=$('#add');const lgs=[...new Set(GAMES.map(g=>g.lg))]
 // ---- drafts saved from the Arb Engine
 function drafts(){const P=plays().filter(p=>p.status==='open');const el=$('#drafts');if(!P.length){el.innerHTML='<div class="empty">nothing saved yet — click any price on the Arb Engine to park it here, then set a stake to log it</div>';return}
   el.innerHTML=P.map(p=>`<div class="draft" data-id="${esc(p.id)}"><span>${esc(p.game)} · <b>${esc(p.selection)}${p.market==='spread'?' '+(+p.point>0?'+':'')+p.point:p.market==='total'?' '+p.point:''}</b> <span class="dim">${p.market} · ${esc(p.source)} ${esc(p.american)} · ${CT(p.kickoff)}</span></span><input type="number" placeholder="stake" step="1"><button class="btn">log</button><button class="btn ghost">drop</button></div>`).join('');
-  el.querySelectorAll('.draft').forEach(d=>{const id=d.dataset.id;const p=P.find(x=>x.id===id);d.querySelector('.btn:not(.ghost)').onclick=()=>{const st=+d.querySelector('input').value;if(!st){toast('stake?');return}const gid=(GAMES.find(g=>g.lg===p.league&&g.away+' @ '+g.home===p.game&&g.date===p.kickoff)||{}).id;BETS.push({id:'b'+Date.now(),lg:p.league,gid,game:p.game,kickoff:p.kickoff,market:p.market,selection:p.selection,point:p.point,dec:+p.dec,american:p.american,stake:st,source:p.source,note:p.fair?`fair ${(100*p.fair).toFixed(1)}% on the Arb Engine`:'from the Arb Engine',status:'open',placed:new Date().toISOString(),shared:true});const all=plays();const i=all.findIndex(x=>x.id===id);if(i>=0)all[i].status='logged';SV('rainman.plays',all);SV('rainman.bets',BETS);toast('logged');render()};
+  el.querySelectorAll('.draft').forEach(d=>{const id=d.dataset.id;const p=P.find(x=>x.id===id);d.querySelector('.btn:not(.ghost)').onclick=()=>{const st=+d.querySelector('input').value;if(!st){toast('stake?');return}const gid=(GAMES.find(g=>g.lg===p.league&&g.away+' @ '+g.home===p.game&&g.date===p.kickoff)||{}).id;BETS.push({id:'b'+Date.now(),lg:p.league,gid,game:p.game,kickoff:p.kickoff,market:p.market,selection:p.selection,point:p.point,player:p.player||'',stat:p.stat||'',side:p.side||'',dec:+p.dec,american:p.american,stake:st,source:p.source,note:p.fair?`fair ${(100*p.fair).toFixed(1)}% on the Arb Engine`:'from the Arb Engine',status:'open',placed:new Date().toISOString(),shared:true});const all=plays();const i=all.findIndex(x=>x.id===id);if(i>=0)all[i].status='logged';SV('rainman.plays',all);SV('rainman.bets',BETS);toast('logged');render()};
     d.querySelector('.ghost').onclick=()=>{SV('rainman.plays',plays().filter(x=>x.id!==id));render()}})}
 // ---- stats + ledger
 function stats(){const g=BETS.filter(b=>b.status!=='open');const w=g.filter(b=>b.status==='won').length,l=g.filter(b=>b.status==='lost').length,p=g.filter(b=>b.status==='push').length;const units=g.reduce((s,b)=>s+pnl(b),0),risk=g.reduce((s,b)=>s+b.stake,0);
@@ -121,7 +142,7 @@ $('#wipe').onclick=()=>{if(confirm('clear every play, friend and the profile fro
 """
 
 def page(games, results, pulled):
-    J = dict(games=games, results={k: list(v) for k, v in results.items()}, pulled=pulled)
+    J = dict(games=games, results={k: list(v) for k, v in results.items()}, props=prop_results(), pulled=pulled)
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · Social</title>{HEAD}<style>{CSS}</style></head><body>
 <div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><span class="tag">Social · plays, records, leaderboard</span><span class="hl"><a href="index.html">all sports</a><a href="arb.html">Arb Engine</a><a class="on" href="social.html">Social</a></span><span class="right"><span id="nfr"></span> · slate {pulled} · built {built}</span></div>
@@ -142,7 +163,7 @@ def page(games, results, pulled):
 def main():
     games, pulled = slate(); R = results()
     open('dashboard/social.html', 'w', encoding='utf-8').write(page(games, R, pulled))
-    print(f'social: {len(games)} games on the picker · {len(R)//2} NFL finals for grading · dashboard/social.html {os.path.getsize("dashboard/social.html")//1024} KB')
+    print(f'social: {len(games)} games on the picker · {len(R)} finals keyed for grading · dashboard/social.html {os.path.getsize("dashboard/social.html")//1024} KB')
 
 if __name__ == '__main__':
     main()
