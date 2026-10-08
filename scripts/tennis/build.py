@@ -1,6 +1,7 @@
 """Tennis layer -> dashboard/tennis.html (+ data/processed/tennis_matches.csv, tennis_elo.csv).
 
-Inputs (scripts/local/pull_tennis.py): data/raw/tennis/{atp,wta}_matches_{year}.csv, {tour}_rankings_current.csv, {tour}_players.csv (Sackmann),
+Inputs (scripts/local/pull_tennis.py): data/raw/tennis/{atp,wta}_matches_{year}.csv, {tour}_rankings_current.csv, {tour}_players.csv (the Sackmann archive mirror),
+        data/raw/tennis/espn_results.csv (completed matches since the mirror stops — same Elo treatment, no serve stats),
         data/raw/tennis/espn_<date>.txt (the week's singles matches), data/raw/tennis/markets_<date>.txt (Kalshi + Polymarket match prices).
 Model : Elo in the FiveThirtyEight style — K = 250 / (matches + 5)^0.4, one overall rating and one per surface, updated match by match in date order
         across every cached season; a match-up probability uses the 50/50 blend of overall and surface Elo:  P(A) = 1 / (1 + 10^((Elo_B − Elo_A)/400)).
@@ -33,8 +34,31 @@ def load_matches(tour):
     for f in sorted(glob.glob(f'{RAW}/{tour}_matches_*.csv')):
         for r in csv.DictReader(open(f, encoding='utf-8')):
             if not r.get('winner_id') or not r.get('loser_id') or not r.get('tourney_date'): continue
-            r['_tour'] = tour; rows.append(r)
-    rows.sort(key=lambda r: (r['tourney_date'], int(float(r.get('match_num') or 0))))
+            r['_tour'] = tour; r['_src'] = 'archive'; rows.append(r)
+    last = max((r['tourney_date'] for r in rows), default='00000000')
+    # ESPN's own completed results carry the history past the mirror's last date; ESPN ids are not Sackmann ids,
+    # so a player is keyed by his name here and the two id spaces are reconciled by name in profiles()
+    f = f'{RAW}/espn_results.csv'
+    seen = {(r['tourney_date'], norm(r['winner_name']), norm(r['loser_name'])) for r in rows}
+    if os.path.exists(f):
+        for r in csv.DictReader(open(f, encoding='utf-8')):
+            if r.get('tour') != tour or not r.get('winner') or not r.get('loser'): continue
+            d = r['date']
+            if d <= last or (d, norm(r['winner']), norm(r['loser'])) in seen: continue
+            rows.append({'tourney_date': d, 'match_num': r['compId'], 'tourney_name': r['tournament'], 'tourney_level': 'A', 'surface': '',
+                         'winner_id': 'E' + r['winner_id'], 'winner_name': r['winner'], 'winner_ioc': '', 'loser_id': 'E' + r['loser_id'], 'loser_name': r['loser'], 'loser_ioc': '',
+                         'round': r['round'], 'score': r['score'], '_tour': tour, '_src': 'espn', '_court': r.get('court', '')})
+    ids = {}
+    for r in rows:
+        if r.get('_src') == 'archive':
+            ids.setdefault(key(r['winner_name']), r['winner_id']); ids.setdefault(key(r['loser_name']), r['loser_id'])
+    for r in rows:
+        if r.get('_src') != 'espn': continue
+        for side in ('winner', 'loser'):
+            a = ids.get(key(r[side + '_name']))
+            if a: r[side + '_id'] = a
+            else: ids.setdefault(key(r[side + '_name']), r[side + '_id'])
+    rows.sort(key=lambda r: (r['tourney_date'], str(r.get('match_num') or '')))
     return rows
 
 def elo_run(rows):
@@ -42,9 +66,15 @@ def elo_run(rows):
     P = defaultdict(lambda: dict(elo=1500.0, surf={s: 1500.0 for s in SURFACES}, n=0, surf_n={s: 0 for s in SURFACES}))
     E = lambda a, b: 1 / (1 + 10 ** ((b - a) / 400))
     K = lambda n: 250 / ((n + 5) ** 0.4)
+    SURF_BY = {}
     for r in rows:
-        w, l = P[r['winner_id']], P[r['loser_id']]; s = r.get('surface') or 'Hard'
-        if s not in SURFACES: s = 'Hard'
+        if r.get('surface') in SURFACES: SURF_BY.setdefault(norm(r['tourney_name']), r['surface'])
+    for r in rows:
+        w, l = P[r['winner_id']], P[r['loser_id']]; s = r.get('surface') or ''
+        if s not in SURFACES:
+            toks = {t for t in norm(r['tourney_name']).split() if len(t) > 3}
+            s = next((v for k, v in SURF_BY.items() if toks & set(k.split())), 'Hard')
+            r['surface'] = s
         lw = LEVEL_W.get(r.get('tourney_level', ''), 0.9)
         r['_pw'] = 0.5 * E(w['elo'], l['elo']) + 0.5 * E(w['surf'][s], l['surf'][s]); r['_s'] = s
         ew = E(w['elo'], l['elo']); w['elo'] += K(w['n']) * lw * (1 - ew); l['elo'] -= K(l['n']) * lw * ew
