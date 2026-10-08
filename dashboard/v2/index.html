@@ -367,6 +367,10 @@ tr:hover td{background:var(--s2)}
 #labTbl tr.grp th:first-child,#labTbl tr.grp th:last-child{border-left:0;background:transparent}
 #labTbl tr.grp th.pa{color:var(--cyan)}#labTbl tr.grp th.pa b{color:var(--txt)}#labTbl tr.grp th.pa span{text-transform:none;letter-spacing:0}
 #labTbl th.pa{color:var(--cyan)}
+#labTbl table.lab2 th.gs,#labTbl table.lab2 td.gs{border-left:2px solid var(--edge2)}#labTbl table.lab2 th.md:first-of-type,#labTbl table.lab2 td.md:first-of-type{border-left:2px solid var(--edge2)}
+#labTbl table.lab2 tr.grp th.g0{text-align:left;background:transparent;border-left:0}#labTbl table.lab2 tr.grp th.op{color:var(--acc)}#labTbl table.lab2 tr.grp th.md{color:var(--dim)}
+#labTbl table.lab2 th.op{color:var(--acc)}#labTbl table.lab2 td.op{white-space:nowrap;text-align:right}#labTbl table.lab2 td.op .ov{display:inline-block;min-width:38px;text-align:right;font-weight:600;margin-right:5px;color:var(--txt)}
+#labTbl table.lab2 td.pa{text-align:right}#labTbl table.lab2 td.md{color:var(--dim)}#labTbl table.lab2 tbody tr:hover td.op{background:rgba(232,179,57,.05)}#labTbl table.lab2 tbody tr:hover td.pa{background:rgba(88,166,255,.05)}
 #labTbl table{border-collapse:separate;border-spacing:0}
 #labTbl td,#labTbl th{padding:2px 5px}
 #labTbl tbody td:first-child,#labTbl thead tr:not(.grp) th:first-child{position:sticky;left:0;z-index:2;background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
@@ -1436,7 +1440,7 @@ function lab(){
     <select id="labCol" class="lgnfl" title="filter by college tier / conference / school">${(()=>{const t={},c={},sc={};UNIVERSE.forEach(u=>{const ci=cinfo(u.player);if(!ci)return;t[ci.tier]=(t[ci.tier]||0)+1;c[ci.confL]=(c[ci.confL]||0)+1;sc[ci.disp]=(sc[ci.disp]||0)+1});
       return `<option value="">all colleges</option><optgroup label="tier">${Object.keys(TIER).filter(k=>t[k]).map(k=>`<option value="t:${k}">${TIER[k][0]} (${t[k]})</option>`).join('')}</optgroup><optgroup label="conference">${Object.keys(c).sort().map(k=>`<option value="c:${k}">${k} (${c[k]})</option>`).join('')}</optgroup><optgroup label="school">${Object.keys(sc).sort().map(k=>`<option value="s:${esc(k)}">${esc(k)} (${sc[k]})</option>`).join('')}</optgroup>`})()}</select>
     <input id="labQ" placeholder="search player / college..." size="18">
-    <span class="note">position buttons toggle and combine (ALL = every position) &middot; starred cols = opponent's DvP rank for that stat (week / slate / game / team / roster from the global filter bar) &middot; with several positions selected the stats sit in a shared grid (PaYd · PaTD · RuYd · Rec · RcYd · TD · P+R/R+Y) — every column sorts, blanks mean the stat doesn't apply to that slot &middot; &Psi; = mean of ranks &middot; PROJ = projected PPR &middot; <b>avg</b> cols = the player's own per-game averages (big = selected span, small = the other; ▲ = the opponent allows more than he averages, ▼ less) &middot; GP = games this season · all seasons &middot; click a player name for his card &middot; click headers to sort</span>
+    <span class="note">three blocks per row: the player (who, where, usage) · <b>his own averages per game</b> (big = the selected span, small = the other; ▲ / ▼ = the opponent allows more / less than he averages) · <b>what the opponent allows per game to his slot</b> with its rank among 32 defenses (1 = allows the most) · then the model (Ψ = mean rank, Ψ+ = conviction, PROJ = projected PPR) &middot; position buttons toggle and combine &middot; every column sorts &middot; click a name for his card</span>
   </div><div id="labTbl"></div>`;
   let posSet=new Set(['QB']),sortK='psi',sortA=true;
   const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
@@ -1499,14 +1503,15 @@ function lab(){
       return (x<y?-1:x>y?1:0)*(sortA?1:-1);});
     const common=`<th data-k="player">Player</th><th data-k="team">Tm</th>${IS_NFL?'<th data-k="college" title="final college · logo, conference badge; tint = tier (gold power-4 · teal G5 · slate FCS · magenta small school)">College</th>':''}${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
-      <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th><th data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th>`;
-    const tail=`<th class="rk" data-k="psi">&Psi;</th><th class="rk" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
+      <th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th>`;
+    const tail=`<th class="md" data-k="psi" title="mean of the opponent's ranks across this slot's stats · 1 = softest">&Psi;</th><th class="md" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th class="md" data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th><th class="md" data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
     const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td>${IS_NFL?`<td>${ccell(u.player)}</td>`:''}${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}${trendGlyph(u)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
-      <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.ln||u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td><td>${u.opp?edgeChip(u.opp,u.grp):'—'}</td>`};
-    const rowTail=u=>`<td>${psi(u.psi)}</td><td>${convBadge(u.cv)}</td><td title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
-    const nCommon=(single?9:10)-(IS_NFL?0:1);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}"></th><th colspan="${n}">opp DvP rank · ${src}</th><th colspan="3">model</th><th colspan="${k}" class="pa">player avg / gm · <b>${AV==='S'?spanS:spanC}</b> <span>· ${AV==='S'?spanC:spanS}</span></th><th colspan="${n}">opp allows / gm</th><th></th></tr>`;
+      <td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.ln||u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td>`};
+    const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${convBadge(u.cv)}</td><td class="md">${u.opp?edgeChip(u.opp,u.grp):'—'}</td><td class="md" title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
+    const oppCell=(v,r,c)=>v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(decOf(c))}</span>${badge(r)}`;
+    const nCommon=(single?8:9)-(IS_NFL?0:1);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${k}" class="pa">his averages per game · <b>${AV==='S'?spanS:spanC}</b> <span>· small = ${AV==='S'?spanC:spanS}</span></th><th colspan="${n}" class="op">opponent allows per game to his slot · rank of 32 · ${src}</th><th colspan="4" class="md">model</th></tr>`;
     let html;
     if(single){
       const heads=LABDEF[single].heads;
@@ -1515,26 +1520,22 @@ function lab(){
         const alts=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2']
           .filter(g=>g.startsWith(single==='QB'?'QB':single)).map(g=>J.groupStats[g][i]).filter(Boolean);
         return Math.max(...alts.map(c=>d.stats[c]?d.stats[c].avg:0));})));
-      html=`<table><thead>${grpRow(heads.length,heads.length+1)}<tr>${common}
-      ${heads.map((h,i)=>`<th class="rk" data-k="r${i}">${h}</th>`).join('')}${tail}
-      ${heads.map((h,i)=>`<th class="pa" data-k="a${i}" title="${esc(sampleStats[i])}: the player's own per-game average">${h.replaceAll('*','')}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
-      ${heads.map((h,i)=>`<th data-k="v${i}">${h.replaceAll('*','')}</th>`).join('')}
-      <th>&omega;</th></tr></thead><tbody>
-      ${R.map(u=>`<tr>${rowCommon(u)}${u.ranks.map(r=>`<td>${badge(r)}</td>`).join('')}${rowTail(u)}
-      ${u.avgS.map((v,i)=>`<td class="pa">${avgCell(v,u.avgC[i],u.raws[i],u.statset[i])}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
-      ${u.raws.map((v,i)=>`<td>${v==null?'—':spec(v,colmax[i]||1)}</td>`).join('')}
-      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp)):''}</td></tr>`).join('')}</tbody></table>`;
+      html=`<table class="lab2"><thead>${grpRow(heads.length,heads.length+1)}<tr>${common}
+      ${heads.map((h,i)=>`<th class="pa${i===0?' gs':''}" data-k="a${i}" title="${esc(sampleStats[i])}: the player's own per-game average">${h.replaceAll('*','')}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
+      ${heads.map((h,i)=>`<th class="op${i===0?' gs':''}" data-k="r${i}" title="${esc(sampleStats[i])} allowed per game to this slot · badge = rank of 32 (click sorts by rank)">${h.replaceAll('*','')}</th>`).join('')}
+      </tr></thead><tbody>
+      ${R.map(u=>`<tr>${rowCommon(u)}
+      ${u.avgS.map((v,i)=>`<td class="pa${i===0?' gs':''}">${avgCell(v,u.avgC[i],u.raws[i],u.statset[i])}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
+      ${u.raws.map((v,i)=>`<td class="op${i===0?' gs':''}">${oppCell(v,u.ranks[i],u.statset[i])}</td>`).join('')}${rowTail(u)}</tr>`).join('')}</tbody></table>`;
     } else {
       // per-column max for the raw spectral bars across every slot that feeds the column
       const umax=UCOLS.map((_,k)=>Math.max(1,...R.map(u=>u.uV[k]==null?0:u.uV[k])));
-      html=`<table class="fx labMulti"><thead>${grpRow(UCOLS.length,UCOLS.length+1)}<tr>${common}
-      ${UCOLS.map(([h,tip],i)=>`<th class="rk" data-k="u${i}" title="DvP rank: ${tip}">*${h}*</th>`).join('')}${tail}
-      ${UCOLS.map(([h,tip],i)=>`<th class="pa" data-k="x${i}" title="player's own per-game average: ${tip.replace(' allowed','')}">${h}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
-      ${UCOLS.map(([h,tip],i)=>`<th data-k="w${i}" title="raw allowed per game: ${tip}">${h}</th>`).join('')}<th>&omega;</th></tr></thead><tbody>
-      ${R.map(u=>`<tr>${rowCommon(u)}${u.uR.map(r=>`<td>${r==null?'<span class="dim">·</span>':badge(r)}</td>`).join('')}${rowTail(u)}
-      ${u.uS.map((v,k)=>`<td class="pa">${v==null&&u.uC[k]==null?'<span class="dim">·</span>':avgCell(v,u.uC[k],u.uV[k],k===1||k===5?'TD':'yd')}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
-      ${u.uV.map((v,k)=>`<td>${v==null?'<span class="dim">·</span>':spec(+(+v).toFixed(k===1||k===5?2:1),umax[k])}</td>`).join('')}
-      <td>${u.opp?sparkWave(series(u.opp,J.primary[u.grp]),vivid(u.opp),80,18):''}</td></tr>`).join('')}</tbody></table>`;
+      html=`<table class="fx labMulti lab2"><thead>${grpRow(UCOLS.length,UCOLS.length+1)}<tr>${common}
+      ${UCOLS.map(([h,tip],i)=>`<th class="pa${i===0?' gs':''}" data-k="x${i}" title="player's own per-game average: ${tip.replace(' allowed','')}">${h}</th>`).join('')}<th class="pa" data-k="gp" title="games played: this season · all seasons">GP</th>
+      ${UCOLS.map(([h,tip],i)=>`<th class="op${i===0?' gs':''}" data-k="u${i}" title="${tip} per game · badge = rank of 32 (click sorts by rank)">${h}</th>`).join('')}${tail}</tr></thead><tbody>
+      ${R.map(u=>`<tr>${rowCommon(u)}
+      ${u.uS.map((v,k)=>`<td class="pa${k===0?' gs':''}">${v==null&&u.uC[k]==null?'<span class="dim">·</span>':avgCell(v,u.uC[k],u.uV[k],k===1||k===5?'TD':'yd')}</td>`).join('')}<td class="pa">${gpCell(u)}</td>
+      ${u.uV.map((v,k)=>`<td class="op${k===0?' gs':''}">${v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(k===1||k===5?2:1)}</span>${badge(u.uR[k])}`}</td>`).join('')}${rowTail(u)}</tr>`).join('')}</tbody></table>`;
     }
     $('#labTbl').innerHTML=html+`<p class="note">${R.length} players &middot; ${act.join(' + ')||'no position selected'} &middot; wk ${G.week} &middot; source: ${src}${ACT?' &middot; filtered: '+[...ACT].join(' '):''}</p>`;
     document.querySelectorAll('#labTbl th[data-k]').forEach(th=>th.onclick=()=>{
