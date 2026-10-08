@@ -140,15 +140,19 @@ def main(seasons):
                          'fantasy_pts_std': round(std, 2), 'fantasy_pts_ppr': round(std + a['rec'], 2), '_kick': g['kick']})
         # slots: cumulative usage through the current week, ranked within team x position
         recs.sort(key=lambda r: (r['week'], r['_kick']))
-        cum = defaultdict(float); by_week = defaultdict(list)
+        # usage RATE per game played (shrunk toward a position prior over 2 games), not the raw cumulative count:
+        # a starter who missed games is still the WR1 the week he returns (same fix as the NFL builder, 2026-10-08)
+        cum = defaultdict(float); gp = defaultdict(int); by_week = defaultdict(list)
         for r in recs: by_week[r['week']].append(r)
         USAGE = {'QB': lambda r: r['pass_att'], 'RB': lambda r: r['rush_att'] + r['rec'], 'WR': lambda r: r['rec'], 'TE': lambda r: r['rec']}
+        PRIOR = {'QB': 20.0, 'RB': 8.0, 'WR': 2.5, 'TE': 1.5}; K = 2.0
+        rate = lambda r: (cum[r['player_id']] + K * PRIOR[r['pos']]) / (gp[r['player_id']] + K)
         for wk in sorted(by_week):
-            for r in by_week[wk]: cum[r['player_id']] += USAGE[r['pos']](r)
+            for r in by_week[wk]: cum[r['player_id']] += USAGE[r['pos']](r); gp[r['player_id']] += 1
             teams = defaultdict(list)
             for r in by_week[wk]: teams[(r['team'], r['pos'])].append(r)
             for (t, p), lst in teams.items():
-                lst.sort(key=lambda r: (-cum[r['player_id']], -USAGE[p](r), -(r['rec_yds'] + r['rush_yds'] + r['pass_yds']), r['player']))
+                lst.sort(key=lambda r: (-rate(r), -USAGE[p](r), -(r['rec_yds'] + r['rush_yds'] + r['pass_yds']), r['player']))
                 for i, r in enumerate(lst, 1):
                     if p == 'QB': r['slot'] = f'QB{min(i, 2)}'
                     elif p == 'RB': r['slot'] = f'RB{min(i, 3)}'
