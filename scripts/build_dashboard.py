@@ -4,6 +4,7 @@ Every number traces to data/game_logs/ via the derived CSVs. Rerun after any dat
 """
 import json, re, csv, glob, json, os, sys, datetime
 import pandas as pd
+import brand
 REPO = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 LEAGUE = sys.argv[sys.argv.index('--league') + 1] if '--league' in sys.argv else 'nfl'
 
@@ -73,6 +74,8 @@ def intel_payload():
             for c in COV_COLS: row[c] = base.get(c)
             row['cov_est'] = f'{ss} {st}'
     return intel
+
+BRAND_EXTRA_CSS = '.brand .rmask{vertical-align:-5px;margin-right:2px}.hright .rmsw{margin-left:6px}'
 
 def bets_payload():
     """Game model + frozen picks ledger + player-prop lines (build_games.py / build_props.py)."""
@@ -350,7 +353,15 @@ def main():
         raise TypeError(type(o))
     payload = json.dumps(data, separators=(',', ':'), default=np_default)
     template = open(os.path.join(REPO, 'scripts/dashboard_template.html'), encoding='utf-8').read()
-    html = template.replace('__DATA__', payload).replace('__LEAGUE_NAME__', data['league']['title'])
+    _i = template.index('<style>') + 7; _j = template.index('</style>')
+    _css, _blocks = brand.themed_css(template[_i:_j])          # dark keeps every literal; light and rain get mapped overrides
+    template = template[:_i] + _css + template[_j:]
+    html = (template.replace('__DATA__', payload).replace('__LEAGUE_NAME__', data['league']['title'])
+            .replace('__BRAND_CSS__', brand.THEME_CSS + brand.alias_css('dash') + brand.SWITCH_CSS + BRAND_EXTRA_CSS + _blocks)
+            .replace('__BRAND_BOOT__', brand.THEME_BOOT)
+            .replace('__BRAND_MARK__', brand.mascot('counting', 22, 'rmask hdr'))
+            .replace('__BRAND_SWITCH__', brand.theme_switch_html())
+            .replace('__BRAND_JS__', '<script>' + brand.THEME_JS + '</script>'))
     out = os.path.join(REPO, 'dashboard', 'rainman.html' if LEAGUE == 'nfl' else f'{LEAGUE}.html')
     os.makedirs(os.path.dirname(out), exist_ok=True)
     open(out, 'w', encoding='utf-8').write(html)

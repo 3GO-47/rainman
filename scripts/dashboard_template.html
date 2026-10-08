@@ -8,8 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
-:root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--txt:#e6e6e8;--dim:#9a9ca4;--dim2:#60626a;
---amber:#e8b339;--accent:#e8b339;--green:#3fb950;--red:#f0564a;--cyan:#8ab4d8;--violet:#a99bd6;
+__BRAND_CSS__
+
+:root{
 --ui:Inter,"Segoe UI",system-ui,sans-serif;--mono:"JetBrains Mono","IBM Plex Mono",Consolas,"Cascadia Code",monospace;--side:248px}
 *{box-sizing:border-box}
 html{background:var(--bg)}
@@ -713,7 +714,8 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb{display:block}.hint.fi.blk:hover .hb{display:block}
 #crumb{flex:1}
 .standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
-</style></head><body>
+</style>__BRAND_BOOT__
+</head><body>
 <div id="legacyNav" hidden><nav>
 <button data-v="home" class="on"><span class="fk">F1</span>Home</button>
 <button data-v="board"><span class="fk">F2</span>Big Board</button>
@@ -731,9 +733,9 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 <div id="app">
 <div id="top">
 <div id="hdr">
- <div class="brand"><svg width="18" height="18" viewBox="0 0 16 16" style="vertical-align:-3px"><ellipse cx="8" cy="8" rx="7" ry="4.4" transform="rotate(-28 8 8)" fill="#5c3a1e" stroke="#8b98a5" stroke-width=".8"/><path d="M5.8 9.7 L10.2 6.3 M6.7 10.1 L7.4 8.4 M8.3 7.7 L9 6" stroke="#e6e6e6" stroke-width="1" fill="none"/></svg> RAINMAN <span class="lgsw" id="lgSw"></span></div>
+ <div class="brand">__BRAND_MARK__ RAINMAN <span class="lgsw" id="lgSw"></span></div>
  <nav id="tnav" aria-label="sections"></nav>
- <div class="hright"><button id="gFind" title="jump to any player or team (Ctrl-K or /)">&#9906; <span class="fl">find player / team</span> <kbd>ctrl-K</kbd></button><span class="gl">WEEK</span><select id="gWk"></select><button id="gHelp" title="glossary (?)">?</button><button id="gShare" title="copy a link that opens the dashboard with this exact view / week / filters">&#128279;</button></div>
+ <div class="hright"><button id="gFind" title="jump to any player or team (Ctrl-K or /)">&#9906; <span class="fl">find player / team</span> <kbd>ctrl-K</kbd></button><span class="gl">WEEK</span><select id="gWk"></select><button id="gHelp" title="glossary (?)">?</button><button id="gShare" title="copy a link that opens the dashboard with this exact view / week / filters">&#128279;</button>__BRAND_SWITCH__</div>
 </div>
 <div id="sub"><nav id="snav" aria-label="views"></nav><div id="crumb"></div></div>
 <div id="gbar" title="global filter — applies to every view">
@@ -3576,4 +3578,5 @@ document.addEventListener('click',()=>setTimeout(()=>{const m=document.getElemen
 addEventListener('click',()=>document.querySelectorAll('.hint.open').forEach(h=>h.classList.remove('open')));
 buildSide();go(CUR_ITEM,{silent:true});
 addEventListener('hashchange',()=>{const h=new URLSearchParams(location.hash.replace(/^#/,''));const v=h.get('v')||'lab';if(ITEMS[v]&&v!==CUR_ITEM)go(v,{silent:true})});
-</script></body></html>
+</script>__BRAND_JS__
+</body></html>

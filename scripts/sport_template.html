@@ -2,7 +2,9 @@
 <title>RAINMAN</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--txt:#e6e6e9;--dim:#8b8d94;--mute:#5c5e66;--acc:#e8b339;--green:#3fb950;--red:#f0564a;--blue:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
+__BRAND_CSS__
+
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--txt);font-family:var(--sans);font-size:13px;line-height:1.45}a{color:inherit;text-decoration:none}img{-webkit-user-drag:none}
 #hdr{display:flex;align-items:center;gap:14px;padding:0 18px;height:50px;border-bottom:1px solid var(--edge);background:#050506;position:sticky;top:0;z-index:20}
 #hdr .brand{font-family:var(--mono);font-weight:700;letter-spacing:.22em;font-size:14px;display:flex;align-items:center;gap:8px}#hdr .brand i{color:var(--acc);font-style:normal}#hdr .brand img{height:26px;width:auto}
@@ -43,8 +45,9 @@ th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}th.srt-asc:
 .ldrow{display:grid;grid-template-columns:12px minmax(88px,1fr) 44px 40px 30px;gap:5px;align-items:center;padding:1px 0;font-size:10.5px}.ldrow .who{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ldrow .bar{height:6px;background:var(--s3);border-radius:2px;overflow:hidden}.ldrow .bar i{display:block;height:100%;background:var(--blue)}.ldrow b{text-align:right;font-family:var(--mono)}.ldrow .mini{text-align:right}
 .pintro{display:flex;flex-direction:column;gap:5px;padding:10px 12px;margin:0 0 12px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb,.hint.fi.blk:hover .hb{display:block}
-</style></head><body>
-<div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><img id="lgLogo" alt="" style="height:26px;width:auto"><span class="lg" id="lgName"></span><nav id="tnav"></nav><span class="right"><a class="all" href="index.html">◍ all sports</a><a class="all" href="rainman.html">NFL</a><span id="built"></span></span></div>
+</style>__BRAND_BOOT__
+</head><body>
+<div id="hdr"><a class="brand" href="index.html">__BRAND_MARK__ RAINMAN</a><img id="lgLogo" alt="" style="height:26px;width:auto"><span class="lg" id="lgName"></span><nav id="tnav"></nav><span class="right"><a class="all" href="index.html">◍ all sports</a><a class="all" href="rainman.html">NFL</a><span id="built"></span>__BRAND_SWITCH__</span></div>
 <div id="sub"></div>
 <div id="gbar"><label>game</label><select id="gGame"><option value="">all games</option></select><label>team</label><select id="gTeam"><option value="">all teams</option></select><label>slot</label><span id="gSlots"></span><label>source</label><select id="gSrc"></select><span class="mini" id="gInfo"></span></div>
 <main>
@@ -208,4 +211,5 @@ function ledger(){const el=$('#picks');const P=J.picks.slice().sort((a,b)=>a.dat
 function render(){({overview:home,cards,board,lab,explorer,dvp,ratings:ratingsView,lines,ledger})[G.sub]();sortableAll();}
 $('#lgLogo').src=J.logo;$('#lgName').textContent=J.label;$('#built').textContent='built '+J.built;$('#foot').textContent=`RAINMAN · ${J.label} · every number traces to the sportsdataverse box-score parquets (data/sports/${J.league}/raw) · lines from ESPN's scoreboard (slate ${J.slateDate}) · built ${J.built}`;
 const h=new URLSearchParams(location.hash.replace(/^#/,''));go(h.get('v')||'overview');
-</script></body></html>
+</script>__BRAND_JS__
+</body></html>

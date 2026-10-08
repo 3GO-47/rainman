@@ -29,6 +29,7 @@ KAL_CITY = {'Washington': 'WSH', 'San Francisco': 'SF', 'Green Bay': 'GB', 'Dall
             'New York J': 'NYJ', 'New England': 'NE', 'Tennessee': 'TEN', 'Indianapolis': 'IND', 'Cleveland': 'CLE', 'Baltimore': 'BAL', 'Chicago': 'CHI', 'Atlanta': 'ATL',
             'Jacksonville': 'JAX', 'Houston': 'HOU', 'Seattle': 'SEA', 'Denver': 'DEN', 'Detroit': 'DET', 'Minnesota': 'MIN', 'Miami': 'MIA', 'Cincinnati': 'CIN'}
 MON = {m: i for i, m in enumerate(['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'], 1)}
+import brand
 
 def latest(prefix):
     f = sorted(glob.glob(f'data/raw/markets/{prefix}_*.txt'))
@@ -39,6 +40,7 @@ def asof(path):
 def dec_from_american(a):
     a = float(a); return 1 + a / 100 if a > 0 else 1 + 100 / -a
 def american(dec):
+    if not dec or dec <= 1.0001: return ''                      # a settled market prices at 1.00 — there is no American odds for a certainty
     return f'+{round((dec - 1) * 100)}' if dec >= 2 else f'{round(-100 / (dec - 1))}'
 
 def slate():
@@ -71,6 +73,10 @@ def find_game(G, lg, away, home, date=None):
     return None
 
 # ------------------------------------------------------------------------------------------------ sources → normalized rows
+def dead(cost):
+    """an exchange side already settled (or quoted at the bound) is not a market we can price"""
+    return cost is None or cost <= 0.02 or cost >= 0.985
+
 def row(g, market, sel, point, src, dec, cost=None, asof_='', note=''):
     """cost = probability-like price actually paid on an exchange (before fee); for books cost = 1/dec."""
     cost = 1 / dec if cost is None else cost
@@ -128,6 +134,7 @@ def load_kalshi(G):
         g = find_game(G, lg, tt[0], tt[1], date)
         if not g: continue
         bid, ask = float(bid), float(ask); mid = (bid + ask) / 2
+        if dead(ask) or dead(1 - bid): continue
         if series.endswith('GAME'):
             team = KAL_CITY.get(sub.strip()) or (ticker.split('-')[-1] if ticker.split('-')[-1] in teams.get(lg, set()) else KAL_ABBR.get(ticker.split('-')[-1]))
             if team not in (g['away'], g['home']): continue
@@ -206,6 +213,7 @@ def load_poly(G):
         if not m or kind not in ('game', 'props') or not bid or not ask: continue
         lg = m.group(1)
         outs = outs.split(','); bid, ask = float(bid), float(ask)
+        if dead(ask) or dead(1 - bid): continue
         g = None
         if kind == 'props':
             st = POLY_STAT.get(t)
@@ -488,7 +496,7 @@ def write_csv(path, rows):
 # ------------------------------------------------------------------------------------------------ page
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">"""
 CSS = r"""
-:root{--bg:#000;--p:#0a0a0b;--p2:#111113;--p3:#17171a;--e:#1c1c20;--e2:#2a2a30;--fg:#e7e7ea;--dim:#8a8c93;--mute:#55575f;--acc:#e8b339;--g:#3fb950;--r:#f0564a;--b:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:13px/1.4 var(--sans)}a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}
 #hdr{display:flex;align-items:center;gap:14px;padding:0 18px;height:44px;border-bottom:1px solid var(--e);background:#050506;position:sticky;top:0;z-index:9}
 .brand{font:800 14px/1 var(--mono);letter-spacing:4px}.brand i{color:var(--acc);font-style:normal;margin-right:6px}.brand small{font:500 10px var(--mono);letter-spacing:2px;color:var(--dim);margin-left:8px}
@@ -526,6 +534,8 @@ td{padding:6px 8px;border-bottom:1px solid var(--e);vertical-align:middle;white-
 .toast{position:fixed;right:18px;bottom:18px;background:#15140f;border:1px solid var(--acc);color:var(--fg);padding:8px 12px;border-radius:6px;font:600 11px var(--mono);display:none;z-index:9}
 @media (max-width:900px){.shop{grid-template-columns:1fr}.glist{max-height:260px}.dr{grid-template-columns:1fr}.tabs button{padding:0 8px}.brand small{display:none}}
 """
+CSS, CSS_VARS = brand.themed_css(CSS)
+
 JS = r"""
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const G=J.games,L=J.lines,B=J.board,A=J.arbs,E=J.evs,MV=J.moves,CL=J.close,SRC=J.src;const TZ='America/Chicago';const NOW=Date.now();
@@ -634,8 +644,8 @@ def page(G, lines, board, arbs, evs, mv, close, asof_, n_model):
     src = {k: v for k, v in src.items() if k in used}
     slim = [{k: l[k] for k in ('league', 'event_id', 'market', 'selection', 'point', 'source', 'eff_dec', 'implied', 'fee', 'note', 'player', 'stat', 'liq') if k in l} for l in lines]
     J = dict(games=games, lines=slim, board=board, arbs=arbs, evs=evs, moves=mv[:300], close=close, src=src, asof=asof_, n_model=n_model, built=datetime.now().strftime('%Y-%m-%d %H:%M'))
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · Arb Engine</title>{HEAD}<style>{CSS}</style></head><body>
-<div id="hdr"><a class="brand" href="index.html"><i>◍</i>RAINMAN<small>ARB ENGINE</small></a><div class="tabs" id="tabs"></div><div class="lg" id="lgs"></div><span class="bk">bankroll $<input id="bank" type="number" step="100"></span><span class="meta" id="plays"></span><span class="hl"><a href="index.html">all sports</a><a href="social.html">social</a></span><button class="q" id="q" title="how it works">?</button></div>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Arb Engine</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}</style></head><body>
+<div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN<small>ARB ENGINE</small></a><div class="tabs" id="tabs"></div><div class="lg" id="lgs"></div><span class="bk">bankroll $<input id="bank" type="number" step="100"></span><span class="meta" id="plays"></span><span class="hl"><a href="index.html">all sports</a><a href="social.html">social</a></span>{brand.theme_switch_html()}<button class="q" id="q" title="how it works">?</button></div>
 <main><div id="view"></div><div class="foot" id="foot"></div></main>
 <div id="how"><div class="box"><h3>How the Arb Engine prices a bet</h3>
 <h5>Sources</h5><p>Every main line (moneyline, spread, total) and main player prop at DraftKings, FanDuel, BetMGM, BetRivers and ESPN BET through The Odds API, plus the Kalshi and Polymarket exchanges (YES at the ask, the other side at 1 − bid; Kalshi's 7% × P × (1−P) taker fee is added to the cost). Started games are dropped — live prices are not a market we price.</p>
@@ -644,7 +654,7 @@ def page(G, lines, board, arbs, evs, mv, close, asof_, n_model):
 <h5>Confidence A / B / C</h5><p>0–100 from: how many two-sided sources set the fair (1 → 30, 2 → 52, 3 → 66, 4 → 76, 5+ → 84), minus how much they disagree (−1 per point of spread in their fairs), +8 when an exchange is among them, ±10 for the consensus moving toward or away from the bet since the opener, −10/−25 when the edge is over 8% / 15% (usually a stale or limited line), capped at 60 for YES-only markets. A ≥ 70, B ≥ 50.</p>
 <h5>Steam and CLV</h5><p>Every Odds API pull saves one consensus snapshot per market. STEAM shows the opener → latest path. CLV scores each saved play against the latest (or closing) consensus for its side: positive means you beat the market's final number — the only durable evidence an edge is real.</p></div></div>
 <div id="toast" class="toast"></div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script></body></html>"""
+<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script></body></html>"""
 
 def main():
     G = slate()

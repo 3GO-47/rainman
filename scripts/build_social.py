@@ -7,6 +7,7 @@ Inputs: data/raw/slate_all_<date>.txt (game picker, logos), data/processed/game_
 Output: dashboard/social.html
 """
 import csv, glob, json, os, re
+import brand
 from datetime import datetime, timedelta
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 NFLV = {'WAS': 'WSH', 'LA': 'LAR', 'JAX': 'JAX'}   # nflverse → ESPN slate abbreviations
@@ -53,7 +54,7 @@ def prop_results(days=28):
 
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
 CSS = """
-:root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--fg:#e6e6e9;--dim:#8b8d94;--mute:#5c5e66;--acc:#e8b339;--green:#3fb950;--red:#f0564a;--blue:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:13px;line-height:1.45}a{color:inherit;text-decoration:none}
 #hdr{display:flex;align-items:center;gap:16px;padding:10px 24px;border-bottom:1px solid var(--edge);background:#050506;position:sticky;top:0;z-index:5}.brand{font:800 15px/1 var(--mono);letter-spacing:4px}.brand i{color:var(--acc);font-style:normal;margin-right:6px}.tag{color:var(--dim);font-size:12px}#hdr .right{margin-left:auto;color:var(--mute);font:500 10.5px var(--mono)}
 .hl{display:flex;gap:4px;margin-left:10px}.hl a{font:600 10px var(--mono);letter-spacing:1px;padding:3px 9px;border:1px solid var(--edge2);border-radius:4px;color:var(--dim)}.hl a:hover,.hl a.on{color:var(--fg);border-color:var(--acc)}
@@ -75,6 +76,8 @@ table{border-collapse:collapse;width:100%;font-size:12px}th{font:600 9.5px var(-
 .empty{color:var(--mute);padding:12px;border:1px dashed var(--edge2);border-radius:8px;text-align:center}.toast{position:fixed;right:18px;bottom:18px;background:#15140f;border:1px solid var(--acc);color:var(--fg);padding:8px 12px;border-radius:8px;font:600 11px var(--mono);display:none;z-index:9}
 .foot{margin-top:26px;padding-top:12px;border-top:1px solid var(--edge);color:var(--mute);font:400 11px/1.6 var(--sans)}
 """
+CSS, CSS_VARS = brand.themed_css(CSS)
+
 JS = r"""
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const TZ='America/Chicago';const CT=d=>new Date(d).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZone:TZ}).replace(':00','');
@@ -144,8 +147,8 @@ $('#wipe').onclick=()=>{if(confirm('clear every play, friend and the profile fro
 def page(games, results, pulled):
     J = dict(games=games, results={k: list(v) for k, v in results.items()}, props=prop_results(), pulled=pulled)
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · Social</title>{HEAD}<style>{CSS}</style></head><body>
-<div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><span class="tag">Social · plays, records, leaderboard</span><span class="hl"><a href="index.html">all sports</a><a href="arb.html">Arb Engine</a><a class="on" href="social.html">Social</a></span><span class="right"><span id="nfr"></span> · slate {pulled} · built {built}</span></div>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Social</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}</style></head><body>
+<div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN</a><span class="tag">Social · plays, records, leaderboard</span><span class="hl"><a href="index.html">all sports</a><a href="arb.html">Arb Engine</a><a class="on" href="social.html">Social</a>{brand.theme_switch_html()}</span><span class="right"><span id="nfr"></span> · slate {pulled} · built {built}</span></div>
 <div class="wrap">
 <h1>Your plays. Your record. The board.<small>Log every bet you place — by hand, or straight from the Arb Engine — and the site grades it, tracks your units week by week and ranks you against everyone whose plays you've imported. Share a link and friends can see and tail your plays. Everything here lives in this browser: no account yet, nothing leaves your machine unless you share a link.</small></h1>
 <div class="pintro"><div class="pw"><b>How it works</b> — log a play (or set a stake on one saved from the Arb Engine) · NFL game lines grade themselves from the final score, everything else gets the W / L / P buttons · the leaderboard ranks weekly units · <b>share</b> copies a link that carries your plays; open a friend's link to import theirs.</div><div class="ph"><span>units = stake × (odds − 1) on a win, −stake on a loss</span><span>week = Monday to Sunday</span><span>DraftKings and FanDuel have no account feed — log those by hand</span><span>Kalshi / Polymarket imports are next</span><span>backup / restore keeps a JSON copy</span></div></div>
@@ -158,7 +161,7 @@ def page(games, results, pulled):
 <h2>feed <span>plays shared by you and the people you've imported · tail copies a play into your drafts</span></h2><div id="feed" class="feed"></div>
 <div class="foot">RAINMAN · Social (local prototype) · plays are stored in this browser only; a share link carries a copy of your plays to whoever opens it. Automatic grading uses the finals the site already tracks (NFL now; other leagues as their results feeds land). Bet responsibly.</div></div>
 <div id="toast" class="toast"></div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script></body></html>"""
+<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script></body></html>"""
 
 def main():
     games, pulled = slate(); R = results()

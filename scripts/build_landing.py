@@ -24,6 +24,7 @@ SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'lal
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
 SOCCER_LOGO = {k: CDN + f'leaguelogos/soccer/500-dark/{v}.png' for k, v in SOCCER_LOGO.items()}
 COMING = [('f1', 'Formula 1', CDN + 'teamlogos/leagues/500-dark/f1.png'), ('ufc', 'UFC', CDN + 'teamlogos/leagues/500/ufc.png')]
+import brand
 
 MK_LABEL = {'pass_yds': 'Pass yds', 'pass_td': 'Pass TD', 'rush_yds': 'Rush yds', 'rush_att': 'Rush att', 'receptions': 'Receptions', 'rec_yds': 'Rec yds'}
 def nfl_teaser():
@@ -147,7 +148,7 @@ def game_model_backtest():
 SHEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
 
 SCSS = """
-:root{--bg:#000;--panel:#0b0b0c;--s2:#131315;--s3:#1a1a1d;--edge:#1d1e21;--edge2:#2a2b30;--fg:#e6e6e9;--dim:#8b8d94;--mute:#5c5e66;--acc:#e8b339;--green:#3fb950;--red:#f0564a;--blue:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:'Inter',system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:13px;line-height:1.45}a{color:inherit;text-decoration:none}img{-webkit-user-drag:none}
 #hdr{display:flex;align-items:center;gap:16px;padding:10px 24px;border-bottom:1px solid var(--edge);background:#050506;position:sticky;top:0;z-index:5}
 .brand{font:800 15px/1 var(--mono);letter-spacing:4px}.brand i{color:var(--acc);font-style:normal;margin-right:6px}.tag{color:var(--dim);font-size:12px}#hdr .right{margin-left:auto;color:var(--mute);font:500 10.5px var(--mono)}
@@ -197,6 +198,8 @@ table{border-collapse:collapse;width:100%;font-size:12px}th{font:600 9.5px var(-
 .foot{margin-top:26px;padding-top:12px;border-top:1px solid var(--edge);color:var(--mute);font:400 11px/1.6 var(--sans)}
 @media (max-width:760px){.wrap{padding:12px}h1{font-size:20px}#hdr .tag,#hdr .hl{display:none}.tlhead,.lane{grid-template-columns:90px 1fr}.bub{min-width:88px}}
 """
+SCSS, SCSS_VARS = brand.themed_css(SCSS, 'scss')
+
 
 SJS = r"""
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -297,7 +300,7 @@ render();window.addEventListener('resize',()=>timeline());
 
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">"""
 CSS = r"""
-:root{--bg:#000;--p:#0a0a0b;--p2:#111113;--p3:#17171a;--e:#1c1c20;--e2:#2a2a30;--fg:#e7e7ea;--dim:#8a8c93;--mute:#55575f;--acc:#e8b339;--g:#3fb950;--r:#f0564a;--b:#58a6ff;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+:root{--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans)}a{color:inherit;text-decoration:none}img{-webkit-user-drag:none;user-select:none}
 #hdr{display:flex;align-items:center;gap:14px;padding:0 20px;height:48px;border-bottom:1px solid var(--e);background:#050506;position:sticky;top:0;z-index:5}
 .brand{font:800 15px/1 var(--mono);letter-spacing:5px}.brand i{color:var(--acc);font-style:normal;margin-right:7px}
@@ -340,6 +343,8 @@ tr.lg{cursor:pointer}tr.lg:hover td{background:var(--p)}
 .foot b{color:var(--dim);font-weight:500}
 @media(max-width:640px){main{padding:24px 14px 50px}h1{font-size:24px}.grid{grid-template-columns:1fr}}
 """
+CSS, CSS_VARS = brand.themed_css(CSS, 'css')
+
 
 def page(games, pulled):
     """Layer 0: the sports, each linked to its dashboard, and how the models have actually scored. Nothing else."""
@@ -414,8 +419,8 @@ def page(games, pulled):
     nsport = len([1 for k, l, g, p, s_, i in LEAGUES if cnt.get(k)])
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN</title>
-{HEAD}<style>{CSS}</style></head><body>
-<div id="hdr"><span class="brand"><i>◍</i>RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a></span></div>
+{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}{CSS_VARS}{CSS}</style>{brand.THEME_BOOT}</head><body>
+<div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a>{brand.theme_switch_html()}</span></div>
 <main>
 <h1>RAINMAN</h1>
 <p class="sub">Matchup intelligence, one dashboard per sport.</p>
@@ -425,8 +430,9 @@ def page(games, pulled):
 <div class="perf">{kp}</div>
 {table_html}
 <p class="note">A win at −110 returns 0.909 and a loss costs 1, so 52.4% is break-even; the gold tick on each bar is that line. Records separate skill from variance somewhere past 300 positions — read these as a running tally, not a verdict. The NFL model's full breakdown, calibration and changelog live on <a href="rainman.html#v=pkhome" style="color:var(--acc)">its Model tab</a>.</p>
-<div class="foot">RAINMAN · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}) · player models from game logs (Pro Football Reference, ESPN, sportsdataverse, the Sackmann tennis archive) · built {built} · information, not advice</div>
+<div class="foot"><a href="brand.html" style="color:var(--accent-text)">brand</a> · RAINMAN · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}) · player models from game logs (Pro Football Reference, ESPN, sportsdataverse, the Sackmann tennis archive) · built {built} · information, not advice</div>
 </main>
+<script>{brand.THEME_JS}</script>
 <script>document.querySelectorAll('tr.lg[data-go]').forEach(t=>{{if(t.dataset.go)t.onclick=()=>location.href=t.dataset.go}});</script>
 </body></html>"""
 
@@ -438,8 +444,8 @@ def shell(key, label, games, pulled, logo=''):
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES)
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · {label}</title>
-{SHEAD}<style>{SCSS}</style></head><body>
-<div id="hdr"><a class="brand" href="index.html"><i>◍</i> RAINMAN</a><span class="tag">{label} · schedule &amp; lines</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}</span></div>
+{SHEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{SCSS_VARS}{SCSS}</style>{brand.THEME_BOOT}</head><body>
+<div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN</a><span class="tag">{label} · schedule &amp; lines</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}{brand.theme_switch_html()}</span></div>
 <div class="wrap">
 <h1><img src="{logo}" alt="" style="height:34px;vertical-align:middle;margin-right:10px" onerror="this.style.display='none'">{label}<small>Every game in the slate window on one clock, then as a wall of matchups with the DraftKings line, total and implied scores, plus the records ESPN carries on the schedule. Player matchups and the pick model arrive for {label} when a box-score source is wired in.</small></h1>
 <div id="sports" class="bubs" hidden></div>
@@ -450,7 +456,7 @@ def shell(key, label, games, pulled, logo=''):
 <div class="foot">RAINMAN · {label} · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}). <a href="index.html">← all sports</a></div>
 </div>
 <script>const J={json.dumps(J, separators=(',', ':'))};</script>
-<script>{SJS}</script></body></html>"""
+<script>{brand.THEME_JS}</script><script>{SJS}</script></body></html>"""
 
 def main():
     games, pulled = load_slate()
