@@ -37,7 +37,7 @@ def get(sport, path, **params):
 def slate():
     """League → {full team name: slate abbreviation}, plus which leagues have games in the next 8 days."""
     files = sorted(glob.glob('data/raw/slate_all_*.txt')); names, active = {}, set()
-    lim = (datetime.datetime.utcnow() + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%MZ')
+    lim = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%MZ')
     if not files: return names, active
     for line in open(files[-1], encoding='utf-8'):
         if not line.startswith('G|'): continue
@@ -71,7 +71,7 @@ def main():
     np = 0
     if '--props' in sys.argv and (leagues is None or 'nfl' in leagues) and 'nfl' in active:
         events, left = get(SPORT['nfl'], '/events')
-        soon = [e for e in events if e['commence_time'] < (datetime.datetime.utcnow() + datetime.timedelta(days=8)).isoformat()]
+        soon = [e for e in events if e['commence_time'] < (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=8)).isoformat()]
         with open(f'data/raw/odds_api/props_{today}.csv', 'w', newline='', encoding='utf-8') as f:
             w = csv.writer(f); w.writerow(['player', 'market', 'book', 'side', 'line', 'price', 'event', 'updated'])
             for e in soon:

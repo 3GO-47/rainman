@@ -3085,7 +3085,7 @@ function sortableAll(root){(root||document).querySelectorAll('table').forEach(t=
       vs.sort((a,b)=>{if(numeric){const x=num(a.v),y=num(b.v);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return asc?x-y:y-x}const x=String(a.v).toLowerCase(),y=String(b.v).toLowerCase();return asc?x.localeCompare(y):y.localeCompare(x)});
       vs.forEach(x=>tb.appendChild(x.r))})})})})}
 function logoize(root){(root||document).querySelectorAll('.plink[data-p],.pp[data-p]').forEach(el=>{if(el.dataset.lg||el.closest('.tdc,.r11row,.r11who,.dchead,.kpi'))return;el.dataset.lg='1';
-  if(el.querySelector('img.tl')||(el.previousSibling&&el.previousSibling.nodeType===1&&el.previousSibling.classList&&el.previousSibling.classList.contains('tl')))return;
+  const prev=el.previousElementSibling;if(el.querySelector('img.tl')||(prev&&prev.tagName==='IMG'&&prev.classList.contains('tl')))return;
   const t=PTEAM[el.dataset.p];if(!t||!TEAM[t])return;el.insertAdjacentHTML('afterbegin',`<img class="tl" src="${LOGO(t)}" style="width:13px;height:13px;margin-right:3px;vertical-align:-2px" alt="">`)})}
 /* markets: how each one maps to the player's log, the DvP column for his slot, and the projection market key */
 const MKT=[
