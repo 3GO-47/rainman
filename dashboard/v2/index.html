@@ -2650,7 +2650,9 @@ function waiver(slot,full,append){const wk=G.week;const R=waiverRows(wk);const N
 /* ---------- DFS: DraftKings Classic pick'ems (replaces the league-roster fantasy view) ---------- */
 const dkPtsOf=(u)=>{const pj=PROJ[u.player+'|'+u.team]||PROJ[(u.ln||u.player)+'|'+u.team];if(!pj)return null;const t=TDM[u.player+'|'+u.team];const lam=t?+t.lam:0;const g=(k,m)=>pj[k]?pj[k].proj*m:0;
   return {pts:g('pass_yds',.04)+g('pass_td',4)-g('interceptions',1)+g('rush_yds',.1)+g('rec_yds',.1)+g('receptions',1)+6*lam+(pj.pass_yds&&pj.pass_yds.proj>=300?3:0),pj,lam}};
-const usageOK=(u)=>{const g=USG[u.ln||u.player]||{};const snp=g.snp??(u.gp?.6:0),tsh=g.tsh??0,vol=u.gp?+u.se:0;
+const usageOK=(u)=>{if(!IS_NFL){const L=(PLOGS[u.ln||u.player]||[]).filter(l=>l[LOG.season]===LAST_SE);if(L.length<2)return false;const a=i=>L.reduce((s,l)=>s+(+l[i]||0),0)/L.length;   // college: no snap counts — gate on real volume this season
+    return u.pos==='QB'?a(LOG.patt)>=10:u.pos==='RB'?a(LOG.ra)>=6:(a(LOG.rec)>=1.5||a(LOG.ra)>=4)}
+  const g=USG[u.ln||u.player]||{};const snp=g.snp??(u.gp?.6:0),tsh=g.tsh??0,vol=u.gp?+u.se:0;
   if(u.pos==='QB')return snp>=.5;if(u.pos==='RB')return snp>=.3||vol>=8;return snp>=.45&&(tsh>=.1||vol>=3.5)};
 function lineup(){
   RR.push(render);
@@ -3347,6 +3349,14 @@ const MKT=[
  {k:'rec_yds',label:'Rec yds',slots:['RB1','WR1','WR2','WR3','TE1'],col:g=>`${g} RecY`,own:l=>l[LOG.recy],dec:0},
  {k:'td',label:'Anytime TD',slots:['RB1','RB2','WR1','WR2','WR3','TE1'],col:g=>`${g} TD`,own:l=>l[LOG.rtd]+l[LOG.rectd],dec:2,prob:true}];
 const MKT_BY=Object.fromEntries(MKT.map(m=>[m.k,m]));
+/* college fallback for the Big Board: no prop model, so project each market from the player's own averages (this season, ≥2 games; last season if not)
+   scaled half-way toward what the opponent allows to his slot relative to the league mean of that stat; band = ±40% */
+const LGMEAN=(()=>{const m={};const D=J.dvp.combined||{};Object.values(D).forEach(d=>Object.entries(d.stats||{}).forEach(([c,x])=>{(m[c]=m[c]||[]).push(+x.avg)}));Object.keys(m).forEach(c=>m[c]=m[c].reduce((a,b)=>a+b,0)/m[c].length);return m})();
+function synthProj(u){const L=PLOGS[u.ln||u.player]||[];let Lc=L.filter(l=>l[LOG.season]===LAST_SE);if(Lc.length<2)Lc=L.filter(l=>l[LOG.season]===LAST_SE-1);if(Lc.length<2)return null;
+  const o=oppFor(u.team,G.week);if(!o||o==='BYE')return null;const d=J.dvp.combined[o.replace('@','')];const F={pass_yds:LOG.py,pass_td:LOG.ptd,pass_att:LOG.patt,rush_att:LOG.ra,rush_yds:LOG.ry,receptions:LOG.rec,rec_yds:LOG.recy};const pj={};
+  Object.entries(F).forEach(([k,i])=>{const avg=Lc.reduce((s,l)=>s+(+l[i]||0),0)/Lc.length;if(!(avg>0))return;const mk=MKT_BY[k];let mx=1;if(mk&&d){const st=u.grp==='QB'?'QB1':u.grp;if(mk.slots.includes(st)){const c=mk.col(u.grp);const x=d.stats[c];if(x&&LGMEAN[c])mx=1+0.5*((+x.avg)/LGMEAN[c]-1)}}
+    const pr=avg*mx;pj[k]={proj:pr,q10:pr*.6,q50:pr,q90:pr*1.4,n:Lc.length,mx,gx:1}});
+  if(!Object.keys(pj).length)return null;pj._lam=Lc.reduce((s,l)=>s+(+l[LOG.rtd]||0)+(+l[LOG.rectd]||0),0)/Lc.length;pj._synth=true;return pj}
 const PROJ=(()=>{const m={};(BT11.proj||[]).forEach(r=>{(m[r[0]+'|'+r[1]]=m[r[0]+'|'+r[1]]||{})[r[4]]={proj:r[5],q10:r[6],q50:r[7],q90:r[8],n:r[9],mx:r[10],gx:r[11]}});return m})();
 const TDM=(()=>{const m={};(BT11.td||[]).forEach(t=>m[t.player+'|'+t.team]=t);return m})();
 const DKL=(()=>{const m={};(BT11.lines||[]).forEach(l=>{const k=l.player+'|'+l.team+'|'+l.market;if(!m[k]||Math.abs(l.p_over-.5)<Math.abs(m[k].p_over-.5))m[k]=l});return m})();
@@ -3450,7 +3460,7 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
   $('#board').innerHTML=`<div class="tabs" id="bbTabs">${POS.map((p,i)=>`<button data-p="${p}" class="${i===0?'on':''}">${p==='ALL'?p:posIcon(p,12)+' '+p}</button>`).join('')}</div>
    <div class="controls"><select id="bbDepth"><option value="1" selected>starters</option><option value="">every depth-chart player</option></select><input id="bbQ" placeholder="search player / team..." size="20"><button id="bbCsv" class="mclose" style="position:static">&#8681; csv</button>
    <select id="bbUse"><option value="1" selected>usage-qualified only</option><option value="">everyone on a depth chart</option></select><span class="tabs" id="bbView"><button data-v="both" class="on">lanes + board</button><button data-v="table">board only</button></span>
-   <span class="note">matchup rankings for the week: the colored number in each market cell is the opponent's rank allowing that stat to his slot (1 = allows the most, green; 32 = stingiest, red) · the bold number is the model's median projection, the band its 10th–90th percentile · <b>MATCH</b> = mean rank across his markets (lower = softer week) · lanes: every usage-qualified starter by matchup (left = soft, right = stingy), dot size = volume · quadrants: the eight best matchups per position ranked by DK points × softness, with the softest market and the opponent's rank · players who barely play are filtered out (QB ≥50% snaps · RB ≥30% snaps or 8 touches/g · WR/TE ≥45% snaps and ≥10% target share or 3.5 targets/g) — switch to "everyone" to see them · the full board is below, collapsed</span></div>
+   <span class="note">matchup rankings for the week: the colored number in each market cell is the opponent's rank allowing that stat to his slot (1 = allows the most, green; ${NT} = stingiest, red) · the bold number is the model's median projection, the band its 10th–90th percentile · <b>MATCH</b> = mean rank across his markets (lower = softer week) · lanes: every usage-qualified starter by matchup (left = soft, right = stingy), dot size = volume · quadrants: the eight best matchups per position ranked by DK points × softness, with the softest market and the opponent's rank · players who barely play are filtered out (QB ≥50% snaps · RB ≥30% snaps or 8 touches/g · WR/TE ≥45% snaps and ≥10% target share or 3.5 targets/g) — switch to "everyone" to see them · the full board is below, collapsed</span></div>
    <div id="bbKpi"></div><div id="bbMap"></div><div id="bbQuad"></div><div id="bbTbl"></div>`;
   let pos='ALL',sortK='match',sortA=true,lastRows=[],view='both';
   $('#bbTabs').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#bbTabs').children].forEach(x=>x.classList.toggle('on',x===b));pos=b.dataset.p;render()};
@@ -3462,7 +3472,7 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
   const dkpts=(pj,lam)=>{let p=0;const g=(k,m)=>{const r=pj[k];if(!r)return 0;return r.proj*m};p+=g('pass_yds',.04)+g('pass_td',4)-g('interceptions',1)+g('rush_yds',.1)+g('rec_yds',.1)+g('receptions',1)+6*(lam||0);return p};
   function rows(){const q=$('#bbQ').value.trim().toLowerCase(),dep=$('#bbDepth').value;
     return UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&(pos==='ALL'||u.pos===pos)&&(!dep||u.slot===(u.grp==='QB'?'QB1':u.grp))&&u.inj!=='-1'&&(!q||(u.player+' '+u.team).toLowerCase().includes(q)))
-      .map(u=>{const pj=PROJ[u.player+'|'+u.team]||PROJ[(u.ln||u.player)+'|'+u.team];if(!pj)return null;const t=TDM[u.player+'|'+u.team];const lam=t?+t.lam:null;
+      .map(u=>{let pj=PROJ[u.player+'|'+u.team]||PROJ[(u.ln||u.player)+'|'+u.team];if(!pj&&!IS_NFL)pj=synthProj(u);if(!pj)return null;const t=TDM[u.player+'|'+u.team];const lam=t?+t.lam:(pj._lam??null);
         const rk={};[...COLS.map(c=>c[0]),'td'].forEach(k=>{if(pj[k]||k==='td'){const r=rankOf(u,k);if(r)rk[k]=r}});const rs=Object.values(rk).map(r=>r.rank);const match=rs.length?mean(rs):null;
         const yds=(pj.pass_yds?pj.pass_yds.proj:0)+(pj.rush_yds?pj.rush_yds.proj:0)+(pj.rec_yds?pj.rec_yds.proj:0);const vol=(pj.pass_att?pj.pass_att.proj:0)+(pj.rush_att?pj.rush_att.proj:0)+(pj.receptions?pj.receptions.proj*1.5:0);
         const g=USG[u.ln||u.player]||{};return {u,pj,lam,pts:dkpts(pj,lam),o:oppFor(u.team,G.week),rk,match,yds,vol,snp:g.snp,tsh:g.tsh,ok:usageOK(u)}}).filter(Boolean).filter(r=>!$('#bbUse').value||r.ok)}
@@ -3470,10 +3480,10 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
   function drawMap(R){const el=$('#bbMap');if(view!=='both'){el.innerHTML='';return}
     const rows=R.filter(r=>r.match!=null);if(!rows.length){el.innerHTML='';return}
     const W=Math.max(700,el.clientWidth||1200),PADL=52,PADR=18,LH=92,lanes=['QB','RB','WR','TE'].filter(p=>rows.some(r=>r.u.pos===p));const H=lanes.length*LH+30;
-    const X=m=>PADL+(m-1)/31*(W-PADL-PADR);const vmax=Math.max(...rows.map(r=>r.vol))||1;
+    const X=m=>PADL+(m-1)/(NT-1)*(W-PADL-PADR);const vmax=Math.max(...rows.map(r=>r.vol))||1;
     let out=`<svg class="bblanes" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" style="display:block;max-width:100%">`;
-    out+=`<text x="${PADL}" y="12" class="ax g">soft matchup — rank 1</text><text x="${(PADL+W-PADR)/2}" y="12" class="ax" text-anchor="middle">MATCH = mean of the opponent's ranks across his markets</text><text x="${W-PADR}" y="12" class="ax r" text-anchor="end">stingy — rank 32</text>`;
-    [1,8,16,24,32].forEach(v=>{out+=`<line x1="${X(v)}" x2="${X(v)}" y1="18" y2="${H-8}" class="grid"/><text x="${X(v)}" y="${H-1}" class="ax" text-anchor="middle">${v}</text>`});
+    out+=`<text x="${PADL}" y="12" class="ax g">soft matchup — rank 1</text><text x="${(PADL+W-PADR)/2}" y="12" class="ax" text-anchor="middle">MATCH = mean of the opponent's ranks across his markets</text><text x="${W-PADR}" y="12" class="ax r" text-anchor="end">stingy — rank ${NT}</text>`;
+    (NT===32?[1,8,16,24,32]:[1,Math.round(NT/4),Math.round(NT/2),Math.round(3*NT/4),NT]).forEach(v=>{out+=`<line x1="${X(v)}" x2="${X(v)}" y1="18" y2="${H-8}" class="grid"/><text x="${X(v)}" y="${H-1}" class="ax" text-anchor="middle">${v}</text>`});
     lanes.forEach((p,li)=>{const y0=22+li*LH,yc=y0+LH*0.62;const L=rows.filter(r=>r.u.pos===p).sort((a,b)=>a.match-b.match);const med=L[Math.floor(L.length/2)].match;
       out+=`<rect x="${PADL-4}" y="${y0}" width="${W-PADL-PADR+8}" height="${LH-6}" class="lane"/><text x="6" y="${yc+4}" class="lb" style="fill:${POSC[p]}">${p}</text><line x1="${X(med)}" x2="${X(med)}" y1="${y0+4}" y2="${y0+LH-10}" class="med"/><text x="${X(med)}" y="${y0+LH-1}" class="ax" text-anchor="middle" style="opacity:.7">median ${med.toFixed(1)}</text>`;
       const placed=[];L.forEach(r=>{const rad=4+Math.sqrt(r.vol/vmax)*7;const x=X(r.match);let y=yc,k=1;const ok=yy=>placed.every(q=>Math.hypot(q.x-x,q.y-yy)>=q.rad+rad+1)&&yy-rad>=y0+36&&yy+rad<=y0+LH-9;
