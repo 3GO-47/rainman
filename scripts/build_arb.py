@@ -138,9 +138,9 @@ def load_kalshi(G):
 
 def load_oddsapi(G):
     """The Odds API game lines (FanDuel, BetMGM, Caesars, … and DraftKings) → rows; when it carries DraftKings, the ESPN DK rows are replaced by it."""
-    f = sorted(glob.glob('data/raw/markets/oddsapi_*.csv')); rows = []
+    f = ['data/raw/markets/oddsapi_current.csv'] if os.path.exists('data/raw/markets/oddsapi_current.csv') else sorted(glob.glob('data/raw/markets/oddsapi_*.csv')); rows = []
     if not f: return rows, False
-    f = f[-1]; a_ = asof(f); has_dk = False
+    f = f[-1]; a_ = asof(f) or datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d'); has_dk = False
     by_lg = {}
     for g in G.values(): by_lg.setdefault(g['lg'], []).append(g)
     for r in csv.DictReader(open(f, encoding='utf-8')):
@@ -158,6 +158,22 @@ def load_oddsapi(G):
         elif r['market'] == 'totals':
             if r['side'] in ('Over', 'Under') and r['point'] != '': rows.append(row(g, 'total', r['side'], float(r['point']), code, dec, asof_=a_))
     return rows, has_dk
+
+def load_props(G):
+    """The Odds API main player props (props_current.csv): Over/Under per player, stat and line at every book → market 'prop'."""
+    f = 'data/raw/odds_api/props_current.csv'; rows = []
+    if not os.path.exists(f): return rows
+    a_ = datetime.fromtimestamp(os.path.getmtime(f)).strftime('%Y-%m-%d')
+    for r in csv.DictReader(open(f, encoding='utf-8')):
+        if r['side'] not in ('Over', 'Under') or r['line'] == '': continue
+        code = BOOKS.get(r['book'], (r['book'].upper()[:4], r['book']))[0]
+        if code not in SRC: SRC[code] = BOOKS.get(r['book'], (code, r['book']))[1]; KIND[code] = 'book'
+        g = find_game(G, r['league'], r['away'], r['home'], r['commence'][:10])
+        if not g: continue
+        try: x = row(g, 'prop', r['side'], float(r['line']), code, dec_from_american(r['price']), asof_=a_)
+        except ValueError: continue
+        x['player'] = r['player']; x['stat'] = r['market']; rows.append(x)
+    return rows
 
 def load_poly(G):
     f = latest('polymarket'); rows = []
@@ -205,10 +221,11 @@ def pair_key(r):
     """Spreads pair on the AWAY team's handicap: away +3.5 ↔ home −3.5 are the two sides of one market."""
     if r['market'] == 'moneyline': return (r['event_id'], 'moneyline', '')
     if r['market'] == 'spread': return (r['event_id'], 'spread', float(r['point']) if r['selection'] == r['away'] else -float(r['point']))
+    if r['market'] == 'prop': return (r['event_id'], 'prop|' + r['stat'] + '|' + r['player'], float(r['point']))
     return (r['event_id'], 'total', float(r['point']))
 
 def side_of(r, g):
-    if r['market'] == 'total': return 'A' if r['selection'] == 'Over' else 'B'
+    if r['market'] in ('total', 'prop'): return 'A' if r['selection'] == 'Over' else 'B'
     return 'A' if r['selection'] == g['away'] else 'B'
 
 def analyse(rows, G):
@@ -232,31 +249,35 @@ def analyse(rows, G):
         fair_a = sum(fairs) / len(fairs); fair_b = 1 - fair_a
         bestA = max(A, key=lambda x: x['eff_dec']); bestB = max(B, key=lambda x: x['eff_dec'])
         sum_inv = 1 / bestA['eff_dec'] + 1 / bestB['eff_dec']
-        selA = bestA['selection'] + (f" {bestA['point']:+g}" if bestA['market'] == 'spread' else f" {bestA['point']}" if bestA['market'] == 'total' else '')
-        selB = bestB['selection'] + (f" {bestB['point']:+g}" if bestB['market'] == 'spread' else f" {bestB['point']}" if bestB['market'] == 'total' else '')
-        rec = dict(league=g['lg'], event_id=g['id'], kickoff=g['date'], away=g['away'], home=g['home'], market=key[1], line=key[2], side_a=selA, side_b=selB,
+        selA = bestA['selection'] + (f" {bestA['point']:+g}" if bestA['market'] == 'spread' else f" {bestA['point']}" if bestA['market'] in ('total', 'prop') else '')
+        selB = bestB['selection'] + (f" {bestB['point']:+g}" if bestB['market'] == 'spread' else f" {bestB['point']}" if bestB['market'] in ('total', 'prop') else '')
+        mk = 'prop' if key[1].startswith('prop|') else key[1]
+        rec = dict(league=g['lg'], event_id=g['id'], kickoff=g['date'], away=g['away'], home=g['home'], market=mk, line=key[2], side_a=selA, side_b=selB,
+                   player=bestA.get('player', ''), stat=bestA.get('stat', ''),
                    fair_a=round(fair_a, 4), fair_b=round(fair_b, 4), sources=len(fairs),
                    best_a_src=bestA['source'], best_a_dec=bestA['eff_dec'], best_a_american=american(bestA['eff_dec']), best_b_src=bestB['source'], best_b_dec=bestB['eff_dec'], best_b_american=american(bestB['eff_dec']),
                    hold=round(sum_inv - 1, 4), ev_a=round(fair_a * bestA['eff_dec'] - 1, 4), ev_b=round(fair_b * bestB['eff_dec'] - 1, 4))
         rec['best_ev'] = max(rec['ev_a'], rec['ev_b']); board.append(rec)
         if sum_inv < 1:
             margin = 1 - sum_inv; stake_a = (1 / bestA['eff_dec']) / sum_inv * 100; stake_b = 100 - stake_a
-            arbs.append(dict(**{k: rec[k] for k in ('league', 'event_id', 'kickoff', 'away', 'home', 'market', 'line', 'side_a', 'side_b', 'best_a_src', 'best_a_dec', 'best_b_src', 'best_b_dec')},
+            arbs.append(dict(**{k: rec[k] for k in ('league', 'event_id', 'kickoff', 'away', 'home', 'market', 'line', 'side_a', 'side_b', 'best_a_src', 'best_a_dec', 'best_b_src', 'best_b_dec', 'player', 'stat')},
                              margin=round(margin, 4), stake_a_per_100=round(stake_a, 2), stake_b_per_100=round(stake_b, 2), profit_per_100=round(100 * margin / sum_inv, 2)))
         for side, lst, fair in (('A', A, fair_a), ('B', B, fair_b)):
             for r in lst:
                 ev = fair * r['eff_dec'] - 1
                 if ev >= 0.01:
                     kelly = max(0, (fair * r['eff_dec'] - 1) / (r['eff_dec'] - 1))
-                    evs.append(dict(league=g['lg'], event_id=g['id'], kickoff=g['date'], away=g['away'], home=g['home'], market=r['market'], selection=r['selection'], point=r['point'], source=r['source'],
+                    evs.append(dict(league=g['lg'], event_id=g['id'], kickoff=g['date'], away=g['away'], home=g['home'], market=r['market'], selection=r['selection'], point=r['point'], source=r['source'], player=r.get('player', ''), stat=r.get('stat', ''),
                                     dec=r['eff_dec'], american=american(r['eff_dec']), fair=round(fair, 4), ev=round(ev, 4), kelly_quarter=round(kelly / 4, 4), sources=len(fairs)))
     board.sort(key=lambda r: -r['best_ev']); arbs.sort(key=lambda r: -r['margin']); evs.sort(key=lambda r: -r['ev'])
     return board, arbs, evs
 
 def write_csv(path, rows):
     if not rows: open(path, 'w').write(''); return
+    cols = list(rows[0].keys()) + [k for r in rows for k in r.keys() if k not in rows[0]]
+    cols = list(dict.fromkeys(cols))
     with open(path, 'w', newline='', encoding='utf-8') as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
+        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
 
 # ------------------------------------------------------------------------------------------------ page
 HEAD = """<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">"""
@@ -297,11 +318,11 @@ function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';cl
 const lgs=[...new Set(B.map(b=>b.league))];
 function kpis(){const n=L.length,ev=B.filter(b=>b.best_ev>=EVMIN/100).length;const best=B[0];
   $('#kpis').innerHTML=`<div class="kpi"><span>lines quantified</span><b>${n}</b><small>${new Set(L.map(l=>l.event_id)).size} games · ${new Set(L.map(l=>l.source)).size} sources</small></div><div class="kpi"><span>two-way markets</span><b>${B.length}</b><small>priced at ${B.filter(b=>b.sources>=2).length>0?'2+':'1'} sources: ${B.filter(b=>b.sources>=2).length}</small></div><div class="kpi ${A.length?'g':''}"><span>arbitrage</span><b>${A.length}</b><small>${A.length?'best '+pct(A[0].margin)+' guaranteed':'none after fees right now'}</small></div><div class="kpi a"><span>+EV plays ≥ ${EVMIN}%</span><b>${ev}</b><small>${best?'best '+pct(best.best_ev)+' · '+best.side_a.split(' ')[0]+'/'+best.side_b.split(' ')[0]:''}</small></div><div class="kpi"><span>pulled</span><b style="font-size:14px">${esc(J.asof)}</b><small>prices move — re-check before you bet</small></div>`}
-function coverage(){const srcs=Object.keys(SRC);const mks=['moneyline','spread','total'];const cnt={};L.forEach(l=>{cnt[l.source+'|'+l.market]=(cnt[l.source+'|'+l.market]||0)+1});const mx=Math.max(1,...Object.values(cnt));
+function coverage(){const srcs=Object.keys(SRC);const mks=['moneyline','spread','total','prop'];const cnt={};L.forEach(l=>{cnt[l.source+'|'+l.market]=(cnt[l.source+'|'+l.market]||0)+1});const mx=Math.max(1,...Object.values(cnt));
   $('#cov').innerHTML=srcs.map(s=>`<div class="card"><h3>${SRC[s].name} <span>${SRC[s].kind}${SRC[s].fee?' · taker fee '+SRC[s].fee:' · no fee'}</span></h3>${mks.map(m=>`<div class="brow"><span>${m}</span><span class="bar"><i style="width:${(100*(cnt[s+'|'+m]||0)/mx).toFixed(0)}%"></i></span><span class="n">${cnt[s+'|'+m]||0}<small>lines</small></span></div>`).join('')}<p class="note">${esc(SRC[s].how)}</p></div>`).join('')}
-function chips(){$('#filt').innerHTML=`<button data-l="all" class="${LG==='all'?'on':''}">all leagues</button>${lgs.map(l=>`<button data-l="${l}" class="${LG===l?'on':''}">${l.toUpperCase()} <span class="dim">${B.filter(b=>b.league===l).length}</span></button>`).join('')}<span style="width:10px"></span>${['all','moneyline','spread','total'].map(m=>`<button data-m="${m}" class="${MK===m?'on':''}">${m}</button>`).join('')}<span class="sp"></span><button data-o="1" class="${ONE?'on':''}">${ONE?'hiding':'show'} single-source lines</button><label>show +EV from <input id="evmin" type="number" step="0.5" value="${EVMIN}">%</label>`;
+function chips(){$('#filt').innerHTML=`<button data-l="all" class="${LG==='all'?'on':''}">all leagues</button>${lgs.map(l=>`<button data-l="${l}" class="${LG===l?'on':''}">${l.toUpperCase()} <span class="dim">${B.filter(b=>b.league===l).length}</span></button>`).join('')}<span style="width:10px"></span>${['all','moneyline','spread','total','prop'].map(m=>`<button data-m="${m}" class="${MK===m?'on':''}">${m==='prop'?'player props':m}</button>`).join('')}<span class="sp"></span><button data-o="1" class="${ONE?'on':''}">${ONE?'hiding':'show'} single-source lines</button><label>show +EV from <input id="evmin" type="number" step="0.5" value="${EVMIN}">%</label>`;
   $('#filt').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.l)LG=b.dataset.l;if(b.dataset.m)MK=b.dataset.m;if(b.dataset.o)ONE=!ONE;render()});$('#evmin').onchange=e=>{EVMIN=+e.target.value||0;render()}}
-const keep=b=>(LG==='all'||b.league===LG)&&(MK==='all'||b.market===MK);const keepW=b=>keep(b)&&(ONE||b.sources>=2||b.hold<0);
+const keep=b=>(LG==='all'||b.league===LG)&&(MK==='all'||b.market===MK);const keepW=b=>keep(b)&&b.market!=='prop'&&(ONE||b.sources>=2||b.hold<0);const keepP=b=>keep(b)&&b.market==='prop'&&(ONE||b.sources>=2||b.hold<0);
 function priceChips(ev,market,line,side,fair){const sel=side.split(' ')[0];const rows=L.filter(l=>l.event_id===ev&&l.market===market&&l.selection===sel&&(market==='moneyline'||(market==='total'?Math.abs(+l.point-line)<1e-9:Math.abs((l.selection===l.away?+l.point:-+l.point)-line)<1e-9)));
   if(!rows.length)return '<span class="dim mono" style="font-size:10px">no price</span>';const best=Math.max(...rows.map(r=>r.eff_dec));const P=plays();
   return rows.sort((a,b)=>b.eff_dec-a.eff_dec).map(r=>{const e=fair*r.eff_dec-1;const id=[r.event_id,r.market,r.selection,r.point,r.source].join('|');return `<span class="p ${r.eff_dec===best?'best':''} ${P.some(p=>p.id===id)?'saved':''}" title="${SRC[r.source].name}: ${r.american} (${pct(r.implied)} implied${r.fee?' + fee '+pct(r.fee):''})${r.note?' · '+esc(r.note):''} · click to save this play" data-id="${esc(id)}"><small>${r.source}</small><i>${am(r.eff_dec)}</i><span class="ev ${e>=0?'g':'r'}">${e>=0?'+':''}${(100*e).toFixed(1)}%</span></span>`}).join('')}
@@ -311,13 +332,21 @@ function wall(){const rows=B.filter(keepW);const byG={};rows.forEach(b=>(byG[b.e
       <div class="side"><div class="sn">${b.market!=='total'?logo(g,b.side_a.split(' ')[0]):''}<b>${esc(b.side_a)}</b><span class="fair">fair <b>${pct(b.fair_a)}</b></span></div><div class="px">${priceChips(b.event_id,b.market,b.line,b.side_a,b.fair_a)}</div></div>
       <div class="side"><div class="sn">${b.market!=='total'?logo(g,b.side_b.split(' ')[0]):''}<b>${esc(b.side_b)}</b><span class="fair">fair <b>${pct(b.fair_b)}</b></span></div><div class="px">${priceChips(b.event_id,b.market,b.line,b.side_b,b.fair_b)}</div></div></div>`).join('')}</div>`).join('')||'<div class="empty">no priced markets for this filter</div>';
   $('#wall').querySelectorAll('.p[data-id]').forEach(el=>el.onclick=()=>{const [ev,market,sel,point,src]=el.dataset.id.split('|');const g=G[ev];const l=L.find(x=>x.event_id===ev&&x.market===market&&x.selection===sel&&String(x.point)===point&&x.source===src);savePlay({id:el.dataset.id,league:g.lg,game:g.away+' @ '+g.home,kickoff:g.date,market,selection:sel,point,source:src,dec:l.eff_dec,american:am(l.eff_dec),fair:null,from:'arb'})})}
-function arbs(){const rows=A.filter(keep);$('#arbs').innerHTML=rows.length?rows.map(a=>{const g=G[a.event_id];return `<div class="arb"><div class="legs"><span>${logo(g,g.away)} ${esc(g.away)} @ ${logo(g,g.home)} ${esc(g.home)} · <span class="dim">${a.market}${a.market!=='moneyline'?' '+a.line:''} · ${CT(g.date)}</span></span><span>$${a.stake_a_per_100} on <b>${esc(a.side_a)}</b> at ${SRC[a.best_a_src].name} ${am(a.best_a_dec)}</span><span>$${a.stake_b_per_100} on <b>${esc(a.side_b)}</b> at ${SRC[a.best_b_src].name} ${am(a.best_b_dec)}</span></div><div class="m">+${pct(a.margin)}<small>$${a.profit_per_100} locked per $100 · after exchange fees</small></div></div>`}).join(''):'<div class="empty">no arbitrage after fees in the current pull — the board above still shows where each side is cheapest</div>'}
+let PSK='best_ev',PSA=false;
+function props(){const rows=B.filter(keepP);const el=$('#props');if(!el)return;if(!rows.length){el.innerHTML=`<div class="empty">${B.some(b=>b.market==='prop')?'no player props for this filter':'no player props on file yet — the first prop pull lands once a game is inside the props window (NFL 5 days, CFB 3 days)'}</div>`;return}
+  const V={best_ev:r=>r.best_ev,player:r=>r.player,stat:r=>r.stat,line:r=>r.line,game:r=>r.away+r.home,kick:r=>r.kickoff,over:r=>r.best_a_dec,under:r=>r.best_b_dec,fair:r=>r.fair_a,src:r=>r.sources,hold:r=>r.hold};rows.sort((a,b)=>{const x=V[PSK](a),y=V[PSK](b);return (x<y?-1:x>y?1:0)*(PSA?1:-1)});
+  const th=(k,l)=>`<th data-k="${k}" class="${PSK===k?(PSA?'srt-asc':'srt-desc'):''}">${l}</th>`;const STAT={pass_yds:'pass yds',pass_td:'pass TD',completions:'completions',pass_att:'pass att',rush_yds:'rush yds',rush_att:'rush att',receptions:'receptions',rec_yds:'rec yds'};
+  el.innerHTML=`<table><thead><tr>${th('player','player')}${th('stat','stat')}${th('line','line')}${th('game','game')}${th('kick','kick (CT)')}${th('over','best over')}${th('under','best under')}${th('fair','fair over')}${th('src','books')}${th('hold','hold')}${th('best_ev','best EV')}</tr></thead><tbody>${rows.slice(0,400).map(b=>{const g=G[b.event_id];const cell=(src,dec,ev,sel)=>`<span class="p ${ev>=0?'':''}" data-id="${esc([b.event_id,'prop',sel,b.line,src].join('|'))}" title="click to save"><small>${src}</small><i>${am(dec)}</i><span class="ev ${ev>=0?'g':'r'}">${ev>=0?'+':''}${(100*ev).toFixed(1)}%</span></span>`;
+    return `<tr><td><b>${esc(b.player)}</b></td><td class="dim">${STAT[b.stat]||esc(b.stat)}</td><td class="mono">${b.line}</td><td><span class="tm">${logo(g,g.away)}${esc(g.away)}</span> <span class="dim">@</span> <span class="tm">${logo(g,g.home)}${esc(g.home)}</span></td><td class="mono dim">${CT(g.date)}</td><td>${cell(b.best_a_src,b.best_a_dec,b.ev_a,'Over')}</td><td>${cell(b.best_b_src,b.best_b_dec,b.ev_b,'Under')}</td><td class="mono dim">${pct(b.fair_a)}</td><td class="mono dim">${b.sources}</td><td class="mono ${b.hold<0?'g':'dim'}">${(100*b.hold).toFixed(1)}%</td><td class="mono ${b.best_ev>=0?'g':'r'}"><b>${b.best_ev>=0?'+':''}${(100*b.best_ev).toFixed(1)}%</b></td></tr>`}).join('')}</tbody></table>${rows.length>400?`<p class="note">showing the top 400 of ${rows.length} prop markets — narrow the filter</p>`:''}`;
+  el.querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(PSK===k)PSA=!PSA;else{PSK=k;PSA=false}props()});
+  el.querySelectorAll('.p[data-id]').forEach(x=>x.onclick=()=>{const [ev,market,sel,point,src]=x.dataset.id.split('|');const g=G[ev];const b=rows.find(r=>r.event_id===ev&&String(r.line)===point&&x.closest('tr').firstChild.textContent===r.player);const dec=sel==='Over'?b.best_a_dec:b.best_b_dec;savePlay({id:x.dataset.id+'|'+b.player,league:g.lg,game:g.away+' @ '+g.home,kickoff:g.date,market:'prop',selection:`${b.player} ${sel} ${b.line} ${b.stat}`,point,source:src,dec,american:am(dec),fair:sel==='Over'?b.fair_a:b.fair_b,from:'arb'})})}
+function arbs(){const rows=A.filter(keep);$('#arbs').innerHTML=rows.length?rows.map(a=>{const g=G[a.event_id];return `<div class="arb"><div class="legs"><span>${logo(g,g.away)} ${esc(g.away)} @ ${logo(g,g.home)} ${esc(g.home)} · <span class="dim">${a.market==='prop'?esc(a.player)+' '+esc(a.stat)+' '+a.line:a.market+(a.market!=='moneyline'?' '+a.line:'')} · ${CT(g.date)}</span></span><span>$${a.stake_a_per_100} on <b>${esc(a.side_a)}</b> at ${SRC[a.best_a_src].name} ${am(a.best_a_dec)}</span><span>$${a.stake_b_per_100} on <b>${esc(a.side_b)}</b> at ${SRC[a.best_b_src].name} ${am(a.best_b_dec)}</span></div><div class="m">+${pct(a.margin)}<small>$${a.profit_per_100} locked per $100 · after exchange fees</small></div></div>`}).join(''):'<div class="empty">no arbitrage after fees in the current pull — the board above still shows where each side is cheapest</div>'}
 function evtable(){const rows=E.filter(e=>keep({league:e.league,market:e.market})&&e.ev>=EVMIN/100);const V={ev:r=>r.ev,fair:r=>r.fair,dec:r=>r.dec,kick:r=>r.kickoff,game:r=>r.away+r.home,sel:r=>r.selection,src:r=>r.source,kelly:r=>r.kelly_quarter,market:r=>r.market};rows.sort((a,b)=>{const x=V[SORTK](a),y=V[SORTK](b);return (x<y?-1:x>y?1:0)*(SORTA?1:-1)});
   const th=(k,l)=>`<th data-k="${k}" class="${SORTK===k?(SORTA?'srt-asc':'srt-desc'):''}">${l}</th>`;
-  $('#ev').innerHTML=rows.length?`<table><thead><tr>${th('kick','kick (CT)')}${th('game','game')}${th('market','market')}${th('sel','selection')}${th('src','source')}${th('dec','price')}${th('fair','fair')}${th('ev','EV')}${th('kelly','¼ kelly')}<th></th></tr></thead><tbody>${rows.map(r=>{const g=G[r.event_id];const id=[r.event_id,r.market,r.selection,r.point,r.source].join('|');return `<tr><td class="mono dim">${CT(r.kickoff)}</td><td><span class="tm">${logo(g,g.away)}${esc(g.away)}</span> <span class="dim">@</span> <span class="tm">${logo(g,g.home)}${esc(g.home)}</span></td><td class="dim">${r.market}</td><td><b>${esc(r.selection)}${r.market==='spread'?' '+(+r.point>0?'+':'')+r.point:r.market==='total'?' '+r.point:''}</b></td><td>${SRC[r.source].name}</td><td class="mono">${am(r.dec)}</td><td class="mono dim">${pct(r.fair)}</td><td class="mono g"><b>+${(100*r.ev).toFixed(1)}%</b></td><td class="mono dim">${(100*r.kelly_quarter).toFixed(1)}%</td><td><span class="p" data-id="${esc(id)}">save</span></td></tr>`}).join('')}</tbody></table>`:'<div class="empty">nothing clears the threshold — lower it or wait for the next pull</div>';
+  $('#ev').innerHTML=rows.length?`<table><thead><tr>${th('kick','kick (CT)')}${th('game','game')}${th('market','market')}${th('sel','selection')}${th('src','source')}${th('dec','price')}${th('fair','fair')}${th('ev','EV')}${th('kelly','¼ kelly')}<th></th></tr></thead><tbody>${rows.map(r=>{const g=G[r.event_id];const id=[r.event_id,r.market,r.selection,r.point,r.source].join('|');return `<tr><td class="mono dim">${CT(r.kickoff)}</td><td><span class="tm">${logo(g,g.away)}${esc(g.away)}</span> <span class="dim">@</span> <span class="tm">${logo(g,g.home)}${esc(g.home)}</span></td><td class="dim">${r.market}</td><td><b>${r.market==='prop'?esc(r.player)+' '+esc(r.selection)+' '+r.point+' '+esc(r.stat):esc(r.selection)+(r.market==='spread'?' '+(+r.point>0?'+':'')+r.point:r.market==='total'?' '+r.point:'')}</b></td><td>${SRC[r.source].name}</td><td class="mono">${am(r.dec)}</td><td class="mono dim">${pct(r.fair)}</td><td class="mono g"><b>+${(100*r.ev).toFixed(1)}%</b></td><td class="mono dim">${(100*r.kelly_quarter).toFixed(1)}%</td><td><span class="p" data-id="${esc(id)}">save</span></td></tr>`}).join('')}</tbody></table>`:'<div class="empty">nothing clears the threshold — lower it or wait for the next pull</div>';
   $('#ev').querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(SORTK===k)SORTA=!SORTA;else{SORTK=k;SORTA=false}evtable()});
   $('#ev').querySelectorAll('.p[data-id]').forEach(el=>el.onclick=()=>{const r=rows.find(x=>[x.event_id,x.market,x.selection,x.point,x.source].join('|')===el.dataset.id);const g=G[r.event_id];savePlay({id:el.dataset.id,league:g.lg,game:g.away+' @ '+g.home,kickoff:g.date,market:r.market,selection:r.selection,point:r.point,source:r.source,dec:r.dec,american:am(r.dec),fair:r.fair,from:'arb'})})}
-function render(){kpis();chips();wall();arbs();evtable();$('#plays').textContent=plays().length+' saved plays'}
+function render(){kpis();chips();wall();props();arbs();evtable();$('#plays').textContent=plays().length+' saved plays'}
 coverage();render();
 """
 
@@ -341,6 +370,7 @@ def page(G, lines, board, arbs, evs, asof_):
 <h2>coverage <span>how many lines each source contributes, by market — the quantification layer every other number is built on</span></h2><div id="cov" class="cov"></div>
 <h2>arbitrage <span>both sides covered across sources for a guaranteed return, fees included · stake split per $100</span></h2><div id="arbs" style="display:grid;gap:8px"></div>
 <h2>the board <span>every market priced at two or more sources, best price per side in gold, EV on every chip · sorted by the best edge in the game · single-source lines behind the toggle</span></h2><div id="filt" class="chips"></div><div id="wall" class="wall"></div>
+<h2>player props <span>main markets at every book, Over and Under paired at the same line · best price per side, fair = consensus, hold &lt; 0 = arbitrage · sortable</span></h2><div id="props"></div>
 <h2>+EV plays <span>every price that beats the consensus by the threshold · sortable · ¼ Kelly = suggested stake as a share of bankroll</span></h2><div id="ev"></div>
 <div class="foot">RAINMAN · Arb Engine · lines from the US books via The Odds API (plus DraftKings via ESPN when no key is set), Kalshi (public trade API) and Polymarket (Gamma API), pulled {asof_}; no account, no key. Fair probabilities are a consensus, not a model — they move with the market. This is information, not advice; check the live price and your book's rules before placing anything.</div></div>
 <div id="toast" class="toast"></div>
@@ -349,7 +379,7 @@ def page(G, lines, board, arbs, evs, asof_):
 def main():
     G = slate()
     oa, has_dk = load_oddsapi(G)
-    lines = (load_dk(G) if not has_dk else []) + oa + load_kalshi(G) + load_poly(G)
+    lines = (load_dk(G) if not has_dk else []) + oa + load_props(G) + load_kalshi(G) + load_poly(G)
     board, arbs, evs = analyse(lines, G)
     os.makedirs('data/processed', exist_ok=True)
     write_csv('data/processed/lines_all.csv', lines); write_csv('data/processed/arb_board.csv', board); write_csv('data/processed/arb_opps.csv', arbs); write_csv('data/processed/ev_opps.csv', evs)
