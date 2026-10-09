@@ -3744,13 +3744,22 @@ function labGrid(){
 const tdLbl=s=>/^\d{4}$/.test(s)?"'"+s.slice(2):s==='combined'?'cmb':s==='adjusted'?'adj':s.slice(0,4);
 function tdGrid(){
   const srcs=Object.keys(J.dvp);
+  /* A quarterback's slot carries TWO touchdown stats and they routinely point opposite ways —
+     PHI allows the MOST quarterback rushing TDs in the league (rank 1) and nearly the fewest
+     passing TDs (rank 31). Averaging those gives 16, a number that describes neither. So the
+     QB stat is picked, never blended; everyone else has one TD stat and it is simply that one. */
+  const tdStat=(grp,pos)=>{const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));
+    if(st.length<2)return st;
+    const mode=($('#tgQB')||{}).value||'rush';
+    const pass=st.find(c=>c==='P TD'),rush=st.find(c=>c!=='P TD');
+    return mode==='pass'?[pass]:mode==='both'?st:[rush]};
   const tdRank=(d,grp,pos)=>{if(!d)return null;
-    const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));
-    const rs=st.map(c=>d.stats[c]?d.stats[c].rank:null).filter(v=>v!=null);
+    const rs=tdStat(grp,pos).map(c=>d.stats[c]?d.stats[c].rank:null).filter(v=>v!=null);
     return rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:null};
   $('#tdgrid').innerHTML=`<div class="controls">
     <select id="tgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="tgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="tgQB" title="a QB's slot has two TD-allowed stats; pick which one his column reads"><option value="rush" selected>QB: rushing / receiving TD</option><option value="pass">QB: passing TD</option><option value="both">QB: mean of both</option></select>
     <input id="tgQ" placeholder="search player..." size="15">
     <span class="note">touchdowns only. Each cell is the rank of the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; &mu; = mean across the sets &middot; the first column is every slot owner together, then one per position</span>
   </div>
@@ -3786,7 +3795,7 @@ function tdGrid(){
     tWire($('#tgB'+p));
   }
   const all=()=>['ALL'].concat(TPOS).forEach(col);
-  ['tgDepth','tgInj'].forEach(i=>$('#'+i).onchange=all);$('#tgQ').oninput=all;all();
+  ['tgDepth','tgInj','tgQB'].forEach(i=>$('#'+i).onchange=all);$('#tgQ').oninput=all;all();
   RR.push(all);
 }
 
