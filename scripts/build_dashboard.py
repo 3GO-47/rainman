@@ -306,6 +306,23 @@ def main():
     data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
     data['picksAll'] = rows_of('data/processed/picks_all.csv')
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
+    # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine
+    _sal = {}
+    for _f in sorted(glob.glob('data/raw/dk_salaries_wk*.csv')):
+        _w = re.search(r'wk(\d+)', _f)
+        if not _w: continue
+        _rows = []
+        for r in csv.DictReader(open(_f, encoding='utf-8')):
+            _t = (r.get('TeamAbbrev') or '').strip()
+            _t = {'JAC': 'JAX', 'WSH': 'WAS', 'LVR': 'LV', 'OAK': 'LV', 'SD': 'LAC'}.get(_t, _t)
+            _p = (r.get('Position') or '').upper()
+            _p = 'DST' if _p in ('DST', 'DEF', 'D/ST') else _p
+            try: _s = int(str(r['Salary']).replace('$', '').replace(',', ''))
+            except Exception: continue
+            _rows.append([f'{_t} D/ST' if _p == 'DST' else (r.get('Name') or '').strip(), _t, _p, _s])
+        if _rows: _sal[_w.group(1)] = _rows
+    data['dfs']['salaries'] = _sal
+    data['dfs']['cap'] = 50000
     data['signals'] = json.load(open('data/processed/signals.json')) if os.path.exists('data/processed/signals.json') else None
     # v5: full units (OL / defense fronts / special teams) with bios, and game narratives (build_units.py, build_narratives.py)
     def unit_row(r):

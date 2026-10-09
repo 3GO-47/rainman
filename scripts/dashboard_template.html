@@ -604,6 +604,16 @@ img.tl{vertical-align:-3px}
 
 /* ---- v5 home slate ribbon ---- */
 .sribbon{display:grid;grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:8px}
+/* a week of NFL football is sixteen squares: fifteen games and the teams idle. the grid says so. */
+.sribbon.g16{grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch}
+.sribbon.g16>.stile{display:flex;flex-direction:column}.sribbon.g16>.stile>.stf{margin-top:auto}
+@media(max-width:1480px){.sribbon.g16{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1080px){.sribbon.g16{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.sribbon.g16{grid-template-columns:1fr}}
+.stile.byet{background:var(--s2);border-style:dashed;cursor:default}.stile.byet:hover{border-color:var(--edge2)}
+.byelogos{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:6px 0 4px;min-height:30px}
+.byelogos .bt{display:flex;align-items:center;gap:5px;font:800 14px var(--ui,inherit);color:var(--dim)}
+.byenone{font:600 13px var(--mono);color:var(--dim2);margin:8px 0 4px;min-height:30px;display:flex;align-items:center}
 .stile{border:1px solid var(--edge2);border-radius:9px;padding:7px 9px 6px;background:linear-gradient(135deg,color-mix(in srgb,var(--a) 12%,var(--s2)),color-mix(in srgb,var(--h) 12%,var(--s2)));cursor:pointer;min-width:0}
 .stile:hover{border-color:var(--acc)}.stl{display:flex;justify-content:space-between;align-items:center}.stt{display:flex;justify-content:space-between;align-items:center;margin:5px 0 3px}
 .stteam{display:flex;align-items:center;gap:6px;font-size:14px}.stt>.mini{margin:0 6px}.stteam.r{flex-direction:row-reverse}.stteam i{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--dim)}
@@ -707,10 +717,25 @@ table.dcdef{table-layout:fixed}table.dcdef th:first-child,table.dcdef td:first-c
 .dumbs{display:flex;flex-direction:column;gap:4px}.dumb{display:grid;grid-template-columns:120px minmax(0,1fr) 230px;gap:10px;align-items:center;font-size:11px}.dtrack{position:relative;height:24px;background:var(--s2);border-radius:12px}.dtrack i{position:absolute;top:0;bottom:0}.davg{width:2px;background:var(--dim);opacity:.8}.dline{top:10px!important;bottom:10px!important;background:linear-gradient(90deg,var(--red),var(--green));opacity:.5;border-radius:2px}.dpt{position:absolute;top:50%;transform:translate(-50%,-50%);display:flex}.dpt.r2,.dpt.g2{opacity:.7}.dv{font:500 10.5px var(--mono);text-align:right}
 table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-width:34px;display:inline-block;font-size:9px;padding:1px 2px}
 /* big board quadrants */
-.quads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media (max-width:1000px){.quads{grid-template-columns:1fr}}.dfsl{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:10px}.dfsl .panel{margin:0}.quad{border:1px solid var(--edge);border-radius:8px;padding:6px 8px;background:var(--panel)}.qh{font:700 12px var(--mono);letter-spacing:1px;margin-bottom:4px}.qrow{display:grid;grid-template-columns:14px minmax(150px,1.3fr) 44px minmax(120px,1fr) 60px;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.qn{display:flex;flex-direction:column;min-width:0}.qn i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qk{font-size:11px;color:var(--dim)}.qk b{color:var(--txt)}.qp{text-align:right}.qp b{font-size:13px}.qp i{font-style:normal;font-size:9px;color:var(--dim);margin-left:3px}
+.quads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media (max-width:1000px){.quads{grid-template-columns:1fr}}.dfsl{display:grid;grid-template-columns:repeat(auto-fit,minmax(392px,1fr));gap:10px}.dfsl .panel{margin:0}
+/* ---- DFS: dense by design — every figure in view, nothing to scroll sideways for ---- */
+.lcard h3{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.lcard h3 .f{margin-left:auto}
+.capbar{height:4px;background:var(--s3);border-radius:2px;overflow:hidden;margin:0 0 5px}
+.capbar i{display:block;height:100%;background:var(--accent-text,var(--acc))}
+table.lgt td.pnm{overflow:hidden;text-overflow:ellipsis}
+table.lgt td.mono,table.lgt th{font-variant-numeric:tabular-nums}
+table.lgt tr.ltot td{border-top:1px solid var(--edge2);border-bottom:0;background:var(--s2);font-weight:700}
+table.lgt .badge{display:inline-block;min-width:20px;text-align:center;border-radius:3px;font:600 10.5px/1.55 var(--mono);padding:0 3px}
+#lineupSlot .lgrid{margin:10px 0}#lineupSlot .lgcol>div{max-height:none}
+#lineupSlot .lgcol>h3{margin:0;padding:6px 10px;border-bottom:1px solid var(--edge);background:var(--s2);font:700 11px var(--mono);letter-spacing:1.1px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+#lineupSlot .lgcol>h3 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
+#lineupSlot .grid2{margin-top:10px}#lineupSlot .grid2 .panel{margin:0}
+#lineupSlot>.note{margin-top:10px}.quad{border:1px solid var(--edge);border-radius:8px;padding:6px 8px;background:var(--panel)}.qh{font:700 12px var(--mono);letter-spacing:1px;margin-bottom:4px}.qrow{display:grid;grid-template-columns:14px minmax(150px,1.3fr) 44px minmax(120px,1fr) 60px;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.qn{display:flex;flex-direction:column;min-width:0}.qn i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qk{font-size:11px;color:var(--dim)}.qk b{color:var(--txt)}.qp{text-align:right}.qp b{font-size:13px}.qp i{font-style:normal;font-size:9px;color:var(--dim);margin-left:3px}
 .bbfull>summary{cursor:pointer;list-style:none}.bbfull>summary::-webkit-details-marker{display:none}
 
-.pintro{display:flex;flex-direction:column;gap:5px;padding:10px 12px;margin:0 0 12px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
+.pintro{display:flex;flex-direction:column;gap:5px;padding:5px 10px;margin:0 0 9px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
+.pintro.key{border-left-width:1px;background:transparent;border-color:transparent;padding:0;margin:0 0 8px}
+#crumb:empty{display:none}
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb{display:block}.hint.fi.blk:hover .hb{display:block}
 #crumb{flex:1}
 .standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
@@ -1071,7 +1096,7 @@ const SECTIONS=[
  {id:'home',fk:'F1',label:'Home',items:[
    {id:'overview',label:'Overview',desc:'the week at a glance: slate, standings, season leaders, market board, every defense ranked by position, movers',c:'home',sub:'overview'},
    {id:'insights',label:'Insights',desc:'best / worst matchup per role this week, the softest and stingiest defense per slot, schedule strength, volatility',c:'home',sub:'insights'},
-   {id:'fantasy',label:'DFS',desc:'DraftKings Classic pick\'ems: frozen optimal lineups, top plays per roster spot, stacks and bring-backs — usage-filtered',c:'home',sub:'fantasy',nfl:true}]},
+   {id:'fantasy',label:'DFS',desc:'DraftKings Classic: the frozen cap-legal lineup per slate, every priced play by position, stacks, and the best points per dollar',c:'home',sub:'fantasy',nfl:true}]},
  {id:'match',fk:'F2',label:'Matchups',items:[
    {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
@@ -1118,7 +1143,7 @@ const INTRO={
  lab:{what:'Every starter this week in one sortable list: his own per-game averages (this season, and cumulative 2024–26) beside what his opponent allows to his slot, with the opponent\'s rank in every stat.',how:['rank 1 of 32 = the defense allows the most to that slot (best matchup)','▲ / ▼ next to an average = the opponent allows more / less than the player averages','every column sorts; position, depth, injury, college, slate, game and team filters narrow the list']},
  overview:{what:'The week at a glance: the slate with lines, the standings, who leads the league, and every defense ranked by how much it gives up to each position.',how:['green = good for the offense / fantasy player, red = bad','rank 1 of 32 = that defense allows the MOST to that slot','μ = average rank across the slots','click a game tile to open its matchup, a defense to open its detail']},
  insights:{what:'Charts only. Which starters have the softest and hardest matchups this week, which defenses sit at the extremes for each slot, and whose ranks are too volatile to trust.',how:['Ψ ("psi") = the opponent\'s average rank in the stats that matter for a slot — 1 is the softest field, 32 the hardest','bar length = how soft the matchup is','click any name for his card and the opponent\'s game log']},
- fantasy:{what:'DraftKings Classic pick\'ems: the frozen optimal lineup for each slate, QB stacks with a bring-back, and the top plays at every roster spot.',how:['DK pts = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','MATCH = average opponent rank across his markets, 1 = softest','players who barely play are filtered out']},
+ fantasy:{how:['DK = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','$k = DraftKings salary in thousands · v$ = projected points per $1,000 · M = mean opponent rank across his markets, 1 = softest','every lineup obeys the DK Classic rules and the $50,000 cap, and is the exact optimum under them','players who barely play are filtered out']},
  projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
  tdboard:{what:'Touchdowns. Who scores, how often, and which end zones are softest this week.',how:['TD/gm = his touchdowns per game','rank 1 = the defense allows the most touchdowns to that slot','model % = our probability of a touchdown this week']},
@@ -1134,10 +1159,11 @@ const INTRO={
  gameview:{what:'One game: the Matchups card, then the market with the model\u2019s disagreement beside it. The deeper views \u2014 depth charts, scheme and personnel, form and defensive trend, storylines \u2014 wait behind the four strips at the bottom.',how:['the card and the strips are the live Matchups, Depth Charts and Intel views \u2014 the same numbers, not copies','a strip builds the first time you open it, so the page stays light','left column is the away side, right is the home side']},
  tdgrid:{what:'Touchdowns, five columns: one board of every slot owner, then QB, RB, WR and TE on their own.',how:['the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 = allows the most touchdowns = the best end-zone matchup','columns sort independently']},
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
-function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML=`<span>${it.desc}</span>`;
+function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML='';
   let el=$('#pageIntro');if(!el){el=document.createElement('div');el.id='pageIntro';const m=$('main');m.insertBefore(el,m.firstChild)}
-  if(!x){el.innerHTML='';return}
-  const nt=t=>String(t).replace(/of 32/g,'of '+NT);el.innerHTML=`<div class="pintro"><div class="pw"><b>${it.label}</b> — ${nt(x.what)}</div><div class="ph">${x.how.map(h=>`<span>${nt(h)}</span>`).join('')}</div></div>`}
+  if(!x||!x.how||!x.how.length){el.innerHTML='';return}
+  /* the descriptive paragraph is gone on purpose — the tab name and the page say what it is. only the reading key stays. */
+  const nt=t=>String(t).replace(/of 32/g,'of '+NT);el.innerHTML=`<div class="pintro key"><div class="ph">${x.how.map(h=>`<span>${nt(h)}</span>`).join('')}</div></div>`}
 function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return go('overview');CUR_ITEM=it.id;
   const b=document.querySelector(`#legacyNav nav button[data-v="${it.c}"]`);if(b)b.click();
   if(it.c==='defenses'){const t=document.querySelector(`#defTabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
@@ -2015,8 +2041,16 @@ function home(){
   const MANY=gsw.length>20;const marquee=MANY?gsw.slice().sort((a,b)=>gscore(b)-gscore(a)).slice(0,8):gsw;
   const grow=g=>{const v=g[GM.vis],h=g[GM.home],t=tilt(g),b=bg(v,h)||{},e=envOfG(g);const sp=b.spread_line,tot=b.total_line;const impH=sp!=null&&tot!=null?(tot-sp)/2:null;
     return `<tr class="gb" data-game="${v}@${h}" style="cursor:pointer"><td class="mini">${slateChip(g[GM.slate])} ${g[GM.day]} ${g[GM.time]||'TBD'}</td><td style="text-align:left">${tcell(v)} <span class="mini">@</span> ${tcell(h)}</td><td>${sp!=null?`<span class="mini">${sp>0?h:v}</span> −${Math.abs(sp)}`:'<span class="dim">—</span>'}</td><td>${tot??'<span class="dim">—</span>'}</td><td class="mini">${impH!=null?`${(tot-impH).toFixed(1)} / ${impH.toFixed(1)}`:''}</td><td>${tcell(t.fav)} <span class="mini">+${t.mag.toFixed(1)}Ψ</span></td><td class="mini">${e?`<span style="color:${e.scoreP>=.8?'var(--green)':e.scoreP<=.2?'var(--red)':'var(--dim)'}">#${e.rank}</span>`:'—'}</td></tr>`};
+  // the bye square: the 16th tile of an NFL week, so the slate always reads as a full grid
+  const byeT=Object.keys(J.sched26).filter(t=>(J.sched26[t]||[])[wk-1]==='BYE').sort();
+  const byeTile=`<div class="stile byet" title="idle in week ${wk} — no game, so no players, no markets and no DvP rows">
+      <div class="stl"><span class="slate">BYE</span><span class="mini">wk ${wk}</span></div>
+      ${byeT.length?`<div class="byelogos">${byeT.map(t=>`${tlogo(t,26)}<b style="color:${vividC(t)}">${t}</b>`).join('')}</div>`:`<div class="byenone">— nobody idle —</div>`}
+      <div class="stf mini">${byeT.length?`${byeT.length} team${byeT.length===1?'':'s'} idle · out of every lineup, market and DvP row this week`:`every team plays in week ${wk}`}</div></div>`;
+  const tiles=marquee.map(stile).join('')+(MANY?'':byeTile);
+  const nTiles=marquee.length+(MANY?0:1);
   const slateBoard=`<div class="panel" id="slateBoard"><h3>wk ${wk} ${MANY?'marquee games':'slate'} <span class="f">implied team totals under the logos · DK spread and total · K = Kalshi home win price · tilt bar leans toward the offense in the softer field · env = scoring-environment rank · click a game to open it${MANY?' · marquee = closest spreads, highest totals, power-conference teams':''}</span></h3>
-    <div class="sribbon">${marquee.map(stile).join('')||'<p class="note">no games in the current filter</p>'}</div>
+    <div class="sribbon${nTiles<=16?' g16':''}">${marquee.length?tiles:'<p class="note">no games in the current filter</p>'}</div>
     ${MANY?`<table class="gboard slatetbl"><thead><tr><th>kick</th><th>game</th><th>spread</th><th>total</th><th>implied</th><th>softer field</th><th title="scoring environment rank">env</th></tr></thead><tbody>${gsw.map(grow).join('')}</tbody></table>`:''}</div>`;
   const rrow=g=>{const {best,worst}=pick(g);const who=(x,tone)=>x?`<span class="who"><span class="pp plink" data-p="${x.u.player}"><b>${esc(x.u.player)}</b></span><span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)}</span>${psi(x.v)}</span>`:'<span class="dim">—</span>';
     return `<div class="rrow">${slotchip(g)}${who(best)}${who(worst)}</div>`};
@@ -2565,27 +2599,88 @@ const usageOK=(u)=>{if(!IS_NFL){const L=(PLOGS[u.ln||u.player]||[]).filter(l=>l[
   if(u.pos==='QB')return snp>=.5;if(u.pos==='RB')return snp>=.3||vol>=8;return snp>=.45&&(tsh>=.1||vol>=3.5)};
 function lineup(){
   RR.push(render);
+  /* DK spells names its own way; match on a normalised key, prefer (name, team), fall back to an unambiguous name */
+  const nk=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[.'`’\-]/g,'').replace(/\s+(jr|sr|ii|iii|iv|v)$/,'').replace(/\s+/g,' ').trim();
+  function salTable(wk){const L=((DFS.salaries||{})[String(wk)])||[];const nt={},bn={},dup=new Set();
+    L.forEach(r=>{const k=nk(r[0]);nt[k+'|'+r[1]]=+r[3];if(bn[k]!=null&&bn[k]!==+r[3])dup.add(k);bn[k]=+r[3]});
+    return {n:L.length,get(p,t){const k=nk(p);if(nt[k+'|'+t]!=null)return nt[k+'|'+t];if(bn[k]!=null&&!dup.has(k))return bn[k];return null}}}
+  const CAP=(DFS.cap||50000),money=v=>'$'+(+v).toLocaleString();
   function render(){const slot=$('#lineupSlot');if(!slot)return;if(!IS_NFL){slot.innerHTML='';return}const wk=G.week;
-    const S=DFS.summary.filter(s=>+s.week===wk),E=DFS.entries.filter(e=>+e.week===wk);const capped=S.some(s=>s.capped==='True');
+    const SLORD=['main','early','afternoon','primetime','full'];
+    const S=DFS.summary.filter(s=>+s.week===wk).sort((a,b)=>SLORD.indexOf(a.slate)-SLORD.indexOf(b.slate)),E=DFS.entries.filter(e=>+e.week===wk);const capped=S.some(s=>s.capped==='True');
+    const SAL=salTable(wk);
     // candidate pool: usage-qualified starters with a projection
     const pool=UNIVERSE.filter(u=>u.grp&&inU(u)&&inP(u.pos)&&u.inj!=='-1'&&u.slot===(u.grp==='QB'?'QB1':u.grp)).map(u=>{const o=oppFor(u.team,wk);if(!o||o==='BYE')return null;const d=dkPtsOf(u);if(!d)return null;const def=o.replace('@','');
       const ranks=Object.keys(d.pj).map(k=>{const mk=MKT_BY[k];if(!mk)return null;const st=u.grp==='QB'?'QB1':u.grp;if(!mk.slots.includes(st))return null;const x=(J.dvp.combined[def]||{stats:{}}).stats[mk.col(u.grp)];return x?+x.rank:null}).filter(v=>v!=null);
-      const g=USG[u.ln||u.player]||{};return {u,o,def,pts:d.pts,lam:d.lam,match:ranks.length?mean(ranks):null,snp:g.snp,tsh:g.tsh,ok:usageOK(u),g:gameOf(u.team,wk)}}).filter(Boolean);
+      const g=USG[u.ln||u.player]||{};const sal=SAL.get(u.player,u.team);
+      return {u,o,def,pts:d.pts,lam:d.lam,match:ranks.length?mean(ranks):null,snp:g.snp,tsh:g.tsh,sal,val:sal?1000*d.pts/sal:null,ok:usageOK(u),g:gameOf(u.team,wk)}}).filter(Boolean);
     const q=pool.filter(r=>r.ok);
-    const top=(pos,n)=>q.filter(r=>pos==='FLEX'?['RB','WR','TE'].includes(r.u.pos):r.u.pos===pos).sort((a,b)=>b.pts-a.pts).slice(0,n);
-    const row=(r,i)=>`<tr><td class="mini">${i+1}</td><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${slotchip(r.u.dslot||r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${r.g?slateChip(r.g[GM.slate]):''}</td><td><b style="font-size:13px">${r.pts.toFixed(1)}</b></td><td>${r.match==null?'<span class="dim">·</span>':`<span class="hc" style="${gradeStyle(r.match)}">${r.match.toFixed(1)}</span>`}</td><td class="mini">${r.lam?r.lam.toFixed(2):''}</td><td class="mini">${r.snp!=null?(100*r.snp).toFixed(0)+'%':''}</td><td class="mini">${r.tsh!=null&&r.u.pos!=='QB'?(100*r.tsh).toFixed(0)+'%':''}</td></tr>`;
-    const tbl=(pos,n)=>{const R=top(pos,n);if(!R.length)return '';return `<div class="panel"><h3>${pos==='FLEX'?'FLEX':posIcon(pos,12)+' '+pos} <span class="f">top ${R.length} by DraftKings Classic points</span></h3><table><thead><tr><th>#</th><th>player</th><th>slot</th><th>opp</th><th>kick</th><th>DK pts</th><th title="mean opponent rank across his markets · 1 = softest">MATCH</th><th title="expected touchdowns">TD λ</th><th>snap%</th><th>tgt%</th></tr></thead><tbody>${R.map(row).join('')}</tbody></table></div>`};
-    // stacks: QB + his best pass catcher (WR1/TE1) by combined DK points, with the game total
-    const stacks=q.filter(r=>r.u.pos==='QB').map(qb=>{const mates=q.filter(r=>r.u.team===qb.u.team&&['WR','TE'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts);const m=mates[0];if(!m)return null;const bg=(BET.games||[]).find(x=>x.week===wk&&(x.away_team===qb.u.team||x.home_team===qb.u.team))||{};
-      const brg=q.filter(r=>r.u.team===qb.def&&['WR','TE','RB'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts)[0];return {qb,m,brg,tot:qb.pts+m.pts,ou:bg.total_line}}).filter(Boolean).sort((a,b)=>b.tot-a.tot).slice(0,8);
-    const stackH=`<div class="panel"><h3>stacks <span class="f">QB + his top pass catcher by combined DK points · bring-back = the best play on the other side of the same game · O/U = the DraftKings total</span></h3><table><thead><tr><th>#</th><th>QB</th><th>pass catcher</th><th>stack pts</th><th>game</th><th>O/U</th><th>bring-back</th></tr></thead><tbody>${stacks.map((s,i)=>`<tr><td class="mini">${i+1}</td><td>${pn(s.qb.u.player,s.qb.u.team)} <span class="mini">${s.qb.pts.toFixed(1)}</span></td><td>${pn(s.m.u.player,s.m.u.team)} <span class="mini">${s.m.pts.toFixed(1)}</span></td><td><b style="font-size:13px">${s.tot.toFixed(1)}</b></td><td class="mini">${oppcell(s.qb.o)}</td><td>${s.ou??'<span class="dim">—</span>'}</td><td>${s.brg?`${pn(s.brg.u.player,s.brg.u.team)} <span class="mini">${s.brg.pts.toFixed(1)}</span>`:'<span class="dim">—</span>'}</td></tr>`).join('')}</tbody></table></div>`;
-    // frozen optimal lineups (build_dfs.py)
-    const lineups=S.map(s=>{const L=E.filter(e=>e.slate===s.slate);return `<div class="panel"><h3>${s.slate} slate — frozen lineup <span class="f">${s.capped==='True'?'$'+s.salary+' of $50,000':'uncapped — best projection at every roster spot (drop the DK salary CSV at data/raw/dk_salaries_wk'+wk+'.csv for a capped build)'} · projected <b style="color:var(--txt)">${(+s.proj_total).toFixed(1)}</b>${s.actual_total?` · actual <b style="color:var(--txt)">${(+s.actual_total).toFixed(1)}</b>`:''} · frozen ${s.frozen_on} · ${s.games} games</span></h3>
-      <table><thead><tr><th>roster</th><th>player</th><th>tm</th><th>opp</th><th>salary</th><th>proj</th><th>${s.capped==='True'?'pts / $1k':''}</th><th>actual</th><th>±</th></tr></thead><tbody>${L.map(e=>`<tr><td class="mini">${e.roster}</td><td>${e.roster==='DST'?esc(e.player):pn(e.player,e.team)}</td><td>${tcell(e.team)}</td><td>${oppcell(e.opp)}</td><td class="mini">${e.salary?'$'+(+e.salary).toLocaleString():'—'}</td><td><b>${(+e.proj_pts).toFixed(1)}</b></td><td class="mini">${e.salary?(1000*+e.proj_pts/+e.salary).toFixed(2):''}</td><td>${e.actual_pts!==''?(+e.actual_pts).toFixed(1):'<span class="dim">—</span>'}</td><td class="${e.actual_pts!==''?(+e.actual_pts-+e.proj_pts>=0?'rise':'fall'):'mini'}">${e.actual_pts!==''?((+e.actual_pts-+e.proj_pts>=0?'+':'')+(+e.actual_pts-+e.proj_pts).toFixed(1)):''}</td></tr>`).join('')}</tbody></table></div>`}).join('');
-    const best=q.slice().sort((a,b)=>b.pts-a.pts)[0];
-    const kp=`<div class="kpis">${kpi('DraftKings Classic',`wk ${wk}`,`${S.length} slate${S.length===1?'':'s'} frozen · ${capped?'salary-capped':'uncapped'}`)}${S[0]?kpi('projected lineup',(+S[0].proj_total).toFixed(1),`${S[0].slate} · ${S[0].games} games`,'g'):''}${best?kpi('top projection',`${tlogo(best.u.team,14)} ${esc(pshort(best.u.player))}`,`${best.pts.toFixed(1)} DK pts · ${oppcell(best.o)}`):''}${kpi('player pool',q.length,`${pool.length-q.length} low-usage players filtered out`)}</div>`;
-    slot.innerHTML=kp+`<div class="dfsl">${lineups}</div>`+stackH+`<div class="grid2">${tbl('QB',8)}${tbl('RB',10)}</div><div class="grid2">${tbl('WR',12)}${tbl('TE',8)}</div>${tbl('FLEX',12)}
-      <p class="note">DK Classic scoring: 0.04/pass yd, 4/pass TD, −1 INT, 0.1/rush or rec yd, 6/TD, 1/reception, +3 for 300 pass yds · projections from the walk-forward prop model (Big Board) and the TD model · usage filter: QBs ≥50% snaps, RBs ≥30% snaps or 8 touches/g, WR/TE ≥45% snaps and ≥10% target share or 3.5 targets/g</p>`;
+    const priced=q.filter(r=>r.sal!=null);
+
+    /* ---- top plays: one narrow column per position, every figure visible without a sideways scroll ---- */
+    const dcell=(v,r)=>v==null?'<span class="dim">·</span>':`<span class="badge" style="${gradeStyle(+r)}">${v}</span>`;
+    const prow=(r,i)=>`<tr><td class="mini">${i+1}</td>
+      <td class="pnm"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span>${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+      <td class="mini">${r.o[0]==='@'?'@':''}${r.def}</td>
+      <td class="mono" data-v="${r.sal||0}">${r.sal?(r.sal/1000).toFixed(1):'<span class="dim">·</span>'}</td>
+      <td><b class="mono">${r.pts.toFixed(1)}</b></td>
+      <td class="mono" data-v="${r.val||0}">${r.val?r.val.toFixed(2):'<span class="dim">·</span>'}</td>
+      <td class="md">${r.match==null?'<span class="dim">·</span>':dcell(Math.round(r.match),r.match)}</td></tr>`;
+    const pcol=(pos,n)=>{const R=q.filter(r=>r.u.pos===pos).sort((a,b)=>b.pts-a.pts).slice(0,n);
+      return `<div class="lgcol"><h3>${posIcon(pos,12)} ${pos}<span class="f">${R.length} of ${q.filter(r=>r.u.pos===pos).length}</span></h3><div>
+        <table class="lgt dfst"><colgroup><col style="width:20px"><col><col style="width:36px"><col style="width:34px"><col style="width:38px"><col style="width:34px"><col style="width:30px"></colgroup>
+        <thead><tr><th>#</th><th>player</th><th>opp</th><th title="DraftKings salary, in thousands">$k</th><th title="projected DraftKings points">DK</th><th title="projected points per $1,000 of salary">v$</th><th title="mean opponent rank across his markets · 1 = softest">M</th></tr></thead>
+        <tbody>${R.length?R.map(prow).join(''):'<tr><td colspan="7" class="mini">nobody qualifies</td></tr>'}</tbody></table></div></div>`};
+    const plays=`<div class="lgrid">${TPOS.map(p=>pcol(p,p==='WR'?16:12)).join('')}</div>`;
+
+    /* ---- frozen lineups: the model's actual submission, with the cap it had to live inside ---- */
+    const lcard=s=>{const L=E.filter(e=>e.slate===s.slate);const cap=s.capped==='True';const spend=cap?L.reduce((a,e)=>a+(+e.salary||0),0):0;
+      const act=s.actual_total!==''&&s.actual_total!=null;
+      return `<div class="panel lcard"><h3>${s.slate}<span class="f">${cap?`${money(spend)} of ${money(CAP)} · ${money(CAP-spend)} left`:'uncapped — best projection per spot, no DST'} · ${s.games} game${s.games==='1'?'':'s'} · frozen ${s.frozen_on}</span></h3>
+        ${cap?`<div class="capbar" title="${money(spend)} of the ${money(CAP)} cap"><i style="width:${Math.min(100,100*spend/CAP).toFixed(1)}%"></i></div>`:''}
+        <table class="lgt dfsl2"><colgroup><col style="width:38px"><col><col style="width:34px"><col style="width:46px"><col style="width:40px"><col style="width:34px"><col style="width:40px"><col style="width:40px"></colgroup>
+        <thead><tr><th>spot</th><th>player</th><th>opp</th><th>$</th><th>proj</th><th title="projected points per $1,000">v$</th><th>act</th><th>±</th></tr></thead><tbody>
+        ${L.map(e=>{const d=e.actual_pts!==''?+e.actual_pts-+e.proj_pts:null;return `<tr><td class="mini">${e.roster}</td>
+          <td class="pnm">${e.roster==='DST'?esc(e.player):`<span class="pp plink" data-p="${esc(e.player)}">${esc(pshort(e.player))}</span>`}</td>
+          <td class="mini">${e.opp&&e.opp[0]==='@'?'@':''}${String(e.opp||'').replace('@','')}</td>
+          <td class="mono" data-v="${+e.salary||0}">${e.salary?money(e.salary).replace('$',''):'<span class="dim">·</span>'}</td>
+          <td><b class="mono">${(+e.proj_pts).toFixed(1)}</b></td>
+          <td class="mono" data-v="${e.salary?1000*+e.proj_pts/+e.salary:0}">${e.salary?(1000*+e.proj_pts/+e.salary).toFixed(2):'<span class="dim">·</span>'}</td>
+          <td class="mono">${e.actual_pts!==''?(+e.actual_pts).toFixed(1):'<span class="dim">·</span>'}</td>
+          <td class="mono ${d==null?'mini':d>=0?'rise':'fall'}" data-v="${d==null?-999:d}">${d==null?'':(d>=0?'+':'')+d.toFixed(1)}</td></tr>`}).join('')}
+        <tr class="ltot"><td class="mini">total</td><td></td><td></td><td class="mono">${cap?money(spend).replace('$',''):''}</td><td><b class="mono">${(+s.proj_total).toFixed(1)}</b></td><td></td><td class="mono">${act?(+s.actual_total).toFixed(1):''}</td><td class="mono ${act?((+s.actual_total-+s.proj_total)>=0?'rise':'fall'):''}">${act?((+s.actual_total-+s.proj_total>=0?'+':'')+(+s.actual_total-+s.proj_total).toFixed(1)):''}</td></tr>
+        </tbody></table></div>`};
+    const lineups=S.length?`<div class="dfsl">${S.map(lcard).join('')}</div>`:'<p class="note">no lineup frozen for this week yet</p>';
+
+    /* ---- stacks and the value board, side by side ---- */
+    const stacks=q.filter(r=>r.u.pos==='QB').map(qb=>{const mates=q.filter(r=>r.u.team===qb.u.team&&['WR','TE'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts);const m=mates[0];if(!m)return null;const bgm=(BET.games||[]).find(x=>x.week===wk&&(x.away_team===qb.u.team||x.home_team===qb.u.team))||{};
+      const brg=q.filter(r=>r.u.team===qb.def&&['WR','TE','RB'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts)[0];
+      const sal=(qb.sal||0)+(m.sal||0);return {qb,m,brg,tot:qb.pts+m.pts,sal:qb.sal&&m.sal?sal:null,ou:bgm.total_line}}).filter(Boolean).sort((a,b)=>b.tot-a.tot).slice(0,10);
+    const stackH=`<div class="panel"><h3>stacks<span class="f">QB + his top pass catcher · bring-back = the best play on the other side of the same game</span></h3>
+      <table class="lgt"><thead><tr><th>QB</th><th>pass catcher</th><th>pts</th><th>$k</th><th>O/U</th><th>bring-back</th></tr></thead><tbody>
+      ${stacks.map(s=>`<tr><td class="pnm"><span class="pp plink" data-p="${esc(s.qb.u.player)}">${esc(pshort(s.qb.u.player))}</span></td>
+        <td class="pnm"><span class="pp plink" data-p="${esc(s.m.u.player)}">${esc(pshort(s.m.u.player))}</span></td>
+        <td><b class="mono">${s.tot.toFixed(1)}</b></td><td class="mono" data-v="${s.sal||0}">${s.sal?(s.sal/1000).toFixed(1):'<span class="dim">·</span>'}</td>
+        <td class="mono">${s.ou??'<span class="dim">·</span>'}</td>
+        <td class="pnm">${s.brg?`<span class="pp plink" data-p="${esc(s.brg.u.player)}">${esc(pshort(s.brg.u.player))}</span> <span class="mini">${s.brg.pts.toFixed(1)}</span>`:'<span class="dim">·</span>'}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">no stack qualifies</td></tr>'}</tbody></table></div>`;
+    const vboard=priced.filter(r=>r.pts>=7).sort((a,b)=>b.val-a.val).slice(0,14);
+    const valueH=`<div class="panel"><h3>value<span class="f">most projected points per $1,000 of salary, among plays projected for 7+</span></h3>
+      <table class="lgt"><thead><tr><th>player</th><th>pos</th><th>opp</th><th>$k</th><th>DK</th><th>v$</th></tr></thead><tbody>
+      ${vboard.map(r=>`<tr><td class="pnm"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span></td>
+        <td class="mini">${r.u.pos}</td><td class="mini">${r.o[0]==='@'?'@':''}${r.def}</td>
+        <td class="mono" data-v="${r.sal}">${(r.sal/1000).toFixed(1)}</td><td><b class="mono">${r.pts.toFixed(1)}</b></td>
+        <td class="mono"><b>${r.val.toFixed(2)}</b></td></tr>`).join('')||'<tr><td colspan="6" class="mini">no salaries for this week</td></tr>'}</tbody></table></div>`;
+
+    const best=q.slice().sort((a,b)=>b.pts-a.pts)[0];const bv=vboard[0];
+    const kp=`<div class="kpis">
+      ${kpi('DraftKings Classic',`wk ${wk}`,`${S.length} slate${S.length===1?'':'s'} frozen · ${capped?'cap '+money(CAP)+' enforced':'uncapped'}`)}
+      ${SAL.n?kpi('salaries posted',SAL.n,`${priced.length} of ${q.length} qualified plays priced`):kpi('salaries','none',`drop the DK export at data/raw/dk_salaries_wk${wk}.csv`,'r')}
+      ${S[0]?kpi(S[0].slate+' projection',(+S[0].proj_total).toFixed(1),`${S[0].capped==='True'?money(S[0].salary):'uncapped'} · ${S[0].games} games`,'g'):''}
+      ${best?kpi('top projection',`${tlogo(best.u.team,14)} ${esc(pshort(best.u.player))}`,`${best.pts.toFixed(1)} DK pts${best.sal?' · '+money(best.sal):''}`):''}
+      ${bv?kpi('best value',`${tlogo(bv.u.team,14)} ${esc(pshort(bv.u.player))}`,`${bv.val.toFixed(2)} pts per $1k · ${money(bv.sal)}`,'g'):''}
+    </div>`;
+    slot.innerHTML=kp+lineups+plays+`<div class="grid2">${stackH}${valueH}</div>`
+      +`<p class="note">DK Classic scoring: 0.04/pass yd, 4/pass TD, −1 INT, 0.1/rush or rec yd, 6/TD, 1/reception, +3 for 300 pass yds · lineups obey every DK Classic rule — QB/RB/RB/WR/WR/WR/TE/FLEX/DST, FLEX from RB-WR-TE, no player twice, ${money(CAP)} cap, two games minimum — and are the exact optimum under them, not a greedy fill · projections from the walk-forward prop model (Big Board) and the TD model · salaries are DraftKings' posted numbers for the week · usage filter: QBs ≥50% snaps, RBs ≥30% snaps or 8 touches/g, WR/TE ≥45% snaps and ≥10% target share or 3.5 targets/g</p>`;
     logoize(slot)}
 }
 /* ---------- MODEL LAB: walk-forward backtest of the projection formula ----------
