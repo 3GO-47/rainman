@@ -714,6 +714,70 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb{display:block}.hint.fi.blk:hover .hb{display:block}
 #crumb{flex:1}
 .standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
+/* ---------- TEST (F6) ---------- */
+.lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
+.lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
+.lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
+ font:700 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.lgcol>h3 .f{font:400 10px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
+.lgcol>div{max-height:72vh;overflow:auto}
+table.lgt{width:max-content;min-width:100%;border-collapse:collapse;font-size:11px}
+table.lgt .badge{padding:0 2px;font-size:9px;min-width:0;letter-spacing:0}
+.lgrid.td5 table.lgt td{padding:3px 3px}
+.lgrid.td5 table.lgt th{padding:5px 3px}
+table.lgt td .ov{margin-right:3px}
+table.lgt th{position:sticky;top:0;z-index:1;background:var(--s2);text-align:left;padding:5px 5px;cursor:pointer;
+ font:600 9.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--edge);white-space:nowrap}
+table.lgt th:hover{color:var(--txt)}
+table.lgt td{padding:3px 5px;border-bottom:1px solid var(--edge);white-space:nowrap}
+table.lgt tbody tr:hover td{background:var(--s2)}
+table.lgt td .ov{font:600 11px var(--mono);margin-right:4px}
+@media(max-width:1760px){.lgrid.td5{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:1500px){.lgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:1180px){.lgrid.td5{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:820px){.lgrid,.lgrid.td5{grid-template-columns:1fr}}
+
+/* Game View — fits the screen; each pane scrolls inside itself */
+.gv{display:flex;flex-direction:column;gap:9px;height:calc(100vh - 250px);min-height:520px}
+.gv .gvcols{flex:1;min-height:0}
+.gv .gvside{display:flex;flex-direction:column;height:100%;min-height:0}
+.gv .gvpane{flex:1 1 auto;min-height:0;max-height:none}
+.gv .gvpane:nth-child(3){flex:0 0 auto}
+.gvnarr{flex:0 0 auto}
+.gvhead{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--edge);
+ border-radius:10px;padding:9px 13px}
+.gvtitle{font:800 19px var(--ui,inherit);display:flex;align-items:center;gap:9px}
+.gvtitle .at{color:var(--dim2);font-weight:400}
+.gvmeta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
+.gvcols{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:start}
+.gvside{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
+.gvside>header{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2)}
+.gvrec{font:600 12px var(--mono);display:flex;align-items:center;gap:8px;margin-left:auto}
+.gvrec .sq{width:7px;height:11px;border-radius:1px;display:inline-block;background:var(--dim2)}
+.gvrec .sq.w{background:var(--green)}.gvrec .sq.l{background:var(--red)}
+.gvpane{border-bottom:1px solid var(--edge);max-height:30vh;overflow:auto}
+.gvpane:last-child{border-bottom:0}
+.gvpane>h4{margin:0;padding:6px 11px;position:sticky;top:0;background:var(--panel);z-index:2;
+ font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
+.gvpane>h4 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:7px}
+table.gvt{margin-bottom:2px}
+.gvdep{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:3px 11px 5px}
+.gvdep>b{font:700 9.5px var(--mono);letter-spacing:1px;color:var(--dim);width:26px;flex:none}
+.dchip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--edge2);border-radius:4px;padding:1px 6px;font-size:11px}
+.dchip i{font-style:normal;font:700 9px var(--mono);color:var(--dim2)}
+.dchip.q{border-color:var(--amber)}.dchip.out{opacity:.5;text-decoration:line-through}
+table.gvk{width:100%;border-collapse:collapse;font-size:11.5px}
+table.gvk{table-layout:fixed}
+table.gvk th{text-align:left;padding:3px 0 3px 11px;font:600 9.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--dim2);width:62px}
+table.gvk td{padding:3px 8px 3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+.gvnarr{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:0 0 7px;max-height:18vh;overflow:auto}
+.gvnarr>h4{margin:0;padding:7px 13px;position:sticky;top:0;background:var(--panel);
+ font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
+.gvnarr>h4 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:7px}
+.gvnarr .rivln{padding:0 13px}
+.gvnarr .rivln b{color:var(--accent-text);font:700 9.5px var(--mono);letter-spacing:1px;text-transform:uppercase;margin-right:6px}
+@media(max-width:980px){.gvcols{grid-template-columns:1fr}.gvpane{max-height:none}}
 </style>__BRAND_BOOT__
 </head><body>
 <div id="legacyNav" hidden><nav>
@@ -729,6 +793,7 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 <button data-v="games"><span class="fk">F9</span>Games &amp; Picks</button>
 <button data-v="locker"><span class="fk">F10</span>Locker Room</button>
 <button data-v="bets"><span class="fk">F11</span>Bets</button>
+<button data-v="test"><span class="fk">F6</span>TEST</button>
 </nav></div>
 <div id="app">
 <div id="top">
@@ -756,6 +821,7 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
+<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgrid" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -987,7 +1053,7 @@ $('#ntHdr').textContent=NT;if(!IS_NFL)document.querySelectorAll('.lgnfl').forEac
 (()=>{const o=LG.other;if(!o)return;const keep=location.hash||'';$('#lgSw').innerHTML=`<a href="index.html" title="Layer 0 — every sport" style="color:var(--acc)">◍ all sports</a><a class="${IS_NFL?'on':''}" href="${IS_NFL?'#':'rainman.html'+keep}">NFL</a><a class="${IS_NFL?'':'on'}" href="${IS_NFL?'ncaa.html'+keep:'#'}">NCAA</a>`;addEventListener('hashchange',()=>{[...$('#lgSw').children].forEach(a=>{if(!a.classList.contains('on'))a.href=a.href.split('#')[0]+location.hash})})})();
 document.querySelectorAll('#legacyNav nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#legacyNav nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  ['home','chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
+  ['home','chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets','test'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
   if(DIRTY.has(b.dataset.v))runView(b.dataset.v);});
 /* ---------- task-based navigation: every legacy view / sub-panel has exactly one home in the sidebar ---------- */
 const SECTIONS=[
@@ -1013,7 +1079,11 @@ const SECTIONS=[
  {id:'picksec',fk:'F5',label:'Picks',items:[
    {id:'pkhome',label:'Model',desc:'how the model has actually done: record, units, calibration, what it is good at and what has changed',c:'pkhome',nfl:true},
    {id:'picks',label:'Card',desc:'this week\'s frozen positions — filter by game, slate, market or edge; the game model board underneath',c:'games',nfl:true},
-   {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]}];
+   {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]},
+ {id:'test',fk:'F6',label:'TEST',items:[
+   {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
+   {id:'gameview',label:'Game View',desc:'one game, one screen: both sides\' matchup ranks, depth charts, coordinator tendencies, form by venue and slate, and the narrative around it',c:'test',sub:'gameview'},
+   {id:'tdgrid',label:'TD Grid',desc:'touchdowns five ways — one cumulative board plus QB, RB, WR and TE, each showing the opponent\'s TD-allowed rank for every data set',c:'test',sub:'tdgrid'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1029,6 +1099,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
+  if(it.c==='test'){['labgrid','gameview','tdgrid'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1048,6 +1119,9 @@ const INTRO={
  observatory:{what:'One defense in depth: what it has allowed week by week against the league, where it sits among all 32, and whether it is trending softer or tighter.',how:['Δ = change over the last four weeks vs the season','σ = how much the weekly numbers swing','above the diagonal = allowing more lately']},
  schedule:{what:'Every offense\'s remaining schedule, colored by how soft each opponent is for the chosen slot.',how:['green = soft opponent, red = tough','μ = average over the remaining games','sort by the lens to find the easiest and hardest paths']},
  pkhome:{what:'Every position the model has frozen, graded against the line it was frozen at — the record, where it comes from, whether the edge means anything, and what has changed.',how:['a position risks one unit; a win at \u2212110 returns 0.909, so 52.4% is break-even','the edge buckets answer the only question that matters: does disagreeing more with the market win more?','skill is the model\u2019s improvement over predicting a player\u2019s own season average \u2014 under 2 is noise','nothing here is a projection; it is the scored record, and the slate filter narrows it']},
+ labgrid:{what:'The Matchup Lab dealt into four columns — QB, RB, WR, TE — showing only what the opponent allows per game to that slot, so you can read the whole slate across positions at once.',how:['rank 1 of 32 = the defense allows the MOST to that slot (the best matchup)','one data set drives all four columns; change it once at the top','every column sorts on its own — click a header inside a column','click a name for his card']},
+ gameview:{what:'One game on one screen. Both offenses against the defense they face, the depth charts behind them, how each coordinator calls it, how each team travels, and the threads around the game.',how:['the ranks come straight from the Lab — same numbers, same data set','left column is the away side, right is the home side','nothing scrolls: pick a game and the whole picture is in front of you']},
+ tdgrid:{what:'Touchdowns, five columns: one board of every slot owner, then QB, RB, WR and TE on their own.',how:['the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 = allows the most touchdowns = the best end-zone matchup','columns sort independently']},
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
 function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML=`<span>${it.desc}</span>`;
   let el=$('#pageIntro');if(!el){el=document.createElement('div');el.id='pageIntro';const m=$('main');m.insertBefore(el,m.firstChild)}
@@ -1064,7 +1138,7 @@ function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return
   document.querySelectorAll('#tnav .on,#snav .on').forEach(e=>{try{e.scrollIntoView({block:'nearest',inline:'nearest'})}catch(_){}});
   renderIntro(it);
   document.title=`RAINMAN · ${it.label}`;if(!opts.silent)writeHash();window.scrollTo({top:0})}
-addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea'))return;const i=['F1','F2','F3','F4','F5'].indexOf(e.key);
+addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea'))return;const i=['F1','F2','F3','F4','F5','F6'].indexOf(e.key);
   if(i>=0){e.preventDefault();const sec=SECTIONS[i];if(sec&&sec.items.some(itemOK))go(SEC_LAST[sec.id]||sec.items.find(itemOK).id);return}});
 const LOG={player:0,pid:1,season:2,week:3,team:4,opp:5,ha:6,slot:7,pos:8,py:9,ptd:10,patt:11,int:12,ra:13,ry:14,rtd:15,tgt:16,rec:17,recy:18,rectd:19,fstd:20,fppr:21,snaps:22,snp:23,tsh:24,adot:25,rsh:26,wopr:27};
 const WCOL={};J.statCols.forEach((c,i)=>WCOL[c]=i+4);
@@ -3564,7 +3638,218 @@ function homeBoard(){RR.push(()=>{const slot=$('#bbHomeSlot');if(!slot)return;co
     <table class="mkb"><thead><tr><th>market</th><th style="color:var(--green)">best</th><th>2nd</th><th>3rd</th><th style="color:var(--red)">avoid</th></tr></thead><tbody>${rows}</tbody></table>
     <p class="note">${SIG&&SIG.overall.dvp?`audited: the stat-specific matchup carries a ${(100*SIG.overall.dvp.lift).toFixed(1)}% lift top-third vs bottom-third across ${SIG.rows.toLocaleString()} starter-games; Ψ alone ${(100*SIG.overall.psi.lift).toFixed(1)}% — see Intel › Signals`:''} · * attempts use the yardage column as the matchup proxy</p></div>`;logoize(slot)})}
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11]];
+/* ======================= TEST (F6) · final-draft pages =======================
+   Everything here reads the same payload as the live tabs and writes to none of
+   them. Promote a view by moving its item into another section. */
+const TPOS=['QB','RB','WR','TE'];
+const tKey=p=>p==='QB'?'QB':p==='RB'?'RB1':p==='WR'?'WR1':'TE1';
+
+/* one Matchup Lab row, reduced to what the opponent allows */
+function tRows(pos,src,o){
+  const D=J.dvp[src]||{},wk=G.week,q=(o.q||'').toLowerCase();
+  return UNIVERSE.filter(u=>u.pos===pos&&u.grp&&inU(u)
+      &&(!o.dep||u.depth<=+o.dep)
+      &&(o.hin!=='x'||u.inj!=='-1')
+      &&(!q||u.player.toLowerCase().includes(q))
+      &&(!o.team||u.team===o.team))
+    .map(u=>{
+      const oppRaw=(J.sched26[u.team]||[])[wk-1]||'';
+      const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
+      const d=opp&&D[opp]?D[opp]:null,stats=LABDEF[pos].stats(u.grp),gm=gameOf(u.team,wk);
+      return {u,oppRaw,opp,stats,gm,
+        ranks:stats.map(c=>d?d.stats[c].rank:null),
+        raws:stats.map(c=>d?d.stats[c].avg:null),
+        psi:d?d.comps[u.grp]:null,
+        kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99};});
+}
+const tSortVal=(x,k,asc)=>k==='psi'?(x.psi==null?99:x.psi)
+  :k==='player'?x.u.player:k==='team'?x.u.team:k==='opp'?(x.opp||'zzz'):k==='kick'?x.kickord
+  :k[0]==='r'?(x.ranks[+k.slice(1)]==null?(asc?99:-1):x.ranks[+k.slice(1)])
+  :k[0]==='v'?(x.raws[+k.slice(1)]==null?(asc?1e9:-1):x.raws[+k.slice(1)]):0;
+function tWire(root){if(!root)return;root.querySelectorAll('.plink[data-p]').forEach(n=>n.onclick=()=>playerPop(n.dataset.p));
+  try{logoize(root)}catch(_){}}
+
+/* ---------------- Lab Grid — four positions side by side ---------------- */
+function labGrid(){
+  const srcs=Object.keys(J.dvp);
+  $('#labgrid').innerHTML=`<div class="controls">
+    <select id="lgSrc" title="which data set every column reads">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
+    <select id="lgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    <select id="lgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="lgMode"><option value="both" selected>allowed /gm + rank</option><option value="rank">rank only</option><option value="raw">allowed /gm only</option></select>
+    <input id="lgQ" placeholder="search player..." size="15">
+    <span class="note">the Matchup Lab dealt four ways. Every column shows one thing — <b>what this week's opponent allows per game to that slot</b> — so the softest field at each position sits one glance apart. rank 1 of ${NT} = allows the most = best matchup &middot; each column sorts on its own &middot; click a name for his card</span>
+  </div>
+  <div class="lgrid">${TPOS.map(p=>`<section class="lgcol"><h3>${posIcon(p,12)} ${p} <span class="f" id="lgN${p}"></span></h3><div id="lgB${p}"></div></section>`).join('')}</div>`;
+  const sort={};TPOS.forEach(p=>sort[p]={k:'psi',a:true});
+  function col(p){
+    const src=$('#lgSrc').value,mode=$('#lgMode').value,st=sort[p];
+    const R=tRows(p,src,{dep:$('#lgDepth').value,hin:$('#lgInj').value,q:$('#lgQ').value});
+    R.sort((a,b)=>{const x=tSortVal(a,st.k,st.a),y=tSortVal(b,st.k,st.a);return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
+    const heads=LABDEF[p].heads,sample=LABDEF[p].stats(tKey(p));
+    $('#lgN'+p).textContent=R.length+(R.length===1?' player':' players');
+    const cell=(v,r,c)=>v==null?'<td class="dim">·</td>':
+      `<td>${mode==='rank'?'':`<span class="ov">${(+v).toFixed(decOf(c))}</span>`}${mode==='raw'?'':badge(r)}</td>`;
+    const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    $('#lgB'+p).innerHTML=`<table class="lgt"><thead><tr>
+      ${th('player','Player')}${th('opp','Opp',"this week's opponent")}
+      ${heads.map((h,i)=>th('r'+i,h.split('*').join(''),sample[i]+' allowed per game to this slot · badge = rank of '+NT)).join('')}
+      ${th('psi','Ψ',"mean of the opponent's ranks across this slot's stats · 1 = softest")}</tr></thead><tbody>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
+        <td>${oppcell(x.oppRaw)}</td>
+        ${x.stats.map((c,i)=>cell(x.raws[i],x.ranks[i],c)).join('')}<td>${psi(x.psi)}</td></tr>`).join('')
+        ||`<tr><td colspan="${heads.length+3}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+    $('#lgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
+      if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=(h.dataset.k==='psi'||h.dataset.k[0]==='r'||h.dataset.k==='player'||h.dataset.k==='team'||h.dataset.k==='opp')}col(p)});
+    tWire($('#lgB'+p));
+  }
+  const all=()=>TPOS.forEach(col);
+  ['lgSrc','lgDepth','lgInj','lgMode'].forEach(i=>$('#'+i).onchange=all);$('#lgQ').oninput=all;all();
+  RR.push(all);
+}
+
+/* ---------------- TD Grid — cumulative + one column per position ---------------- */
+const tdLbl=s=>/^\d{4}$/.test(s)?"'"+s.slice(2):s==='combined'?'cmb':s==='adjusted'?'adj':s.slice(0,4);
+function tdGrid(){
+  const srcs=Object.keys(J.dvp);
+  const tdRank=(d,grp,pos)=>{if(!d)return null;
+    const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));
+    const rs=st.map(c=>d.stats[c]?d.stats[c].rank:null).filter(v=>v!=null);
+    return rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:null};
+  $('#tdgrid').innerHTML=`<div class="controls">
+    <select id="tgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    <select id="tgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <input id="tgQ" placeholder="search player..." size="15">
+    <span class="note">touchdowns only. Each cell is the rank of the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; &mu; = mean across the sets &middot; the first column is every slot owner together, then one per position</span>
+  </div>
+  <div class="lgrid td5">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◍ all':posIcon(p,12)+' '+p} <span class="f" id="tgN${p}"></span></h3><div id="tgB${p}"></div></section>`).join('')}</div>`;
+  const sort={};['ALL'].concat(TPOS).forEach(p=>sort[p]={k:'mu',a:true});
+  function col(p){
+    const st=sort[p],o={dep:$('#tgDepth').value,hin:$('#tgInj').value,q:$('#tgQ').value};
+    const R=[];(p==='ALL'?TPOS:[p]).forEach(pos=>{
+      tRows(pos,srcs[0],o).forEach(x=>{
+        const cells=srcs.map(s=>{const D=J.dvp[s]||{};return tdRank(x.opp&&D[x.opp]?D[x.opp]:null,x.u.grp,pos)});
+        const got=cells.filter(v=>v!=null);
+        R.push(Object.assign({},x,{pos,cells,mu:got.length?got.reduce((a,b)=>a+b,0)/got.length:null}))})});
+    R.sort((a,b)=>{let x,y;
+      if(st.k==='mu'){x=a.mu==null?99:a.mu;y=b.mu==null?99:b.mu}
+      else if(st.k[0]==='s'){const i=+st.k.slice(1);x=a.cells[i]==null?(st.a?99:-1):a.cells[i];y=b.cells[i]==null?(st.a?99:-1):b.cells[i]}
+      else if(st.k==='pos'){x=TPOS.indexOf(a.pos);y=TPOS.indexOf(b.pos)}
+      else{x=tSortVal(a,st.k,st.a);y=tSortVal(b,st.k,st.a)}
+      return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
+    $('#tgN'+p).textContent=R.length+(R.length===1?' player':' players');
+    const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    $('#tgB'+p).innerHTML=`<table class="lgt"><thead><tr>
+      ${th('player','Player')}${p==='ALL'?th('pos','Pos'):''}${th('opp','Opp')}
+            ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot \u00b7 '+s+' \u00b7 rank of '+NT)).join('')}
+      ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+        ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
+        ${x.cells.map(v=>v==null?'<td class="dim">·</td>':`<td>${badge(v)}</td>`).join('')}
+        <td>${psi(x.mu)}</td></tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+    $('#tgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
+      if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=true}col(p)});
+    tWire($('#tgB'+p));
+  }
+  const all=()=>['ALL'].concat(TPOS).forEach(col);
+  ['tgDepth','tgInj'].forEach(i=>$('#'+i).onchange=all);$('#tgQ').oninput=all;all();
+  RR.push(all);
+}
+
+/* ---------------- Game View — one game, one screen ---------------- */
+function gameView(){
+  const srcs=Object.keys(J.dvp);
+  $('#gameview').innerHTML=`<div class="controls">
+    <select id="gvGame"></select>
+    <select id="gvSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
+    <span class="note">one game, one screen. The ranks are the Matchup Lab's, on the data set you pick here &middot; left is the away side, right is the home side &middot; nothing below the fold: each pane scrolls inside itself</span>
+  </div><div id="gvBody" class="gv"></div>`;
+  function fill(){
+    const wk=G.week,gs=GAMES(wk);
+    const sel=$('#gvGame'),prev=sel.value;
+    sel.innerHTML=gs.map(g=>`<option value="${g[GM.vis]}@${g[GM.home]}">${g[GM.vis]} @ ${g[GM.home]} · ${SLATE_LBL[g[GM.slate]]||g[GM.slate]}</option>`).join('');
+    if(prev&&gs.some(g=>g[GM.vis]+'@'+g[GM.home]===prev))sel.value=prev;
+    if(G.game&&gs.some(g=>g[GM.vis]+'@'+g[GM.home]===G.game))sel.value=G.game;
+    draw();
+  }
+  /* records, venue split and this slate's history, from the graded game ledger */
+  function form(t){
+    const G26=(BET.games||[]).filter(g=>g.result!=null&&g.away_score!=null);
+    const r={w:0,l:0,hw:0,hl:0,aw:0,al:0,pf:0,pa:0,last:[]};
+    G26.slice().sort((a,b)=>a.week-b.week).forEach(g=>{
+      const home=g.home_team===t,away=g.away_team===t;if(!home&&!away)return;
+      const mine=+(home?g.home_score:g.away_score),theirs=+(home?g.away_score:g.home_score);
+      r.pf+=mine;r.pa+=theirs;
+      if(mine>theirs){r.w++;home?r.hw++:r.aw++;r.last.push('W')}
+      else if(mine<theirs){r.l++;home?r.hl++:r.al++;r.last.push('L')}else r.last.push('T')});
+    return r;
+  }
+  function coach(t){
+    const se=(IN_SE&&IN_SE[0])||SE_NOW,C=(IN.coaching[se]||{})[t]||{},T=(IN.tags[se]||{})[t]||{},
+          O=(IN.off[se]||{})[t]||{},D=(IN.def[se]||{})[t]||{};
+    const num=(v,d,suf)=>v==null?'—':(+v).toFixed(d)+(suf||'');
+    return `<table class="gvk"><tbody>
+      <tr><th>OC</th><td>${esc(C.oc||'—')}${C.oc_changed===1?' <span class="newdc">NEW</span>':''}</td>
+          <th>style</th><td>${esc((T.OFF&&T.OFF.primary_tag)||'—')}</td></tr>
+      <tr><th>DC</th><td>${esc(C.dc||'—')}${C.dc_changed===1?' <span class="newdc">NEW</span>':''}</td>
+          <th>style</th><td>${esc((T.DEF&&T.DEF.primary_tag)||'—')}</td></tr>
+      <tr><th>pace</th><td>${num(O.sec_per_play,1,'s')}</td><th>plays</th><td>${num(O.plays_per_game,0)}</td></tr>
+      <tr><th>PROE</th><td>${num(O.proe,1,'%')}</td><th>EPA/play</th><td>${num(O.epa_play,3)}</td></tr>
+      <tr><th>D EPA</th><td>${num(D.epa_play_allowed,3)}</td><th>charting</th><td class="mini">${se}</td></tr>
+    </tbody></table>`;
+  }
+  function side(t,opp,src,home){
+    const f=form(t),gp=f.w+f.l||1;
+    const streak=f.last.slice(-5).map(c=>`<i class="sq ${c==='W'?'w':c==='L'?'l':''}"></i>`).join('');
+    const ranks=TPOS.map(p=>{
+      const R=tRows(p,src,{dep:'2',hin:'x',team:t}).sort((a,b)=>(a.psi==null?99:a.psi)-(b.psi==null?99:b.psi));
+      if(!R.length)return '';
+      const heads=LABDEF[p].heads;
+      return `<table class="lgt gvt"><thead><tr><th>${posIcon(p,10)} ${p}</th><th>Slot</th>
+        ${heads.map(h=>`<th>${h.split('*').join('')}</th>`).join('')}<th>Ψ</th></tr></thead><tbody>
+        ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
+          <td>${slotchip(x.u.dslot)}</td>
+          ${x.ranks.map((r,i)=>r==null?'<td class="dim">·</td>':`<td><span class="ov">${x.raws[i]==null?'—':(+x.raws[i]).toFixed(decOf(x.stats[i]))}</span>${badge(r)}</td>`).join('')}
+          <td>${psi(x.psi)}</td></tr>`).join('')}</tbody></table>`}).join('');
+    const dep=(()=>{const rows=UNIVERSE.filter(u=>u.team===t&&u.grp&&u.depth<=3)
+        .sort((a,b)=>TPOS.indexOf(a.pos)-TPOS.indexOf(b.pos)||a.depth-b.depth);
+      const byPos={};rows.forEach(u=>(byPos[u.pos]=byPos[u.pos]||[]).push(u));
+      return TPOS.filter(p=>byPos[p]).map(p=>`<div class="gvdep"><b>${p}</b>${byPos[p].map(u=>
+        `<span class="dchip${u.inj==='-1'?' out':u.inj==='0'?' q':''}"><i>${u.depth}</i><span class="plink" data-p="${esc(u.player)}">${esc(pshort(u.player))}</span></span>`).join('')}</div>`).join('')})();
+    return `<section class="gvside ${home?'h':'a'}">
+      <header>${tlogo(t,22)} <b style="color:${vividC(t)}">${t}</b> <span class="mini">${TEAM[t]?esc(TEAM[t].n):''}</span>
+        <span class="gvrec">${f.w}-${f.l} <span class="mini">home ${f.hw}-${f.hl} · away ${f.aw}-${f.al} · ${(f.pf/gp).toFixed(1)} for / ${(f.pa/gp).toFixed(1)} against</span> ${streak}</span>
+        <span class="mini">${home?'hosting':'at'} ${oppcell(home?opp:'@'+opp)}</span></header>
+      <div class="gvpane"><h4>matchup ranks <span class="f">what ${opp} allows per game to each slot · rank of ${NT}</span></h4>${ranks||'<p class="note">no starters on file</p>'}</div>
+      <div class="gvpane"><h4>depth <span class="f">effective order this week</span></h4>${dep||'<p class="note">no depth chart</p>'}</div>
+      <div class="gvpane"><h4>how they call it</h4>${coach(t)}</div>
+    </section>`;
+  }
+  function draw(){
+    const key=$('#gvGame').value,src=$('#gvSrc').value;if(!key)return;
+    const [vis,home]=key.split('@'),wk=G.week,g=GAMES(wk).find(x=>x[GM.vis]===vis&&x[GM.home]===home);
+    if(!g){$('#gvBody').innerHTML='<p class="note">that game is not on this week’s slate</p>';return}
+    const N=(J.narr||[]).filter(n=>+n.week===wk&&n.game===vis+'@'+home);
+    const line=(()=>{const b=(BET.games||[]).find(x=>x.week===wk&&x.away_team===vis&&x.home_team===home);
+      if(!b)return '';
+      const sp=b.spread_line==null?null:+b.spread_line,tt=b.total_line==null?null:+b.total_line;
+      const imp=sp!=null&&tt!=null?` · ${vis} ${((tt+sp)/2).toFixed(1)} – ${home} ${((tt-sp)/2).toFixed(1)}`:'';
+      return `<span class="mini">${esc(home)} ${sp==null?'—':(sp>0?'+':'')+sp.toFixed(1)} · O/U ${tt==null?'—':tt.toFixed(1)}${imp}</span>`})();
+    $('#gvBody').innerHTML=`
+      <div class="gvhead">
+        <div class="gvtitle">${tlogo(vis,26)} <b style="color:${vividC(vis)}">${vis}</b> <span class="at">@</span> <b style="color:${vividC(home)}">${home}</b></div>
+        <div class="gvmeta">${slateChip(g[GM.slate])} <span class="mini">${esc(g[GM.day]||'')} ${esc(g[GM.time]||'')}</span> ${line} ${envLine(vis,home,wk)}</div>
+      </div>
+      <div class="gvcols">${side(vis,home,src,false)}${side(home,vis,src,true)}</div>
+      <div class="gvnarr"><h4>around the game <span class="f">rivalries, revenge, homecomings</span></h4>
+        ${N.length?N.slice(0,10).map(n=>`<div class="rivln"><b>${esc(n.kind)}</b> ${esc(n.text||n.detail||'')}</div>`).join(''):'<p class="note">nothing flagged for this one</p>'}</div>`;
+    tWire($('#gvBody'));
+  }
+  $('#gvGame').onchange=draw;$('#gvSrc').onchange=draw;
+  fill();RR.push(fill);
+}
+
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',tdGrid]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();

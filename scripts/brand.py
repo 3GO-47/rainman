@@ -13,12 +13,12 @@ Usage in a page builder:
 # ------------------------------------------------------------------ tokens
 # Every page uses these names. Page-local vocabularies are aliased onto them by alias_css().
 THEMES = {
-    'dark': {  # current site, unchanged
+    'dark': {  # the live site. Only the retired gold family moved: the secondary is now rain blue
         'bg': '#000', 'panel': '#0b0b0c', 's2': '#131315', 's3': '#1a1a1d',
         'edge': '#1d1e21', 'edge2': '#2a2b30',
         'txt': '#e6e6e8', 'dim': '#9a9ca4', 'dim2': '#60626a',
-        'accent': '#e8b339', 'accent-text': '#e8b339', 'on-accent': '#000',
-        'amber': '#e8b339', 'green': '#3fb950', 'red': '#f0564a',
+        'accent': '#2b6bff', 'accent-text': '#5c93ff', 'on-accent': '#ffffff',
+        'amber': '#2b6bff', 'green': '#3fb950', 'red': '#f0564a',
         'cyan': '#8ab4d8', 'violet': '#a99bd6', 'blue': '#6c8cff', 'pink': '#e86fa8',
         'mark': '#e6e6e8', 'mark-shade': '#1a1a1d',
     },
@@ -159,10 +159,18 @@ _DRIPS = [(12.2, 11), (21.1, 16), (30.0, 12.5), (38.9, 16.5), (47.8, 10.5)]
 _VISOR = '<rect x="10.5" y="18.4" width="43" height="11.6" rx="5.8"/>'
 _BOLT = '<path d="M55.5 1.5 L46.8 13.4 h5.1 l-3.4 9.6 L58.6 9.8 h-5.3 z"/>'
 
-def mascot(state='counting', size=28, cls='rmask', title=None):
+def mascot(state='counting', size=28, cls='rmask', title=None, anim=False):
     """state: counting · edge · noplay · loading1-4 · error · live.
     Returns an inline SVG that themes itself — no fills are hard-coded."""
-    drips = ''.join(f'<rect x="{x}" y="32" width="6.2" height="{h}" rx="3.1"/>' for x, h in _DRIPS)
+    if anim:          # the drips grow and let go, left to right -- used on the landing page only
+        drips = ''.join('<rect x="%s" y="32" width="6.2" height="%s" rx="3.1">'
+                        '<animate attributeName="height" values="%s;%s;%s" dur="2.6s" begin="%ss" '
+                        'repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55;1" '
+                        'keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/></rect>'
+                        % (x, h, round(h * .45, 1), round(h * 1.45, 1), round(h * .45, 1), round(i * .21, 2))
+                        for i, (x, h) in enumerate(_DRIPS))
+    else:
+        drips = ''.join(f'<rect x="{x}" y="32" width="6.2" height="{h}" rx="3.1"/>' for x, h in _DRIPS)
     mark = 'var(--mark)'; shade = 'var(--mark-shade)'; acc = 'var(--accent)'
     eyes = f'<circle cx="25.4" cy="24.2" r="2.2" fill="{acc}"/><circle cx="38.6" cy="24.2" r="2.2" fill="{acc}"/>'
     tally = f'<path d="M7 50.5 L57 37.5" stroke="{acc}" stroke-width="4.2" stroke-linecap="round" fill="none"/>'
@@ -192,22 +200,105 @@ def mascot(state='counting', size=28, cls='rmask', title=None):
             f'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAINMAN {state}">{t}'
             f'<g fill="{mark}">{_CLOUD}{drips}</g><g fill="{shade}">{_VISOR}</g>{eyes}{tally}{extra}</svg>')
 
-def app_icon(size=64, theme='dark'):
-    """Rounded-square app icon: accent field, mark knocked out in on-accent."""
+
+# ------------------------------------------------------------------ the rest of the crew
+# RAINMAN is the cloud. THORP is the umbrella — he covers the slate. KELLY is the raindrop,
+# and she carries the +1 card. Same colour logic as the cloud: body = --mark, visor = --mark-shade,
+# accent parts = --accent, so all three re-skin with the theme and none of them hard-codes a fill.
+
+def thorp(state='idle', size=28, cls='rmask', title=None):
+    """state: idle · edge · noplay (soaked)."""
+    mark, shade, acc = 'var(--mark)', 'var(--mark-shade)', 'var(--accent)'
+    dim = 'var(--dim2)'
+    body, tilt, extra = mark, '', ''
+    mouth = f'<path d="M26.4 42.6 q5.6 5.2 11.2 0" stroke="{shade}" stroke-width="2.4" stroke-linecap="round" fill="none"/>'
+    eyes = f'<circle cx="28.3" cy="35.1" r="2.1" fill="{acc}"/><circle cx="35.7" cy="35.1" r="2.1" fill="{acc}"/>'
+    feet = (f'<ellipse cx="26.2" cy="57.2" rx="4.6" ry="2.8" fill="{acc}"/>'
+            f'<ellipse cx="37.8" cy="57.2" rx="4.6" ry="2.8" fill="{acc}"/>')
+    nub = f'<rect x="29.6" y="4" width="4.8" height="11" rx="2.4" fill="{acc}"/>'
+    if state == 'noplay':                                  # soaked: canopy droops, the rain won
+        body, feet = dim, feet.replace(acc, dim)
+        nub = nub.replace(acc, dim)
+        eyes = (f'<rect x="25.6" y="34" width="5.4" height="2.2" rx="1.1" fill="{mark}" opacity=".5"/>'
+                f'<rect x="33" y="34" width="5.4" height="2.2" rx="1.1" fill="{mark}" opacity=".5"/>')
+        tilt = ' transform="rotate(-9 32 21)"'
+        mouth = f'<path d="M26.4 45 q5.6 -5 11.2 0" stroke="{shade}" stroke-width="2.4" stroke-linecap="round" fill="none"/>'
+        extra = ''.join(f'<rect x="{x}" y="{y}" width="3" height="7" rx="1.5" fill="{dim}" opacity=".55"/>'
+                        for x, y in ((16, 2), (31, 0), (46, 3)))
+    elif state == 'edge':                                  # the spark: he found one
+        extra = ''.join(f'<path d="M{x1} {y1} L{x2} {y2}" stroke="{acc}" stroke-width="2.4" stroke-linecap="round"/>'
+                        for x1, y1, x2, y2 in ((44, 10, 51, 5), (46, 16, 54, 14), (41, 6, 45, 0)))
+    t = f'<title>{title}</title>' if title else ''
+    return (f'<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 64 64" fill="none" '
+            f'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Thorp {state}">{t}'
+            f'<g{tilt}>{nub}<rect x="8" y="14.5" width="48" height="15" rx="7.5" fill="{body}"/></g>'
+            f'<rect x="24.2" y="27" width="15.6" height="29" rx="6" fill="{body}"/>'
+            f'<rect x="24.2" y="30.4" width="15.6" height="9.4" rx="4.7" fill="{shade}"/>'
+            f'{eyes}{mouth}{feet}{extra}</svg>')
+
+_DROP = 'M32 4 C32 4 14.5 26.5 14.5 39 a17.5 17.5 0 1 0 35 0 C49.5 26.5 32 4 32 4 Z'
+
+def kelly(state='counting', size=28, cls='rmask', title=None, card=True):
+    """state: counting · edge · noplay. The +1 card is hers; drop it with card=False for a plain drop."""
+    body, face = 'var(--accent)', 'var(--on-accent)'
+    if state == 'noplay': body, face = 'var(--dim2)', 'var(--bg)'
+    mouth = f'<path d="M25.6 48.6 q6.4 5.6 12.8 0" stroke="{face}" stroke-width="2.6" stroke-linecap="round" fill="none"/>'
+    if state == 'noplay':
+        mouth = f'<path d="M25.6 51.4 q6.4 -5.2 12.8 0" stroke="{face}" stroke-width="2.6" stroke-linecap="round" fill="none"/>'
+    spark = ''
+    if state == 'edge':
+        spark = ''.join(f'<path d="M{x1} {y1} L{x2} {y2}" stroke="{body}" stroke-width="2.4" stroke-linecap="round"/>'
+                        for x1, y1, x2, y2 in ((47, 14, 54, 8), (50, 21, 58, 18)))
+    plus = ('<g transform="rotate(14 50 50)">'
+            f'<rect x="40.5" y="40.5" width="19" height="19" rx="3.4" fill="var(--txt)"/>'
+            f'<text x="50" y="53.4" text-anchor="middle" fill="var(--bg)" '
+            f'font-family="var(--mono,ui-monospace,monospace)" font-size="11" font-weight="700">+1</text></g>') if card else ''
+    t = f'<title>{title}</title>' if title else ''
+    return (f'<svg class="{cls}" width="{size}" height="{size}" viewBox="0 0 64 64" fill="none" '
+            f'xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kelly {state}">{t}'
+            f'<path d="{_DROP}" fill="{body}"/>'
+            f'<rect x="20.4" y="36.2" width="23.2" height="8.8" rx="4.4" fill="{face}"/>'
+            f'{mouth}{spark}{plus}</svg>')
+
+CREW = {'rainman': ('Rainman', 'the cloud', mascot), 'thorp': ('Thorp', 'the umbrella', thorp),
+        'kelly': ('Kelly', 'the raindrop', kelly)}
+
+
+def _flat(svg, theme, knockout=True):
+    """Resolve a crew SVG's variables to literals. knockout=True draws it onto an accent field:
+    the body takes the on-accent colour and the detail takes the accent back, so it reads at 16px."""
     T = THEMES[theme]
-    drips = ''.join(f'<rect x="{x}" y="32" width="6.2" height="{h}" rx="3.1"/>' for x, h in _DRIPS)
+    pal = {'mark': 'on-accent', 'mark-shade': 'accent', 'accent': 'on-accent', 'on-accent': 'accent',
+           'txt': 'on-accent', 'bg': 'accent', 'dim2': 'on-accent', 'red': 'on-accent'} if knockout else \
+          {k: k for k in T}
+    return _re.sub(r'var\(--([a-z-]+)(?:,[^)]*)?\)', lambda m: T.get(pal.get(m.group(1), m.group(1)), T['txt']), svg)
+
+def app_icon(size=64, theme='dark', who='kelly'):
+    """Rounded-square app icon: accent field, one of the crew knocked out of it. Kelly is the default."""
+    T = THEMES[theme]
+    inner = CREW[who][2]('counting' if who != 'thorp' else 'idle', 64, cls='')
+    inner = _flat(inner, theme).replace('<svg ', '<svg x="7" y="7" ', 1)
+    inner = _re.sub(r'(<svg x="7" y="7" class="" )width="64" height="\d+"', r'\1width="50" height="50"', inner)
     return (f'<svg width="{size}" height="{size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RAINMAN">'
-            f'<rect width="64" height="64" rx="14" fill="{T["accent"]}"/>'
-            f'<g transform="translate(5,5) scale(.84)" fill="{T["on-accent"]}">{_CLOUD}{drips}</g>'
-            f'<g transform="translate(5,5) scale(.84)" fill="{T["accent"]}">{_VISOR}</g></svg>')
+            f'<rect width="64" height="64" rx="14" fill="{T["accent"]}"/>{inner}</svg>')
+
+def crew_badge(who='rainman', size=48, theme='dark'):
+    """The round badge from the brand sheet: accent disc, crew member knocked out."""
+    T = THEMES[theme]
+    inner = _flat(CREW[who][2]('counting' if who != 'thorp' else 'idle', 64, cls=''), theme)
+    inner = _re.sub(r'(<svg class="" )width="64" height="\d+"', r'\1x="10" y="10" width="44" height="44"', inner)
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{CREW[who][0]}">'
+            f'<circle cx="32" cy="32" r="32" fill="{T["accent"]}"/>{inner}</svg>')
 
 def favicon_href(theme='dark'):
     import base64
     return 'data:image/svg+xml;base64,' + base64.b64encode(app_icon(64, theme).encode()).decode()
 
 def lockup(size=34, stacked=False, cls='rmlock'):
-    """Mascot + wordmark. The wordmark is live text so it inherits the page font."""
-    m = mascot('counting', size)
+    """Rainman + Kelly + wordmark. The wordmark is live text so it inherits the page font."""
+    m = (f'<span style="display:inline-flex;align-items:flex-end;gap:0;margin-right:{size//10}px">'
+         f'{mascot("counting", size)}'
+         f'<span style="margin-left:-{int(size*.26)}px;margin-bottom:-{int(size*.06)}px">{kelly("counting", int(size * .78))}</span></span>')
     if stacked:
         return (f'<span class="{cls} st" style="display:inline-flex;flex-direction:column;align-items:center;gap:4px">'
                 f'{m}<b style="font:800 {max(13, size // 2)}px/1 var(--mono,monospace);letter-spacing:4px;color:var(--mark)">RAINMAN</b></span>')
@@ -296,13 +387,25 @@ def _grey(L, theme):
             return _mix(_tok(theme, a[1]), _tok(theme, b[1]), t)
     return _tok(theme, 'txt')
 
-# hue of each of dark's semantic colours -> the bucket an arbitrary saturated literal falls into
-_BUCKETS = [(_hue(*_hex2rgb(THEMES['dark'][n])[:3]), n)
-            for n in ('red', 'amber', 'green', 'cyan', 'blue', 'violet', 'pink')]
+# Hue anchors for the semantic buckets. Fixed, not read off the live palette: dark's --amber is rain
+# blue now, so deriving them would send every gold literal to the nearest surviving hue (red).
+_BUCKETS = [(4, 'red'), (43, 'amber'), (128, 'green'), (206, 'cyan'), (228, 'blue'), (253, 'violet'), (331, 'pink')]
+
+_GOLD = (20, 66)        # hue window of the retired amber/gold family
 
 def map_color(lit, theme):
     """One dark literal -> its counterpart in `theme`."""
     r, g, b, a = _parse(lit)
+    if theme == 'dark':
+        # dark is the live site and stays byte-identical, with ONE deliberate exception:
+        # the old gold secondary is now rain blue. Every other literal is returned untouched.
+        if lit.lower() in ('#e8b339', '#e8b33a'): return _fmt(*_hex2rgb(THEMES['dark']['accent-text'])[:3], a)
+        H, S, L = _hue(r, g, b), _sat(r, g, b), _lum(r, g, b)
+        if S < .25 or not (_GOLD[0] <= H <= _GOLD[1]): return lit
+        th = _hex2rgb(THEMES['dark']['accent'])[:3]
+        e = L / max(_lum(*_hex2rgb('#e8b339')[:3]), 1e-6)
+        if e < 1: return _fmt(*_mix((0, 0, 0), th, max(e, .06) ** .85), a)
+        return _fmt(*_mix(th, (255, 255, 255), min((e - 1) * .55, .40)), a)
     T = THEMES[theme]
     key = lit.lower()
     if key.startswith('#'):                              # 1. a named token keeps its name
@@ -334,9 +437,11 @@ def themed_css(css, prefix='k'):
         return f'var({key},{lit})'
     out = _RGBA.sub(sub, _HEX.sub(sub, css))
     blocks = ''
-    for t in ('light', 'rain'):
-        decls = ''.join(f'{v}:{map_color(k, t)};' for k, v in seen.items())
-        blocks += f'[data-theme="{t}"]{{{decls}}}\n'
+    for t in ORDER:
+        decls = ''.join(f'{v}:{map_color(k, t)};' for k, v in seen.items()
+                        if not (t == 'dark' and map_color(k, t) == k))   # dark declares only what actually moved
+        if decls: blocks += (f':root,[data-theme="dark"]{{{decls}}}\n' if t == 'dark'
+                             else f'[data-theme="{t}"]{{{decls}}}\n')
     return out, blocks
 
 

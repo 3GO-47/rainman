@@ -309,9 +309,15 @@ CSS = r"""
 main{max-width:1180px;margin:0 auto;padding:34px 20px 70px}
 h1{font:800 30px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 6px}
 .sub{color:var(--dim);font-size:13.5px;margin:0}
-.hero{display:flex;align-items:center;gap:18px;margin:0 0 26px}
-.hero .rmask{flex:none;width:76px;height:76px}
-@media(max-width:640px){.hero{gap:12px}.hero .rmask{width:52px;height:52px}}
+.hero{display:flex;align-items:center;gap:16px;margin:0 0 26px}
+.hero>.rmask{flex:none;width:82px;height:72px}
+.hero .kel{flex:none;margin:14px 2px 0 -26px;display:block;animation:rmbob 3.6s ease-in-out infinite}
+.hero .kel .rmask{width:50px;height:50px;display:block}
+@keyframes rmbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
+#rainfx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#hdr,main{position:relative;z-index:1}
+@media(prefers-reduced-motion:reduce){.hero .kel{animation:none}#rainfx{display:none}}
+@media(max-width:640px){.hero{gap:10px}.hero>.rmask{width:56px;height:50px}.hero .kel{margin-left:-18px}.hero .kel .rmask{width:34px;height:34px}}
 h2{font:600 10.5px var(--mono);letter-spacing:2.2px;text-transform:uppercase;color:var(--mute);margin:34px 0 12px;display:flex;align-items:baseline;gap:10px}
 h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:var(--mute)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:10px}
@@ -425,17 +431,44 @@ def page(games, pulled):
 {HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}{CSS_VARS}{CSS}</style>{brand.THEME_BOOT}</head><body>
 <div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a>{brand.theme_switch_html()}</span></div>
 <main>
-<div class="hero">{brand.mascot("counting", 76, "rmask")}<div><h1>RAINMAN</h1>
+<canvas id="rainfx" aria-hidden="true"></canvas>
+<div class="hero">{brand.mascot("counting", 82, "rmask", anim=True)}<span class="kel">{brand.kelly("counting", 50, "rmask")}</span><div><h1>RAINMAN</h1>
 <p class="sub">Matchup intelligence, one dashboard per sport.</p></div></div>
 <h2>sports <span>{nsport} with games in the window</span></h2>
 <div class="grid">{tiles}</div>
 <h2>model performance <span>every position the models froze, graded against the line it was frozen at · one unit risked per position</span></h2>
 <div class="perf">{kp}</div>
 {table_html}
-<p class="note">A win at −110 returns 0.909 and a loss costs 1, so 52.4% is break-even; the gold tick on each bar is that line. Records separate skill from variance somewhere past 300 positions — read these as a running tally, not a verdict. The NFL model's full breakdown, calibration and changelog live on <a href="rainman.html#v=pkhome" style="color:var(--acc)">its Model tab</a>.</p>
+<p class="note">A win at −110 returns 0.909 and a loss costs 1, so 52.4% is break-even; the tick on each bar is that line. Records separate skill from variance somewhere past 300 positions — read these as a running tally, not a verdict. The NFL model's full breakdown, calibration and changelog live on <a href="rainman.html#v=pkhome" style="color:var(--acc)">its Model tab</a>.</p>
 <div class="foot"><a href="brand.html" style="color:var(--accent-text)">brand</a> · RAINMAN · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}) · player models from game logs (Pro Football Reference, ESPN, sportsdataverse, the Sackmann tennis archive) · built {built} · information, not advice</div>
 </main>
 <script>{brand.THEME_JS}</script>
+<script>
+(function(){{
+ var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if (reduce) {{ document.querySelectorAll('#rainfx,animate').forEach(function(n){{n.remove()}}); return; }}
+ var c = document.getElementById('rainfx'); if (!c) return; var g = c.getContext('2d');
+ var W, H, drops = [], dpr = Math.min(devicePixelRatio || 1, 2);
+ function mk(y){{ return {{x: Math.random()*W, y: y, l: (9 + Math.random()*30)*dpr,
+                         v: (2.2 + Math.random()*4.4)*dpr, a: .06 + Math.random()*.26}}; }}
+ function size(){{ W = c.width = innerWidth*dpr; H = c.height = innerHeight*dpr;
+   c.style.width = innerWidth+'px'; c.style.height = innerHeight+'px';
+   var n = Math.max(40, Math.min(190, Math.round(innerWidth*innerHeight/11000)));
+   drops = []; for (var i=0;i<n;i++) drops.push(mk(Math.random()*H)); }}
+ var col = '#2b6bff', fade = 1;
+ function theme(){{ var cs = getComputedStyle(document.documentElement), t = document.documentElement.dataset.theme;
+   col = (t === 'light' ? cs.getPropertyValue('--dim2') : cs.getPropertyValue('--accent')).trim() || col;
+   fade = t === 'light' ? .5 : 1; }}                         // paper takes a lighter shower
+ function tick(){{
+   theme(); g.clearRect(0,0,W,H); g.lineWidth = 1.15*dpr; g.lineCap = 'round'; g.strokeStyle = col;
+   for (var i=0;i<drops.length;i++){{ var d = drops[i];
+     g.globalAlpha = d.a*fade; g.beginPath(); g.moveTo(d.x, d.y); g.lineTo(d.x + 1.3*dpr, d.y + d.l); g.stroke();
+     d.y += d.v*2.1; if (d.y > H) drops[i] = mk(-d.l); }}
+   g.globalAlpha = 1; requestAnimationFrame(tick); }}
+ addEventListener('resize', size); size(); tick();
+}})();
+</script>
+
 <script>document.querySelectorAll('tr.lg[data-go]').forEach(t=>{{if(t.dataset.go)t.onclick=()=>location.href=t.dataset.go}});</script>
 </body></html>"""
 

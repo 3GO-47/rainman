@@ -12,6 +12,8 @@ import brand
 
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 STATES = ['counting', 'edge', 'noplay', 'loading1', 'loading2', 'loading3', 'loading4', 'error', 'live']
+THORP = ['idle', 'edge', 'noplay']
+KELLY = ['counting', 'edge', 'noplay']
 BLURB = {
     'counting': 'the default — RAINMAN is counting. Use it as the header mark on every page.',
     'edge': 'an edge cleared the threshold. Use beside a tier-A play or a filled arbitrage, never as decoration.',
@@ -28,8 +30,14 @@ def main():
     d = 'dashboard/assets/mascot'; os.makedirs(d, exist_ok=True)
     for s in STATES:
         open(f'{d}/{s}.svg', 'w', encoding='utf-8').write(brand.mascot(s, 128))
+    for s in THORP:
+        open(f'{d}/thorp-{s}.svg', 'w', encoding='utf-8').write(brand.thorp(s, 128))
+    for s in KELLY:
+        open(f'{d}/kelly-{s}.svg', 'w', encoding='utf-8').write(brand.kelly(s, 128))
     for t in brand.ORDER:
         open(f'{d}/icon-{t}.svg', 'w', encoding='utf-8').write(brand.app_icon(256, t))
+        for w in brand.CREW:
+            open(f'{d}/badge-{w}-{t}.svg', 'w', encoding='utf-8').write(brand.crew_badge(w, 128, t))
     open('dashboard/assets/favicon.svg', 'w', encoding='utf-8').write(brand.app_icon(64, 'dark'))
 
     swatch = lambda k, v: (f'<div class="sw"><span class="chip" style="background:{v};border-color:var(--edge2)"></span>'
@@ -38,12 +46,17 @@ def main():
     for t in brand.ORDER:
         T = brand.THEMES[t]
         cells = ''.join(f'<figure>{brand.mascot(s, 64)}<figcaption>{s}</figcaption></figure>' for s in STATES)
+        crew = (''.join(f'<figure>{brand.thorp(s, 64)}<figcaption>thorp {s}</figcaption></figure>' for s in THORP)
+                + ''.join(f'<figure>{brand.kelly(s, 64)}<figcaption>kelly {s}</figcaption></figure>' for s in KELLY)
+                + ''.join(f'<figure>{brand.crew_badge(w, 56, t)}<figcaption>{brand.CREW[w][0]}</figcaption></figure>'
+                          for w in brand.CREW))
         tags = ''.join(f'<span class="tag" style="color:var(--lg-{k});border-color:var(--lg-{k})">{k.upper()}</span>'
                        for k in brand.LEAGUE_TAG[t])
         panes += (f'<section class="pane" data-theme="{t}"><h2>{brand.LABEL[t]}'
                   f'{" · current site, unchanged" if t == "dark" else ""}</h2>'
                   f'<div class="lock">{brand.lockup(40)}<span class="tl">{brand.TAGLINE}</span></div>'
                   f'<div class="row mas">{cells}</div>'
+                  f'<div class="row mas">{crew}</div>'
                   f'<div class="row"><div class="icon">{brand.app_icon(72, t)}<span>app icon</span></div>'
                   f'<div class="stack">{brand.lockup(34, True)}<span>stacked</span></div>'
                   f'<div class="tags">{tags}<span>league tags</span></div></div>'
@@ -90,7 +103,7 @@ figcaption{font:500 9px var(--mono);letter-spacing:1px;text-transform:uppercase;
             f'original sheet in <code>notes/brand/RAINMAN_Brand.pdf</code>.</p></header>'
             f'<main>{panes}</main></body></html>')
     open('dashboard/brand.html', 'w', encoding='utf-8').write(html)
-    print(f'brand assets: {len(STATES)} mascot SVGs + {len(brand.ORDER)} app icons + favicon · dashboard/brand.html '
+    print(f'brand assets: {len(STATES) + len(THORP) + len(KELLY)} crew SVGs + {len(brand.ORDER)} app icons + favicon · dashboard/brand.html '
           f'{os.path.getsize("dashboard/brand.html") // 1024} KB')
 
 if __name__ == '__main__':
