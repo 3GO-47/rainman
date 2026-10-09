@@ -739,19 +739,39 @@ table.dcdef{table-layout:fixed}table.dcdef th:first-child,table.dcdef td:first-c
 table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-width:34px;display:inline-block;font-size:9px;padding:1px 2px}
 /* big board quadrants */
 .quads{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media (max-width:1000px){.quads{grid-template-columns:1fr}}.dfsl{display:grid;grid-template-columns:repeat(auto-fit,minmax(392px,1fr));gap:10px}.dfsl .panel{margin:0}
-/* ---- DFS: dense by design — every figure in view, nothing to scroll sideways for ---- */
+/* ---- DFS: dense, but every figure has to be readable at a glance ---- */
 .lcard h3{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.lcard h3 .f{margin-left:auto}
-.capbar{height:4px;background:var(--s3);border-radius:2px;overflow:hidden;margin:0 0 5px}
+.capbar{height:5px;background:var(--s3);border-radius:3px;overflow:hidden;margin:0 0 7px}
 .capbar i{display:block;height:100%;background:var(--accent-text,var(--acc))}
-table.lgt td.pnm{overflow:hidden;text-overflow:ellipsis}
-table.lgt td.mono,table.lgt th{font-variant-numeric:tabular-nums}
-table.lgt tr.ltot td{border-top:1px solid var(--edge2);border-bottom:0;background:var(--s2);font-weight:700}
-table.lgt .badge{display:inline-block;min-width:20px;text-align:center;border-radius:3px;font:600 10.5px/1.55 var(--mono);padding:0 3px}
-#lineupSlot .lgrid{margin:10px 0}#lineupSlot .lgcol>div{max-height:none}
-#lineupSlot .lgcol>h3{margin:0;padding:6px 10px;border-bottom:1px solid var(--edge);background:var(--s2);font:700 11px var(--mono);letter-spacing:1.1px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
-#lineupSlot .lgcol>h3 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
-#lineupSlot .grid2{margin-top:10px}#lineupSlot .grid2 .panel{margin:0}
-#lineupSlot>.note{margin-top:10px}.quad{border:1px solid var(--edge);border-radius:8px;padding:6px 8px;background:var(--panel)}.qh{font:700 12px var(--mono);letter-spacing:1px;margin-bottom:4px}.qrow{display:grid;grid-template-columns:14px minmax(150px,1.3fr) 44px minmax(120px,1fr) 60px;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.qn{display:flex;flex-direction:column;min-width:0}.qn i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qk{font-size:11px;color:var(--dim)}.qk b{color:var(--txt)}.qp{text-align:right}.qp b{font-size:13px}.qp i{font-style:normal;font-size:9px;color:var(--dim);margin-left:3px}
+#lineupSlot .dfsl{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(max-width:1100px){#lineupSlot .dfsl{grid-template-columns:1fr}}
+#lineupSlot .lgrid{margin:12px 0;gap:12px}
+#lineupSlot .lgcol>div{max-height:none}
+#lineupSlot .lgcol>h3{margin:0;padding:7px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
+ font:700 12px var(--ui,inherit);letter-spacing:.09em;text-transform:uppercase;display:flex;align-items:center;gap:7px;color:var(--txt)}
+#lineupSlot .lgcol>h3 .f{font:500 10.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
+/* the tables: 12.5px body, real headers, numbers right and tabular, one hero figure per row */
+#lineupSlot table.lgt{font-size:12.5px}
+#lineupSlot table.lgt thead th{position:sticky;top:0;z-index:1;background:var(--panel);color:var(--dim);
+ font:600 10px/1.4 var(--ui,inherit);letter-spacing:.09em;text-transform:uppercase;text-align:right;
+ padding:6px 7px;border-bottom:1px solid var(--edge2);white-space:nowrap;overflow:hidden}
+#lineupSlot table.lgt thead th:first-child,#lineupSlot table.lgt thead th:nth-child(2){text-align:left}
+#lineupSlot table.lgt td{padding:5px 7px;font-size:12.5px;border-bottom:1px solid var(--edge);
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#lineupSlot table.lgt td.pn{text-align:left;color:var(--txt)}
+#lineupSlot table.lgt td.spot{text-align:left;font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+#lineupSlot table.lgt td.op2{text-align:right;color:var(--dim);font:500 11.5px var(--mono)}
+#lineupSlot table.lgt td.num,#lineupSlot table.lgt td.mt{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+#lineupSlot table.lgt td.hero{font-weight:700;font-size:13.5px;color:var(--txt)}
+#lineupSlot table.lgt td.mt{padding-right:9px}
+#lineupSlot table.lgt .badge{display:inline-block;min-width:24px;padding:1px 5px;text-align:center;border-radius:3px;
+ font:700 11.5px/1.5 var(--mono);letter-spacing:0}
+#lineupSlot table.lgt tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--s2) 45%,transparent)}
+#lineupSlot table.lgt tbody tr:hover td{background:var(--s2)}
+#lineupSlot table.lgt tr.ltot td{border-top:1px solid var(--edge2);border-bottom:0;background:var(--s2)!important;font-weight:700}
+#lineupSlot table.lgt td img.tl{width:15px;height:15px;margin-right:5px;vertical-align:-3px}
+#lineupSlot .grid2{margin-top:12px;gap:12px}#lineupSlot .grid2 .panel{margin:0}
+#lineupSlot>.note{margin-top:12px}.quad{border:1px solid var(--edge);border-radius:8px;padding:6px 8px;background:var(--panel)}.qh{font:700 12px var(--mono);letter-spacing:1px;margin-bottom:4px}.qrow{display:grid;grid-template-columns:14px minmax(150px,1.3fr) 44px minmax(120px,1fr) 60px;gap:6px;align-items:center;padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.qn{display:flex;flex-direction:column;min-width:0}.qn i{font-style:normal;font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.qk{font-size:11px;color:var(--dim)}.qk b{color:var(--txt)}.qp{text-align:right}.qp b{font-size:13px}.qp i{font-style:normal;font-size:9px;color:var(--dim);margin-left:3px}
 .bbfull>summary{cursor:pointer;list-style:none}.bbfull>summary::-webkit-details-marker{display:none}
 
 .pintro{display:flex;flex-direction:column;gap:5px;padding:5px 10px;margin:0 0 9px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
@@ -2639,58 +2659,61 @@ function lineup(){
     const priced=q.filter(r=>r.sal!=null);
 
     /* ---- top plays: one narrow column per position, every figure visible without a sideways scroll ---- */
-    const dcell=(v,r)=>v==null?'<span class="dim">·</span>':`<span class="badge" style="${gradeStyle(+r)}">${v}</span>`;
-    const prow=(r,i)=>`<tr><td class="mini">${i+1}</td>
-      <td class="pnm"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span>${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
-      <td class="mini">${r.o[0]==='@'?'@':''}${r.def}</td>
-      <td class="mono" data-v="${r.sal||0}">${r.sal?(r.sal/1000).toFixed(1):'<span class="dim">·</span>'}</td>
-      <td><b class="mono">${r.pts.toFixed(1)}</b></td>
-      <td class="mono" data-v="${r.val||0}">${r.val?r.val.toFixed(2):'<span class="dim">·</span>'}</td>
-      <td class="md">${r.match==null?'<span class="dim">·</span>':dcell(Math.round(r.match),r.match)}</td></tr>`;
-    const pcol=(pos,n)=>{const R=q.filter(r=>r.u.pos===pos).sort((a,b)=>b.pts-a.pts).slice(0,n);
-      return `<div class="lgcol"><h3>${posIcon(pos,12)} ${pos}<span class="f">${R.length} of ${q.filter(r=>r.u.pos===pos).length}</span></h3><div>
-        <table class="lgt dfst"><colgroup><col style="width:20px"><col><col style="width:36px"><col style="width:34px"><col style="width:38px"><col style="width:34px"><col style="width:30px"></colgroup>
-        <thead><tr><th>#</th><th>player</th><th>opp</th><th title="DraftKings salary, in thousands">$k</th><th title="projected DraftKings points">DK</th><th title="projected points per $1,000 of salary">v$</th><th title="mean opponent rank across his markets · 1 = softest">M</th></tr></thead>
-        <tbody>${R.length?R.map(prow).join(''):'<tr><td colspan="7" class="mini">nobody qualifies</td></tr>'}</tbody></table></div></div>`};
+    const dcell=(v,r)=>v==null?'<span class="dim">\u00b7</span>':`<span class="badge" style="${gradeStyle(+r)}">${v}</span>`;
+    const prow=r=>`<tr>
+      <td class="pn"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span>${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+      <td class="op2">${r.o[0]==='@'?'@':''}${r.def}</td>
+      <td class="num" data-v="${r.sal||0}">${r.sal?(r.sal/1000).toFixed(1):'<span class="dim">\u00b7</span>'}</td>
+      <td class="num hero">${r.pts.toFixed(1)}</td>
+      <td class="num" data-v="${r.val||0}">${r.val?r.val.toFixed(2):'<span class="dim">\u00b7</span>'}</td>
+      <td class="mt">${r.match==null?'<span class="dim">\u00b7</span>':dcell(Math.round(r.match),r.match)}</td></tr>`;
+    const pcol=(pos,n)=>{const all=q.filter(r=>r.u.pos===pos);const R=all.sort((a,b)=>b.pts-a.pts).slice(0,n);
+      return `<div class="lgcol"><h3>${posIcon(pos,13)} ${pos}<span class="f">${R.length} of ${all.length}</span></h3><div>
+        <table class="lgt dfst"><colgroup><col><col style="width:46px"><col style="width:46px"><col style="width:50px"><col style="width:46px"><col style="width:48px"></colgroup>
+        <thead><tr><th>player</th><th title="opponent">opp</th><th title="DraftKings salary, in thousands">$K</th><th title="projected DraftKings points">DK</th><th title="projected points per $1,000 of salary">V$</th><th title="mean opponent rank across his markets \u00b7 1 = softest field">MTCH</th></tr></thead>
+        <tbody>${R.length?R.map(prow).join(''):'<tr><td colspan="6" class="mini">nobody qualifies</td></tr>'}</tbody></table></div></div>`};
     const plays=`<div class="lgrid">${TPOS.map(p=>pcol(p,p==='WR'?16:12)).join('')}</div>`;
 
     /* ---- frozen lineups: the model's actual submission, with the cap it had to live inside ---- */
     const lcard=s=>{const L=E.filter(e=>e.slate===s.slate);const cap=s.capped==='True';const spend=cap?L.reduce((a,e)=>a+(+e.salary||0),0):0;
-      const act=s.actual_total!==''&&s.actual_total!=null;
-      return `<div class="panel lcard"><h3>${s.slate}<span class="f">${cap?`${money(spend)} of ${money(CAP)} · ${money(CAP-spend)} left`:'uncapped — best projection per spot, no DST'} · ${s.games} game${s.games==='1'?'':'s'} · frozen ${s.frozen_on}</span></h3>
+      const act=L.some(e=>e.actual_pts!=='');const tot=s.actual_total!==''&&s.actual_total!=null;
+      return `<div class="panel lcard"><h3>${s.slate}<span class="f">${cap?`${money(spend)} of ${money(CAP)} \u00b7 ${money(CAP-spend)} left`:'uncapped \u2014 best projection per spot, no DST'} \u00b7 ${s.games} game${s.games==='1'?'':'s'} \u00b7 frozen ${s.frozen_on}</span></h3>
         ${cap?`<div class="capbar" title="${money(spend)} of the ${money(CAP)} cap"><i style="width:${Math.min(100,100*spend/CAP).toFixed(1)}%"></i></div>`:''}
-        <table class="lgt dfsl2"><colgroup><col style="width:38px"><col><col style="width:34px"><col style="width:46px"><col style="width:40px"><col style="width:34px"><col style="width:40px"><col style="width:40px"></colgroup>
-        <thead><tr><th>spot</th><th>player</th><th>opp</th><th>$</th><th>proj</th><th title="projected points per $1,000">v$</th><th>act</th><th>±</th></tr></thead><tbody>
-        ${L.map(e=>{const d=e.actual_pts!==''?+e.actual_pts-+e.proj_pts:null;return `<tr><td class="mini">${e.roster}</td>
-          <td class="pnm">${e.roster==='DST'?esc(e.player):`<span class="pp plink" data-p="${esc(e.player)}">${esc(pshort(e.player))}</span>`}</td>
-          <td class="mini">${e.opp&&e.opp[0]==='@'?'@':''}${String(e.opp||'').replace('@','')}</td>
-          <td class="mono" data-v="${+e.salary||0}">${e.salary?money(e.salary).replace('$',''):'<span class="dim">·</span>'}</td>
-          <td><b class="mono">${(+e.proj_pts).toFixed(1)}</b></td>
-          <td class="mono" data-v="${e.salary?1000*+e.proj_pts/+e.salary:0}">${e.salary?(1000*+e.proj_pts/+e.salary).toFixed(2):'<span class="dim">·</span>'}</td>
-          <td class="mono">${e.actual_pts!==''?(+e.actual_pts).toFixed(1):'<span class="dim">·</span>'}</td>
-          <td class="mono ${d==null?'mini':d>=0?'rise':'fall'}" data-v="${d==null?-999:d}">${d==null?'':(d>=0?'+':'')+d.toFixed(1)}</td></tr>`}).join('')}
-        <tr class="ltot"><td class="mini">total</td><td></td><td></td><td class="mono">${cap?money(spend).replace('$',''):''}</td><td><b class="mono">${(+s.proj_total).toFixed(1)}</b></td><td></td><td class="mono">${act?(+s.actual_total).toFixed(1):''}</td><td class="mono ${act?((+s.actual_total-+s.proj_total)>=0?'rise':'fall'):''}">${act?((+s.actual_total-+s.proj_total>=0?'+':'')+(+s.actual_total-+s.proj_total).toFixed(1)):''}</td></tr>
+        <table class="lgt dfsl2"><colgroup><col style="width:58px"><col><col style="width:50px"><col style="width:78px"><col style="width:64px"><col style="width:54px">${act?'<col style="width:58px"><col style="width:58px">':''}</colgroup>
+        <thead><tr><th>spot</th><th>player</th><th>opp</th><th title="DraftKings salary">salary</th><th title="projected DraftKings points">proj</th><th title="projected points per $1,000 of salary">V$</th>${act?'<th>actual</th><th title="actual minus projected">\u00b1</th>':''}</tr></thead><tbody>
+        ${L.map(e=>{const d=e.actual_pts!==''?+e.actual_pts-+e.proj_pts:null;return `<tr><td class="spot">${e.roster}</td>
+          <td class="pn">${e.roster==='DST'?esc(e.player):`<span class="pp plink" data-p="${esc(e.player)}">${esc(pshort(e.player))}</span>`}</td>
+          <td class="op2">${e.opp&&e.opp[0]==='@'?'@':''}${String(e.opp||'').replace('@','')}</td>
+          <td class="num" data-v="${+e.salary||0}">${e.salary?money(e.salary):'<span class="dim">\u00b7</span>'}</td>
+          <td class="num hero">${(+e.proj_pts).toFixed(1)}</td>
+          <td class="num" data-v="${e.salary?1000*+e.proj_pts/+e.salary:0}">${e.salary?(1000*+e.proj_pts/+e.salary).toFixed(2):'<span class="dim">\u00b7</span>'}</td>
+          ${act?`<td class="num">${e.actual_pts!==''?(+e.actual_pts).toFixed(1):'<span class="dim">\u00b7</span>'}</td>
+          <td class="num ${d==null?'':d>=0?'rise':'fall'}" data-v="${d==null?-999:d}">${d==null?'':(d>=0?'+':'')+d.toFixed(1)}</td>`:''}</tr>`}).join('')}
+        <tr class="ltot"><td class="spot">total</td><td></td><td></td><td class="num">${cap?money(spend):''}</td><td class="num hero">${(+s.proj_total).toFixed(1)}</td><td class="num">${cap&&spend?(1000*+s.proj_total/spend).toFixed(2):''}</td>${act?`<td class="num">${tot?(+s.actual_total).toFixed(1):''}</td><td class="num ${tot?((+s.actual_total-+s.proj_total)>=0?'rise':'fall'):''}">${tot?((+s.actual_total-+s.proj_total>=0?'+':'')+(+s.actual_total-+s.proj_total).toFixed(1)):''}</td>`:''}</tr>
         </tbody></table></div>`};
     const lineups=S.length?`<div class="dfsl">${S.map(lcard).join('')}</div>`:'<p class="note">no lineup frozen for this week yet</p>';
 
     /* ---- stacks and the value board, side by side ---- */
     const stacks=q.filter(r=>r.u.pos==='QB').map(qb=>{const mates=q.filter(r=>r.u.team===qb.u.team&&['WR','TE'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts);const m=mates[0];if(!m)return null;const bgm=(BET.games||[]).find(x=>x.week===wk&&(x.away_team===qb.u.team||x.home_team===qb.u.team))||{};
       const brg=q.filter(r=>r.u.team===qb.def&&['WR','TE','RB'].includes(r.u.pos)).sort((a,b)=>b.pts-a.pts)[0];
-      const sal=(qb.sal||0)+(m.sal||0);return {qb,m,brg,tot:qb.pts+m.pts,sal:qb.sal&&m.sal?sal:null,ou:bgm.total_line}}).filter(Boolean).sort((a,b)=>b.tot-a.tot).slice(0,10);
+      const sal=(qb.sal||0)+(m.sal||0);return {qb,m,brg,tot:qb.pts+m.pts,sal:qb.sal&&m.sal?sal:null,ou:bgm.total_line}}).filter(Boolean).sort((a,b)=>b.tot-a.tot).slice(0,14);
     const stackH=`<div class="panel"><h3>stacks<span class="f">QB + his top pass catcher · bring-back = the best play on the other side of the same game</span></h3>
-      <table class="lgt"><thead><tr><th>QB</th><th>pass catcher</th><th>pts</th><th>$k</th><th>O/U</th><th>bring-back</th></tr></thead><tbody>
-      ${stacks.map(s=>`<tr><td class="pnm"><span class="pp plink" data-p="${esc(s.qb.u.player)}">${esc(pshort(s.qb.u.player))}</span></td>
-        <td class="pnm"><span class="pp plink" data-p="${esc(s.m.u.player)}">${esc(pshort(s.m.u.player))}</span></td>
-        <td><b class="mono">${s.tot.toFixed(1)}</b></td><td class="mono" data-v="${s.sal||0}">${s.sal?(s.sal/1000).toFixed(1):'<span class="dim">·</span>'}</td>
-        <td class="mono">${s.ou??'<span class="dim">·</span>'}</td>
-        <td class="pnm">${s.brg?`<span class="pp plink" data-p="${esc(s.brg.u.player)}">${esc(pshort(s.brg.u.player))}</span> <span class="mini">${s.brg.pts.toFixed(1)}</span>`:'<span class="dim">·</span>'}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">no stack qualifies</td></tr>'}</tbody></table></div>`;
-    const vboard=priced.filter(r=>r.pts>=7).sort((a,b)=>b.val-a.val).slice(0,14);
-    const valueH=`<div class="panel"><h3>value<span class="f">most projected points per $1,000 of salary, among plays projected for 7+</span></h3>
-      <table class="lgt"><thead><tr><th>player</th><th>pos</th><th>opp</th><th>$k</th><th>DK</th><th>v$</th></tr></thead><tbody>
-      ${vboard.map(r=>`<tr><td class="pnm"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span></td>
-        <td class="mini">${r.u.pos}</td><td class="mini">${r.o[0]==='@'?'@':''}${r.def}</td>
-        <td class="mono" data-v="${r.sal}">${(r.sal/1000).toFixed(1)}</td><td><b class="mono">${r.pts.toFixed(1)}</b></td>
-        <td class="mono"><b>${r.val.toFixed(2)}</b></td></tr>`).join('')||'<tr><td colspan="6" class="mini">no salaries for this week</td></tr>'}</tbody></table></div>`;
+      <table class="lgt"><colgroup><col><col><col style="width:54px"><col style="width:50px"><col style="width:52px"><col style="width:140px"></colgroup>
+      <thead><tr><th>QB</th><th>pass catcher</th><th title="combined projected DraftKings points">pts</th><th title="combined salary, in thousands">$K</th><th title="the DraftKings game total">O/U</th><th title="the best play on the other side of the same game">bring-back</th></tr></thead><tbody>
+      ${stacks.map(s=>`<tr><td class="pn"><span class="pp plink" data-p="${esc(s.qb.u.player)}">${esc(pshort(s.qb.u.player))}</span></td>
+        <td class="pn"><span class="pp plink" data-p="${esc(s.m.u.player)}">${esc(pshort(s.m.u.player))}</span></td>
+        <td class="num hero">${s.tot.toFixed(1)}</td>
+        <td class="num" data-v="${s.sal||0}">${s.sal?(s.sal/1000).toFixed(1):'<span class="dim">\u00b7</span>'}</td>
+        <td class="num">${s.ou??'<span class="dim">\u00b7</span>'}</td>
+        <td class="pn" title="${s.brg?esc(s.brg.u.player)+' \u2014 '+s.brg.pts.toFixed(1)+' DK pts':''}">${s.brg?`<span class="pp plink" data-p="${esc(s.brg.u.player)}">${esc(pshort(s.brg.u.player))}</span>`:'<span class="dim">\u00b7</span>'}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">no stack qualifies</td></tr>'}</tbody></table></div>`;
+    const vboard=TPOS.flatMap(p=>priced.filter(r=>r.pts>=7&&r.u.pos===p).sort((a,b)=>b.val-a.val).slice(0,4)).sort((a,b)=>b.val-a.val);
+    const valueH=`<div class="panel"><h3>value<span class="f">most projected points per $1,000 of salary \u00b7 the best four at each position, among plays projected for 7+</span></h3>
+      <table class="lgt"><colgroup><col><col style="width:44px"><col style="width:48px"><col style="width:48px"><col style="width:48px"><col style="width:48px"></colgroup>
+      <thead><tr><th>player</th><th>pos</th><th>opp</th><th title="DraftKings salary, in thousands">$K</th><th title="projected DraftKings points">DK</th><th title="projected points per $1,000 of salary">V$</th></tr></thead><tbody>
+      ${vboard.map(r=>`<tr><td class="pn"><span class="pp plink" data-p="${esc(r.u.player)}">${esc(pshort(r.u.player))}</span></td>
+        <td class="op2">${r.u.pos}</td><td class="op2">${r.o[0]==='@'?'@':''}${r.def}</td>
+        <td class="num" data-v="${r.sal}">${(r.sal/1000).toFixed(1)}</td><td class="num">${r.pts.toFixed(1)}</td>
+        <td class="num hero">${r.val.toFixed(2)}</td></tr>`).join('')||'<tr><td colspan="6" class="mini">no salaries for this week</td></tr>'}</tbody></table></div>`;
 
     const best=q.slice().sort((a,b)=>b.pts-a.pts)[0];const bv=vboard[0];
     const kp=`<div class="kpis">
