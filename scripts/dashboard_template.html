@@ -767,7 +767,17 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
    carries the allowed-per-game number INSIDE the pill instead of value + separate badge,
    which is what lets four or five columns sit side by side without scrolling. */
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
-.lgrid.td5{grid-template-columns:1.32fr repeat(4,minmax(0,1fr))}
+.lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.lgrid.td5.wide{grid-template-columns:1.32fr repeat(4,minmax(0,1fr))}
+/* full-length columns: the table runs down the page instead of scrolling inside a 72vh box,
+   so its header sticks to the page under the fixed chrome rather than to a scroll box */
+.lgrid.full .lgcol{overflow:visible}
+.lgrid.full .lgcol>h3{border-radius:9px 9px 0 0;position:sticky;top:var(--sticky,33px);z-index:6}
+.lgrid.full .lgcol>h3 .gl{font:500 9.5px var(--mono);letter-spacing:.04em;text-transform:none;color:var(--accent-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.lgrid.full .lgcol>div{max-height:none;overflow:visible}
+/* ONE sticky row only: two separately-stuck <th> rows leave a hairline between them that the
+   scrolling rows show through, so the group band's words move up into the heading block. */
+.lgrid.full table.lgt tr.hd th{top:calc(var(--sticky,33px) + var(--h3h,31px));z-index:4;box-shadow:0 1px 0 var(--edge2)}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
  font:600 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
@@ -879,7 +889,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div></div>
+<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1140,7 +1150,8 @@ const SECTIONS=[
    {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]},
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
-   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'}]}];
+   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
+   {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1156,7 +1167,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['labgrid','gameview'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
+  if(it.c==='test'){['labgrid','gameview','tdgridTest'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1167,6 +1178,7 @@ const INTRO={
  fantasy:{how:['DK = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','$k = DraftKings salary in thousands · v$ = projected points per $1,000 · M = mean opponent rank across his markets, 1 = softest','every lineup obeys the DK Classic rules and the $50,000 cap, and is the exact optimum under them','players who barely play are filtered out']},
  projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
+ tdgrid:{how:['the F6 draft of the TD Board, left exactly as it was \u2014 columns scroll inside themselves and the depth filter is the original 1st-string / top-2 / all select','the live version is F2 Matchups \u2192 TD Board']},
  tdboard:{how:['the fields pane gives the two softest end zones for each role this week and the one to avoid','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','a QB has two TD-allowed stats \u2014 pick which one his column reads; they often point opposite ways','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
@@ -3697,6 +3709,7 @@ function tRows(pos,src,o){
   const D=J.dvp[src]||{},wk=G.week,q=(o.q||'').toLowerCase();
   return UNIVERSE.filter(u=>u.pos===pos&&u.grp&&inU(u)
       &&(!o.dep||u.depth<=+o.dep)
+      &&(!o.slots||o.slots.has(u.dslot||u.slot))
       &&(o.hin!=='x'||u.inj!=='-1')
       &&(!q||u.player.toLowerCase().includes(q))
       &&(!o.team||u.team===o.team))
@@ -3772,31 +3785,43 @@ function labGrid(){
 
 /* ---------------- TD Grid — cumulative + one column per position ---------------- */
 const tdLbl=s=>/^\d{4}$/.test(s)?"'"+s.slice(2):s==='combined'?'cmb':s==='adjusted'?'adj':s.slice(0,4);
-function tdGrid(){
+/* The five-column touchdown grid. It renders twice from one implementation: as the live TD Board
+   under F2 (root '#tdgrid', slot chips, full-length columns) and as the untouched draft under
+   F6 TEST (root '#tdgridTest', the original depth select and 72vh scrolling columns). Every
+   element id is prefixed, so the two instances never collide. */
+const TD_SLOTS=['QB1','RB1','RB2','WR1','WR2','WR3','WR4','TE1','TE2'];
+function tdGrid(root,px,legacy){
+  root=root||'#tdgrid';px=px||'tg';legacy=!!legacy;
   const srcs=Object.keys(J.dvp);
+  const live=new Set(TD_SLOTS);
   /* A quarterback's slot carries TWO touchdown stats and they routinely point opposite ways —
      PHI allows the MOST quarterback rushing TDs in the league (rank 1) and nearly the fewest
      passing TDs (rank 31). Averaging those gives 16, a number that describes neither. So the
      QB stat is picked, never blended; everyone else has one TD stat and it is simply that one. */
   const tdStat=(grp,pos)=>{const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));
     if(st.length<2)return st;
-    const mode=($('#tgQB')||{}).value||'rush';
+    const mode=($('#'+px+'QB')||{}).value||'rush';
     const pass=st.find(c=>c==='P TD'),rush=st.find(c=>c!=='P TD');
     return mode==='pass'?[pass]:mode==='both'?st:[rush]};
   const tdRank=(d,grp,pos)=>{if(!d)return null;
     const rs=tdStat(grp,pos).map(c=>d.stats[c]?d.stats[c].rank:null).filter(v=>v!=null);
     return rs.length?rs.reduce((a,b)=>a+b,0)/rs.length:null};
-  $('#tdgrid').innerHTML=`<div class="controls">
-    <select id="tgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
-    <select id="tgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
-    <select id="tgQB" title="a QB's slot has two TD-allowed stats; pick which one his column reads"><option value="rush" selected>QB: rushing / receiving TD</option><option value="pass">QB: passing TD</option><option value="both">QB: mean of both</option></select>
-    <input id="tgQ" placeholder="search player..." size="15">
-    <span class="note">touchdowns only. Each cell is the rank of the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; &mu; = mean across the sets &middot; the first column is every slot owner together, then one per position</span>
+  const depthCtl=legacy
+    ? `<select id="${px}Depth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>`
+    : `<span class="chips" id="${px}Slots" title="which depth slots the board covers — click to toggle, ALL for every body on the chart">
+        <button data-s="">all</button>${TD_SLOTS.map(s=>`<button data-s="${s}" class="on">${s}</button>`).join('')}</span>`;
+  $(root).innerHTML=`<div class="controls">
+    ${depthCtl}
+    <select id="${px}Inj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="${px}QB" title="a QB's slot has two TD-allowed stats; pick which one his column reads"><option value="rush" selected>QB: rushing / receiving TD</option><option value="pass">QB: passing TD</option><option value="both">QB: mean of both</option></select>
+    <input id="${px}Q" placeholder="search player..." size="15">
+    <span class="note">touchdowns only. Each cell is the rank of the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; &mu; = mean across the sets &middot; the first column is every slot owner together, then one per position${legacy?'':' &middot; the slot chips pick which depths appear, and each column runs its full length rather than scrolling inside itself'}</span>
   </div>
-  <div class="lgrid td5">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◍ all':posIcon(p,12)+' '+p} <span class="f" id="tgN${p}"></span></h3><div id="tgB${p}"></div></section>`).join('')}</div>`;
+  <div class="lgrid td5${legacy?'':' wide full'}">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◉ all':posIcon(p,12)+' '+p}${legacy?'':` <span class="gl" title="touchdowns this week's opponent allows to that slot, ranked among the ${NT} defenses · 1 = allows the most">${p==='ALL'?`TDs allowed to his slot · rank of ${NT}`:'TD rank'}</span>`} <span class="f" id="${px}N${p}"></span></h3><div id="${px}B${p}"></div></section>`).join('')}</div>`;
   const sort={};['ALL'].concat(TPOS).forEach(p=>sort[p]={k:'mu',a:true});
   function col(p){
-    const st=sort[p],o={dep:$('#tgDepth').value,hin:$('#tgInj').value,q:$('#tgQ').value};
+    const st=sort[p],o={hin:$('#'+px+'Inj').value,q:$('#'+px+'Q').value};
+    if(legacy)o.dep=$('#'+px+'Depth').value; else if(live.size)o.slots=live;
     const R=[];(p==='ALL'?TPOS:[p]).forEach(pos=>{
       tRows(pos,srcs[0],o).forEach(x=>{
         const cells=srcs.map(s=>{const D=J.dvp[s]||{};return tdRank(x.opp&&D[x.opp]?D[x.opp]:null,x.u.grp,pos)});
@@ -3808,29 +3833,38 @@ function tdGrid(){
       else if(st.k==='pos'){x=TPOS.indexOf(a.pos);y=TPOS.indexOf(b.pos)}
       else{x=tSortVal(a,st.k,st.a);y=tSortVal(b,st.k,st.a)}
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
-    $('#tgN'+p).textContent=R.length+(R.length===1?' player':' players');
+    $('#'+px+'N'+p).textContent=R.length+(R.length===1?' player':' players');
     const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const ncol=srcs.length+1, wname=p==='ALL'?23:26, wpos=p==='ALL'?6:0, wopp=p==='ALL'?18:21, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
-    $('#tgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
+    const ncol=srcs.length+1, wname=p==='ALL'?(legacy?24:23):(legacy?28:26), wpos=p==='ALL'?6:0,
+          wopp=legacy?17:(p==='ALL'?18:21), wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
+    $('#'+px+'B'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
       Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead>
-      <tr class="grp"><th class="g0" colspan="${p==='ALL'?3:2}">player</th>
-        <th class="op" colspan="${srcs.length}">TDs allowed to his slot \u00b7 rank of ${NT}</th>
-        <th class="md">\u03bc</th></tr>
+      ${legacy?`<tr class="grp"><th class="g0" colspan="${p==='ALL'?3:2}">player</th>
+        <th class="op" colspan="${srcs.length}">TDs allowed to his slot · rank of ${NT}</th>
+        <th class="md">μ</th></tr>`:''}
       <tr class="hd">
       ${th('player','Player')}${p==='ALL'?th('pos','')  :''}${th('opp','Opp')}
-            ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot \u00b7 '+s+' \u00b7 rank of '+NT)).join('')}
+            ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot · '+s+' · rank of '+NT)).join('')}
       ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
-      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} \u00b7 ${x.pos} \u00b7 ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
         ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
         ${x.cells.map((v,i)=>v==null?`<td class="op${i===0?' gs':''}"><span class="dim">·</span></td>`
           :`<td class="op${i===0?' gs':''}" title="${srcs[i]} · rank ${v.toFixed(v%1?1:0)} of ${NT}"><span class="badge" style="${gradeStyle(v)}">${Math.round(v)}</span></td>`).join('')}
         ${tPsi(x.mu).replace('class="md"','class="md gs"')}</tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
-    $('#tgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
+    $('#'+px+'B'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=true}col(p)});
-    tWire($('#tgB'+p));
+    tWire($('#'+px+'B'+p));
+    if(!legacy){const sec=$('#'+px+'B'+p).closest('.lgcol'),h=sec&&sec.querySelector('h3');
+      if(h)sec.style.setProperty('--h3h',h.offsetHeight+'px')}
   }
   const all=()=>['ALL'].concat(TPOS).forEach(col);
-  ['tgDepth','tgInj','tgQB'].forEach(i=>$('#'+i).onchange=all);$('#tgQ').oninput=all;all();
+  (legacy?[px+'Depth',px+'Inj',px+'QB']:[px+'Inj',px+'QB']).forEach(i=>$('#'+i).onchange=all);
+  if(!legacy)$('#'+px+'Slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    const v=b.dataset.s;
+    if(!v)live.clear(); else live.has(v)?live.delete(v):live.add(v);
+    $('#'+px+'Slots').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));
+    all()});
+  $('#'+px+'Q').oninput=all;all();
   RR.push(all);
 }
 
@@ -3994,7 +4028,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
