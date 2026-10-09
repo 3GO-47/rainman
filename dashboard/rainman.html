@@ -2271,10 +2271,10 @@ function tdboard(){
         rows.push({u,g,o,def,score,meas})})});
     const byRole=groups.filter(g=>inP(posOf(g))&&(!sc||sc==='core'||g===sc)).map(g=>{const rr=rows.filter(r=>r.g===g).sort((a,b)=>a.score-b.score);if(!rr.length)return '';
       const cell=r=>`<td style="text-align:left;white-space:nowrap" title="${r.def} allows ${r.meas.toFixed(2)} TD/gm to ${r.g}"><span class="pp plink" data-p="${r.u.player}">${esc(pshort(r.u.player))}</span> <span class="mini">${r.o[0]==='@'?'@':'vs'}</span> ${tcell(r.def)} ${badge(r.score)}</td>`;
-      return `<tr><td>${slotchip(g)}</td>${rr.slice(0,2).map(cell).join('')}${rr.length<2?'<td></td>':''}<td style="border-left:1px solid var(--edge2)"></td>${cell(rr[rr.length-1])}</tr>`}).join('');
-    $('#tdFields').innerHTML=`<h3>TD fields by role <span class="f">the two softest end zones for each role this week (hover for the opponent's TDs allowed /gm) and the one to avoid · badge = league rank, 1 = most TDs allowed</span>
+      return `<tr><td>${slotchip(g)}</td>${rr.slice(0,3).map(cell).join('')}${'<td></td>'.repeat(Math.max(0,3-rr.length))}</tr>`}).join('');
+    $('#tdFields').innerHTML=`<h3>TD fields by role <span class="f">the three softest end zones for each role this week — hover for the opponent's TDs allowed /gm · badge = league rank, 1 = most TDs allowed</span>
       <select id="tdSlot" title="which slots this pane covers">${SLOTS.map(v=>`<option value="${v}" ${v===tdSc?'selected':''}>${SLOTL[v]||v}</option>`).join('')}</select></h3>
-      <table><thead><tr><th>role</th><th style="text-align:left;color:var(--green)">softest</th><th style="text-align:left">2nd</th><th></th><th style="text-align:left;color:var(--red)">hardest</th></tr></thead><tbody>${byRole||'<tr><td colspan="5" class="dim">no slot owner plays under this filter</td></tr>'}</tbody></table>`;
+      <table><thead><tr><th>role</th><th style="text-align:left;color:var(--green)">softest</th><th style="text-align:left">2nd</th><th style="text-align:left">3rd</th></tr></thead><tbody>${byRole||'<tr><td colspan="4" class="dim">no slot owner plays under this filter</td></tr>'}</tbody></table>`;
   }
   function fieldsWired(){fields();$('#tdSlot').onchange=e=>{tdSc=e.target.value;fieldsWired()}}
   RR.push(fieldsWired);fieldsWired();
