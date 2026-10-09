@@ -773,16 +773,13 @@ table.lgt .psi{font-weight:600;font:600 10.5px var(--mono)}
 @media(max-width:1180px){.lgrid.td5{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:820px){.lgrid,.lgrid.td5{grid-template-columns:1fr}}
 
-/* Game View — a full page now, not a locked screen: sections stack and the page scrolls */
-.gv{display:flex;flex-direction:column;gap:14px}
-.gvsec{scroll-margin-top:96px}
-.gvsec>h3{margin:0 0 7px;font:600 10.5px var(--mono);letter-spacing:2.2px;text-transform:uppercase;
- color:var(--dim);display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--edge);padding-bottom:5px}
-.gvsec>h3 .f{font:400 11px var(--ui);letter-spacing:0;text-transform:none;color:var(--dim2)}
+/* Game View — the card and the number are the page; the deep views wait behind a strip */
+.gv{display:flex;flex-direction:column;gap:10px}
 .gv2{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
 .gv2>*{min-width:0}
 .gv .panel h4{margin:10px 0 5px;font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
 .gv .panel h4:first-child{margin-top:0}
+.gvmkt .panel{display:flex;flex-direction:column}
 table.gvk{width:100%;border-collapse:collapse;font-size:11.5px;table-layout:fixed}
 table.gvk th{text-align:left;padding:4px 6px 4px 0;font:600 9px var(--mono);letter-spacing:1.1px;
  text-transform:uppercase;color:var(--dim2);width:78px}
@@ -793,13 +790,26 @@ table.gvk.wide thead th{width:auto;color:var(--dim);border-bottom:1px solid var(
 .gvk .sq{width:7px;height:11px;border-radius:1px;display:inline-block;background:var(--dim2);margin-right:2px}
 .gvk .sq.w{background:var(--green)}.gvk .sq.l{background:var(--red)}
 table.gvt.lgt{table-layout:auto}
-#gvJump button{font:600 9.5px var(--mono);letter-spacing:1px;text-transform:uppercase}
+/* the four closed strips */
+.gvdeep{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+details.gvd{background:var(--panel);border:1px solid var(--edge);border-radius:8px;min-width:0}
+details.gvd>summary{cursor:pointer;list-style:none;padding:9px 13px;display:flex;align-items:baseline;gap:9px;
+ font:600 10px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--dim)}
+details.gvd>summary::-webkit-details-marker{display:none}
+details.gvd>summary::before{content:'\25B8';color:var(--dim2);font-size:10px;letter-spacing:0}
+details.gvd[open]>summary::before{content:'\25BE'}
+details.gvd>summary:hover{color:var(--txt)}
+details.gvd>summary .f{font:400 10.5px var(--ui);letter-spacing:0;text-transform:none;color:var(--dim2)}
+details.gvd[open]{grid-column:1/-1}
+details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent-text)}
+.gvdb{padding:11px 13px}
+.gvdb:empty{display:none}
 .gvpair{margin-bottom:12px}
 .gvpair>h4{margin:0 0 6px;font:600 9.5px var(--mono);letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-text)}
 .gvpair .panel{margin-bottom:8px}
-.gvsec .dcteam{min-width:0}
-.gvsec .dct2{width:100%;table-layout:auto}
-@media(max-width:1100px){.gv2{grid-template-columns:1fr}}
+.gvdb .dcteam{min-width:0}
+.gvdb .dct2{width:100%;table-layout:auto}
+@media(max-width:1100px){.gv2,.gvdeep{grid-template-columns:1fr}}
 </style><script>(function(){try{var t=localStorage.getItem('rm-theme')||'dark';document.documentElement.dataset.theme=['dark','light','rain'].indexOf(t)<0?'dark':t}catch(e){document.documentElement.dataset.theme='dark'}})();</script><link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlJBSU5NQU4iPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMmI2YmZmIi8+PHN2ZyB4PSI3IiB5PSI3IiBjbGFzcz0iIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IktlbGx5IGNvdW50aW5nIj48cGF0aCBkPSJNMzIgNCBDMzIgNCAxNC41IDI2LjUgMTQuNSAzOSBhMTcuNSAxNy41IDAgMSAwIDM1IDAgQzQ5LjUgMjYuNSAzMiA0IDMyIDQgWiIgZmlsbD0iI2ZmZmZmZiIvPjxyZWN0IHg9IjIwLjQiIHk9IjM2LjIiIHdpZHRoPSIyMy4yIiBoZWlnaHQ9IjguOCIgcng9IjQuNCIgZmlsbD0iIzJiNmJmZiIvPjxwYXRoIGQ9Ik0yNS42IDQ4LjYgcTYuNCA1LjYgMTIuOCAwIiBzdHJva2U9IiMyYjZiZmYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InJvdGF0ZSgxNCA1MCA1MCkiPjxyZWN0IHg9IjQwLjUiIHk9IjQwLjUiIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgcng9IjMuNCIgZmlsbD0iI2ZmZmZmZiIvPjx0ZXh0IHg9IjUwIiB5PSI1My40IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmI2YmZmIiBmb250LWZhbWlseT0iI2U2ZTZlOCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCI+KzE8L3RleHQ+PC9nPjwvc3ZnPjwvc3ZnPg==">
 </head><body>
 <div id="legacyNav" hidden><nav>
@@ -1104,7 +1114,7 @@ const SECTIONS=[
    {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]},
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
-   {id:'gameview',label:'Game View',desc:'one game, everything: the Matchups card, both depth charts, both scheme profiles from Intel, form and defensive trend, the market and the model\'s edge, and the storylines',c:'test',sub:'gameview'},
+   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
    {id:'tdgrid',label:'TD Grid',desc:'touchdowns five ways — one cumulative board plus QB, RB, WR and TE, each showing the opponent\'s TD-allowed rank for every data set',c:'test',sub:'tdgrid'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
@@ -1142,7 +1152,7 @@ const INTRO={
  schedule:{what:'Every offense\'s remaining schedule, colored by how soft each opponent is for the chosen slot.',how:['green = soft opponent, red = tough','μ = average over the remaining games','sort by the lens to find the easiest and hardest paths']},
  pkhome:{what:'Every position the model has frozen, graded against the line it was frozen at — the record, where it comes from, whether the edge means anything, and what has changed.',how:['a position risks one unit; a win at \u2212110 returns 0.909, so 52.4% is break-even','the edge buckets answer the only question that matters: does disagreeing more with the market win more?','skill is the model\u2019s improvement over predicting a player\u2019s own season average \u2014 under 2 is noise','nothing here is a projection; it is the scored record, and the slate filter narrows it']},
  labgrid:{what:'The Matchup Lab dealt into four columns — QB, RB, WR, TE — showing only what the opponent allows per game to that slot, so you can read the whole slate across positions at once.',how:['rank 1 of 32 = the defense allows the MOST to that slot (the best matchup)','one data set drives all four columns; change it once at the top','every column sorts on its own — click a header inside a column','click a name for his card']},
- gameview:{what:'Everything the site holds on one game, in one page: the Matchups card, both depth charts, both coordinators\u2019 scheme and personnel profiles, each team\u2019s form and each defense\u2019s week-by-week trend, the market and the model\u2019s disagreement with it, and the storylines.',how:['the sections are the live Matchups, Depth Charts and Intel views \u2014 same numbers, not copies','jump between sections with the buttons, or scroll','left column is the away side, right is the home side']},
+ gameview:{what:'One game: the Matchups card, then the market with the model\u2019s disagreement beside it. The deeper views \u2014 depth charts, scheme and personnel, form and defensive trend, storylines \u2014 wait behind the four strips at the bottom.',how:['the card and the strips are the live Matchups, Depth Charts and Intel views \u2014 the same numbers, not copies','a strip builds the first time you open it, so the page stays light','left column is the away side, right is the home side']},
  tdgrid:{what:'Touchdowns, five columns: one board of every slot owner, then QB, RB, WR and TE on their own.',how:['the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 = allows the most touchdowns = the best end-zone matchup','columns sort independently']},
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
 function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML=`<span>${it.desc}</span>`;
@@ -3818,16 +3828,11 @@ function tdGrid(){
    over by GV.* at boot, so when those tabs change this page changes with them. */
 function gameView(){
   const srcs=Object.keys(J.dvp);
-  const SEC=[['card','matchup'],['depth','depth charts'],['scheme','scheme & personnel'],
-             ['form','form & trend'],['market','market'],['story','storylines']];
   $('#gameview').innerHTML=`<div class="controls">
     <select id="gvGame"></select>
     <select id="gvSrc" title="which data set the matchup ranks read">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-    <span class="tabs" id="gvJump">${SEC.map(([k,l])=>`<button data-j="gv_${k}">${l}</button>`).join('')}</span>
-    <span class="note">everything the site holds on one game, in one place. The card at the top is the Matchups card for this game; under it sit both depth charts, both coordinators' scheme and personnel profiles from Intel, each team's form and each defense's week-by-week trend, the market and the model's disagreement with it, and the storylines &middot; click any name for his card</span>
+    <span class="note">the game, then the number. The card is the Matchups card for this game and the row under it is the market with the model's disagreement beside it &middot; depth charts, scheme profiles, form and storylines sit behind the four strips at the bottom and build only when you open one &middot; click any name for his card</span>
   </div><div id="gvBody" class="gv"></div>`;
-  $('#gvJump').onclick=e=>{const b=e.target.closest('button');if(!b)return;
-    const el=document.getElementById(b.dataset.j);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})};
 
   /* ---- form: record, venue split, this slate, last five, ATS ---- */
   function form(t){
@@ -3849,7 +3854,7 @@ function gameView(){
     return r;
   }
   const streak=l=>l.slice(-5).map(c=>`<i class="sq ${c==='W'?'w':c==='L'?'l':''}" title="${c}"></i>`).join('');
-  function formCard(t,opp){
+  function formCard(t){
     const f=form(t),gp=Math.max(1,f.w+f.l+f.t);
     const bySlate=(()=>{const g=gameOf(t,G.week);if(!g)return '';const sl=g[GM.slate];
       const rows=(BET.games||[]).filter(x=>x.result!=null&&(x.away_team===t||x.home_team===t));
@@ -3933,34 +3938,44 @@ function gameView(){
     const key=$('#gvGame').value,src=$('#gvSrc').value,wk=G.week;if(!key)return;
     const [vis,home]=key.split('@');
     const g=GAMES(wk).find(x=>x[GM.vis]===vis&&x[GM.home]===home);
-    if(!g){$('#gvBody').innerHTML='<p class="note">that game is not on this week’s slate</p>';return}
+    if(!g){$('#gvBody').innerHTML='<p class="note">that game is not on this week\u2019s slate</p>';return}
     const D=J.dvp[src]||{};
-    const sect=(id,title,sub,body)=>`<section class="gvsec" id="gv_${id}"><h3>${title}${sub?` <span class="f">${sub}</span>`:''}</h3>${body}</section>`;
-    const two=(a,b)=>`<div class="gv2">${a}${b}</div>`;
     const se=(IN_SE&&IN_SE[0])||SE_NOW;
-    const haveIntel=!!(GV.intelOff&&IN.off[se]&&IN.off[se][vis]);
     const mk=market(vis,home,wk);
+    /* the deep views are built only when you open one — the Intel drills alone are a few
+       thousand pixels of season tables, and nobody opens four of them at once */
+    const LAZY={
+      depth:()=>GV.dcSide?`<div class="gvpair">${GV.dcSide(vis)}</div><div class="gvpair">${GV.dcSide(home)}</div>`
+                        :'<p class="note">no depth chart on file</p>',
+      scheme:()=>(GV.intelOff&&IN.off[se]&&IN.off[se][vis])
+        ?`<div class="gvpair"><h4>${vis} offense vs ${home} defense</h4>${GV.intelOff(vis,se)}${GV.intelDef(home,se)}</div>
+          <div class="gvpair"><h4>${home} offense vs ${vis} defense</h4>${GV.intelOff(home,se)}${GV.intelDef(vis,se)}</div>`
+        :'<p class="note">no charted scheme data for this league</p>',
+      form:()=>`<div class="gv2">
+          <div class="panel"><h4>${tcell(vis)} <span class="mini">form</span></h4>${formCard(vis)}
+            <h4>${tcell(home)} <span class="mini">defense — weekly</span></h4>${trend(home)}</div>
+          <div class="panel"><h4>${tcell(home)} <span class="mini">form</span></h4>${formCard(home)}
+            <h4>${tcell(vis)} <span class="mini">defense — weekly</span></h4>${trend(vis)}</div></div>`,
+      story:()=>storyBlock(g,wk,{limit:40})||'<p class="note">nothing flagged for this one</p>'
+    };
+    const det=(id,title,sub)=>`<details class="gvd" data-k="${id}"><summary>${title}${sub?` <span class="f">${sub}</span>`:''}</summary><div class="gvdb"></div></details>`;
     $('#gvBody').innerHTML=
-      sect('card','matchup','both offenses against the defense they face · '+src,
-        GV.card?GV.card(g,D):'<p class="note">the Matchups card is unavailable</p>')
-     +sect('depth','depth charts','who actually holds each spot this week, offense and defense',
-        GV.dcSide?`<div class="gvpair">${GV.dcSide(vis)}</div><div class="gvpair">${GV.dcSide(home)}</div>`:'<p class="note">no depth chart on file</p>')
-     +sect('scheme','scheme & personnel','how each unit plays, what changed, and who turned over · '+se,
-        haveIntel?`<div class="gvpair"><h4>${vis} offense vs ${home} defense</h4>${GV.intelOff(vis,se)}${GV.intelDef(home,se)}</div>
-                   <div class="gvpair"><h4>${home} offense vs ${vis} defense</h4>${GV.intelOff(home,se)}${GV.intelDef(vis,se)}</div>`
-                 :'<p class="note">no charted scheme data for this league</p>')
-     +sect('form','form & trend','records, venue and this slate · then what each defense has been giving up',
-        two(`<div class="panel"><h4>${tcell(vis)} <span class="mini">form</span></h4>${formCard(vis,home)}
-              <h4>${tcell(home)} <span class="mini">defense — weekly</span></h4>${trend(home)}</div>`,
-            `<div class="panel"><h4>${tcell(home)} <span class="mini">form</span></h4>${formCard(home,vis)}
-              <h4>${tcell(vis)} <span class="mini">defense — weekly</span></h4>${trend(vis)}</div>`))
-     +sect('market','market','the number, the model, and the gap',
-        two(`<div class="panel"><h4>game lines</h4>${mk.lines}</div>`,
-            `<div class="panel"><h4>player markets <span class="mini">biggest disagreements</span></h4>${mk.props}</div>`))
-     +sect('story','storylines','rivalries, revenge, homecomings, alumni',
-        (storyBlock(g,wk,{limit:40})||'<p class="note">nothing flagged for this one</p>'));
+      (GV.card?GV.card(g,D):'<p class="note">the Matchups card is unavailable</p>')
+     +`<div class="gv2 gvmkt">
+         <div class="panel"><h4>market <span class="mini">the number, the model, the gap</span></h4>${mk.lines}</div>
+         <div class="panel"><h4>edges <span class="mini">this game's player markets by EV</span></h4>${mk.props}</div></div>`
+     +`<div class="gvdeep">${det('depth','depth charts','both sides, offense and defense')}
+        ${det('scheme','scheme &amp; personnel',`how each unit plays · ${se}`)}
+        ${det('form','form &amp; trend','records, venue, ATS · what each defense is giving up')}
+        ${det('story','storylines','rivalries, revenge, homecomings, alumni')}</div>`;
+    $('#gvBody').querySelectorAll('details.gvd').forEach(d=>d.ontoggle=()=>{
+      if(!d.open)return;const box=d.querySelector('.gvdb');if(box.dataset.done)return;
+      box.dataset.done='1';
+      try{box.innerHTML=LAZY[d.dataset.k]()}catch(err){box.innerHTML='<p class="note">could not build this section</p>';console.error(err)}
+      if(typeof logoize==='function')logoize(box);
+      box.querySelectorAll('.plink[data-p],.pp[data-p]').forEach(n=>n.onclick=()=>playerPop(n.dataset.p));
+    });
     if(typeof logoize==='function')logoize($('#gvBody'));
-    if(typeof sortableAll==='function')try{sortableAll($('#gvBody'))}catch(_){}
     $('#gvBody').querySelectorAll('.plink[data-p],.pp[data-p]').forEach(n=>n.onclick=()=>playerPop(n.dataset.p));
   }
   $('#gvGame').onchange=draw;$('#gvSrc').onchange=draw;
