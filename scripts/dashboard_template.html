@@ -715,37 +715,38 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 #crumb{flex:1}
 .standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
 /* ---------- TEST (F6) ---------- */
-/* the six DvP bands as classes, written in rgba so the theme mapper re-levels them */
-.lgt td.hb{text-align:center;font:600 10.5px var(--mono);letter-spacing:-.3px;padding:3px 2px}
-.lgt td.b1{background:rgba(39,135,80,.9);color:#eafff1}
-.lgt td.b2{background:rgba(40,88,66,.9);color:#d6f0e2}
-.lgt td.b3{background:rgba(48,50,54,.9);color:#d8d9dd}
-.lgt td.b4{background:rgba(34,35,38,.9);color:#c9cace}
-.lgt td.b5{background:rgba(109,56,48,.9);color:#ffdfd9}
-.lgt td.b6{background:rgba(161,53,45,.9);color:#ffe4e0}
-.lgt td.b0{color:var(--dim2)}
-
+/* These tables are the Matchup Lab's own styling: same header band, same sticky rows, same
+   tinted rank pill from gradeStyle(), same hover tints. The one departure is that a cell
+   carries the allowed-per-game number INSIDE the pill instead of value + separate badge,
+   which is what lets four or five columns sit side by side without scrolling. */
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
 .lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
- font:700 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+ font:600 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
 .lgcol>h3 .f{font:400 10px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
 .lgcol>div{max-height:72vh;overflow-y:auto;overflow-x:hidden}
-table.lgt{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11px}
-table.lgt td:first-child,table.lgt th:first-child{overflow:hidden;text-overflow:ellipsis}
-table.lgt col.num{width:var(--nw,42px)}
-table.lgt .badge{padding:0 2px;font-size:9px;min-width:0;letter-spacing:0}
-.lgrid.td5 table.lgt td{padding:3px 3px}
-.lgrid.td5 table.lgt th{padding:5px 3px}
-table.lgt td .ov{margin-right:3px}
-table.lgt th{position:sticky;top:0;z-index:1;background:var(--s2);text-align:left;padding:5px 4px;cursor:pointer;overflow:hidden;
- font:600 9.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--edge);white-space:nowrap}
-table.lgt th:hover{color:var(--txt)}
-table.lgt td{padding:3px 4px;border-bottom:1px solid var(--edge);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
-table.lgt th:nth-child(n+3),table.lgt td:nth-child(n+3){text-align:right}
+table.lgt{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11.5px}
+table.lgt tr.grp th{position:sticky;top:0;z-index:3;font:600 9.5px/1.2 var(--ui);letter-spacing:.1em;
+ text-transform:uppercase;color:var(--dim2);text-align:center;background:var(--s2);cursor:default;
+ border-bottom:1px solid var(--edge);border-left:1px solid var(--edge2);padding:4px 6px;overflow:hidden}
+table.lgt tr.grp th.g0{text-align:left;background:var(--s2);border-left:0}
+table.lgt tr.grp th.op{color:var(--accent-text)}
+table.lgt tr.grp th.md{color:var(--dim)}
+table.lgt tr.hd th{position:sticky;top:21px;z-index:2;cursor:pointer;color:var(--dim);background:var(--panel);
+ font:600 10px/1.3 var(--ui);letter-spacing:.08em;text-transform:uppercase;text-align:left;
+ border-bottom:1px solid var(--edge2);padding:4px 5px;overflow:hidden}
+table.lgt tr.hd th:hover{color:var(--txt)}
+table.lgt th.op,table.lgt th.md{text-align:right}
+table.lgt td{padding:2px 5px;border-bottom:1px solid var(--edge);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.lgt td.op,table.lgt td.md{text-align:right}
+table.lgt td.md{color:var(--dim)}
 table.lgt tbody tr:hover td{background:var(--s2)}
-table.lgt td .ov{font:600 11px var(--mono);margin-right:4px}
+table.lgt tbody tr:hover td.op{background:rgba(232,179,57,.05)}
+table.lgt th.gs,table.lgt td.gs{border-left:2px solid var(--edge2)}
+table.lgt .badge{display:inline-block;min-width:0;padding:0 4px;text-align:center;
+ font:600 10.5px/1.55 var(--mono);border-radius:3px;letter-spacing:0}
+table.lgt .psi{font-weight:600;font:600 10.5px var(--mono)}
 @media(max-width:1760px){.lgrid.td5{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:1500px){.lgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:1180px){.lgrid.td5{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -778,6 +779,7 @@ table.lgt td .ov{font:600 11px var(--mono);margin-right:4px}
  font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
 .gvpane>h4 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:7px}
 table.gvt{margin-bottom:2px;table-layout:fixed;width:100%}
+table.gvt tr.hd th{top:0}
 
 table.gvt th:first-child,table.gvt td:first-child{width:35%}
 table.gvt th:nth-child(2),table.gvt td:nth-child(2){width:12%}
@@ -3690,10 +3692,13 @@ function tRows(pos,src,o){
 /* allowed-per-game, compact: whole numbers wherever a whole number still says it,
    one decimal only where rounding would collapse the value to 0 */
 const tNum=v=>v==null?'':Math.abs(v)>=10?Math.round(v).toString():Math.abs(v)>=1?(+v).toFixed(1):(+v).toFixed(2).replace(/^0/,'');
-const tBand=r=>r==null?'b0':r<=5*RS?'b1':r<=10*RS?'b2':r<=16*RS?'b3':r<=21*RS?'b4':r<=27*RS?'b5':'b6';
 /* one cell: the number, tinted by where that rank sits among the defenses */
-const tCell=(v,r,tip)=>v==null?'<td class="hb b0">\u00b7</td>'
-  :`<td class="hb ${tBand(r)}" title="${esc(tip||'')}${r==null?'':' \u00b7 rank '+(+r).toFixed(+r%1?1:0)+' of '+NT}">${tNum(v)}</td>`;
+const tCell=(v,r,tip)=>v==null?'<td class="op"><span class="dim">\u00b7</span></td>'
+  :`<td class="op" title="${esc(tip||'')}${r==null?'':' \u00b7 rank '+(+r).toFixed(+r%1?1:0)+' of '+NT}">`
+   +`<span class="badge" style="${r==null?'':gradeStyle(+r)}">${tNum(v)}</span></td>`;
+const tPsi=v=>v==null?'<td class="md"><span class="dim">\u00b7</span></td>'
+  :`<td class="md" title="mean of the opponent's ranks across this slot's stats \u00b7 1 = softest">`
+   +`<span class="psi" style="color:${gradeColor(+v)}">${Math.round(v)}</span></td>`;
 const tSortVal=(x,k,asc)=>k==='psi'?(x.psi==null?99:x.psi)
   :k==='player'?x.u.player:k==='team'?x.u.team:k==='opp'?(x.opp||'zzz'):k==='kick'?x.kickord
   :k[0]==='r'?(x.ranks[+k.slice(1)]==null?(asc?99:-1):x.ranks[+k.slice(1)])
@@ -3719,17 +3724,21 @@ function labGrid(){
     R.sort((a,b)=>{const x=tSortVal(a,st.k,st.a),y=tSortVal(b,st.k,st.a);return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     const heads=LABDEF[p].heads,sample=LABDEF[p].stats(tKey(p));
     $('#lgN'+p).textContent=R.length+(R.length===1?' player':' players');
-    const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const nstat=heads.length+1, wname=Math.max(25,45-nstat*3), wopp=14, wnum=((100-wname-wopp)/nstat).toFixed(2);
+    const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    const nstat=heads.length+1, wname=Math.max(25,45-nstat*3), wopp=15, wnum=((100-wname-wopp)/nstat).toFixed(2);
     $('#lgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%"><col style="width:${wopp}%">${
-      Array.from({length:nstat},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead><tr>
+      Array.from({length:nstat},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead>
+      <tr class="grp"><th class="g0" colspan="2">player</th>
+        <th class="op" colspan="${heads.length}">allows / game · rank of ${NT}</th>
+        <th class="md">model</th></tr>
+      <tr class="hd">
       ${th('player','Player')}${th('opp','Opp',"this week's opponent")}
-      ${heads.map((h,i)=>th('r'+i,h.split('*').join(''),sample[i]+' allowed per game to this slot · badge = rank of '+NT)).join('')}
-      ${th('psi','Ψ',"mean of the opponent's ranks across this slot's stats · 1 = softest")}</tr></thead><tbody>
+      ${heads.map((h,i)=>th('r'+i,h.split('*').join(''),sample[i]+' allowed per game to this slot · the pill is its rank of '+NT,'op'+(i===0?' gs':''))).join('')}
+      ${th('psi','Ψ',"mean of the opponent's ranks across this slot's stats · 1 = softest",'md gs')}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
         <td>${oppcell(x.oppRaw)}</td>
-        ${x.stats.map((c,i)=>tCell(x.raws[i],x.ranks[i],c)).join('')}
-        <td class="hb ${tBand(x.psi)}">${x.psi==null?'\u00b7':(+x.psi).toFixed(0)}</td></tr>`).join('')
+        ${x.stats.map((c,i)=>tCell(x.raws[i],x.ranks[i],c).replace('class="op"','class="op'+(i===0?' gs':'')+'"')).join('')}
+        ${tPsi(x.psi).replace('class="md"','class="md gs"')}</tr>`).join('')
         ||`<tr><td colspan="${heads.length+3}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $('#lgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=(h.dataset.k==='psi'||h.dataset.k[0]==='r'||h.dataset.k==='player'||h.dataset.k==='team'||h.dataset.k==='opp')}col(p)});
@@ -3779,17 +3788,22 @@ function tdGrid(){
       else{x=tSortVal(a,st.k,st.a);y=tSortVal(b,st.k,st.a)}
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     $('#tgN'+p).textContent=R.length+(R.length===1?' player':' players');
-    const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const ncol=srcs.length+1, wname=p==='ALL'?25:29, wpos=p==='ALL'?6:0, wopp=16, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
+    const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    const ncol=srcs.length+1, wname=p==='ALL'?24:28, wpos=p==='ALL'?6:0, wopp=17, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
     $('#tgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
-      Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead><tr>
+      Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead>
+      <tr class="grp"><th class="g0" colspan="${p==='ALL'?3:2}">player</th>
+        <th class="op" colspan="${srcs.length}">TDs allowed to his slot \u00b7 rank of ${NT}</th>
+        <th class="md">\u03bc</th></tr>
+      <tr class="hd">
       ${th('player','Player')}${p==='ALL'?th('pos','')  :''}${th('opp','Opp')}
             ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot \u00b7 '+s+' \u00b7 rank of '+NT)).join('')}
       ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
         ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
-        ${x.cells.map((v,i)=>`<td class="hb ${tBand(v)}" title="${srcs[i]}${v==null?'':' · rank '+v.toFixed(v%1?1:0)+' of '+NT}">${v==null?'·':Math.round(v)}</td>`).join('')}
-        <td class="hb ${tBand(x.mu)}" title="mean rank across the data sets">${x.mu==null?'·':Math.round(x.mu)}</td></tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+        ${x.cells.map((v,i)=>v==null?`<td class="op${i===0?' gs':''}"><span class="dim">·</span></td>`
+          :`<td class="op${i===0?' gs':''}" title="${srcs[i]} · rank ${v.toFixed(v%1?1:0)} of ${NT}"><span class="badge" style="${gradeStyle(v)}">${Math.round(v)}</span></td>`).join('')}
+        ${tPsi(x.mu).replace('class="md"','class="md gs"')}</tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $('#tgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=true}col(p)});
     tWire($('#tgB'+p));
@@ -3864,8 +3878,8 @@ function gameView(){
           x.stats.forEach((c,i)=>{const k=uIdx(c);if(k>=0){V[k]=x.raws[i];K[k]=x.ranks[i]}});
           return `<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
             <td>${slotchip(x.u.dslot)}</td>
-            ${UC.map((u,i)=>tCell(V[i],K[i],u[1])).join('')}
-            <td class="hb ${tBand(x.psi)}">${x.psi==null?'\u00b7':(+x.psi).toFixed(0)}</td></tr>`}).join('')}).join('');
+            ${UC.map((u,i)=>tCell(V[i],K[i],u[1]).replace('class="op"','class="op'+(i===0?' gs':'')+'"')).join('')}
+            ${tPsi(x.psi).replace('class="md"','class="md gs"')}</tr>`}).join('')}).join('');
       return body?`<table class="lgt gvt"><thead><tr><th>Player</th><th>Slot</th>
         ${UC.map(u=>`<th title="${esc(u[1])}">${u[0]}</th>`).join('')}
         <th title="mean of the opponent's ranks across this slot's stats \u00b7 1 = softest">\u03A8</th></tr></thead><tbody>${body}</tbody></table>`:''})();
