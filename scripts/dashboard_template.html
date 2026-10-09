@@ -754,6 +754,8 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .bbfull>summary{cursor:pointer;list-style:none}.bbfull>summary::-webkit-details-marker{display:none}
 
 .pintro{display:flex;flex-direction:column;gap:5px;padding:5px 10px;margin:0 0 9px;background:var(--panel);border:1px solid var(--edge);border-left:3px solid var(--acc);border-radius:8px}.pintro .pw{font-size:12.5px;color:var(--txt);line-height:1.45}.pintro .pw b{color:var(--acc)}.pintro .ph{display:flex;flex-wrap:wrap;gap:4px 6px}.pintro .ph span{font:500 10.5px/1.5 var(--mono);color:var(--dim);background:var(--s2);border:1px solid var(--edge);border-radius:4px;padding:0 7px}
+#tdFields>h3{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+#tdFields>h3>select{margin-left:auto;font:500 11px var(--ui,inherit);padding:2px 6px}
 .pintro.key{border-left-width:1px;background:transparent;border-color:transparent;padding:0;margin:0 0 8px}
 #crumb:empty{display:none}
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb{display:block}.hint.fi.blk:hover .hb{display:block}
@@ -765,7 +767,7 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
    carries the allowed-per-game number INSIDE the pill instead of value + separate badge,
    which is what lets four or five columns sit side by side without scrolling. */
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
-.lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.lgrid.td5{grid-template-columns:1.32fr repeat(4,minmax(0,1fr))}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
  font:600 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
@@ -877,7 +879,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgrid" hidden></div></div>
+<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1120,7 +1122,7 @@ const SECTIONS=[
  {id:'match',fk:'F2',label:'Matchups',items:[
    {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
-   {id:'tdboard',label:'TD Board',desc:'touchdown rates, TD matchups, red-zone roles, the Kalshi anytime price',c:'tdb'}]},
+   {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
    {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
@@ -1138,8 +1140,7 @@ const SECTIONS=[
    {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]},
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
-   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
-   {id:'tdgrid',label:'TD Grid',desc:'touchdowns five ways — one cumulative board plus QB, RB, WR and TE, each showing the opponent\'s TD-allowed rank for every data set',c:'test',sub:'tdgrid'}]}];
+   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1155,7 +1156,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['labgrid','gameview','tdgrid'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
+  if(it.c==='test'){['labgrid','gameview'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1166,7 +1167,7 @@ const INTRO={
  fantasy:{how:['DK = projected DraftKings points (PPR scoring, +3 for 300 passing yards)','$k = DraftKings salary in thousands · v$ = projected points per $1,000 · M = mean opponent rank across his markets, 1 = softest','every lineup obeys the DK Classic rules and the $50,000 cap, and is the exact optimum under them','players who barely play are filtered out']},
  projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
- tdboard:{what:'Touchdowns. Who scores, how often, and which end zones are softest this week.',how:['TD/gm = his touchdowns per game','rank 1 = the defense allows the most touchdowns to that slot','model % = our probability of a touchdown this week']},
+ tdboard:{how:['the fields pane gives the two softest end zones for each role this week and the one to avoid','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','a QB has two TD-allowed stats \u2014 pick which one his column reads; they often point opposite ways','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
  scheme:{what:'How every defense and offense plays — coverage, blitz, pace, personnel — and what that style gives up to each position.',how:['+8 = that type of defense gives up 8% more fantasy points than average to the position','trust = how far last season\'s profile still describes this unit','click a row for the full profile and what changed']},
@@ -1177,7 +1178,7 @@ const INTRO={
  pkhome:{what:'Every position the model has frozen, graded against the line it was frozen at — the record, where it comes from, whether the edge means anything, and what has changed.',how:['a position risks one unit; a win at \u2212110 returns 0.909, so 52.4% is break-even','the edge buckets answer the only question that matters: does disagreeing more with the market win more?','skill is the model\u2019s improvement over predicting a player\u2019s own season average \u2014 under 2 is noise','nothing here is a projection; it is the scored record, and the slate filter narrows it']},
  labgrid:{what:'The Matchup Lab dealt into four columns — QB, RB, WR, TE — showing only what the opponent allows per game to that slot, so you can read the whole slate across positions at once.',how:['rank 1 of 32 = the defense allows the MOST to that slot (the best matchup)','one data set drives all four columns; change it once at the top','every column sorts on its own — click a header inside a column','click a name for his card']},
  gameview:{what:'One game: the Matchups card, then the market with the model\u2019s disagreement beside it. The deeper views \u2014 depth charts, scheme and personnel, form and defensive trend, storylines \u2014 wait behind the four strips at the bottom.',how:['the card and the strips are the live Matchups, Depth Charts and Intel views \u2014 the same numbers, not copies','a strip builds the first time you open it, so the page stays light','left column is the away side, right is the home side']},
- tdgrid:{what:'Touchdowns, five columns: one board of every slot owner, then QB, RB, WR and TE on their own.',how:['the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 = allows the most touchdowns = the best end-zone matchup','columns sort independently']},
+
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
 function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML='';
   let el=$('#pageIntro');if(!el){el=document.createElement('div');el.id='pageIntro';const m=$('main');m.insertBefore(el,m.firstChild)}
@@ -2208,129 +2209,43 @@ function dchart(){
 }
 /* ---------- TD Board: composite TD rankings, all players ---------- */
 var tdChart,psChart;
+/* ---------- TD BOARD: the softest end zone per role, then touchdowns five ways ----------
+   The old board's scatter panels drew into #psCanvas / #tdCanvas, which no markup has carried
+   for some time, and its one long table has been superseded by the five-column grid below. What
+   survives is the fields-by-role pane — the only thing that answered "where is the end zone soft
+   this week" in one glance — sitting on top of the grid. */
 function tdboard(){
-  $('#tdb').innerHTML=`<div class="controls">
-   <select id="tdSlot"><option value="core" selected>core slots (top WR4 only)</option><option value="">every body (WR5, WR6...)</option>
-     <option>QB</option><option>RB1</option><option>RB2</option><option>WR1</option><option>WR2</option><option>WR3</option><option>WR4+</option><option>TE1</option><option>TE2</option></select>
-   <span class="note">composite TD matchup — every slot owner ranked by the TDs his opponent surrenders to his role &middot; QB score = mean of PaTD + QB rush/rec TD ranks &middot; rank 1 = most TDs allowed = best TD matchup</span></div>
-   <div id="tdKpi"></div>
-   <div class="panel" id="tdFields"></div><div id="tdCands" hidden></div>
-   <div id="tdTbl"></div>`;
-  /* TD phase space: defense-level scatter of the TD rankings (static across weeks) */
-  (function(){
-    const acc={};
-    J.logs.forEach(l=>{const d=l[LOG.opp];const a=acc[d]=acc[d]||{air:0,gnd:0,g:new Set()};
-      a.air+=l[LOG.ptd];a.gnd+=l[LOG.rtd];a.g.add(l[LOG.season]+'-'+l[LOG.week]);});
-    const ps=Object.keys(acc).map(d=>({t:d,x:+(acc[d].air/acc[d].g.size).toFixed(2),y:+(acc[d].gnd/acc[d].g.size).toFixed(2)}));
-    const XM2=mean(ps.map(p2=>p2.x)),YM2=mean(ps.map(p2=>p2.y));
-    const equip={id:'equip',afterDraw(ch){const x2=ch.scales.x,y3=ch.scales.y;if(!x2||!y3)return;
-      const ctx=ch.ctx;ctx.save();
-      ctx.strokeStyle='rgba(77,208,225,.20)';ctx.setLineDash([4,5]);ctx.font='9px monospace';ctx.fillStyle='rgba(77,208,225,.55)';
-      [1.6,2.0,2.4,2.8].forEach(c2=>{
-        const xa=Math.max(x2.min,c2-y3.max),xb=Math.min(x2.max,c2-y3.min);
-        if(xa<xb){ctx.beginPath();ctx.moveTo(x2.getPixelForValue(xa),y3.getPixelForValue(c2-xa));
-          ctx.lineTo(x2.getPixelForValue(xb),y3.getPixelForValue(c2-xb));ctx.stroke();
-          ctx.fillText('\u03a3'+c2.toFixed(1),x2.getPixelForValue(xb)-26,y3.getPixelForValue(c2-xb)-4);}});
-      ctx.strokeStyle='rgba(230,230,230,.18)';ctx.setLineDash([5,5]);
-      ctx.beginPath();ctx.moveTo(x2.getPixelForValue(XM2),y3.top);ctx.lineTo(x2.getPixelForValue(XM2),y3.bottom);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(x2.left,y3.getPixelForValue(YM2));ctx.lineTo(x2.right,y3.getPixelForValue(YM2));ctx.stroke();
-      ctx.restore();}};
-    if(psChart)psChart.destroy();
-    psChart=$('#psCanvas')&&new Chart($('#psCanvas'),{type:'scatter',
-      data:{datasets:[{data:ps,parsing:false,pointStyle:ps.map(p2=>logoPt(p2.t,19)),borderColor:'transparent'}]},
-      options:{maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:c2=>`${c2.raw.t}: ${c2.raw.x} air &middot; ${c2.raw.y} ground TD/gm — \u03a3 ${(c2.raw.x+c2.raw.y).toFixed(2)}`.replace(/&middot;/g,'·')}}},
-      scales:{x:{title:{display:true,text:'passing TDs allowed /gm',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}},
-        y:{title:{display:true,text:'rushing TDs allowed /gm',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}}}},
-      plugins:[equip]});
-  })();
-  function render(){
-    const wk=G.week,sc=$('#tdSlot').value,D=J.dvp.combined;
+  $('#tdb').innerHTML=`<div class="panel" id="tdFields"></div><div id="tdgrid"></div>`;
+  /* the slot filter lives in the pane it drives, so the page carries one controls bar, not two */
+  const SLOTS=['core','','QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
+  const SLOTL={core:'core slots (top WR4 only)','':'every body (WR5, WR6...)'};
+  let tdSc='core';
+  function fields(){
+    const wk=G.week,sc=tdSc,D=J.dvp.combined;
     const groups=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
     const rows=[];
-    const lg={};groups.forEach(g=>{const arr=Object.keys(D).map(t=>g==='QB'?D[t].stats['P TD'].avg+D[t].stats['QB TD'].avg:D[t].stats[g+' TD'].avg);lg[g]={mx:Math.max(...arr),av:mean(arr)}});
     groups.forEach(g=>{
       if(sc&&sc!=='core'&&g!==sc)return;
       UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&u.slot===(g==='QB'?'QB1':g)).forEach(u=>{
-      if(!inP(posOf(g)))return;
-      if(!inU(u))return;
-      if(sc==='core'&&g==='WR4+'&&u.dslot!=='WR4')return;
-      if(sc==='core'&&g==='TE2'&&u.depth>2)return;
-      const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
-      const def=o.replace('@','');const d=D[def];if(!d)return;
-      let cols,score;
-      let meas;
-      if(g==='QB'){cols=[['PaTD',d.stats['P TD']],['ruTD',d.stats['QB TD']]];
-        score=(d.stats['P TD'].rank+d.stats['QB TD'].rank)/2;meas=d.stats['P TD'].avg+d.stats['QB TD'].avg;}
-      else{cols=[['TD',d.stats[g+' TD']]];score=d.stats[g+' TD'].rank;meas=d.stats[g+' TD'].avg;}
-      rows.push({u,g,o,def,cols,score,meas});});});
-    rows.sort((a,b)=>a.score-b.score);
-    /* collider scatter: x = TD matchup rank (reversed), y = player's own TDs/gm 2025 */
-    const plot=rows.slice(0,130).map(r=>{
-      const Ls=PLOGS[r.u.ln||r.u.player]||[];
-      const y2=Ls.length?mean(Ls.map(l=>l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd])):0;
-      return {x:r.score,y:+y2.toFixed(2),t:r.u.player,tm:r.u.team,g:r.g};});
-    const YM=mean(plot.map(p2=>p2.y));
-    if(tdChart)tdChart.destroy();
-    const quad={id:'quad',afterDraw(ch){const x2=ch.scales.x,y3=ch.scales.y;if(!x2||!y3)return;
-      const ctx=ch.ctx;ctx.save();
-      ctx.strokeStyle='rgba(230,230,230,.22)';ctx.setLineDash([5,5]);
-      ctx.beginPath();ctx.moveTo(x2.getPixelForValue(MID),y3.top);ctx.lineTo(x2.getPixelForValue(MID),y3.bottom);ctx.stroke();
-      ctx.beginPath();ctx.moveTo(x2.left,y3.getPixelForValue(YM));ctx.lineTo(x2.right,y3.getPixelForValue(YM));ctx.stroke();
-      ctx.setLineDash([]);ctx.font='10px monospace';
-      ctx.fillStyle='rgba(0,200,83,.75)';ctx.textAlign='right';
-      ctx.fillText('scorers in soft matchups',x2.right-8,y3.top+14);
-      ctx.fillStyle='rgba(125,125,125,.7)';ctx.textAlign='left';
-      ctx.fillText('PROVEN, BUT WALLED OFF',x2.left+8,y3.top+14);
-      ctx.fillText('DEAD ZONE',x2.left+8,y3.bottom-8);
-      ctx.fillStyle='rgba(77,208,225,.75)';ctx.textAlign='right';
-      ctx.fillText('OPEN FIELD, UNPROVEN',x2.right-8,y3.bottom-8);
-      ctx.restore();}};
-    tdChart=$('#tdCanvas')&&new Chart($('#tdCanvas'),{type:'scatter',
-      data:{datasets:[{data:plot,parsing:false,pointStyle:plot.map(p2=>logoPt(p2.tm,17)),borderColor:'transparent'}]},
-      options:{maintainAspectRatio:false,plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:c2=>`${c2.raw.t} (${c2.raw.g}) — TD field rank ${c2.raw.x} · ${c2.raw.y} TD/gm ${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)}`}}},
-      scales:{x:{reverse:true,title:{display:true,text:'TD matchup rank (right = opponent allows the most TDs)',color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}},
-        y:{title:{display:true,text:`player TDs per game (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})`,color:'#7d7d7d',font:{family:'monospace',size:10}},ticks:{color:'#5d7186'},grid:{color:'#141414'}}}},
-      plugins:[quad]});
-    const tdOwn=u=>{const L=PLOGS[u.ln||u.player]||[];const Lc=L.filter(l=>l[LOG.season]===LAST_SE);const f=a=>a.length?mean(a.map(l=>l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd])):null;
-      const sv=f(Lc),cv=f(L);if(sv==null&&cv==null)return '<span class="dim">—</span>';
-      return `<b>${sv==null?'—':sv.toFixed(2)}</b> <span class="mini">${cv==null?'—':cv.toFixed(2)} · ${Lc.length}/${L.length} gp</span>`};
-    // ---- v3: fields by role, candidate cards, KPI strip ----
-    // own = all TDs (QB incl. passing, matching the QB TD score); any = rush + rec only (what an anytime-TD ticket pays)
-    const ownTD=u=>{const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE);const f=(a,any)=>a.length?mean(a.map(l=>(any?0:l[LOG.ptd])+l[LOG.rtd]+l[LOG.rectd])):null;return {s:f(Lc),c:f(L),as:f(Lc,1),ac:f(L,1),gs:Lc.length,gc:L.length}};
-    rows.forEach(r=>{r.own=ownTD(r.u);const rate=r.own.gs>=2?r.own.as:(r.own.ac??0);const fld=r.g==='QB'?D[r.def].stats['QB TD'].avg/Math.max(.02,mean(Object.keys(D).map(t=>D[t].stats['QB TD'].avg))):r.meas/Math.max(.05,lg[r.g].av);r.z=(rate||0)*fld});
+        if(!inP(posOf(g)))return;
+        if(!inU(u))return;
+        if(sc==='core'&&g==='WR4+'&&u.dslot!=='WR4')return;
+        if(sc==='core'&&g==='TE2'&&u.depth>2)return;
+        const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return;
+        const def=o.replace('@','');const d=D[def];if(!d)return;
+        const score=g==='QB'?(d.stats['P TD'].rank+d.stats['QB TD'].rank)/2:d.stats[g+' TD'].rank;
+        const meas=g==='QB'?d.stats['P TD'].avg+d.stats['QB TD'].avg:d.stats[g+' TD'].avg;
+        rows.push({u,g,o,def,score,meas})})});
     const byRole=groups.filter(g=>inP(posOf(g))&&(!sc||sc==='core'||g===sc)).map(g=>{const rr=rows.filter(r=>r.g===g).sort((a,b)=>a.score-b.score);if(!rr.length)return '';
       const cell=r=>`<td style="text-align:left;white-space:nowrap" title="${r.def} allows ${r.meas.toFixed(2)} TD/gm to ${r.g}"><span class="pp plink" data-p="${r.u.player}">${esc(pshort(r.u.player))}</span> <span class="mini">${r.o[0]==='@'?'@':'vs'}</span> ${tcell(r.def)} ${badge(r.score)}</td>`;
       return `<tr><td>${slotchip(g)}</td>${rr.slice(0,2).map(cell).join('')}${rr.length<2?'<td></td>':''}<td style="border-left:1px solid var(--edge2)"></td>${cell(rr[rr.length-1])}</tr>`}).join('');
-    $('#tdFields').innerHTML=`<h3>TD fields by role <span class="f">the two softest end zones for each role this week (hover for the opponent's TDs allowed /gm) and the one to avoid · badge = league rank, 1 = most TDs allowed</span></h3>
-      <table><thead><tr><th>role</th><th style="text-align:left;color:var(--green)">softest</th><th style="text-align:left">2nd</th><th></th><th style="text-align:left;color:var(--red)">hardest</th></tr></thead><tbody>${byRole}</tbody></table>`;
-    const cands=[...rows].filter(r=>r.own.gc>=3).sort((a,b)=>b.z-a.z).slice(0,12);
-    const tdp={};(BT11.td||[]).forEach(t=>tdp[t.player+'|'+t.team]=t);
-    $('#tdCands').innerHTML=`<h3>anytime TD board <span class="f">his rush + receiving TD rate × how soft the end zone is this week · big = TD/gm this season (small: all seasons) · model % = reference only</span></h3>
-      <div class="tdcards">${cands.map(r=>{const t=tdp[r.u.player+'|'+r.u.team];const id=(J.ph||{})[r.u.player];
-        return `<div class="tdc pp" data-p="${r.u.player}" style="border-left:3px solid ${vividC(r.u.team)}">
-          <span class="r11f" style="width:40px;height:40px;border-color:${vivid(r.u.team)};background-image:url(${LOGO(r.u.team)})">${id?`<img src="${HEAD(id)}" alt="">`:''}</span>
-          <span style="min-width:0"><span class="nm">${esc(r.u.player)}</span><span class="sb">${slotchip(r.g)} ${r.o[0]==='@'?'@':'vs'} ${tcell(r.def)}</span><span class="sb">allows ${r.meas.toFixed(2)} TD/gm ${badge(r.score)}${(()=>{const k=(typeof KL!=='undefined')&&(KL[r.u.player+'|'+r.u.team+'|anytime_td']||KL[(r.u.ln||r.u.player)+'|'+r.u.team+'|anytime_td']);return k?` · <span title="Kalshi anytime-TD mid price (bid ${k.p_bid} / ask ${k.p_ask})" style="color:var(--acc)">K ${(100*+k.p_mid).toFixed(0)}%</span>`:''})()}</span></span>
-          <span class="big">${(r.own.gs>=2?r.own.as:r.own.ac).toFixed(2)}<small>${r.own.ac!=null?r.own.ac.toFixed(2)+' all':''}${t&&t.p!=null?` · mdl ${(100*t.p).toFixed(0)}%`:''}</small></span></div>`}).join('')||'<p class="note">no players in the current filter</p>'}</div>`;
-    const soft=[...rows].sort((a,b)=>a.score-b.score)[0],hard=[...rows].sort((a,b)=>b.score-a.score)[0],hot=[...rows].filter(r=>r.own.gs>=2).sort((a,b)=>b.own.s-a.own.s)[0];
-    $('#tdKpi').innerHTML=`<div class="kpis">${kpi('players on the board',rows.length,`wk ${wk} · ${sc==='core'?'core slots':sc||'every slot'}`)}
-      ${soft?kpi('softest end zone',`${soft.def} vs ${soft.g}`,`${soft.meas.toFixed(2)} TD/gm allowed · ${esc(pshort(soft.u.player))}`,'g'):''}
-      ${hard?kpi('hardest end zone',`${hard.def} vs ${hard.g}`,`${hard.meas.toFixed(2)} TD/gm allowed · ${esc(pshort(hard.u.player))}`,'r'):''}
-      ${hot?kpi('hottest scorer',esc(pshort(hot.u.player)),`${hot.own.s.toFixed(2)} TD/gm this season · ${hot.own.gs} gp · ${hot.o[0]==='@'?'@':'vs'} ${hot.def}`,'a'):''}
-      ${cands[0]?kpi('top of the board',esc(pshort(cands[0].u.player)),`${cands[0].g} ${cands[0].o[0]==='@'?'@':'vs'} ${cands[0].def} · rate × field ${cands[0].z.toFixed(2)}`,'g'):''}</div>`;
-    $('#tdTbl').innerHTML=`<table class="fx"><colgroup><col style="width:34px"><col style="width:170px"><col style="width:58px"><col style="width:82px"><col style="width:66px"><col style="width:64px"><col style="width:150px"><col style="width:230px"><col style="width:60px"><col style="width:96px"><col></colgroup>
-      <thead><tr><th>#</th><th>player</th><th>tm</th><th>slot</th><th>opp</th><th>kick</th>
-      <th class="pa" title="his own touchdowns per game: this season (big) · every scraped season (small) · games played">his TD/gm ${LAST_SE} · all</th>
-      <th style="text-align:left">TDs opp allows /gm (rank)</th><th class="rk">TD &Psi;</th><th>&omega; wkly TD</th><th style="text-align:left">TD volume vs role league range (tick = lg avg)</th></tr></thead><tbody>
-      ${rows.map((r,i)=>`<tr><td class="mini">${i+1}</td><td class="pp plink" data-p="${r.u.player}">${esc(r.u.player)}${trendGlyph(r.u)}</td><td>${tcell(r.u.team)}</td>
-      <td>${slotchip(r.u.dslot||r.g)}</td><td>${oppcell(r.o)}</td><td>${(g2=>g2?slateChip(g2[GM.slate]):'')(gameOf(r.u.team,wk))}</td><td class="pa">${tdOwn(r.u)}</td>
-      <td style="text-align:left">${r.cols.map(([n,o2])=>`${(+o2.avg).toFixed(1)}<span class="mini">${n}</span>&nbsp;${badge(o2.rank)}`).join(' &nbsp;')}</td>
-      <td>${psi(r.score)}</td><td>${sparkWave(series(r.def,r.g==='QB'?'P TD':r.g+' TD'),vivid(r.def),80,18)}</td>
-      <td><div class="tdbar"><div class="fill" style="width:${(r.meas/lg[r.g].mx*100).toFixed(1)}%;background:linear-gradient(90deg,${gradeColor(r.score)}55,${gradeColor(r.score)})"></div><span class="tick" style="left:${(lg[r.g].av/lg[r.g].mx*100).toFixed(1)}%"></span><span class="val">${r.meas.toFixed(1)}/gm</span></div></td></tr>`).join('')}
-      </tbody></table><p class="note">${rows.length} players &middot; wk ${wk} &middot; combined ${J.blend} DvP</p>`;
+    $('#tdFields').innerHTML=`<h3>TD fields by role <span class="f">the two softest end zones for each role this week (hover for the opponent's TDs allowed /gm) and the one to avoid · badge = league rank, 1 = most TDs allowed</span>
+      <select id="tdSlot" title="which slots this pane covers">${SLOTS.map(v=>`<option value="${v}" ${v===tdSc?'selected':''}>${SLOTL[v]||v}</option>`).join('')}</select></h3>
+      <table><thead><tr><th>role</th><th style="text-align:left;color:var(--green)">softest</th><th style="text-align:left">2nd</th><th></th><th style="text-align:left;color:var(--red)">hardest</th></tr></thead><tbody>${byRole||'<tr><td colspan="5" class="dim">no slot owner plays under this filter</td></tr>'}</tbody></table>`;
   }
-  $('#tdSlot').onchange=render;RR.push(render);
+  function fieldsWired(){fields();$('#tdSlot').onchange=e=>{tdSc=e.target.value;fieldsWired()}}
+  RR.push(fieldsWired);fieldsWired();
+  tdGrid();
 }
 /* ---------- INTEL: scheme tags · playcaller tendencies · defensive turnover · usage ---------- */
 /* source: nflverse pbp + FTN charting + NGS participation + snap counts, joined to game_logs by build_advanced.py */
@@ -3895,7 +3810,7 @@ function tdGrid(){
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     $('#tgN'+p).textContent=R.length+(R.length===1?' player':' players');
     const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const ncol=srcs.length+1, wname=p==='ALL'?24:28, wpos=p==='ALL'?6:0, wopp=17, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
+    const ncol=srcs.length+1, wname=p==='ALL'?23:26, wpos=p==='ALL'?6:0, wopp=p==='ALL'?18:21, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
     $('#tgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
       Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead>
       <tr class="grp"><th class="g0" colspan="${p==='ALL'?3:2}">player</th>
@@ -3905,7 +3820,7 @@ function tdGrid(){
       ${th('player','Player')}${p==='ALL'?th('pos','')  :''}${th('opp','Opp')}
             ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot \u00b7 '+s+' \u00b7 rank of '+NT)).join('')}
       ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
-      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} \u00b7 ${x.pos} \u00b7 ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
         ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
         ${x.cells.map((v,i)=>v==null?`<td class="op${i===0?' gs':''}"><span class="dim">·</span></td>`
           :`<td class="op${i===0?' gs':''}" title="${srcs[i]} · rank ${v.toFixed(v%1?1:0)} of ${NT}"><span class="badge" style="${gradeStyle(v)}">${Math.round(v)}</span></td>`).join('')}
@@ -4079,7 +3994,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',tdGrid]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
