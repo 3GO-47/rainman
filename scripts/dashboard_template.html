@@ -715,22 +715,35 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 #crumb{flex:1}
 .standconf{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 16px}.slatetbl{margin-top:10px}.slatetbl td,.slatetbl th{padding:2px 6px;text-align:center}
 /* ---------- TEST (F6) ---------- */
+/* the six DvP bands as classes, written in rgba so the theme mapper re-levels them */
+.lgt td.hb{text-align:center;font:600 10.5px var(--mono);letter-spacing:-.3px;padding:3px 2px}
+.lgt td.b1{background:rgba(39,135,80,.9);color:#eafff1}
+.lgt td.b2{background:rgba(40,88,66,.9);color:#d6f0e2}
+.lgt td.b3{background:rgba(48,50,54,.9);color:#d8d9dd}
+.lgt td.b4{background:rgba(34,35,38,.9);color:#c9cace}
+.lgt td.b5{background:rgba(109,56,48,.9);color:#ffdfd9}
+.lgt td.b6{background:rgba(161,53,45,.9);color:#ffe4e0}
+.lgt td.b0{color:var(--dim2)}
+
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
 .lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
  font:700 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
 .lgcol>h3 .f{font:400 10px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:auto}
-.lgcol>div{max-height:72vh;overflow:auto}
-table.lgt{width:max-content;min-width:100%;border-collapse:collapse;font-size:11px}
+.lgcol>div{max-height:72vh;overflow-y:auto;overflow-x:hidden}
+table.lgt{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11px}
+table.lgt td:first-child,table.lgt th:first-child{overflow:hidden;text-overflow:ellipsis}
+table.lgt col.num{width:var(--nw,42px)}
 table.lgt .badge{padding:0 2px;font-size:9px;min-width:0;letter-spacing:0}
 .lgrid.td5 table.lgt td{padding:3px 3px}
 .lgrid.td5 table.lgt th{padding:5px 3px}
 table.lgt td .ov{margin-right:3px}
-table.lgt th{position:sticky;top:0;z-index:1;background:var(--s2);text-align:left;padding:5px 5px;cursor:pointer;
+table.lgt th{position:sticky;top:0;z-index:1;background:var(--s2);text-align:left;padding:5px 4px;cursor:pointer;overflow:hidden;
  font:600 9.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--edge);white-space:nowrap}
 table.lgt th:hover{color:var(--txt)}
-table.lgt td{padding:3px 5px;border-bottom:1px solid var(--edge);white-space:nowrap}
+table.lgt td{padding:3px 4px;border-bottom:1px solid var(--edge);white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
+table.lgt th:nth-child(n+3),table.lgt td:nth-child(n+3){text-align:right}
 table.lgt tbody tr:hover td{background:var(--s2)}
 table.lgt td .ov{font:600 11px var(--mono);margin-right:4px}
 @media(max-width:1760px){.lgrid.td5{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -752,25 +765,37 @@ table.lgt td .ov{font:600 11px var(--mono);margin-right:4px}
 .gvmeta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-left:auto}
 .gvcols{display:grid;grid-template-columns:1fr 1fr;gap:9px;align-items:start}
 .gvside{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
-.gvside>header{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2)}
+.gvside>header{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2)}
+.gvside>header .nm{display:flex;align-items:center;gap:7px;min-width:0}
+.gvside>header .nm b{font:800 15px var(--ui,inherit)}
+.gvside>header .nm span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .gvrec{font:600 12px var(--mono);display:flex;align-items:center;gap:8px;margin-left:auto}
 .gvrec .sq{width:7px;height:11px;border-radius:1px;display:inline-block;background:var(--dim2)}
 .gvrec .sq.w{background:var(--green)}.gvrec .sq.l{background:var(--red)}
 .gvpane{border-bottom:1px solid var(--edge);max-height:30vh;overflow:auto}
 .gvpane:last-child{border-bottom:0}
-.gvpane>h4{margin:0;padding:6px 11px;position:sticky;top:0;background:var(--panel);z-index:2;
+.gvpane>h4{margin:0;padding:6px 11px;position:sticky;top:0;background:var(--panel);z-index:3;border-bottom:1px solid var(--edge);
  font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
 .gvpane>h4 .f{font:400 9.5px var(--mono);letter-spacing:0;text-transform:none;color:var(--dim2);margin-left:7px}
-table.gvt{margin-bottom:2px}
-.gvdep{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:3px 11px 5px}
+table.gvt{margin-bottom:2px;table-layout:fixed;width:100%}
+
+table.gvt th:first-child,table.gvt td:first-child{width:36%}
+table.gvt th:nth-child(2),table.gvt td:nth-child(2){width:11%}
+table.gvt th:nth-child(n+3),table.gvt td:nth-child(n+3){width:10.6%;text-align:right}
+tr.gvgrp td{background:var(--s3);font:700 9px var(--mono);letter-spacing:1.4px;text-transform:uppercase;
+ color:var(--dim);padding:3px 6px}
+table.gvt td:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gvdep{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:4px 11px}
+.gvdep+.gvdep{border-top:1px solid var(--edge)}
 .gvdep>b{font:700 9.5px var(--mono);letter-spacing:1px;color:var(--dim);width:26px;flex:none}
 .dchip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--edge2);border-radius:4px;padding:1px 6px;font-size:11px}
 .dchip i{font-style:normal;font:700 9px var(--mono);color:var(--dim2)}
 .dchip.q{border-color:var(--amber)}.dchip.out{opacity:.5;text-decoration:line-through}
 table.gvk{width:100%;border-collapse:collapse;font-size:11.5px}
 table.gvk{table-layout:fixed}
-table.gvk th{text-align:left;padding:3px 0 3px 11px;font:600 9.5px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--dim2);width:62px}
-table.gvk td{padding:3px 8px 3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+table.gvk th{text-align:left;padding:4px 6px 4px 11px;font:600 9px var(--mono);letter-spacing:1.1px;text-transform:uppercase;color:var(--dim2);width:72px}
+table.gvk td{padding:4px 10px 4px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;font:600 11.5px var(--mono)}
+table.gvk tr+tr th,table.gvk tr+tr td{border-top:1px solid var(--edge)}
 .gvnarr{background:var(--panel);border:1px solid var(--edge);border-radius:10px;padding:0 0 7px;max-height:18vh;overflow:auto}
 .gvnarr>h4{margin:0;padding:7px 13px;position:sticky;top:0;background:var(--panel);
  font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--dim)}
@@ -3662,6 +3687,13 @@ function tRows(pos,src,o){
         psi:d?d.comps[u.grp]:null,
         kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99};});
 }
+/* allowed-per-game, compact: whole numbers wherever a whole number still says it,
+   one decimal only where rounding would collapse the value to 0 */
+const tNum=v=>v==null?'':Math.abs(v)>=10?Math.round(v).toString():Math.abs(v)>=1?(+v).toFixed(1):(+v).toFixed(2).replace(/^0/,'');
+const tBand=r=>r==null?'b0':r<=5*RS?'b1':r<=10*RS?'b2':r<=16*RS?'b3':r<=21*RS?'b4':r<=27*RS?'b5':'b6';
+/* one cell: the number, tinted by where that rank sits among the defenses */
+const tCell=(v,r,tip)=>v==null?'<td class="hb b0">\u00b7</td>'
+  :`<td class="hb ${tBand(r)}" title="${esc(tip||'')}${r==null?'':' \u00b7 rank '+(+r).toFixed(+r%1?1:0)+' of '+NT}">${tNum(v)}</td>`;
 const tSortVal=(x,k,asc)=>k==='psi'?(x.psi==null?99:x.psi)
   :k==='player'?x.u.player:k==='team'?x.u.team:k==='opp'?(x.opp||'zzz'):k==='kick'?x.kickord
   :k[0]==='r'?(x.ranks[+k.slice(1)]==null?(asc?99:-1):x.ranks[+k.slice(1)])
@@ -3676,35 +3708,35 @@ function labGrid(){
     <select id="lgSrc" title="which data set every column reads">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
     <select id="lgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
     <select id="lgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
-    <select id="lgMode"><option value="both" selected>allowed /gm + rank</option><option value="rank">rank only</option><option value="raw">allowed /gm only</option></select>
     <input id="lgQ" placeholder="search player..." size="15">
-    <span class="note">the Matchup Lab dealt four ways. Every column shows one thing — <b>what this week's opponent allows per game to that slot</b> — so the softest field at each position sits one glance apart. rank 1 of ${NT} = allows the most = best matchup &middot; each column sorts on its own &middot; click a name for his card</span>
+    <span class="note">the Matchup Lab dealt four ways. Every number is <b>what this week's opponent allows per game to that slot</b>, shaded by where that sits among the ${NT} defenses — green = allows the most = the best matchup, red = the least. Hover any cell for the exact rank &middot; each column sorts on its own &middot; click a name for his card</span>
   </div>
   <div class="lgrid">${TPOS.map(p=>`<section class="lgcol"><h3>${posIcon(p,12)} ${p} <span class="f" id="lgN${p}"></span></h3><div id="lgB${p}"></div></section>`).join('')}</div>`;
   const sort={};TPOS.forEach(p=>sort[p]={k:'psi',a:true});
   function col(p){
-    const src=$('#lgSrc').value,mode=$('#lgMode').value,st=sort[p];
+    const src=$('#lgSrc').value,st=sort[p];
     const R=tRows(p,src,{dep:$('#lgDepth').value,hin:$('#lgInj').value,q:$('#lgQ').value});
     R.sort((a,b)=>{const x=tSortVal(a,st.k,st.a),y=tSortVal(b,st.k,st.a);return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     const heads=LABDEF[p].heads,sample=LABDEF[p].stats(tKey(p));
     $('#lgN'+p).textContent=R.length+(R.length===1?' player':' players');
-    const cell=(v,r,c)=>v==null?'<td class="dim">·</td>':
-      `<td>${mode==='rank'?'':`<span class="ov">${(+v).toFixed(decOf(c))}</span>`}${mode==='raw'?'':badge(r)}</td>`;
     const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    $('#lgB'+p).innerHTML=`<table class="lgt"><thead><tr>
+    const nstat=heads.length+1, wname=Math.max(25,45-nstat*3), wopp=14, wnum=((100-wname-wopp)/nstat).toFixed(2);
+    $('#lgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%"><col style="width:${wopp}%">${
+      Array.from({length:nstat},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead><tr>
       ${th('player','Player')}${th('opp','Opp',"this week's opponent")}
       ${heads.map((h,i)=>th('r'+i,h.split('*').join(''),sample[i]+' allowed per game to this slot · badge = rank of '+NT)).join('')}
       ${th('psi','Ψ',"mean of the opponent's ranks across this slot's stats · 1 = softest")}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
         <td>${oppcell(x.oppRaw)}</td>
-        ${x.stats.map((c,i)=>cell(x.raws[i],x.ranks[i],c)).join('')}<td>${psi(x.psi)}</td></tr>`).join('')
+        ${x.stats.map((c,i)=>tCell(x.raws[i],x.ranks[i],c)).join('')}
+        <td class="hb ${tBand(x.psi)}">${x.psi==null?'\u00b7':(+x.psi).toFixed(0)}</td></tr>`).join('')
         ||`<tr><td colspan="${heads.length+3}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $('#lgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=(h.dataset.k==='psi'||h.dataset.k[0]==='r'||h.dataset.k==='player'||h.dataset.k==='team'||h.dataset.k==='opp')}col(p)});
     tWire($('#lgB'+p));
   }
   const all=()=>TPOS.forEach(col);
-  ['lgSrc','lgDepth','lgInj','lgMode'].forEach(i=>$('#'+i).onchange=all);$('#lgQ').oninput=all;all();
+  ['lgSrc','lgDepth','lgInj'].forEach(i=>$('#'+i).onchange=all);$('#lgQ').oninput=all;all();
   RR.push(all);
 }
 
@@ -3739,14 +3771,16 @@ function tdGrid(){
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     $('#tgN'+p).textContent=R.length+(R.length===1?' player':' players');
     const th=(k,l,tip)=>`<th data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    $('#tgB'+p).innerHTML=`<table class="lgt"><thead><tr>
-      ${th('player','Player')}${p==='ALL'?th('pos','Pos'):''}${th('opp','Opp')}
+    const ncol=srcs.length+1, wname=p==='ALL'?25:29, wpos=p==='ALL'?6:0, wopp=16, wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
+    $('#tgB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
+      Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead><tr>
+      ${th('player','Player')}${p==='ALL'?th('pos','')  :''}${th('opp','Opp')}
             ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot \u00b7 '+s+' \u00b7 rank of '+NT)).join('')}
       ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
         ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
-        ${x.cells.map(v=>v==null?'<td class="dim">·</td>':`<td>${badge(v)}</td>`).join('')}
-        <td>${psi(x.mu)}</td></tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+        ${x.cells.map((v,i)=>`<td class="hb ${tBand(v)}" title="${srcs[i]}${v==null?'':' · rank '+v.toFixed(v%1?1:0)+' of '+NT}">${v==null?'·':Math.round(v)}</td>`).join('')}
+        <td class="hb ${tBand(x.mu)}" title="mean rank across the data sets">${x.mu==null?'·':Math.round(x.mu)}</td></tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $('#tgB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=true}col(p)});
     tWire($('#tgB'+p));
@@ -3794,32 +3828,42 @@ function gameView(){
       <tr><th>DC</th><td>${esc(C.dc||'—')}${C.dc_changed===1?' <span class="newdc">NEW</span>':''}</td>
           <th>style</th><td>${esc((T.DEF&&T.DEF.primary_tag)||'—')}</td></tr>
       <tr><th>pace</th><td>${num(O.sec_per_play,1,'s')}</td><th>plays</th><td>${num(O.plays_per_game,0)}</td></tr>
-      <tr><th>PROE</th><td>${num(O.proe,1,'%')}</td><th>EPA/play</th><td>${num(O.epa_play,3)}</td></tr>
-      <tr><th>D EPA</th><td>${num(D.epa_play_allowed,3)}</td><th>charting</th><td class="mini">${se}</td></tr>
+      <tr><th>PROE</th><td>${num(O.proe,1,'%')}</td><th>O EPA</th><td>${num(O.epa_play,3)}</td></tr>
+      <tr><th>D EPA</th><td>${num(D.epa_play_allowed,3)}</td><th>charted</th><td class="mini">${se}</td></tr>
     </tbody></table>`;
   }
   function side(t,opp,src,home){
     const f=form(t),gp=f.w+f.l||1;
     const streak=f.last.slice(-5).map(c=>`<i class="sq ${c==='W'?'w':c==='L'?'l':''}"></i>`).join('');
-    const ranks=TPOS.map(p=>{
-      const R=tRows(p,src,{dep:'2',hin:'x',team:t}).sort((a,b)=>(a.psi==null?99:a.psi)-(b.psi==null?99:b.psi));
-      if(!R.length)return '';
-      const heads=LABDEF[p].heads;
-      return `<table class="lgt gvt"><thead><tr><th>${posIcon(p,10)} ${p}</th><th>Slot</th>
-        ${heads.map(h=>`<th>${h.split('*').join('')}</th>`).join('')}<th>Ψ</th></tr></thead><tbody>
-        ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
-          <td>${slotchip(x.u.dslot)}</td>
-          ${x.ranks.map((r,i)=>r==null?'<td class="dim">·</td>':`<td><span class="ov">${x.raws[i]==null?'—':(+x.raws[i]).toFixed(decOf(x.stats[i]))}</span>${badge(r)}</td>`).join('')}
-          <td>${psi(x.psi)}</td></tr>`).join('')}</tbody></table>`}).join('');
+    /* one table for all four positions: every slot's stats land in the same six columns,
+       so the rows line up down the side instead of each position bringing its own header */
+    const UC=[['PASS','passing yards allowed per game'],['RUSH','rushing yards allowed per game'],
+              ['REC','receptions allowed per game'],['RECYD','receiving yards allowed per game'],
+              ['TD','touchdowns allowed per game to the slot']];
+    const uIdx=c=>c==='QB PY'?0:/ RY$/.test(c)?1:/Recep$/.test(c)?2:/RecY$/.test(c)?3:/TD$/.test(c)?4:-1;
+    const ranks=(()=>{
+      const body=TPOS.map(p=>{
+        const R=tRows(p,src,{dep:'2',hin:'x',team:t}).sort((a,b)=>(a.psi==null?99:a.psi)-(b.psi==null?99:b.psi));
+        if(!R.length)return '';
+        return `<tr class="gvgrp"><td colspan="8">${posIcon(p,10)} ${p}</td></tr>`+R.map(x=>{
+          const V=UC.map(()=>null),K=UC.map(()=>null);
+          x.stats.forEach((c,i)=>{const k=uIdx(c);if(k>=0&&(V[k]==null||/ TD$/.test(c))){V[k]=x.raws[i];K[k]=x.ranks[i]}});
+          return `<tr><td class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
+            <td>${slotchip(x.u.dslot)}</td>
+            ${UC.map((u,i)=>tCell(V[i],K[i],u[1])).join('')}
+            <td class="hb ${tBand(x.psi)}">${x.psi==null?'\u00b7':(+x.psi).toFixed(0)}</td></tr>`}).join('')}).join('');
+      return body?`<table class="lgt gvt"><thead><tr><th>Player</th><th>Slot</th>
+        ${UC.map(u=>`<th title="${esc(u[1])}">${u[0]}</th>`).join('')}
+        <th title="mean of the opponent's ranks across this slot's stats \u00b7 1 = softest">\u03A8</th></tr></thead><tbody>${body}</tbody></table>`:''})();
     const dep=(()=>{const rows=UNIVERSE.filter(u=>u.team===t&&u.grp&&u.depth<=3)
         .sort((a,b)=>TPOS.indexOf(a.pos)-TPOS.indexOf(b.pos)||a.depth-b.depth);
       const byPos={};rows.forEach(u=>(byPos[u.pos]=byPos[u.pos]||[]).push(u));
       return TPOS.filter(p=>byPos[p]).map(p=>`<div class="gvdep"><b>${p}</b>${byPos[p].map(u=>
         `<span class="dchip${u.inj==='-1'?' out':u.inj==='0'?' q':''}"><i>${u.depth}</i><span class="plink" data-p="${esc(u.player)}">${esc(pshort(u.player))}</span></span>`).join('')}</div>`).join('')})();
     return `<section class="gvside ${home?'h':'a'}">
-      <header>${tlogo(t,22)} <b style="color:${vividC(t)}">${t}</b> <span class="mini">${TEAM[t]?esc(TEAM[t].n):''}</span>
-        <span class="gvrec">${f.w}-${f.l} <span class="mini">home ${f.hw}-${f.hl} · away ${f.aw}-${f.al} · ${(f.pf/gp).toFixed(1)} for / ${(f.pa/gp).toFixed(1)} against</span> ${streak}</span>
-        <span class="mini">${home?'hosting':'at'} ${oppcell(home?opp:'@'+opp)}</span></header>
+      <header><span class="nm">${tlogo(t,20)} <b style="color:${vividC(t)}">${t}</b> <span class="mini">${TEAM[t]?esc(TEAM[t].n):''}</span></span>
+        <span class="gvrec">${f.w}-${f.l} <span class="mini">H ${f.hw}-${f.hl} · A ${f.aw}-${f.al} · ${(f.pf/gp).toFixed(0)} for / ${(f.pa/gp).toFixed(0)} against</span></span>
+        <span class="gvrec">${streak} <span class="mini">${home?'hosting':'at'} ${opp}</span></span></header>
       <div class="gvpane"><h4>matchup ranks <span class="f">what ${opp} allows per game to each slot · rank of ${NT}</span></h4>${ranks||'<p class="note">no starters on file</p>'}</div>
       <div class="gvpane"><h4>depth <span class="f">effective order this week</span></h4>${dep||'<p class="note">no depth chart</p>'}</div>
       <div class="gvpane"><h4>how they call it</h4>${coach(t)}</div>
