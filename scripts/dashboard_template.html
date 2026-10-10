@@ -778,6 +778,11 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 /* ONE sticky row only: two separately-stuck <th> rows leave a hairline between them that the
    scrolling rows show through, so the group band's words move up into the heading block. */
 .lgrid.full table.lgt tr.hd th{top:calc(var(--sticky,33px) + var(--h3h,31px));z-index:4;box-shadow:0 1px 0 var(--edge2)}
+/* the board carries one more numeric column than the draft, so its cells run tighter */
+.lgrid.full table.lgt th,.lgrid.full table.lgt td{padding-left:3px;padding-right:3px}
+.lgrid.full table.lgt th[data-k="td"]{letter-spacing:0;padding-left:1px;padding-right:1px}
+.lgrid.full table.lgt td.tdg{font:600 10.5px var(--mono);color:var(--txt);font-variant-numeric:tabular-nums}
+.lgrid.full table.lgt td.tdg.stale{color:var(--dim2);font-weight:500}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
  font:600 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
@@ -1179,7 +1184,7 @@ const INTRO={
  projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
  tdgrid:{how:['the F6 draft of the TD Board, left exactly as it was \u2014 columns scroll inside themselves and the depth filter is the original 1st-string / top-2 / all select','the live version is F2 Matchups \u2192 TD Board']},
- tdboard:{how:['the fields pane gives the two softest end zones for each role this week and the one to avoid','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','a QB has two TD-allowed stats \u2014 pick which one his column reads; they often point opposite ways','every column sorts on its own']},
+ tdboard:{how:['the fields pane gives the three softest end zones for each role this week','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','TD/G is the player\u2019s own touchdowns per game this season \u2014 dim means he has not played yet this year, so it is his whole log','a QB has two TD-allowed stats \u2014 pick which one his column reads; TD/G follows the same pick','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
  scheme:{what:'How every defense and offense plays — coverage, blitz, pace, personnel — and what that style gives up to each position.',how:['+8 = that type of defense gives up 8% more fantasy points than average to the position','trust = how far last season\'s profile still describes this unit','click a row for the full profile and what changed']},
@@ -3736,7 +3741,8 @@ const tPsi=v=>v==null?'<td class="md"><span class="dim">\u00b7</span></td>'
 const tSortVal=(x,k,asc)=>k==='psi'?(x.psi==null?99:x.psi)
   :k==='player'?x.u.player:k==='team'?x.u.team:k==='opp'?(x.opp||'zzz'):k==='kick'?x.kickord
   :k[0]==='r'?(x.ranks[+k.slice(1)]==null?(asc?99:-1):x.ranks[+k.slice(1)])
-  :k[0]==='v'?(x.raws[+k.slice(1)]==null?(asc?1e9:-1):x.raws[+k.slice(1)]):0;
+  :k[0]==='v'?(x.raws[+k.slice(1)]==null?(asc?1e9:-1):x.raws[+k.slice(1)])
+  :k==='td'?(x.td==null?(asc?1e9:-1):-x.td.v):0;
 function tWire(root){if(!root)return;root.querySelectorAll('.plink[data-p]').forEach(n=>n.onclick=()=>playerPop(n.dataset.p));
   try{logoize(root)}catch(_){}}
 
@@ -3790,6 +3796,16 @@ const tdLbl=s=>/^\d{4}$/.test(s)?"'"+s.slice(2):s==='combined'?'cmb':s==='adjust
    F6 TEST (root '#tdgridTest', the original depth select and 72vh scrolling columns). Every
    element id is prefixed, so the two instances never collide. */
 const TD_SLOTS=['QB1','RB1','RB2','WR1','WR2','WR3','WR4','TE1','TE2'];
+/* His own touchdowns per game, counted the same way the columns beside him are read: in rushing mode
+   the board asks what the defense gives up on the ground, so the figure is his rush + receiving TDs;
+   in passing mode it is his passing TDs. A player with no games yet this season falls back to his
+   whole log, shown dim, so an empty cell always means no touchdown data at all rather than a new year. */
+function tdRate(u,mode){const L=PLOGS[u.ln||u.player]||[];if(!L.length)return null;
+  const pick=l=>mode==='pass'?l[LOG.ptd]:mode==='both'?l[LOG.ptd]+l[LOG.rtd]+l[LOG.rectd]:l[LOG.rtd]+l[LOG.rectd];
+  const cur=L.filter(l=>l[LOG.season]===LAST_SE);
+  const avg=a=>a.reduce((t,l)=>t+pick(l),0)/a.length;
+  return cur.length?{v:avg(cur),gp:cur.length,se:LAST_SE,old:false}
+                   :{v:avg(L),gp:L.length,se:'all seasons',old:true}};
 function tdGrid(root,px,legacy){
   root=root||'#tdgrid';px=px||'tg';legacy=!!legacy;
   const srcs=Object.keys(J.dvp);
@@ -3798,9 +3814,10 @@ function tdGrid(root,px,legacy){
      PHI allows the MOST quarterback rushing TDs in the league (rank 1) and nearly the fewest
      passing TDs (rank 31). Averaging those gives 16, a number that describes neither. So the
      QB stat is picked, never blended; everyone else has one TD stat and it is simply that one. */
+  const qbMode=()=>($('#'+px+'QB')||{}).value||'rush';
   const tdStat=(grp,pos)=>{const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));
     if(st.length<2)return st;
-    const mode=($('#'+px+'QB')||{}).value||'rush';
+    const mode=qbMode();
     const pass=st.find(c=>c==='P TD'),rush=st.find(c=>c!=='P TD');
     return mode==='pass'?[pass]:mode==='both'?st:[rush]};
   const tdRank=(d,grp,pos)=>{if(!d)return null;
@@ -3815,7 +3832,7 @@ function tdGrid(root,px,legacy){
     <select id="${px}Inj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <select id="${px}QB" title="a QB's slot has two TD-allowed stats; pick which one his column reads"><option value="rush" selected>QB: rushing / receiving TD</option><option value="pass">QB: passing TD</option><option value="both">QB: mean of both</option></select>
     <input id="${px}Q" placeholder="search player..." size="15">
-    <span class="note">touchdowns only. Each cell is the rank of the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; &mu; = mean across the sets &middot; the first column is every slot owner together, then one per position${legacy?'':' &middot; the slot chips pick which depths appear, and each column runs its full length rather than scrolling inside itself'}</span>
+    <span class="note">touchdowns only. Each rank cell is the <b>touchdowns this week's opponent allows to that slot</b> in one data set, so a soft end zone can be read as a 2026 blip or as three years of it. rank 1 of ${NT} = allows the most = best TD matchup &middot; <b>TD/G is the player's own</b>, not the defense: his touchdowns per game this season, counted the way his rank columns read &middot; the first column is every slot owner together, then one per position${legacy?' &middot; \u03bc = mean across the sets':' &middot; rows are ordered by the mean rank across the sets, which the player tooltip carries'}</span>
   </div>
   <div class="lgrid td5${legacy?'':' wide full'}">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◉ all':posIcon(p,12)+' '+p}${legacy?'':` <span class="gl" title="touchdowns this week's opponent allows to that slot, ranked among the ${NT} defenses · 1 = allows the most">${p==='ALL'?`TDs allowed to his slot · rank of ${NT}`:'TD rank'}</span>`} <span class="f" id="${px}N${p}"></span></h3><div id="${px}B${p}"></div></section>`).join('')}</div>`;
   const sort={};['ALL'].concat(TPOS).forEach(p=>sort[p]={k:'mu',a:true});
@@ -3826,7 +3843,8 @@ function tdGrid(root,px,legacy){
       tRows(pos,srcs[0],o).forEach(x=>{
         const cells=srcs.map(s=>{const D=J.dvp[s]||{};return tdRank(x.opp&&D[x.opp]?D[x.opp]:null,x.u.grp,pos)});
         const got=cells.filter(v=>v!=null);
-        R.push(Object.assign({},x,{pos,cells,mu:got.length?got.reduce((a,b)=>a+b,0)/got.length:null}))})});
+        R.push(Object.assign({},x,{pos,cells,td:legacy?null:tdRate(x.u,qbMode()),
+          mu:got.length?got.reduce((a,b)=>a+b,0)/got.length:null}))})});
     R.sort((a,b)=>{let x,y;
       if(st.k==='mu'){x=a.mu==null?99:a.mu;y=b.mu==null?99:b.mu}
       else if(st.k[0]==='s'){const i=+st.k.slice(1);x=a.cells[i]==null?(st.a?99:-1):a.cells[i];y=b.cells[i]==null?(st.a?99:-1):b.cells[i]}
@@ -3835,8 +3853,8 @@ function tdGrid(root,px,legacy){
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     $('#'+px+'N'+p).textContent=R.length+(R.length===1?' player':' players');
     const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const ncol=srcs.length+1, wname=p==='ALL'?(legacy?24:23):(legacy?28:26), wpos=p==='ALL'?6:0,
-          wopp=legacy?17:(p==='ALL'?18:21), wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
+    const ncol=srcs.length+(legacy?1:1), wname=p==='ALL'?(legacy?24:24):(legacy?28:27), wpos=p==='ALL'?6:0,
+          wopp=legacy?17:(p==='ALL'?15:17), wnum=((100-wname-wpos-wopp)/ncol).toFixed(2);
     $('#'+px+'B'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${
       Array.from({length:ncol},()=>`<col style="width:${wnum}%">`).join('')}</colgroup><thead>
       ${legacy?`<tr class="grp"><th class="g0" colspan="${p==='ALL'?3:2}">player</th>
@@ -3844,13 +3862,16 @@ function tdGrid(root,px,legacy){
         <th class="md">μ</th></tr>`:''}
       <tr class="hd">
       ${th('player','Player')}${p==='ALL'?th('pos','')  :''}${th('opp','Opp')}
+            ${legacy?'':th('td','TD/G','his OWN touchdowns per game this season — not the defense. counted the way his columns read: rushing mode = rush + receiving, passing mode = passing','md')}
             ${srcs.map((s,i)=>th('s'+i,tdLbl(s),'touchdowns allowed to his slot · '+s+' · rank of '+NT)).join('')}
-      ${th('mu','μ','mean rank across every data set')}</tr></thead><tbody>
-      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
+      ${legacy?th('mu','μ','mean rank across every data set'):''}</tr></thead><tbody>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}${x.mu==null?'':' · mean rank '+x.mu.toFixed(1)+' of '+NT}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':''}</td>
         ${p==='ALL'?`<td style="color:${POSC[x.pos]}">${posIcon(x.pos,10)}</td>`:''}<td>${oppcell(x.oppRaw)}</td>
+        ${legacy?'':(x.td==null?'<td class="md"><span class="dim">·</span></td>'
+          :`<td class="md tdg${x.td.old?' stale':''}" title="${esc(x.u.player)} · ${x.td.v.toFixed(2)} TD/gm over ${x.td.gp} game${x.td.gp===1?'':'s'} (${x.td.se})">${x.td.v>=1?x.td.v.toFixed(1):x.td.v.toFixed(2).replace(/^0/,'')}</td>`)}
         ${x.cells.map((v,i)=>v==null?`<td class="op${i===0?' gs':''}"><span class="dim">·</span></td>`
           :`<td class="op${i===0?' gs':''}" title="${srcs[i]} · rank ${v.toFixed(v%1?1:0)} of ${NT}"><span class="badge" style="${gradeStyle(v)}">${Math.round(v)}</span></td>`).join('')}
-        ${tPsi(x.mu).replace('class="md"','class="md gs"')}</tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+        ${legacy?tPsi(x.mu).replace('class="md"','class="md gs"'):''}</tr>`).join('')||`<tr><td colspan="${srcs.length+5}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $('#'+px+'B'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=true}col(p)});
     tWire($('#'+px+'B'+p));
