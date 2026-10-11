@@ -1,545 +1,608 @@
 # P|eventSlug|kind|endDateUTC|marketId|question|sportsMarketType|line|outcomes|outcomePrices|bestBid|bestAsk|liquidity|volume  (gamma-api.polymarket.com; pulled 2026-10-11)
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4024657|Bengals vs. Dolphins|moneyline||Bengals,Dolphins|0.755,0.245|0.75|0.76|256663|293295
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4061642|Spread: Bengals (-6.5)|spreads|-6.5|Bengals,Dolphins|0.525,0.475|0.52|0.53|53871|174475
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4061643|Spread: Bengals (-7.5)|spreads|-7.5|Bengals,Dolphins|0.455,0.545|0.45|0.46|55957|38580
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4866432|Spread: Bengals (-5.5)|spreads|-5.5|Bengals,Dolphins|0.555,0.445|0.55|0.56|15695|174
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4061657|Bengals vs. Dolphins: O/U 54.5|totals|54.5|Over,Under|0.505,0.495|0.5|0.51|29669|3179
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4061656|Bengals vs. Dolphins: O/U 52.5|totals|52.5|Over,Under|0.555,0.445|0.54|0.57|4026|5
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4061658|Bengals vs. Dolphins: O/U 56.5|totals|56.5|Over,Under|0.44,0.56|0.43|0.45|4123|133
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4866654|Dolphins Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.635,0.365|0.6|0.67|3217|16
-P|nfl-cin-mia-2026-10-11|game|2026-10-11T17:00:00Z|4866652|Dolphins Team Total: O/U 16.5|team_totals|16.5|Over,Under|0.795,0.205|0.76|0.83|3178|341
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4024660|Raiders vs. Patriots|moneyline||Raiders,Patriots|0.365,0.635|0.36|0.37|307039|549078
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4061613|Spread: Patriots (-4.5)|spreads|-4.5|Patriots,Raiders|0.495,0.505|0.49|0.5|61258|28941
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4866154|Spread: Patriots (-3.5)|spreads|-3.5|Patriots,Raiders|0.515,0.485|0.51|0.52|47256|313352
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4866155|Spread: Patriots (-5.5)|spreads|-5.5|Patriots,Raiders|0.475,0.525|0.47|0.48|32496|2772
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4061634|Raiders vs. Patriots: O/U 55.5|totals|55.5|Over,Under|0.495,0.505|0.49|0.5|4285|0
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4866316|Raiders vs. Patriots: O/U 56.5|totals|56.5|Over,Under|0.475,0.525|0.47|0.48|13303|1723
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4866315|Raiders vs. Patriots: O/U 54.5|totals|54.5|Over,Under|0.53,0.47|0.52|0.54|4410|0
-P|nfl-lv-ne-2026-10-11|game|2026-10-11T17:00:00Z|4866360|Raiders Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.7,0.3|0.67|0.73|1828|1014
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4024664|Vikings vs. Saints|moneyline||Vikings,Saints|0.615,0.385|0.61|0.62|299264|669501
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4865854|Spread: Vikings (-3.5)|spreads|-3.5|Vikings,Saints|0.485,0.515|0.48|0.49|79900|19981
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4865855|Spread: Vikings (-4.5)|spreads|-4.5|Vikings,Saints|0.455,0.545|0.45|0.46|48356|2115
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4865856|Spread: Vikings (-5.5)|spreads|-5.5|Vikings,Saints|0.445,0.555|0.44|0.45|51289|2562
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4061600|Vikings vs. Saints: O/U 39.5|totals|39.5|Over,Under|0.51,0.49|0.5|0.52|11249|124
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4866034|Vikings vs. Saints: O/U 40.5|totals|40.5|Over,Under|0.48,0.52|0.47|0.49|10665|0
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4061601|Vikings vs. Saints: O/U 41.5|totals|41.5|Over,Under|0.45,0.55|0.44|0.46|71974|80780
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4866086|Vikings Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.55,0.45|0.52|0.58|2404|196
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4866097|Saints Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.365,0.635|0.33|0.4|2887|18
-P|nfl-min-no-2026-10-11|game|2026-10-11T17:00:00Z|4866092|Saints Team Total: O/U 10.5|team_totals|10.5|Over,Under|0.78,0.22|0.75|0.81|2129|0
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4024666|Browns vs. Jets|moneyline||Browns,Jets|0.255,0.745|0.25|0.26|308315|643185
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865491|Spread: Jets (-7.5)|spreads|-7.5|Jets,Browns|0.485,0.515|0.48|0.49|48804|111158
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865492|Spread: Jets (-8.5)|spreads|-8.5|Jets,Browns|0.445,0.555|0.44|0.45|4455|1424
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865493|Spread: Jets (-9.5)|spreads|-9.5|Jets,Browns|0.445,0.555|0.44|0.45|41932|6616
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4061574|Browns vs. Jets: O/U 40.5|totals|40.5|Over,Under|0.515,0.485|0.51|0.52|53135|32731
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4061576|Browns vs. Jets: O/U 42.5|totals|42.5|Over,Under|0.465,0.535|0.46|0.47|30554|1013
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4061572|Browns vs. Jets: O/U 38.5|totals|38.5|Over,Under|0.585,0.415|0.58|0.59|51990|41122
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865687|Browns Team Total: O/U 19.5|team_totals|19.5|Over,Under|0.4,0.6|0.36|0.44|1716|526
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865688|Browns Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.345,0.655|0.29|0.4|2007|0
-P|nfl-cle-nyj-2026-10-11|game|2026-10-11T17:00:00Z|4865699|Jets Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.655,0.345|0.6|0.71|1469|209
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4024667|Colts vs. Steelers|moneyline||Colts,Steelers|0.41,0.59|0.4|0.42|261622|211433
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061525|Spread: Steelers (-3.5)|spreads|-3.5|Steelers,Colts|0.465,0.535|0.46|0.47|54485|95798
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061524|Spread: Steelers (-2.5)|spreads|-2.5|Steelers,Colts|0.55,0.45|0.54|0.56|55354|69757
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061523|Spread: Steelers (-1.5)|spreads|-1.5|Steelers,Colts|0.56,0.44|0.55|0.57|29988|3205
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061538|Colts vs. Steelers: O/U 48.5|totals|48.5|Over,Under|0.525,0.475|0.51|0.54|9125|10
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061539|Colts vs. Steelers: O/U 50.5|totals|50.5|Over,Under|0.46,0.54|0.45|0.47|6184|36
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4061537|Colts vs. Steelers: O/U 46.5|totals|46.5|Over,Under|0.59,0.41|0.58|0.6|12841|2250
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4844340|Colts Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.6,0.4|0.58|0.62|1483|232
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4844352|Steelers Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.605,0.395|0.56|0.65|3040|10
-P|nfl-ind-pit-2026-10-11|game|2026-10-11T17:00:00Z|4844351|Steelers Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.73,0.27|0.7|0.76|1989|11
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4024668|Texans vs. Titans|moneyline||Texans,Titans|0.695,0.305|0.69|0.7|266499|947458
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4061481|Spread: Texans (-4.5)|spreads|-4.5|Texans,Titans|0.51,0.49|0.5|0.52|21848|9209
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4843880|Spread: Texans (-5.5)|spreads|-5.5|Texans,Titans|0.49,0.51|0.48|0.5|22116|4598
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4061483|Spread: Texans (-6.5)|spreads|-6.5|Texans,Titans|0.45,0.55|0.44|0.46|37386|121619
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4061497|Texans vs. Titans: O/U 36.5|totals|36.5|Over,Under|0.505,0.495|0.5|0.51|69791|31635
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4061499|Texans vs. Titans: O/U 38.5|totals|38.5|Over,Under|0.44,0.56|0.43|0.45|46520|633328
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4061501|Texans vs. Titans: O/U 40.5|totals|40.5|Over,Under|0.375,0.625|0.37|0.38|31166|6062
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4844085|Texans Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.495,0.505|0.48|0.51|2309|3424
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4844094|Titans Team Total: O/U 16.5|team_totals|16.5|Over,Under|0.465,0.535|0.44|0.49|1660|272
-P|nfl-hou-ten-2026-10-11|game|2026-10-11T17:00:00Z|4844091|Titans Team Total: O/U 10.5|team_totals|10.5|Over,Under|0.735,0.265|0.69|0.78|647|0
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4024671|Giants vs. Commanders|moneyline||Giants,Commanders|0.255,0.745|0.25|0.26|390878|100674
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843593|Spread: Commanders (-7.5)|spreads|-7.5|Commanders,Giants|0.515,0.485|0.51|0.52|35463|4663
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843594|Spread: Commanders (-8.5)|spreads|-8.5|Commanders,Giants|0.485,0.515|0.48|0.49|16290|371
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843595|Spread: Commanders (-9.5)|spreads|-9.5|Commanders,Giants|0.465,0.535|0.46|0.47|31512|2557
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843780|Giants vs. Commanders: O/U 42.5|totals|42.5|Over,Under|0.495,0.505|0.49|0.5|65744|16830
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4061451|Giants vs. Commanders: O/U 41.5|totals|41.5|Over,Under|0.525,0.475|0.52|0.53|56488|93519
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4061452|Giants vs. Commanders: O/U 43.5|totals|43.5|Over,Under|0.455,0.545|0.45|0.46|59975|16025
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843843|Commanders Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.595,0.405|0.57|0.62|1756|0
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843831|Giants Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.325,0.675|0.29|0.36|22678|5027
-P|nfl-nyg-was-2026-10-11|game|2026-10-11T17:00:00Z|4843842|Commanders Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.74,0.26|0.71|0.77|1991|0
-P|nfl-cle-nyj-2026-10-11-player-props|props|2026-10-11T17:00:00Z|5379885|Deshaun Watson: Passing Yards O/U 174.5|passing_yards|174.5|Over,Under|0.57,0.43|0.51|0.63|509|0
-P|nfl-cle-nyj-2026-10-11-player-props|props|2026-10-11T17:00:00Z|5379886|Deshaun Watson: Passing Yards O/U 199.5|passing_yards|199.5|Over,Under|0.4,0.6|0.34|0.46|276|0
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4024675|Broncos vs. Chargers|moneyline||Broncos,Chargers|0.635,0.365|0.63|0.64|1055612|18556
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843321|Spread: Broncos (-3.5)|spreads|-3.5|Broncos,Chargers|0.495,0.505|0.49|0.5|876189|183666
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843322|Spread: Broncos (-4.5)|spreads|-4.5|Broncos,Chargers|0.455,0.545|0.45|0.46|331981|210
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843323|Spread: Broncos (-5.5)|spreads|-5.5|Broncos,Chargers|0.435,0.565|0.43|0.44|235352|0
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4061428|Broncos vs. Chargers: O/U 42.5|totals|42.5|Over,Under|0.485,0.515|0.48|0.49|381311|14035
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4061427|Broncos vs. Chargers: O/U 40.5|totals|40.5|Over,Under|0.555,0.445|0.55|0.56|240648|188
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4061429|Broncos vs. Chargers: O/U 44.5|totals|44.5|Over,Under|0.415,0.585|0.41|0.42|57412|105
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843524|Broncos Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.475,0.525|0.47|0.48|17153|778
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843533|Chargers Team Total: O/U 19.5|team_totals|19.5|Over,Under|0.475,0.525|0.47|0.48|22718|123
-P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4843534|Chargers Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.415,0.585|0.4|0.43|7601|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5380374|Bo Nix: Anytime Touchdown|anytime_touchdowns||Yes,No|0.16,0.84|0.13|0.19|12282|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5380380|Evan Engram: Anytime Touchdown|anytime_touchdowns||Yes,No|0.16,0.84|0.15|0.17|11490|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5380383|J.K. Dobbins: Anytime Touchdown|anytime_touchdowns||Yes,No|0.35,0.65|0.34|0.36|9929|51
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5380385|Jaylen Waddle: Anytime Touchdown|anytime_touchdowns||Yes,No|0.305,0.695|0.29|0.32|12791|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5380397|Omarion Hampton: Anytime Touchdown|anytime_touchdowns||Yes,No|0.325,0.675|0.32|0.33|12458|82
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5395928|Justin Herbert: Passing Yards O/U 249.5|passing_yards|249.5|Over,Under|0.245,0.755|0.22|0.27|412|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5396258|Omarion Hampton: Rushing Yards O/U 39.5|rushing_yards|39.5|Over,Under|0.525,0.475|0.5|0.55|445|5
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5396262|RJ Harvey: Rushing Yards O/U 19.5|rushing_yards|19.5|Over,Under|0.635,0.365|0.62|0.65|235|117
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5396266|Courtland Sutton: Receiving Yards O/U 39.5|receiving_yards|39.5|Over,Under|0.52,0.48|0.49|0.55|249|0
-P|nfl-den-lac-2026-10-11-player-props|props|2026-10-11T20:05:00Z|5405536|Evan Engram: Receptions O/U 2.5|receptions|2.5|Over,Under|0.435,0.565|0.42|0.45|2074|0
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4024677|Lions vs. Cardinals|moneyline||Lions,Cardinals|0.695,0.305|0.69|0.7|1999332|15416
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4061388|Spread: Lions (-4.5)|spreads|-4.5|Lions,Cardinals|0.515,0.485|0.51|0.52|999826|54712
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4843067|Spread: Lions (-5.5)|spreads|-5.5|Lions,Cardinals|0.485,0.515|0.48|0.49|1235632|16710
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4843066|Spread: Lions (-3.5)|spreads|-3.5|Lions,Cardinals|0.545,0.455|0.54|0.55|229542|105
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4061406|Lions vs. Cardinals: O/U 54.5|totals|54.5|Over,Under|0.505,0.495|0.5|0.51|336907|205470
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4061405|Lions vs. Cardinals: O/U 52.5|totals|52.5|Over,Under|0.565,0.435|0.56|0.57|189380|320
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4061407|Lions vs. Cardinals: O/U 56.5|totals|56.5|Over,Under|0.435,0.565|0.43|0.44|194878|69
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4843274|Lions Team Total: O/U 30.5|team_totals|30.5|Over,Under|0.485,0.515|0.47|0.5|15433|4249
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4843282|Cardinals Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.55,0.45|0.51|0.59|6070|0
-P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4843283|Cardinals Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.425,0.575|0.38|0.47|5948|0
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4024678|Bears vs. Packers|moneyline||Bears,Packers|0.245,0.755|0.24|0.25|225706|552655
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4842817|Spread: Packers (-7.5)|spreads|-7.5|Packers,Bears|0.5,0.5|0.49|0.51|9382|5117
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4842818|Spread: Packers (-8.5)|spreads|-8.5|Packers,Bears|0.465,0.535|0.41|0.52|1056|440
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4061366|Spread: Packers (-6.5)|spreads|-6.5|Packers,Bears|0.535,0.465|0.53|0.54|16559|1068
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4061377|Bears vs. Packers: O/U 48.5|totals|48.5|Over,Under|0.485,0.515|0.48|0.49|17844|1665
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4061376|Bears vs. Packers: O/U 46.5|totals|46.5|Over,Under|0.56,0.44|0.55|0.57|40734|258957
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4061375|Bears vs. Packers: O/U 44.5|totals|44.5|Over,Under|0.625,0.375|0.61|0.64|35497|9507
-P|nfl-chi-gb-2026-10-11|game|2026-10-11T20:25:00Z|4843012|Bears Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.515,0.485|0.46|0.57|560|11
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4024680|49ers vs. Seahawks|moneyline||49ers,Seahawks|0.395,0.605|0.39|0.4|1607734|105611
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061337|Spread: Seahawks (-3.5)|spreads|-3.5|Seahawks,49ers|0.455,0.545|0.45|0.46|1598170|42176
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842542|Spread: Seahawks (-2.5)|spreads|-2.5|Seahawks,49ers|0.565,0.435|0.56|0.57|647731|7404
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061338|Spread: Seahawks (-4.5)|spreads|-4.5|Seahawks,49ers|0.435,0.565|0.43|0.44|326343|13335
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842701|49ers vs. Seahawks: O/U 46.5|totals|46.5|Over,Under|0.515,0.485|0.51|0.52|459181|135973
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061351|49ers vs. Seahawks: O/U 47.5|totals|47.5|Over,Under|0.475,0.525|0.47|0.48|257741|10450
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061350|49ers vs. Seahawks: O/U 45.5|totals|45.5|Over,Under|0.545,0.455|0.54|0.55|228293|6495
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842750|49ers Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.535,0.465|0.53|0.54|7581|169
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842762|Seahawks Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.56,0.44|0.51|0.61|5889|0
-P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842763|Seahawks Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.435,0.565|0.39|0.48|6107|0
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381035|Sam Darnold: Passing Yards O/U 224.5|passing_yards|224.5|Over,Under|0.575,0.425|0.55|0.6|20|50
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381050|Brock Purdy: Rushing Yards O/U 24.5|rushing_yards|24.5|Over,Under|0.475,0.525|0.46|0.49|549|5
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381055|Christian McCaffrey: Rushing Yards O/U 49.5|rushing_yards|49.5|Over,Under|0.51,0.49|0.5|0.52|5455|513
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381135|Brock Purdy: Anytime Touchdown|anytime_touchdowns||Yes,No|0.12,0.88|0.09|0.15|12309|312
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381137|Christian McCaffrey: Anytime Touchdown|anytime_touchdowns||Yes,No|0.525,0.475|0.5|0.55|6531|44
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381141|Deebo Samuel Sr.: Anytime Touchdown|anytime_touchdowns||Yes,No|0.255,0.745|0.23|0.28|9238|0
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381145|Emanuel Wilson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.5,0.5|0.49|0.51|9005|0
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381148|George Holani: Anytime Touchdown|anytime_touchdowns||Yes,No|0.235,0.765|0.23|0.24|1479|5
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381150|George Kittle: Anytime Touchdown|anytime_touchdowns||Yes,No|0.32,0.68|0.31|0.33|11063|317
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381154|Jaxon Smith-Njigba: Anytime Touchdown|anytime_touchdowns||Yes,No|0.48,0.52|0.47|0.49|9436|26
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381161|Mike Evans: Anytime Touchdown|anytime_touchdowns||Yes,No|0.295,0.705|0.27|0.32|9483|0
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381182|Sam Darnold: Passing Attempts O/U 35.5|passing_attempts|35.5|Over,Under|0.28,0.72|0.25|0.31|52|13
-P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5403655|Emanuel Wilson: Rushing Yards O/U 59.5|rushing_yards|59.5|Over,Under|0.565,0.435|0.51|0.62|1173|0
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381223|Amon-Ra St. Brown: Anytime Touchdown|anytime_touchdowns||Yes,No|0.55,0.45|0.54|0.56|9192|718
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381237|Jacoby Brissett: Anytime Touchdown|anytime_touchdowns||Yes,No|0.125,0.875|0.11|0.14|2127|0
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381239|Jahmyr Gibbs: Anytime Touchdown|anytime_touchdowns||Yes,No|0.76,0.24|0.75|0.77|5790|125
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381242|Jameson Williams: Anytime Touchdown|anytime_touchdowns||Yes,No|0.315,0.685|0.29|0.34|9286|6
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381246|Jeremiyah Love: Anytime Touchdown|anytime_touchdowns||Yes,No|0.48,0.52|0.47|0.49|4867|5
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381252|Michael Wilson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.37,0.63|0.36|0.38|12016|403
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381255|Sam LaPorta: Anytime Touchdown|anytime_touchdowns||Yes,No|0.36,0.64|0.35|0.37|9095|63
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381262|Trey McBride: Anytime Touchdown|anytime_touchdowns||Yes,No|0.465,0.535|0.46|0.47|11779|333
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381276|Jared Goff: Passing Attempts O/U 35.5|passing_attempts|35.5|Over,Under|0.46,0.54|0.45|0.47|1331|0
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5398191|Jahmyr Gibbs: Rushing Yards O/U 89.5|rushing_yards|89.5|Over,Under|0.525,0.475|0.51|0.54|3171|0
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5398206|Amon-Ra St. Brown: Receiving Yards O/U 99.5|receiving_yards|99.5|Over,Under|0.345,0.655|0.34|0.35|561|256
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5398258|Trey McBride: Receiving Yards O/U 79.5|receiving_yards|79.5|Over,Under|0.545,0.455|0.54|0.55|504|156
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5398265|Amon-Ra St. Brown: Receptions O/U 6.5|receptions|6.5|Over,Under|0.59,0.41|0.58|0.6|2861|0
-P|nfl-det-ari-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5398293|Trey McBride: Receptions O/U 7.5|receptions|7.5|Over,Under|0.525,0.475|0.5|0.55|1920|351
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4024681|Ravens vs. Falcons|moneyline||Ravens,Falcons|0.385,0.615|0.38|0.39|1080521|65606
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842257|Spread: Falcons (-3.5)|spreads|-3.5|Falcons,Ravens|0.475,0.525|0.47|0.48|798811|12309
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842258|Spread: Falcons (-4.5)|spreads|-4.5|Falcons,Ravens|0.445,0.555|0.44|0.45|474867|34
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842256|Spread: Falcons (-2.5)|spreads|-2.5|Falcons,Ravens|0.575,0.425|0.57|0.58|376131|4701
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4061313|Ravens vs. Falcons: O/U 43.5|totals|43.5|Over,Under|0.505,0.495|0.5|0.51|352288|36941
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842417|Ravens vs. Falcons: O/U 42.5|totals|42.5|Over,Under|0.535,0.465|0.53|0.54|228406|588
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842418|Ravens vs. Falcons: O/U 44.5|totals|44.5|Over,Under|0.455,0.545|0.45|0.46|212896|908
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842468|Ravens Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.47,0.53|0.46|0.48|7391|0
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842467|Ravens Team Total: O/U 19.5|team_totals|19.5|Over,Under|0.55,0.45|0.51|0.59|6036|0
-P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842479|Falcons Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.625,0.375|0.61|0.64|7342|3
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380957|Bijan Robinson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.645,0.355|0.63|0.66|5996|27
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380963|Derrick Henry: Anytime Touchdown|anytime_touchdowns||Yes,No|0.57,0.43|0.56|0.58|9891|1304
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380967|Drake London: Anytime Touchdown|anytime_touchdowns||Yes,No|0.42,0.58|0.4|0.44|9364|8
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380975|Kyle Pitts Sr.: Anytime Touchdown|anytime_touchdowns||Yes,No|0.19,0.81|0.17|0.21|10343|5
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380998|Michael Penix Jr.: Passing Completions O/U 19.5|passing_completions|19.5|Over,Under|0.43,0.57|0.4|0.46|35|0
-P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5469001|Tyler Huntley: Passing Yards O/U 174.5|passing_yards|174.5|Over,Under|0.515,0.485|0.5|0.53|1706|0
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4058840|Bills vs. Rams|moneyline||Bills,Rams|0.385,0.615|0.38|0.39|649670|52976
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061234|Spread: Rams (-3.5)|spreads|-3.5|Rams,Bills|0.475,0.525|0.47|0.48|468267|4890
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061238|Spread: Rams (-4.5)|spreads|-4.5|Rams,Bills|0.435,0.565|0.43|0.44|272338|16
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4841935|Spread: Rams (-2.5)|spreads|-2.5|Rams,Bills|0.575,0.425|0.57|0.58|264839|8577
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061255|Bills vs. Rams: O/U 54.5|totals|54.5|Over,Under|0.485,0.515|0.48|0.49|171433|43
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061252|Bills vs. Rams: O/U 52.5|totals|52.5|Over,Under|0.56,0.44|0.55|0.57|143592|0
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061258|Bills vs. Rams: O/U 56.5|totals|56.5|Over,Under|0.425,0.575|0.42|0.43|118096|68
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842196|Bills Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.48,0.52|0.47|0.49|11929|514
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842208|Rams Team Total: O/U 27.5|team_totals|27.5|Over,Under|0.575,0.425|0.56|0.59|11346|108
-P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842195|Bills Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.6,0.4|0.55|0.65|6022|0
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420281|Matthew Stafford: Passing Yards O/U 274.5|passing_yards|274.5|Over,Under|0.55,0.45|0.54|0.56|69|0
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420350|Kyren Williams: Receiving Yards O/U 19.5|receiving_yards|19.5|Over,Under|0.515,0.485|0.5|0.53|1211|619
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420394|Josh Allen: Anytime Touchdown|anytime_touchdowns||Yes,No|0.53,0.47|0.51|0.55|1051|27
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420396|Keon Coleman: Anytime Touchdown|anytime_touchdowns||Yes,No|0.29,0.71|0.28|0.3|1601|10
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444758|Keon Coleman: Receiving Yards O/U 39.5|receiving_yards|39.5|Over,Under|0.505,0.495|0.5|0.51|76|0
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444864|Khalil Shakir: Receiving Yards O/U 49.5|receiving_yards|49.5|Over,Under|0.47,0.53|0.45|0.49|82|0
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444875|Keon Coleman: Receptions O/U 3.5|receptions|3.5|Over,Under|0.38,0.62|0.37|0.39|686|5
-P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444879|Khalil Shakir: Receptions O/U 4.5|receptions|4.5|Over,Under|0.48,0.52|0.45|0.51|458|0
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4212356|Seahawks vs. Broncos|moneyline||Seahawks,Broncos|0.56,0.44|0.55|0.57|23603|2728
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367619|Spread: Seahawks (-2.5)|spreads|-2.5|Seahawks,Broncos|0.5,0.5|0.49|0.51|5750|0
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367618|Spread: Seahawks (-1.5)|spreads|-1.5|Seahawks,Broncos|0.515,0.485|0.5|0.53|7857|5
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367620|Spread: Seahawks (-3.5)|spreads|-3.5|Seahawks,Broncos|0.42,0.58|0.41|0.43|6260|0
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367632|Seahawks vs. Broncos: O/U 42.5|totals|42.5|Over,Under|0.485,0.515|0.47|0.5|9215|0
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367631|Seahawks vs. Broncos: O/U 40.5|totals|40.5|Over,Under|0.545,0.455|0.53|0.56|10237|2
-P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367633|Seahawks vs. Broncos: O/U 44.5|totals|44.5|Over,Under|0.415,0.585|0.4|0.43|10822|0
-P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4329882|Texans vs. Jaguars|moneyline||Texans,Jaguars|0.4,0.6|0.39|0.41|18852|82
-P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4367553|Texans vs. Jaguars: O/U 42.5|totals|42.5|Over,Under|0.5,0.5|0.45|0.55|8285|0
-P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|5127224|Spread: Jaguars (-2.5)|spreads|-2.5|Jaguars,Texans|0.55,0.45|0.49|0.61|5269|119
-P|nfl-chi-atl-2026-10-18|game|2026-10-18T17:00:00Z|4329883|Bears vs. Falcons|moneyline||Bears,Falcons|0.555,0.445|0.54|0.57|18285|14
-P|nfl-chi-atl-2026-10-18|game|2026-10-18T17:00:00Z|4367492|Spread: Bears (-1.5)|spreads|-1.5|Bears,Falcons|0.5,0.5|0.45|0.55|5050|9
-P|nfl-chi-atl-2026-10-18|game|2026-10-18T17:00:00Z|5129251|Bears vs. Falcons: O/U 48.5|totals|48.5|Over,Under|0.495,0.505|0.44|0.55|7652|0
-P|nfl-chi-atl-2026-10-18|game|2026-10-18T17:00:00Z|4367512|Bears vs. Falcons: O/U 47.5|totals|47.5|Over,Under|0.535,0.465|0.5|0.57|7549|600
-P|nfl-bal-cle-2026-10-18|game|2026-10-18T17:00:00Z|4329884|Ravens vs. Browns|moneyline||Ravens,Browns|0.665,0.335|0.65|0.68|16737|4025
-P|nfl-bal-cle-2026-10-18|game|2026-10-18T17:00:00Z|4367453|Spread: Ravens (-3.5)|spreads|-3.5|Ravens,Browns|0.5,0.5|0.45|0.55|5177|0
-P|nfl-ten-ind-2026-10-18|game|2026-10-18T17:00:00Z|4329885|Titans vs. Colts|moneyline||Titans,Colts|0.27,0.73|0.25|0.29|20277|22
-P|nfl-ten-ind-2026-10-18|game|2026-10-18T17:00:00Z|4367427|Spread: Colts (-6.5)|spreads|-6.5|Colts,Titans|0.5,0.5|0.45|0.55|7796|0
-P|nfl-nyj-ne-2026-10-18|game|2026-10-18T17:00:00Z|4329886|Jets vs. Patriots|moneyline||Jets,Patriots|0.25,0.75|0.23|0.27|20405|2
-P|nfl-no-nyg-2026-10-18|game|2026-10-18T17:00:00Z|4329887|Saints vs. Giants|moneyline||Saints,Giants|0.53,0.47|0.52|0.54|17280|201
-P|nfl-no-nyg-2026-10-18|game|2026-10-18T17:00:00Z|4367387|Saints vs. Giants: O/U 44.5|totals|44.5|Over,Under|0.51,0.49|0.45|0.57|7195|0
-P|nfl-no-nyg-2026-10-18|game|2026-10-18T17:00:00Z|5128023|Spread: Saints (-1.5)|spreads|-1.5|Saints,Giants|0.495,0.505|0.44|0.55|5359|0
-P|nfl-car-phi-2026-10-18|game|2026-10-18T17:00:00Z|4329888|Panthers vs. Eagles|moneyline||Panthers,Eagles|0.48,0.52|0.46|0.5|17265|2505
-P|nfl-car-phi-2026-10-18|game|2026-10-18T17:00:00Z|5127766|Spread: Eagles (-1.5)|spreads|-1.5|Eagles,Panthers|0.495,0.505|0.44|0.55|5299|0
-P|nfl-car-phi-2026-10-18|game|2026-10-18T17:00:00Z|5127923|Panthers vs. Eagles: O/U 42.5|totals|42.5|Over,Under|0.505,0.495|0.45|0.56|7786|0
-P|nfl-pit-tb-2026-10-18|game|2026-10-18T17:00:00Z|4329889|Steelers vs. Buccaneers|moneyline||Steelers,Buccaneers|0.565,0.435|0.55|0.58|17088|18
-P|nfl-pit-tb-2026-10-18|game|2026-10-18T17:00:00Z|4367333|Steelers vs. Buccaneers: O/U 39.5|totals|39.5|Over,Under|0.495,0.505|0.44|0.55|7671|0
-P|nfl-pit-tb-2026-10-18|game|2026-10-18T17:00:00Z|5127467|Spread: Steelers (-2.5)|spreads|-2.5|Steelers,Buccaneers|0.505,0.495|0.45|0.56|5442|0
-P|nfl-ari-la-2026-10-18|game|2026-10-18T20:05:00Z|4329890|Cardinals vs. Rams|moneyline||Cardinals,Rams|0.15,0.85|0.13|0.17|22617|22
-P|nfl-ari-la-2026-10-18|game|2026-10-18T20:05:00Z|4367294|Spread: Rams (-10.5)|spreads|-10.5|Rams,Cardinals|0.5,0.5|0.45|0.55|8714|0
-P|nfl-ari-la-2026-10-18|game|2026-10-18T20:05:00Z|5129527|Cardinals vs. Rams: O/U 50.5|totals|50.5|Over,Under|0.5,0.5|0.45|0.55|8026|0
-P|nfl-lac-kc-2026-10-18|game|2026-10-18T20:25:00Z|4329891|Chargers vs. Chiefs|moneyline||Chargers,Chiefs|0.2,0.8|0.18|0.22|22499|18
-P|nfl-lac-kc-2026-10-18|game|2026-10-18T20:25:00Z|5129898|Spread: Chiefs (-7.5)|spreads|-7.5|Chiefs,Chargers|0.5,0.5|0.45|0.55|9034|63
-P|nfl-buf-lv-2026-10-18|game|2026-10-18T20:25:00Z|4329892|Bills vs. Raiders|moneyline||Bills,Raiders|0.69,0.31|0.67|0.71|23983|1
-P|nfl-buf-lv-2026-10-18|game|2026-10-18T20:25:00Z|4367243|Spread: Bills (-4.5)|spreads|-4.5|Bills,Raiders|0.515,0.485|0.46|0.57|8220|0
-P|nfl-dal-gb-2026-10-19|game|2026-10-19T00:20:00Z|4329893|Cowboys vs. Packers|moneyline||Cowboys,Packers|0.535,0.465|0.52|0.55|22971|10
-P|nfl-dal-gb-2026-10-19|game|2026-10-19T00:20:00Z|5130134|Spread: Cowboys (-1.5)|spreads|-1.5|Cowboys,Packers|0.505,0.495|0.45|0.56|5654|0
-P|nfl-dal-gb-2026-10-19|game|2026-10-19T00:20:00Z|5130346|Cowboys vs. Packers: O/U 50.5|totals|50.5|Over,Under|0.51,0.49|0.45|0.57|8646|0
-P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557991|Kraken vs. Capitals|moneyline||Kraken,Capitals|0.345,0.655|0.34|0.35|216714|25465
-P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557994|Kraken vs. Capitals: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.47|0.48|90184|2648
-P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557993|Kraken vs. Capitals: O/U 5.5|totals|5.5|Over,Under|0.59,0.41|0.58|0.6|47245|1020
-P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557995|Kraken vs. Capitals: O/U 7.5|totals|7.5|Over,Under|0.275,0.725|0.27|0.28|39259|10
-P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|5505467|Spread: Capitals (-1.5)|spreads|-1.5|Capitals,Kraken|0.435,0.565|0.43|0.44|125029|806
-P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557996|Canucks vs. Rangers|moneyline||Canucks,Rangers|0.285,0.715|0.28|0.29|219800|13932
-P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557999|Canucks vs. Rangers: O/U 6.5|totals|6.5|Over,Under|0.465,0.535|0.46|0.47|97796|140
-P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557998|Canucks vs. Rangers: O/U 5.5|totals|5.5|Over,Under|0.58,0.42|0.57|0.59|83119|166
-P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4558000|Canucks vs. Rangers: O/U 7.5|totals|7.5|Over,Under|0.255,0.745|0.25|0.26|17355|174
-P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|5505466|Spread: Rangers (-1.5)|spreads|-1.5|Rangers,Canucks|0.495,0.505|0.49|0.5|124028|1981
-P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558001|Hurricanes vs. Flyers|moneyline||Hurricanes,Flyers|0.665,0.335|0.66|0.67|362391|20368
-P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558003|Hurricanes vs. Flyers: O/U 5.5|totals|5.5|Over,Under|0.525,0.475|0.52|0.53|86790|937
-P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558004|Hurricanes vs. Flyers: O/U 6.5|totals|6.5|Over,Under|0.415,0.585|0.41|0.42|48033|147
-P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558002|Hurricanes vs. Flyers: O/U 4.5|totals|4.5|Over,Under|0.755,0.245|0.75|0.76|49357|0
-P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|5505465|Spread: Hurricanes (-1.5)|spreads|-1.5|Hurricanes,Flyers|0.425,0.575|0.42|0.43|97375|782
-P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586623|Panthers vs. Sabres|moneyline||Panthers,Sabres|0.505,0.495|0.5|0.51|29334|4733
-P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586626|Panthers vs. Sabres: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.45|0.46|13202|113
-P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586625|Panthers vs. Sabres: O/U 5.5|totals|5.5|Over,Under|0.555,0.445|0.55|0.56|10709|2136
-P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586627|Panthers vs. Sabres: O/U 7.5|totals|7.5|Over,Under|0.265,0.735|0.25|0.28|8889|20
-P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|5568262|Spread: Panthers (-1.5)|spreads|-1.5|Panthers,Sabres|0.31,0.69|0.28|0.34|2514|0
-P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586628|Senators vs. Devils|moneyline||Senators,Devils|0.445,0.555|0.44|0.45|21077|3468
-P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586630|Senators vs. Devils: O/U 5.5|totals|5.5|Over,Under|0.545,0.455|0.53|0.56|8078|0
-P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586631|Senators vs. Devils: O/U 6.5|totals|6.5|Over,Under|0.425,0.575|0.41|0.44|5191|0
-P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586632|Senators vs. Devils: O/U 7.5|totals|7.5|Over,Under|0.25,0.75|0.24|0.26|5203|0
-P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586633|Golden Knights vs. Wild|moneyline||GoldenKnights,Wild|0.495,0.505|0.49|0.5|25337|6701
-P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586636|Golden Knights vs. Wild: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.44|0.47|11355|5
-P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586635|Golden Knights vs. Wild: O/U 5.5|totals|5.5|Over,Under|0.555,0.445|0.54|0.57|8945|0
-P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586637|Golden Knights vs. Wild: O/U 7.5|totals|7.5|Over,Under|0.275,0.725|0.26|0.29|7222|0
-P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616286|Devils vs. Red Wings|moneyline||Devils,RedWings|0.465,0.535|0.46|0.47|20133|209
-P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616292|Devils vs. Red Wings: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.45|0.5|4553|0
-P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616290|Devils vs. Red Wings: O/U 5.5|totals|5.5|Over,Under|0.575,0.425|0.56|0.59|5431|0
-P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616288|Devils vs. Red Wings: O/U 4.5|totals|4.5|Over,Under|0.78,0.22|0.76|0.8|5940|0
-P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616299|Panthers vs. Blue Jackets|moneyline||Panthers,BlueJackets|0.455,0.545|0.45|0.46|14034|0
-P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616303|Panthers vs. Blue Jackets: O/U 5.5|totals|5.5|Over,Under|0.545,0.455|0.52|0.57|5415|0
-P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616305|Panthers vs. Blue Jackets: O/U 6.5|totals|6.5|Over,Under|0.445,0.555|0.42|0.47|5556|0
-P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616307|Panthers vs. Blue Jackets: O/U 7.5|totals|7.5|Over,Under|0.23,0.77|0.19|0.27|5496|0
-P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616312|Sabres vs. Canadiens|moneyline||Sabres,Canadiens|0.445,0.555|0.44|0.45|11850|5
-P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616318|Sabres vs. Canadiens: O/U 6.5|totals|6.5|Over,Under|0.495,0.505|0.49|0.5|5052|0
-P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616320|Sabres vs. Canadiens: O/U 7.5|totals|7.5|Over,Under|0.25,0.75|0.23|0.27|5459|0
-P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616314|Sabres vs. Canadiens: O/U 4.5|totals|4.5|Over,Under|0.785,0.215|0.73|0.84|4161|0
-P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616325|Capitals vs. Hurricanes|moneyline||Capitals,Hurricanes|0.405,0.595|0.4|0.41|11421|13
-P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616331|Capitals vs. Hurricanes: O/U 6.5|totals|6.5|Over,Under|0.46,0.54|0.44|0.48|5584|0
-P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616333|Capitals vs. Hurricanes: O/U 7.5|totals|7.5|Over,Under|0.26,0.74|0.24|0.28|6352|0
-P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616338|Kraken vs. Flyers|moneyline||Kraken,Flyers|0.495,0.505|0.49|0.5|18120|470
-P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616342|Kraken vs. Flyers: O/U 5.5|totals|5.5|Over,Under|0.515,0.485|0.5|0.53|4911|0
-P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616344|Kraken vs. Flyers: O/U 6.5|totals|6.5|Over,Under|0.415,0.585|0.39|0.44|5339|0
-P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616340|Kraken vs. Flyers: O/U 4.5|totals|4.5|Over,Under|0.755,0.245|0.71|0.8|5817|0
-P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616351|Lightning vs. Rangers|moneyline||Lightning,Rangers|0.58,0.42|0.57|0.59|11038|27
-P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616355|Lightning vs. Rangers: O/U 5.5|totals|5.5|Over,Under|0.505,0.495|0.48|0.53|5636|12
-P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616353|Lightning vs. Rangers: O/U 4.5|totals|4.5|Over,Under|0.74,0.26|0.7|0.78|5479|0
-P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616362|Blues vs. Senators|moneyline||Blues,Senators|0.435,0.565|0.43|0.44|5871|136
-P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616364|Blues vs. Senators: O/U 5.5|totals|5.5|Over,Under|0.525,0.475|0.5|0.55|1350|0
-P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616365|Blues vs. Senators: O/U 6.5|totals|6.5|Over,Under|0.425,0.575|0.4|0.45|2279|0
-P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616363|Blues vs. Senators: O/U 4.5|totals|4.5|Over,Under|0.77,0.23|0.72|0.82|1616|0
-P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616367|Canucks vs. Islanders|moneyline||Canucks,Islanders|0.325,0.675|0.32|0.33|13544|7
-P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616370|Canucks vs. Islanders: O/U 6.5|totals|6.5|Over,Under|0.415,0.585|0.4|0.43|4633|0
-P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616368|Canucks vs. Islanders: O/U 4.5|totals|4.5|Over,Under|0.76,0.24|0.72|0.8|5333|0
-P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616371|Canucks vs. Islanders: O/U 7.5|totals|7.5|Over,Under|0.225,0.775|0.21|0.24|3946|0
-P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616374|Penguins vs. Blackhawks|moneyline||Penguins,Blackhawks|0.605,0.395|0.6|0.61|14209|52
-P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616380|Penguins vs. Blackhawks: O/U 6.5|totals|6.5|Over,Under|0.515,0.485|0.49|0.54|5642|0
-P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616378|Penguins vs. Blackhawks: O/U 5.5|totals|5.5|Over,Under|0.615,0.385|0.59|0.64|4811|0
-P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616382|Penguins vs. Blackhawks: O/U 7.5|totals|7.5|Over,Under|0.305,0.695|0.28|0.33|5596|0
-P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616387|Wild vs. Jets|moneyline||Wild,Jets|0.555,0.445|0.55|0.56|14070|11
-P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616391|Wild vs. Jets: O/U 5.5|totals|5.5|Over,Under|0.525,0.475|0.5|0.55|5416|0
-P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616394|Wild vs. Jets: O/U 6.5|totals|6.5|Over,Under|0.415,0.585|0.38|0.45|4311|0
-P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616389|Wild vs. Jets: O/U 4.5|totals|4.5|Over,Under|0.745,0.255|0.72|0.77|5620|0
-P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616401|Avalanche vs. Stars|moneyline||Avalanche,Stars|0.54,0.46|0.53|0.55|11605|112
-P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616407|Avalanche vs. Stars: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.43|0.48|5926|0
-P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616405|Avalanche vs. Stars: O/U 5.5|totals|5.5|Over,Under|0.545,0.455|0.51|0.58|6391|33
-P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616403|Avalanche vs. Stars: O/U 4.5|totals|4.5|Over,Under|0.765,0.235|0.74|0.79|5772|0
-P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616414|Golden Knights vs. Predators|moneyline||GoldenKnights,Predators|0.565,0.435|0.56|0.57|11158|107
-P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616420|Golden Knights vs. Predators: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.45|0.5|5191|0
-P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616418|Golden Knights vs. Predators: O/U 5.5|totals|5.5|Over,Under|0.575,0.425|0.54|0.61|5048|0
-P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616422|Golden Knights vs. Predators: O/U 7.5|totals|7.5|Over,Under|0.25,0.75|0.2|0.3|5482|0
-P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616428|Maple Leafs vs. Utah|moneyline||MapleLeafs,Utah|0.39,0.61|0.38|0.4|11204|25
-P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616434|Maple Leafs vs. Utah: O/U 6.5|totals|6.5|Over,Under|0.5,0.5|0.48|0.52|5548|0
-P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616431|Maple Leafs vs. Utah: O/U 5.5|totals|5.5|Over,Under|0.61,0.39|0.58|0.64|5774|0
-P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616435|Maple Leafs vs. Utah: O/U 7.5|totals|7.5|Over,Under|0.285,0.715|0.25|0.32|5420|0
-P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616441|Flames vs. Ducks|moneyline||Flames,Ducks|0.365,0.635|0.36|0.37|14895|109
-P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616447|Flames vs. Ducks: O/U 6.5|totals|6.5|Over,Under|0.485,0.515|0.46|0.51|5549|0
-P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616445|Flames vs. Ducks: O/U 5.5|totals|5.5|Over,Under|0.585,0.415|0.56|0.61|6063|0
-P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616449|Flames vs. Ducks: O/U 7.5|totals|7.5|Over,Under|0.285,0.715|0.26|0.31|6029|0
-P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616455|Oilers vs. Kings|moneyline||Oilers,Kings|0.565,0.435|0.56|0.57|13567|341
-P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616461|Oilers vs. Kings: O/U 6.5|totals|6.5|Over,Under|0.51,0.49|0.5|0.52|3284|0
-P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616459|Oilers vs. Kings: O/U 5.5|totals|5.5|Over,Under|0.57,0.43|0.54|0.6|4008|0
-P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616463|Oilers vs. Kings: O/U 7.5|totals|7.5|Over,Under|0.265,0.735|0.24|0.29|5965|0
-P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616469|Bruins vs. Sharks|moneyline||Bruins,Sharks|0.525,0.475|0.52|0.53|15016|134
-P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616475|Bruins vs. Sharks: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.45|0.5|5258|0
-P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616477|Bruins vs. Sharks: O/U 7.5|totals|7.5|Over,Under|0.27,0.73|0.25|0.29|6148|0
-P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616471|Bruins vs. Sharks: O/U 4.5|totals|4.5|Over,Under|0.795,0.205|0.75|0.84|5874|0
-P|nhl-mon-wsh-2026-10-14|game|2026-10-14T23:30:00Z|4640800|Canadiens vs. Capitals|moneyline||Canadiens,Capitals|0.465,0.535|0.46|0.47|8712|0
-P|nhl-dal-col-2026-10-14|game|2026-10-15T00:30:00Z|4640805|Stars vs. Avalanche|moneyline||Stars,Avalanche|0.405,0.595|0.4|0.41|9124|5
-P|nhl-van-fla-2026-10-15|game|2026-10-15T23:00:00Z|4688853|Canucks vs. Panthers|moneyline||Canucks,Panthers|0.265,0.735|0.26|0.27|9658|273
-P|nhl-buf-tor-2026-10-15|game|2026-10-15T23:00:00Z|4688858|Sabres vs. Maple Leafs|moneyline||Sabres,MapleLeafs|0.54,0.46|0.53|0.55|10255|5
-P|nhl-sea-tb-2026-10-15|game|2026-10-15T23:00:00Z|4688863|Kraken vs. Lightning|moneyline||Kraken,Lightning|0.34,0.66|0.33|0.35|10188|0
-P|nhl-nyi-ott-2026-10-15|game|2026-10-15T23:00:00Z|4688868|Islanders vs. Senators|moneyline||Islanders,Senators|0.415,0.585|0.41|0.42|1746|0
-P|nhl-nyr-nj-2026-10-15|game|2026-10-15T23:00:00Z|4688873|Rangers vs. Devils|moneyline||Rangers,Devils|0.505,0.495|0.5|0.51|9138|10
-P|nhl-phi-det-2026-10-15|game|2026-10-15T23:30:00Z|4688878|Flyers vs. Red Wings|moneyline||Flyers,RedWings|0.45,0.55|0.44|0.46|8545|0
-P|nhl-stl-min-2026-10-15|game|2026-10-16T00:00:00Z|4688883|Blues vs. Wild|moneyline||Blues,Wild|0.39,0.61|0.38|0.4|8654|5
-P|nhl-sj-nsh-2026-10-15|game|2026-10-16T00:00:00Z|4688888|Sharks vs. Predators|moneyline||Sharks,Predators|0.435,0.565|0.43|0.44|8450|0
-P|nhl-wpg-chi-2026-10-15|game|2026-10-16T00:00:00Z|4688893|Jets vs. Blackhawks|moneyline||Jets,Blackhawks|0.56,0.44|0.55|0.57|8668|0
-P|nhl-utah-edm-2026-10-15|game|2026-10-16T01:00:00Z|4688898|Utah vs. Oilers|moneyline||Utah,Oilers|0.46,0.54|0.45|0.47|8585|5
-P|nhl-cal-las-2026-10-15|game|2026-10-16T02:00:00Z|4688903|Flames vs. Golden Knights|moneyline||Flames,GoldenKnights|0.27,0.73|0.26|0.28|9526|331
-P|nhl-pit-col-2026-10-16|game|2026-10-17T01:00:00Z|4726819|Penguins vs. Avalanche|moneyline||Penguins,Avalanche|0.405,0.595|0.4|0.41|9691|10
-P|nhl-bos-ana-2026-10-16|game|2026-10-17T02:00:00Z|4726824|Bruins vs. Ducks|moneyline||Bruins,Ducks|0.5,0.5|0.49|0.51|9569|0
-P|nhl-nj-wsh-2026-10-17|game|2026-10-17T17:00:00Z|4761377|Devils vs. Capitals|moneyline||Devils,Capitals|0.355,0.645|0.34|0.37|8386|5
-P|nhl-car-wpg-2026-10-17|game|2026-10-17T19:30:00Z|4761382|Hurricanes vs. Jets|moneyline||Hurricanes,Jets|0.6,0.4|0.58|0.62|9274|0
-P|nhl-van-tb-2026-10-17|game|2026-10-17T20:00:00Z|4761387|Canucks vs. Lightning|moneyline||Canucks,Lightning|0.255,0.745|0.25|0.26|9331|227
-P|nhl-sea-fla-2026-10-17|game|2026-10-17T22:00:00Z|4761392|Kraken vs. Panthers|moneyline||Kraken,Panthers|0.415,0.585|0.41|0.42|9618|49
-P|nhl-nyr-cbj-2026-10-17|game|2026-10-17T23:00:00Z|4761397|Rangers vs. Blue Jackets|moneyline||Rangers,BlueJackets|0.485,0.515|0.46|0.51|8859|0
-P|nhl-nyi-tor-2026-10-17|game|2026-10-17T23:00:00Z|4761402|Islanders vs. Maple Leafs|moneyline||Islanders,MapleLeafs|0.48,0.52|0.47|0.49|9186|5
-P|nhl-ott-phi-2026-10-17|game|2026-10-17T23:00:00Z|4761407|Senators vs. Flyers|moneyline||Senators,Flyers|0.555,0.445|0.54|0.57|1689|0
-P|nhl-buf-mon-2026-10-17|game|2026-10-17T23:00:00Z|4761412|Sabres vs. Canadiens|moneyline||Sabres,Canadiens|0.485,0.515|0.47|0.5|9587|0
-P|nhl-sj-det-2026-10-17|game|2026-10-17T23:00:00Z|4761417|Sharks vs. Red Wings|moneyline||Sharks,RedWings|0.44,0.56|0.41|0.47|9612|0
-P|nhl-dal-chi-2026-10-17|game|2026-10-17T23:00:00Z|4761422|Stars vs. Blackhawks|moneyline||Stars,Blackhawks|0.665,0.335|0.65|0.68|9190|0
-P|nhl-stl-nsh-2026-10-17|game|2026-10-18T00:00:00Z|4761427|Blues vs. Predators|moneyline||Blues,Predators|0.46,0.54|0.43|0.49|9034|0
-P|nhl-bos-lak-2026-10-17|game|2026-10-18T01:00:00Z|4761432|Bruins vs. Kings|moneyline||Bruins,Kings|0.41,0.59|0.36|0.46|9544|21
-P|nhl-edm-utah-2026-10-17|game|2026-10-18T02:00:00Z|4761437|Oilers vs. Utah|moneyline||Oilers,Utah|0.47,0.53|0.44|0.5|9315|0
-P|nhl-pit-las-2026-10-17|game|2026-10-18T02:00:00Z|4761442|Penguins vs. Golden Knights|moneyline||Penguins,GoldenKnights|0.44,0.56|0.42|0.46|9304|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347295|Delaware vs. Middle Tennessee|moneyline||Delaware,MiddleTennessee|0.565,0.435|0.56|0.57|15903|2136
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347308|Spread: Delaware (-2.5)|spreads|-2.5|Delaware,MiddleTennessee|0.51,0.49|0.5|0.52|10049|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347309|Spread: Delaware (-1.5)|spreads|-1.5|Delaware,MiddleTennessee|0.53,0.47|0.52|0.54|9589|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347310|Spread: Delaware (-0.5)|spreads|-0.5|Delaware,MiddleTennessee|0.555,0.445|0.54|0.57|1845|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347332|Delaware vs. Middle Tennessee: O/U 47.5|totals|47.5|Over,Under|0.52,0.48|0.51|0.53|9558|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347333|Delaware vs. Middle Tennessee: O/U 49.5|totals|49.5|Over,Under|0.46,0.54|0.45|0.47|9296|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347331|Delaware vs. Middle Tennessee: O/U 45.5|totals|45.5|Over,Under|0.565,0.435|0.55|0.58|6363|0
-P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347390|Middle Tennessee Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.495,0.505|0.48|0.51|1869|0
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347878|Florida International vs. Jacksonville State|moneyline||FloridaInternational,JacksonvilleState|0.435,0.565|0.43|0.44|17517|2820
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347949|Spread: Jacksonville State (-2.5)|spreads|-2.5|JacksonvilleState,FloridaInternational|0.525,0.475|0.52|0.53|11105|974
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347946|Spread: Jacksonville State (-1.5)|spreads|-1.5|JacksonvilleState,FloridaInternational|0.545,0.455|0.54|0.55|11184|948
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347938|Spread: Florida International (-0.5)|spreads|-0.5|FloridaInternational,JacksonvilleState|0.445,0.555|0.43|0.46|2713|0
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348022|Florida International vs. Jacksonville State: O/U 45.5|totals|45.5|Over,Under|0.495,0.505|0.48|0.51|10861|0
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348026|Florida International vs. Jacksonville State: O/U 47.5|totals|47.5|Over,Under|0.44,0.56|0.43|0.45|8626|0
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348018|Florida International vs. Jacksonville State: O/U 43.5|totals|43.5|Over,Under|0.56,0.44|0.55|0.57|9307|0
-P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348207|Florida International Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.55,0.45|0.53|0.57|1775|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347877|Kennesaw State vs. Missouri State|moneyline||KennesawState,MissouriState|0.575,0.425|0.57|0.58|15898|152
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347931|Spread: Kennesaw State (-2.5)|spreads|-2.5|KennesawState,MissouriState|0.53,0.47|0.52|0.54|10278|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347925|Spread: Kennesaw State (-3.5)|spreads|-3.5|KennesawState,MissouriState|0.46,0.54|0.45|0.47|12614|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347934|Spread: Kennesaw State (-1.5)|spreads|-1.5|KennesawState,MissouriState|0.55,0.45|0.54|0.56|10319|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348036|Kennesaw State vs. Missouri State: O/U 51.5|totals|51.5|Over,Under|0.475,0.525|0.46|0.49|11112|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348032|Kennesaw State vs. Missouri State: O/U 49.5|totals|49.5|Over,Under|0.545,0.455|0.53|0.56|10525|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348040|Kennesaw State vs. Missouri State: O/U 53.5|totals|53.5|Over,Under|0.41,0.59|0.38|0.44|6731|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348217|Kennesaw State Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.52,0.48|0.5|0.54|1164|0
-P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348228|Missouri State Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.535,0.465|0.52|0.55|1172|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347879|Western Kentucky vs. Sam Houston|moneyline||WesternKentucky,SamHouston|0.525,0.475|0.52|0.53|19199|1743
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347935|Spread: Western Kentucky (-1.5)|spreads|-1.5|WesternKentucky,SamHouston|0.495,0.505|0.48|0.51|13026|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347939|Spread: Western Kentucky (-0.5)|spreads|-0.5|WesternKentucky,SamHouston|0.52,0.48|0.51|0.53|3676|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347929|Spread: Western Kentucky (-2.5)|spreads|-2.5|WesternKentucky,SamHouston|0.475,0.525|0.47|0.48|12127|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348033|Western Kentucky vs. Sam Houston: O/U 51.5|totals|51.5|Over,Under|0.5,0.5|0.49|0.51|13181|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348037|Western Kentucky vs. Sam Houston: O/U 53.5|totals|53.5|Over,Under|0.44,0.56|0.43|0.45|11490|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348029|Western Kentucky vs. Sam Houston: O/U 49.5|totals|49.5|Over,Under|0.565,0.435|0.55|0.58|10426|0
-P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348214|Western Kentucky Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.49,0.51|0.47|0.51|1808|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347876|East Carolina vs. UAB|moneyline||EastCarolina,UAB|0.655,0.345|0.65|0.66|16693|6
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347916|Spread: East Carolina (-5.5)|spreads|-5.5|EastCarolina,UAB|0.49,0.51|0.48|0.5|8763|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347920|Spread: East Carolina (-4.5)|spreads|-4.5|EastCarolina,UAB|0.515,0.485|0.5|0.53|6804|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347912|Spread: East Carolina (-6.5)|spreads|-6.5|EastCarolina,UAB|0.455,0.545|0.44|0.47|7907|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348030|East Carolina vs. UAB: O/U 51.5|totals|51.5|Over,Under|0.49,0.51|0.48|0.5|6847|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348027|East Carolina vs. UAB: O/U 49.5|totals|49.5|Over,Under|0.56,0.44|0.55|0.57|6417|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348035|East Carolina vs. UAB: O/U 53.5|totals|53.5|Over,Under|0.43,0.57|0.42|0.44|5353|0
-P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348224|UAB Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.495,0.505|0.48|0.51|707|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348293|Georgia Southern vs. Old Dominion|moneyline||GeorgiaSouthern,OldDominion|0.61,0.39|0.6|0.62|17505|531
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348305|Spread: Georgia Southern (-3.5)|spreads|-3.5|GeorgiaSouthern,OldDominion|0.5,0.5|0.49|0.51|12728|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348304|Spread: Georgia Southern (-4.5)|spreads|-4.5|GeorgiaSouthern,OldDominion|0.47,0.53|0.46|0.48|14189|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348303|Spread: Georgia Southern (-5.5)|spreads|-5.5|GeorgiaSouthern,OldDominion|0.45,0.55|0.44|0.46|13230|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348344|Georgia Southern vs. Old Dominion: O/U 49.5|totals|49.5|Over,Under|0.505,0.495|0.49|0.52|10133|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348341|Georgia Southern vs. Old Dominion: O/U 47.5|totals|47.5|Over,Under|0.565,0.435|0.55|0.58|3620|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348348|Georgia Southern vs. Old Dominion: O/U 51.5|totals|51.5|Over,Under|0.435,0.565|0.42|0.45|9666|0
-P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348505|Old Dominion Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.49,0.51|0.47|0.51|1219|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348327|Colorado State vs. Texas State|moneyline||ColoradoState,TexasState|0.2,0.8|0.19|0.21|16203|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348430|Spread: Texas State (-10.5)|spreads|-10.5|TexasState,ColoradoState|0.525,0.475|0.52|0.53|13038|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348434|Spread: Texas State (-13.5)|spreads|-13.5|TexasState,ColoradoState|0.46,0.54|0.45|0.47|13179|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348391|Spread: Colorado State (-0.5)|spreads|-0.5|ColoradoState,TexasState|0.2,0.8|0.19|0.21|3315|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348513|Colorado State vs. Texas State: O/U 67.5|totals|67.5|Over,Under|0.485,0.515|0.47|0.5|13888|0
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348509|Colorado State vs. Texas State: O/U 65.5|totals|65.5|Over,Under|0.525,0.475|0.52|0.53|15393|1899
-P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348516|Colorado State vs. Texas State: O/U 69.5|totals|69.5|Over,Under|0.425,0.575|0.41|0.44|8868|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348332|Memphis vs. Tulane|moneyline||Memphis,Tulane|0.7,0.3|0.68|0.72|11271|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348372|Spread: Memphis (-6.5)|spreads|-6.5|Memphis,Tulane|0.525,0.475|0.51|0.54|8974|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348368|Spread: Memphis (-7.5)|spreads|-7.5|Memphis,Tulane|0.445,0.555|0.42|0.47|8113|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348376|Spread: Memphis (-5.5)|spreads|-5.5|Memphis,Tulane|0.555,0.445|0.53|0.58|8038|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348490|Memphis vs. Tulane: O/U 51.5|totals|51.5|Over,Under|0.53,0.47|0.5|0.56|1479|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348494|Memphis vs. Tulane: O/U 53.5|totals|53.5|Over,Under|0.47,0.53|0.44|0.5|5563|0
-P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348647|Memphis Team Total: O/U 29.5|team_totals|29.5|Over,Under|0.51,0.49|0.48|0.54|790|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348442|Appalachian State vs. Coastal Carolina|moneyline||AppalachianState,CoastalCarolina|0.515,0.485|0.5|0.53|11571|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348507|Spread: Appalachian State (-1.5)|spreads|-1.5|AppalachianState,CoastalCarolina|0.485,0.515|0.47|0.5|7458|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348503|Spread: Appalachian State (-2.5)|spreads|-2.5|AppalachianState,CoastalCarolina|0.475,0.525|0.45|0.5|6518|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348522|Spread: Coastal Carolina (-1.5)|spreads|-1.5|CoastalCarolina,AppalachianState|0.47,0.53|0.45|0.49|8591|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348613|Appalachian State vs. Coastal Carolina: O/U 51.5|totals|51.5|Over,Under|0.515,0.485|0.48|0.55|5750|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348616|Appalachian State vs. Coastal Carolina: O/U 53.5|totals|53.5|Over,Under|0.47,0.53|0.45|0.49|7846|0
-P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348747|Appalachian State Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.51,0.49|0.48|0.54|280|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348620|Washington vs. Purdue|moneyline||Washington,Purdue|0.415,0.585|0.4|0.43|14632|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348699|Spread: Purdue (-2.5)|spreads|-2.5|Purdue,Washington|0.535,0.465|0.52|0.55|8961|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348703|Spread: Purdue (-3.5)|spreads|-3.5|Purdue,Washington|0.46,0.54|0.44|0.48|7922|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348695|Spread: Purdue (-1.5)|spreads|-1.5|Purdue,Washington|0.565,0.435|0.54|0.59|7089|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348756|Washington vs. Purdue: O/U 51.5|totals|51.5|Over,Under|0.53,0.47|0.51|0.55|12769|0
-P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348759|Washington vs. Purdue: O/U 53.5|totals|53.5|Over,Under|0.465,0.535|0.43|0.5|6587|0
-P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348755|Kansas vs. Kansas State|moneyline||Kansas,KansasState|0.27,0.73|0.25|0.29|9820|0
-P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348845|Spread: Kansas State (-6.5)|spreads|-6.5|KansasState,Kansas|0.505,0.495|0.47|0.54|5001|0
-P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348848|Spread: Kansas State (-7.5)|spreads|-7.5|KansasState,Kansas|0.47,0.53|0.45|0.49|8496|0
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349030|Florida vs. Texas|moneyline||Florida,Texas|0.24,0.76|0.21|0.27|7018|0
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349054|Spread: Texas (-8.5)|spreads|-8.5|Texas,Florida|0.52,0.48|0.48|0.56|5288|18
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349055|Spread: Texas (-10.5)|spreads|-10.5|Texas,Florida|0.475,0.525|0.43|0.52|5472|0
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349053|Spread: Texas (-7.5)|spreads|-7.5|Texas,Florida|0.535,0.465|0.49|0.58|5195|0
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349070|Florida vs. Texas: O/U 53.5|totals|53.5|Over,Under|0.51,0.49|0.48|0.54|4009|0
-P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349069|Florida vs. Texas: O/U 51.5|totals|51.5|Over,Under|0.525,0.475|0.47|0.58|4272|0
-P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349259|Florida Atlantic vs. Army|moneyline||FloridaAtlantic,Army|0.43,0.57|0.41|0.45|15278|0
-P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349365|Mississippi State vs. LSU|moneyline||MississippiState,LSU|0.24,0.76|0.23|0.25|4600|514
-P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349390|Spread: LSU (-10.5)|spreads|-10.5|LSU,MississippiState|0.51,0.49|0.49|0.53|6238|0
-P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349391|Spread: LSU (-13.5)|spreads|-13.5|LSU,MississippiState|0.465,0.535|0.42|0.51|4575|0
-P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349408|Mississippi State vs. LSU: O/U 59.5|totals|59.5|Over,Under|0.505,0.495|0.47|0.54|4412|0
-P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349409|Mississippi State vs. LSU: O/U 61.5|totals|61.5|Over,Under|0.455,0.545|0.4|0.51|4462|0
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349499|Ohio State vs. Indiana|moneyline||OhioState,Indiana|0.635,0.365|0.63|0.64|19140|7413
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349515|Spread: Ohio State (-3.5)|spreads|-3.5|OhioState,Indiana|0.515,0.485|0.5|0.53|9447|0
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349514|Spread: Ohio State (-4.5)|spreads|-4.5|OhioState,Indiana|0.48,0.52|0.46|0.5|10812|10
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349513|Spread: Ohio State (-5.5)|spreads|-5.5|OhioState,Indiana|0.46,0.54|0.44|0.48|9095|155
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349542|Ohio State vs. Indiana: O/U 50.5|totals|50.5|Over,Under|0.505,0.495|0.48|0.53|7186|0
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349543|Ohio State vs. Indiana: O/U 52.5|totals|52.5|Over,Under|0.44,0.56|0.41|0.47|6980|0
-P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349541|Ohio State vs. Indiana: O/U 48.5|totals|48.5|Over,Under|0.56,0.44|0.54|0.58|7661|0
-P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349640|Cincinnati vs. West Virginia|moneyline||Cincinnati,WestVirginia|0.475,0.525|0.45|0.5|4558|0
-P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349657|Spread: West Virginia (-1.5)|spreads|-1.5|WestVirginia,Cincinnati|0.49,0.51|0.47|0.51|5998|0
-P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349658|Spread: West Virginia (-2.5)|spreads|-2.5|WestVirginia,Cincinnati|0.455,0.545|0.43|0.48|4218|0
-P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349654|Spread: Cincinnati (-1.5)|spreads|-1.5|Cincinnati,WestVirginia|0.45,0.55|0.4|0.5|4209|0
-P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349684|Cincinnati vs. West Virginia: O/U 61.5|totals|61.5|Over,Under|0.51,0.49|0.47|0.55|4141|0
-P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349745|Georgia State vs. James Madison|moneyline||GeorgiaState,JamesMadison|0.22,0.78|0.2|0.24|7948|0
-P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349864|Ball State vs. Bowling Green|moneyline||BallState,BowlingGreen|0.275,0.725|0.24|0.31|8194|0
-P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350015|Virginia vs. SMU|moneyline||Virginia,SMU|0.26,0.74|0.23|0.29|6550|0
-P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350040|Spread: SMU (-7.5)|spreads|-7.5|SMU,Virginia|0.52,0.48|0.5|0.54|7252|0
-P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350042|Spread: SMU (-10.5)|spreads|-10.5|SMU,Virginia|0.445,0.555|0.4|0.49|4583|0
-P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350039|Spread: SMU (-6.5)|spreads|-6.5|SMU,Virginia|0.56,0.44|0.51|0.61|3685|0
-P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350057|Virginia vs. SMU: O/U 53.5|totals|53.5|Over,Under|0.505,0.495|0.46|0.55|5207|0
-P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350141|Pittsburgh vs. Boston College|moneyline||Pittsburgh,BostonCollege|0.675,0.325|0.64|0.71|8723|0
-P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350150|Spread: Pittsburgh (-6.5)|spreads|-6.5|Pittsburgh,BostonCollege|0.5,0.5|0.47|0.53|6200|0
-P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350151|Spread: Pittsburgh (-5.5)|spreads|-5.5|Pittsburgh,BostonCollege|0.515,0.485|0.47|0.56|4564|0
-P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350152|Spread: Pittsburgh (-4.5)|spreads|-4.5|Pittsburgh,BostonCollege|0.535,0.465|0.49|0.58|5245|0
-P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350177|Pittsburgh vs. Boston College: O/U 45.5|totals|45.5|Over,Under|0.505,0.495|0.46|0.55|4808|0
-P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350245|Northwestern vs. Michigan State|moneyline||Northwestern,MichiganState|0.765,0.235|0.74|0.79|4615|0
-P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350386|Rutgers vs. Maryland|moneyline||Rutgers,Maryland|0.37,0.63|0.34|0.4|4637|0
-P|cfb-cita-txam-2026-10-17|game|2026-10-17T17:00:00Z|5350538|The Citadel vs. Texas A&M|moneyline||TheCitadel,TexasA&M|0.004,0.996|0.001|0.007|11884|0
-P|cfb-charlt-templ-2026-10-17|game|2026-10-17T17:00:00Z|5350808|Charlotte vs. Temple|moneyline||Charlotte,Temple|0.055,0.945|0.03|0.08|2657|0
-P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350934|UMass vs. Buffalo|moneyline||UMass,Buffalo|0.385,0.615|0.35|0.42|5056|0
-P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351066|Western Michigan vs. Central Michigan|moneyline||WesternMichigan,CentralMichigan|0.73,0.27|0.7|0.76|6827|0
-P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351074|Spread: Western Michigan (-7.5)|spreads|-7.5|WesternMichigan,CentralMichigan|0.5,0.5|0.47|0.53|6833|0
-P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351075|Spread: Western Michigan (-6.5)|spreads|-6.5|WesternMichigan,CentralMichigan|0.545,0.455|0.5|0.59|7183|0
-P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351076|Spread: Western Michigan (-5.5)|spreads|-5.5|WesternMichigan,CentralMichigan|0.565,0.435|0.52|0.61|5167|0
-P|cfb-vamil-woff-2026-10-17|game|2026-10-17T17:30:00Z|5351170|VMI vs. Wofford|moneyline||VMI,Wofford|0.0225,0.9775|0.008|0.037|11647|0
-P|cfb-idaho-mont-2026-10-17|game|2026-10-17T19:00:00Z|5351331|Idaho vs. Montana|moneyline||Idaho,Montana|0.26,0.74|0.2|0.32|6033|95
-P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351547|Arizona State vs. Texas Tech|moneyline||ArizonaState,TexasTech|0.18,0.82|0.16|0.2|8893|0
-P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351585|Arizona State vs. Texas Tech: O/U 49.5|totals|49.5|Over,Under|0.5,0.5|0.45|0.55|19|0
-P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351651|Northern Illinois vs. Wyoming|moneyline||NorthernIllinois,Wyoming|0.27,0.73|0.25|0.29|8167|0
-P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351791|Georgia Tech vs. Virginia Tech|moneyline||GeorgiaTech,VirginiaTech|0.25,0.75|0.22|0.28|6670|0
-P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351815|Spread: Virginia Tech (-7.5)|spreads|-7.5|VirginiaTech,GeorgiaTech|0.54,0.46|0.5|0.58|4508|0
-P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351817|Spread: Virginia Tech (-10.5)|spreads|-10.5|VirginiaTech,GeorgiaTech|0.45,0.55|0.42|0.48|5939|0
-P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351833|Georgia Tech vs. Virginia Tech: O/U 55.5|totals|55.5|Over,Under|0.485,0.515|0.44|0.53|4999|0
-P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351832|Georgia Tech vs. Virginia Tech: O/U 53.5|totals|53.5|Over,Under|0.52,0.48|0.48|0.56|6461|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351896|Auburn vs. Georgia|moneyline||Auburn,Georgia|0.095,0.905|0.09|0.1|12615|1647
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351926|Spread: Georgia (-20.5)|spreads|-20.5|Georgia,Auburn|0.465,0.535|0.41|0.52|4202|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351925|Spread: Georgia (-17.5)|spreads|-17.5|Georgia,Auburn|0.535,0.465|0.5|0.57|5141|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351924|Spread: Georgia (-16.5)|spreads|-16.5|Georgia,Auburn|0.565,0.435|0.52|0.61|5429|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351934|Auburn vs. Georgia: O/U 49.5|totals|49.5|Over,Under|0.515,0.485|0.49|0.54|4793|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351935|Auburn vs. Georgia: O/U 51.5|totals|51.5|Over,Under|0.45,0.55|0.4|0.5|3290|0
-P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351933|Auburn vs. Georgia: O/U 47.5|totals|47.5|Over,Under|0.56,0.44|0.5|0.62|4794|0
-P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352008|Toledo vs. Eastern Michigan|moneyline||Toledo,EasternMichigan|0.65,0.35|0.63|0.67|12048|0
-P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352112|Penn State vs. Michigan|moneyline||PennState,Michigan|0.34,0.66|0.32|0.36|12623|69
-P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352133|Spread: Michigan (-5.5)|spreads|-5.5|Michigan,PennState|0.53,0.47|0.51|0.55|8370|0
-P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352134|Spread: Michigan (-6.5)|spreads|-6.5|Michigan,PennState|0.44,0.56|0.4|0.48|7261|0
-P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352147|Penn State vs. Michigan: O/U 43.5|totals|43.5|Over,Under|0.5,0.5|0.47|0.53|7698|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352220|Missouri vs. Ole Miss|moneyline||Missouri,OleMiss|0.34,0.66|0.32|0.36|4714|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352241|Spread: Ole Miss (-5.5)|spreads|-5.5|OleMiss,Missouri|0.515,0.485|0.47|0.56|4173|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352242|Spread: Ole Miss (-6.5)|spreads|-6.5|OleMiss,Missouri|0.48,0.52|0.46|0.5|7378|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352240|Spread: Ole Miss (-4.5)|spreads|-4.5|OleMiss,Missouri|0.53,0.47|0.49|0.57|2288|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352263|Missouri vs. Ole Miss: O/U 59.5|totals|59.5|Over,Under|0.49,0.51|0.44|0.54|4740|0
-P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352262|Missouri vs. Ole Miss: O/U 57.5|totals|57.5|Over,Under|0.53,0.47|0.48|0.58|4298|0
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352326|Alabama vs. Tennessee|moneyline||Alabama,Tennessee|0.7,0.3|0.69|0.71|12420|24
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352334|Spread: Alabama (-7.5)|spreads|-7.5|Alabama,Tennessee|0.47,0.53|0.43|0.51|6397|0
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352335|Spread: Alabama (-6.5)|spreads|-6.5|Alabama,Tennessee|0.535,0.465|0.52|0.55|9406|100
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352337|Spread: Alabama (-4.5)|spreads|-4.5|Alabama,Tennessee|0.555,0.445|0.51|0.6|4963|24
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352367|Alabama vs. Tennessee: O/U 55.5|totals|55.5|Over,Under|0.49,0.51|0.46|0.52|8507|0
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352366|Alabama vs. Tennessee: O/U 53.5|totals|53.5|Over,Under|0.555,0.445|0.5|0.61|8055|0
-P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352368|Alabama vs. Tennessee: O/U 57.5|totals|57.5|Over,Under|0.44,0.56|0.38|0.5|5911|0
-P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352430|UNLV vs. Air Force|moneyline||UNLV,AirForce|0.56,0.44|0.54|0.58|11652|0
-P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352562|Akron vs. Miami (OH)|moneyline||Akron,Miami(OH)|0.23,0.77|0.21|0.25|6590|0
-P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352686|North Carolina vs. Duke|moneyline||NorthCarolina,Duke|0.41,0.59|0.39|0.43|12091|0
-P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352706|Spread: Duke (-3.5)|spreads|-3.5|Duke,NorthCarolina|0.48,0.52|0.46|0.5|7424|0
-P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352705|Spread: Duke (-2.5)|spreads|-2.5|Duke,NorthCarolina|0.545,0.455|0.5|0.59|4596|0
-P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352707|Spread: Duke (-4.5)|spreads|-4.5|Duke,NorthCarolina|0.44,0.56|0.39|0.49|5141|0
-P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352724|North Carolina vs. Duke: O/U 47.5|totals|47.5|Over,Under|0.49,0.51|0.46|0.52|5709|0
-P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352881|Tulsa vs. Rice|moneyline||Tulsa,Rice|0.565,0.435|0.51|0.62|4473|0
-P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353012|Troy vs. Louisiana|moneyline||Troy,Louisiana|0.38,0.62|0.35|0.41|4191|0
-P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353198|Washington State vs. Oregon State|moneyline||WashingtonState,OregonState|0.105,0.895|0.09|0.12|15226|0
-P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353227|Spread: Oregon State (-17.5)|spreads|-17.5|OregonState,WashingtonState|0.51,0.49|0.49|0.53|3484|0
-P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353237|Washington State vs. Oregon State: O/U 51.5|totals|51.5|Over,Under|0.525,0.475|0.48|0.57|5293|0
-P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353343|Arkansas vs. Vanderbilt|moneyline||Arkansas,Vanderbilt|0.335,0.665|0.29|0.38|6581|29
-P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353365|Spread: Vanderbilt (-6.5)|spreads|-6.5|Vanderbilt,Arkansas|0.5,0.5|0.48|0.52|7140|0
-P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353364|Spread: Vanderbilt (-5.5)|spreads|-5.5|Vanderbilt,Arkansas|0.515,0.485|0.47|0.56|4536|0
-P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353363|Spread: Vanderbilt (-4.5)|spreads|-4.5|Vanderbilt,Arkansas|0.535,0.465|0.49|0.58|5450|0
-P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353381|Arkansas vs. Vanderbilt: O/U 49.5|totals|49.5|Over,Under|0.505,0.495|0.47|0.54|5235|0
-P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353447|Florida State vs. Miami (FL)|moneyline||FloridaState,Miami(FL)|0.08,0.92|0.07|0.09|15721|417
-P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353485|Spread: Miami (FL) (-20.5)|spreads|-20.5|Miami(FL),FloridaState|0.53,0.47|0.51|0.55|4993|0
-P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353496|Florida State vs. Miami (FL): O/U 55.5|totals|55.5|Over,Under|0.51,0.49|0.47|0.55|4039|0
-P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353579|TCU vs. Baylor|moneyline||TCU,Baylor|0.35,0.65|0.31|0.39|6858|0
-P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353705|Arkansas State vs. Southern Miss|moneyline||ArkansasState,SouthernMiss|0.715,0.285|0.68|0.75|3314|0
-P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353862|Nevada vs. North Dakota State|moneyline||Nevada,NorthDakotaState|0.13,0.87|0.11|0.15|12126|0
-P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353889|Spread: North Dakota State (-14.5)|spreads|-14.5|NorthDakotaState,Nevada|0.49,0.51|0.45|0.53|2242|0
-P|cfb-kentst-sfl-2026-10-17|game|2026-10-17T23:00:00Z|5353969|Kent State vs. South Florida|moneyline||KentState,SouthFlorida|0.11,0.89|0.09|0.13|5934|0
-P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343891|Wisconsin vs. UCLA|moneyline||Wisconsin,UCLA|0.415,0.585|0.38|0.45|5154|0
-P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354158|Kentucky vs. Oklahoma|moneyline||Kentucky,Oklahoma|0.335,0.665|0.32|0.35|4504|6168
-P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354180|Spread: Oklahoma (-6.5)|spreads|-6.5|Oklahoma,Kentucky|0.5,0.5|0.48|0.52|4917|0
-P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354179|Spread: Oklahoma (-5.5)|spreads|-5.5|Oklahoma,Kentucky|0.51,0.49|0.46|0.56|3815|0
-P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354178|Spread: Oklahoma (-4.5)|spreads|-4.5|Oklahoma,Kentucky|0.535,0.465|0.49|0.58|4387|0
-P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354193|Kentucky vs. Oklahoma: O/U 43.5|totals|43.5|Over,Under|0.505,0.495|0.46|0.55|4680|0
-P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354262|Louisville vs. Syracuse|moneyline||Louisville,Syracuse|0.81,0.19|0.79|0.83|10223|0
-P|cfb-elon-stan-2026-10-17|game|2026-10-17T23:30:00Z|5354367|Elon vs. Stanford|moneyline||Elon,Stanford|0.029,0.971|0.021|0.037|11507|0
-P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354511|Oklahoma State vs. Houston|moneyline||OklahomaState,Houston|0.395,0.605|0.37|0.42|4571|0
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354636|Notre Dame vs. BYU|moneyline||NotreDame,BYU|0.775,0.225|0.77|0.78|13052|1726
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354642|Spread: Notre Dame (-10.5)|spreads|-10.5|NotreDame,BYU|0.51,0.49|0.48|0.54|6343|0
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354641|Spread: Notre Dame (-13.5)|spreads|-13.5|NotreDame,BYU|0.46,0.54|0.44|0.48|6368|0
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354640|Spread: Notre Dame (-14.5)|spreads|-14.5|NotreDame,BYU|0.435,0.565|0.39|0.48|6398|0
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354673|Notre Dame vs. BYU: O/U 47.5|totals|47.5|Over,Under|0.505,0.495|0.48|0.53|7599|0
-P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354674|Notre Dame vs. BYU: O/U 49.5|totals|49.5|Over,Under|0.44,0.56|0.38|0.5|4191|0
-P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354740|Navy vs. UTSA|moneyline||Navy,UTSA|0.305,0.695|0.26|0.35|6140|0
-P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354889|Louisiana Tech vs. Louisiana-Monroe|moneyline||LouisianaTech,Louisiana-Monroe|0.85,0.15|0.81|0.89|5802|0
-P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355008|San Jose State vs. UTEP|moneyline||SanJoseState,UTEP|0.76,0.24|0.74|0.78|10131|0
-P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355114|Ohio vs. Sacramento State|moneyline||Ohio,SacramentoState|0.82,0.18|0.78|0.86|6118|0
-P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355218|Utah vs. Colorado|moneyline||Utah,Colorado|0.875,0.125|0.85|0.9|5436|0
-P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355324|Fresno State vs. San Diego State|moneyline||FresnoState,SanDiegoState|0.75,0.25|0.73|0.77|9734|0
-P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355331|Spread: Fresno State (-8.5)|spreads|-8.5|FresnoState,SanDiegoState|0.5,0.5|0.47|0.53|4389|0
-P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355436|New Mexico vs. Hawai'i|moneyline||NewMexico,Hawai'i|0.855,0.145|0.84|0.87|3836|20
-P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355540|Wake Forest vs. California|moneyline||WakeForest,California|0.75,0.25|0.71|0.79|6688|0
-P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5343995|Nebraska vs. Oregon|moneyline||Nebraska,Oregon|0.325,0.675|0.3|0.35|3621|38
+P|nfl-den-lac-2026-10-11|game|2026-10-11T20:05:00Z|4024675|Broncos vs. Chargers|moneyline||Broncos,Chargers|0.9995,0.0005|0.999|1|671515|1572240
+P|nfl-det-ari-2026-10-11|game|2026-10-11T20:25:00Z|4024677|Lions vs. Cardinals|moneyline||Lions,Cardinals|0.9995,0.0005|0.999|1|777285|1237750
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4024680|49ers vs. Seahawks|moneyline||49ers,Seahawks|0.555,0.445|0.55|0.56|119899|3709409
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842526|Spread: 49ers (-2.5)|spreads|-2.5|49ers,Seahawks|0.52,0.48|0.5|0.54|11066|5190
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842525|Spread: 49ers (-1.5)|spreads|-1.5|49ers,Seahawks|0.525,0.475|0.51|0.54|34121|10298
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061336|Spread: Seahawks (-1.5)|spreads|-1.5|Seahawks,49ers|0.43,0.57|0.42|0.44|36473|10294
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4842710|49ers vs. Seahawks: O/U 64.5|totals|64.5|Over,Under|0.55,0.45|0.53|0.57|22768|12705
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061359|49ers vs. Seahawks: O/U 63.5|totals|63.5|Over,Under|0.565,0.435|0.55|0.58|2593|29
+P|nfl-sf-sea-2026-10-11|game|2026-10-11T20:25:00Z|4061360|49ers vs. Seahawks: O/U 65.5|totals|65.5|Over,Under|0.345,0.655|0.33|0.36|2285|3739
+P|nfl-sf-sea-2026-10-11-player-props|props|2026-10-11T20:25:00Z|5381154|Jaxon Smith-Njigba: Anytime Touchdown|anytime_touchdowns||Yes,No|0.99,0.01|0.98|1|8|1495
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4024681|Ravens vs. Falcons|moneyline||Ravens,Falcons|0.385,0.615|0.38|0.39|4072033|116171
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842257|Spread: Falcons (-3.5)|spreads|-3.5|Falcons,Ravens|0.475,0.525|0.47|0.48|1311152|28281
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842258|Spread: Falcons (-4.5)|spreads|-4.5|Falcons,Ravens|0.445,0.555|0.44|0.45|1035415|337
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842256|Spread: Falcons (-2.5)|spreads|-2.5|Falcons,Ravens|0.575,0.425|0.57|0.58|1626034|5728
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4061313|Ravens vs. Falcons: O/U 43.5|totals|43.5|Over,Under|0.515,0.485|0.51|0.52|507291|285351
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842418|Ravens vs. Falcons: O/U 44.5|totals|44.5|Over,Under|0.475,0.525|0.47|0.48|337763|29318
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842417|Ravens vs. Falcons: O/U 42.5|totals|42.5|Over,Under|0.545,0.455|0.54|0.55|279403|2453
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842480|Falcons Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.505,0.495|0.47|0.54|5161|0
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842468|Ravens Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.48,0.52|0.46|0.5|21641|675
+P|nfl-bal-atl-2026-10-12|game|2026-10-12T00:20:00Z|4842467|Ravens Team Total: O/U 19.5|team_totals|19.5|Over,Under|0.555,0.445|0.52|0.59|6522|0
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380870|Justice Hill: Rushing Yards O/U 9.5|rushing_yards|9.5|Over,Under|0.545,0.455|0.54|0.55|2968|8
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380886|Drake London: Receiving Yards O/U 79.5|receiving_yards|79.5|Over,Under|0.53,0.47|0.52|0.54|3396|1960
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380924|Bijan Robinson: Receptions O/U 3.5|receptions|3.5|Over,Under|0.485,0.515|0.47|0.5|5889|507
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380955|Austin Hooper: Anytime Touchdown|anytime_touchdowns||Yes,No|0.105,0.895|0.09|0.12|10218|218
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380957|Bijan Robinson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.645,0.355|0.64|0.65|13373|67
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380959|Brian Robinson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.25,0.75|0.24|0.26|3810|5
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380963|Derrick Henry: Anytime Touchdown|anytime_touchdowns||Yes,No|0.545,0.455|0.54|0.55|23383|3632
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380967|Drake London: Anytime Touchdown|anytime_touchdowns||Yes,No|0.425,0.575|0.42|0.43|12266|464
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380970|Jahan Dotson: Anytime Touchdown|anytime_touchdowns||Yes,No|0.15,0.85|0.13|0.17|13178|705
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380973|Justice Hill: Anytime Touchdown|anytime_touchdowns||Yes,No|0.11,0.89|0.1|0.12|4010|30
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380975|Kyle Pitts Sr.: Anytime Touchdown|anytime_touchdowns||Yes,No|0.2,0.8|0.18|0.22|11937|340
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380978|Mark Andrews: Anytime Touchdown|anytime_touchdowns||Yes,No|0.25,0.75|0.23|0.27|10965|147
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380983|Olamide Zaccheaus: Anytime Touchdown|anytime_touchdowns||Yes,No|0.09,0.91|0.08|0.1|10156|0
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380986|Rashod Bateman: Anytime Touchdown|anytime_touchdowns||Yes,No|0.15,0.85|0.13|0.17|12715|59
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5380989|Zay Flowers: Anytime Touchdown|anytime_touchdowns||Yes,No|0.305,0.695|0.29|0.32|13881|267
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5469001|Tyler Huntley: Passing Yards O/U 174.5|passing_yards|174.5|Over,Under|0.52,0.48|0.5|0.54|273|102
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5469019|Tyler Huntley: Anytime Touchdown|anytime_touchdowns||Yes,No|0.17,0.83|0.16|0.18|11752|239
+P|nfl-bal-atl-2026-10-12-player-props|props|2026-10-12T00:20:00Z|5469026|Tyler Huntley: Passing Completions O/U 17.5|passing_completions|17.5|Over,Under|0.515,0.485|0.48|0.55|2342|0
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4058840|Bills vs. Rams|moneyline||Bills,Rams|0.385,0.615|0.38|0.39|1123880|54049
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061234|Spread: Rams (-3.5)|spreads|-3.5|Rams,Bills|0.475,0.525|0.47|0.48|519654|9826
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061238|Spread: Rams (-4.5)|spreads|-4.5|Rams,Bills|0.435,0.565|0.43|0.44|279727|16
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4841935|Spread: Rams (-2.5)|spreads|-2.5|Rams,Bills|0.575,0.425|0.57|0.58|251656|8872
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061255|Bills vs. Rams: O/U 54.5|totals|54.5|Over,Under|0.485,0.515|0.48|0.49|190685|8987
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061252|Bills vs. Rams: O/U 52.5|totals|52.5|Over,Under|0.56,0.44|0.55|0.57|145466|0
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4061258|Bills vs. Rams: O/U 56.5|totals|56.5|Over,Under|0.425,0.575|0.42|0.43|121615|68
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842196|Bills Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.48,0.52|0.47|0.49|12226|514
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842208|Rams Team Total: O/U 27.5|team_totals|27.5|Over,Under|0.575,0.425|0.56|0.59|11455|108
+P|nfl-buf-la-2026-10-13|game|2026-10-13T00:15:00Z|4842195|Bills Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.6,0.4|0.56|0.64|6070|0
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420281|Matthew Stafford: Passing Yards O/U 274.5|passing_yards|274.5|Over,Under|0.555,0.445|0.54|0.57|38|0
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420350|Kyren Williams: Receiving Yards O/U 19.5|receiving_yards|19.5|Over,Under|0.525,0.475|0.5|0.55|1221|619
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420376|Kyren Williams: Receptions O/U 2.5|receptions|2.5|Over,Under|0.595,0.405|0.58|0.61|767|151
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420394|Josh Allen: Anytime Touchdown|anytime_touchdowns||Yes,No|0.51,0.49|0.5|0.52|1426|27
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420396|Keon Coleman: Anytime Touchdown|anytime_touchdowns||Yes,No|0.285,0.715|0.28|0.29|2269|10
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5420419|Josh Allen: Passing Completions O/U 21.5|passing_completions|21.5|Over,Under|0.515,0.485|0.5|0.53|33|7
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444758|Keon Coleman: Receiving Yards O/U 39.5|receiving_yards|39.5|Over,Under|0.505,0.495|0.5|0.51|38|0
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444864|Khalil Shakir: Receiving Yards O/U 49.5|receiving_yards|49.5|Over,Under|0.48,0.52|0.45|0.51|31|0
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444875|Keon Coleman: Receptions O/U 3.5|receptions|3.5|Over,Under|0.37,0.63|0.36|0.38|1091|5
+P|nfl-buf-la-2026-10-13-player-props|props|2026-10-13T00:15:00Z|5444879|Khalil Shakir: Receptions O/U 4.5|receptions|4.5|Over,Under|0.485,0.515|0.47|0.5|880|66
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4212356|Seahawks vs. Broncos|moneyline||Seahawks,Broncos|0.565,0.435|0.56|0.57|18993|2813
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367619|Spread: Seahawks (-2.5)|spreads|-2.5|Seahawks,Broncos|0.5,0.5|0.49|0.51|8784|0
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367618|Spread: Seahawks (-1.5)|spreads|-1.5|Seahawks,Broncos|0.525,0.475|0.51|0.54|10895|8
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367620|Spread: Seahawks (-3.5)|spreads|-3.5|Seahawks,Broncos|0.42,0.58|0.41|0.43|6953|0
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367632|Seahawks vs. Broncos: O/U 42.5|totals|42.5|Over,Under|0.505,0.495|0.49|0.52|11548|0
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367631|Seahawks vs. Broncos: O/U 40.5|totals|40.5|Over,Under|0.565,0.435|0.55|0.58|12126|2
+P|nfl-sea-den-2026-10-16|game|2026-10-16T00:15:00Z|4367633|Seahawks vs. Broncos: O/U 44.5|totals|44.5|Over,Under|0.435,0.565|0.42|0.45|11716|0
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4329882|Texans vs. Jaguars|moneyline||Texans,Jaguars|0.43,0.57|0.42|0.44|20861|153
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|5127224|Spread: Jaguars (-2.5)|spreads|-2.5|Jaguars,Texans|0.53,0.47|0.51|0.55|10953|294
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|5127225|Spread: Jaguars (-3.5)|spreads|-3.5|Jaguars,Texans|0.45,0.55|0.43|0.47|10891|0
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|5127223|Spread: Jaguars (-1.5)|spreads|-1.5|Jaguars,Texans|0.57,0.43|0.55|0.59|10517|0
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4367553|Texans vs. Jaguars: O/U 42.5|totals|42.5|Over,Under|0.5,0.5|0.48|0.52|13931|0
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4367555|Texans vs. Jaguars: O/U 44.5|totals|44.5|Over,Under|0.455,0.545|0.44|0.47|13779|0
+P|nfl-hou-jax-2026-10-18|game|2026-10-18T13:30:00Z|4367552|Texans vs. Jaguars: O/U 40.5|totals|40.5|Over,Under|0.58,0.42|0.56|0.6|11691|0
+P|nfl-chi-atl-2026-10-18|game|2026-10-18T17:00:00Z|4329883|Bears vs. Falcons|moneyline||Bears,Falcons|0.545,0.455|0.53|0.56|18655|68
+P|nfl-bal-cle-2026-10-18|game|2026-10-18T17:00:00Z|4329884|Ravens vs. Browns|moneyline||Ravens,Browns|0.665,0.335|0.65|0.68|18299|4245
+P|nfl-ten-ind-2026-10-18|game|2026-10-18T17:00:00Z|4329885|Titans vs. Colts|moneyline||Titans,Colts|0.265,0.735|0.25|0.28|20899|22
+P|nfl-nyj-ne-2026-10-18|game|2026-10-18T17:00:00Z|4329886|Jets vs. Patriots|moneyline||Jets,Patriots|0.26,0.74|0.25|0.27|21647|2
+P|nfl-no-nyg-2026-10-18|game|2026-10-18T17:00:00Z|4329887|Saints vs. Giants|moneyline||Saints,Giants|0.49,0.51|0.48|0.5|17971|212
+P|nfl-no-nyg-2026-10-18|game|2026-10-18T17:00:00Z|5128023|Spread: Saints (-1.5)|spreads|-1.5|Saints,Giants|0.485,0.515|0.45|0.52|4805|0
+P|nfl-car-phi-2026-10-18|game|2026-10-18T17:00:00Z|4329888|Panthers vs. Eagles|moneyline||Panthers,Eagles|0.475,0.525|0.46|0.49|20199|2505
+P|nfl-car-phi-2026-10-18|game|2026-10-18T17:00:00Z|5127766|Spread: Eagles (-1.5)|spreads|-1.5|Eagles,Panthers|0.505,0.495|0.46|0.55|4746|0
+P|nfl-pit-tb-2026-10-18|game|2026-10-18T17:00:00Z|4329889|Steelers vs. Buccaneers|moneyline||Steelers,Buccaneers|0.575,0.425|0.56|0.59|17734|18
+P|nfl-ari-la-2026-10-18|game|2026-10-18T20:05:00Z|4329890|Cardinals vs. Rams|moneyline||Cardinals,Rams|0.15,0.85|0.14|0.16|17226|48
+P|nfl-ari-la-2026-10-18|game|2026-10-18T20:05:00Z|4367294|Spread: Rams (-10.5)|spreads|-10.5|Rams,Cardinals|0.5,0.5|0.45|0.55|5824|0
+P|nfl-lac-kc-2026-10-18|game|2026-10-18T20:25:00Z|4329891|Chargers vs. Chiefs|moneyline||Chargers,Chiefs|0.205,0.795|0.19|0.22|21450|18
+P|nfl-lac-kc-2026-10-18|game|2026-10-18T20:25:00Z|5129898|Spread: Chiefs (-7.5)|spreads|-7.5|Chiefs,Chargers|0.51,0.49|0.47|0.55|6653|63
+P|nfl-buf-lv-2026-10-18|game|2026-10-18T20:25:00Z|4329892|Bills vs. Raiders|moneyline||Bills,Raiders|0.69,0.31|0.67|0.71|20423|1
+P|nfl-dal-gb-2026-10-19|game|2026-10-19T00:20:00Z|4329893|Cowboys vs. Packers|moneyline||Cowboys,Packers|0.525,0.475|0.51|0.54|15500|10
+P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557991|Kraken vs. Capitals|moneyline||Kraken,Capitals|0.425,0.575|0.42|0.43|37828|93294
+P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|4557995|Kraken vs. Capitals: O/U 7.5|totals|7.5|Over,Under|0.425,0.575|0.41|0.44|18046|8704
+P|nhl-sea-wsh-2026-10-11|game|2026-10-11T21:00:00Z|5587931|Kraken vs. Capitals: O/U 8.5|totals|8.5|Over,Under|0.275,0.725|0.27|0.28|3636|58
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557996|Canucks vs. Rangers|moneyline||Canucks,Rangers|0.165,0.835|0.16|0.17|18037|94733
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557999|Canucks vs. Rangers: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.43|0.48|4601|54148
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4557998|Canucks vs. Rangers: O/U 5.5|totals|5.5|Over,Under|0.62,0.38|0.58|0.66|10628|1236
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|4558000|Canucks vs. Rangers: O/U 7.5|totals|7.5|Over,Under|0.215,0.785|0.17|0.26|4667|541
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|5505466|Spread: Rangers (-1.5)|spreads|-1.5|Rangers,Canucks|0.55,0.45|0.51|0.59|1689|4317
+P|nhl-van-nyr-2026-10-11|game|2026-10-11T22:00:00Z|5588499|Spread: Rangers (-2.5)|spreads|-2.5|Rangers,Canucks|0.395,0.605|0.34|0.45|1864|40
+P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558001|Hurricanes vs. Flyers|moneyline||Hurricanes,Flyers|0.675,0.325|0.67|0.68|49694|44461
+P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558003|Hurricanes vs. Flyers: O/U 5.5|totals|5.5|Over,Under|0.445,0.555|0.42|0.47|7751|3135
+P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558004|Hurricanes vs. Flyers: O/U 6.5|totals|6.5|Over,Under|0.325,0.675|0.3|0.35|4250|773
+P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|4558002|Hurricanes vs. Flyers: O/U 4.5|totals|4.5|Over,Under|0.68,0.32|0.65|0.71|9925|6048
+P|nhl-car-phi-2026-10-11|game|2026-10-11T23:00:00Z|5505465|Spread: Hurricanes (-1.5)|spreads|-1.5|Hurricanes,Flyers|0.42,0.58|0.41|0.43|17057|7096
+P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586623|Panthers vs. Sabres|moneyline||Panthers,Sabres|0.505,0.495|0.5|0.51|88138|9120
+P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586626|Panthers vs. Sabres: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.45|0.46|34966|113
+P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586625|Panthers vs. Sabres: O/U 5.5|totals|5.5|Over,Under|0.565,0.435|0.56|0.57|34310|2204
+P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|4586627|Panthers vs. Sabres: O/U 7.5|totals|7.5|Over,Under|0.255,0.745|0.25|0.26|16995|20
+P|nhl-fla-buf-2026-10-12|game|2026-10-12T17:00:00Z|5568262|Spread: Panthers (-1.5)|spreads|-1.5|Panthers,Sabres|0.285,0.715|0.28|0.29|37812|0
+P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586628|Senators vs. Devils|moneyline||Senators,Devils|0.445,0.555|0.44|0.45|65798|3741
+P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586630|Senators vs. Devils: O/U 5.5|totals|5.5|Over,Under|0.54,0.46|0.53|0.55|28755|0
+P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586631|Senators vs. Devils: O/U 6.5|totals|6.5|Over,Under|0.435,0.565|0.43|0.44|31247|0
+P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|4586632|Senators vs. Devils: O/U 7.5|totals|7.5|Over,Under|0.235,0.765|0.22|0.25|16904|0
+P|nhl-ott-nj-2026-10-12|game|2026-10-12T23:00:00Z|5568261|Spread: Devils (-1.5)|spreads|-1.5|Devils,Senators|0.315,0.685|0.31|0.32|30059|143
+P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586633|Golden Knights vs. Wild|moneyline||GoldenKnights,Wild|0.495,0.505|0.49|0.5|72447|13620
+P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586635|Golden Knights vs. Wild: O/U 5.5|totals|5.5|Over,Under|0.55,0.45|0.54|0.56|30889|0
+P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586636|Golden Knights vs. Wild: O/U 6.5|totals|6.5|Over,Under|0.445,0.555|0.44|0.45|31786|5
+P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|4586637|Golden Knights vs. Wild: O/U 7.5|totals|7.5|Over,Under|0.25,0.75|0.24|0.26|18232|0
+P|nhl-las-min-2026-10-12|game|2026-10-13T00:00:00Z|5568260|Spread: Wild (-1.5)|spreads|-1.5|Wild,GoldenKnights|0.295,0.705|0.29|0.3|28325|139
+P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616286|Devils vs. Red Wings|moneyline||Devils,RedWings|0.475,0.525|0.47|0.48|20220|255
+P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616292|Devils vs. Red Wings: O/U 6.5|totals|6.5|Over,Under|0.49,0.51|0.46|0.52|5797|0
+P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616290|Devils vs. Red Wings: O/U 5.5|totals|5.5|Over,Under|0.57,0.43|0.56|0.58|5609|0
+P|nhl-nj-det-2026-10-13|game|2026-10-13T22:00:00Z|4616288|Devils vs. Red Wings: O/U 4.5|totals|4.5|Over,Under|0.78,0.22|0.76|0.8|5814|0
+P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616299|Panthers vs. Blue Jackets|moneyline||Panthers,BlueJackets|0.46,0.54|0.45|0.47|13870|665
+P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616303|Panthers vs. Blue Jackets: O/U 5.5|totals|5.5|Over,Under|0.545,0.455|0.51|0.58|5152|7
+P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616305|Panthers vs. Blue Jackets: O/U 6.5|totals|6.5|Over,Under|0.445,0.555|0.42|0.47|5524|0
+P|nhl-fla-cbj-2026-10-13|game|2026-10-13T22:15:00Z|4616307|Panthers vs. Blue Jackets: O/U 7.5|totals|7.5|Over,Under|0.23,0.77|0.19|0.27|6391|0
+P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616312|Sabres vs. Canadiens|moneyline||Sabres,Canadiens|0.445,0.555|0.44|0.45|12663|5
+P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616318|Sabres vs. Canadiens: O/U 6.5|totals|6.5|Over,Under|0.495,0.505|0.49|0.5|4978|0
+P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616320|Sabres vs. Canadiens: O/U 7.5|totals|7.5|Over,Under|0.255,0.745|0.24|0.27|5789|0
+P|nhl-buf-mon-2026-10-13|game|2026-10-13T22:30:00Z|4616314|Sabres vs. Canadiens: O/U 4.5|totals|4.5|Over,Under|0.785,0.215|0.73|0.84|4933|0
+P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616325|Capitals vs. Hurricanes|moneyline||Capitals,Hurricanes|0.405,0.595|0.4|0.41|10128|13
+P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616331|Capitals vs. Hurricanes: O/U 6.5|totals|6.5|Over,Under|0.465,0.535|0.43|0.5|5256|3
+P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616333|Capitals vs. Hurricanes: O/U 7.5|totals|7.5|Over,Under|0.265,0.735|0.24|0.29|6236|17
+P|nhl-wsh-car-2026-10-13|game|2026-10-13T22:45:00Z|4616327|Capitals vs. Hurricanes: O/U 4.5|totals|4.5|Over,Under|0.79,0.21|0.74|0.84|4911|0
+P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616338|Kraken vs. Flyers|moneyline||Kraken,Flyers|0.475,0.525|0.47|0.48|18131|587
+P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616342|Kraken vs. Flyers: O/U 5.5|totals|5.5|Over,Under|0.515,0.485|0.5|0.53|5502|0
+P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616344|Kraken vs. Flyers: O/U 6.5|totals|6.5|Over,Under|0.415,0.585|0.39|0.44|5573|0
+P|nhl-sea-phi-2026-10-13|game|2026-10-13T23:00:00Z|4616340|Kraken vs. Flyers: O/U 4.5|totals|4.5|Over,Under|0.755,0.245|0.71|0.8|5808|0
+P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616351|Lightning vs. Rangers|moneyline||Lightning,Rangers|0.58,0.42|0.57|0.59|12559|48
+P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616355|Lightning vs. Rangers: O/U 5.5|totals|5.5|Over,Under|0.505,0.495|0.47|0.54|5759|12
+P|nhl-tb-nyr-2026-10-13|game|2026-10-13T23:15:00Z|4616353|Lightning vs. Rangers: O/U 4.5|totals|4.5|Over,Under|0.74,0.26|0.7|0.78|5642|0
+P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616362|Blues vs. Senators|moneyline||Blues,Senators|0.435,0.565|0.43|0.44|4213|136
+P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616364|Blues vs. Senators: O/U 5.5|totals|5.5|Over,Under|0.525,0.475|0.5|0.55|1682|0
+P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616365|Blues vs. Senators: O/U 6.5|totals|6.5|Over,Under|0.425,0.575|0.4|0.45|2372|0
+P|nhl-stl-ott-2026-10-13|game|2026-10-13T23:30:00Z|4616363|Blues vs. Senators: O/U 4.5|totals|4.5|Over,Under|0.77,0.23|0.72|0.82|1724|0
+P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616367|Canucks vs. Islanders|moneyline||Canucks,Islanders|0.325,0.675|0.32|0.33|12851|2861
+P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616369|Canucks vs. Islanders: O/U 5.5|totals|5.5|Over,Under|0.52,0.48|0.5|0.54|4644|0
+P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616370|Canucks vs. Islanders: O/U 6.5|totals|6.5|Over,Under|0.425,0.575|0.39|0.46|5634|0
+P|nhl-van-nyi-2026-10-13|game|2026-10-13T23:45:00Z|4616368|Canucks vs. Islanders: O/U 4.5|totals|4.5|Over,Under|0.735,0.265|0.71|0.76|5224|0
+P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616374|Penguins vs. Blackhawks|moneyline||Penguins,Blackhawks|0.605,0.395|0.6|0.61|14016|122
+P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616380|Penguins vs. Blackhawks: O/U 6.5|totals|6.5|Over,Under|0.515,0.485|0.49|0.54|5490|0
+P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616378|Penguins vs. Blackhawks: O/U 5.5|totals|5.5|Over,Under|0.615,0.385|0.59|0.64|5224|0
+P|nhl-pit-chi-2026-10-13|game|2026-10-14T00:00:00Z|4616382|Penguins vs. Blackhawks: O/U 7.5|totals|7.5|Over,Under|0.305,0.695|0.28|0.33|5584|0
+P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616387|Wild vs. Jets|moneyline||Wild,Jets|0.555,0.445|0.55|0.56|14204|11
+P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616391|Wild vs. Jets: O/U 5.5|totals|5.5|Over,Under|0.525,0.475|0.5|0.55|5439|0
+P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616394|Wild vs. Jets: O/U 6.5|totals|6.5|Over,Under|0.425,0.575|0.4|0.45|5513|0
+P|nhl-min-wpg-2026-10-13|game|2026-10-14T00:15:00Z|4616389|Wild vs. Jets: O/U 4.5|totals|4.5|Over,Under|0.745,0.255|0.72|0.77|5822|0
+P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616401|Avalanche vs. Stars|moneyline||Avalanche,Stars|0.54,0.46|0.53|0.55|11604|112
+P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616407|Avalanche vs. Stars: O/U 6.5|totals|6.5|Over,Under|0.455,0.545|0.43|0.48|5868|3
+P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616405|Avalanche vs. Stars: O/U 5.5|totals|5.5|Over,Under|0.555,0.445|0.52|0.59|6174|33
+P|nhl-col-dal-2026-10-13|game|2026-10-14T00:30:00Z|4616403|Avalanche vs. Stars: O/U 4.5|totals|4.5|Over,Under|0.765,0.235|0.74|0.79|5736|0
+P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616414|Golden Knights vs. Predators|moneyline||GoldenKnights,Predators|0.565,0.435|0.56|0.57|11333|107
+P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616420|Golden Knights vs. Predators: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.45|0.5|5343|0
+P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616418|Golden Knights vs. Predators: O/U 5.5|totals|5.5|Over,Under|0.58,0.42|0.55|0.61|5470|0
+P|nhl-las-nsh-2026-10-13|game|2026-10-14T00:45:00Z|4616422|Golden Knights vs. Predators: O/U 7.5|totals|7.5|Over,Under|0.255,0.745|0.21|0.3|5725|0
+P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616428|Maple Leafs vs. Utah|moneyline||MapleLeafs,Utah|0.4,0.6|0.39|0.41|11832|165
+P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616434|Maple Leafs vs. Utah: O/U 6.5|totals|6.5|Over,Under|0.5,0.5|0.48|0.52|5640|0
+P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616431|Maple Leafs vs. Utah: O/U 5.5|totals|5.5|Over,Under|0.61,0.39|0.58|0.64|5853|0
+P|nhl-tor-utah-2026-10-13|game|2026-10-14T01:00:00Z|4616435|Maple Leafs vs. Utah: O/U 7.5|totals|7.5|Over,Under|0.285,0.715|0.25|0.32|5552|0
+P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616441|Flames vs. Ducks|moneyline||Flames,Ducks|0.365,0.635|0.36|0.37|14884|129
+P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616447|Flames vs. Ducks: O/U 6.5|totals|6.5|Over,Under|0.485,0.515|0.46|0.51|5534|0
+P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616445|Flames vs. Ducks: O/U 5.5|totals|5.5|Over,Under|0.585,0.415|0.56|0.61|5907|0
+P|nhl-cal-ana-2026-10-13|game|2026-10-14T01:45:00Z|4616449|Flames vs. Ducks: O/U 7.5|totals|7.5|Over,Under|0.285,0.715|0.26|0.31|5830|0
+P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616455|Oilers vs. Kings|moneyline||Oilers,Kings|0.565,0.435|0.56|0.57|13630|341
+P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616461|Oilers vs. Kings: O/U 6.5|totals|6.5|Over,Under|0.51,0.49|0.5|0.52|3272|0
+P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616459|Oilers vs. Kings: O/U 5.5|totals|5.5|Over,Under|0.565,0.435|0.54|0.59|4576|0
+P|nhl-edm-lak-2026-10-13|game|2026-10-14T02:30:00Z|4616463|Oilers vs. Kings: O/U 7.5|totals|7.5|Over,Under|0.265,0.735|0.24|0.29|5882|0
+P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616469|Bruins vs. Sharks|moneyline||Bruins,Sharks|0.525,0.475|0.52|0.53|14947|197
+P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616475|Bruins vs. Sharks: O/U 6.5|totals|6.5|Over,Under|0.475,0.525|0.45|0.5|5455|0
+P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616477|Bruins vs. Sharks: O/U 7.5|totals|7.5|Over,Under|0.27,0.73|0.25|0.29|5661|0
+P|nhl-bos-sj-2026-10-13|game|2026-10-14T03:00:00Z|4616471|Bruins vs. Sharks: O/U 4.5|totals|4.5|Over,Under|0.795,0.205|0.75|0.84|5825|0
+P|nhl-mon-wsh-2026-10-14|game|2026-10-14T23:30:00Z|4640800|Canadiens vs. Capitals|moneyline||Canadiens,Capitals|0.45,0.55|0.44|0.46|9081|5
+P|nhl-mon-wsh-2026-10-14|game|2026-10-14T23:30:00Z|4640803|Canadiens vs. Capitals: O/U 6.5|totals|6.5|Over,Under|0.51,0.49|0.46|0.56|1097|0
+P|nhl-dal-col-2026-10-14|game|2026-10-15T00:30:00Z|4640805|Stars vs. Avalanche|moneyline||Stars,Avalanche|0.405,0.595|0.4|0.41|11589|5
+P|nhl-dal-col-2026-10-14|game|2026-10-15T00:30:00Z|4640807|Stars vs. Avalanche: O/U 5.5|totals|5.5|Over,Under|0.555,0.445|0.5|0.61|1469|0
+P|nhl-dal-col-2026-10-14|game|2026-10-15T00:30:00Z|4640808|Stars vs. Avalanche: O/U 6.5|totals|6.5|Over,Under|0.435,0.565|0.38|0.49|1360|0
+P|nhl-van-fla-2026-10-15|game|2026-10-15T23:00:00Z|4688853|Canucks vs. Panthers|moneyline||Canucks,Panthers|0.265,0.735|0.26|0.27|9218|273
+P|nhl-buf-tor-2026-10-15|game|2026-10-15T23:00:00Z|4688858|Sabres vs. Maple Leafs|moneyline||Sabres,MapleLeafs|0.54,0.46|0.53|0.55|11198|5
+P|nhl-sea-tb-2026-10-15|game|2026-10-15T23:00:00Z|4688863|Kraken vs. Lightning|moneyline||Kraken,Lightning|0.34,0.66|0.33|0.35|9319|0
+P|nhl-nyi-ott-2026-10-15|game|2026-10-15T23:00:00Z|4688868|Islanders vs. Senators|moneyline||Islanders,Senators|0.415,0.585|0.41|0.42|1466|0
+P|nhl-nyr-nj-2026-10-15|game|2026-10-15T23:00:00Z|4688873|Rangers vs. Devils|moneyline||Rangers,Devils|0.505,0.495|0.5|0.51|9701|10
+P|nhl-phi-det-2026-10-15|game|2026-10-15T23:30:00Z|4688878|Flyers vs. Red Wings|moneyline||Flyers,RedWings|0.415,0.585|0.41|0.42|11021|44
+P|nhl-stl-min-2026-10-15|game|2026-10-16T00:00:00Z|4688883|Blues vs. Wild|moneyline||Blues,Wild|0.39,0.61|0.38|0.4|8716|5
+P|nhl-sj-nsh-2026-10-15|game|2026-10-16T00:00:00Z|4688888|Sharks vs. Predators|moneyline||Sharks,Predators|0.435,0.565|0.43|0.44|8701|0
+P|nhl-wpg-chi-2026-10-15|game|2026-10-16T00:00:00Z|4688893|Jets vs. Blackhawks|moneyline||Jets,Blackhawks|0.56,0.44|0.55|0.57|10033|0
+P|nhl-utah-edm-2026-10-15|game|2026-10-16T01:00:00Z|4688898|Utah vs. Oilers|moneyline||Utah,Oilers|0.46,0.54|0.45|0.47|8672|5
+P|nhl-cal-las-2026-10-15|game|2026-10-16T02:00:00Z|4688903|Flames vs. Golden Knights|moneyline||Flames,GoldenKnights|0.27,0.73|0.26|0.28|9222|331
+P|nhl-pit-col-2026-10-16|game|2026-10-17T01:00:00Z|4726819|Penguins vs. Avalanche|moneyline||Penguins,Avalanche|0.405,0.595|0.4|0.41|8966|10
+P|nhl-bos-ana-2026-10-16|game|2026-10-17T02:00:00Z|4726824|Bruins vs. Ducks|moneyline||Bruins,Ducks|0.5,0.5|0.49|0.51|8873|0
+P|nhl-nj-wsh-2026-10-17|game|2026-10-17T17:00:00Z|4761377|Devils vs. Capitals|moneyline||Devils,Capitals|0.4,0.6|0.37|0.43|10336|10
+P|nhl-car-wpg-2026-10-17|game|2026-10-17T19:30:00Z|4761382|Hurricanes vs. Jets|moneyline||Hurricanes,Jets|0.6,0.4|0.59|0.61|10695|0
+P|nhl-van-tb-2026-10-17|game|2026-10-17T20:00:00Z|4761387|Canucks vs. Lightning|moneyline||Canucks,Lightning|0.255,0.745|0.25|0.26|10489|227
+P|nhl-sea-fla-2026-10-17|game|2026-10-17T22:00:00Z|4761392|Kraken vs. Panthers|moneyline||Kraken,Panthers|0.415,0.585|0.41|0.42|11037|49
+P|nhl-nyr-cbj-2026-10-17|game|2026-10-17T23:00:00Z|4761397|Rangers vs. Blue Jackets|moneyline||Rangers,BlueJackets|0.485,0.515|0.47|0.5|10563|0
+P|nhl-nyi-tor-2026-10-17|game|2026-10-17T23:00:00Z|4761402|Islanders vs. Maple Leafs|moneyline||Islanders,MapleLeafs|0.48,0.52|0.47|0.49|10551|5
+P|nhl-ott-phi-2026-10-17|game|2026-10-17T23:00:00Z|4761407|Senators vs. Flyers|moneyline||Senators,Flyers|0.56,0.44|0.55|0.57|1585|0
+P|nhl-buf-mon-2026-10-17|game|2026-10-17T23:00:00Z|4761412|Sabres vs. Canadiens|moneyline||Sabres,Canadiens|0.485,0.515|0.48|0.49|10435|0
+P|nhl-sj-det-2026-10-17|game|2026-10-17T23:00:00Z|4761417|Sharks vs. Red Wings|moneyline||Sharks,RedWings|0.44,0.56|0.42|0.46|10647|0
+P|nhl-dal-chi-2026-10-17|game|2026-10-17T23:00:00Z|4761422|Stars vs. Blackhawks|moneyline||Stars,Blackhawks|0.665,0.335|0.66|0.67|10461|0
+P|nhl-stl-nsh-2026-10-17|game|2026-10-18T00:00:00Z|4761427|Blues vs. Predators|moneyline||Blues,Predators|0.46,0.54|0.44|0.48|10743|0
+P|nhl-bos-lak-2026-10-17|game|2026-10-18T01:00:00Z|4761432|Bruins vs. Kings|moneyline||Bruins,Kings|0.41,0.59|0.37|0.45|11411|21
+P|nhl-edm-utah-2026-10-17|game|2026-10-18T02:00:00Z|4761437|Oilers vs. Utah|moneyline||Oilers,Utah|0.47,0.53|0.45|0.49|10511|0
+P|nhl-pit-las-2026-10-17|game|2026-10-18T02:00:00Z|4761442|Penguins vs. Golden Knights|moneyline||Penguins,GoldenKnights|0.41,0.59|0.4|0.42|10456|5
+P|nhl-cbj-min-2026-10-18|game|2026-10-18T22:00:00Z|4797319|Blue Jackets vs. Wild|moneyline||BlueJackets,Wild|0.38,0.62|0.32|0.44|8354|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347295|Delaware vs. Middle Tennessee|moneyline||Delaware,MiddleTennessee|0.565,0.435|0.56|0.57|19845|2818
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347308|Spread: Delaware (-2.5)|spreads|-2.5|Delaware,MiddleTennessee|0.51,0.49|0.5|0.52|16545|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347309|Spread: Delaware (-1.5)|spreads|-1.5|Delaware,MiddleTennessee|0.53,0.47|0.52|0.54|14055|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347307|Spread: Delaware (-3.5)|spreads|-3.5|Delaware,MiddleTennessee|0.44,0.56|0.43|0.45|15153|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347332|Delaware vs. Middle Tennessee: O/U 47.5|totals|47.5|Over,Under|0.515,0.485|0.51|0.52|15353|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347333|Delaware vs. Middle Tennessee: O/U 49.5|totals|49.5|Over,Under|0.45,0.55|0.44|0.46|15499|7
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347331|Delaware vs. Middle Tennessee: O/U 45.5|totals|45.5|Over,Under|0.575,0.425|0.57|0.58|14063|0
+P|cfb-del-mtnst-2026-10-13|game|2026-10-13T23:00:00Z|5347390|Middle Tennessee Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.49,0.51|0.47|0.51|2359|0
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347878|Florida International vs. Jacksonville State|moneyline||FloridaInternational,JacksonvilleState|0.425,0.575|0.42|0.43|19212|2820
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347949|Spread: Jacksonville State (-2.5)|spreads|-2.5|JacksonvilleState,FloridaInternational|0.53,0.47|0.52|0.54|12290|974
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347953|Spread: Jacksonville State (-3.5)|spreads|-3.5|JacksonvilleState,FloridaInternational|0.46,0.54|0.45|0.47|14642|411
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5347946|Spread: Jacksonville State (-1.5)|spreads|-1.5|JacksonvilleState,FloridaInternational|0.55,0.45|0.54|0.56|13610|948
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348018|Florida International vs. Jacksonville State: O/U 43.5|totals|43.5|Over,Under|0.495,0.505|0.48|0.51|15435|354
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348014|Florida International vs. Jacksonville State: O/U 41.5|totals|41.5|Over,Under|0.555,0.445|0.54|0.57|9740|0
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348022|Florida International vs. Jacksonville State: O/U 45.5|totals|45.5|Over,Under|0.42,0.58|0.41|0.43|15947|0
+P|cfb-flint-jaxst-2026-10-13|game|2026-10-14T00:00:00Z|5348207|Florida International Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.505,0.495|0.49|0.52|3752|0
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347877|Kennesaw State vs. Missouri State|moneyline||KennesawState,MissouriState|0.585,0.415|0.58|0.59|17262|731
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347925|Spread: Kennesaw State (-3.5)|spreads|-3.5|KennesawState,MissouriState|0.475,0.525|0.47|0.48|15194|263
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347931|Spread: Kennesaw State (-2.5)|spreads|-2.5|KennesawState,MissouriState|0.55,0.45|0.54|0.56|16200|17
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5347921|Spread: Kennesaw State (-4.5)|spreads|-4.5|KennesawState,MissouriState|0.445,0.555|0.44|0.45|15940|0
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348036|Kennesaw State vs. Missouri State: O/U 51.5|totals|51.5|Over,Under|0.485,0.515|0.48|0.49|13342|0
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348032|Kennesaw State vs. Missouri State: O/U 49.5|totals|49.5|Over,Under|0.55,0.45|0.54|0.56|12424|910
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348040|Kennesaw State vs. Missouri State: O/U 53.5|totals|53.5|Over,Under|0.43,0.57|0.42|0.44|13385|0
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348228|Missouri State Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.54,0.46|0.52|0.56|2302|0
+P|cfb-kenest-msrst-2026-10-14|game|2026-10-14T23:30:00Z|5348217|Kennesaw State Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.55,0.45|0.53|0.57|2304|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347879|Western Kentucky vs. Sam Houston|moneyline||WesternKentucky,SamHouston|0.525,0.475|0.52|0.53|22196|1805
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347935|Spread: Western Kentucky (-1.5)|spreads|-1.5|WesternKentucky,SamHouston|0.49,0.51|0.48|0.5|17297|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347939|Spread: Western Kentucky (-0.5)|spreads|-0.5|WesternKentucky,SamHouston|0.515,0.485|0.5|0.53|4822|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5347943|Spread: Sam Houston (-0.5)|spreads|-0.5|SamHouston,WesternKentucky|0.485,0.515|0.47|0.5|4831|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348033|Western Kentucky vs. Sam Houston: O/U 51.5|totals|51.5|Over,Under|0.5,0.5|0.49|0.51|12912|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348037|Western Kentucky vs. Sam Houston: O/U 53.5|totals|53.5|Over,Under|0.445,0.555|0.43|0.46|13383|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348029|Western Kentucky vs. Sam Houston: O/U 49.5|totals|49.5|Over,Under|0.57,0.43|0.56|0.58|13244|0
+P|cfb-wkent-smho-2026-10-14|game|2026-10-15T00:00:00Z|5348214|Western Kentucky Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.49,0.51|0.47|0.51|2265|0
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347876|East Carolina vs. UAB|moneyline||EastCarolina,UAB|0.635,0.365|0.63|0.64|19346|6
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347920|Spread: East Carolina (-4.5)|spreads|-4.5|EastCarolina,UAB|0.49,0.51|0.48|0.5|18859|73
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347916|Spread: East Carolina (-5.5)|spreads|-5.5|EastCarolina,UAB|0.475,0.525|0.47|0.48|17394|76
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5347924|Spread: East Carolina (-3.5)|spreads|-3.5|EastCarolina,UAB|0.53,0.47|0.52|0.54|16781|0
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348027|East Carolina vs. UAB: O/U 49.5|totals|49.5|Over,Under|0.495,0.505|0.48|0.51|8213|25
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348030|East Carolina vs. UAB: O/U 51.5|totals|51.5|Over,Under|0.44,0.56|0.43|0.45|9526|1002
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348023|East Carolina vs. UAB: O/U 47.5|totals|47.5|Over,Under|0.56,0.44|0.55|0.57|12804|0
+P|cfb-ecar-uab-2026-10-15|game|2026-10-15T23:30:00Z|5348224|UAB Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.46,0.54|0.44|0.48|2450|0
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348293|Georgia Southern vs. Old Dominion|moneyline||GeorgiaSouthern,OldDominion|0.615,0.385|0.6|0.63|20413|531
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348305|Spread: Georgia Southern (-3.5)|spreads|-3.5|GeorgiaSouthern,OldDominion|0.51,0.49|0.5|0.52|14608|0
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348304|Spread: Georgia Southern (-4.5)|spreads|-4.5|GeorgiaSouthern,OldDominion|0.48,0.52|0.47|0.49|14482|0
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348303|Spread: Georgia Southern (-5.5)|spreads|-5.5|GeorgiaSouthern,OldDominion|0.455,0.545|0.44|0.47|15685|6
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348341|Georgia Southern vs. Old Dominion: O/U 47.5|totals|47.5|Over,Under|0.49,0.51|0.48|0.5|8659|40
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348337|Georgia Southern vs. Old Dominion: O/U 45.5|totals|45.5|Over,Under|0.55,0.45|0.54|0.56|13233|0
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348344|Georgia Southern vs. Old Dominion: O/U 49.5|totals|49.5|Over,Under|0.43,0.57|0.42|0.44|13662|65
+P|cfb-gas-old-2026-10-15|game|2026-10-15T23:30:00Z|5348505|Old Dominion Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.445,0.55|0.43|0.47|2342|0
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348327|Colorado State vs. Texas State|moneyline||ColoradoState,TexasState|0.195,0.805|0.19|0.2|15242|10
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348434|Spread: Texas State (-13.5)|spreads|-13.5|TexasState,ColoradoState|0.49,0.51|0.48|0.5|14329|0
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348441|Spread: Texas State (-16.5)|spreads|-16.5|TexasState,ColoradoState|0.46,0.54|0.42|0.5|5996|0
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348430|Spread: Texas State (-10.5)|spreads|-10.5|TexasState,ColoradoState|0.545,0.455|0.54|0.55|8638|304
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348513|Colorado State vs. Texas State: O/U 67.5|totals|67.5|Over,Under|0.52,0.48|0.51|0.53|11892|1467
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348509|Colorado State vs. Texas State: O/U 65.5|totals|65.5|Over,Under|0.525,0.475|0.52|0.53|8016|4849
+P|cfb-colst-txst-2026-10-15|game|2026-10-16T00:00:00Z|5348516|Colorado State vs. Texas State: O/U 69.5|totals|69.5|Over,Under|0.455,0.545|0.45|0.46|13274|1055
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348332|Memphis vs. Tulane|moneyline||Memphis,Tulane|0.685,0.315|0.67|0.7|16776|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348372|Spread: Memphis (-6.5)|spreads|-6.5|Memphis,Tulane|0.515,0.485|0.5|0.53|11627|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348376|Spread: Memphis (-5.5)|spreads|-5.5|Memphis,Tulane|0.55,0.45|0.53|0.57|11219|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348368|Spread: Memphis (-7.5)|spreads|-7.5|Memphis,Tulane|0.445,0.555|0.43|0.46|11642|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348494|Memphis vs. Tulane: O/U 53.5|totals|53.5|Over,Under|0.5,0.5|0.48|0.52|7863|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348497|Memphis vs. Tulane: O/U 55.5|totals|55.5|Over,Under|0.445,0.555|0.42|0.47|6673|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348490|Memphis vs. Tulane: O/U 51.5|totals|51.5|Over,Under|0.565,0.435|0.54|0.59|3651|0
+P|cfb-mphs-tulane-2026-10-16|game|2026-10-16T23:30:00Z|5348647|Memphis Team Total: O/U 29.5|team_totals|29.5|Over,Under|0.525,0.475|0.5|0.55|1708|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348442|Appalachian State vs. Coastal Carolina|moneyline||AppalachianState,CoastalCarolina|0.51,0.49|0.49|0.53|15991|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348507|Spread: Appalachian State (-1.5)|spreads|-1.5|AppalachianState,CoastalCarolina|0.49,0.51|0.47|0.51|9151|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348503|Spread: Appalachian State (-2.5)|spreads|-2.5|AppalachianState,CoastalCarolina|0.48,0.52|0.46|0.5|8111|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348522|Spread: Coastal Carolina (-1.5)|spreads|-1.5|CoastalCarolina,AppalachianState|0.46,0.54|0.44|0.48|8481|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348613|Appalachian State vs. Coastal Carolina: O/U 51.5|totals|51.5|Over,Under|0.515,0.485|0.48|0.55|8257|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348616|Appalachian State vs. Coastal Carolina: O/U 53.5|totals|53.5|Over,Under|0.455,0.545|0.42|0.49|8107|0
+P|cfb-applst-coast-2026-10-16|game|2026-10-17T00:00:00Z|5348747|Appalachian State Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.51,0.49|0.48|0.54|1069|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348620|Washington vs. Purdue|moneyline||Washington,Purdue|0.41,0.59|0.4|0.42|18203|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348703|Spread: Purdue (-3.5)|spreads|-3.5|Purdue,Washington|0.465,0.535|0.45|0.48|11909|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348699|Spread: Purdue (-2.5)|spreads|-2.5|Purdue,Washington|0.55,0.45|0.53|0.57|11475|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348708|Spread: Purdue (-4.5)|spreads|-4.5|Purdue,Washington|0.44,0.56|0.42|0.46|11594|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348756|Washington vs. Purdue: O/U 51.5|totals|51.5|Over,Under|0.52,0.48|0.5|0.54|16697|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348759|Washington vs. Purdue: O/U 53.5|totals|53.5|Over,Under|0.45,0.55|0.42|0.48|9181|0
+P|cfb-wash-pur-2026-10-16|game|2026-10-17T00:00:00Z|5348753|Washington vs. Purdue: O/U 49.5|totals|49.5|Over,Under|0.57,0.43|0.54|0.6|5890|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348755|Kansas vs. Kansas State|moneyline||Kansas,KansasState|0.32,0.68|0.31|0.33|13291|28
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348845|Spread: Kansas State (-6.5)|spreads|-6.5|KansasState,Kansas|0.49,0.51|0.47|0.51|13652|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348843|Spread: Kansas State (-5.5)|spreads|-5.5|KansasState,Kansas|0.515,0.485|0.5|0.53|12351|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348840|Spread: Kansas State (-4.5)|spreads|-4.5|KansasState,Kansas|0.545,0.455|0.53|0.56|12093|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348958|Kansas vs. Kansas State: O/U 55.5|totals|55.5|Over,Under|0.5,0.5|0.48|0.52|8760|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348959|Kansas vs. Kansas State: O/U 57.5|totals|57.5|Over,Under|0.445,0.555|0.41|0.48|7252|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5348957|Kansas vs. Kansas State: O/U 53.5|totals|53.5|Over,Under|0.565,0.435|0.54|0.59|7887|0
+P|cfb-kan-kanst-2026-10-17|game|2026-10-17T16:00:00Z|5349000|Kansas Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.555,0.445|0.53|0.58|1711|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349030|Florida vs. Texas|moneyline||Florida,Texas|0.23,0.77|0.22|0.24|9552|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349055|Spread: Texas (-10.5)|spreads|-10.5|Texas,Florida|0.475,0.525|0.46|0.49|11584|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349054|Spread: Texas (-8.5)|spreads|-8.5|Texas,Florida|0.53,0.47|0.51|0.55|11511|18
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349053|Spread: Texas (-7.5)|spreads|-7.5|Texas,Florida|0.545,0.455|0.51|0.58|5863|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349070|Florida vs. Texas: O/U 53.5|totals|53.5|Over,Under|0.49,0.51|0.48|0.5|9322|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349069|Florida vs. Texas: O/U 51.5|totals|51.5|Over,Under|0.545,0.455|0.52|0.57|8834|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349071|Florida vs. Texas: O/U 55.5|totals|55.5|Over,Under|0.43,0.57|0.38|0.48|4590|0
+P|cfb-fl-tx-2026-10-17|game|2026-10-17T16:00:00Z|5349112|Florida Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.535,0.465|0.51|0.56|1708|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349259|Florida Atlantic vs. Army|moneyline||FloridaAtlantic,Army|0.43,0.57|0.41|0.45|17611|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349277|Spread: Army (-2.5)|spreads|-2.5|Army,FloridaAtlantic|0.52,0.48|0.5|0.54|7179|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349278|Spread: Army (-3.5)|spreads|-3.5|Army,FloridaAtlantic|0.45,0.55|0.42|0.48|6714|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349276|Spread: Army (-1.5)|spreads|-1.5|Army,FloridaAtlantic|0.55,0.45|0.53|0.57|7607|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349301|Florida Atlantic vs. Army: O/U 57.5|totals|57.5|Over,Under|0.47,0.53|0.44|0.5|4801|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349300|Florida Atlantic vs. Army: O/U 55.5|totals|55.5|Over,Under|0.535,0.465|0.51|0.56|7362|0
+P|cfb-flatl-army-2026-10-17|game|2026-10-17T16:00:00Z|5349350|Army Team Total: O/U 29.5|team_totals|29.5|Over,Under|0.505,0.495|0.48|0.53|1724|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349365|Mississippi State vs. LSU|moneyline||MississippiState,LSU|0.225,0.775|0.22|0.23|8697|543
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349390|Spread: LSU (-10.5)|spreads|-10.5|LSU,MississippiState|0.52,0.48|0.5|0.54|10653|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349391|Spread: LSU (-13.5)|spreads|-13.5|LSU,MississippiState|0.44,0.56|0.41|0.47|9898|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349408|Mississippi State vs. LSU: O/U 59.5|totals|59.5|Over,Under|0.48,0.52|0.45|0.51|8010|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349409|Mississippi State vs. LSU: O/U 61.5|totals|61.5|Over,Under|0.45,0.55|0.42|0.48|4638|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349407|Mississippi State vs. LSU: O/U 57.5|totals|57.5|Over,Under|0.55,0.45|0.52|0.58|7242|0
+P|cfb-mspst-lsu-2026-10-17|game|2026-10-17T16:00:00Z|5349457|LSU Team Total: O/U 35.5|team_totals|35.5|Over,Under|0.465,0.535|0.44|0.49|1104|0
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349499|Ohio State vs. Indiana|moneyline||OhioState,Indiana|0.63,0.37|0.62|0.64|22771|9777
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349515|Spread: Ohio State (-3.5)|spreads|-3.5|OhioState,Indiana|0.505,0.495|0.49|0.52|12454|0
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349514|Spread: Ohio State (-4.5)|spreads|-4.5|OhioState,Indiana|0.47,0.53|0.45|0.49|13538|12
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349513|Spread: Ohio State (-5.5)|spreads|-5.5|OhioState,Indiana|0.45,0.55|0.43|0.47|13371|155
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349542|Ohio State vs. Indiana: O/U 50.5|totals|50.5|Over,Under|0.53,0.47|0.51|0.55|12322|0
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349543|Ohio State vs. Indiana: O/U 52.5|totals|52.5|Over,Under|0.465,0.535|0.44|0.49|12529|0
+P|cfb-ohiost-ind-2026-10-17|game|2026-10-17T16:00:00Z|5349544|Ohio State vs. Indiana: O/U 54.5|totals|54.5|Over,Under|0.44,0.56|0.4|0.48|2863|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349640|Cincinnati vs. West Virginia|moneyline||Cincinnati,WestVirginia|0.47,0.53|0.45|0.49|8600|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349657|Spread: West Virginia (-1.5)|spreads|-1.5|WestVirginia,Cincinnati|0.5,0.5|0.48|0.52|8284|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349658|Spread: West Virginia (-2.5)|spreads|-2.5|WestVirginia,Cincinnati|0.48,0.52|0.45|0.51|6916|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349654|Spread: Cincinnati (-1.5)|spreads|-1.5|Cincinnati,WestVirginia|0.46,0.54|0.43|0.49|7044|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349684|Cincinnati vs. West Virginia: O/U 61.5|totals|61.5|Over,Under|0.51,0.49|0.48|0.54|6505|0
+P|cfb-cin-wvir-2026-10-17|game|2026-10-17T16:00:00Z|5349685|Cincinnati vs. West Virginia: O/U 63.5|totals|63.5|Over,Under|0.455,0.545|0.42|0.49|7079|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349745|Georgia State vs. James Madison|moneyline||GeorgiaState,JamesMadison|0.195,0.805|0.18|0.21|9087|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349770|Spread: James Madison (-10.5)|spreads|-10.5|JamesMadison,GeorgiaState|0.525,0.475|0.5|0.55|9492|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349771|Spread: James Madison (-13.5)|spreads|-13.5|JamesMadison,GeorgiaState|0.46,0.54|0.44|0.48|9334|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349787|Georgia State vs. James Madison: O/U 57.5|totals|57.5|Over,Under|0.53,0.47|0.51|0.55|7100|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349788|Georgia State vs. James Madison: O/U 59.5|totals|59.5|Over,Under|0.47,0.53|0.45|0.49|6018|0
+P|cfb-gast-jmad-2026-10-17|game|2026-10-17T16:00:00Z|5349786|Georgia State vs. James Madison: O/U 55.5|totals|55.5|Over,Under|0.565,0.435|0.54|0.59|2852|254
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349864|Ball State vs. Bowling Green|moneyline||BallState,BowlingGreen|0.28,0.72|0.26|0.3|10150|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349886|Spread: Bowling Green (-6.5)|spreads|-6.5|BowlingGreen,BallState|0.53,0.47|0.51|0.55|10556|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349887|Spread: Bowling Green (-7.5)|spreads|-7.5|BowlingGreen,BallState|0.465,0.535|0.44|0.49|10942|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349888|Spread: Bowling Green (-8.5)|spreads|-8.5|BowlingGreen,BallState|0.445,0.555|0.42|0.47|9785|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349900|Ball State vs. Bowling Green: O/U 45.5|totals|45.5|Over,Under|0.48,0.52|0.45|0.51|6535|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349899|Ball State vs. Bowling Green: O/U 43.5|totals|43.5|Over,Under|0.55,0.45|0.52|0.58|6090|0
+P|cfb-ballst-bowlgr-2026-10-17|game|2026-10-17T16:00:00Z|5349963|Bowling Green Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.5,0.5|0.47|0.53|1664|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350015|Virginia vs. SMU|moneyline||Virginia,SMU|0.26,0.74|0.24|0.28|13178|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350041|Spread: SMU (-8.5)|spreads|-8.5|SMU,Virginia|0.51,0.49|0.48|0.54|6835|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350040|Spread: SMU (-7.5)|spreads|-7.5|SMU,Virginia|0.53,0.47|0.51|0.55|11464|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350042|Spread: SMU (-10.5)|spreads|-10.5|SMU,Virginia|0.44,0.56|0.41|0.47|10235|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350057|Virginia vs. SMU: O/U 53.5|totals|53.5|Over,Under|0.48,0.52|0.45|0.51|8001|0
+P|cfb-vir-smu-2026-10-17|game|2026-10-17T16:00:00Z|5350056|Virginia vs. SMU: O/U 51.5|totals|51.5|Over,Under|0.545,0.455|0.51|0.58|5187|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350141|Pittsburgh vs. Boston College|moneyline||Pittsburgh,BostonCollege|0.665,0.335|0.64|0.69|10239|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350151|Spread: Pittsburgh (-5.5)|spreads|-5.5|Pittsburgh,BostonCollege|0.515,0.485|0.49|0.54|9870|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350150|Spread: Pittsburgh (-6.5)|spreads|-6.5|Pittsburgh,BostonCollege|0.48,0.52|0.47|0.49|9661|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350152|Spread: Pittsburgh (-4.5)|spreads|-4.5|Pittsburgh,BostonCollege|0.535,0.465|0.51|0.56|8056|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350176|Pittsburgh vs. Boston College: O/U 43.5|totals|43.5|Over,Under|0.515,0.485|0.48|0.55|9639|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350177|Pittsburgh vs. Boston College: O/U 45.5|totals|45.5|Over,Under|0.45,0.55|0.43|0.47|9521|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350178|Pittsburgh vs. Boston College: O/U 47.5|totals|47.5|Over,Under|0.445,0.555|0.4|0.49|4613|0
+P|cfb-pitt-boscol-2026-10-17|game|2026-10-17T16:00:00Z|5350225|Pittsburgh Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.455,0.545|0.43|0.48|1769|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350245|Northwestern vs. Michigan State|moneyline||Northwestern,MichiganState|0.755,0.245|0.74|0.77|9772|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350252|Spread: Northwestern (-8.5)|spreads|-8.5|Northwestern,MichiganState|0.495,0.505|0.47|0.52|8121|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350253|Spread: Northwestern (-7.5)|spreads|-7.5|Northwestern,MichiganState|0.515,0.485|0.49|0.54|7414|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350251|Spread: Northwestern (-10.5)|spreads|-10.5|Northwestern,MichiganState|0.44,0.56|0.42|0.46|7876|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350283|Northwestern vs. Michigan State: O/U 49.5|totals|49.5|Over,Under|0.47,0.53|0.44|0.5|3332|0
+P|cfb-nw-mst-2026-10-17|game|2026-10-17T16:00:00Z|5350282|Northwestern vs. Michigan State: O/U 47.5|totals|47.5|Over,Under|0.535,0.465|0.5|0.57|3372|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350386|Rutgers vs. Maryland|moneyline||Rutgers,Maryland|0.35,0.65|0.33|0.37|8503|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350406|Spread: Maryland (-4.5)|spreads|-4.5|Maryland,Rutgers|0.5,0.5|0.48|0.52|5617|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350407|Spread: Maryland (-5.5)|spreads|-5.5|Maryland,Rutgers|0.475,0.525|0.45|0.5|5319|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350405|Spread: Maryland (-3.5)|spreads|-3.5|Maryland,Rutgers|0.54,0.46|0.52|0.56|5101|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350429|Rutgers vs. Maryland: O/U 59.5|totals|59.5|Over,Under|0.48,0.52|0.45|0.51|4321|0
+P|cfb-rutger-mary-2026-10-17|game|2026-10-17T16:30:00Z|5350428|Rutgers vs. Maryland: O/U 57.5|totals|57.5|Over,Under|0.545,0.455|0.51|0.58|4309|0
+P|cfb-cita-txam-2026-10-17|game|2026-10-17T17:00:00Z|5350538|The Citadel vs. Texas A&M|moneyline||TheCitadel,TexasA&M|0.0045,0.9955|0.002|0.007|12279|0
+P|cfb-charlt-templ-2026-10-17|game|2026-10-17T17:00:00Z|5350808|Charlotte vs. Temple|moneyline||Charlotte,Temple|0.065,0.935|0.05|0.08|9956|0
+P|cfb-charlt-templ-2026-10-17|game|2026-10-17T17:00:00Z|5350838|Spread: Temple (-20.5)|spreads|-20.5|Temple,Charlotte|0.555,0.445|0.53|0.58|9193|0
+P|cfb-charlt-templ-2026-10-17|game|2026-10-17T17:00:00Z|5350846|Charlotte vs. Temple: O/U 49.5|totals|49.5|Over,Under|0.53,0.47|0.5|0.56|6677|0
+P|cfb-charlt-templ-2026-10-17|game|2026-10-17T17:00:00Z|5350847|Charlotte vs. Temple: O/U 51.5|totals|51.5|Over,Under|0.47,0.53|0.44|0.5|6628|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350934|UMass vs. Buffalo|moneyline||UMass,Buffalo|0.4,0.6|0.38|0.42|9622|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350953|Spread: Buffalo (-3.5)|spreads|-3.5|Buffalo,UMass|0.485,0.515|0.47|0.5|8280|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350954|Spread: Buffalo (-4.5)|spreads|-4.5|Buffalo,UMass|0.465,0.535|0.44|0.49|8689|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350955|Spread: Buffalo (-5.5)|spreads|-5.5|Buffalo,UMass|0.435,0.565|0.41|0.46|8730|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350969|UMass vs. Buffalo: O/U 43.5|totals|43.5|Over,Under|0.485,0.515|0.46|0.51|6978|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350968|UMass vs. Buffalo: O/U 41.5|totals|41.5|Over,Under|0.55,0.45|0.52|0.58|5465|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5350970|UMass vs. Buffalo: O/U 45.5|totals|45.5|Over,Under|0.41,0.59|0.38|0.44|6680|0
+P|cfb-umass-buf-2026-10-17|game|2026-10-17T17:00:00Z|5351016|UMass Team Total: O/U 20.5|team_totals|20.5|Over,Under|0.48,0.52|0.45|0.51|1330|0
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351066|Western Michigan vs. Central Michigan|moneyline||WesternMichigan,CentralMichigan|0.705,0.295|0.68|0.73|9219|0
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351075|Spread: Western Michigan (-6.5)|spreads|-6.5|WesternMichigan,CentralMichigan|0.53,0.47|0.5|0.56|10006|0
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351074|Spread: Western Michigan (-7.5)|spreads|-7.5|WesternMichigan,CentralMichigan|0.465,0.535|0.45|0.48|10573|50
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351073|Spread: Western Michigan (-8.5)|spreads|-8.5|WesternMichigan,CentralMichigan|0.44,0.56|0.41|0.47|8792|0
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351101|Western Michigan vs. Central Michigan: O/U 43.5|totals|43.5|Over,Under|0.48,0.52|0.45|0.51|8001|0
+P|cfb-wmich-cmich-2026-10-17|game|2026-10-17T17:30:00Z|5351100|Western Michigan vs. Central Michigan: O/U 41.5|totals|41.5|Over,Under|0.545,0.455|0.51|0.58|8042|0
+P|cfb-vamil-woff-2026-10-17|game|2026-10-17T17:30:00Z|5351170|VMI vs. Wofford|moneyline||VMI,Wofford|0.0275,0.9725|0.018|0.037|12123|0
+P|cfb-idaho-mont-2026-10-17|game|2026-10-17T19:00:00Z|5351331|Idaho vs. Montana|moneyline||Idaho,Montana|0.275,0.725|0.22|0.33|7246|95
+P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351547|Arizona State vs. Texas Tech|moneyline||ArizonaState,TexasTech|0.16,0.84|0.14|0.18|7751|0
+P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351573|Spread: Texas Tech (-13.5)|spreads|-13.5|TexasTech,ArizonaState|0.53,0.47|0.5|0.56|5083|0
+P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351574|Spread: Texas Tech (-14.5)|spreads|-14.5|TexasTech,ArizonaState|0.46,0.54|0.44|0.48|5151|0
+P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351585|Arizona State vs. Texas Tech: O/U 49.5|totals|49.5|Over,Under|0.47,0.53|0.44|0.5|3316|0
+P|cfb-arzst-txtech-2026-10-17|game|2026-10-17T19:30:00Z|5351584|Arizona State vs. Texas Tech: O/U 47.5|totals|47.5|Over,Under|0.55,0.45|0.53|0.57|3371|50
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351651|Northern Illinois vs. Wyoming|moneyline||NorthernIllinois,Wyoming|0.27,0.73|0.25|0.29|19739|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351674|Spread: Wyoming (-7.5)|spreads|-7.5|Wyoming,NorthernIllinois|0.5,0.5|0.48|0.52|8751|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351675|Spread: Wyoming (-8.5)|spreads|-8.5|Wyoming,NorthernIllinois|0.485,0.515|0.46|0.51|7535|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351673|Spread: Wyoming (-6.5)|spreads|-6.5|Wyoming,NorthernIllinois|0.575,0.425|0.55|0.6|8646|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351685|Northern Illinois vs. Wyoming: O/U 41.5|totals|41.5|Over,Under|0.49,0.51|0.46|0.52|5284|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351684|Northern Illinois vs. Wyoming: O/U 39.5|totals|39.5|Over,Under|0.55,0.45|0.52|0.58|5332|0
+P|cfb-nill-wyom-2026-10-17|game|2026-10-17T19:30:00Z|5351774|Wyoming Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.545,0.455|0.52|0.57|1863|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351791|Georgia Tech vs. Virginia Tech|moneyline||GeorgiaTech,VirginiaTech|0.24,0.76|0.22|0.26|9996|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351816|Spread: Virginia Tech (-8.5)|spreads|-8.5|VirginiaTech,GeorgiaTech|0.515,0.485|0.49|0.54|7251|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351815|Spread: Virginia Tech (-7.5)|spreads|-7.5|VirginiaTech,GeorgiaTech|0.535,0.465|0.51|0.56|10260|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351817|Spread: Virginia Tech (-10.5)|spreads|-10.5|VirginiaTech,GeorgiaTech|0.45,0.55|0.43|0.47|10696|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351833|Georgia Tech vs. Virginia Tech: O/U 55.5|totals|55.5|Over,Under|0.49,0.51|0.46|0.52|7573|0
+P|cfb-gtech-vtech-2026-10-17|game|2026-10-17T19:30:00Z|5351832|Georgia Tech vs. Virginia Tech: O/U 53.5|totals|53.5|Over,Under|0.555,0.445|0.52|0.59|8471|0
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351896|Auburn vs. Georgia|moneyline||Auburn,Georgia|0.095,0.905|0.09|0.1|17837|1647
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351925|Spread: Georgia (-17.5)|spreads|-17.5|Georgia,Auburn|0.52,0.48|0.5|0.54|10555|0
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351926|Spread: Georgia (-20.5)|spreads|-20.5|Georgia,Auburn|0.465,0.535|0.45|0.48|12402|0
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351924|Spread: Georgia (-16.5)|spreads|-16.5|Georgia,Auburn|0.56,0.44|0.54|0.58|11702|0
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351934|Auburn vs. Georgia: O/U 49.5|totals|49.5|Over,Under|0.485,0.515|0.46|0.51|8872|10
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351935|Auburn vs. Georgia: O/U 51.5|totals|51.5|Over,Under|0.465,0.535|0.42|0.51|4134|0
+P|cfb-aubrn-ga-2026-10-17|game|2026-10-17T19:30:00Z|5351933|Auburn vs. Georgia: O/U 47.5|totals|47.5|Over,Under|0.55,0.45|0.53|0.57|9832|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352008|Toledo vs. Eastern Michigan|moneyline||Toledo,EasternMichigan|0.65,0.35|0.63|0.67|18826|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352018|Spread: Toledo (-5.5)|spreads|-5.5|Toledo,EasternMichigan|0.48,0.52|0.46|0.5|8303|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352019|Spread: Toledo (-4.5)|spreads|-4.5|Toledo,EasternMichigan|0.535,0.465|0.53|0.54|8552|112
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352017|Spread: Toledo (-6.5)|spreads|-6.5|Toledo,EasternMichigan|0.45,0.55|0.42|0.48|8201|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352048|Toledo vs. Eastern Michigan: O/U 53.5|totals|53.5|Over,Under|0.49,0.51|0.46|0.52|6488|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352047|Toledo vs. Eastern Michigan: O/U 51.5|totals|51.5|Over,Under|0.55,0.45|0.52|0.58|6674|0
+P|cfb-toledo-emich-2026-10-17|game|2026-10-17T19:30:00Z|5352095|Eastern Michigan Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.535,0.465|0.51|0.56|1760|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352112|Penn State vs. Michigan|moneyline||PennState,Michigan|0.335,0.665|0.32|0.35|15387|69
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352133|Spread: Michigan (-5.5)|spreads|-5.5|Michigan,PennState|0.51,0.49|0.5|0.52|11200|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352134|Spread: Michigan (-6.5)|spreads|-6.5|Michigan,PennState|0.48,0.52|0.47|0.49|13408|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352132|Spread: Michigan (-4.5)|spreads|-4.5|Michigan,PennState|0.54,0.46|0.52|0.56|11456|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352146|Penn State vs. Michigan: O/U 41.5|totals|41.5|Over,Under|0.53,0.47|0.5|0.56|5226|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352147|Penn State vs. Michigan: O/U 43.5|totals|43.5|Over,Under|0.47,0.53|0.44|0.5|8975|0
+P|cfb-pennst-mich-2026-10-17|game|2026-10-17T19:30:00Z|5352148|Penn State vs. Michigan: O/U 45.5|totals|45.5|Over,Under|0.405,0.595|0.35|0.46|6997|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352220|Missouri vs. Ole Miss|moneyline||Missouri,OleMiss|0.34,0.66|0.32|0.36|11076|69
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352241|Spread: Ole Miss (-5.5)|spreads|-5.5|OleMiss,Missouri|0.51,0.49|0.49|0.53|11196|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352242|Spread: Ole Miss (-6.5)|spreads|-6.5|OleMiss,Missouri|0.47,0.53|0.45|0.49|10198|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352240|Spread: Ole Miss (-4.5)|spreads|-4.5|OleMiss,Missouri|0.54,0.46|0.51|0.57|6996|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352263|Missouri vs. Ole Miss: O/U 59.5|totals|59.5|Over,Under|0.5,0.5|0.47|0.53|6814|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352262|Missouri vs. Ole Miss: O/U 57.5|totals|57.5|Over,Under|0.565,0.435|0.54|0.59|6731|0
+P|cfb-missr-miss-2026-10-17|game|2026-10-17T19:30:00Z|5352264|Missouri vs. Ole Miss: O/U 61.5|totals|61.5|Over,Under|0.435,0.565|0.4|0.47|6345|0
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352326|Alabama vs. Tennessee|moneyline||Alabama,Tennessee|0.7,0.3|0.69|0.71|20773|34
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352335|Spread: Alabama (-6.5)|spreads|-6.5|Alabama,Tennessee|0.53,0.47|0.52|0.54|12140|381
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352334|Spread: Alabama (-7.5)|spreads|-7.5|Alabama,Tennessee|0.455,0.545|0.44|0.47|10756|132
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352333|Spread: Alabama (-8.5)|spreads|-8.5|Alabama,Tennessee|0.445,0.555|0.43|0.46|8586|20
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352366|Alabama vs. Tennessee: O/U 53.5|totals|53.5|Over,Under|0.5,0.5|0.48|0.52|9438|0
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352367|Alabama vs. Tennessee: O/U 55.5|totals|55.5|Over,Under|0.445,0.555|0.4|0.49|4880|0
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352365|Alabama vs. Tennessee: O/U 51.5|totals|51.5|Over,Under|0.565,0.435|0.53|0.6|5197|0
+P|cfb-ala-tenn-2026-10-17|game|2026-10-17T19:30:00Z|5352413|Tennessee Team Total: O/U 23.5|team_totals|23.5|Over,Under|0.51,0.49|0.48|0.54|1615|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352430|UNLV vs. Air Force|moneyline||UNLV,AirForce|0.51,0.49|0.49|0.53|21112|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352444|Spread: UNLV (-1.5)|spreads|-1.5|UNLV,AirForce|0.48,0.52|0.46|0.5|8202|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352447|Spread: Air Force (-1.5)|spreads|-1.5|AirForce,UNLV|0.465,0.535|0.44|0.49|8406|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352443|Spread: UNLV (-2.5)|spreads|-2.5|UNLV,AirForce|0.46,0.54|0.44|0.48|7656|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352467|UNLV vs. Air Force: O/U 47.5|totals|47.5|Over,Under|0.485,0.515|0.46|0.51|6472|0
+P|cfb-unlv-airf-2026-10-17|game|2026-10-17T19:30:00Z|5352466|UNLV vs. Air Force: O/U 45.5|totals|45.5|Over,Under|0.55,0.45|0.52|0.58|6854|0
+P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352562|Akron vs. Miami (OH)|moneyline||Akron,Miami(OH)|0.225,0.775|0.2|0.25|6682|0
+P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352587|Spread: Miami (OH) (-10.5)|spreads|-10.5|Miami(OH),Akron|0.475,0.525|0.44|0.51|5315|0
+P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352586|Spread: Miami (OH) (-8.5)|spreads|-8.5|Miami(OH),Akron|0.535,0.465|0.5|0.57|4011|0
+P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352599|Akron vs. Miami (OH): O/U 47.5|totals|47.5|Over,Under|0.485,0.515|0.45|0.52|4462|0
+P|cfb-akron-miaoh-2026-10-17|game|2026-10-17T19:30:00Z|5352598|Akron vs. Miami (OH): O/U 45.5|totals|45.5|Over,Under|0.555,0.445|0.52|0.59|4851|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352686|North Carolina vs. Duke|moneyline||NorthCarolina,Duke|0.395,0.605|0.38|0.41|17781|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352706|Spread: Duke (-3.5)|spreads|-3.5|Duke,NorthCarolina|0.485,0.515|0.47|0.5|9662|260
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352707|Spread: Duke (-4.5)|spreads|-4.5|Duke,NorthCarolina|0.465,0.535|0.44|0.49|9571|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352709|Spread: Duke (-6.5)|spreads|-6.5|Duke,NorthCarolina|0.455,0.545|0.4|0.51|4003|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352724|North Carolina vs. Duke: O/U 47.5|totals|47.5|Over,Under|0.49,0.51|0.47|0.51|8518|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352723|North Carolina vs. Duke: O/U 45.5|totals|45.5|Over,Under|0.555,0.445|0.52|0.59|7365|0
+P|cfb-ncar-duke-2026-10-17|game|2026-10-17T19:30:00Z|5352725|North Carolina vs. Duke: O/U 49.5|totals|49.5|Over,Under|0.43,0.57|0.4|0.46|7755|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352881|Tulsa vs. Rice|moneyline||Tulsa,Rice|0.625,0.375|0.6|0.65|10323|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352892|Spread: Tulsa (-4.5)|spreads|-4.5|Tulsa,Rice|0.485,0.515|0.46|0.51|9194|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352893|Spread: Tulsa (-3.5)|spreads|-3.5|Tulsa,Rice|0.52,0.48|0.5|0.54|8611|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352891|Spread: Tulsa (-5.5)|spreads|-5.5|Tulsa,Rice|0.455,0.545|0.43|0.48|11705|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352917|Tulsa vs. Rice: O/U 45.5|totals|45.5|Over,Under|0.52,0.48|0.49|0.55|9088|0
+P|cfb-tulsa-rice-2026-10-17|game|2026-10-17T20:30:00Z|5352918|Tulsa vs. Rice: O/U 47.5|totals|47.5|Over,Under|0.46,0.54|0.44|0.48|8055|230
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353012|Troy vs. Louisiana|moneyline||Troy,Louisiana|0.375,0.625|0.36|0.39|9574|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353031|Spread: Louisiana (-3.5)|spreads|-3.5|Louisiana,Troy|0.52,0.48|0.5|0.54|7466|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353032|Spread: Louisiana (-4.5)|spreads|-4.5|Louisiana,Troy|0.48,0.52|0.46|0.5|8249|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353033|Spread: Louisiana (-5.5)|spreads|-5.5|Louisiana,Troy|0.455,0.545|0.43|0.48|8823|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353050|Troy vs. Louisiana: O/U 49.5|totals|49.5|Over,Under|0.495,0.505|0.47|0.52|6334|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353051|Troy vs. Louisiana: O/U 51.5|totals|51.5|Over,Under|0.445,0.555|0.42|0.47|6614|0
+P|cfb-troy-loulaf-2026-10-17|game|2026-10-17T21:00:00Z|5353049|Troy vs. Louisiana: O/U 47.5|totals|47.5|Over,Under|0.56,0.44|0.53|0.59|6464|0
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353198|Washington State vs. Oregon State|moneyline||WashingtonState,OregonState|0.11,0.89|0.09|0.13|16301|0
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353227|Spread: Oregon State (-17.5)|spreads|-17.5|OregonState,WashingtonState|0.52,0.48|0.5|0.54|8462|0
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353226|Spread: Oregon State (-16.5)|spreads|-16.5|OregonState,WashingtonState|0.575,0.425|0.56|0.59|6914|176
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353238|Washington State vs. Oregon State: O/U 53.5|totals|53.5|Over,Under|0.495,0.505|0.47|0.52|3243|0
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353239|Washington State vs. Oregon State: O/U 55.5|totals|55.5|Over,Under|0.44,0.56|0.41|0.47|7627|0
+P|cfb-washst-oregst-2026-10-17|game|2026-10-17T22:00:00Z|5353237|Washington State vs. Oregon State: O/U 51.5|totals|51.5|Over,Under|0.56,0.44|0.53|0.59|6451|50
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353343|Arkansas vs. Vanderbilt|moneyline||Arkansas,Vanderbilt|0.33,0.67|0.31|0.35|10212|29
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353365|Spread: Vanderbilt (-6.5)|spreads|-6.5|Vanderbilt,Arkansas|0.5,0.5|0.48|0.52|9578|0
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353364|Spread: Vanderbilt (-5.5)|spreads|-5.5|Vanderbilt,Arkansas|0.535,0.465|0.51|0.56|9566|0
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353363|Spread: Vanderbilt (-4.5)|spreads|-4.5|Vanderbilt,Arkansas|0.555,0.445|0.53|0.58|9217|0
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353381|Arkansas vs. Vanderbilt: O/U 49.5|totals|49.5|Over,Under|0.53,0.47|0.5|0.56|8296|0
+P|cfb-ark-vand-2026-10-17|game|2026-10-17T23:00:00Z|5353382|Arkansas vs. Vanderbilt: O/U 51.5|totals|51.5|Over,Under|0.465,0.535|0.43|0.5|7822|0
+P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353447|Florida State vs. Miami (FL)|moneyline||FloridaState,Miami(FL)|0.08,0.92|0.07|0.09|18279|417
+P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353485|Spread: Miami (FL) (-20.5)|spreads|-20.5|Miami(FL),FloridaState|0.54,0.46|0.52|0.56|8504|0
+P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353497|Florida State vs. Miami (FL): O/U 57.5|totals|57.5|Over,Under|0.47,0.53|0.44|0.5|5705|0
+P|cfb-flst-mia-2026-10-17|game|2026-10-17T23:00:00Z|5353496|Florida State vs. Miami (FL): O/U 55.5|totals|55.5|Over,Under|0.535,0.465|0.51|0.56|6611|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353579|TCU vs. Baylor|moneyline||TCU,Baylor|0.32,0.68|0.3|0.34|7305|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353601|Spread: Baylor (-6.5)|spreads|-6.5|Baylor,TCU|0.5,0.5|0.48|0.52|4239|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353600|Spread: Baylor (-5.5)|spreads|-5.5|Baylor,TCU|0.54,0.46|0.52|0.56|4288|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353599|Spread: Baylor (-4.5)|spreads|-4.5|Baylor,TCU|0.565,0.435|0.54|0.59|4264|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353617|TCU vs. Baylor: O/U 49.5|totals|49.5|Over,Under|0.49,0.51|0.46|0.52|2469|0
+P|cfb-tcu-bayl-2026-10-17|game|2026-10-17T23:00:00Z|5353616|TCU vs. Baylor: O/U 47.5|totals|47.5|Over,Under|0.545,0.455|0.51|0.58|2491|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353705|Arkansas State vs. Southern Miss|moneyline||ArkansasState,SouthernMiss|0.71,0.29|0.69|0.73|9683|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353717|Spread: Arkansas State (-6.5)|spreads|-6.5|ArkansasState,SouthernMiss|0.535,0.465|0.52|0.55|9786|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353715|Spread: Arkansas State (-7.5)|spreads|-7.5|ArkansasState,SouthernMiss|0.46,0.54|0.44|0.48|10274|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353714|Spread: Arkansas State (-8.5)|spreads|-8.5|ArkansasState,SouthernMiss|0.445,0.555|0.42|0.47|9050|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353754|Arkansas State vs. Southern Miss: O/U 61.5|totals|61.5|Over,Under|0.48,0.52|0.45|0.51|5577|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353753|Arkansas State vs. Southern Miss: O/U 59.5|totals|59.5|Over,Under|0.53,0.47|0.5|0.56|5170|0
+P|cfb-arkst-soumis-2026-10-17|game|2026-10-17T23:00:00Z|5353798|Arkansas State Team Total: O/U 32.5|team_totals|32.5|Over,Under|0.555,0.445|0.53|0.58|1838|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353862|Nevada vs. North Dakota State|moneyline||Nevada,NorthDakotaState|0.14,0.86|0.12|0.16|17921|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353890|Spread: North Dakota State (-16.5)|spreads|-16.5|NorthDakotaState,Nevada|0.495,0.505|0.48|0.51|5933|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353889|Spread: North Dakota State (-14.5)|spreads|-14.5|NorthDakotaState,Nevada|0.53,0.47|0.51|0.55|6392|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353891|Spread: North Dakota State (-17.5)|spreads|-17.5|NorthDakotaState,Nevada|0.43,0.57|0.4|0.46|6111|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353898|Nevada vs. North Dakota State: O/U 45.5|totals|45.5|Over,Under|0.52,0.48|0.49|0.55|5309|0
+P|cfb-nevada-ndkst-2026-10-17|game|2026-10-17T23:00:00Z|5353899|Nevada vs. North Dakota State: O/U 47.5|totals|47.5|Over,Under|0.465,0.535|0.44|0.49|4490|0
+P|cfb-kentst-sfl-2026-10-17|game|2026-10-17T23:00:00Z|5353969|Kent State vs. South Florida|moneyline||KentState,SouthFlorida|0.09,0.91|0.07|0.11|9492|0
+P|cfb-kentst-sfl-2026-10-17|game|2026-10-17T23:00:00Z|5354004|Spread: South Florida (-20.5)|spreads|-20.5|SouthFlorida,KentState|0.48,0.52|0.46|0.5|5583|0
+P|cfb-kentst-sfl-2026-10-17|game|2026-10-17T23:00:00Z|5354011|Kent State vs. South Florida: O/U 47.5|totals|47.5|Over,Under|0.475,0.525|0.45|0.5|3805|0
+P|cfb-kentst-sfl-2026-10-17|game|2026-10-17T23:00:00Z|5354010|Kent State vs. South Florida: O/U 45.5|totals|45.5|Over,Under|0.55,0.45|0.52|0.58|3057|0
+P|cfb-monst-ewash-2026-10-17|game|2026-10-17T23:00:00Z|5354118|Montana State vs. Eastern Washington|moneyline||MontanaState,EasternWashington|0.9,0.1|0.86|0.94|6613|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343891|Wisconsin vs. UCLA|moneyline||Wisconsin,UCLA|0.41,0.59|0.39|0.43|9084|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343910|Spread: UCLA (-3.5)|spreads|-3.5|UCLA,Wisconsin|0.46,0.54|0.44|0.48|6838|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343909|Spread: UCLA (-2.5)|spreads|-2.5|UCLA,Wisconsin|0.545,0.455|0.52|0.57|6612|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343908|Spread: UCLA (-1.5)|spreads|-1.5|UCLA,Wisconsin|0.565,0.435|0.54|0.59|6222|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343927|Wisconsin vs. UCLA: O/U 45.5|totals|45.5|Over,Under|0.53,0.47|0.5|0.56|4052|0
+P|cfb-wisc-ucla-2026-10-17|game|2026-10-17T23:30:00Z|5343928|Wisconsin vs. UCLA: O/U 47.5|totals|47.5|Over,Under|0.47,0.53|0.44|0.5|4697|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354158|Kentucky vs. Oklahoma|moneyline||Kentucky,Oklahoma|0.295,0.705|0.29|0.3|8898|6228
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354180|Spread: Oklahoma (-6.5)|spreads|-6.5|Oklahoma,Kentucky|0.52,0.48|0.5|0.54|9758|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354181|Spread: Oklahoma (-7.5)|spreads|-7.5|Oklahoma,Kentucky|0.44,0.56|0.42|0.46|10214|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354179|Spread: Oklahoma (-5.5)|spreads|-5.5|Oklahoma,Kentucky|0.56,0.44|0.53|0.59|8544|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354193|Kentucky vs. Oklahoma: O/U 43.5|totals|43.5|Over,Under|0.505,0.495|0.48|0.53|6354|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354194|Kentucky vs. Oklahoma: O/U 45.5|totals|45.5|Over,Under|0.44,0.56|0.41|0.47|6597|0
+P|cfb-uk-okl-2026-10-17|game|2026-10-17T23:30:00Z|5354192|Kentucky vs. Oklahoma: O/U 41.5|totals|41.5|Over,Under|0.57,0.43|0.54|0.6|6103|0
+P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354262|Louisville vs. Syracuse|moneyline||Louisville,Syracuse|0.82,0.18|0.8|0.84|12951|0
+P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354267|Spread: Louisville (-13.5)|spreads|-13.5|Louisville,Syracuse|0.49,0.51|0.47|0.51|6889|0
+P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354266|Spread: Louisville (-14.5)|spreads|-14.5|Louisville,Syracuse|0.43,0.57|0.4|0.46|6368|0
+P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354304|Louisville vs. Syracuse: O/U 55.5|totals|55.5|Over,Under|0.52,0.48|0.5|0.54|8083|0
+P|cfb-lou-syra-2026-10-17|game|2026-10-17T23:30:00Z|5354305|Louisville vs. Syracuse: O/U 57.5|totals|57.5|Over,Under|0.465,0.535|0.43|0.5|6787|0
+P|cfb-elon-stan-2026-10-17|game|2026-10-17T23:30:00Z|5354367|Elon vs. Stanford|moneyline||Elon,Stanford|0.028,0.972|0.018|0.038|10417|54
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354511|Oklahoma State vs. Houston|moneyline||OklahomaState,Houston|0.37,0.63|0.35|0.39|8836|10
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354535|Spread: Houston (-4.5)|spreads|-4.5|Houston,OklahomaState|0.48,0.52|0.46|0.5|4295|0
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354534|Spread: Houston (-3.5)|spreads|-3.5|Houston,OklahomaState|0.525,0.475|0.5|0.55|7071|0
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354537|Spread: Houston (-5.5)|spreads|-5.5|Houston,OklahomaState|0.46,0.54|0.44|0.48|4279|0
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354576|Oklahoma State vs. Houston: O/U 61.5|totals|61.5|Over,Under|0.485,0.515|0.46|0.51|4463|0
+P|cfb-okst-hou-2026-10-17|game|2026-10-17T23:30:00Z|5354575|Oklahoma State vs. Houston: O/U 59.5|totals|59.5|Over,Under|0.54,0.46|0.51|0.57|4735|26
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354636|Notre Dame vs. BYU|moneyline||NotreDame,BYU|0.775,0.225|0.77|0.78|19405|4094
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354642|Spread: Notre Dame (-10.5)|spreads|-10.5|NotreDame,BYU|0.49,0.51|0.48|0.5|10812|0
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354643|Spread: Notre Dame (-8.5)|spreads|-8.5|NotreDame,BYU|0.55,0.45|0.53|0.57|7294|0
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354640|Spread: Notre Dame (-14.5)|spreads|-14.5|NotreDame,BYU|0.395,0.605|0.34|0.45|6635|0
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354673|Notre Dame vs. BYU: O/U 47.5|totals|47.5|Over,Under|0.49,0.51|0.47|0.51|8865|0
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354672|Notre Dame vs. BYU: O/U 45.5|totals|45.5|Over,Under|0.53,0.47|0.5|0.56|5162|0
+P|cfb-nd-byu-2026-10-17|game|2026-10-17T23:30:00Z|5354721|Notre Dame Team Total: O/U 29.5|team_totals|29.5|Over,Under|0.47,0.53|0.45|0.49|2726|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354740|Navy vs. UTSA|moneyline||Navy,UTSA|0.31,0.69|0.29|0.33|10714|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354762|Spread: UTSA (-6.5)|spreads|-6.5|UTSA,Navy|0.5,0.5|0.48|0.52|10887|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354761|Spread: UTSA (-5.5)|spreads|-5.5|UTSA,Navy|0.54,0.46|0.51|0.57|9888|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354760|Spread: UTSA (-4.5)|spreads|-4.5|UTSA,Navy|0.565,0.435|0.54|0.59|9972|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354781|Navy vs. UTSA: O/U 55.5|totals|55.5|Over,Under|0.48,0.52|0.45|0.51|6128|0
+P|cfb-navy-utsa-2026-10-17|game|2026-10-18T00:00:00Z|5354780|Navy vs. UTSA: O/U 53.5|totals|53.5|Over,Under|0.545,0.455|0.51|0.58|6299|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354889|Louisiana Tech vs. Louisiana-Monroe|moneyline||LouisianaTech,Louisiana-Monroe|0.85,0.15|0.83|0.87|9730|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354895|Spread: Louisiana Tech (-14.5)|spreads|-14.5|LouisianaTech,Louisiana-Monroe|0.5,0.5|0.48|0.52|5764|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354894|Spread: Louisiana Tech (-16.5)|spreads|-16.5|LouisianaTech,Louisiana-Monroe|0.465,0.535|0.44|0.49|7807|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354896|Spread: Louisiana Tech (-13.5)|spreads|-13.5|LouisianaTech,Louisiana-Monroe|0.56,0.44|0.54|0.58|5611|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354936|Louisiana Tech vs. Louisiana-Monroe: O/U 55.5|totals|55.5|Over,Under|0.495,0.505|0.47|0.52|5595|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354935|Louisiana Tech vs. Louisiana-Monroe: O/U 53.5|totals|53.5|Over,Under|0.555,0.445|0.53|0.58|5430|0
+P|cfb-loutch-lamon-2026-10-17|game|2026-10-18T00:00:00Z|5354937|Louisiana Tech vs. Louisiana-Monroe: O/U 57.5|totals|57.5|Over,Under|0.435,0.565|0.4|0.47|2438|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355008|San Jose State vs. UTEP|moneyline||SanJoseState,UTEP|0.75,0.25|0.73|0.77|18471|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355015|Spread: San Jose State (-8.5)|spreads|-8.5|SanJoseState,UTEP|0.5,0.5|0.47|0.53|2183|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355016|Spread: San Jose State (-7.5)|spreads|-7.5|SanJoseState,UTEP|0.51,0.49|0.48|0.54|5907|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355014|Spread: San Jose State (-10.5)|spreads|-10.5|SanJoseState,UTEP|0.44,0.56|0.41|0.47|3821|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355047|San Jose State vs. UTEP: O/U 49.5|totals|49.5|Over,Under|0.49,0.51|0.46|0.52|3945|0
+P|cfb-sjst-utep-2026-10-17|game|2026-10-18T01:00:00Z|5355046|San Jose State vs. UTEP: O/U 47.5|totals|47.5|Over,Under|0.545,0.455|0.51|0.58|2740|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355114|Ohio vs. Sacramento State|moneyline||Ohio,SacramentoState|0.85,0.15|0.83|0.87|13124|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355118|Spread: Ohio (-14.5)|spreads|-14.5|Ohio,SacramentoState|0.49,0.51|0.47|0.51|7986|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355119|Spread: Ohio (-13.5)|spreads|-13.5|Ohio,SacramentoState|0.55,0.45|0.53|0.57|7898|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355117|Spread: Ohio (-16.5)|spreads|-16.5|Ohio,SacramentoState|0.445,0.555|0.42|0.47|8193|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355152|Ohio vs. Sacramento State: O/U 49.5|totals|49.5|Over,Under|0.49,0.505|0.46|0.52|4880|0
+P|cfb-ohio-sacst-2026-10-17|game|2026-10-18T02:00:00Z|5355151|Ohio vs. Sacramento State: O/U 47.5|totals|47.5|Over,Under|0.555,0.445|0.52|0.59|4891|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355218|Utah vs. Colorado|moneyline||Utah,Colorado|0.875,0.125|0.86|0.89|13217|258
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355221|Spread: Utah (-16.5)|spreads|-16.5|Utah,Colorado|0.5,0.5|0.48|0.52|8464|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355222|Spread: Utah (-14.5)|spreads|-14.5|Utah,Colorado|0.53,0.47|0.51|0.55|9396|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355220|Spread: Utah (-17.5)|spreads|-17.5|Utah,Colorado|0.44,0.56|0.42|0.46|7946|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355256|Utah vs. Colorado: O/U 49.5|totals|49.5|Over,Under|0.475,0.525|0.45|0.5|6563|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355255|Utah vs. Colorado: O/U 47.5|totals|47.5|Over,Under|0.545,0.455|0.51|0.58|4410|0
+P|cfb-utah-col-2026-10-17|game|2026-10-18T02:15:00Z|5355306|Utah Team Total: O/U 32.5|team_totals|32.5|Over,Under|0.5,0.5|0.47|0.53|1709|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355324|Fresno State vs. San Diego State|moneyline||FresnoState,SanDiegoState|0.75,0.25|0.73|0.77|16462|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355331|Spread: Fresno State (-8.5)|spreads|-8.5|FresnoState,SanDiegoState|0.49,0.51|0.47|0.51|8864|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355332|Spread: Fresno State (-7.5)|spreads|-7.5|FresnoState,SanDiegoState|0.51,0.49|0.49|0.53|6013|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355333|Spread: Fresno State (-6.5)|spreads|-6.5|FresnoState,SanDiegoState|0.575,0.425|0.55|0.6|6351|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355360|Fresno State vs. San Diego State: O/U 45.5|totals|45.5|Over,Under|0.49,0.51|0.46|0.52|5510|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355359|Fresno State vs. San Diego State: O/U 43.5|totals|43.5|Over,Under|0.55,0.45|0.52|0.58|5168|0
+P|cfb-frest-sdst-2026-10-17|game|2026-10-18T02:30:00Z|5355408|Fresno State Team Total: O/U 26.5|team_totals|26.5|Over,Under|0.525,0.475|0.5|0.55|1744|0
+P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355436|New Mexico vs. Hawai'i|moneyline||NewMexico,Hawai'i|0.84,0.16|0.82|0.86|9789|20
+P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355440|Spread: New Mexico (-14.5)|spreads|-14.5|NewMexico,Hawai'i|0.475,0.525|0.45|0.5|4299|0
+P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355441|Spread: New Mexico (-13.5)|spreads|-13.5|NewMexico,Hawai'i|0.54,0.46|0.52|0.56|4792|0
+P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355472|New Mexico vs. Hawai'i: O/U 45.5|totals|45.5|Over,Under|0.53,0.47|0.5|0.56|2494|0
+P|cfb-nmx-hawaii-2026-10-17|game|2026-10-18T02:30:00Z|5355473|New Mexico vs. Hawai'i: O/U 47.5|totals|47.5|Over,Under|0.455,0.545|0.43|0.48|2539|0
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355540|Wake Forest vs. California|moneyline||WakeForest,California|0.76,0.24|0.74|0.78|14122|0
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355546|Spread: Wake Forest (-10.5)|spreads|-10.5|WakeForest,California|0.47,0.53|0.44|0.5|6864|0
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355547|Spread: Wake Forest (-8.5)|spreads|-8.5|WakeForest,California|0.535,0.465|0.51|0.56|6730|0
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355580|Wake Forest vs. California: O/U 53.5|totals|53.5|Over,Under|0.5,0.5|0.47|0.53|3600|0
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355581|Wake Forest vs. California: O/U 55.5|totals|55.5|Over,Under|0.45,0.55|0.43|0.47|4184|80
+P|cfb-wake-cah-2026-10-17|game|2026-10-18T02:30:00Z|5355579|Wake Forest vs. California: O/U 51.5|totals|51.5|Over,Under|0.56,0.44|0.53|0.59|4865|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5343995|Nebraska vs. Oregon|moneyline||Nebraska,Oregon|0.305,0.695|0.29|0.32|9260|77
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344017|Spread: Oregon (-6.5)|spreads|-6.5|Oregon,Nebraska|0.52,0.48|0.5|0.54|6122|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344018|Spread: Oregon (-7.5)|spreads|-7.5|Oregon,Nebraska|0.45,0.55|0.43|0.47|5757|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344016|Spread: Oregon (-5.5)|spreads|-5.5|Oregon,Nebraska|0.56,0.44|0.54|0.58|5671|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344035|Nebraska vs. Oregon: O/U 53.5|totals|53.5|Over,Under|0.47,0.53|0.44|0.5|3441|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344034|Nebraska vs. Oregon: O/U 51.5|totals|51.5|Over,Under|0.535,0.465|0.51|0.56|3509|0
+P|cfb-nebr-ore-2026-10-17|game|2026-10-18T03:00:00Z|5344084|Oregon Team Total: O/U 29.5|team_totals|29.5|Over,Under|0.505,0.495|0.48|0.53|1698|0
