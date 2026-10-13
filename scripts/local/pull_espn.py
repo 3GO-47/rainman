@@ -27,11 +27,86 @@ def season_year():
 # the old 0-row snapshots were what starved build_depth_chart — it just returns None and says so.
 WEB = 'https://www.espn.com/nfl/team/depth/_/name'
 INJ = {'P': '', 'Q': 'Q', 'D': 'D', 'O': 'O', 'IR': 'IR', 'PUP': 'PUP', 'SUS': 'SUSP', 'SUSP': 'SUSP', 'NFI': 'NFI'}
+# espn.com serves the server-rendered __espnfitt__ blob to document requests; Accept: */* gets a client-rendered shell.
+HTML_HDR = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-User': '?1', 'Upgrade-Insecure-Requests': '1',
+            'Cache-Control': 'no-cache', 'Pragma': 'no-cache'}
+NFLV = 'https://github.com/nflverse/nflverse-data/releases/download'
+
+def depth_nflverse():
+    """Browser-free depth charts: nflverse mirrors the same ESPN depth chart daily (~15:00Z) as depth_charts_{season}.parquet,
+    with the same names, rows (pos_slot 1/2/8 = the WR1/WR2/WR3 rows) and order (pos_rank). Tags: roster status RES/PUP/NON/SUS
+    -> IR/PUP/NFI/SUSP (long-term, always current), plus the week's injury report (Out/Doubtful/Questionable -> O/D/Q) once it
+    exists for the UPCOMING week (on Tuesday the newest report is last week's, so it is not applied). Writes the same
+    team|row|depth|name|tag lines the ESPN page gives, so build_depth_chart.py is unchanged."""
+    import pandas as pd
+    season = TODAY.year if TODAY.month >= 3 else TODAY.year - 1
+    os.makedirs('data/raw/nflverse', exist_ok=True)
+    files = {}
+    for rel, name in (('depth_charts', 'depth_charts'), ('rosters', 'roster'), ('injuries', 'injuries')):
+        dest = f'data/raw/nflverse/{name}_{season}.parquet'
+        try:
+            b = get(f'{NFLV}/{rel}/{name}_{season}.parquet', binary=True, timeout=120)
+            if len(b) > 100: open(dest, 'wb').write(b)
+        except Exception as e:
+            log(f'  nflverse {name}_{season}: {str(e)[:70]} — using the cached file if there is one')
+        if os.path.exists(dest): files[name] = dest
+    if 'depth_charts' not in files:
+        log('depth (nflverse): no depth_charts parquet — NOT writing a snapshot; the last good one stands'); return None
+    d = pd.read_parquet(files['depth_charts'])
+    asof = str(d.dt.max())
+    d = d[(d.dt == d.dt.max()) & (d.pos_grp == '3WR 1TE') & d.pos_abb.isin(['QB', 'RB', 'WR', 'TE', 'FB'])].copy()
+    TEAM = {'LA': 'LAR'}                                   # nflverse -> ESPN/RAINMAN codes (everything else already matches)
+    d['team'] = d.team.map(lambda t: TEAM.get(t, t))
+    d['gsis'] = d.gsis_id.astype(str)
+    tag = {}
+    try:
+        played = int(pd.read_csv(f'data/game_logs/game_logs_{season}.csv', usecols=['week']).week.max())
+    except Exception:
+        played = 0
+    if 'injuries' in files:
+        i = pd.read_parquet(files['injuries'], columns=['team', 'week', 'gsis_id', 'report_status'])
+        wk = int(i.week.max())
+        if wk > played:
+            rs = {'Out': 'O', 'Doubtful': 'D', 'Questionable': 'Q'}
+            n = 0
+            for _, x in i[i.week == wk].iterrows():
+                t = rs.get(str(x.report_status))
+                if t: tag[str(x.gsis_id)] = t; n += 1
+            log(f'  injury report week {wk}: {n} players tagged O/D/Q')
+        else:
+            log(f'  newest injury report is week {wk} (already played) — not applied; IR/PUP from the roster only')
+    if 'roster' in files:
+        r = pd.read_parquet(files['roster'], columns=['gsis_id', 'status', 'week'])
+        r = r[r.week == r.week.max()]
+        st = {'RES': 'IR', 'PUP': 'PUP', 'NON': 'NFI', 'SUS': 'SUSP'}
+        for _, x in r.iterrows():
+            t = st.get(str(x.status))
+            if t: tag[str(x.gsis_id)] = t                    # long-term status outranks the weekly report
+    lines = []
+    for team, T in d.groupby('team'):
+        for pos in ('QB', 'RB', 'WR', 'TE', 'FB'):
+            P = T[T.pos_abb == pos]
+            if P.empty: continue
+            slots = sorted(P.pos_slot.unique()) if pos == 'WR' else [None]
+            for k, sl in enumerate(slots, 1):
+                rows = (P[P.pos_slot == sl] if sl is not None else P).sort_values('pos_rank')
+                label = f'WR{k}' if pos == 'WR' else pos
+                for dep, (_, x) in enumerate(rows.iterrows(), 1):
+                    lines.append('|'.join([team, label, str(dep), str(x.player_name), tag.get(x.gsis, '')]))
+    nteams = len({l.split('|')[0] for l in lines})
+    if nteams < 24:
+        log(f'depth (nflverse): only {nteams} teams ({len(lines)} rows) — NOT writing a snapshot; the last good one stands'); return None
+    out = f'data/raw/espn_depth_{TODAY_S}.txt'
+    write_lines(out, lines)
+    log(f'depth: {len(lines)} rows / {nteams} teams from nflverse (ESPN chart as of {asof}) -> {out}')
+    return out
+
 def depth():
     lines = []
     for team in ESPN_NFL:
         try:
-            html = get(f'{WEB}/{team.lower()}', pace=1.0)
+            html = get(f'{WEB}/{team.lower()}', pace=1.0, headers=HTML_HDR)
             m = re.search(r"window\['__espnfitt__'\]\s*=\s*(\{.*?\});\s*</script>", html, re.S)
             if not m: raise ValueError('no __espnfitt__ blob')
             groups = json.loads(m.group(1))['page']['content']['depth']['dethTeamGroups']
@@ -55,8 +130,8 @@ def depth():
             log(f'  {team}: depth failed {str(e)[:80]}')
     nteams = len({l.split('|')[0] for l in lines})
     if nteams < 24:
-        log(f'depth: only {nteams} teams parsed ({len(lines)} rows) — NOT writing a snapshot; the last good one stands')
-        return None
+        log(f'depth: only {nteams} teams parsed from espn.com ({len(lines)} rows) — falling back to the nflverse mirror')
+        return depth_nflverse()
     out = f'data/raw/espn_depth_{TODAY_S}.txt'
     write_lines(out, lines)
     log(f'depth: {len(lines)} rows / {nteams} teams -> {out}')

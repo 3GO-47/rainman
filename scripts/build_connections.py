@@ -16,7 +16,8 @@ os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 try:
     import geonamescache
 except ImportError:
-    raise SystemExit('build_connections: geonamescache not installed (pip install geonamescache) — keeping existing connections_2026.csv')
+    print('build_connections: geonamescache not installed (py -3 -m pip install geonamescache) — keeping existing connections_2026.csv')
+    raise SystemExit(0)   # optional layer: a missing geocoder must never fail the whole refresh
 
 NEAR = 100      # miles: homecoming / college-town radius
 CLOSE = 50

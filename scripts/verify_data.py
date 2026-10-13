@@ -5,7 +5,7 @@ point formulas, slot utilization, and D/ST attribution.
 
 Usage: python3 verify_data.py   -> prints report + writes notes/data_audit_<date>.md
 """
-import csv, glob, json, re, datetime
+import os, csv, glob, json, re, datetime
 import pandas as pd
 import numpy as np
 
@@ -136,9 +136,14 @@ def main():
     comb = pd.read_csv('data/processed/dvp_combined.csv').set_index('defense')
     s24 = pd.read_csv('data/processed/dvp_season_2024.csv').set_index('defense')
     s25 = pd.read_csv('data/processed/dvp_season_2025.csv').set_index('defense')
-    blend_bad = sum(1 for d in comb.index for c in STAT_COLS
-        if abs((s24.loc[d,c+' avg']+s25.loc[d,c+' avg'])/2 - comb.loc[d,c+' avg']) > 0.011)
-    ok('combined = equal-weight mean of 2024+2025 (every cell)', blend_bad==0, f'{blend_bad} off')
+    s26 = pd.read_csv('data/processed/dvp_season_2026.csv').set_index('defense') if os.path.exists('data/processed/dvp_season_2026.csv') else None
+    wk26 = pd.read_csv('data/game_logs/game_logs_2026.csv', usecols=['week']).week.nunique() if os.path.exists('data/game_logs/game_logs_2026.csv') else 0
+    cur2 = s26 is not None and wk26 >= 4                       # compute_dvp: current season counts 2x once >=4 weeks exist
+    def expect(d, c):
+        if cur2: return (s24.loc[d,c+' avg'] + s25.loc[d,c+' avg'] + 2*s26.loc[d,c+' avg']) / 4
+        return (s24.loc[d,c+' avg'] + s25.loc[d,c+' avg']) / 2
+    blend_bad = sum(1 for d in comb.index for c in STAT_COLS if abs(expect(d,c) - comb.loc[d,c+' avg']) > 0.011)
+    ok(f'combined = {"(2024+2025+2026x2)/4" if cur2 else "equal-weight mean of 2024+2025"} (every cell)', blend_bad==0, f'{blend_bad} off')
     # composite spot: QB * = mean of its 5 stat ranks
     qb_cols = ['QB PY','QB RY','QB P+R','P TD','QB TD']
     comp_bad = sum(1 for d in comb.index

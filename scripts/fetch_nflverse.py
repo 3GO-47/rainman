@@ -44,7 +44,7 @@ def main(seasons):
     for s in seasons:
         for rel, name in [('snap_counts','snap_counts'),('ftn_charting','ftn_charting'),
                           ('pbp_participation','pbp_participation'),('depth_charts','depth_charts'),
-                          ('rosters','roster')]:
+                          ('rosters','roster'),('injuries','injuries')]:
             dest = f'{OUT}/{name}_{s}.parquet'
             if os.path.exists(dest) and s != cur: continue
             ok = get(f'{BASE}/{rel}/{name}_{s}.parquet', dest)

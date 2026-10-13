@@ -261,6 +261,7 @@ the sum of the opposing players at that slot; combined = last season + this seas
 - **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-13 — **Loop self-sufficiency.** Depth charts from the nflverse mirror of ESPN's chart (+ roster IR, weekly O/D/Q report) when espn.com won't serve the page; a missing geocoder no longer fails the refresh; verifier follows the in-season blend rule; live Markets chips unhidden.
 - 2026-10-07 — **other sports.** NBA, NHL and WNBA go live on the same framework: sportsdataverse parquets (GitHub) →
   `scripts/sports/build.py` → `nba.html`, `nhl.html`, `wnba.html` with DvP by slot, projections, ratings, game-line picks
   and a daily loop; Layer 0 marks them LIVE and shows their softest matchups.
