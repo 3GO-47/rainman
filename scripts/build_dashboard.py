@@ -143,7 +143,8 @@ def betting_payload():
         for r in GL.itertuples():
             sc = r.away_score == r.away_score
             glh.append([int(r.season), int(r.week), r.away_team, r.home_team, int(r.away_score) if sc else None,
-                        int(r.home_score) if sc else None, r.spread_line, r.total_line])
+                        int(r.home_score) if sc else None, r.spread_line, r.total_line,
+                        r.roof if isinstance(r.roof, str) else None, int(r.div_game) if r.div_game == r.div_game else None])
     return {'lines': rows('bet_lines.csv'), 'td': td, 'proj': proj, 'glh': glh, 'corr': json.load(open(P + 'bet_corr.json')),
             'model': {k: {kk: vv for kk, vv in v.items()} for k, v in M['markets'].items()}, 'dists': M['dists'],
             'ledger': rows('bet_ledger.csv'), 'dvpMeta': meta,
