@@ -76,6 +76,8 @@ def main(week=None):
             add({'type': 'DFS', 'week': int(r.week), 'frozen_on': r.frozen_on, 'ref': f'dfs|{r.slate}', 'market': 'dk_classic', 'side': r.slate, 'line': r.salary if r.salary == r.salary else '',
                  'model': r.proj_total, 'market_ref': '', 'market_src': 'DK' if r.capped else 'uncapped', 'edge': '', 'note': 'projected DK points; graded = actual DK points'})
     allp = pd.concat([old, pd.DataFrame(new)], ignore_index=True) if new else old.copy()
+    for c in ('result', 'actual'):   # grading writes strings and numbers into the same cell — keep them plain object columns
+        if c in allp.columns: allp[c] = allp[c].astype(object)
     # ---- grading ----
     scores = {r.game_id: r for r in gm.itertuples() if r.result == r.result}
     logs = pd.read_csv('data/game_logs/game_logs_2026.csv')

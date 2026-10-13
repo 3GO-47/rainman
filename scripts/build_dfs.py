@@ -251,6 +251,7 @@ def main(week=None):
             elif played: ent.at[i, 'actual_pts'] = 0.0
         for i, s in smm.iterrows():
             e = ent[(ent.week == s.week) & (ent.slate == s.slate)]
+            e = e[e.slot.astype(str).map(POS_OF) != 'DST']   # D/ST scoring (sacks, points allowed) is not in the game logs — the total is the eight skill spots
             if len(e) and e.actual_pts.astype(str).ne('').all() and e.actual_pts.notna().all():
                 smm.at[i, 'actual_total'] = round(float(pd.to_numeric(e.actual_pts).sum()), 2)
     ent.to_csv(ent_path, index=False); smm.to_csv(sum_path, index=False)
