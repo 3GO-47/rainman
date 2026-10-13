@@ -90,7 +90,7 @@ def main(week=None):
     PROP_COL = {'pass_yds': ['pass_yds'], 'pass_td': ['pass_td'], 'pass_att': ['pass_att'], 'completions': ['cmp'], 'interceptions': ['int'], 'rush_yds': ['rush_yds'],
                 'rush_att': ['rush_att'], 'receptions': ['rec'], 'rec_yds': ['rec_yds'], 'rush_rec_yds': ['rush_yds', 'rec_yds'], 'pass_rush_yds': ['pass_yds', 'rush_yds']}
     if '--regrade' in sys.argv:   # wipe every prop / spread / total grade and redo it from the frozen line (one-off after a grading fix)
-        m = allp.type.isin(['PROP', 'ATS', 'TOTAL']); allp.loc[m, 'result'] = ''; allp.loc[m, 'actual'] = ''
+        m = allp.type.isin(['PROP', 'ATS', 'TOTAL', 'TD']); allp.loc[m, 'result'] = ''; allp.loc[m, 'actual'] = ''
     for i, r in allp.iterrows():
         if isinstance(r.result, str) and r.result in ('W', 'L', 'P'): continue
         t = r.type
@@ -119,10 +119,12 @@ def main(week=None):
             name = ln.get((r.player, r.team), r.player)
             gl = logs[(logs.week == r.week) & (logs.team == r.team) & (logs.player == name)]
             played = ((logs.week == r.week) & (logs.team == r.team)).any()
-            if col and (len(gl) or played) and r.line == r.line:
-                act = float(sum(gl.iloc[0][c] for c in col)) if len(gl) else 0.0
+            if col and len(gl) and r.line == r.line:
+                act = float(sum(gl.iloc[0][c] for c in col))
                 d = act - float(r.line); over = str(r.side).strip().lower().startswith('o')
                 allp.at[i, 'result'] = 'P' if d == 0 else ('W' if (d > 0) == over else 'L'); allp.at[i, 'actual'] = act
+            elif col and played:   # inactive: no box-score line while his team played — voided, as the book would
+                allp.at[i, 'result'] = 'P'; allp.at[i, 'actual'] = 'DNP'
             else:
                 res, act = bl_res.get(r.ref, ('', ''))
                 if isinstance(res, str) and res: allp.at[i, 'result'] = res; allp.at[i, 'actual'] = act
@@ -130,9 +132,11 @@ def main(week=None):
             name = ln.get((r.player, r.team), r.player)
             g = logs[(logs.week == r.week) & (logs.team == r.team) & (logs.player == name)]
             played = ((logs.week == r.week) & (logs.team == r.team)).any()
-            if len(g) or played:
-                scored = int(len(g) and (g.rush_td.iloc[0] + g.rec_td.iloc[0]) >= 1)
+            if len(g):
+                scored = int((g.rush_td.iloc[0] + g.rec_td.iloc[0]) >= 1)
                 allp.at[i, 'actual'] = scored; allp.at[i, 'result'] = 'W' if (scored == 1) == (r.side == 'YES') else 'L'
+            elif played:   # his team played, he has no line in the box score: inactive — the book voids it, so do we
+                allp.at[i, 'result'] = 'P'; allp.at[i, 'actual'] = 'DNP'
         elif t == 'DFS' and len(dfs):
             s = dfs[(dfs.week == r.week) & (dfs.slate == r.side)]
             if len(s) and str(s.actual_total.iloc[0]) not in ('', 'nan'):

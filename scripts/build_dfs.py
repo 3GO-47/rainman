@@ -52,7 +52,8 @@ def main(week=None):
     if week is None: week = int(pj.week.max())
     pj = pj[pj.week == week]
     td = pd.read_csv(P + 'bet_td.csv'); td = td[td.week == week]
-    lines = pd.read_csv(P + 'bet_lines.csv')
+    try: lines = pd.read_csv(P + 'bet_lines.csv')
+    except pd.errors.EmptyDataError: lines = pd.DataFrame(columns=['team', 'team_implied'])
     kick = pd.read_csv(P + 'kickoffs_2026.csv'); kick = kick[kick.week == week]
     slate_of, kick_at = {}, {}
     for r in kick.itertuples():

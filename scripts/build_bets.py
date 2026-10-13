@@ -64,7 +64,9 @@ def main():
                         fair_over=fair(pao), fair_under=fair(pau), side=side, ev=round(100 * max(evo, evu), 1),
                         matchup_x=r.matchup_x, game_x=r.game_x, team_implied=r.team_implied, n_eff=r.n_eff, w_model=round(wt(r.n_eff), 3),
                         skill=M['markets'][x['market']]['skill'], open=x['open'], updated=x['updated']))
-    B = pd.DataFrame(out)
+    BCOLS = ['week', 'player', 'team', 'opp', 'slot', 'market', 'book', 'line', 'over_price', 'under_price', 'priced', 'proj', 'q10', 'q50', 'q90', 'p_over_model',
+             'p_over', 'p_under', 'fair_over', 'fair_under', 'side', 'ev', 'matchup_x', 'game_x', 'team_implied', 'n_eff', 'w_model', 'skill', 'open', 'updated']
+    B = pd.DataFrame(out, columns=BCOLS)   # header always written, so a week with no priced lines still reads back as a table
     B.to_csv('data/processed/bet_lines.csv', index=False)
     # anytime TD: every projected player, fair price from the model; book price + EV where a priced feed has it
     T = PJ[PJ.market == 'anytime_td'].copy()
@@ -95,7 +97,7 @@ def ledger(B):
             'p_over', 'side', 'ev', 'n_eff', 'actual', 'result']
     led = pd.read_csv(LP) if os.path.exists(LP) else pd.DataFrame(columns=cols)
     k = lambda d: d.week.astype(str) + '|' + d.player + '|' + d.market + '|' + d.book + '|' + d.line.astype(str)
-    new = B[~k(B).isin(set(k(led)) if len(led) else set())].copy()
+    new = B[~k(B).isin(set(k(led)) if len(led) else set())].copy() if len(B) else B.iloc[0:0]
     if len(new):
         new['frozen_on'] = str(pd.Timestamp.today().date()); new['actual'] = np.nan; new['result'] = ''
         led = pd.concat([led, new[cols]], ignore_index=True)

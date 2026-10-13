@@ -62,6 +62,14 @@ def main(season):
             drows.append(f[1:])
         elif line.startswith('ERR|'):
             print('WARN skipped:', line)
+    # one name per player id: box lines come from two sources (PFR pages, nflverse fallback) that spell names differently
+    # ("D.K. Metcalf" / "DK Metcalf", "Luther Burden" / "Luther Burden III"); the first spelling seen for an id wins everywhere
+    canon = {}
+    for f in prows:
+        canon.setdefault(f[1], f[2])
+    fixed = sum(1 for f in prows if f[2] != canon[f[1]])
+    for f in prows: f[2] = canon[f[1]]
+    if fixed: print(f'  {fixed} box lines renamed to the id\'s first spelling')
 
     inferred = 0
     recs = []

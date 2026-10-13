@@ -64,11 +64,11 @@ def nflverse_box(missing, games):
     ros = pd.read_parquet(f'data/raw/nflverse/roster_{SEASON}.parquet', columns=['gsis_id', 'pfr_id'])
     pfr = dict(ros.dropna().drop_duplicates('gsis_id').values)
     # also learn ids from names already in the box file (keeps a player on one id across sources)
-    byname = {}
+    byname, nameof = {}, {}
     if os.path.exists(BOX):
         for l in open(BOX, encoding='utf-8'):
             if l.startswith('P|'):
-                p = l.split('|'); byname[(p[3], norm(p[4]))] = p[2]
+                p = l.split('|'); byname[(p[3], norm(p[4]))] = p[2]; nameof.setdefault(p[2], p[3])
     want = {g.game_id: g.pfr for g in missing}
     s = s[(s.season_type != 'PRE') & s.game_id.isin(want)]
     out, done = [], set()
@@ -76,8 +76,9 @@ def nflverse_box(missing, games):
         bid = want[r.game_id]; team = LA.get(r.team, r.team)
         if not any([r.attempts, r.carries, r.targets, r.receptions]): continue
         pid = pfr.get(r.player_id) or byname.get((r.player_display_name, team)) or r.player_id
+        pname = nameof.get(pid, r.player_display_name)   # keep the spelling the file already uses for this id
         fl = int((r.sack_fumbles_lost or 0) + (r.rushing_fumbles_lost or 0) + (r.receiving_fumbles_lost or 0))
-        out.append('|'.join(str(x) for x in ['P', bid, pid, r.player_display_name, team, int(r.completions or 0), int(r.attempts or 0), int(r.passing_yards or 0), int(r.passing_tds or 0),
+        out.append('|'.join(str(x) for x in ['P', bid, pid, pname, team, int(r.completions or 0), int(r.attempts or 0), int(r.passing_yards or 0), int(r.passing_tds or 0),
                                              int(r.passing_interceptions or 0), int(r.carries or 0), int(r.rushing_yards or 0), int(r.rushing_tds or 0), int(r.targets or 0),
                                              int(r.receptions or 0), int(r.receiving_yards or 0), int(r.receiving_tds or 0), fl]))
         done.add(r.game_id)

@@ -123,7 +123,8 @@ def betting_payload():
         return {'lines': [], 'td': [], 'proj': [], 'glh': glh, 'corr': {}, 'model': {}, 'dists': {}, 'ledger': [], 'dvpMeta': {}, 'week': None}
     def rows(f):
         if not os.path.exists(P + f): return []
-        df = pd.read_csv(P + f)
+        try: df = pd.read_csv(P + f)
+        except pd.errors.EmptyDataError: return []
         return json.loads(df.to_json(orient='records'))
     M = json.load(open(P + 'prop_model.json'))
     meta = json.load(open(P + 'dvp_adjusted_meta.json')) if os.path.exists(P + 'dvp_adjusted_meta.json') else {}
