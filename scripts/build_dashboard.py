@@ -358,6 +358,11 @@ def main():
     dcp = sorted(glob.glob('data/processed/depth_charts_*.csv'))[-1]
     data['depth'] = list(csv.DictReader(open(dcp, encoding='utf-8')))
     data['depthDate'] = dcp.split('_')[-1][:10]
+    # previous snapshot (the one before the newest) so the dashboard can show what changed week over week
+    allp = sorted(glob.glob('data/processed/depth_charts_*.csv'))
+    prev = [f for f in allp[:-1] if f.split('_')[-1][:10] < data['depthDate']]
+    data['depthPrev'] = {'date': prev[-1].split('_')[-1][:10], 'rows': [[r['player'], r['team'], r['slot'], r['injury'], r.get('depth', '')]
+                        for r in csv.DictReader(open(prev[-1], encoding='utf-8'))]} if prev else None
     data['ph'] = headshots(logs, data['depth']) if LEAGUE == 'nfl' else ncaa_headshots()
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}

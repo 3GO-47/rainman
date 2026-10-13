@@ -198,7 +198,7 @@ tr.bdrow td{background:rgba(255,213,79,.06)}
  .grid2,.grid3{grid-template-columns:1fr}
  .panel{overflow-x:auto}
  .sm-row{min-width:860px}
- #tdTbl,#labTbl,#h2hTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#tdb>.controls,#h2h>.controls{overflow-x:auto}
+ #tdTbl,#labTbl,#h2hTbl,#ddTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#tdb>.controls,#h2h>.controls{overflow-x:auto}
  table{font-size:10.5px}
  th{position:static}
  .controls{gap:6px}
@@ -364,21 +364,22 @@ tr:hover td{background:var(--s2)}
 .tabs button.on{background:var(--accent);color:#1a1200;border-color:var(--accent);font-weight:600}
 #defTabs,#r11Tabs{display:none}
 /* matchup board: player-average block */
-:is(#labTbl,#h2hTbl) tr.grp th{font:600 9.5px/1.2 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);text-align:center;border-bottom:1px solid var(--edge);border-left:1px solid var(--edge2);padding:4px 6px;background:var(--s2)}
-:is(#labTbl,#h2hTbl) tr.grp th:first-child,:is(#labTbl,#h2hTbl) tr.grp th:last-child{border-left:0;background:transparent}
-:is(#labTbl,#h2hTbl) tr.grp th.pa{color:var(--cyan)}:is(#labTbl,#h2hTbl) tr.grp th.pa b{color:var(--txt)}:is(#labTbl,#h2hTbl) tr.grp th.pa span{text-transform:none;letter-spacing:0}
-:is(#labTbl,#h2hTbl) th.pa{color:var(--cyan)}
-:is(#labTbl,#h2hTbl) table.lab2 th.gs,:is(#labTbl,#h2hTbl) table.lab2 td.gs{border-left:2px solid var(--edge2)}:is(#labTbl,#h2hTbl) table.lab2 th.md:first-of-type,:is(#labTbl,#h2hTbl) table.lab2 td.md:first-of-type{border-left:2px solid var(--edge2)}
-:is(#labTbl,#h2hTbl) table.lab2 tr.grp th.g0{text-align:left;background:transparent;border-left:0}:is(#labTbl,#h2hTbl) table.lab2 tr.grp th.op{color:var(--acc)}:is(#labTbl,#h2hTbl) table.lab2 tr.grp th.md{color:var(--dim)}
-:is(#labTbl,#h2hTbl) table.lab2 th.op{color:var(--acc)}:is(#labTbl,#h2hTbl) table.lab2 td.op{white-space:nowrap;text-align:right}:is(#labTbl,#h2hTbl) table.lab2 td.op .ov{display:inline-block;min-width:38px;text-align:right;font-weight:600;margin-right:5px;color:var(--txt)}
-:is(#labTbl,#h2hTbl) table.lab2 td.pa{text-align:right}:is(#labTbl,#h2hTbl) table.lab2 td.md{color:var(--dim)}:is(#labTbl,#h2hTbl) table.lab2 tbody tr:hover td.op{background:rgba(232,179,57,.05)}:is(#labTbl,#h2hTbl) table.lab2 tbody tr:hover td.pa{background:rgba(88,166,255,.05)}
-:is(#labTbl,#h2hTbl) table{border-collapse:separate;border-spacing:0}
-:is(#labTbl,#h2hTbl) td,:is(#labTbl,#h2hTbl) th{padding:2px 5px}
-#h2hTbl td,#h2hTbl th{padding:2px 4px}#h2hTbl table.lab2 td.op .ov{min-width:34px;margin-right:3px}
-:is(#labTbl,#h2hTbl) tbody td:first-child,:is(#labTbl,#h2hTbl) thead tr:not(.grp) th:first-child{position:sticky;left:0;z-index:2;background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
-:is(#labTbl,#h2hTbl) tbody tr:hover td:first-child{background:var(--s2)}
-:is(#labTbl,#h2hTbl) td.pa{white-space:nowrap;border-left:1px dotted var(--edge2)}:is(#labTbl,#h2hTbl) td.pa+td.pa{border-left:0}
-:is(#labTbl,#h2hTbl) td.pa b{font-weight:600;color:var(--txt)}:is(#labTbl,#h2hTbl) td.pa .mini{color:var(--dim2)}
+:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th{font:600 9.5px/1.2 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);text-align:center;border-bottom:1px solid var(--edge);border-left:1px solid var(--edge2);padding:4px 6px;background:var(--s2)}
+:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th:first-child,:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th:last-child{border-left:0;background:transparent}
+:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th.pa{color:var(--cyan)}:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th.pa b{color:var(--txt)}:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th.pa span{text-transform:none;letter-spacing:0}
+:is(#labTbl,#h2hTbl,#ddTbl) th.pa{color:var(--cyan)}
+:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 th.gs,:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.gs{border-left:2px solid var(--edge2)}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 th.md:first-of-type,:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.md:first-of-type{border-left:2px solid var(--edge2)}
+:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 tr.grp th.g0{text-align:left;background:transparent;border-left:0}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 tr.grp th.op{color:var(--acc)}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 tr.grp th.md{color:var(--dim)}
+:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 th.op{color:var(--acc)}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.op{white-space:nowrap;text-align:right}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.op .ov{display:inline-block;min-width:38px;text-align:right;font-weight:600;margin-right:5px;color:var(--txt)}
+:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.pa{text-align:right}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 td.md{color:var(--dim)}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 tbody tr:hover td.op{background:rgba(232,179,57,.05)}:is(#labTbl,#h2hTbl,#ddTbl) table.lab2 tbody tr:hover td.pa{background:rgba(88,166,255,.05)}
+:is(#labTbl,#h2hTbl,#ddTbl) table{border-collapse:separate;border-spacing:0}
+:is(#labTbl,#h2hTbl,#ddTbl) td,:is(#labTbl,#h2hTbl,#ddTbl) th{padding:2px 5px}
+#h2hTbl td,#h2hTbl th{padding:2px 4px}
+#ddTbl table.dd td{text-align:left;white-space:nowrap}#ddTbl table.dd td.r,#ddTbl table.dd td.md{text-align:right}#ddTbl table.dd .badge{font-size:9.5px;padding:1px 6px}#h2hTbl table.lab2 td.op .ov{min-width:34px;margin-right:3px}
+:is(#labTbl,#h2hTbl,#ddTbl) tbody td:first-child,:is(#labTbl,#h2hTbl,#ddTbl) thead tr:not(.grp) th:first-child{position:sticky;left:0;z-index:2;background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
+:is(#labTbl,#h2hTbl,#ddTbl) tbody tr:hover td:first-child{background:var(--s2)}
+:is(#labTbl,#h2hTbl,#ddTbl) td.pa{white-space:nowrap;border-left:1px dotted var(--edge2)}:is(#labTbl,#h2hTbl,#ddTbl) td.pa+td.pa{border-left:0}
+:is(#labTbl,#h2hTbl,#ddTbl) td.pa b{font-weight:600;color:var(--txt)}:is(#labTbl,#h2hTbl,#ddTbl) td.pa .mini{color:var(--dim2)}
 .pa-up{color:var(--green);font-style:normal;font-size:9px;margin-left:2px}.pa-dn{color:var(--red);font-style:normal;font-size:9px;margin-left:2px}
 .slate{border:1px solid var(--edge2);color:var(--cyan);border-radius:3px;font:600 9.5px/1.5 var(--ui);letter-spacing:.06em}
 .tag{border-color:var(--edge2);background:var(--s2);color:var(--txt);border-radius:3px;font:500 10px/1.5 var(--ui)}
@@ -409,7 +410,7 @@ tr:hover td{background:var(--s2)}
 .r11dn>b,.r11who b,.r11sum b,.r11mg b,.r11ln b,.r11tot>b{font-family:var(--ui)}
 .r11ln b,.r11sum b,.r11mg b,.r11tot>b,.r11bg,.b11big{font-family:var(--mono)}
 .pq{display:flex;align-items:center;gap:6px;width:100%;background:var(--s2);border:1px solid var(--edge);color:var(--txt);padding:5px 8px;margin:3px 0;border-radius:5px;font:500 11.5px/1.3 var(--ui);cursor:pointer;text-align:left}.pq:hover{border-color:var(--accent)}.pq em{margin-left:auto;font:500 11px/1 var(--mono);color:var(--dim)}
-.panel,#inOut,#bbTbl,#gmOut,#tdTbl,#labTbl,#h2hTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#matrixWrap,#mDrill{overflow-x:auto}
+.panel,#inOut,#bbTbl,#gmOut,#c2gmOut,#tdTbl,#labTbl,#h2hTbl,#ddTbl,#ddTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#matrixWrap,#mDrill{overflow-x:auto}
 th{position:static}
 main{container-type:inline-size}
 @container (max-width:1340px){#chamber .gamecard .grid2{grid-template-columns:1fr}}
@@ -490,10 +491,10 @@ tr:hover td{background:var(--s2)}
 .inj0{color:var(--amber)}.injm1{color:var(--red)}
 .plink:hover,.pp:hover{color:var(--accent)}
 /* matchup board */
-:is(#labTbl,#h2hTbl) tr.grp th{background:#000;color:var(--dim2);border-left:1px solid var(--edge2)}
-:is(#labTbl,#h2hTbl) tr.grp th.pa{color:var(--dim)}:is(#labTbl,#h2hTbl) tr.grp th.pa b{color:var(--txt)}
-:is(#labTbl,#h2hTbl) tbody td:first-child,:is(#labTbl,#h2hTbl) thead tr:not(.grp) th:first-child{background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
-:is(#labTbl,#h2hTbl) td.pa b{color:var(--txt)}
+:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th{background:#000;color:var(--dim2);border-left:1px solid var(--edge2)}
+:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th.pa{color:var(--dim)}:is(#labTbl,#h2hTbl,#ddTbl) tr.grp th.pa b{color:var(--txt)}
+:is(#labTbl,#h2hTbl,#ddTbl) tbody td:first-child,:is(#labTbl,#h2hTbl,#ddTbl) thead tr:not(.grp) th:first-child{background:var(--panel);box-shadow:1px 0 0 var(--edge2)}
+:is(#labTbl,#h2hTbl,#ddTbl) td.pa b{color:var(--txt)}
 /* bets module */
 .r11row{border-bottom-color:var(--edge)}.r11row:hover{background:var(--s2)}.r11row.on{background:var(--s3)}
 .r11rg button.on{border-bottom-color:var(--accent)}
@@ -900,7 +901,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div></div>
+<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div><div id="markets2" hidden></div><div id="ddelta" hidden></div><div id="card2" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1164,7 +1165,10 @@ const SECTIONS=[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
    {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'},
-   {id:'h2h',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent \u2014 his own averages in every prior meeting we have logs for, four columns by position',c:'test',sub:'h2h'}]}];
+   {id:'h2h',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent \u2014 his own averages in every prior meeting we have logs for, four columns by position',c:'test',sub:'h2h'},
+   {id:'markets2',label:'Markets v2',desc:'the Markets page with its market chips back \u2014 pass yards, rush yards, receptions, receiving yards, anytime TD and game lines are each one click',c:'test',sub:'markets2'},
+   {id:'ddelta',label:'Depth Delta',desc:'what changed on the depth charts since last week \u2014 injuries, promotions, demotions, new names \u2014 and what each change means against this week\'s opponent',c:'test',sub:'ddelta'},
+   {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1180,7 +1184,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',h2hp:'#h2hP',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
+  if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h','markets2','ddelta','card2'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1194,6 +1198,9 @@ const INTRO={
  tdgrid:{how:['the F6 draft of the TD Board, left exactly as it was \u2014 columns scroll inside themselves and the depth filter is the original 1st-string / top-2 / all select','the live version is F2 Matchups \u2192 TD Board']},
  h2h:{how:['every number is the player\u2019s own per-game average in the games he has already played against this week\u2019s opponent, any season, whichever team he was on','n = how many of those games there are \u2014 a 1 is one game, read it that way','PPR \u25b2 / \u25bc = at least 10% above / below his average over every logged game','the slot chips pick which depths appear; the minimum hides thin samples','columns sort on their own; click a name for his card and the full log']},
  h2hp:{how:['the Matchup Lab\u2019s table with the opponent block replaced: every number there is the player\u2019s own per-game average in the games he has already played against this week\u2019s opponent, any season, whichever team he was on','n = how many of those games there are \u2014 a 1 is one game, read it that way','\u25b2 / \u25bc = more / less than his own average over the selected span; \u0394 PPR is that gap in fantasy points','position buttons toggle and combine; the minimum hides thin samples; every column sorts; click a name for his card']},
+ markets2:{how:['the same Markets page \u2014 the chips that pick the market were hidden by a stylesheet rule left over from the old navigation, so the live page is stuck on pass yards; here they show','pick a chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the gap']},
+ ddelta:{how:['every player whose slot, injury flag or team differs from the previous depth-chart snapshot','OUT and demoted players name who steps in; promoted players show how soft this week\u2019s opponent is to the slot they just inherited (\u03a8, 1 = allows the most)','PPR/g and snp% are his own this season \u2014 a promotion with no snaps behind it is a name, not a play','every column sorts; click a name for his card']},
+ card2:{how:['the same frozen positions, plus two columns the live Card does not have: the graded record of the position\u2019s cohort (same type, same size of edge) and of its market','the strip on top is the model\u2019s own answer to \u201cdoes the edge mean anything\u201d \u2014 the min-edge slider starts at the first bucket from which every larger bucket clears break-even (10+ graded plays each)','sorted by cohort hit rate, then edge; a position whose cohort is red is a position the record has not earned yet']},
  tdboard:{how:['the fields pane gives the three softest end zones for each role this week','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','TD/G is the player\u2019s own touchdowns per game this season \u2014 dim means he has not played yet this year, so it is his whole log','a QB has two TD-allowed stats \u2014 pick which one his column reads; TD/G follows the same pick','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
@@ -3017,12 +3024,22 @@ const pkMref=p=>p.type==='ML'||p.type==='TD'?`${(100*+p.market_ref).toFixed(0)}%
 const pkModel=p=>p.type==='ML'||p.type==='TD'||p.type==='PROP'?`${(100*+p.model).toFixed(0)}%`:String(p.model);
 const pkEdge=p=>p.edge===''||p.edge==null?'':p.type==='PROP'?`${(+p.edge).toFixed(1)}% EV`:p.type==='ML'||p.type==='TD'?`${(+p.edge>0?'+':'')}${(100*+p.edge).toFixed(0)}%`:`${Math.abs(+p.edge).toFixed(1)} pts`;
 
-function games(){
-  $('#games').innerHTML=`<div id="gmOut"></div>`;
+function games(root='#games',px='',v2=false){
+  $(root).innerHTML=`<div id="${px}gmOut"></div>`;
   const bt=BET.backtest;const TYPES=['ALL','ML','ATS','TOTAL','PROP','TD'];
   let ft='ALL',hist=false,grp=true,minE=3,one=true,sk='edge',sa=false,gsel='';
   const ALL=PICKS.filter(p=>p.type!=='DFS');
   const pkEdgePct=pkEdgeVal;
+  /* v2: every live position carries the graded record of its own cohort — same type, same edge bucket — and of its market */
+  const EB=[[-9,0],[0,.03],[.03,.06],[.06,.10],[.10,.18],[.18,9]];
+  const GR=ALL.filter(p=>p.result==='W'||p.result==='L'||p.result==='P');
+  const bOf=e=>e==null?-1:EB.findIndex(([lo,hi])=>e>=lo&&e<hi);
+  const cohort=p=>{const b=bOf(pkEdgePct(p));if(b<0)return null;const rs=GR.filter(q=>q.type===p.type&&bOf(pkEdgePct(q))===b);return {...pkRec(rs),lo:EB[b][0],hi:EB[b][1]}};
+  const mktRec=p=>pkRec(GR.filter(q=>q.type===p.type&&(p.type==='PROP'?q.market===p.market:true)));
+  const trustV=p=>{const c=cohort(p);return c&&c.graded>=10?c.hit:-1};
+  const bLbl=(lo,hi)=>lo<0?'model on the other side':hi>1?`${(100*lo).toFixed(0)}%+`:`${(100*lo).toFixed(0)}–${(100*hi).toFixed(0)}%`;
+  const recCell=r=>{if(!r||!r.graded)return '<span class="dim">no history</span>';const tone=r.hit==null?'':r.hit>=BE110?'g':'r';return `<b class="${tone}">${pkWL(r)}</b> <span class="mini">${pkPct(r.hit,0)}</span>`};
+  if(v2){const pb=EB.map(([lo,hi])=>({lo,hi,...pkRec(GR.filter(q=>q.type==='PROP'&&pkEdgePct(q)!=null&&pkEdgePct(q)>=lo&&pkEdgePct(q)<hi))})).filter(b=>b.lo>=0&&b.graded>=10);const pbi=pb.findIndex((b,i)=>pb.slice(i).every(x=>x.hit>BE110));minE=pbi>=0?Math.round(100*pb[pbi].lo):3;sk='trust'}
   const resChipP=r=>r==='W'?'<span class="badge" style="background:#00c853">W</span>':r==='L'?'<span class="badge" style="background:#ff5252">L</span>':r==='P'||r==='PUSH'?'<span class="badge" style="background:#7d7d7d">P</span>':'<span class="pend">live</span>';
   /* every filter the card honours: header slate / game / team, its own game picker, type, minimum edge, one line per player */
   function pass(p){
@@ -3037,7 +3054,7 @@ function games(){
   const dedupe=rows=>{if(!one)return rows;const seen={},out=[];
     rows.slice().sort((a,b)=>(pkEdgePct(b)||-9)-(pkEdgePct(a)||-9)).forEach(p=>{const k=p.player?`${p.player}|${p.market}`:`${pkGame(p)}|${p.type}`;if(seen[k])return;seen[k]=1;out.push(p)});
     return out};
-  const SORT={edge:p=>pkEdgePct(p)??-9,type:p=>p.type,who:p=>(p.player||p.team||''),market:p=>p.market,model:p=>pkProb(p)??(+p.model||0),result:p=>p.result||'zz',game:p=>pkGame(p),week:p=>+p.week};
+  const SORT={trust:p=>trustV(p)*1000+(pkEdgePct(p)??0),edge:p=>pkEdgePct(p)??-9,type:p=>p.type,who:p=>(p.player||p.team||''),market:p=>p.market,model:p=>pkProb(p)??(+p.model||0),result:p=>p.result||'zz',game:p=>pkGame(p),week:p=>+p.week};
   const sortRows=rows=>rows.slice().sort((a,b)=>{const x=SORT[sk](a),y=SORT[sk](b);return (x<y?-1:x>y?1:0)*(sa?1:-1)});
   const th=(k,l,t)=>`<th data-k="${k}" class="${sk===k?(sa?'srt-asc':'srt-desc'):''}" title="${t||''}">${l}</th>`;
   const row=p=>`<tr class="${p.result?'done':''}"><td><span class="ptype ${p.type}">${PK_TL[p.type]}</span></td>
@@ -3045,8 +3062,9 @@ function games(){
     <td class="mini">${pkMk(p.market)}</td><td><b>${esc(String(p.side))}</b>${p.line&&p.type==='PROP'?` <span class="mini">${p.line}</span>`:''}</td>
     <td class="r mono">${pkModel(p)}</td><td class="r mono mini">${pkMref(p)} <span class="dim">${esc(p.market_src||'')}</span></td>
     <td class="r"><b class="${(pkEdgeVal(p)??0)>0?'g':'r'}">${pkEdge(p)}</b></td>
+    ${v2?(c=>`<td class="r" title="${c?`graded ${PK_TL[p.type]} positions whose edge sat in the ${bLbl(c.lo,c.hi)} bucket`:''}">${recCell(c)}${c?` <span class="dim mini">${bLbl(c.lo,c.hi)}</span>`:''}</td><td class="r" title="graded record of this market">${recCell(mktRec(p))}</td>`)(cohort(p)):''}
     <td class="r mini">${esc(p.frozen_on||'')}</td><td class="r">${resChipP(p.result)}</td><td class="r mini">${p.actual??''}</td></tr>`;
-  const table=rows=>rows.length?`<table class="mkt picks pktbl"><thead><tr>${th('type','type')}${th('who','position','the player or the game the position is on')}${th('market','market')}<th>side</th>${th('model','model','what the model says: a probability, a spread or a total')}<th class="r">market</th>${th('edge','edge','how far the model is from the market — spreads and totals in points, everything else in probability or EV')}<th class="r">frozen</th>${th('result','result')}<th class="r">actual</th></tr></thead><tbody>${rows.map(row).join('')}</tbody></table>`:'<div class="pkempty">nothing matches these filters — widen the edge or clear the game</div>';
+  const table=rows=>rows.length?`<table class="mkt picks pktbl"><thead><tr>${th('type','type')}${th('who','position','the player or the game the position is on')}${th('market','market')}<th>side</th>${th('model','model','what the model says: a probability, a spread or a total')}<th class="r">market</th>${th('edge','edge','how far the model is from the market — spreads and totals in points, everything else in probability or EV')}${v2?th('trust','cohort record','how positions of this type with an edge this size have actually graded — the number to trust before the edge')+'<th class="r">market record</th>':''}<th class="r">frozen</th>${th('result','result')}<th class="r">actual</th></tr></thead><tbody>${rows.map(row).join('')}</tbody></table>`:'<div class="pkempty">nothing matches these filters — widen the edge or clear the game</div>';
   /* grouped: one block per game, the game lines first, then its props */
   const grouped=rows=>{const by={};rows.forEach(p=>{const k=pkGame(p)||'—';(by[k]=by[k]||[]).push(p)});
     const ord=['ML','ATS','TOTAL','TD','PROP'];
@@ -3076,31 +3094,33 @@ function games(){
     const histAll=ALL.filter(p=>+p.week!==wk&&pass(p));const rowsHist=sortRows(dedupe(histAll));
     const r=pkRec(rowsNow);
     const gameOpts=[...new Set(pool.map(pkGame).filter(Boolean))].sort((a,b)=>{const ka=kickOf(a),kb=kickOf(b);return ka<kb?-1:ka>kb?1:0});
-    const chips=`<span class="tabs" id="pkChips">${TYPES.map(t=>`<button data-t="${t}" class="${ft===t?'on':''}">${PK_TL[t]}${t==='ALL'?'':` <span class="mini">${pool.filter(p=>p.type===t&&pass({...p,type:t})!==false).filter(p=>p.type===t).length}</span>`}</button>`).join('')}</span>`;
-    $('#gmOut').innerHTML=`<div class="kpis">
+    const chips=`<span class="tabs" id="${px}pkChips">${TYPES.map(t=>`<button data-t="${t}" class="${ft===t?'on':''}">${PK_TL[t]}${t==='ALL'?'':` <span class="mini">${pool.filter(p=>p.type===t&&pass({...p,type:t})!==false).filter(p=>p.type===t).length}</span>`}</button>`).join('')}</span>`;
+    $('#'+px+'gmOut').innerHTML=`<div class="kpis">
       ${kpi('positions shown',String(rowsNow.length),`${pool.length} frozen this week${one?' · best line per player':''}`,'')}
       ${kpi('live',String(r.pend),r.graded?`${r.graded} already graded`:'none graded yet','')}
       ${kpi('record · this card',r.graded?pkWL(r):'—',r.graded?`${pkU(r.units)} units`:'grades land after the games','')}
       ${kpi('biggest edge',rowsNow.length?pkEdge(rowsNow.slice().sort((a,b)=>(pkEdgePct(b)??-9)-(pkEdgePct(a)??-9))[0]):'—',rowsNow.length?(rowsNow.slice().sort((a,b)=>(pkEdgePct(b)??-9)-(pkEdgePct(a)??-9))[0].player||rowsNow[0].team||''):'','')}
     </div>
+    ${v2?(()=>{const T=ft==='ALL'?'PROP':ft;const bs=EB.map(([lo,hi])=>({lo,hi,...pkRec(GR.filter(q=>q.type===T&&pkEdgePct(q)!=null&&pkEdgePct(q)>=lo&&pkEdgePct(q)<hi))})).filter(b=>b.graded);
+      return `<div class="panel"><h3>what the graded record says about ${PK_TL[T]} edges <span class="f">hit rate by edge bucket · green clears the 52.4% break-even · the slider below starts where the buckets stay green from there on</span></h3><div class="kpis">${bs.map(b=>kpi(bLbl(b.lo,b.hi),pkPct(b.hit,0),`${pkWL(b)} · ${pkU(b.units)} u`,b.hit>=BE110?'g':'r')).join('')||'<span class="note">nothing graded yet</span>'}</div></div>`})():''}
     <div class="panel"><div class="controls pkctl">${chips}
-      <label class="pkf">game <select id="pkGame"><option value="">all games (${gameOpts.length})</option>${gameOpts.map(g=>`<option value="${g}" ${gsel===g?'selected':''}>${g.replace('@',' @ ')} · ${pool.filter(p=>pkGame(p)===g).length}</option>`).join('')}</select></label>
-      <label class="pkf">min edge <input type="range" id="pkEdgeR" min="0" max="12" step="0.5" value="${minE}"><span class="v" id="pkEdgeV">${minE?minE+'%':'any'}</span></label>
-      <span class="seg"><button id="pkOne" class="${one?'on':''}" title="keep only the model's strongest line per player per market">best per player</button><button id="pkAll2" class="${one?'':'on'}">every line</button></span>
-      <span class="seg"><button id="pkGrp" class="${grp?'on':''}">by game</button><button id="pkFlat" class="${grp?'':'on'}">one list</button></span>
+      <label class="pkf">game <select id="${px}pkGame"><option value="">all games (${gameOpts.length})</option>${gameOpts.map(g=>`<option value="${g}" ${gsel===g?'selected':''}>${g.replace('@',' @ ')} · ${pool.filter(p=>pkGame(p)===g).length}</option>`).join('')}</select></label>
+      <label class="pkf">min edge <input type="range" id="${px}pkEdgeR" min="0" max="12" step="0.5" value="${minE}"><span class="v" id="${px}pkEdgeV">${minE?minE+'%':'any'}</span></label>
+      <span class="seg"><button id="${px}pkOne" class="${one?'on':''}" title="keep only the model's strongest line per player per market">best per player</button><button id="${px}pkAll2" class="${one?'':'on'}">every line</button></span>
+      <span class="seg"><button id="${px}pkGrp" class="${grp?'on':''}">by game</button><button id="${px}pkFlat" class="${grp?'':'on'}">one list</button></span>
       ${ACT?`<span class="note">slate filter active — ${rowsNow.length} of ${sortRows(dedupe(pool)).length} positions</span>`:''}</div>
       ${grp?grouped(rowsNow):table(rowsNow)}</div>`
       +board()+
-      `<details class="panel" id="pkHist" ${hist?'open':''}><summary><h3 style="margin:0;border:0;padding:0">earlier weeks <span class="f">${rowsHist.length} graded position${rowsHist.length===1?'':'s'} under the same filters${ft==='ALL'?'':' · '+PK_TL[ft]} · expand</span></h3></summary>${table(rowsHist)}</details>`+dfs();
-    logoize($('#gmOut'));
-    $('#pkChips').onclick=e=>{const b=e.target.closest('button');if(!b)return;ft=b.dataset.t;hist=$('#pkHist')&&$('#pkHist').open;render()};
-    $('#pkGame').onchange=e=>{gsel=e.target.value;render()};
-    $('#pkEdgeR').oninput=e=>{minE=+e.target.value;$('#pkEdgeV').textContent=minE?minE+'%':'any';const t=$('#pkEdgeR');render();const n=$('#pkEdgeR');if(n){n.focus()}};
-    $('#pkOne').onclick=()=>{one=true;render()};$('#pkAll2').onclick=()=>{one=false;render()};
-    $('#pkGrp').onclick=()=>{grp=true;render()};$('#pkFlat').onclick=()=>{grp=false;render()};
-    $('#gmOut').querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(sk===k)sa=!sa;else{sk=k;sa=(k==='who'||k==='type'||k==='market'||k==='game')}render()});
-    $('#gmOut').querySelectorAll('[data-goto]').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.goto)});
-    $('#gmOut').querySelectorAll('tr.gb[data-game]').forEach(tr=>tr.onclick=()=>{G.game=tr.dataset.game;G.slates.clear();apply();go('matchups')});}
+      `<details class="panel" id="${px}pkHist" ${hist?'open':''}><summary><h3 style="margin:0;border:0;padding:0">earlier weeks <span class="f">${rowsHist.length} graded position${rowsHist.length===1?'':'s'} under the same filters${ft==='ALL'?'':' · '+PK_TL[ft]} · expand</span></h3></summary>${table(rowsHist)}</details>`+dfs();
+    logoize($('#'+px+'gmOut'));
+    $('#'+px+'pkChips').onclick=e=>{const b=e.target.closest('button');if(!b)return;ft=b.dataset.t;hist=$('#'+px+'pkHist')&&$('#'+px+'pkHist').open;render()};
+    $('#'+px+'pkGame').onchange=e=>{gsel=e.target.value;render()};
+    $('#'+px+'pkEdgeR').oninput=e=>{minE=+e.target.value;$('#'+px+'pkEdgeV').textContent=minE?minE+'%':'any';const t=$('#'+px+'pkEdgeR');render();const n=$('#'+px+'pkEdgeR');if(n){n.focus()}};
+    $('#'+px+'pkOne').onclick=()=>{one=true;render()};$('#'+px+'pkAll2').onclick=()=>{one=false;render()};
+    $('#'+px+'pkGrp').onclick=()=>{grp=true;render()};$('#'+px+'pkFlat').onclick=()=>{grp=false;render()};
+    $('#'+px+'gmOut').querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(sk===k)sa=!sa;else{sk=k;sa=(k==='who'||k==='type'||k==='market'||k==='game')}render()});
+    $('#'+px+'gmOut').querySelectorAll('[data-goto]').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.goto)});
+    $('#'+px+'gmOut').querySelectorAll('tr.gb[data-game]').forEach(tr=>tr.onclick=()=>{G.game=tr.dataset.game;G.slates.clear();apply();go('matchups')});}
   RR.push(render);
 }
 function pkhomeView(){RR.push(picksHome)}
@@ -3553,10 +3573,10 @@ const band=(pj,line,w=120,dec=0)=>{if(!pj)return '<span class="dim">—</span>';
 const pOverLine=(pj,line)=>{if(!pj||line==null)return null;const sd=Math.max(1e-6,(pj.q90-pj.q10)/2.563);const z=(pj.proj-line)/sd;return 0.5*(1+erf(z/Math.SQRT2))};
 function erf(x){const t=1/(1+0.3275911*Math.abs(x));const y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return x>=0?y:-y}
 /* ---------------- BETS -> MARKETS (our own board: one dense table per market, expandable game-by-game) ---------------- */
-function bets11(){const el=$('#bets');const W=G.week;
+function bets11(root='#bets',px=''){const el=$(root);const W=G.week;
   const tabs=MKT.filter(m=>m.k!=='td').map(m=>`<button data-t="${m.k}">${m.label}</button>`).join('')+`<button data-t="T">Anytime TD</button><button data-t="G">Game lines</button>`;
-  el.innerHTML=`<div class="r11top"><div class="tabs" id="r11Tabs">${tabs}</div></div><div id="mkKpi"></div><div id="mkOut"></div>`;
-  const T=$('#r11Tabs');let cur='pass_yds';T.querySelector('[data-t="pass_yds"]').classList.add('on');
+  el.innerHTML=`<div class="r11top"><div class="tabs" id="${px}r11Tabs">${tabs}</div></div><div id="${px}mkKpi"></div><div id="${px}mkOut"></div>`;
+  const T=$('#'+px+'r11Tabs');let cur='pass_yds';T.querySelector('[data-t="pass_yds"]').classList.add('on');
   T.onclick=e=>{const b=e.target.closest('button');if(!b)return;const t=b.dataset.t==='P'?'pass_yds':b.dataset.t;cur=t;[...T.children].forEach(x=>x.classList.toggle('on',x.dataset.t===t));render()};
   // go() clicks data-t="P"/"T"/"G"; provide hidden aliases so those resolve
   T.insertAdjacentHTML('beforeend','<button data-t="P" hidden></button>');
@@ -3567,7 +3587,7 @@ function bets11(){const el=$('#bets');const W=G.week;
     const V={score:r=>r.score,own:r=>r.own,l5:r=>r.l5,allowed:r=>r.allowed,rank:r=>-r.rank,proj:r=>r.pj?r.pj.proj:-1,line:r=>r.line??-1,pover:r=>r.pOver??-1,edge:r=>r.edge==null?-9:Math.abs(r.edge),l10:r=>r.l10?r.l10.o/r.l10.n:-1,player:r=>r.u.player,team:r=>r.u.team};
     R.sort((a,b)=>{const x=(V[sortK]||V.score)(a),y=(V[sortK]||V.score)(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
     const lines=R.filter(r=>r.line!=null).length,kal=R.filter(r=>r.kl).length,top=R[0];
-    $('#mkKpi').innerHTML=`<div class="kpis">${kpi('players',R.length,`${mk.label} · starters in the ${mk.slots.join('/')} slot${mk.slots.length>1?'s':''} · wk ${W}`)}
+    $('#'+px+'mkKpi').innerHTML=`<div class="kpis">${kpi('players',R.length,`${mk.label} · starters in the ${mk.slots.join('/')} slot${mk.slots.length>1?'s':''} · wk ${W}`)}
       ${top?kpi('best volume × matchup',`${tlogo(top.u.team,14)} ${esc(pshort(top.u.player))}`,`${fmt(top.own,mk.dec)} /gm × ${top.ratio.toFixed(2)} (${top.def} allows ${fmt(top.allowed,mk.dec)}, #${top.rank})`,'g'):''}
       ${kpi('lines posted',lines,`${R.filter(r=>r.dk).length} DraftKings · ${kal} Kalshi ladders`)}
       ${(()=>{const e=R.filter(r=>r.edge!=null).sort((a,b)=>Math.abs(b.edge)-Math.abs(a.edge))[0];return e?kpi('largest model − Kalshi gap',`${tlogo(e.u.team,14)} ${esc(pshort(e.u.player))} ${e.edge>0?'over':'under'} ${e.line}`,`model ${(100*e.pOver).toFixed(0)}% vs exchange ${(100*e.kp).toFixed(0)}% — reference, not a pick`,'a'):''})()}
@@ -3595,7 +3615,7 @@ function bets11(){const el=$('#bets');const W=G.week;
     const V={score:r=>r.score,own:r=>r.own,allowed:r=>r.allowed,rank:r=>-r.rank,pm:r=>r.pm??-1,kp:r=>r.kp??-1,edge:r=>r.edge==null?-9:Math.abs(r.edge),l10:r=>r.l10?r.l10.o/r.l10.n:-1,player:r=>r.u.player};
     R.sort((a,b)=>{const x=(V[sortK]||V.score)(a),y=(V[sortK]||V.score)(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
     const top=R[0],priced=R.filter(r=>r.kp!=null);
-    $('#mkKpi').innerHTML=`<div class="kpis">${kpi('players',R.length,`rush + receiving TD · wk ${W}`)}${top?kpi('best rate × end zone',`${tlogo(top.u.team,14)} ${esc(pshort(top.u.player))}`,`${top.own.toFixed(2)} TD/gm × ${top.ratio.toFixed(2)} (${top.def} #${top.rank})`,'g'):''}${kpi('Kalshi priced',priced.length,priced.length?`${(100*mean(priced.map(r=>r.kp))).toFixed(0)}% average yes price`:'no anytime markets for this slate yet')}
+    $('#'+px+'mkKpi').innerHTML=`<div class="kpis">${kpi('players',R.length,`rush + receiving TD · wk ${W}`)}${top?kpi('best rate × end zone',`${tlogo(top.u.team,14)} ${esc(pshort(top.u.player))}`,`${top.own.toFixed(2)} TD/gm × ${top.ratio.toFixed(2)} (${top.def} #${top.rank})`,'g'):''}${kpi('Kalshi priced',priced.length,priced.length?`${(100*mean(priced.map(r=>r.kp))).toFixed(0)}% average yes price`:'no anytime markets for this slate yet')}
       ${(()=>{const e=R.filter(r=>r.edge!=null).sort((a,b)=>Math.abs(b.edge)-Math.abs(a.edge))[0];return e?kpi('largest model − Kalshi gap',`${tlogo(e.u.team,14)} ${esc(pshort(e.u.player))}`,`model ${(100*e.pm).toFixed(0)}% vs ${(100*e.kp).toFixed(0)}% — reference, not a pick`,'a'):''})()}</div>`;
     const th=(k,l,tip)=>`<th data-k="${k}" title="${tip||''}" style="cursor:pointer">${l}${sortK===k?(sortA?' ▲':' ▼'):''}</th>`;
     return `<div class="panel"><table class="mkt"><thead><tr>${th('player','player')}<th>tm</th><th>opp</th><th>slot</th>${th('own',`TD/gm ${LAST_SE}`)}<th>L10 scored</th>${th('allowed','opp TD allowed /gm')}${th('score','rate × zone')}${th('pm','model P(TD)')}${th('kp','Kalshi yes')}<th>bid / ask</th>${th('edge','gap')}</tr></thead><tbody>
@@ -3613,10 +3633,10 @@ function bets11(){const el=$('#bets');const W=G.week;
         <td>${k&&k.total?`<b>${k.total.line}</b> <span class="mini">o${k.total.near_strike} ${(100*+k.total.p_mid).toFixed(0)}%</span>`:'<span class="dim">—</span>'}</td><td>${b.total_line??'—'}</td><td>${b.model_total??'—'}</td>
         <td class="mini">${b.result!=null?`${b.away_score}-${b.home_score}`:''}</td></tr>`}).join('');
     const kcnt=gs.filter(g=>kalGame(W,g[GM.vis],g[GM.home])).length;
-    $('#mkKpi').innerHTML=`<div class="kpis">${kpi('games',gs.length,`wk ${W}`)}${kpi('Kalshi priced',kcnt,'moneyline · spread ladder · total ladder (exchange mids)')}${kpi('DK lines',Object.keys(BG).length,'spread · total · moneyline (DraftKings consensus)')}</div>`;
+    $('#'+px+'mkKpi').innerHTML=`<div class="kpis">${kpi('games',gs.length,`wk ${W}`)}${kpi('Kalshi priced',kcnt,'moneyline · spread ladder · total ladder (exchange mids)')}${kpi('DK lines',Object.keys(BG).length,'spread · total · moneyline (DraftKings consensus)')}</div>`;
     return `<div class="panel"><table class="mkt"><thead><tr><th>kick</th><th>game</th><th>Kalshi win prob</th><th>model win prob</th><th>Kalshi spread</th><th>DK spread</th><th>model spread</th><th>Kalshi total</th><th>DK total</th><th>model total</th><th>final</th></tr></thead><tbody>${rows}</tbody></table>
       <p class="note">Kalshi spread = the favorite's ladder interpolated to the 50% rung · Kalshi total = the over ladder interpolated to 50% (the nearest rung and its price beside it) · model numbers are the game model's, shown as reference</p></div>`}
-  function render(){const O=$('#mkOut');O.innerHTML=cur==='T'?tdTable():cur==='G'?gameTable():playerTable(MKT_BY[cur]||MKT[0]);
+  function render(){const O=$('#'+px+'mkOut');O.innerHTML=cur==='T'?tdTable():cur==='G'?gameTable():playerTable(MKT_BY[cur]||MKT[0]);
     O.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=['player','team'].includes(k)}render()});
     O.querySelectorAll('tr.mkr').forEach(tr=>tr.onclick=e=>{if(e.target.closest('.pp'))return;open=open===tr.dataset.p?null:tr.dataset.p;render()});logoize(O)}
   RR.push(()=>{sortK=cur==='T'?'score':'score';render()})}
@@ -3911,6 +3931,70 @@ const H2H_STATS={
   RB:[['RuY',l=>l[LOG.ry]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rtd]+l[LOG.rectd]]],
   WR:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]],
   TE:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]]};
+/* ---------- Depth Delta (F6): what changed on the depth charts since the previous snapshot, and what it means this week ---------- */
+function depthDelta(){
+  const el=$('#ddelta');if(!el)return;const PV=J.depthPrev;
+  if(!PV){el.innerHTML='<p class="note">only one depth-chart snapshot in the build — the diff appears once a second week is pulled</p>';return}
+  const INJ={'1':'active','0':'Q','-1':'OUT'};const injOrd={'1':0,'0':1,'-1':2};
+  const prev={};PV.rows.forEach(([pl,tm,sl,inj,dep])=>{prev[pl+'|'+tm]={slot:sl,inj:String(inj),depth:+dep||0}});
+  const cur={};UNIVERSE.forEach(u=>{cur[u.player+'|'+u.team]=u});
+  const curByName={};UNIVERSE.forEach(u=>{curByName[u.player]=u});
+  const wk=G.week,D=J.dvp.combined||{};
+  const rowsAll=[];
+  UNIVERSE.forEach(u=>{const k=u.player+'|'+u.team,p=prev[k];const inj=String(u.inj);
+    const kinds=[];let was='';
+    if(!p){const moved=PV.rows.find(r=>r[0]===u.player);if(moved){kinds.push('team');was=`${moved[1]} ${moved[2]}`}else if(u.depth<=2){kinds.push('new')}}
+    else{
+      if(p.inj!==inj)kinds.push(injOrd[inj]>injOrd[p.inj]?'hurt':'back');
+      if(p.slot!==u.slot){const sn=x=>parseInt(String(x).replace(/\D/g,''))||9;const dn=sn(u.slot)>sn(p.slot);if(!(dn&&inj==='-1'))kinds.push(dn?'down':'up');was=p.slot}
+    }
+    if(!kinds.length)return;
+    const d=u.opp&&D[u.opp]?D[u.opp]:null;const comp=d?d.comps[u.grp]:null;
+    const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE);
+    const ppr=Lc.length?Lc.reduce((t,l)=>t+l[LOG.fppr],0)/Lc.length:null;const ug=USG[u.ln||u.player]||{};
+    // who steps in: the man now holding the slot this player used to hold (OUT / demotion), or the man he displaced (promotion)
+    let next='';if(kinds.includes('hurt')&&inj==='-1'){const n=UNIVERSE.find(x=>x.team===u.team&&x.slot===u.slot&&x!==u&&x.inj!=='-1')||UNIVERSE.find(x=>x.team===u.team&&x.grp===u.grp&&x!==u&&x.inj!=='-1'&&x.depth===u.depth+1);if(n)next=n.player}
+    else if(kinds.includes('down')&&was){const n=UNIVERSE.find(x=>x.team===u.team&&x.slot===was);if(n)next=n.player}
+    rowsAll.push({u,kinds,was,inj,injWas:p?p.inj:'',comp,ppr,snp:ug.snp==null?null:ug.snp,next,
+      kick:(g=>g?slateChip(g[GM.slate]):'<span class="dim">—</span>')(gameOf(u.team,wk)),kickord:(g=>g?SLATE_ORDER.indexOf(g[GM.slate]):99)(gameOf(u.team,wk))});
+  });
+  // off the chart entirely (cut, traded away, IR): on the previous snapshot, nowhere on the current one
+  const gone=PV.rows.filter(r=>!curByName[r[0]]&&(+r[4]||9)<=2).map(r=>({u:{player:r[0],team:r[1],slot:r[2],grp:SLOTG(r[2]),inj:String(r[3]),depth:+r[4]||0,pos:r[2].replace(/[0-9+]/g,''),opp:'',oppRaw:''},kinds:['off'],was:r[2],inj:String(r[3]),injWas:String(r[3]),comp:null,ppr:null,snp:null,next:(UNIVERSE.find(x=>x.team===r[1]&&x.slot===r[2])||{}).player||'',kick:'',kickord:99}));
+  const KINDS=[['hurt','injury worse'],['back','injury cleared'],['up','promoted'],['down','demoted'],['new','new on chart'],['team','changed teams'],['off','off the chart']];
+  const KCOL={hurt:'var(--red)',back:'var(--green)',up:'var(--green)',down:'var(--red)',new:'var(--cyan)',team:'var(--acc)',off:'var(--dim)'};
+  const teams=[...new Set(rowsAll.concat(gone).map(r=>r.u.team))].sort();
+  el.innerHTML=`<div class="kpis" id="ddKpi"></div><div class="controls">
+    <span class="tabs" id="ddKinds"><button data-k="" class="on">all</button>${KINDS.map(([k,l])=>`<button data-k="${k}">${l}</button>`).join('')}</span>
+    <select id="ddTeam"><option value="">all teams</option>${teams.map(t=>`<option>${t}</option>`).join('')}</select>
+    <select id="ddDepth"><option value="2" selected>top 2 depths</option><option value="1">starters only</option><option value="">every depth</option></select>
+    <input id="ddQ" placeholder="search player..." size="15">
+    <span class="note">every body whose slot, injury flag or team is different from the <b>${PV.date}</b> chart, with what it means this week: the opponent, how soft that opponent is to his new slot (Ψ, 1 = allows the most), his own PPR per game and snap share this season, and who steps in behind an OUT or demoted player &middot; every column sorts &middot; click a name for his card</span>
+  </div><div id="ddTbl"></div>`;
+  let sk='kind',sa=true;
+  const kindOrd=r=>KINDS.findIndex(([k])=>r.kinds.includes(k));
+  const S={kind:r=>kindOrd(r),team:r=>r.u.team,player:r=>r.u.player,pos:r=>r.u.pos,slot:r=>r.u.slot,was:r=>r.was,inj:r=>injOrd[r.inj]??9,opp:r=>r.u.opp||'zz',kick:r=>r.kickord,comp:r=>r.comp==null?(sa?99:-1):r.comp,ppr:r=>r.ppr==null?(sa?1e9:-1):r.ppr,snp:r=>r.snp==null?(sa?1e9:-1):r.snp,next:r=>r.next||'zz'};
+  function render(){
+    const kind=$('#ddKinds button.on').dataset.k,tm=$('#ddTeam').value,dep=$('#ddDepth').value,q=$('#ddQ').value.toLowerCase();
+    let R=rowsAll.concat(gone).filter(r=>(!kind||r.kinds.includes(kind))&&(!tm||r.u.team===tm)&&(!dep||r.u.depth<=+dep||r.kinds.includes('off'))&&(!q||r.u.player.toLowerCase().includes(q))&&inF(r.u.team));
+    R.sort((a,b)=>{const x=S[sk](a),y=S[sk](b);return (x<y?-1:x>y?1:0)*(sa?1:-1)||kindOrd(a)-kindOrd(b)||(b.ppr||0)-(a.ppr||0)});
+    const n=k=>rowsAll.concat(gone).filter(r=>r.kinds.includes(k)&&r.u.depth<=2).length;
+    $('#ddKpi').innerHTML=kpi('changes',String(R.length),`vs the ${PV.date} chart · ${J.depthDate}`)+kpi('ruled out',String(rowsAll.filter(r=>r.kinds.includes('hurt')&&r.inj==='-1'&&r.u.depth<=2).length),'top-2 bodies now OUT','r')+kpi('promoted',String(n('up')),'moved up a slot','g')+kpi('cleared',String(n('back')),'injury flag improved','g')+kpi('new starters',String(rowsAll.filter(r=>(r.kinds.includes('new')||r.kinds.includes('team'))&&r.u.depth===1).length),'first on a chart, or a new team','');
+    const th=(k,l,t)=>`<th data-k="${k}" class="${sk===k?(sa?'srt-asc':'srt-desc'):''}" title="${t||''}">${l}</th>`;
+    const chip=r=>r.kinds.map(k=>`<span class="badge" style="background:${KCOL[k]};color:#000">${KINDS.find(x=>x[0]===k)[1]}</span>`).join(' ');
+    const injc=r=>r.inj==='-1'?'<span class="injm1">OUT</span>':r.inj==='0'?'<span class="inj0">Q</span>':'<span class="dim">active</span>';
+    $('#ddTbl').innerHTML=R.length?`<table class="lab2 dd"><thead><tr>${th('player','Player')}${th('team','Tm')}${th('pos','Pos')}${th('kind','change')}${th('was','was','slot or flag on the previous chart')}${th('slot','now')}${th('inj','flag')}${th('next','steps in','the man now holding the slot he left (OUT / demoted) or the one he displaced')}${th('opp','Opp')}${th('kick','Kick')}${th('comp','Ψ','how soft this week\'s opponent is to his current slot · mean rank of its stats, 1 = allows the most')}${th('ppr','PPR/g','his own PPR per game this season')}${th('snp','snp%','season snap share')}</tr></thead><tbody>
+      ${R.map(r=>`<tr><td class="plink" data-p="${esc(r.u.player)}">${esc(r.u.player)}</td><td>${tcell(r.u.team)}</td><td style="color:${POSC[r.u.pos]||'inherit'}">${r.u.pos}</td><td>${chip(r)}</td>
+        <td class="mini">${[r.was&&r.was!==r.u.slot?esc(r.was):'',(r.kinds.includes('hurt')||r.kinds.includes('back'))?(INJ[r.injWas]||''):''].filter(Boolean).join(' · ')||'<span class="dim">—</span>'}</td><td>${r.kinds.includes('off')?'<span class="dim">off chart</span>':slotchip(r.u.dslot||r.u.slot)}</td><td>${injc(r)}</td>
+        <td class="mini">${r.next?`<span class="plink" data-p="${esc(r.next)}">${esc(r.next)}</span>`:'<span class="dim">—</span>'}</td><td>${r.u.oppRaw?oppcell(r.u.oppRaw):'<span class="dim">—</span>'}</td><td>${r.kick}</td>
+        <td class="md">${r.comp!=null?psi(r.comp):'<span class="dim">—</span>'}</td><td class="r mono">${r.ppr==null?'<span class="dim">—</span>':r.ppr.toFixed(1)}</td><td class="mini">${r.snp==null?'—':(100*r.snp).toFixed(0)+'%'}</td></tr>`).join('')}</tbody></table>`:'<p class="note">nothing changed under these filters</p>';
+    $('#ddTbl').querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(sk===k)sa=!sa;else{sk=k;sa=!(k==='comp'||k==='ppr'||k==='snp')}render()});
+    $('#ddTbl').querySelectorAll('.plink').forEach(td=>td.onclick=()=>playerPop(td.dataset.p));
+    logoize($('#ddTbl'));
+  }
+  $('#ddKinds').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#ddKinds').children].forEach(x=>x.classList.toggle('on',x===b));render()};
+  ['ddTeam','ddDepth'].forEach(i=>$('#'+i).onchange=render);$('#ddQ').oninput=render;
+  render();RR.push(render);
+}
 /* ---------- Head to Head (F3 Players): the Matchup Lab's table, with the opponent block replaced by what the player has actually done against this week's opponent ---------- */
 const H2H_COLS=[['PaY',l=>l[LOG.py],1,'passing yards'],['PaTD',l=>l[LOG.ptd],2,'passing TDs'],['RuY',l=>l[LOG.ry],1,'rushing yards'],['Tgt',l=>l[LOG.tgt],1,'targets'],['Rec',l=>l[LOG.rec],1,'receptions'],['RcY',l=>l[LOG.recy],1,'receiving yards'],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2,'rushing + receiving TDs']];
 const H2H_VIS={QB:[0,1,2,6],RB:[2,3,4,5,6],WR:[3,4,5,6],TE:[3,4,5,6],ALL:[0,1,2,4,5,6]};
@@ -4226,7 +4310,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
