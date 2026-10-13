@@ -215,6 +215,10 @@ def picks(lg, C, games, S):
     allp = pd.concat([old, pd.DataFrame(new)], ignore_index=True) if new else old.copy()
     if len(allp): allp = allp.drop_duplicates(subset=['type', 'ref', 'side'], keep='first').reset_index(drop=True)
     done = {f"{r.away}@{r.home}|{r.date}": r for r in S[S.done & S.home_score.notna()].itertuples()}
+    # 'actual' holds a score string for ML ("24-17") and a number for ATS/totals; once a read-back ledger has typed the
+    # column float, writing the string raised pandas' LossySetitemError and killed every sport's build (2026-10-10)
+    for c in ('result', 'actual'):
+        if c in allp.columns: allp[c] = allp[c].astype(object)
     for i, r in allp.iterrows():
         if isinstance(r.result, str) and r.result in ('W', 'L', 'P'): continue
         key = f"{r.game}|{r.date}"; g = done.get(key)

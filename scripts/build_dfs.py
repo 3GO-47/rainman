@@ -204,7 +204,11 @@ def main(week=None):
     ent = pd.read_csv(ent_path) if os.path.exists(ent_path) else pd.DataFrame()
     smm = pd.read_csv(sum_path) if os.path.exists(sum_path) else pd.DataFrame()
     new_e, new_s = [], []
+    if not capped:
+        print(f'dfs: wk {week} · no data/raw/dk_salaries_wk{week}.csv — nothing frozen. A lineup with no cap and no DST is not a '
+              f'DraftKings entry, so it does not go on the record (scripts/local/pull_dk_salaries.md has the salary route); grading only')
     for name, slates in SLATES.items():
+        if not capped: break
         if len(ent) and ((ent.week == week) & (ent.slate == name)).any(): continue
         pool = df if slates is None else df[df.slate.isin(slates)]
         if pool.empty: continue

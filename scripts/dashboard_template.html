@@ -783,6 +783,10 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .lgrid.full table.lgt th[data-k="td"]{letter-spacing:0;padding-left:1px;padding-right:1px}
 .lgrid.full table.lgt td.tdg{font:600 10.5px var(--mono);color:var(--txt);font-variant-numeric:tabular-nums}
 .lgrid.full table.lgt td.tdg.stale{color:var(--dim2);font-weight:500}
+.lgrid.hh td.hn{text-align:right;font:600 10.5px var(--mono);color:var(--dim)}
+.lgrid.hh td.hp{text-align:right;white-space:nowrap}.lgrid.hh td.hp b{font:700 11px var(--mono);color:var(--txt)}
+.lgrid.hh td.hp i{font-style:normal;font-size:9px;margin-left:3px}.lgrid.hh td.hp.rise b,.lgrid.hh td.hp.rise i{color:var(--green)}.lgrid.hh td.hp.fall b,.lgrid.hh td.hp.fall i{color:var(--red)}
+.lgrid.hh table.lgt td.op{text-align:right;font:500 11px var(--mono)}
 .lgcol{background:var(--panel);border:1px solid var(--edge);border-radius:10px;overflow:hidden;min-width:0}
 .lgcol>h3{margin:0;padding:8px 11px;border-bottom:1px solid var(--edge);background:var(--s2);
  font:600 11.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;display:flex;align-items:center;gap:7px}
@@ -894,7 +898,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div></div>
+<div id="test" hidden><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1156,7 +1160,8 @@ const SECTIONS=[
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
-   {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'}]}];
+   {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'},
+   {id:'h2h',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent \u2014 his own averages in every prior meeting we have logs for, four columns by position',c:'test',sub:'h2h'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1172,7 +1177,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['labgrid','gameview','tdgridTest'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
+  if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1184,6 +1189,7 @@ const INTRO={
  projections:{what:'Every starter ranked by matchup. The lanes place each player from soft to stingy; the quadrants list the best plays per position; the full board has every market.',how:['dot size = volume (attempts, carries, targets)','colored number = the opponent\'s rank allowing that stat to his slot (1 = allows the most)','bold = median projection, small range = 10th–90th percentile','low-usage players are hidden by default']},
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
  tdgrid:{how:['the F6 draft of the TD Board, left exactly as it was \u2014 columns scroll inside themselves and the depth filter is the original 1st-string / top-2 / all select','the live version is F2 Matchups \u2192 TD Board']},
+ h2h:{how:['every number is the player\u2019s own per-game average in the games he has already played against this week\u2019s opponent, any season, whichever team he was on','n = how many of those games there are \u2014 a 1 is one game, read it that way','PPR \u25b2 / \u25bc = at least 10% above / below his average over every logged game','the slot chips pick which depths appear; the minimum hides thin samples','columns sort on their own; click a name for his card and the full log']},
  tdboard:{how:['the fields pane gives the three softest end zones for each role this week','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','TD/G is the player\u2019s own touchdowns per game this season \u2014 dim means he has not played yet this year, so it is his whole log','a QB has two TD-allowed stats \u2014 pick which one his column reads; TD/G follows the same pick','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
@@ -3889,6 +3895,78 @@ function tdGrid(root,px,legacy){
   RR.push(all);
 }
 
+/* ---------------- Head to Head (F6 TEST draft) — what each starter has actually done against this week's opponent ----------------
+   The Lab and the TD Grid answer "what does this defense give up to his slot". This answers the narrower, blunter
+   question: when THIS player has faced THIS defense before — any season we have logs for, whichever team he was
+   on at the time — what did he put up? One row per slot owner, four columns by position, the Lab's own layout.
+   Every figure is a straight mean of his game-log rows where opp == this week's opponent; n is how many such
+   games exist. PPR carries a ▲/▼ against his own average over every logged game, so the row says at a glance
+   whether this matchup has historically been better or worse than his norm. No model, no blending: the logs. */
+const H2H_STATS={
+  QB:[['PaY',l=>l[LOG.py]],['PaTD',l=>l[LOG.ptd]],['RuY',l=>l[LOG.ry]],['RuTD',l=>l[LOG.rtd]]],
+  RB:[['RuY',l=>l[LOG.ry]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rtd]+l[LOG.rectd]]],
+  WR:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]],
+  TE:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]]};
+function h2hGrid(){
+  const live=new Set(TD_SLOTS);
+  $('#h2h').innerHTML=`<div class="controls">
+    <span class="chips" id="hhSlots" title="which depth slots the board covers — click to toggle, ALL for every body on the chart">
+      <button data-s="">all</button>${TD_SLOTS.map(s=>`<button data-s="${s}" class="on">${s}</button>`).join('')}</span>
+    <select id="hhSe" title="which seasons of history count"><option value="">all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option>${ALL_SE.slice().reverse().map(s=>`<option value="${s}">${s} only</option>`).join('')}</select>
+    <select id="hhInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="hhMin" title="hide players with fewer prior meetings than this"><option value="0">any history</option><option value="1" selected>1+ prior game</option><option value="2">2+ prior games</option><option value="3">3+ prior games</option></select>
+    <input id="hhQ" placeholder="search player..." size="15">
+    <span class="note">head to head. Every number is the player's <b>own average in the games he has already played against this week's opponent</b> — any season we have logs for, whichever team he was on — and <b>n</b> is how many of those games exist. PPR carries ▲ / ▼ against his average over every logged game, so a row says at a glance whether this defense has historically been a better or worse day than his norm. Thin samples are thin: a 1 next to a big number is one game. Columns sort on their own; click a name for his card and the full log.</span>
+  </div>
+  <div class="lgrid full hh">${TPOS.map(p=>`<section class="lgcol"><h3>${posIcon(p,12)} ${p} <span class="gl">vs this week's opponent · his own games</span><span class="f" id="hhN${p}"></span></h3><div id="hhB${p}"></div></section>`).join('')}</div>`;
+  const sort={};TPOS.forEach(p=>sort[p]={k:'ppr',a:false});
+  function col(p){
+    const st=sort[p],se=$('#hhSe').value,min=+$('#hhMin').value;
+    const o={hin:$('#hhInj').value,q:$('#hhQ').value};if(live.size)o.slots=live;
+    const S=H2H_STATS[p];
+    const R=tRows(p,'combined',o).map(x=>{
+      const L=PLOGS[x.u.ln||x.u.player]||[];
+      const vs=x.opp?L.filter(l=>l[LOG.opp]===x.opp&&(!se||l[LOG.season]===+se)):[];
+      const all=se?L.filter(l=>l[LOG.season]===+se):L;
+      const mean=(a,f)=>a.length?a.reduce((t,l)=>t+f(l),0)/a.length:null;
+      return Object.assign({},x,{n:vs.length,vals:S.map(([,f])=>mean(vs,f)),ppr:mean(vs,l=>l[LOG.fppr]),base:mean(all,l=>l[LOG.fppr]),gpAll:all.length,
+        last:vs.length?vs[vs.length-1]:null})}).filter(x=>x.n>=min);
+    R.sort((a,b)=>{let x,y;const miss=st.a?1e9:-1e9;
+      if(st.k==='ppr'){x=a.ppr==null?miss:a.ppr;y=b.ppr==null?miss:b.ppr}
+      else if(st.k==='n'){x=a.n;y=b.n}
+      else if(st.k[0]==='h'){const i=+st.k.slice(1);x=a.vals[i]==null?miss:a.vals[i];y=b.vals[i]==null?miss:b.vals[i]}
+      else{x=tSortVal(a,st.k,st.a);y=tSortVal(b,st.k,st.a)}
+      return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
+    $('#hhN'+p).textContent=R.length+(R.length===1?' player':' players');
+    const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    const wname=27,wopp=15,wn=8,wppr=13,wnum=((100-wname-wopp-wn-wppr)/S.length).toFixed(2);
+    const num=v=>v==null?'<span class="dim">·</span>':tNum(v);
+    const pprCell=x=>{if(x.ppr==null)return '<td class="md hp"><span class="dim">·</span></td>';
+      const d=x.base!=null&&x.base>0?x.ppr/x.base-1:null;const cls=d==null?'':d>=.1?'rise':d<=-.1?'fall':'';
+      const tip=`${x.ppr.toFixed(1)} PPR per game vs ${x.opp} over ${x.n} game${x.n===1?'':'s'}${x.base!=null?` · his average over all ${x.gpAll} logged games: ${x.base.toFixed(1)}`:''}${x.last?` · last meeting ${x.last[LOG.season]} wk ${x.last[LOG.week]}`:''}`;
+      return `<td class="md hp ${cls}" title="${esc(tip)}"><b>${x.ppr.toFixed(1)}</b>${d==null?'':`<i>${d>=0?'▲':'▼'}</i>`}</td>`};
+    $('#hhB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%"><col style="width:${wopp}%"><col style="width:${wn}%">${S.map(()=>`<col style="width:${wnum}%">`).join('')}<col style="width:${wppr}%"></colgroup><thead>
+      <tr class="hd">${th('player','Player')}${th('opp','Opp',"this week's opponent")}${th('n','n','how many games he has played against this opponent in the logs','md')}
+      ${S.map(([h],i)=>th('h'+i,h,h+' per game in those meetings','op'+(i===0?' gs':''))).join('')}
+      ${th('ppr','PPR','PPR points per game in those meetings · ▲ at least 10% above his overall average, ▼ at least 10% below','md gs')}</tr></thead><tbody>
+      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
+        <td>${x.opp?oppcell(x.oppRaw):'<span class="dim">bye</span>'}</td>
+        <td class="md hn">${x.n||'<span class="dim">0</span>'}</td>
+        ${x.vals.map((v,i)=>`<td class="op${i===0?' gs':''}" title="${v==null?'no prior meetings':S[i][0]+' '+v.toFixed(2)+' per game over '+x.n+' game'+(x.n===1?'':'s')}">${num(v)}</td>`).join('')}
+        ${pprCell(x)}</tr>`).join('')||`<tr><td colspan="${S.length+4}" class="dim">nobody here has faced this week's opponent before${min?' — drop the minimum to see the rest':''}</td></tr>`}</tbody></table>`;
+    $('#hhB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
+      if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=h.dataset.k==='player'||h.dataset.k==='opp'}col(p)});
+    tWire($('#hhB'+p));
+    const sec=$('#hhB'+p).closest('.lgcol'),h=sec&&sec.querySelector('h3');if(h)sec.style.setProperty('--h3h',h.offsetHeight+'px');
+  }
+  const all=()=>TPOS.forEach(col);
+  ['hhSe','hhInj','hhMin'].forEach(i=>$('#'+i).onchange=all);$('#hhQ').oninput=all;
+  $('#hhSlots').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
+    if(!v)live.clear(); else live.has(v)?live.delete(v):live.add(v);
+    $('#hhSlots').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));all()});
+  all();RR.push(all);
+}
+
 /* ---------------- Game View — one game, everything the site knows about it ----------------
    Built out of the live pieces rather than copies: the card is the Matchups card, the depth
    tables are the Depth Charts tables, the scheme drills are the Intel drills. They are handed
@@ -4049,7 +4127,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',h2hGrid]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();

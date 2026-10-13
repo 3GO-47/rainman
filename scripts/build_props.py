@@ -25,9 +25,20 @@ MARKET = {  # market -> (game_log columns to sum, DvP stat for the player's slot
     'Total Receiving Yards': (['rec_yds'], '{g} RecY'), 'Total Receptions': (['rec'], '{g} Recep'),
     'Total Rushing Plus Receiving Yards': (['rush_yds', 'rec_yds'], 'RB R+R'),
 }
-files = sorted(glob.glob('data/raw/props_2026_wk*_*.txt'))
-if not files: print('no props files'); sys.exit()
+def _has_pb(f):
+    with open(f, encoding='utf-8') as h: return any(l.startswith('PB|') for l in h)
+files = [f for f in sorted(glob.glob('data/raw/props_2026_wk*_*.txt')) if _has_pb(f)]   # a GM-only file is a probe that found nothing
+OUT = 'data/processed/props_current.csv'
+def _retire(why):
+    # stale lines must not be shown as this week's markets; build_bets reads the Odds API props on its own
+    if os.path.exists(OUT): os.remove(OUT)
+    print(f'props: {why} — {OUT} removed; the Odds API props (data/raw/odds_api/props_current.csv) carry the Markets tab'); sys.exit()
+if not files: _retire('no ESPN props file with markets')
 src = files[-1]; week = int(re.search(r'wk(\d+)', src).group(1))
+try:
+    _cur = int(pd.read_csv('data/processed/matchups_current.csv', usecols=['week']).week.iloc[0])
+    if week < _cur: _retire(f'newest ESPN props are week {week}, the slate is week {_cur}')
+except (FileNotFoundError, ValueError, IndexError): pass
 games, props = {}, []
 for line in open(src, encoding='utf-8'):
     f = line.rstrip('\n').split('|')

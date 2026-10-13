@@ -7,7 +7,7 @@ Each sub-command writes the same raw file the recipe wrote, so every downstream 
 Usage: python scripts/local/pull_espn.py depth|props|slate|ncaa [...]"""
 import datetime, json, os, re, sys
 sys.path.insert(0, os.path.dirname(__file__))
-from common import get_json, log, write_lines, TODAY, TODAY_S, ESPN_NFL
+from common import get, get_json, log, write_lines, TODAY, TODAY_S, ESPN_NFL
 
 SITE = 'https://site.api.espn.com/apis/site/v2/sports'
 CORE = 'https://sports.core.api.espn.com/v2/sports'
@@ -18,51 +18,65 @@ def season_year():
     return TODAY.year if TODAY.month >= 3 else TODAY.year - 1
 
 # ---------------------------------------------------------------- depth charts
+# ESPN retired the core-API depthcharts endpoint (every season now answers {"error":{"code":404}} — first seen
+# 2026-10-08, confirmed against 2025 too). The team depth page is server-rendered and carries the same data as
+# JSON in window['__espnfitt__'] -> page.content.depth.dethTeamGroups: one group per unit (offense, defense,
+# special teams), each a list of rows [POS, athlete, athlete, ...] in depth order, every athlete tagged with
+# its injury codes. The offense group is the one that starts with QB. Output format is unchanged:
+# TEAM|POSROW|DEPTH|NAME|TAG, WR rows numbered WR1..WR3 in page order. An empty pull is never written —
+# the old 0-row snapshots were what starved build_depth_chart — it just returns None and says so.
+WEB = 'https://www.espn.com/nfl/team/depth/_/name'
+INJ = {'P': '', 'Q': 'Q', 'D': 'D', 'O': 'O', 'IR': 'IR', 'PUP': 'PUP', 'SUS': 'SUSP', 'SUSP': 'SUSP', 'NFI': 'NFI'}
 def depth():
-    y = season_year(); lines = []
-    for team, tid in ESPN_NFL.items():
+    lines = []
+    for team in ESPN_NFL:
         try:
-            ro = get_json(f'{SITE}/football/nfl/teams/{tid}/roster', pace=1.0)
-            names, tags = {}, {}
-            for grp in ro.get('athletes', []):
-                for a in grp.get('items', []):
-                    names[str(a['id'])] = a.get('displayName', '')
-                    t = ''
-                    for inj in a.get('injuries', []) or []:
-                        t = TAG.get(inj.get('status', ''), (inj.get('status') or '')[:1].upper()) or t
-                    if grp.get('position') == 'injuredReserveOrOut' and not t: t = 'IR'
-                    if grp.get('position') == 'suspended': t = 'SUSP'
-                    tags[str(a['id'])] = t
-            dc = get_json(f'{CORE}/football/nfl/seasons/{y}/teams/{tid}/depthcharts', pace=1.0)
-            off = next((it for it in dc.get('items', []) if 'qb' in (it.get('positions') or {})), None)
-            if not off: log(f'  {team}: no offense formation'); continue
-            for key, P in off['positions'].items():
-                pos = (P.get('position') or {}).get('abbreviation', key.upper())
+            html = get(f'{WEB}/{team.lower()}', pace=1.0)
+            m = re.search(r"window\['__espnfitt__'\]\s*=\s*(\{.*?\});\s*</script>", html, re.S)
+            if not m: raise ValueError('no __espnfitt__ blob')
+            groups = json.loads(m.group(1))['page']['content']['depth']['dethTeamGroups']
+            off = next((g for g in groups if g.get('rows') and g['rows'][0] and g['rows'][0][0] == 'QB'), None)
+            if not off: raise ValueError('no offense group')
+            wr = 0
+            for row in off['rows']:
+                pos = row[0]
                 if pos not in ('QB', 'RB', 'WR', 'TE', 'FB'): continue
-                ath = P.get('athletes', [])
-                slots = sorted({a.get('slot', 1) for a in ath})
-                for si, slot in enumerate(slots, 1):
-                    row = sorted((a for a in ath if a.get('slot', 1) == slot), key=lambda a: a.get('rank', 99))
-                    label = f'WR{si}' if pos == 'WR' else pos
-                    for d, a in enumerate(row, 1):
-                        aid = (a.get('athlete') or {}).get('$ref', '').split('/athletes/')[-1].split('?')[0]
-                        nm = names.get(aid)
-                        if not nm:
-                            try: nm = get_json(f'{CORE}/football/nfl/athletes/{aid}', pace=0.5).get('displayName', '')
-                            except Exception: nm = ''
-                        if nm: lines.append('|'.join([team, label, str(d), nm, tags.get(aid, '')]))
+                if pos == 'WR': wr += 1
+                label = f'WR{wr}' if pos == 'WR' else pos
+                for d, a in enumerate(row[1:], 1):
+                    nm = (a or {}).get('name') or (a or {}).get('displayName') or ''
+                    if not nm: continue
+                    tag = ''
+                    for code in (a.get('injuries') or []):
+                        c = code if isinstance(code, str) else (code or {}).get('abbreviation', '')
+                        tag = INJ.get(c, c) or tag
+                    lines.append('|'.join([team, label, str(d), nm, tag]))
         except Exception as e:
             log(f'  {team}: depth failed {str(e)[:80]}')
+    nteams = len({l.split('|')[0] for l in lines})
+    if nteams < 24:
+        log(f'depth: only {nteams} teams parsed ({len(lines)} rows) — NOT writing a snapshot; the last good one stands')
+        return None
     out = f'data/raw/espn_depth_{TODAY_S}.txt'
     write_lines(out, lines)
-    log(f'depth: {len(lines)} rows / {len({l.split("|")[0] for l in lines})} teams -> {out}')
-    return out if lines else None
+    log(f'depth: {len(lines)} rows / {nteams} teams -> {out}')
+    return out
 
 # ---------------------------------------------------------------- DraftKings props (ESPN odds provider 100)
 def props(week=None):
+    # The whole-season scoreboard (dates=YYYY) is calendar-year and capped at 100 events, so on 2026-10-10 it
+    # answered with January's week 18. Ask the live scoreboard instead; if every game it shows is final we are
+    # between weeks and the next one is the one to price. propBets itself has been answering empty since ESPN
+    # retired its core API in Oct 2026 — the Odds API (fetch_odds_api.py) is the live props source now; this
+    # stays as a probe and writes nothing when it finds nothing, so build_props never sees a junk file.
     y = season_year()
-    sb = get_json(f'{SITE}/football/nfl/scoreboard?seasontype=2&dates={y}' + (f'&week={week}' if week else ''), pace=1.0)
-    week = week or sb.get('week', {}).get('number')
+    if not week:
+        sb0 = get_json(f'{SITE}/football/nfl/scoreboard', pace=1.0)
+        week = (sb0.get('week') or {}).get('number')
+        ev0 = sb0.get('events') or []
+        if week and ev0 and all(((e.get('status') or {}).get('type') or {}).get('completed') for e in ev0): week += 1
+    if not week: log('props: no current week on the scoreboard'); return None
+    sb = get_json(f'{SITE}/football/nfl/scoreboard?seasontype=2&week={week}', pace=1.0)
     lines, n = [], 0
     for e in sb.get('events', []):
         c = e['competitions'][0]
@@ -86,10 +100,13 @@ def props(week=None):
                 n += 1
             if page >= int(pb.get('pageCount', 1) or 1): break
             page += 1
+    if not n:
+        log(f'props: week {week} · {sum(1 for l in lines if l.startswith("GM"))} games · 0 markets — nothing written (ESPN propBets is empty; the Odds API carries props now)')
+        return None
     out = f'data/raw/props_{y}_wk{week}_{TODAY_S}.txt'
     write_lines(out, lines)
     log(f'props: week {week} · {sum(1 for l in lines if l.startswith("GM"))} games · {n} markets -> {out}')
-    return out if n else None
+    return out
 
 # ---------------------------------------------------------------- multi-sport slate
 SLATE = [('nfl', 'football/nfl', ''), ('cfb', 'football/college-football', '&groups=80'), ('nba', 'basketball/nba', ''), ('ncaab', 'basketball/mens-college-basketball', '&groups=50'),
@@ -104,6 +121,7 @@ def slate(days=8):
             except Exception as e:
                 log(f'  slate {lg} {d}: {str(e)[:60]}'); continue
             for e in sb.get('events', []):
+              try:
                 if e['id'] in seen: continue
                 seen.add(e['id'])
                 c = e['competitions'][0]
@@ -114,11 +132,13 @@ def slate(days=8):
                     tm = t.get('team', {}); rk = (t.get('curatedRank') or {}).get('current', '')
                     return [str(tm.get('id', '')), tm.get('abbreviation', ''), tm.get('displayName', '').replace('|', '/'), next((r.get('summary', '') for r in t.get('records', []) if r.get('type') == 'total'), ''),
                             (tm.get('logo') or '').replace('https://a.espncdn.com/i/teamlogos/', ''), '' if rk in ('', 99, '99') else str(rk)]
-                od = (c.get('odds') or [{}])[0]
-                rows.append('|'.join(['G', lg, e['id'], e['date'].replace(':00Z', 'Z'), (e.get('status') or {}).get('type', {}).get('name', '')] + T('away') + T('home') +
+                od = (c.get('odds') or [{}])[0] or {}
+                rows.append('|'.join(['G', lg, e['id'], e['date'].replace(':00Z', 'Z'), ((e.get('status') or {}).get('type') or {}).get('name', '')] + T('away') + T('home') +
                                      [((c.get('venue') or {}).get('fullName') or '').replace('|', '/'), ','.join(b for bc in c.get('broadcasts', []) for b in bc.get('names', [])),
                                       od.get('details', ''), str(od.get('overUnder', '')), str((e.get('week') or {}).get('number', '')), str(st), '1' if c.get('neutralSite') else '0',
-                                      (od.get('provider') or {}).get('name', ''), ((c.get('notes') or [{}])[0].get('headline') or '').replace('|', '/')]))
+                                      (od.get('provider') or {}).get('name', ''), (((c.get('notes') or [{}])[0] or {}).get('headline') or '').replace('|', '/')]))
+              except Exception as ex:                         # one malformed event (a null odds/notes/status block) used to abort the whole slate
+                log(f'  slate {lg} event {e.get("id")}: {type(ex).__name__} {str(ex)[:60]}')
     out = f'data/raw/slate_all_{TODAY_S}.txt'
     write_lines(out, rows, f'# multi-sport slate · pulled {TODAY_S} locally (scripts/local/pull_espn.py slate) · preseason rows dropped')
     log(f'slate: {len(rows)} games -> {out}')

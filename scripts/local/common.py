@@ -57,10 +57,18 @@ def write_lines(path, lines, header=None):
         f.write('\n'.join(lines) + ('\n' if lines else ''))
 
 def run(cmd, check=True):
+    # Children print the site's own glyphs (·, ≥, Ψ); under Task Scheduler there is no console and Windows falls
+    # back to cp1252, where ≥ raises UnicodeEncodeError and the whole script reports FAILED with no reason in the
+    # log — build_arb.py did exactly that on every markets run from 2026-10-08. Force UTF-8 for the child and keep
+    # the tail of its stderr, so a failure says why.
     import subprocess
     log('run: ' + ' '.join(cmd))
-    r = subprocess.run([sys.executable] + cmd)
-    if check and r.returncode: raise RuntimeError(f'FAILED: {cmd}')
+    env = dict(os.environ, PYTHONIOENCODING='utf-8', PYTHONUTF8='1')
+    r = subprocess.run([sys.executable] + cmd, env=env, stderr=subprocess.PIPE, text=True, encoding='utf-8', errors='replace')
+    if r.returncode:
+        tail = [l for l in (r.stderr or '').strip().splitlines() if l.strip()][-4:]
+        for l in tail: log('    ' + l[:200])
+        if check: raise RuntimeError(f'FAILED: {cmd}')
     return r.returncode
 
 # ESPN NFL team ids (site + core API) and the abbreviations the rest of RAINMAN uses

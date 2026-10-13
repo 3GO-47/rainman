@@ -118,6 +118,8 @@ def main():
             imp.append({**base, 'kind': 'prob', 'line': '', 'p_mid': pts[0][1], 'p_bid': pts[0][2], 'p_ask': pts[0][3]})
         elif series in ('TD', 'FIRSTTD'):
             for s, mid, bid, ask, v in pts:
+                # a TD rung with no strike (Kalshi started shipping those 2026-10-10) is the plain anytime market, i.e. the 0.5 rung
+                if s is None: s = 0.5
                 imp.append({**base, 'market': market if s == 0.5 else f'{market}_{int(s + 0.5)}plus', 'kind': 'prob', 'line': s, 'p_mid': mid, 'p_bid': bid, 'p_ask': ask})
         else:
             ln = implied([(s, m) for s, m, *_ in pts])

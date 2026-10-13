@@ -48,8 +48,11 @@ def main():
     today = str(datetime.date.today())
     with open(P + f'depth_charts_{today}.csv', 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=['player', 'team', 'slot', 'injury', 'pos_row', 'depth', 'player_id']); w.writeheader(); w.writerows(depth)
+    keep = os.path.normpath(P + f'depth_charts_{today}.csv')
     for old in glob.glob(P + 'depth_charts_*.csv'):
-        if old != P + f'depth_charts_{today}.csv': os.remove(old)   # usage snapshots are fully reproducible from the logs
+        # normpath on both sides: on Windows glob hands back backslashes, the literal has a forward slash, and the
+        # plain != compare deleted today's file along with the old ones (2026-10-10), leaving no snapshot at all
+        if os.path.normpath(old) != keep: os.remove(old)   # usage snapshots are fully reproducible from the logs
     sched = {r['team']: r for r in csv.DictReader(open(P + f'schedule_{SEASON}.csv', encoding='utf-8'))}
     dvp = pd.read_csv(P + 'dvp_combined.csv').set_index('defense')
     out = []

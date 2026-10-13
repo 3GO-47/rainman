@@ -29,8 +29,12 @@ So the salaries come through a site that republishes DK's posted numbers for eve
 * The page's **slate** `<select name="dgi">` lists every DK draft group for the week by name —
   `Main Slate (11 games)`, `Early Only (8 games)`, `Afternoon Only (3 games)`, `Primetime (2 games)`,
   `Thu-Mon (15 games)`, plus one Showdown per game. Those map onto `SLATES` in `build_dfs.py`.
-* Pick the **widest** classic slate (`Thu-Mon`) — it carries every player of the week, and DK posts the
-  same classic salary across the week's classic slates.
+* Pick the **widest** classic slate (`Thu-Mon`) — it carries every player of the week that the page
+  lists, and DK posts the same classic salary across the week's classic slates.
+* Coverage caveat: the page lists the players it projects, not DK's whole lobby — ~260 for a 15-game week
+  against the ~400 DK actually posts. Every starter DK lists is there (week 5: 30 QBs, one per team); what is
+  missing is deep bench and the injured, whom DK does not post either. So a starter with no salary on the
+  DFS tab is almost always a player DK itself has pulled (wk 5: Lamar Jackson, Saquon Barkley), not a join miss.
 * The player `<select>` on that page holds one option per player, formatted
   `POS · Name · TEAM @ OPP · $9,800 · 31.6 pts · 3.22 BoxScore value`. Read `POS`, `Name`, `TEAM` and the
   dollar figure; ignore their projection — RAINMAN uses its own.

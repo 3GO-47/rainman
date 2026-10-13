@@ -130,7 +130,7 @@ ATS,5,2026-10-06,2026_05_CIN_MIA,,CIN@MIA,,spread,MIA +7,-7.0,-3.0,-7.0,DK,4.0,,
 ATS,5,2026-10-06,2026_05_CLE_NYJ,,CLE@NYJ,,spread,CLE +2.5,2.5,-3.4,2.5,DK,-5.9,,,"model spread vs market, home perspective"
 ATS,5,2026-10-06,2026_05_LV_NE,,LV@NE,,spread,NE -3.5,3.5,10.6,3.5,DK,7.1,,,"model spread vs market, home perspective"
 ATS,5,2026-10-06,2026_05_NYG_WAS,,NYG@WAS,,spread,NYG +3,3.0,-2.3,3.0,DK,-5.3,,,"model spread vs market, home perspective"
-ATS,5,2026-10-06,2026_05_TB_DAL,,TB@DAL,,spread,TB +9.5,9.5,2.7,9.5,DK,-6.8,,,"model spread vs market, home perspective"
+ATS,5,2026-10-06,2026_05_TB_DAL,,TB@DAL,,spread,TB +9.5,9.5,2.7,9.5,DK,-6.8,W,-8.0,"model spread vs market, home perspective"
 DFS,5,2026-10-06,dfs|afternoon,,,,dk_classic,afternoon,,161.4,,uncapped,,,,projected DK points; graded = actual DK points
 DFS,5,2026-10-06,dfs|early,,,,dk_classic,early,,132.4,,uncapped,,,,projected DK points; graded = actual DK points
 DFS,5,2026-10-06,dfs|full,,,,dk_classic,full,,174.0,,uncapped,,,,projected DK points; graded = actual DK points
@@ -144,7 +144,7 @@ ML,5,2026-10-06,2026_05_DET_ARI,,DET@ARI,,moneyline,ARI,,0.403,0.315,Kalshi,0.08
 ML,5,2026-10-06,2026_05_HOU_TEN,,HOU@TEN,,moneyline,TEN,,0.326,0.255,Kalshi,0.071,,,"win probability, model vs exchange"
 ML,5,2026-10-06,2026_05_LV_NE,,LV@NE,,moneyline,NE,,0.784,0.635,Kalshi,0.149,,,"win probability, model vs exchange"
 ML,5,2026-10-06,2026_05_NYG_WAS,,NYG@WAS,,moneyline,NYG,,0.568,0.375,Kalshi,0.193,,,"win probability, model vs exchange"
-ML,5,2026-10-06,2026_05_TB_DAL,,TB@DAL,,moneyline,TB,,0.421,0.205,Kalshi,0.216,,,"win probability, model vs exchange"
+ML,5,2026-10-06,2026_05_TB_DAL,,TB@DAL,,moneyline,TB,,0.421,0.205,Kalshi,0.216,W,24-16,"win probability, model vs exchange"
 PROP,5,2026-10-08,AJ Barner|rec_yds|23.5,AJ Barner,SEA,SF,rec_yds,Under,23.5,0.504,0.5,draftkings,-5.3,,,EV at -110 vs posted line
 PROP,5,2026-10-08,AJ Barner|rec_yds|24.5,AJ Barner,SEA,SF,rec_yds,Under,24.5,0.502,0.5,betrivers,-5.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,AJ Barner|rec_yds|25.5,AJ Barner,SEA,SF,rec_yds,Under,25.5,0.509,0.5,betmgm,-4.9,,,EV at -110 vs posted line
@@ -239,19 +239,19 @@ PROP,5,2026-10-08,Brock Purdy|pass_yds|224.5,Brock Purdy,SF,@SEA,pass_yds,Under,
 PROP,5,2026-10-08,Brock Purdy|pass_yds|226.5,Brock Purdy,SF,@SEA,pass_yds,Under,226.5,0.513,0.5,betmgm,-4.1,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Brock Purdy|rush_yds|18.5,Brock Purdy,SF,@SEA,rush_yds,Over,18.5,0.514,0.5,betrivers,-4.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Brock Purdy|rush_yds|19.5,Brock Purdy,SF,@SEA,rush_yds,Over,19.5,0.512,0.5,betmgm,-6.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rec_yds|12.5,Bucky Irving,TB,@DAL,rec_yds,Over,12.5,0.504,0.5,draftkings,-4.2,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Bucky Irving|rec_yds|13.5,Bucky Irving,TB,@DAL,rec_yds,Over,13.5,0.502,0.5,DK,-4.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rec_yds|13.5,Bucky Irving,TB,@DAL,rec_yds,Under,13.5,0.505,0.5,betmgm,-5.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rec_yds|14.5,Bucky Irving,TB,@DAL,rec_yds,Under,14.5,0.51,0.5,betrivers,-4.2,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Bucky Irving|receptions|2.5,Bucky Irving,TB,@DAL,receptions,Under,2.5,0.516,0.5,DK,-1.6,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|receptions|2.5,Bucky Irving,TB,@DAL,receptions,Over,2.5,0.445,0.5,betmgm,-4.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rush_att|12.5,Bucky Irving,TB,@DAL,rush_att,Over,12.5,0.595,0.5,espnbet,-0.8,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Bucky Irving|rush_att|13.5,Bucky Irving,TB,@DAL,rush_att,Over,13.5,0.526,0.5,DK,0.3,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Bucky Irving|rush_rec_yds|75.5,Bucky Irving,TB,@DAL,rush_rec_yds,Under,75.5,0.533,0.5,DK,1.7,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rush_yds|50.5,Bucky Irving,TB,@DAL,rush_yds,Over,50.5,0.507,0.5,betrivers,-4.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rush_yds|51.5,Bucky Irving,TB,@DAL,rush_yds,Over,51.5,0.509,0.5,draftkings,-4.8,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Bucky Irving|rush_yds|52.5,Bucky Irving,TB,@DAL,rush_yds,Over,52.5,0.496,0.5,betmgm,-5.7,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Bucky Irving|rush_yds|57.5,Bucky Irving,TB,@DAL,rush_yds,Under,57.5,0.523,0.5,DK,-0.2,,,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rec_yds|12.5,Bucky Irving,TB,@DAL,rec_yds,Over,12.5,0.504,0.5,draftkings,-4.2,L,10.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Bucky Irving|rec_yds|13.5,Bucky Irving,TB,@DAL,rec_yds,Over,13.5,0.502,0.5,DK,-4.2,L,10.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rec_yds|13.5,Bucky Irving,TB,@DAL,rec_yds,Under,13.5,0.505,0.5,betmgm,-5.5,L,10.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rec_yds|14.5,Bucky Irving,TB,@DAL,rec_yds,Under,14.5,0.51,0.5,betrivers,-4.2,W,10.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Bucky Irving|receptions|2.5,Bucky Irving,TB,@DAL,receptions,Under,2.5,0.516,0.5,DK,-1.6,L,2.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|receptions|2.5,Bucky Irving,TB,@DAL,receptions,Over,2.5,0.445,0.5,betmgm,-4.4,L,2.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rush_att|12.5,Bucky Irving,TB,@DAL,rush_att,Over,12.5,0.595,0.5,espnbet,-0.8,W,21.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Bucky Irving|rush_att|13.5,Bucky Irving,TB,@DAL,rush_att,Over,13.5,0.526,0.5,DK,0.3,W,21.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Bucky Irving|rush_rec_yds|75.5,Bucky Irving,TB,@DAL,rush_rec_yds,Under,75.5,0.533,0.5,DK,1.7,L,175.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rush_yds|50.5,Bucky Irving,TB,@DAL,rush_yds,Over,50.5,0.507,0.5,betrivers,-4.9,W,165.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rush_yds|51.5,Bucky Irving,TB,@DAL,rush_yds,Over,51.5,0.509,0.5,draftkings,-4.8,W,165.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Bucky Irving|rush_yds|52.5,Bucky Irving,TB,@DAL,rush_yds,Over,52.5,0.496,0.5,betmgm,-5.7,W,165.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Bucky Irving|rush_yds|57.5,Bucky Irving,TB,@DAL,rush_yds,Under,57.5,0.523,0.5,DK,-0.2,L,165.0,EV at -110 vs posted line
 PROP,5,2026-10-08,C.J. Stroud|completions|20.5,C.J. Stroud,HOU,@TEN,completions,Under,20.5,0.482,0.5,draftkings,-3.2,,,EV at -110 vs posted line
 PROP,5,2026-10-08,C.J. Stroud|pass_att|31.5,C.J. Stroud,HOU,@TEN,pass_att,Over,31.5,0.531,0.5,draftkings,-3.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,C.J. Stroud|pass_td|1.5,C.J. Stroud,HOU,@TEN,pass_td,Under,1.5,0.525,0.5,betmgm,-5.6,,,EV at -110 vs posted line
@@ -261,11 +261,11 @@ PROP,5,2026-10-08,C.J. Stroud|pass_yds|242.5,C.J. Stroud,HOU,@TEN,pass_yds,Under
 PROP,5,2026-10-08,C.J. Stroud|pass_yds|244.5,C.J. Stroud,HOU,@TEN,pass_yds,Under,244.5,0.525,0.5,draftkings,-0.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,C.J. Stroud|rush_yds|10.5,C.J. Stroud,HOU,@TEN,rush_yds,Under,10.5,0.551,0.5,draftkings,3.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,C.J. Stroud|rush_yds|9.5,C.J. Stroud,HOU,@TEN,rush_yds,Under,9.5,0.533,0.5,betmgm,1.8,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Cade Otton|rec_yds|27.5,Cade Otton,TB,@DAL,rec_yds,Over,27.5,0.523,0.5,fanduel,-1.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Cade Otton|rec_yds|28.5,Cade Otton,TB,@DAL,rec_yds,Over,28.5,0.516,0.5,DK,-1.6,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Cade Otton|rec_yds|29.5,Cade Otton,TB,@DAL,rec_yds,Over,29.5,0.504,0.5,betmgm,-4.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Cade Otton|rec_yds|30.5,Cade Otton,TB,@DAL,rec_yds,Over,30.5,0.501,0.5,betrivers,-5.9,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Cade Otton|receptions|3.5,Cade Otton,TB,@DAL,receptions,Over,3.5,0.502,0.5,DK,-4.2,,,EV at -110 vs posted line
+PROP,5,2026-10-08,Cade Otton|rec_yds|27.5,Cade Otton,TB,@DAL,rec_yds,Over,27.5,0.523,0.5,fanduel,-1.5,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Cade Otton|rec_yds|28.5,Cade Otton,TB,@DAL,rec_yds,Over,28.5,0.516,0.5,DK,-1.6,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Cade Otton|rec_yds|29.5,Cade Otton,TB,@DAL,rec_yds,Over,29.5,0.504,0.5,betmgm,-4.2,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Cade Otton|rec_yds|30.5,Cade Otton,TB,@DAL,rec_yds,Over,30.5,0.501,0.5,betrivers,-5.9,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Cade Otton|receptions|3.5,Cade Otton,TB,@DAL,receptions,Over,3.5,0.502,0.5,DK,-4.2,L,3.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Calvin Ridley|rec_yds|7.5,Calvin Ridley,TEN,HOU,rec_yds,Under,7.5,0.5,0.5,draftkings,-3.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Calvin Ridley|rec_yds|8.5,Calvin Ridley,TEN,HOU,rec_yds,Under,8.5,0.504,0.5,betmgm,-3.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Calvin Ridley|receptions|0.5,Calvin Ridley,TEN,HOU,receptions,Over,0.5,0.615,0.5,draftkings,-3.2,,,EV at -110 vs posted line
@@ -288,19 +288,19 @@ PROP,5,2026-10-08,Carnell Tate|rec_yds|53.5,Carnell Tate,TEN,HOU,rec_yds,Under,5
 PROP,5,2026-10-08,Carnell Tate|rec_yds|54.5,Carnell Tate,TEN,HOU,rec_yds,Under,54.5,0.506,0.5,fanduel,-5.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Carnell Tate|rec_yds|57.5,Carnell Tate,TEN,HOU,rec_yds,Under,57.5,0.536,0.5,espnbet,-5.1,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Carnell Tate|receptions|4.5,Carnell Tate,TEN,HOU,receptions,Under,4.5,0.435,0.5,betmgm,-6.4,,,EV at -110 vs posted line
-PROP,5,2026-10-06,CeeDee Lamb|rec_yds|79.5,CeeDee Lamb,DAL,TB,rec_yds,Over,79.5,0.502,0.5,DK,-4.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,CeeDee Lamb|rec_yds|79.5,CeeDee Lamb,DAL,TB,rec_yds,Under,79.5,0.485,0.5,espnbet,-5.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,CeeDee Lamb|rec_yds|80.5,CeeDee Lamb,DAL,TB,rec_yds,Under,80.5,0.502,0.5,betmgm,-6.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,CeeDee Lamb|rec_yds|81.5,CeeDee Lamb,DAL,TB,rec_yds,Under,81.5,0.502,0.5,draftkings,-5.0,,,EV at -110 vs posted line
-PROP,5,2026-10-08,CeeDee Lamb|receptions|5.5,CeeDee Lamb,DAL,TB,receptions,Under,5.5,0.43,0.5,fanduel,-3.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,CeeDee Lamb|receptions|6.5,CeeDee Lamb,DAL,TB,receptions,Under,6.5,0.512,0.5,DK,-2.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,CeeDee Lamb|receptions|6.5,CeeDee Lamb,DAL,TB,receptions,Over,6.5,0.474,0.5,betrivers,1.9,,,EV at -110 vs posted line
+PROP,5,2026-10-06,CeeDee Lamb|rec_yds|79.5,CeeDee Lamb,DAL,TB,rec_yds,Over,79.5,0.502,0.5,DK,-4.2,W,9.0,EV at -110 vs posted line
+PROP,5,2026-10-08,CeeDee Lamb|rec_yds|79.5,CeeDee Lamb,DAL,TB,rec_yds,Under,79.5,0.485,0.5,espnbet,-5.3,W,9.0,EV at -110 vs posted line
+PROP,5,2026-10-08,CeeDee Lamb|rec_yds|80.5,CeeDee Lamb,DAL,TB,rec_yds,Under,80.5,0.502,0.5,betmgm,-6.2,W,9.0,EV at -110 vs posted line
+PROP,5,2026-10-08,CeeDee Lamb|rec_yds|81.5,CeeDee Lamb,DAL,TB,rec_yds,Under,81.5,0.502,0.5,draftkings,-5.0,W,9.0,EV at -110 vs posted line
+PROP,5,2026-10-08,CeeDee Lamb|receptions|5.5,CeeDee Lamb,DAL,TB,receptions,Under,5.5,0.43,0.5,fanduel,-3.6,W,2.0,EV at -110 vs posted line
+PROP,5,2026-10-06,CeeDee Lamb|receptions|6.5,CeeDee Lamb,DAL,TB,receptions,Under,6.5,0.512,0.5,DK,-2.2,W,2.0,EV at -110 vs posted line
+PROP,5,2026-10-08,CeeDee Lamb|receptions|6.5,CeeDee Lamb,DAL,TB,receptions,Over,6.5,0.474,0.5,betrivers,1.9,W,2.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Chase Brown|rush_att|16.5,Chase Brown,CIN,@MIA,rush_att,Under,16.5,0.533,0.5,draftkings,3.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Chase Brown|rush_yds|66.5,Chase Brown,CIN,@MIA,rush_yds,Under,66.5,0.529,0.5,draftkings,0.2,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Chase Brown|rush_yds|67.5,Chase Brown,CIN,@MIA,rush_yds,Under,67.5,0.533,0.5,fanduel,0.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Chase Brown|rush_yds|68.5,Chase Brown,CIN,@MIA,rush_yds,Under,68.5,0.54,0.5,betrivers,-0.3,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Chris Godwin Jr.|rec_yds|27.5,Chris Godwin Jr.,TB,@DAL,rec_yds,Over,27.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Chris Godwin Jr.|receptions|3.5,Chris Godwin Jr.,TB,@DAL,receptions,Over,3.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Chris Godwin Jr.|rec_yds|27.5,Chris Godwin Jr.,TB,@DAL,rec_yds,Over,27.5,0.5,0.5,DK,-4.5,W,37.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Chris Godwin Jr.|receptions|3.5,Chris Godwin Jr.,TB,@DAL,receptions,Over,3.5,0.5,0.5,DK,-4.5,L,3.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Chris Olave|rec_yds|79.5,Chris Olave,NO,MIN,rec_yds,Under,79.5,0.519,0.5,draftkings,-1.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Chris Olave|rec_yds|81.5,Chris Olave,NO,MIN,rec_yds,Under,81.5,0.52,0.5,betrivers,-2.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Chris Olave|receptions|6.5,Chris Olave,NO,MIN,receptions,Under,6.5,0.523,0.5,betrivers,-0.2,,,EV at -110 vs posted line
@@ -348,22 +348,22 @@ PROP,5,2026-10-08,DK Metcalf|rec_yds|54.5,DK Metcalf,PIT,IND,rec_yds,Under,54.5,
 PROP,5,2026-10-08,DK Metcalf|receptions|3.5,DK Metcalf,PIT,IND,receptions,Under,3.5,0.5,0.5,betrivers,-4.5,,,EV at -110 vs posted line
 PROP,5,2026-10-08,DK Metcalf|receptions|3.5,DK Metcalf,PIT,IND,receptions,Over,3.5,0.581,0.5,draftkings,-5.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,DK Metcalf|receptions|4.5,DK Metcalf,PIT,IND,receptions,Over,4.5,0.408,0.5,espnbet,-6.1,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|completions|22.5,Dak Prescott,DAL,TB,completions,Over,22.5,0.509,0.5,DK,-2.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|completions|22.5,Dak Prescott,DAL,TB,completions,Under,22.5,0.469,0.5,draftkings,-3.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|completions|23.5,Dak Prescott,DAL,TB,completions,Under,23.5,0.505,0.5,betrivers,-3.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|interceptions|0.5,Dak Prescott,DAL,TB,interceptions,Under,0.5,0.517,0.5,DK,-1.4,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|pass_att|33.5,Dak Prescott,DAL,TB,pass_att,Over,33.5,0.511,0.5,DK,-2.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|pass_rush_yds|276.5,Dak Prescott,DAL,TB,pass_rush_yds,Over,276.5,0.511,0.5,DK,-2.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,TB,pass_td,Over,1.5,0.508,0.5,DK,-3.1,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,TB,pass_td,Under,1.5,0.386,0.5,draftkings,4.0,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_td|2.5,Dak Prescott,DAL,TB,pass_td,Under,2.5,0.666,0.5,betmgm,-3.1,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,TB,pass_yds,Over,263.5,0.502,0.5,DK,-4.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,TB,pass_yds,Under,263.5,0.511,0.5,fanduel,-3.8,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_yds|264.5,Dak Prescott,DAL,TB,pass_yds,Under,264.5,0.511,0.5,espnbet,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_yds|265.5,Dak Prescott,DAL,TB,pass_yds,Under,265.5,0.512,0.5,draftkings,-3.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_yds|266.5,Dak Prescott,DAL,TB,pass_yds,Under,266.5,0.513,0.5,betrivers,-4.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Dak Prescott|pass_yds|268.5,Dak Prescott,DAL,TB,pass_yds,Under,268.5,0.517,0.5,betmgm,-3.4,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Dak Prescott|rush_yds|9.5,Dak Prescott,DAL,TB,rush_yds,Under,9.5,0.536,0.5,DK,2.4,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|completions|22.5,Dak Prescott,DAL,TB,completions,Over,22.5,0.509,0.5,DK,-2.9,L,24.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|completions|22.5,Dak Prescott,DAL,TB,completions,Under,22.5,0.469,0.5,draftkings,-3.9,L,24.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|completions|23.5,Dak Prescott,DAL,TB,completions,Under,23.5,0.505,0.5,betrivers,-3.6,L,24.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|interceptions|0.5,Dak Prescott,DAL,TB,interceptions,Under,0.5,0.517,0.5,DK,-1.4,L,2.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|pass_att|33.5,Dak Prescott,DAL,TB,pass_att,Over,33.5,0.511,0.5,DK,-2.5,W,42.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|pass_rush_yds|276.5,Dak Prescott,DAL,TB,pass_rush_yds,Over,276.5,0.511,0.5,DK,-2.5,W,316.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,TB,pass_td,Over,1.5,0.508,0.5,DK,-3.1,W,1.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,TB,pass_td,Under,1.5,0.386,0.5,draftkings,4.0,W,1.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_td|2.5,Dak Prescott,DAL,TB,pass_td,Under,2.5,0.666,0.5,betmgm,-3.1,W,1.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,TB,pass_yds,Over,263.5,0.502,0.5,DK,-4.3,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,TB,pass_yds,Under,263.5,0.511,0.5,fanduel,-3.8,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_yds|264.5,Dak Prescott,DAL,TB,pass_yds,Under,264.5,0.511,0.5,espnbet,-4.5,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_yds|265.5,Dak Prescott,DAL,TB,pass_yds,Under,265.5,0.512,0.5,draftkings,-3.5,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_yds|266.5,Dak Prescott,DAL,TB,pass_yds,Under,266.5,0.513,0.5,betrivers,-4.9,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Dak Prescott|pass_yds|268.5,Dak Prescott,DAL,TB,pass_yds,Under,268.5,0.517,0.5,betmgm,-3.4,L,316.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Dak Prescott|rush_yds|9.5,Dak Prescott,DAL,TB,rush_yds,Under,9.5,0.536,0.5,DK,2.4,W,0.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Dalton Kincaid|rec_yds|49.5,Dalton Kincaid,BUF,@LAR,rec_yds,Under,49.5,0.532,0.5,betrivers,-0.1,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Dalton Kincaid|rec_yds|50.5,Dalton Kincaid,BUF,@LAR,rec_yds,Under,50.5,0.536,0.5,betmgm,0.3,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Dalton Kincaid|receptions|3.5,Dalton Kincaid,BUF,@LAR,receptions,Under,3.5,0.49,0.5,betmgm,5.3,,,EV at -110 vs posted line
@@ -440,13 +440,13 @@ PROP,5,2026-10-08,Elic Ayomanor|rec_yds|17.5,Elic Ayomanor,TEN,HOU,rec_yds,Under
 PROP,5,2026-10-08,Elic Ayomanor|receptions|1.5,Elic Ayomanor,TEN,HOU,receptions,Over,1.5,0.503,0.5,draftkings,-5.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Emanuel Wilson|rush_yds|62.5,Emanuel Wilson,SEA,SF,rush_yds,Under,62.5,0.529,0.5,betmgm,-1.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Emanuel Wilson|rush_yds|64.5,Emanuel Wilson,SEA,SF,rush_yds,Under,64.5,0.546,0.5,espnbet,-1.7,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Emeka Egbuka|rec_yds|31.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,31.5,0.547,0.5,DK,4.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Emeka Egbuka|rec_yds|33.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,33.5,0.534,0.5,draftkings,-0.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Emeka Egbuka|rec_yds|34.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,34.5,0.526,0.5,betmgm,-1.7,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Emeka Egbuka|rec_yds|35.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,35.5,0.519,0.5,fanduel,-2.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Emeka Egbuka|rec_yds|36.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,36.5,0.509,0.5,betrivers,-4.1,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Emeka Egbuka|receptions|2.5,Emeka Egbuka,TB,@DAL,receptions,Over,2.5,0.568,0.5,DK,8.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Emeka Egbuka|receptions|3.5,Emeka Egbuka,TB,@DAL,receptions,Over,3.5,0.516,0.5,betrivers,21.2,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Emeka Egbuka|rec_yds|31.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,31.5,0.547,0.5,DK,4.4,W,38.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Emeka Egbuka|rec_yds|33.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,33.5,0.534,0.5,draftkings,-0.2,W,38.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Emeka Egbuka|rec_yds|34.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,34.5,0.526,0.5,betmgm,-1.7,W,38.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Emeka Egbuka|rec_yds|35.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,35.5,0.519,0.5,fanduel,-2.2,W,38.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Emeka Egbuka|rec_yds|36.5,Emeka Egbuka,TB,@DAL,rec_yds,Over,36.5,0.509,0.5,betrivers,-4.1,W,38.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Emeka Egbuka|receptions|2.5,Emeka Egbuka,TB,@DAL,receptions,Over,2.5,0.568,0.5,DK,8.4,W,6.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Emeka Egbuka|receptions|3.5,Emeka Egbuka,TB,@DAL,receptions,Over,3.5,0.516,0.5,betrivers,21.2,W,6.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Evan Engram|rec_yds|17.5,Evan Engram,DEN,@LAC,rec_yds,Over,17.5,0.518,0.5,draftkings,-2.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Evan Engram|rec_yds|19.5,Evan Engram,DEN,@LAC,rec_yds,Under,19.5,0.492,0.5,betmgm,-6.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Evan Engram|receptions|2.5,Evan Engram,DEN,@LAC,receptions,Over,2.5,0.447,0.5,betmgm,-6.1,,,EV at -110 vs posted line
@@ -469,11 +469,11 @@ PROP,5,2026-10-08,George Kittle|rec_yds|53.5,George Kittle,SF,@SEA,rec_yds,Under
 PROP,5,2026-10-08,George Kittle|rec_yds|56.5,George Kittle,SF,@SEA,rec_yds,Under,56.5,0.543,0.5,betmgm,1.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,George Kittle|rec_yds|58.5,George Kittle,SF,@SEA,rec_yds,Under,58.5,0.552,0.5,betrivers,2.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,George Kittle|receptions|4.5,George Kittle,SF,@SEA,receptions,Under,4.5,0.526,0.5,betrivers,0.4,,,EV at -110 vs posted line
-PROP,5,2026-10-06,George Pickens|rec_yds|59.5,George Pickens,DAL,TB,rec_yds,Under,59.5,0.509,0.5,DK,-2.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,George Pickens|rec_yds|60.5,George Pickens,DAL,TB,rec_yds,Under,60.5,0.51,0.5,draftkings,-3.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,George Pickens|rec_yds|61.5,George Pickens,DAL,TB,rec_yds,Under,61.5,0.512,0.5,betmgm,-4.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,George Pickens|rec_yds|64.5,George Pickens,DAL,TB,rec_yds,Under,64.5,0.526,0.5,espnbet,-3.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,George Pickens|receptions|4.5,George Pickens,DAL,TB,receptions,Under,4.5,0.533,0.5,DK,1.7,,,EV at -110 vs posted line
+PROP,5,2026-10-06,George Pickens|rec_yds|59.5,George Pickens,DAL,TB,rec_yds,Under,59.5,0.509,0.5,DK,-2.9,L,130.0,EV at -110 vs posted line
+PROP,5,2026-10-08,George Pickens|rec_yds|60.5,George Pickens,DAL,TB,rec_yds,Under,60.5,0.51,0.5,draftkings,-3.9,L,130.0,EV at -110 vs posted line
+PROP,5,2026-10-08,George Pickens|rec_yds|61.5,George Pickens,DAL,TB,rec_yds,Under,61.5,0.512,0.5,betmgm,-4.3,L,130.0,EV at -110 vs posted line
+PROP,5,2026-10-08,George Pickens|rec_yds|64.5,George Pickens,DAL,TB,rec_yds,Under,64.5,0.526,0.5,espnbet,-3.6,L,130.0,EV at -110 vs posted line
+PROP,5,2026-10-06,George Pickens|receptions|4.5,George Pickens,DAL,TB,receptions,Under,4.5,0.533,0.5,DK,1.7,L,9.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Gunnar Helm|rec_yds|17.5,Gunnar Helm,TEN,HOU,rec_yds,Under,17.5,0.51,0.5,draftkings,-1.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Gunnar Helm|rec_yds|18.5,Gunnar Helm,TEN,HOU,rec_yds,Under,18.5,0.528,0.5,betmgm,-3.1,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Gunnar Helm|receptions|2.5,Gunnar Helm,TEN,HOU,receptions,Under,2.5,0.509,0.5,draftkings,-5.2,,,EV at -110 vs posted line
@@ -526,11 +526,11 @@ PROP,5,2026-10-08,Jahmyr Gibbs|rush_att|19.5,Jahmyr Gibbs,DET,@ARI,rush_att,Unde
 PROP,5,2026-10-08,Jahmyr Gibbs|rush_yds|90.5,Jahmyr Gibbs,DET,@ARI,rush_yds,Under,90.5,0.535,0.5,betrivers,-0.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jahmyr Gibbs|rush_yds|91.5,Jahmyr Gibbs,DET,@ARI,rush_yds,Under,91.5,0.533,0.5,betmgm,-0.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jahmyr Gibbs|rush_yds|92.5,Jahmyr Gibbs,DET,@ARI,rush_yds,Under,92.5,0.536,0.5,draftkings,1.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jake Ferguson|rec_yds|25.5,Jake Ferguson,DAL,TB,rec_yds,Over,25.5,0.526,0.5,betrivers,-2.9,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jake Ferguson|rec_yds|26.5,Jake Ferguson,DAL,TB,rec_yds,Over,26.5,0.54,0.5,DK,3.1,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jake Ferguson|rec_yds|27.5,Jake Ferguson,DAL,TB,rec_yds,Over,27.5,0.509,0.5,betmgm,-4.9,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jake Ferguson|receptions|3.5,Jake Ferguson,DAL,TB,receptions,Under,3.5,0.505,0.5,DK,-3.6,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jake Ferguson|receptions|3.5,Jake Ferguson,DAL,TB,receptions,Over,3.5,0.459,0.5,betmgm,-5.9,,,EV at -110 vs posted line
+PROP,5,2026-10-08,Jake Ferguson|rec_yds|25.5,Jake Ferguson,DAL,TB,rec_yds,Over,25.5,0.526,0.5,betrivers,-2.9,L,19.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jake Ferguson|rec_yds|26.5,Jake Ferguson,DAL,TB,rec_yds,Over,26.5,0.54,0.5,DK,3.1,L,19.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jake Ferguson|rec_yds|27.5,Jake Ferguson,DAL,TB,rec_yds,Over,27.5,0.509,0.5,betmgm,-4.9,L,19.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jake Ferguson|receptions|3.5,Jake Ferguson,DAL,TB,receptions,Under,3.5,0.505,0.5,DK,-3.6,W,3.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jake Ferguson|receptions|3.5,Jake Ferguson,DAL,TB,receptions,Over,3.5,0.459,0.5,betmgm,-5.9,W,3.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Jakobi Meyers|rec_yds|41.5,Jakobi Meyers,JAX,PHI,rec_yds,Under,41.5,0.502,0.5,draftkings,-4.5,,,EV at -110 vs posted line
 PROP,5,2026-10-06,Jakobi Meyers|rec_yds|42.5,Jakobi Meyers,JAX,PHI,rec_yds,Over,42.5,0.509,0.5,DK,-2.9,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jakobi Meyers|rec_yds|43.5,Jakobi Meyers,JAX,PHI,rec_yds,Under,43.5,0.516,0.5,betrivers,-4.7,,,EV at -110 vs posted line
@@ -549,24 +549,24 @@ PROP,5,2026-10-08,Jalen Hurts|pass_yds|196.5,Jalen Hurts,PHI,@JAX,pass_yds,Under
 PROP,5,2026-10-08,Jalen Hurts|rush_att|5.5,Jalen Hurts,PHI,@JAX,rush_att,Under,5.5,0.492,0.5,draftkings,7.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jalen Hurts|rush_yds|25.5,Jalen Hurts,PHI,@JAX,rush_yds,Under,25.5,0.559,0.5,draftkings,7.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jalen Hurts|rush_yds|26.5,Jalen Hurts,PHI,@JAX,rush_yds,Under,26.5,0.571,0.5,betrivers,6.8,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|completions|17.5,Jalon Daniels,TB,@DAL,completions,Over,17.5,0.509,0.5,DK,-2.8,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|interceptions|0.5,Jalon Daniels,TB,@DAL,interceptions,Over,0.5,0.503,0.5,DK,-4.0,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|pass_att|27.5,Jalon Daniels,TB,@DAL,pass_att,Over,27.5,0.504,0.5,DK,-3.8,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_att|28.5,Jalon Daniels,TB,@DAL,pass_att,Over,28.5,0.51,0.5,draftkings,-4.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|pass_rush_yds|225.5,Jalon Daniels,TB,@DAL,pass_rush_yds,Under,225.5,0.511,0.5,DK,-2.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|pass_td|0.5,Jalon Daniels,TB,@DAL,pass_td,Over,0.5,0.525,0.5,DK,0.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_td|0.5,Jalon Daniels,TB,@DAL,pass_td,Under,0.5,0.324,0.5,espnbet,-6.1,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|pass_yds|179.5,Jalon Daniels,TB,@DAL,pass_yds,Under,179.5,0.506,0.5,DK,-3.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_yds|180.5,Jalon Daniels,TB,@DAL,pass_yds,Under,180.5,0.502,0.5,betmgm,-6.2,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_yds|181.5,Jalon Daniels,TB,@DAL,pass_yds,Under,181.5,0.503,0.5,draftkings,-5.1,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_yds|182.5,Jalon Daniels,TB,@DAL,pass_yds,Under,182.5,0.503,0.5,fanduel,-5.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_yds|184.5,Jalon Daniels,TB,@DAL,pass_yds,Under,184.5,0.503,0.5,espnbet,-6.0,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|pass_yds|185.5,Jalon Daniels,TB,@DAL,pass_yds,Under,185.5,0.501,0.5,betrivers,-6.0,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|rush_att|7.5,Jalon Daniels,TB,@DAL,rush_att,Under,7.5,0.524,0.5,DK,0.0,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Jalon Daniels|rush_yds|43.5,Jalon Daniels,TB,@DAL,rush_yds,Under,43.5,0.536,0.5,DK,2.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|rush_yds|44.5,Jalon Daniels,TB,@DAL,rush_yds,Under,44.5,0.528,0.5,espnbet,0.7,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|rush_yds|45.5,Jalon Daniels,TB,@DAL,rush_yds,Under,45.5,0.537,0.5,betrivers,0.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Jalon Daniels|rush_yds|46.5,Jalon Daniels,TB,@DAL,rush_yds,Under,46.5,0.541,0.5,draftkings,1.6,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|completions|17.5,Jalon Daniels,TB,@DAL,completions,Over,17.5,0.509,0.5,DK,-2.8,W,19.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|interceptions|0.5,Jalon Daniels,TB,@DAL,interceptions,Over,0.5,0.503,0.5,DK,-4.0,L,0.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|pass_att|27.5,Jalon Daniels,TB,@DAL,pass_att,Over,27.5,0.504,0.5,DK,-3.8,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_att|28.5,Jalon Daniels,TB,@DAL,pass_att,Over,28.5,0.51,0.5,draftkings,-4.6,L,25.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|pass_rush_yds|225.5,Jalon Daniels,TB,@DAL,pass_rush_yds,Under,225.5,0.511,0.5,DK,-2.5,W,212.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|pass_td|0.5,Jalon Daniels,TB,@DAL,pass_td,Over,0.5,0.525,0.5,DK,0.3,L,1.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_td|0.5,Jalon Daniels,TB,@DAL,pass_td,Under,0.5,0.324,0.5,espnbet,-6.1,L,1.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|pass_yds|179.5,Jalon Daniels,TB,@DAL,pass_yds,Under,179.5,0.506,0.5,DK,-3.5,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_yds|180.5,Jalon Daniels,TB,@DAL,pass_yds,Under,180.5,0.502,0.5,betmgm,-6.2,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_yds|181.5,Jalon Daniels,TB,@DAL,pass_yds,Under,181.5,0.503,0.5,draftkings,-5.1,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_yds|182.5,Jalon Daniels,TB,@DAL,pass_yds,Under,182.5,0.503,0.5,fanduel,-5.3,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_yds|184.5,Jalon Daniels,TB,@DAL,pass_yds,Under,184.5,0.503,0.5,espnbet,-6.0,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|pass_yds|185.5,Jalon Daniels,TB,@DAL,pass_yds,Under,185.5,0.501,0.5,betrivers,-6.0,L,189.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|rush_att|7.5,Jalon Daniels,TB,@DAL,rush_att,Under,7.5,0.524,0.5,DK,0.0,W,7.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Jalon Daniels|rush_yds|43.5,Jalon Daniels,TB,@DAL,rush_yds,Under,43.5,0.536,0.5,DK,2.3,W,23.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|rush_yds|44.5,Jalon Daniels,TB,@DAL,rush_yds,Under,44.5,0.528,0.5,espnbet,0.7,W,23.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|rush_yds|45.5,Jalon Daniels,TB,@DAL,rush_yds,Under,45.5,0.537,0.5,betrivers,0.3,W,23.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Jalon Daniels|rush_yds|46.5,Jalon Daniels,TB,@DAL,rush_yds,Under,46.5,0.541,0.5,draftkings,1.6,W,23.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Jameis Winston|completions|18.5,Jameis Winston,NYG,@WAS,completions,Under,18.5,0.538,0.5,betrivers,2.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jameis Winston|pass_att|30.5,Jameis Winston,NYG,@WAS,pass_att,Under,30.5,0.506,0.5,draftkings,-0.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jameis Winston|pass_td|1.5,Jameis Winston,NYG,@WAS,pass_td,Over,1.5,0.393,0.5,betrivers,-1.7,,,EV at -110 vs posted line
@@ -588,17 +588,17 @@ PROP,5,2026-10-08,Jared Goff|pass_yds|279.5,Jared Goff,DET,@ARI,pass_yds,Over,27
 PROP,5,2026-10-08,Jared Goff|pass_yds|280.5,Jared Goff,DET,@ARI,pass_yds,Over,280.5,0.505,0.5,betmgm,-5.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jared Goff|pass_yds|282.5,Jared Goff,DET,@ARI,pass_yds,Under,282.5,0.502,0.5,betrivers,-6.2,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jared Goff|rush_yds|0.5,Jared Goff,DET,@ARI,rush_yds,Over,0.5,0.55,0.5,draftkings,2.0,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rec_yds|14.5,Javonte Williams,DAL,TB,rec_yds,Under,14.5,0.505,0.5,betrivers,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rec_yds|15.5,Javonte Williams,DAL,TB,rec_yds,Under,15.5,0.516,0.5,betmgm,-3.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Javonte Williams|rec_yds|16.5,Javonte Williams,DAL,TB,rec_yds,Under,16.5,0.529,0.5,DK,1.1,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Javonte Williams|receptions|2.5,Javonte Williams,DAL,TB,receptions,Under,2.5,0.509,0.5,DK,-2.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rush_att|16.5,Javonte Williams,DAL,TB,rush_att,Under,16.5,0.466,0.5,espnbet,2.4,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Javonte Williams|rush_att|17.5,Javonte Williams,DAL,TB,rush_att,Under,17.5,0.537,0.5,DK,2.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Javonte Williams|rush_rec_yds|93.5,Javonte Williams,DAL,TB,rush_rec_yds,Under,93.5,0.543,0.5,DK,3.7,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rush_yds|70.5,Javonte Williams,DAL,TB,rush_yds,Under,70.5,0.512,0.5,betmgm,-2.2,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Javonte Williams|rush_yds|72.5,Javonte Williams,DAL,TB,rush_yds,Under,72.5,0.526,0.5,DK,0.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rush_yds|73.5,Javonte Williams,DAL,TB,rush_yds,Under,73.5,0.527,0.5,betrivers,-1.0,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Javonte Williams|rush_yds|74.5,Javonte Williams,DAL,TB,rush_yds,Under,74.5,0.543,0.5,espnbet,-2.3,,,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rec_yds|14.5,Javonte Williams,DAL,TB,rec_yds,Under,14.5,0.505,0.5,betrivers,-4.5,L,17.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rec_yds|15.5,Javonte Williams,DAL,TB,rec_yds,Under,15.5,0.516,0.5,betmgm,-3.6,L,17.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Javonte Williams|rec_yds|16.5,Javonte Williams,DAL,TB,rec_yds,Under,16.5,0.529,0.5,DK,1.1,L,17.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Javonte Williams|receptions|2.5,Javonte Williams,DAL,TB,receptions,Under,2.5,0.509,0.5,DK,-2.9,W,2.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rush_att|16.5,Javonte Williams,DAL,TB,rush_att,Under,16.5,0.466,0.5,espnbet,2.4,W,12.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Javonte Williams|rush_att|17.5,Javonte Williams,DAL,TB,rush_att,Under,17.5,0.537,0.5,DK,2.5,W,12.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Javonte Williams|rush_rec_yds|93.5,Javonte Williams,DAL,TB,rush_rec_yds,Under,93.5,0.543,0.5,DK,3.7,W,62.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rush_yds|70.5,Javonte Williams,DAL,TB,rush_yds,Under,70.5,0.512,0.5,betmgm,-2.2,W,45.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Javonte Williams|rush_yds|72.5,Javonte Williams,DAL,TB,rush_yds,Under,72.5,0.526,0.5,DK,0.4,W,45.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rush_yds|73.5,Javonte Williams,DAL,TB,rush_yds,Under,73.5,0.527,0.5,betrivers,-1.0,W,45.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Javonte Williams|rush_yds|74.5,Javonte Williams,DAL,TB,rush_yds,Under,74.5,0.543,0.5,espnbet,-2.3,W,45.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Jaxon Smith-Njigba|rec_yds|92.5,Jaxon Smith-Njigba,SEA,SF,rec_yds,Under,92.5,0.527,0.5,draftkings,0.6,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jaxon Smith-Njigba|rec_yds|94.5,Jaxon Smith-Njigba,SEA,SF,rec_yds,Under,94.5,0.533,0.5,betmgm,-0.4,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Jaxon Smith-Njigba|rec_yds|95.5,Jaxon Smith-Njigba,SEA,SF,rec_yds,Under,95.5,0.535,0.5,betrivers,-0.8,,,EV at -110 vs posted line
@@ -704,16 +704,16 @@ PROP,5,2026-10-08,Kendrick Bourne|rec_yds|23.5,Kendrick Bourne,ARI,DET,rec_yds,U
 PROP,5,2026-10-08,Kendrick Bourne|rec_yds|24.5,Kendrick Bourne,ARI,DET,rec_yds,Under,24.5,0.5,0.5,betmgm,-4.9,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Kendrick Bourne|receptions|2.5,Kendrick Bourne,ARI,DET,receptions,Under,2.5,0.544,0.5,betmgm,-5.3,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Kendrick Bourne|receptions|2.5,Kendrick Bourne,ARI,DET,receptions,Over,2.5,0.48,0.5,betrivers,9.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|rec_yds|10.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,10.5,0.5,0.5,draftkings,-5.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|rec_yds|12.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,12.5,0.492,0.5,betrivers,-6.9,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Kenny Gainwell|rec_yds|9.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,9.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Kenny Gainwell|receptions|1.5,Kenny Gainwell,TB,@DAL,receptions,Over,1.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|receptions|1.5,Kenny Gainwell,TB,@DAL,receptions,Under,1.5,0.5,0.5,betrivers,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Kenny Gainwell|rush_rec_yds|23.5,Kenny Gainwell,TB,@DAL,rush_rec_yds,Over,23.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Kenny Gainwell|rush_yds|10.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,10.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|rush_yds|11.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,11.5,0.503,0.5,betrivers,-6.7,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|rush_yds|12.5,Kenny Gainwell,TB,@DAL,rush_yds,Under,12.5,0.507,0.5,betmgm,-6.3,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Kenny Gainwell|rush_yds|12.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,12.5,0.5,0.5,fanduel,-5.8,,,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|rec_yds|10.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,10.5,0.5,0.5,draftkings,-5.4,L,10.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|rec_yds|12.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,12.5,0.492,0.5,betrivers,-6.9,L,10.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Kenny Gainwell|rec_yds|9.5,Kenny Gainwell,TB,@DAL,rec_yds,Over,9.5,0.5,0.5,DK,-4.5,W,10.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Kenny Gainwell|receptions|1.5,Kenny Gainwell,TB,@DAL,receptions,Over,1.5,0.5,0.5,DK,-4.5,L,3.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|receptions|1.5,Kenny Gainwell,TB,@DAL,receptions,Under,1.5,0.5,0.5,betrivers,-4.5,L,3.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Kenny Gainwell|rush_rec_yds|23.5,Kenny Gainwell,TB,@DAL,rush_rec_yds,Over,23.5,0.5,0.5,DK,-4.5,W,28.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Kenny Gainwell|rush_yds|10.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,10.5,0.5,0.5,DK,-4.5,W,18.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|rush_yds|11.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,11.5,0.503,0.5,betrivers,-6.7,W,18.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|rush_yds|12.5,Kenny Gainwell,TB,@DAL,rush_yds,Under,12.5,0.507,0.5,betmgm,-6.3,W,18.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Kenny Gainwell|rush_yds|12.5,Kenny Gainwell,TB,@DAL,rush_yds,Over,12.5,0.5,0.5,fanduel,-5.8,W,18.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Kirk Cousins|completions|20.5,Kirk Cousins,LV,@NE,completions,Under,20.5,0.479,0.5,betmgm,3.0,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Kirk Cousins|completions|21.5,Kirk Cousins,LV,@NE,completions,Under,21.5,0.543,0.5,betrivers,3.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Kirk Cousins|pass_att|33.5,Kirk Cousins,LV,@NE,pass_att,Under,33.5,0.514,0.5,betmgm,-1.8,,,EV at -110 vs posted line
@@ -870,10 +870,10 @@ PROP,5,2026-10-08,Romeo Doubs|rec_yds|50.5,Romeo Doubs,NE,LV,rec_yds,Under,50.5,
 PROP,5,2026-10-08,Romeo Doubs|rec_yds|51.5,Romeo Doubs,NE,LV,rec_yds,Under,51.5,0.499,0.5,espnbet,-4.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Romeo Doubs|rec_yds|52.5,Romeo Doubs,NE,LV,rec_yds,Under,52.5,0.514,0.5,betrivers,-4.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Romeo Doubs|receptions|3.5,Romeo Doubs,NE,LV,receptions,Under,3.5,0.446,0.5,betmgm,-1.9,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Ryan Flournoy|rec_yds|30.5,Ryan Flournoy,DAL,TB,rec_yds,Under,30.5,0.509,0.5,DK,-2.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Ryan Flournoy|rec_yds|31.5,Ryan Flournoy,DAL,TB,rec_yds,Under,31.5,0.52,0.5,draftkings,-1.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Ryan Flournoy|rec_yds|32.5,Ryan Flournoy,DAL,TB,rec_yds,Under,32.5,0.527,0.5,betmgm,-2.6,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Ryan Flournoy|receptions|3.5,Ryan Flournoy,DAL,TB,receptions,Under,3.5,0.568,0.5,DK,8.4,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Ryan Flournoy|rec_yds|30.5,Ryan Flournoy,DAL,TB,rec_yds,Under,30.5,0.509,0.5,DK,-2.9,L,90.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Ryan Flournoy|rec_yds|31.5,Ryan Flournoy,DAL,TB,rec_yds,Under,31.5,0.52,0.5,draftkings,-1.9,L,90.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Ryan Flournoy|rec_yds|32.5,Ryan Flournoy,DAL,TB,rec_yds,Under,32.5,0.527,0.5,betmgm,-2.6,L,90.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Ryan Flournoy|receptions|3.5,Ryan Flournoy,DAL,TB,receptions,Under,3.5,0.568,0.5,DK,8.4,W,3.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Sam Darnold|completions|19.5,Sam Darnold,SEA,SF,completions,Under,19.5,0.543,0.5,betrivers,3.7,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Sam Darnold|pass_att|30.5,Sam Darnold,SEA,SF,pass_att,Under,30.5,0.521,0.5,betmgm,1.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Sam Darnold|pass_td|1.5,Sam Darnold,SEA,SF,pass_td,Over,1.5,0.486,0.5,betmgm,-5.1,,,EV at -110 vs posted line
@@ -895,12 +895,12 @@ PROP,5,2026-10-08,Ted Hurst III|rec_yds|22.5,Ted Hurst III,TB,@DAL,rec_yds,Under
 PROP,5,2026-10-08,Ted Hurst III|rec_yds|24.5,Ted Hurst III,TB,@DAL,rec_yds,Over,24.5,0.459,0.5,espnbet,-5.9,,,EV at -110 vs posted line
 PROP,5,2026-10-06,Ted Hurst III|receptions|1.5,Ted Hurst III,TB,@DAL,receptions,Over,1.5,0.5,0.5,DK,-4.5,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Ted Hurst III|receptions|1.5,Ted Hurst III,TB,@DAL,receptions,Under,1.5,0.5,0.5,betrivers,-4.5,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Tez Johnson|rec_yds|10.5,Tez Johnson,TB,@DAL,rec_yds,Over,10.5,0.519,0.5,DK,-0.9,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Tez Johnson|rec_yds|13.5,Tez Johnson,TB,@DAL,rec_yds,Under,13.5,0.499,0.5,betmgm,-2.6,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Tez Johnson|rec_yds|14.5,Tez Johnson,TB,@DAL,rec_yds,Under,14.5,0.522,0.5,betrivers,-3.5,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Tez Johnson|rec_yds|16.5,Tez Johnson,TB,@DAL,rec_yds,Under,16.5,0.563,0.5,espnbet,-2.0,,,EV at -110 vs posted line
-PROP,5,2026-10-06,Tez Johnson|receptions|1.5,Tez Johnson,TB,@DAL,receptions,Under,1.5,0.557,0.5,DK,6.4,,,EV at -110 vs posted line
-PROP,5,2026-10-08,Tez Johnson|receptions|1.5,Tez Johnson,TB,@DAL,receptions,Over,1.5,0.443,0.5,betrivers,12.9,,,EV at -110 vs posted line
+PROP,5,2026-10-06,Tez Johnson|rec_yds|10.5,Tez Johnson,TB,@DAL,rec_yds,Over,10.5,0.519,0.5,DK,-0.9,W,64.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Tez Johnson|rec_yds|13.5,Tez Johnson,TB,@DAL,rec_yds,Under,13.5,0.499,0.5,betmgm,-2.6,L,64.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Tez Johnson|rec_yds|14.5,Tez Johnson,TB,@DAL,rec_yds,Under,14.5,0.522,0.5,betrivers,-3.5,L,64.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Tez Johnson|rec_yds|16.5,Tez Johnson,TB,@DAL,rec_yds,Under,16.5,0.563,0.5,espnbet,-2.0,L,64.0,EV at -110 vs posted line
+PROP,5,2026-10-06,Tez Johnson|receptions|1.5,Tez Johnson,TB,@DAL,receptions,Under,1.5,0.557,0.5,DK,6.4,W,1.0,EV at -110 vs posted line
+PROP,5,2026-10-08,Tez Johnson|receptions|1.5,Tez Johnson,TB,@DAL,receptions,Over,1.5,0.443,0.5,betrivers,12.9,W,1.0,EV at -110 vs posted line
 PROP,5,2026-10-08,Tony Pollard|rec_yds|7.5,Tony Pollard,TEN,HOU,rec_yds,Under,7.5,0.513,0.5,betmgm,0.1,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Tony Pollard|rec_yds|8.5,Tony Pollard,TEN,HOU,rec_yds,Under,8.5,0.543,0.5,draftkings,0.8,,,EV at -110 vs posted line
 PROP,5,2026-10-08,Tony Pollard|receptions|1.5,Tony Pollard,TEN,HOU,receptions,Over,1.5,0.539,0.5,betmgm,-2.9,,,EV at -110 vs posted line
@@ -995,8 +995,8 @@ PROP,5,2026-10-08,Zay Flowers|rec_yds|69.5,Zay Flowers,BAL,@ATL,rec_yds,Under,69
 PROP,5,2026-10-08,Zay Flowers|receptions|5.5,Zay Flowers,BAL,@ATL,receptions,Under,5.5,0.538,0.5,betmgm,-0.7,,,EV at -110 vs posted line
 TD,5,2026-10-06,Braelon Allen|td,Braelon Allen,NYJ,CLE,anytime_td,NO,0.5,0.3,0.465,Kalshi,0.165,,,bid 0.44 ask 0.49
 TD,5,2026-10-06,Cam Skattebo|td,Cam Skattebo,NYG,@WAS,anytime_td,NO,0.5,0.368,0.49,Kalshi,0.122,,,bid 0.45 ask 0.53
-TD,5,2026-10-06,George Pickens|td,George Pickens,DAL,TB,anytime_td,NO,0.5,0.261,0.405,Kalshi,0.144,,,bid 0.4 ask 0.41
-TD,5,2026-10-06,Jake Ferguson|td,Jake Ferguson,DAL,TB,anytime_td,YES,0.5,0.369,0.285,Kalshi,0.084,,,bid 0.28 ask 0.29
+TD,5,2026-10-06,George Pickens|td,George Pickens,DAL,TB,anytime_td,NO,0.5,0.261,0.405,Kalshi,0.144,L,1,bid 0.4 ask 0.41
+TD,5,2026-10-06,Jake Ferguson|td,Jake Ferguson,DAL,TB,anytime_td,YES,0.5,0.369,0.285,Kalshi,0.084,L,0,bid 0.28 ask 0.29
 TD,5,2026-10-06,Jaylen Warren|td,Jaylen Warren,PIT,IND,anytime_td,NO,0.5,0.323,0.48,Kalshi,0.157,,,bid 0.46 ask 0.5
 TD,5,2026-10-08,Romeo Doubs|td,Romeo Doubs,NE,LV,anytime_td,YES,0.5,0.406,0.315,Kalshi,0.091,,,bid 0.28 ask 0.35
 TOTAL,5,2026-10-06,2026_05_BUF_LA,,BUF@LAR,,total,UNDER 54.5,54.5,49.4,54.5,DK,-5.1,,,
@@ -1006,3 +1006,82 @@ TOTAL,5,2026-10-06,2026_05_DET_ARI,,DET@ARI,,total,UNDER 54.5,54.5,51.1,54.5,DK,
 TOTAL,5,2026-10-06,2026_05_HOU_TEN,,HOU@TEN,,total,OVER 39.5,39.5,43.4,39.5,DK,3.9,,,
 TOTAL,5,2026-10-06,2026_05_LV_NE,,LV@NE,,total,UNDER 45.5,45.5,40.9,45.5,DK,-4.6,,,
 TOTAL,5,2026-10-06,2026_05_MIN_NO,,MIN@NO,,total,UNDER 42.5,42.5,39.5,42.5,DK,-3.0,,,
+DFS,6,2026-10-13,dfs|afternoon,,,,dk_classic,afternoon,,151.42,,uncapped,,,,projected DK points; graded = actual DK points
+DFS,6,2026-10-13,dfs|early,,,,dk_classic,early,,143.3,,uncapped,,,,projected DK points; graded = actual DK points
+DFS,6,2026-10-13,dfs|full,,,,dk_classic,full,,168.25,,uncapped,,,,projected DK points; graded = actual DK points
+DFS,6,2026-10-13,dfs|main,,,,dk_classic,main,,161.29,,uncapped,,,,projected DK points; graded = actual DK points
+DFS,6,2026-10-13,dfs|primetime,,,,dk_classic,primetime,,140.63,,uncapped,,,,projected DK points; graded = actual DK points
+PROP,6,2026-10-13,Blake Corum|rush_yds|31.5,Blake Corum,LAR,ARI,rush_yds,Over,31.5,0.546,0.5,espnbet,-1.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Blake Corum|rush_yds|32.5,Blake Corum,LAR,ARI,rush_yds,Over,32.5,0.526,0.5,draftkings,-0.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Blake Corum|rush_yds|33.5,Blake Corum,LAR,ARI,rush_yds,Over,33.5,0.517,0.5,betrivers,-2.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Colby Parkinson|rec_yds|16.5,Colby Parkinson,LAR,ARI,rec_yds,Under,16.5,0.505,0.5,betrivers,-5.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Colby Parkinson|rec_yds|17.5,Colby Parkinson,LAR,ARI,rec_yds,Under,17.5,0.512,0.5,betmgm,-4.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Colby Parkinson|receptions|1.5,Colby Parkinson,LAR,ARI,receptions,Under,1.5,0.488,0.5,betrivers,-6.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dalton Kincaid|rec_yds|49.5,Dalton Kincaid,BUF,@LV,rec_yds,Under,49.5,0.524,0.5,betrivers,-2.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dalton Kincaid|rec_yds|50.5,Dalton Kincaid,BUF,@LV,rec_yds,Under,50.5,0.529,0.5,betmgm,-1.0,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dalton Kincaid|rec_yds|51.5,Dalton Kincaid,BUF,@LV,rec_yds,Under,51.5,0.53,0.5,draftkings,1.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dalton Kincaid|rec_yds|54.5,Dalton Kincaid,BUF,@LV,rec_yds,Under,54.5,0.557,0.5,espnbet,0.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dalton Kincaid|receptions|4.5,Dalton Kincaid,BUF,@LV,receptions,Under,4.5,0.65,0.5,betmgm,4.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Davante Adams|rec_yds|62.5,Davante Adams,LAR,ARI,rec_yds,Over,62.5,0.55,0.5,espnbet,0.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Davante Adams|rec_yds|63.5,Davante Adams,LAR,ARI,rec_yds,Over,63.5,0.538,0.5,betmgm,0.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Davante Adams|rec_yds|64.5,Davante Adams,LAR,ARI,rec_yds,Over,64.5,0.535,0.5,betrivers,0.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Davante Adams|receptions|4.5,Davante Adams,LAR,ARI,receptions,Over,4.5,0.512,0.5,betmgm,-2.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dawson Knox|rec_yds|10.5,Dawson Knox,BUF,@LV,rec_yds,Over,10.5,0.521,0.5,draftkings,0.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Dawson Knox|receptions|1.5,Dawson Knox,BUF,@LV,receptions,Over,1.5,0.444,0.5,draftkings,0.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Jordan Whittington|rec_yds|5.5,Jordan Whittington,LAR,ARI,rec_yds,Over,5.5,0.555,0.5,betrivers,1.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Jordan Whittington|rec_yds|6.5,Jordan Whittington,LAR,ARI,rec_yds,Over,6.5,0.545,0.5,betmgm,1.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Jordan Whittington|receptions|0.5,Jordan Whittington,LAR,ARI,receptions,Over,0.5,0.589,0.5,betrivers,-5.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|completions|20.5,Josh Allen,BUF,@LV,completions,Under,20.5,0.533,0.5,betrivers,1.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|completions|21.5,Josh Allen,BUF,@LV,completions,Under,21.5,0.577,0.5,espnbet,2.1,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_att|32.5,Josh Allen,BUF,@LV,pass_att,Under,32.5,0.561,0.5,betmgm,-2.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_td|1.5,Josh Allen,BUF,@LV,pass_td,Over,1.5,0.501,0.5,betmgm,-6.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_td|1.5,Josh Allen,BUF,@LV,pass_td,Under,1.5,0.494,0.5,draftkings,-5.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_yds|243.5,Josh Allen,BUF,@LV,pass_yds,Under,243.5,0.506,0.5,betmgm,-5.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_yds|244.5,Josh Allen,BUF,@LV,pass_yds,Under,244.5,0.507,0.5,draftkings,-3.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|pass_yds|245.5,Josh Allen,BUF,@LV,pass_yds,Under,245.5,0.511,0.5,betrivers,-5.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|rush_att|6.5,Josh Allen,BUF,@LV,rush_att,Under,6.5,0.427,0.5,espnbet,2.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|rush_att|7.5,Josh Allen,BUF,@LV,rush_att,Under,7.5,0.54,0.5,draftkings,0.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|rush_yds|36.5,Josh Allen,BUF,@LV,rush_yds,Under,36.5,0.561,0.5,betmgm,4.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Josh Allen|rush_yds|37.5,Josh Allen,BUF,@LV,rush_yds,Under,37.5,0.566,0.5,betrivers,5.0,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Keon Coleman|rec_yds|37.5,Keon Coleman,BUF,@LV,rec_yds,Over,37.5,0.516,0.5,espnbet,-5.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Keon Coleman|rec_yds|38.5,Keon Coleman,BUF,@LV,rec_yds,Over,38.5,0.507,0.5,draftkings,-4.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Keon Coleman|receptions|2.5,Keon Coleman,BUF,@LV,receptions,Over,2.5,0.609,0.5,draftkings,-4.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Khalil Shakir|rec_yds|43.5,Khalil Shakir,BUF,@LV,rec_yds,Over,43.5,0.531,0.5,draftkings,0.1,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Khalil Shakir|receptions|4.5,Khalil Shakir,BUF,@LV,receptions,Under,4.5,0.555,0.5,draftkings,-4.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Khalil Shakir|receptions|4.5,Khalil Shakir,BUF,@LV,receptions,Over,4.5,0.434,0.5,fanduel,-6.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Konata Mumpfield|rec_yds|7.5,Konata Mumpfield,LAR,ARI,rec_yds,Over,7.5,0.52,0.5,betmgm,-1.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Konata Mumpfield|receptions|0.5,Konata Mumpfield,LAR,ARI,receptions,Under,0.5,0.46,0.5,betrivers,-12.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Konata Mumpfield|receptions|0.5,Konata Mumpfield,LAR,ARI,receptions,Over,0.5,0.619,0.5,draftkings,-3.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rec_yds|19.5,Kyren Williams,LAR,ARI,rec_yds,Over,19.5,0.538,0.5,betmgm,-6.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rec_yds|21.5,Kyren Williams,LAR,ARI,rec_yds,Over,21.5,0.502,0.5,betrivers,-5.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|receptions|2.5,Kyren Williams,LAR,ARI,receptions,Over,2.5,0.575,0.5,betmgm,-2.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_att|14.5,Kyren Williams,LAR,ARI,rush_att,Under,14.5,0.494,0.5,betmgm,-5.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_att|15.5,Kyren Williams,LAR,ARI,rush_att,Under,15.5,0.542,0.5,draftkings,-3.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_yds|68.5,Kyren Williams,LAR,ARI,rush_yds,Over,68.5,0.519,0.5,fanduel,-2.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_yds|69.5,Kyren Williams,LAR,ARI,rush_yds,Over,69.5,0.516,0.5,betmgm,-3.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_yds|70.5,Kyren Williams,LAR,ARI,rush_yds,Over,70.5,0.512,0.5,betrivers,-4.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Kyren Williams|rush_yds|71.5,Kyren Williams,LAR,ARI,rush_yds,Over,71.5,0.511,0.5,draftkings,-2.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|completions|22.5,Matthew Stafford,LAR,ARI,completions,Under,22.5,0.502,0.5,betrivers,-4.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|completions|23.5,Matthew Stafford,LAR,ARI,completions,Under,23.5,0.532,0.5,betmgm,-4.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_att|36.5,Matthew Stafford,LAR,ARI,pass_att,Under,36.5,0.484,0.5,betmgm,-3.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_att|37.5,Matthew Stafford,LAR,ARI,pass_att,Under,37.5,0.518,0.5,draftkings,-2.0,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_td|2.5,Matthew Stafford,LAR,ARI,pass_td,Over,2.5,0.384,0.5,betmgm,-5.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_td|2.5,Matthew Stafford,LAR,ARI,pass_td,Under,2.5,0.602,0.5,draftkings,-5.5,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_yds|277.5,Matthew Stafford,LAR,ARI,pass_yds,Over,277.5,0.506,0.5,fanduel,-4.9,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_yds|279.5,Matthew Stafford,LAR,ARI,pass_yds,Over,279.5,0.504,0.5,espnbet,-5.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_yds|280.5,Matthew Stafford,LAR,ARI,pass_yds,Over,280.5,0.5,0.5,draftkings,-5.0,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_yds|281.5,Matthew Stafford,LAR,ARI,pass_yds,Under,281.5,0.501,0.5,betmgm,-6.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|pass_yds|283.5,Matthew Stafford,LAR,ARI,pass_yds,Under,283.5,0.506,0.5,betrivers,-5.1,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|rush_yds|0.5,Matthew Stafford,LAR,ARI,rush_yds,Over,0.5,0.502,0.5,draftkings,8.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Matthew Stafford|rush_yds|1.5,Matthew Stafford,LAR,ARI,rush_yds,Over,1.5,0.507,0.5,fanduel,2.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Puka Nacua|rec_yds|92.5,Puka Nacua,LAR,ARI,rec_yds,Under,92.5,0.529,0.5,fanduel,-0.8,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Puka Nacua|rec_yds|93.5,Puka Nacua,LAR,ARI,rec_yds,Under,93.5,0.529,0.5,betmgm,-1.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Puka Nacua|rec_yds|94.5,Puka Nacua,LAR,ARI,rec_yds,Under,94.5,0.532,0.5,betrivers,-1.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Puka Nacua|receptions|6.5,Puka Nacua,LAR,ARI,receptions,Under,6.5,0.497,0.5,fanduel,9.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Puka Nacua|receptions|7.5,Puka Nacua,LAR,ARI,receptions,Under,7.5,0.6,0.5,betmgm,4.4,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Ty Johnson|rec_yds|10.5,Ty Johnson,BUF,@LV,rec_yds,Over,10.5,0.536,0.5,draftkings,-1.3,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Ty Johnson|rec_yds|11.5,Ty Johnson,BUF,@LV,rec_yds,Over,11.5,0.506,0.5,espnbet,-1.2,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Ty Johnson|rec_yds|12.5,Ty Johnson,BUF,@LV,rec_yds,Over,12.5,0.52,0.5,betmgm,-4.7,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Ty Johnson|receptions|2.5,Ty Johnson,BUF,@LV,receptions,Under,2.5,0.669,0.5,draftkings,2.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Tyler Higbee|rec_yds|25.5,Tyler Higbee,LAR,ARI,rec_yds,Over,25.5,0.581,0.5,betrivers,8.6,,,EV at -110 vs posted line
+PROP,6,2026-10-13,Tyler Higbee|receptions|2.5,Tyler Higbee,LAR,ARI,receptions,Over,2.5,0.577,0.5,betrivers,2.1,,,EV at -110 vs posted line
