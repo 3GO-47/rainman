@@ -219,7 +219,7 @@ tr.bdrow td{background:var(--k66,rgba(255,213,79,.06))}
  .grid2,.grid3{grid-template-columns:1fr}
  .panel{overflow-x:auto}
  .sm-row{min-width:860px}
- #tdTbl,#labTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#tdb>.controls{overflow-x:auto}
+ #tdTbl,#labTbl,#rkTbl,#skTbl,#chOut,#inSm,#inRest,#dcOut,#pOut,#matrixTblWrap,#tdb>.controls,#h2h>.controls,#h2hP>.controls{overflow-x:auto}
  table{font-size:10.5px}
  th{position:static}
  .controls{gap:6px}
@@ -804,6 +804,7 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .lgrid.full table.lgt th[data-k="td"]{letter-spacing:0;padding-left:1px;padding-right:1px}
 .lgrid.full table.lgt td.tdg{font:600 10.5px var(--mono);color:var(--txt);font-variant-numeric:tabular-nums}
 .lgrid.full table.lgt td.tdg.stale{color:var(--dim2);font-weight:500}
+.lgrid.hh th.op{letter-spacing:0}
 .lgrid.hh td.hn{text-align:right;font:600 10.5px var(--mono);color:var(--dim)}
 .lgrid.hh td.hp{text-align:right;white-space:nowrap}.lgrid.hh td.hp b{font:700 11px var(--mono);color:var(--txt)}
 .lgrid.hh td.hp i{font-style:normal;font-size:9px;margin-left:3px}.lgrid.hh td.hp.rise b,.lgrid.hh td.hp.rise i{color:var(--green)}.lgrid.hh td.hp.fall b,.lgrid.hh td.hp.fall i{color:var(--red)}
@@ -913,7 +914,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <main>
 <div id="home"><div id="homeTop"></div><div id="insights" data-sub="insights"></div></div>
 <div id="chamber" hidden></div>
-<div id="players" hidden><div id="dcView" class="panel"></div><div id="lab"></div><hr class="sep"><div id="player"></div></div>
+<div id="players" hidden><div id="dcView" class="panel"></div><div id="lab"></div><div id="h2hP" hidden></div><hr class="sep"><div id="player"></div></div>
 <div id="defenses" hidden><div class="tabs" id="defTabs">
 <button data-t="ranks" class="on">Rankings</button><button data-t="matrix">Matrix</button><button data-t="defense">Observatory</button></div>
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
@@ -1165,6 +1166,7 @@ const SECTIONS=[
    {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
    {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
+   {id:'h2hp',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent — his own per-game averages in every prior meeting we have logs for, four columns by position',c:'players',sub:'h2hp'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
  {id:'intel',fk:'F4',label:'Intel',items:[
@@ -1195,7 +1197,7 @@ function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec
   nav.querySelectorAll('.sitem').forEach(el=>el.onclick=e=>{e.preventDefault();go(el.dataset.i)})}
 function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='home')document.querySelectorAll('#home [data-sub]').forEach(e=>e.hidden=e.dataset.sub!==it.sub);
-  if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
+  if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',h2hp:'#h2hP',player:'#player'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
   if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub})}
@@ -1211,6 +1213,7 @@ const INTRO={
  matchups:{what:'One game per screen. Both offenses against the defense they face, slot by slot, with the lines, the projection and how much each player actually plays.',how:['the strip under the header shows which offense has the softer field at each slot (lower number = softer)','his 2026 /g = the player\'s own per-game averages this season','opp allows = what the defense gives up to that slot per game, with its league rank','proj = projected PPR points with a floor–ceiling band']},
  tdgrid:{how:['the F6 draft of the TD Board, left exactly as it was \u2014 columns scroll inside themselves and the depth filter is the original 1st-string / top-2 / all select','the live version is F2 Matchups \u2192 TD Board']},
  h2h:{how:['every number is the player\u2019s own per-game average in the games he has already played against this week\u2019s opponent, any season, whichever team he was on','n = how many of those games there are \u2014 a 1 is one game, read it that way','PPR \u25b2 / \u25bc = at least 10% above / below his average over every logged game','the slot chips pick which depths appear; the minimum hides thin samples','columns sort on their own; click a name for his card and the full log']},
+ h2hp:{how:['every number is the player\u2019s own per-game average in the games he has already played against this week\u2019s opponent, any season, whichever team he was on','n = how many of those games there are \u2014 a 1 is one game, read it that way','PPR \u25b2 / \u25bc = at least 10% above / below his average over every logged game','the slot chips pick which depths appear; the minimum hides thin samples','columns sort on their own; click a name for his card and the full log']},
  tdboard:{how:['the fields pane gives the three softest end zones for each role this week','below it, touchdowns five ways: one board of every slot owner, then QB, RB, WR and TE on their own','the number under each data set is the opponent\u2019s rank for TDs allowed to that slot','rank 1 of 32 = allows the most touchdowns = the best end-zone matchup','TD/G is the player\u2019s own touchdowns per game this season \u2014 dim means he has not played yet this year, so it is his whole log','a QB has two TD-allowed stats \u2014 pick which one his column reads; TD/G follows the same pick','every column sorts on its own']},
  explorer:{what:'Any player: his full game log across every scraped season, his usage, and his next four opponents.',how:['type a name, or click any player anywhere on the site','ppr = PPR fantasy points that game','snap% / tgt% = share of offensive snaps and team targets']},
  depth:{what:'Who actually holds each spot this week — offense skill positions and the defensive back seven. Injured starters drop and the next man moves up.',how:['chip order = effective depth (1 = starter)','Q = questionable, OUT = out','▲▼ = workload rising or fading over the last two games','small text = snap share · opportunities per game']},
@@ -3928,22 +3931,23 @@ const H2H_STATS={
   RB:[['RuY',l=>l[LOG.ry]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rtd]+l[LOG.rectd]]],
   WR:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]],
   TE:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]]};
-function h2hGrid(){
+function h2hGrid(root='#h2h',px='hh',legacy=true){
+  const id=k=>px+k,$$=k=>$('#'+px+k);
   const live=new Set(TD_SLOTS);
-  $('#h2h').innerHTML=`<div class="controls">
-    <span class="chips" id="hhSlots" title="which depth slots the board covers — click to toggle, ALL for every body on the chart">
+  $(root).innerHTML=`<div class="controls">
+    <span class="chips" id="${id('Slots')}" title="which depth slots the board covers — click to toggle, ALL for every body on the chart">
       <button data-s="">all</button>${TD_SLOTS.map(s=>`<button data-s="${s}" class="on">${s}</button>`).join('')}</span>
-    <select id="hhSe" title="which seasons of history count"><option value="">all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option>${ALL_SE.slice().reverse().map(s=>`<option value="${s}">${s} only</option>`).join('')}</select>
-    <select id="hhInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
-    <select id="hhMin" title="hide players with fewer prior meetings than this"><option value="0">any history</option><option value="1" selected>1+ prior game</option><option value="2">2+ prior games</option><option value="3">3+ prior games</option></select>
-    <input id="hhQ" placeholder="search player..." size="15">
+    <select id="${id('Se')}" title="which seasons of history count"><option value="">all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option>${ALL_SE.slice().reverse().map(s=>`<option value="${s}">${s} only</option>`).join('')}</select>
+    <select id="${id('Inj')}"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="${id('Min')}" title="hide players with fewer prior meetings than this"><option value="0">any history</option><option value="1" selected>1+ prior game</option><option value="2">2+ prior games</option><option value="3">3+ prior games</option></select>
+    <input id="${id('Q')}" placeholder="search player..." size="15">
     <span class="note">head to head. Every number is the player's <b>own average in the games he has already played against this week's opponent</b> — any season we have logs for, whichever team he was on — and <b>n</b> is how many of those games exist. PPR carries ▲ / ▼ against his average over every logged game, so a row says at a glance whether this defense has historically been a better or worse day than his norm. Thin samples are thin: a 1 next to a big number is one game. Columns sort on their own; click a name for his card and the full log.</span>
   </div>
-  <div class="lgrid full hh">${TPOS.map(p=>`<section class="lgcol"><h3>${posIcon(p,12)} ${p} <span class="gl">vs this week's opponent · his own games</span><span class="f" id="hhN${p}"></span></h3><div id="hhB${p}"></div></section>`).join('')}</div>`;
+  <div class="lgrid full hh">${TPOS.map(p=>`<section class="lgcol"><h3>${posIcon(p,12)} ${p} <span class="gl">vs this week's opponent · his own games</span><span class="f" id="${id('N')}${p}"></span></h3><div id="${id('B')}${p}"></div></section>`).join('')}</div>`;
   const sort={};TPOS.forEach(p=>sort[p]={k:'ppr',a:false});
   function col(p){
-    const st=sort[p],se=$('#hhSe').value,min=+$('#hhMin').value;
-    const o={hin:$('#hhInj').value,q:$('#hhQ').value};if(live.size)o.slots=live;
+    const st=sort[p],se=$$('Se').value,min=+$$('Min').value;
+    const o={hin:$$('Inj').value,q:$$('Q').value};if(live.size)o.slots=live;
     const S=H2H_STATS[p];
     const R=tRows(p,'combined',o).map(x=>{
       const L=PLOGS[x.u.ln||x.u.player]||[];
@@ -3958,33 +3962,33 @@ function h2hGrid(){
       else if(st.k[0]==='h'){const i=+st.k.slice(1);x=a.vals[i]==null?miss:a.vals[i];y=b.vals[i]==null?miss:b.vals[i]}
       else{x=tSortVal(a,st.k,st.a);y=tSortVal(b,st.k,st.a)}
       return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
-    $('#hhN'+p).textContent=R.length+(R.length===1?' player':' players');
+    $(root+' #'+px+'N'+p).textContent=R.length+(R.length===1?' player':' players');
     const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const wname=27,wopp=15,wn=8,wppr=13,wnum=((100-wname-wopp-wn-wppr)/S.length).toFixed(2);
-    const num=v=>v==null?'<span class="dim">·</span>':tNum(v);
+    const wname=legacy?27:26,wopp=legacy?15:16,wn=legacy?8:7,wppr=legacy?13:12,wnum=((100-wname-wopp-wn-wppr)/S.length).toFixed(2);
+    const num=v=>v==null?'<span class="dim">·</span>':(!legacy&&v===0)?'<span class="dim">0</span>':tNum(v);
     const pprCell=x=>{if(x.ppr==null)return '<td class="md hp"><span class="dim">·</span></td>';
       const d=x.base!=null&&x.base>0?x.ppr/x.base-1:null;const cls=d==null?'':d>=.1?'rise':d<=-.1?'fall':'';
       const tip=`${x.ppr.toFixed(1)} PPR per game vs ${x.opp} over ${x.n} game${x.n===1?'':'s'}${x.base!=null?` · his average over all ${x.gpAll} logged games: ${x.base.toFixed(1)}`:''}${x.last?` · last meeting ${x.last[LOG.season]} wk ${x.last[LOG.week]}`:''}`;
       return `<td class="md hp ${cls}" title="${esc(tip)}"><b>${x.ppr.toFixed(1)}</b>${d==null?'':`<i>${d>=0?'▲':'▼'}</i>`}</td>`};
-    $('#hhB'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%"><col style="width:${wopp}%"><col style="width:${wn}%">${S.map(()=>`<col style="width:${wnum}%">`).join('')}<col style="width:${wppr}%"></colgroup><thead>
+    $(root+' #'+px+'B'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%"><col style="width:${wopp}%"><col style="width:${wn}%">${S.map(()=>`<col style="width:${wnum}%">`).join('')}<col style="width:${wppr}%"></colgroup><thead>
       <tr class="hd">${th('player','Player')}${th('opp','Opp',"this week's opponent")}${th('n','n','how many games he has played against this opponent in the logs','md')}
       ${S.map(([h],i)=>th('h'+i,h,h+' per game in those meetings','op'+(i===0?' gs':''))).join('')}
       ${th('ppr','PPR','PPR points per game in those meetings · ▲ at least 10% above his overall average, ▼ at least 10% below','md gs')}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
         <td>${x.opp?oppcell(x.oppRaw):'<span class="dim">bye</span>'}</td>
-        <td class="md hn">${x.n||'<span class="dim">0</span>'}</td>
+        <td class="md hn" title="${x.last?esc(`last meeting ${x.last[LOG.season]} wk ${x.last[LOG.week]}`):''}">${x.n||'<span class="dim">0</span>'}</td>
         ${x.vals.map((v,i)=>`<td class="op${i===0?' gs':''}" title="${v==null?'no prior meetings':S[i][0]+' '+v.toFixed(2)+' per game over '+x.n+' game'+(x.n===1?'':'s')}">${num(v)}</td>`).join('')}
         ${pprCell(x)}</tr>`).join('')||`<tr><td colspan="${S.length+4}" class="dim">nobody here has faced this week's opponent before${min?' — drop the minimum to see the rest':''}</td></tr>`}</tbody></table>`;
-    $('#hhB'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
+    $(root+' #'+px+'B'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{
       if(st.k===h.dataset.k)st.a=!st.a;else{st.k=h.dataset.k;st.a=h.dataset.k==='player'||h.dataset.k==='opp'}col(p)});
-    tWire($('#hhB'+p));
-    const sec=$('#hhB'+p).closest('.lgcol'),h=sec&&sec.querySelector('h3');if(h)sec.style.setProperty('--h3h',h.offsetHeight+'px');
+    tWire($(root+' #'+px+'B'+p));
+    const sec=$(root+' #'+px+'B'+p).closest('.lgcol'),h=sec&&sec.querySelector('h3');if(h)sec.style.setProperty('--h3h',h.offsetHeight+'px');
   }
   const all=()=>TPOS.forEach(col);
-  ['hhSe','hhInj','hhMin'].forEach(i=>$('#'+i).onchange=all);$('#hhQ').oninput=all;
-  $('#hhSlots').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
+  ['Se','Inj','Min'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=all;
+  $$('Slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
     if(!v)live.clear(); else live.has(v)?live.delete(v):live.add(v);
-    $('#hhSlots').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));all()});
+    $$('Slots').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));all()});
   all();RR.push(all);
 }
 
@@ -4148,7 +4152,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',h2hGrid]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',games],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',()=>h2hGrid('#h2hP','hp',false)]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
