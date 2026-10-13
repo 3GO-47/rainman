@@ -14,7 +14,7 @@ Rules (all frozen the first time a week is built, graded later, never rewritten)
   DFS   one row per slate entry: projected points vs the real DK points once the slate has played.
 Each row carries the market reference it was judged against so the record can be audited pick by pick.
 """
-import os, sys, glob
+import os, re, sys, glob
 import numpy as np, pandas as pd
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 P = 'data/processed/'
@@ -87,6 +87,10 @@ def main(week=None):
         for r in csv.DictReader(open(dcs[-1], encoding='utf-8')): ln[(r['player'], r['team'])] = r.get('log_name') or r['player']
     dfs = pd.read_csv(P + 'dfs_summary.csv') if os.path.exists(P + 'dfs_summary.csv') else pd.DataFrame()
     bl_res = {f'{r.player}|{r.market}|{r.line}': (r.result, r.actual) for r in bl.itertuples()} if len(bl) else {}
+    PROP_COL = {'pass_yds': ['pass_yds'], 'pass_td': ['pass_td'], 'pass_att': ['pass_att'], 'completions': ['cmp'], 'interceptions': ['int'], 'rush_yds': ['rush_yds'],
+                'rush_att': ['rush_att'], 'receptions': ['rec'], 'rec_yds': ['rec_yds'], 'rush_rec_yds': ['rush_yds', 'rec_yds'], 'pass_rush_yds': ['pass_yds', 'rush_yds']}
+    if '--regrade' in sys.argv:   # wipe every prop / spread / total grade and redo it from the frozen line (one-off after a grading fix)
+        m = allp.type.isin(['PROP', 'ATS', 'TOTAL']); allp.loc[m, 'result'] = ''; allp.loc[m, 'actual'] = ''
     for i, r in allp.iterrows():
         if isinstance(r.result, str) and r.result in ('W', 'L', 'P'): continue
         t = r.type
@@ -98,14 +102,30 @@ def main(week=None):
                 winner = g.home_team if margin > 0 else g.away_team if margin < 0 else None
                 allp.at[i, 'result'] = 'P' if winner is None else ('W' if winner == r.side else 'L'); allp.at[i, 'actual'] = f'{g.away_score:g}-{g.home_score:g}'
             elif t == 'ATS':
-                res = g.res_ats if isinstance(g.res_ats, str) else ''
-                if res: allp.at[i, 'result'] = {'PUSH': 'P'}.get(res, res); allp.at[i, 'actual'] = margin
+                # graded against the FROZEN side and number ("BAL +2.5"), never the model's current pick
+                m = re.match(r'^(\w+)\s*([+-]?\d+(?:\.\d+)?)$', str(r.side).strip())
+                if not m: continue
+                tm, num = m.group(1), float(m.group(2))
+                cov = (margin if tm == g.home_team else -margin) + num
+                allp.at[i, 'result'] = 'P' if cov == 0 else ('W' if cov > 0 else 'L'); allp.at[i, 'actual'] = margin
             else:
-                res = g.res_total if isinstance(g.res_total, str) else ''
-                if res: allp.at[i, 'result'] = {'PUSH': 'P'}.get(res, res); allp.at[i, 'actual'] = g.total
+                m = re.match(r'^(OVER|UNDER)\s*(\d+(?:\.\d+)?)$', str(r.side).strip().upper())
+                if not m or g.total != g.total: continue
+                d = float(g.total) - float(m.group(2))
+                allp.at[i, 'result'] = 'P' if d == 0 else ('W' if (d > 0) == (m.group(1) == 'OVER') else 'L'); allp.at[i, 'actual'] = g.total
         elif t == 'PROP':
-            res, act = bl_res.get(r.ref, ('', ''))
-            if isinstance(res, str) and res: allp.at[i, 'result'] = res; allp.at[i, 'actual'] = act
+            # graded from the game log against the frozen line and side; the ledger (keyed without a side) only as a fallback
+            col = PROP_COL.get(r.market)
+            name = ln.get((r.player, r.team), r.player)
+            gl = logs[(logs.week == r.week) & (logs.team == r.team) & (logs.player == name)]
+            played = ((logs.week == r.week) & (logs.team == r.team)).any()
+            if col and (len(gl) or played) and r.line == r.line:
+                act = float(sum(gl.iloc[0][c] for c in col)) if len(gl) else 0.0
+                d = act - float(r.line); over = str(r.side).strip().lower().startswith('o')
+                allp.at[i, 'result'] = 'P' if d == 0 else ('W' if (d > 0) == over else 'L'); allp.at[i, 'actual'] = act
+            else:
+                res, act = bl_res.get(r.ref, ('', ''))
+                if isinstance(res, str) and res: allp.at[i, 'result'] = res; allp.at[i, 'actual'] = act
         elif t == 'TD':
             name = ln.get((r.player, r.team), r.player)
             g = logs[(logs.week == r.week) & (logs.team == r.team) & (logs.player == name)]
