@@ -90,6 +90,22 @@ def main():
     for f in [f for f in ['data/raw/odds_api/props_current.csv'] if os.path.exists(f)]:
         O = pd.read_csv(f); O = O[O.market == 'anytime_td']
         for r in O.itertuples(): prices.setdefault(key(r.player), {})[r.book] = float(r.price)
+    # exchanges: the YES ask is what a touchdown costs to buy — one-sided books count (there is no second side to de-vig), Kalshi ANYTD when it opens
+    import glob
+    for f in sorted(glob.glob('data/raw/markets/polymarket_td_*.txt'))[-1:]:
+        for line in open(f, encoding='utf-8'):
+            x = line.rstrip('\n').split('|')
+            if len(x) < 5 or x[0] != 'T': continue
+            try: ask = float(x[4])
+            except ValueError: continue
+            if 0 < ask < 1: prices.setdefault(key(x[1]), {})['Polymarket'] = float(fair(ask))
+    for f in sorted(glob.glob('data/raw/markets/kalshi_*.txt'))[-1:]:
+        for line in open(f, encoding='utf-8'):
+            x = line.rstrip('\n').split('|')
+            if len(x) < 10 or x[0] != 'K2' or 'ANYTD' not in x[1]: continue
+            try: ask = float(x[9])
+            except ValueError: continue
+            if 0 < ask < 1: prices.setdefault(key(x[5] or x[4]), {})['Kalshi'] = float(fair(ask))
     rows = []
     for r in T.itertuples():
         p = float(r.p_yes); pr = prices.get(r.k, {}); bk, best = (max(pr.items(), key=lambda kv: kv[1]) if pr else (None, None))
@@ -100,7 +116,7 @@ def main():
                          fair=fair(p), book=bk, price=best, ev=round(100 * (pa * dec(best) - 1), 1) if best else None, w_model=round(w_, 3),
                          matchup_x=r.matchup_x, game_x=r.game_x, team_implied=r.team_implied))
     pd.DataFrame(rows).sort_values('p_model', ascending=False).to_csv('data/processed/bet_td.csv', index=False)
-    print(f'bet_td.csv: {len(rows)} anytime-TD prices ({sum(1 for x in rows if x["price"])} with a book price)')
+    print(f'bet_td.csv: {len(rows)} anytime-TD prices ({sum(1 for x in rows if x["price"])} with a book or exchange price)')
     print(f'bet_lines.csv: {len(B)} priced lines · books {sorted(B.book.unique()) if len(B) else []}')
     ledger(B)
     corr()

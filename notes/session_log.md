@@ -511,3 +511,9 @@
 ## n57 — 2026-10-14 · v8d (grid panes justify themselves)
 - Player Grid pane → "prop fields by role": per role the three best prop spots — stat, opponent allows/g + rank pill, his season & L5 averages, the posted line (book first; Kalshi rung nearest his average if no book line; o% = frozen model over prob). Score = softness of the field for that stat (0-100) ± 25 × his form vs the line (or vs his average when no line). One entry per player.
 - H2H Grid pane → "history by role": pill = PPR/g vs the opponent; stat line = games, per-game numbers by position, Δ vs his own average; ranked by Δ weighted by games.
+
+## n58 — 2026-10-14 · anytime-TD odds on the TD Grid
+- Sources checked: Odds API (5 credits left — props paused), ESPN propBets (empty), Kalshi KXNFLANYTD (series exists, no week-6 markets open yet), Polymarket (264 anytime-TD markets for wk 6, most empty books; 75 with a real YES ask and ≥ $10 liquidity).
+- data/raw/markets/polymarket_td_<date>.txt (T|player|game|date|yesAsk|yesBid|liquidity): pulled via Chrome today; pull_markets.py now writes it on every loop run and also asks Kalshi for ANYTD.
+- build_bets.py prices anytime TD from the exchanges when no book price exists (YES ask → American). bet_td.csv: 74 priced (Polymarket).
+- TD Grid fields pane: each top pick carries allows/g, model %, fair, and the best posted price with EV. TD Board price column names its source.

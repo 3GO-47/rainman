@@ -55,7 +55,7 @@ def kalshi(G):
     n = 0
     for lg, pre in KALSHI.items():
         if lg not in leagues: continue
-        for s in ('GAME', 'SPREAD', 'TOTAL'):
+        for s in ('GAME', 'SPREAD', 'TOTAL', 'ANYTD'):
             cur = ''
             for _ in range(8):
                 try: j = json.loads(get(f'https://api.elections.kalshi.com/trade-api/v2/markets?limit=200&status=open&series_ticker={pre}{s}' + (f'&cursor={cur}' if cur else ''), pace=0.4))
@@ -63,7 +63,7 @@ def kalshi(G):
                 for m in j.get('markets', []):
                     bid, ask = m.get('yes_bid_dollars'), m.get('yes_ask_dollars')
                     if not (bid or ask): continue
-                    if s != 'GAME' and not (0.25 <= float(bid or 0) <= 0.75): continue      # ladders: keep the rungs near the main line
+                    if s not in ('GAME', 'ANYTD') and not (0.25 <= float(bid or 0) <= 0.75): continue      # ladders: keep the rungs near the main line
                     lines.append('|'.join(str(x if x is not None else '') for x in ['K2', pre + s, m.get('ticker'), m.get('event_ticker'), (m.get('title') or '').replace('|', '/'), (m.get('yes_sub_title') or '').replace('|', '/'),
                                   m.get('floor_strike', m.get('cap_strike', '')), m.get('strike_type', ''), bid, ask, m.get('last_price_dollars', ''), round(float(m.get('volume_fp') or 0)), (m.get('close_time') or '')[:16]]))
                     n += 1
@@ -75,6 +75,7 @@ def kalshi(G):
 def polymarket(G):
     leagues = {g['lg'] for g in G}
     lines = ['# P|eventSlug|kind|endDateUTC|marketId|question|sportsMarketType|line|outcomes|outcomePrices|bestBid|bestAsk|liquidity|volume  (gamma-api.polymarket.com; pulled %s)' % TODAY]
+    tdl = ['# T|player|game|date|yesAsk|yesBid|liquidity  (gamma-api.polymarket.com anytime_touchdowns, pulled %s; ask = price to buy YES, one-sided books kept when liquidity >= $10)' % TODAY]
     lim = (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=8)).strftime('%Y-%m-%dT%H:%M:%SZ')
     n = 0
     clean = lambda s: re.sub(r'[\[\]" ]', '', str(s or ''))
@@ -95,6 +96,8 @@ def polymarket(G):
                     if kind == 'game' and t not in GAME_TYPES: continue
                     if kind == 'props' and t not in PROP_TYPES: continue
                     bid, ask = m.get('bestBid'), m.get('bestAsk')
+                    if t == 'anytime_touchdowns' and ask is not None and ask <= 0.9 and (m.get('liquidityNum') or 0) >= 10:
+                        tdl.append('|'.join(str(x) for x in ['T', str(m.get('question', '')).split(':')[0], re.sub(r'^nfl-|-player-props$|-\d{4}-\d{2}-\d{2}$', '', slug), (e.get('endDate') or '')[:10], ask, bid if bid is not None else '', round(m.get('liquidityNum') or 0)]))
                     if bid is None or ask is None or ask - bid > 0.12: continue
                     pr = [float(x) for x in clean(m.get('outcomePrices')).split(',') if x]
                     if t == 'anytime_touchdowns':
@@ -111,7 +114,8 @@ def polymarket(G):
                         n += 1
             if len(ev) < 100: break
     open(f'{OUT}/polymarket_{TODAY}.txt', 'w', encoding='utf-8').write('\n'.join(lines) + '\n')
-    log(f'  polymarket: {n} markets'); return n
+    if len(tdl) > 1: open(f'{OUT}/polymarket_td_{TODAY}.txt', 'w', encoding='utf-8').write('\n'.join(tdl) + '\n')
+    log(f'  polymarket: {n} markets · {len(tdl) - 1} anytime-TD asks'); return n
 
 def main():
     G = slate()
