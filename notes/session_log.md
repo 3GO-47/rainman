@@ -517,3 +517,10 @@
 - data/raw/markets/polymarket_td_<date>.txt (T|player|game|date|yesAsk|yesBid|liquidity): pulled via Chrome today; pull_markets.py now writes it on every loop run and also asks Kalshi for ANYTD.
 - build_bets.py prices anytime TD from the exchanges when no book price exists (YES ask → American). bet_td.csv: 74 priced (Polymarket).
 - TD Grid fields pane: each top pick carries allows/g, model %, fair, and the best posted price with EV. TD Board price column names its source.
+
+## n59 — 2026-10-14 · Odds API policy (plan now 100k/mo) + F6 TEST → API tab + collapsible grid panes + bet-history popups
+- fetch_odds_api.py rewritten around three pulls per game: OPEN (probe from 6d/4d out; empty answer = free; partial < 3 mkts re-probed 12h later), MOVE (free DK sensor from ESPN: spread ≥1 / total ≥1.5 / ML ≥4pp vs the sensor at our last paid pull; max 2, 6h apart), CLOSE (window 100→45 min before kickoff, after the 90-min inactives). League lines follow the same triggers. Every call logged with reason. RESERVE 200. `--next-close` prints the next close moment.
+- loop.py: after each markets pass it plants one detached sleeper (`loop.py --markets --wait <iso>`) that wakes ~75 min before the next kickoff cluster within 6h, runs the pass (odds → exchanges → arb → bets → clv → dashboard → commit/push) and exits; lock file notes/close_sleeper.json. CAVEAT: first real test is TNF 10/16 — check the API tab for a `close` row; if the task's time limit kills the child despite CREATE_BREAKAWAY_FROM_JOB, the fallback is a 30-min task interval.
+- build_dashboard: data['api'] from notes/odds_usage.log + odds_state.json. Template: apiView() (plan/used/pace tiles, credits per day by reason, by reason, by league, per-game state, full log, the policy text).
+- rolePane: hide/show toggle (remembered per pane). pkHistory(type): click any market-type chip → modal with the model's full recorded history for that type (record, units, plays-only, by week with running units, by market, every position).
+- No credits spent in this session (dry run only). First policy pulls happen on the loop's next --markets run.

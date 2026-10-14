@@ -308,6 +308,26 @@ def main():
     data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
     data['picksAll'] = rows_of('data/processed/picks_all.csv')
     data['picksClv'] = rows_of('data/processed/picks_clv.csv')
+    # Odds API spend: every paid call with its real cost (x-requests-last) and reason, plus the per-game pull state
+    def api_payload():
+        log = []
+        if os.path.exists('notes/odds_usage.log'):
+            for line in open('notes/odds_usage.log', encoding='utf-8'):
+                p = line.rstrip('\n').split('\t')
+                if len(p) < 5: continue
+                kv = {x.split('=', 1)[0]: x.split('=', 1)[1] for x in p[2:] if '=' in x}
+                what = p[1]; reason = kv.get('reason', '')
+                if not reason: reason = 'free' if 'events' in what else 'lines' if what.endswith('lines') else 'legacy'
+                try: cost = int(kv.get('cost', '0') or 0)
+                except ValueError: cost = 0
+                log.append(dict(ts=p[0], what=what, cost=cost, used=kv.get('used', ''), left=kv.get('left', ''), reason=reason,
+                                league=what.split(' ')[0].split('|')[0]))
+        st = {}
+        try: st = json.load(open('notes/odds_state.json'))
+        except Exception: pass
+        props = {k: {kk: vv for kk, vv in v.items() if kk != 'sens'} | {'sens': v.get('sens')} for k, v in (st.get('props') or {}).items() if isinstance(v, dict)}
+        return dict(log=log[-600:], plan=100000, state=dict(lines=st.get('lines', {}), props=props, last_run=st.get('last_run', '')))
+    data['api'] = api_payload()
     data['lineMoves'] = [{k: v for k, v in r.items() if k != 'series'} for r in rows_of('data/processed/line_moves.csv')]
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine

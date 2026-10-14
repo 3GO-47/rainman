@@ -1,20 +1,30 @@
-"""Priced lines from every US book via The Odds API (https://the-odds-api.com), pulled on a cadence instead of a clock.
+"""Priced lines from every US book via The Odds API (https://the-odds-api.com) — pulled on the game's clock, three times at most.
 
 Setup (once): put a key in .env at the repo root — scripts\\local\\set_key.ps1 writes it:   ODDS_API_KEY=...
 (.env is git-ignored; the key never reaches the repo or the site.)
 
-What is pulled (per league, PLAN below): moneyline + spread + total for the whole league in one call (3 credits), and the MAIN
-player-prop markets per game (1 credit per market per game). No alternate lines unless PLAN[lg]['alts'] is on.
-When it is pulled (CADENCE below, state in notes/odds_state.json):
-  game lines  — every LINES_H hours while the league has games in the next 8 days, plus a pregame snapshot inside PREGAME_H
-  player props — first pull once a game is within PROPS_OPEN_D days of kickoff (when books post them), then every PROPS_H hours,
-                 plus one pregame snapshot inside PREGAME_H; never after kickoff.
-Every call's real cost comes back in the x-requests-last header and is written to notes/odds_usage.log, so the spend is measured,
-not estimated. Cost = markets × regions per request (one region, "us").
+What is pulled (PLAN below): moneyline + spread + total for the whole league in one call (3 credits), and the MAIN player-prop
+markets per game (1 credit per market returned per game). No alternate lines unless PLAN[lg]['alts'] is on.
+
+When it is pulled (POLICY below; state in notes/odds_state.json) — every game gets at most three paid prop pulls:
+  1. OPEN   the first pull, when the books post the markets. A game is probed from OPEN_FROM_H before kickoff; the API charges
+            nothing for an empty answer, so a probe that finds no props costs 0. A partial posting (< OPEN_MIN_MKTS markets)
+            is kept and re-probed PROBE_GAP_H later. Nothing is probed earlier than the window — that is where credits die.
+  2. MOVE   a re-pull only when a free sensor says the market moved: DraftKings' game lines come from ESPN's public odds feed
+            every loop run at no cost; when the spread, total or moneyline of a game has moved past MOVE since our last paid
+            pull of it, that game's props (and the league lines) are pulled again. At most MOVE_MAX per game, MOVE_GAP_H apart.
+  3. CLOSE  one pull inside the CLOSE window before kickoff. NFL inactives are published 90 minutes before kickoff and the
+            sharpest prop and side moves follow them, so the window opens at 100 minutes and the pull is taken at the first run
+            after that (loop.py plants a sleeper so one lands ~75 minutes out); nothing is pulled after kickoff.
+Game lines follow the same three triggers at league level (one call covers every game): OPEN when a new game appears on the
+slate, MOVE when any game's sensor moves, CLOSE once per kickoff cluster.
+Every call's real cost comes back in the x-requests-last header and is written to notes/odds_usage.log with its reason, so the
+spend is measured, not estimated. The F6 TEST → API tab reads that log.
 
 Usage: python3 scripts/fetch_odds_api.py              # whatever is due (what loop.py runs)
-       python3 scripts/fetch_odds_api.py --force      # ignore the cadence, pull everything for the active leagues now
-       python3 scripts/fetch_odds_api.py --leagues nfl --dry   # show what would be pulled and the credit cost, pull nothing
+       python3 scripts/fetch_odds_api.py --dry        # show what would be pulled and the credit cost, pull nothing
+       python3 scripts/fetch_odds_api.py --force      # ignore the gaps (not the windows): re-probe / re-pull everything in range now
+       python3 scripts/fetch_odds_api.py --leagues nfl
 Writes data/raw/markets/oddsapi_current.csv  (league, home, away, commence, book, market, side, point, price, updated) → build_arb.py
        data/raw/odds_api/props_current.csv    (league, home, away, commence, player, market, book, side, line, price, event, updated) → build_arb.py, build_bets.py
 Both are merged snapshots: a pull replaces that game's rows, games that have kicked off are dropped.
@@ -32,8 +42,17 @@ ALT = {'player_pass_yds_alternate': 'pass_yds', 'player_pass_tds_alternate': 'pa
 # ---- the plan: which leagues, which markets, no alternates (Josh, 2026-10-08: CFB never; NFL main lines only to start)
 PLAN = {'nfl': dict(lines=True, props=MAIN, alts=False),
         'cfb': dict(lines=True, props={k: v for k, v in MAIN.items() if k in ('player_pass_yds', 'player_pass_tds', 'player_rush_yds', 'player_reception_yds', 'player_receptions', 'player_anytime_td')}, alts=False)}
-CADENCE = dict(LINES_H=20, PROPS_OPEN_D={'nfl': 5, 'cfb': 3}, PROPS_H=30, PREGAME_H=6, PREGAME_GAP_H=4)
-RESERVE = 40          # stop pulling props when the plan has fewer credits than this left (lines, 3 credits, still run)
+# ---- the policy (Josh, 2026-10-14: two to three pulls per line, never for lines that do not exist yet)
+POLICY = dict(
+    OPEN_FROM_H={'nfl': 6 * 24, 'cfb': 4 * 24},   # earliest probe for a game's props: NFL books post main props Mon/Tue for Sunday
+    PROBE_GAP_H=12,                                # an unopened / partial game is probed again this many hours later (empty = free)
+    OPEN_MIN_MKTS=3,                               # fewer unique markets than this is a partial posting — keep it, keep probing
+    MOVE=dict(spread=1.0, total=1.5, ml=0.04),     # sensor thresholds vs the numbers at our last paid pull (points, points, win prob)
+    MOVE_GAP_H=6, MOVE_MAX=2,                      # at most two move pulls per game, six hours apart
+    CLOSE_MIN=(45, 100),                           # the close window, minutes before kickoff (inactives post at 90)
+    LINES_WINDOW_D=8,                              # the league call covers games this far out; a new game on the slate = OPEN
+)
+RESERVE = 200         # stop pulling props when the plan has fewer credits than this left (lines, 3 credits, still run)
 STATE = 'notes/odds_state.json'; USAGE = 'notes/odds_usage.log'
 LINES_F = 'data/raw/markets/oddsapi_current.csv'; PROPS_F = 'data/raw/odds_api/props_current.csv'
 LINES_COLS = ['league', 'home', 'away', 'commence', 'book', 'market', 'side', 'point', 'price', 'updated']
@@ -48,13 +67,13 @@ def key():
     if not k: sys.exit('ODDS_API_KEY missing — see the setup note at the top of this file')
     return k
 
-def get(sport, path, what, **params):
+def get(sport, path, what, reason='', **params):
     params['apiKey'] = key()
     url = f'https://api.the-odds-api.com/v4/sports/{sport}{path}?{urllib.parse.urlencode(params)}'
     with urllib.request.urlopen(url, timeout=30) as r:
         h = r.headers; data = json.loads(r.read())
     last, used, left = h.get('x-requests-last', '?'), h.get('x-requests-used', '?'), h.get('x-requests-remaining', '?')
-    with open(USAGE, 'a', encoding='utf-8') as f: f.write(f'{NOW.strftime("%Y-%m-%dT%H:%MZ")}\t{what}\tcost={last}\tused={used}\tleft={left}\n')
+    with open(USAGE, 'a', encoding='utf-8') as f: f.write(f'{NOW.strftime("%Y-%m-%dT%H:%MZ")}\t{what}\tcost={last}\tused={used}\tleft={left}\treason={reason}\n')
     return data, left
 
 def slate():
@@ -67,6 +86,34 @@ def slate():
         names.setdefault(p[1], {})[p[7]] = p[6]; names[p[1]][p[13]] = p[12]
         games.append(dict(lg=p[1], id=p[2], date=p[3], away=p[6], home=p[12]))
     return names, games
+
+def sensors():
+    """The free sensor: DraftKings game lines from ESPN's public odds feed (pull_markets.py, every loop run), keyed by ESPN event id.
+    D|espnEventId|homeSpread|overUnder|homeML|awayML|...  → {id: dict(spread, total, ml=home win prob)}"""
+    files = sorted(glob.glob('data/raw/markets/draftkings_*.txt')); out = {}
+    if not files: return out
+    for line in open(files[-1], encoding='utf-8'):
+        if not line.startswith('D|'): continue
+        p = line.rstrip('\n').split('|')
+        if len(p) < 6: continue
+        try:
+            sp = float(p[2]) if p[2] not in ('', 'None') else None; tt = float(p[3]) if p[3] not in ('', 'None') else None
+            hm, am = (float(p[4]) if p[4] not in ('', 'None') else None), (float(p[5]) if p[5] not in ('', 'None') else None)
+            ml = None
+            if hm is not None and am is not None:
+                ih, ia = _imp(hm), _imp(am); ml = ih / (ih + ia)
+            out[p[1]] = dict(spread=sp, total=tt, ml=ml)
+        except ValueError: continue
+    return out
+
+def moved(now_s, then_s):
+    """Which sensor crossed its threshold since the last paid pull — '' when none (or when either side is unknown)."""
+    if not now_s or not then_s: return ''
+    for k, thr in POLICY['MOVE'].items():
+        a, b = now_s.get(k), then_s.get(k)
+        if a is None or b is None: continue
+        if abs(a - b) >= thr: return f'{k} {b:+.3g}→{a:+.3g}' if k == 'ml' else f'{k} {b:g}→{a:g}'
+    return ''
 
 def load_state():
     try: return json.load(open(STATE))
@@ -142,27 +189,42 @@ def snapshot(lines_rows, props_rows, pulled_lg, pulled_events):
 def main():
     force, dry = '--force' in sys.argv, '--dry' in sys.argv
     only = sys.argv[sys.argv.index('--leagues') + 1].split(',') if '--leagues' in sys.argv else None
-    names, games = slate(); st = load_state(); st.setdefault('lines', {}); st.setdefault('props', {})
+    names, games = slate(); st = load_state(); st.setdefault('lines', {}); st.setdefault('props', {}); st.setdefault('lines_games', {})
+    SENS = sensors()
     cutoff = NOW.isoformat()
     lines_rows = [r for r in read_csv(LINES_F, LINES_COLS) if r['commence'] > cutoff]      # drop games that have started
     props_rows = [r for r in read_csv(PROPS_F, PROPS_COLS) if r['commence'] > cutoff]
     left = '?'; plan_cost = 0; did = []; stop = False; pulled_lg = set(); pulled_events = set()
+    cmin, cmax = POLICY['CLOSE_MIN']
     def low(): return str(left).isdigit() and int(left) < RESERVE
     for lg, plan in PLAN.items():
         if only and lg not in only: continue
         sport = SPORT[lg]; tm = names.get(lg, {})
-        upcoming = [g for g in games if g['lg'] == lg and NOW.isoformat() < g['date'].replace('Z', '+00:00') <= (NOW + datetime.timedelta(days=8)).isoformat()]
+        upcoming = [g for g in games if g['lg'] == lg and NOW.isoformat() < g['date'].replace('Z', '+00:00') <= (NOW + datetime.timedelta(days=POLICY['LINES_WINDOW_D'])).isoformat()]
         if not upcoming: continue
         kick = lambda g: parse_ts(g['date'])
-        # ---------- game lines: one call per league
-        soon = any((kick(g) - NOW).total_seconds() / 3600 <= CADENCE['PREGAME_H'] for g in upcoming)
-        age = hours_since(st['lines'].get(lg))
-        due = force or age >= CADENCE['LINES_H'] or (soon and age >= CADENCE['PREGAME_GAP_H'])
-        if plan['lines'] and due:
+        mins_to = lambda g: (kick(g) - NOW).total_seconds() / 60
+        gk = lambda g: f"{lg}|{g['away']}@{g['home']}|{g['date'][:10]}"
+        # ---------- game lines: one call per league, three triggers
+        LS = st['lines'].setdefault(lg, {}) if isinstance(st['lines'].get(lg), dict) else {}
+        st['lines'][lg] = LS
+        LG = st['lines_games'].setdefault(lg, {})                      # per game: the sensor at our last lines pull, and whether it has been closed
+        reason = ''
+        new = [g for g in upcoming if gk(g) not in LG]
+        if new: reason = f'open: {len(new)} new game{"s" if len(new) > 1 else ""} on the slate'
+        if not reason:
+            for g in upcoming:
+                mv = moved(SENS.get(g['id']), LG.get(gk(g), {}).get('sens'))
+                if mv and hours_since(LS.get('at')) >= POLICY['MOVE_GAP_H']: reason = f"move: {g['away']}@{g['home']} {mv}"; break
+        if not reason:
+            cl = [g for g in upcoming if cmin <= mins_to(g) <= cmax and not LG.get(gk(g), {}).get('closed')]
+            if cl: reason = f'close: {len(cl)} kickoff{"s" if len(cl) > 1 else ""} in {cmin}-{cmax} min'
+        if force and not reason and hours_since(LS.get('at')) >= 1: reason = 'force'
+        if plan['lines'] and reason:
             plan_cost += 3
             if not dry:
                 try:
-                    data, left = get(sport, '/odds', f'{lg} lines', regions='us', markets='h2h,spreads,totals', bookmakers=BOOKS, oddsFormat='american')
+                    data, left = get(sport, '/odds', f'{lg} lines', reason=reason.split(':')[0], regions='us', markets='h2h,spreads,totals', bookmakers=BOOKS, oddsFormat='american')
                     keys = {(tm.get(e['home_team'], e['home_team']), tm.get(e['away_team'], e['away_team'])) for e in data}
                     lines_rows = [r for r in lines_rows if not (r['league'] == lg and (r['home'], r['away']) in keys)]
                     for e in data:
@@ -172,30 +234,47 @@ def main():
                             for m in b['markets']:
                                 for o in m['outcomes']:
                                     lines_rows.append(dict(league=lg, home=h, away=a, commence=e['commence_time'], book=b['key'], market=m['key'], side=tm.get(o['name'], o['name']), point=o.get('point', ''), price=o['price'], updated=m.get('last_update', '')))
-                    st['lines'][lg] = NOW.isoformat(); did.append(f'{lg} lines ({len(data)} games)'); pulled_lg.add(lg)
+                    LS['at'] = NOW.isoformat(); LS['reason'] = reason
+                    for g in upcoming:
+                        e = LG.setdefault(gk(g), {}); e['sens'] = SENS.get(g['id']); e['at'] = NOW.isoformat()
+                        if cmin <= mins_to(g) <= cmax: e['closed'] = True
+                    did.append(f'{lg} lines ({len(data)} games · {reason})'); pulled_lg.add(lg)
                 except Exception as ex: print(f'  {lg} lines: {ex}')
-            else: did.append(f'{lg} lines (3 credits)')
-        # ---------- props: one call per game, on the game's own clock
+            else: did.append(f'{lg} lines (3 credits · {reason})')
+        # ---------- props: one call per game, three pulls per game at most
         markets = dict(plan['props']); markets.update(ALT if plan['alts'] else {})
         if not markets: continue
         events = None
         for g in sorted(upcoming, key=lambda g: g['date']):                # nearest kickoffs first when credits run short
             if stop: break
-            hrs = (kick(g) - NOW).total_seconds() / 3600
-            if hrs > CADENCE['PROPS_OPEN_D'][lg] * 24: continue
-            k = f"{lg}|{g['away']}@{g['home']}|{g['date'][:10]}"; last = hours_since(st['props'].get(k, {}).get('at'))
-            due = force or last >= CADENCE['PROPS_H'] or (hrs <= CADENCE['PREGAME_H'] and last >= CADENCE['PREGAME_GAP_H'] and not st['props'].get(k, {}).get('snapped'))
-            if not due: continue
-            plan_cost += len(markets)
-            if dry: did.append(f'{k} props ({len(markets)} credits)'); continue
+            mins = mins_to(g); hrs = mins / 60
+            if hrs > POLICY['OPEN_FROM_H'][lg]: continue                   # outside the window: no probe, no credit
+            k = gk(g); S = st['props'].setdefault(k, {}) if isinstance(st['props'].get(k), dict) else {}; st['props'][k] = S
+            opened = (S.get('mkts') or 0) >= POLICY['OPEN_MIN_MKTS']
+            last = hours_since(S.get('at'))
+            reason = ''
+            if not opened:
+                if last >= POLICY['PROBE_GAP_H'] or force: reason = 'open' if not S.get('at') else f"probe #{len(S.get('probes', [])) + 1}" + (' (partial)' if S.get('mkts') else '')
+            else:
+                mv = moved(SENS.get(g['id']), S.get('sens'))
+                if mv and len(S.get('moves', [])) < POLICY['MOVE_MAX'] and last >= POLICY['MOVE_GAP_H']: reason = f'move: {mv}'
+                if not reason and cmin <= mins <= cmax and not S.get('closed'): reason = 'close'
+                if not reason and force and last >= 1: reason = 'force'
+            if not reason: continue
+            cost = len(markets)                                            # the ceiling; an empty answer is free, a partial one costs what it returns
+            plan_cost += cost
+            if dry: did.append(f'{k} props ({reason} · ≤{cost} credits; 0 if nothing is posted yet)'); continue
             if events is None:
-                try: events, left = get(sport, '/events', f'{lg} events')
+                try: events, left = get(sport, '/events', f'{lg} events', reason='free')
                 except Exception as ex: print(f'  {lg} events: {ex}'); break
             ev = next((e for e in events if tm.get(e['home_team'], e['home_team']) == g['home'] and tm.get(e['away_team'], e['away_team']) == g['away']), None)
             if not ev: continue
             if low(): print(f'  credits left {left} < reserve {RESERVE} — props paused until the plan renews'); stop = True; break
-            try: data, left = get(sport, f"/events/{ev['id']}/odds", f'{k} props', regions='us', markets=','.join(markets), bookmakers=BOOKS, oddsFormat='american')
+            try: data, left = get(sport, f"/events/{ev['id']}/odds", f'{k} props', reason=reason.split(':')[0].split(' ')[0], regions='us', markets=','.join(markets), bookmakers=BOOKS, oddsFormat='american')
             except Exception as ex: print(f'  {k} props: {ex}'); continue
+            mk = {m['key'] for b in data.get('bookmakers', []) for m in b['markets']}
+            if not mk:                                                       # nothing posted yet: free, remember the probe, try again later
+                S['at'] = NOW.isoformat(); S.setdefault('probes', []).append(NOW.isoformat()); did.append(f'{k} props (probe · not posted yet · 0 credits)'); continue
             props_rows = [r for r in props_rows if r['event'] != ev['id']]
             n = 0
             for b in data.get('bookmakers', []):
@@ -204,14 +283,32 @@ def main():
                         side = o['name']; player = o.get('description', '')
                         if m['key'] == 'player_anytime_td': side, player = (o['name'] if o['name'] in ('Yes', 'No') else 'Yes'), o.get('description', o['name'])
                         props_rows.append(dict(league=lg, home=g['home'], away=g['away'], commence=ev['commence_time'], player=player, market=markets[m['key']], book=b['key'], side=side, line=o.get('point', ''), price=o['price'], event=ev['id'], updated=m.get('last_update', ''))); n += 1
-            st['props'][k] = dict(at=NOW.isoformat(), snapped=hrs <= CADENCE['PREGAME_H'], n=n); did.append(f'{k} props ({n})'); pulled_events.add(ev['id'])
+            S.update(at=NOW.isoformat(), n=n, mkts=len(mk), sens=SENS.get(g['id']))
+            if not opened: S['open_at'] = S.get('open_at') or NOW.isoformat(); S.setdefault('probes', []).append(NOW.isoformat())
+            if reason.startswith('move'): S.setdefault('moves', []).append(NOW.isoformat())
+            if reason == 'close' or cmin <= mins <= cmax: S['closed'] = True
+            did.append(f'{k} props ({reason} · {len(mk)} markets · {n} rows)'); pulled_events.add(ev['id'])
     if dry:
-        print(f'dry run — would spend about {plan_cost} credits:\n  ' + '\n  '.join(did) if did else 'dry run — nothing due'); return 0
+        print(f'dry run — would spend at most {plan_cost} credits (empty answers are free):\n  ' + '\n  '.join(did) if did else 'dry run — nothing due'); return 0
     write_csv(LINES_F, LINES_COLS, lines_rows); write_csv(PROPS_F, PROPS_COLS, props_rows)
     hl, hp = snapshot(lines_rows, props_rows, pulled_lg, pulled_events)
     st['last_run'] = NOW.isoformat(); json.dump(st, open(STATE, 'w'), indent=1)
     print(f'odds_api: {len(did)} pulls · {len(lines_rows)} line rows · {len(props_rows)} prop rows on file · history +{hl}/+{hp} · credits left {left}' + (f' · {"; ".join(did[:6])}{" …" if len(did) > 6 else ""}' if did else ' · nothing due'))
     return len(did)
 
+def next_close(hours=6.5):
+    """For loop.py: the next moment a close pull is due within `hours` — the first kickoff cluster entering its window."""
+    names, games = slate(); st = load_state()
+    cmin, cmax = POLICY['CLOSE_MIN']; due = []
+    for g in games:
+        if g['lg'] not in PLAN: continue
+        k = f"{g['lg']}|{g['away']}@{g['home']}|{g['date'][:10]}"
+        if (st.get('props', {}).get(k) or {}).get('closed'): continue
+        t = parse_ts(g['date']) - datetime.timedelta(minutes=cmax - 25)     # ~75 minutes out: inside the window, after the inactives
+        if NOW < t <= NOW + datetime.timedelta(hours=hours): due.append(t)
+    return min(due) if due else None
+
 if __name__ == '__main__':
-    main()
+    if '--next-close' in sys.argv:
+        t = next_close(); print(t.isoformat() if t else '')
+    else: main()

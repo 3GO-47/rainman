@@ -32,6 +32,45 @@ def step(name, fn, *a):
     except Exception as e:
         log(f'!! {name} failed: {e}'); log(traceback.format_exc().strip().splitlines()[-1]); return None
 
+SLEEPER = 'notes/close_sleeper.json'
+def plant_sleeper():
+    """The close pull has to land ~75 minutes before kickoff and the markets task only runs every six hours, so each run
+    plants one detached sleeper: a copy of this script that waits for the next close window inside the coming six hours,
+    then runs the markets pass (odds, exchanges, arb, commit, push). Nothing recurring, nothing in Claude — a process on
+    this PC that exits after one pass. A lock file keeps it to one sleeper at a time."""
+    try:
+        r = subprocess.run([sys.executable, 'scripts/fetch_odds_api.py', '--next-close'], capture_output=True, text=True, timeout=120)
+        when = (r.stdout or '').strip()
+    except Exception as e: log(f'  sleeper: could not read the next close window ({e})'); return
+    if not when: log('  sleeper: no close window in the next six hours'); return
+    try:
+        cur = json.load(open(SLEEPER))
+        if cur.get('until') == when and cur.get('pid') and _alive(cur['pid']): log(f'  sleeper: already planted for {when}'); return
+    except Exception: pass
+    flags = 0x00000008 | 0x00000200 | 0x01000000 if os.name == 'nt' else 0     # DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP | CREATE_BREAKAWAY_FROM_JOB
+    try:
+        p = subprocess.Popen([sys.executable, os.path.abspath(__file__), '--markets', '--wait', when], creationflags=flags, close_fds=True,
+                             stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=os.getcwd())
+        json.dump(dict(until=when, pid=p.pid, planted=datetime.datetime.now().isoformat(timespec='minutes')), open(SLEEPER, 'w'))
+        log(f'  sleeper: planted for {when} (pid {p.pid})')
+    except Exception as e: log(f'  sleeper: could not start ({e})')
+
+def _alive(pid):
+    try:
+        if os.name == 'nt':
+            out = subprocess.run(['tasklist', '/FI', f'PID eq {pid}'], capture_output=True, text=True).stdout
+            return str(pid) in out
+        os.kill(pid, 0); return True
+    except Exception: return False
+
+def wait_until(iso):
+    import time
+    t = datetime.datetime.fromisoformat(iso.replace('Z', '+00:00'))
+    while True:
+        s = (t - datetime.datetime.now(datetime.timezone.utc)).total_seconds()
+        if s <= 0: return
+        time.sleep(min(s, 300))
+
 def markets_only(G, st):
     did = []
     if any(G[lg]['active'] for lg in G):
@@ -40,6 +79,8 @@ def markets_only(G, st):
         if step('markets', pull_markets.main): did.append('exchanges')
         if step('tennis markets', pull_tennis.markets) and step('tennis', run, ['scripts/tennis/build.py']) is not None: did.append('tennis')
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
+        if 'odds' in did:                                                                           # fresh book prices: re-price the bet board and the dashboard that shows it
+            step('bets', run, ['scripts/build_bets.py'], False); step('clv', run, ['scripts/build_clv.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False)
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
     if chg:
@@ -47,6 +88,7 @@ def markets_only(G, st):
         if '--no-push' not in sys.argv:
             r = git('push', '-q', 'origin', 'HEAD:main'); log('pushed' if r.returncode == 0 else 'push skipped (no credential helper); commit kept locally')
     log(f'=== markets run done: {", ".join(did) or "nothing due"}')
+    if '--wait' not in sys.argv and os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read(): plant_sleeper()
 
 def main():
     st = state(); did = []
@@ -56,6 +98,9 @@ def main():
     log('gate: ' + json.dumps(G, default=str))
     if '--dry' in sys.argv: return
     if '--markets' in sys.argv:                                                                     # the 6-hourly task: lines + exchanges + arb board only
+        if '--wait' in sys.argv:                                                                    # the planted sleeper: wait for the close window, then one pass
+            when = sys.argv[sys.argv.index('--wait') + 1]; log(f'sleeper: waiting for the close window at {when}'); wait_until(when)
+            step('slate', pull_espn.slate); G = gate.all_leagues()
         markets_only(G, st); return
     if '--tennis' in sys.argv:                                                                      # one-off: tennis history + week + prices -> tennis.html + landing, then commit
         step('tennis pull', pull_tennis.main); step('tennis', run, ['scripts/tennis/build.py']); step('landing', run, ['scripts/build_landing.py'])
