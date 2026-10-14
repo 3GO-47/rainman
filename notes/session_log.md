@@ -534,3 +534,6 @@
 - Injuries (F4 Intel): build_injuries.py merges ESPN injuries feed (new pull_espn.injuries, every loop run) + nflverse report (only when it is the current week) with roles from depth charts (offense) and units (defense); injLift() = status × role weight × slot coupling → lift per opponent slot. Tab: KPIs, who gets a lift, game-by-game with status/practice/role/effect, full table.
 - Dev dashboard: scripts/build_dev.py → dashboard/dev.html (API spend, loop runs, freshness, builds, traffic hook); linked from the API tab; built by refresh.py and the markets pass.
 - Today's ESPN injuries file is a 4-team fixture pulled through Chrome (ARI/DEN/LAR/SEA); the loop's next pass writes all 32.
+
+## n61 — 2026-10-14 · v9b injuries everywhere
+- Game View card: "missing" line per team under the lines (defenders at weighted roles + top-2 skill players); lift chip beside each starter whose slot the opponent's absences touch. Player card: own status / practice / injury / return + lift for his slot. Slate tiles: "SEA 3 out 1 Q". Depth Charts key table: ESPN status + practice chips, lift in the allows cell. Prop / TD panes: lift chip.
