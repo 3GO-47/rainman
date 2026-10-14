@@ -308,6 +308,7 @@ def main():
     data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
     data['picksAll'] = rows_of('data/processed/picks_all.csv')
     data['picksClv'] = rows_of('data/processed/picks_clv.csv')
+    data['lineMoves'] = [{k: v for k, v in r.items() if k != 'series'} for r in rows_of('data/processed/line_moves.csv')]
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine
     _sal = {}

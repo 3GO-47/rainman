@@ -41,6 +41,22 @@ def main():
             ov = g[g.side == 'Over'].price; un = g[g.side == 'Under'].price
             lines.append(dict(player=pl, market=m, book=bk, line=ln, over=float(ov.iloc[0]) if len(ov) else None,
                               under=float(un.iloc[0]) if len(un) else None, open=None, updated=g.updated.iloc[0]))
+    # Kalshi ladders as lines (free, no API credits): for any player-market with no book line this week, the nearest rung is the
+    # line and the YES ask / NO (1 - bid) are the prices. Rows carry book='Kalshi' so the Markets tab shows where the line came from.
+    kf = 'data/processed/kalshi_implied.csv'
+    if os.path.exists(kf) and len(PJ):
+        K = pd.read_csv(kf)
+        K = K[(K.kind == 'line') & K.market.isin(set(MK.values())) & K.near_strike.notna() & K.p_bid.notna() & K.p_ask.notna()]
+        K = K[K.week == int(PJ.week.max())]            # this week's ladders only — a played week's rungs are not lines
+        have = {(key(x['player']), x['market']) for x in lines}
+        def amer(p):
+            p = min(max(float(p), 0.02), 0.98); d = 1 / p
+            return round((d - 1) * 100) if d >= 2 else round(-100 / (d - 1))
+        for r in K.itertuples():
+            if (key(r.player), r.market) in have: continue
+            have.add((key(r.player), r.market))
+            lines.append(dict(player=r.player, market=r.market, book='Kalshi', line=float(r.near_strike),
+                              over=amer(r.p_ask), under=amer(1 - r.p_bid), open=None, updated=str(r.pulled)))
     out = []
     for x in lines:
         r = PJ[(PJ.k == key(x['player'])) & (PJ.market == x['market'])]
