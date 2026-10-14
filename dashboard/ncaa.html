@@ -1202,35 +1202,36 @@ const SECTIONS=[
    {id:'insights',label:'Insights',desc:'best / worst matchup per role this week, the softest and stingiest defense per slot, schedule strength, volatility',c:'home',sub:'insights'}]},
  {id:'match',fk:'F2',label:'Matchups',items:[
    {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
-   {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
-   {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
-   {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'}]},
+   {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'},
+   {id:'gameviewp',label:'Game View',desc:'one game per screen: the matchup card, the market with the model\'s edge beside it, and depth charts, scheme, form and storylines underneath on demand',c:'test',sub:'gameview'}]},
  {id:'players',fk:'F3',label:'Players',items:[
    {id:'labgridp',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'h2hp',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent — his own per-game averages in every prior meeting we have logs for, four columns by position',c:'players',sub:'h2hp'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
  {id:'intel',fk:'F4',label:'Intel',items:[
-   {id:'scheme',label:'Intel',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true},
-   {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
    {id:'ranks',label:'Defenses',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks'},
    {id:'matrix',label:'Matrix',desc:'all defenses × slots heatmap with drill-down to per-stat ranks and raw averages',c:'defenses',sub:'matrix'},
    {id:'observatory',label:'Observatory',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
-   {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'}]},
+   {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'},
+   {id:'scheme',label:'Scheme',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true},
+   {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true}]},
  {id:'picksec',fk:'F5',label:'Picks',items:[
-   {id:'pkhome',label:'Model',desc:'how the model has actually done: record, units, calibration, what it is good at and what has changed',c:'pkhome',nfl:true},
    {id:'picks',label:'Board',desc:'this week\'s frozen positions, grouped by game, each with the graded record of its own cohort — the model\'s plays, not every line',c:'games',nfl:true},
+   {id:'pkhome',label:'Model',desc:'how the model has actually done: record, units, calibration, what it is good at and what has changed',c:'pkhome',nfl:true},
    {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'},
    {id:'fantasy',label:'DFS',desc:'DraftKings Classic: the frozen cap-legal lineup per slate, every priced play by position, stacks, and the best points per dollar',c:'home',sub:'fantasy',nfl:true}]},
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
-   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
    {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'},
    {id:'h2h',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent \u2014 his own averages in every prior meeting we have logs for, four columns by position',c:'test',sub:'h2h'},
-   {id:'markets2',label:'Markets v2',desc:'the Markets page with its market chips back \u2014 pass yards, rush yards, receptions, receiving yards, anytime TD and game lines are each one click',c:'test',sub:'markets2'},
+   {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
    {id:'ddelta',label:'Depth Delta',desc:'what changed on the depth charts since last week \u2014 injuries, promotions, demotions, new names \u2014 and what each change means against this week\'s opponent',c:'test',sub:'ddelta'},
    {id:'splits',label:'Splits',desc:'PPR per game by situation \u2014 home / away, favorite / dog, dome / outdoors, division, last three \u2014 and the split that matches the spot he walks into this week',c:'test',sub:'splits'},
-   {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'}]}];
+   {id:'markets2',label:'Markets v2',desc:'the Markets page with its market chips back \u2014 pass yards, rush yards, receptions, receiving yards, anytime TD and game lines are each one click',c:'test',sub:'markets2'},
+   {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'},
+   {id:'projections',label:'Big Board (retired)',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
+   {id:'matchups',label:'Matchups (retired)',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
@@ -1279,10 +1280,11 @@ const INTRO={
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
 /* per-view change notes (v7, 2026-10-14): what changed on each tab — shown as an "updated" chip in the reading key */
 const NOTES={
+ gameviewp:['v8','promoted from TEST to F2 Matchups as the one-game-per-screen view; clicking a game on Home opens it here'],
  overview:['v7','Home: edge board on top (per role, the three softest and two hardest fields with each player\'s own PPR/g and projection), tiles for the biggest line move and the model\'s plays this week, and standings / leaders / every-defense-ranked folded underneath (your choice is remembered). DFS moved under Picks.'],
  insights:['v7','kept as the visual companion to the edge board'],
- projections:['v7','reviewed — static map, every column sorts; no change'],
- matchups:['v7','"his 2026 /g" reads as label · value pairs that never split across lines; the usage line wraps instead of truncating'],
+ projections:['v8','retired from F2 Matchups — kept here in TEST'],
+ matchups:['v8','retired from F2 Matchups — kept here in TEST'],
  tdboard:['v7','five full columns wrap to 3 / 2 / 1 below 1500 px so names and TD/G never clip'],
  lab:['v7','untouched — the player board stays exactly as it was'],
  h2hp:['v7','untouched'],
@@ -2232,7 +2234,7 @@ function home(){
   document.querySelectorAll('#homeTop details.hfold').forEach(d=>d.ontoggle=()=>{try{localStorage.setItem('rm-hf-'+d.id.slice(3),d.open?'1':'0')}catch(_){}});
   if(typeof syncSub==='function')syncSub();
   document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
-  document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;G.game=k;G.slates.clear();apply();go('matchups')});
+  document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;G.game=k;G.slates.clear();apply();go('gameviewp')});
   document.querySelectorAll('#defHeat tr.dlink').forEach(el=>el.onclick=()=>{go('observatory');const sel=$('#dDef');if(sel){sel.value=el.dataset.d;sel.dispatchEvent(new Event('change'))}});
   }
 }
@@ -3266,7 +3268,7 @@ function games(root='#games',px='',v2=false){
     $('#'+px+'pkGrp').onclick=()=>{grp=true;render()};$('#'+px+'pkFlat').onclick=()=>{grp=false;render()};
     $('#'+px+'gmOut').querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const k=t.dataset.k;if(sk===k)sa=!sa;else{sk=k;sa=(k==='who'||k==='type'||k==='market'||k==='game')}render()});
     $('#'+px+'gmOut').querySelectorAll('[data-goto]').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.goto)});
-    $('#'+px+'gmOut').querySelectorAll('tr.gb[data-game]').forEach(tr=>tr.onclick=()=>{G.game=tr.dataset.game;G.slates.clear();apply();go('matchups')});}
+    $('#'+px+'gmOut').querySelectorAll('tr.gb[data-game]').forEach(tr=>tr.onclick=()=>{G.game=tr.dataset.game;G.slates.clear();apply();go('gameviewp')});}
   RR.push(render);
 }
 function pkhomeView(){RR.push(picksHome)}
