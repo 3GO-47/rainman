@@ -13,3 +13,8 @@ are in git at the listed commit (the web-upload workflow cannot push tags, so th
 Five-tab layout with the n49–n51 fixes (loop self-sufficient, depth-chart universe, CLV, per-tab notes). Frozen copies: dashboard/archive/rainman_v5.2_2026-10-14.html,
 dashboard/archive/ncaa_v1.2_2026-10-14.html, scripts/archive/dashboard_template_v5.2_2026-10-14.html; full backup backups/rainman_backup_v6_2026-10-14.zip.
 Revert the template: cp scripts/archive/dashboard_template_v5.2_2026-10-14.html scripts/dashboard_template.html && python3 scripts/build_dashboard.py
+
+## v5.3-live — 2026-10-14 (tag v5.3-live-2026-10-14; the build live on Pages after the revert)
+Template = ceb2ef2's (F6 TEST visible, 11-view Intel/Picks layout) + today's data/loop fixes. Frozen: dashboard/archive/rainman_v5.3_live_2026-10-14.html,
+scripts/archive/dashboard_template_v5.3_live_2026-10-14.html; backup backups/rainman_backup_v7_live_2026-10-14.zip.
+Revert: cp scripts/archive/dashboard_template_v5.3_live_2026-10-14.html scripts/dashboard_template.html && python3 scripts/build_dashboard.py

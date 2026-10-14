@@ -221,6 +221,7 @@ the sum of the opposing players at that slot; combined = last season + this seas
 - **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-14 — **v7.** Home edge board + folds; Intel reformatted with visualizations (style-edge bars, Ψ strip, strength-of-schedule bars, plain-English coverage glosses); Picks overhauled (Board with cohort records, Model with CLV + plays record, Markets chips, DFS); Lab / TD Board / H2H / TEST untouched. Restore point v5.3-live.
 - 2026-10-14 — **v6 product cut.** Home is one page with the edge board on top; Intel → Defenses (Rankings with the Ψ matrix under ALL · Trends · Schedule · Scheme); DFS under Picks; Insights, Locker Room and Matrix parked under TEST. Backup + restore point v5.2.
 - 2026-10-14 — **Core pass.** Player universe = the effective depth chart (Fantasy Master Key workbook and the owner filter retired);
   closing-line value for every frozen position (`build_clv.py`, Picks › Model) and a "plays ≥ 6% edge" record beside the all-lines record (Model tab + Layer 0);
