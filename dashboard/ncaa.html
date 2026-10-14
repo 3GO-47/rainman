@@ -397,7 +397,7 @@ tr:hover td{background:var(--s2)}
 .tabs button{background:var(--s2);border:1px solid var(--edge2);color:var(--dim);padding:5px 12px;border-radius:5px;font:500 11.5px/1.3 var(--ui);text-transform:none;letter-spacing:0}
 .tabs button:hover{color:var(--txt);border-color:var(--accent)}
 .tabs button.on{background:var(--accent);color:var(--k45,#1a1200);border-color:var(--accent);font-weight:600}
-#defTabs{display:none}
+#defTabs,#r11Tabs{display:none}
 /* matchup board: player-average block */
 :is(#labTbl,#h2hTbl,#ddTbl,#spTbl) tr.grp th{font:600 9.5px/1.2 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);text-align:center;border-bottom:1px solid var(--edge);border-left:1px solid var(--edge2);padding:4px 6px;background:var(--s2)}
 :is(#labTbl,#h2hTbl,#ddTbl,#spTbl) tr.grp th:first-child,:is(#labTbl,#h2hTbl,#ddTbl,#spTbl) tr.grp th:last-child{border-left:0;background:transparent}
@@ -473,9 +473,6 @@ header,#legacyNav nav{display:none}
  #gSum{display:none}
  .chips{flex-wrap:nowrap}
  main{padding:10px 10px 40px}
- .qrow{grid-template-columns:14px minmax(0,1.3fr) 44px minmax(0,1fr) 52px}.quad{overflow:hidden;min-width:0}.quad .qrow>*{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
- .lgrid.full{overflow-x:auto}.lgrid .lgcol{min-width:0}table.lgt{min-width:0}#tdFields,#tdb>.panel,#tdb .panel{overflow-x:auto;max-width:100%}#tdb,#tdb>*,#tdb .panel{min-width:0;width:auto}#tdFields{display:block;max-width:calc(100vw - 20px)}#tdb .chips,#tdgrid .chips{flex-wrap:wrap}
- .gsides,.ldrgrid,.standgrid,.irgrid,details.pkg{overflow-x:auto;max-width:100%}
  .panel{padding:10px;border-radius:6px}
  .sfoot{gap:10px;padding:8px 10px 12px}
 }
@@ -750,7 +747,6 @@ table.dlog{font-size:10.5px}table.dlog td,table.dlog th{padding:1px 5px;text-ali
 table.dct2{width:100%}table.dct2 td{vertical-align:top;padding:4px 6px}table.dct2 th{text-align:left}table.dct2 td.dcpos{white-space:nowrap;font:600 10.5px var(--mono);width:52px}
 .dcc{display:flex;flex-direction:column;gap:1px;padding:3px 6px;border:1px solid var(--edge);border-radius:6px;background:var(--panel);margin:1px 0;min-width:120px}.dcc.d1{border-color:var(--edge2);background:var(--s2)}.dcc.out{opacity:.55}.dcn{display:flex;align-items:center;gap:5px;white-space:nowrap;font-size:11.5px}.dcc.d1 .dcn{font-weight:600}.dcm{font:500 9.5px var(--mono);color:var(--dim)}.dcps{font:600 9px var(--mono);color:var(--mute);min-width:26px;font-style:normal}
 table.dcdef{table-layout:fixed}table.dcdef th:first-child,table.dcdef td:first-child{width:60px}.dcwrap{display:flex;flex-wrap:wrap;gap:4px}.dcwrap .dcc{min-width:0}
-table.dct2:not(.dcdef){table-layout:fixed}table.dct2:not(.dcdef) th:first-child{width:62px}table.dct2:not(.dcdef) td{min-width:0;overflow:hidden}table.dct2 td .dcc{min-width:0;max-width:100%;box-sizing:border-box}table.dct2 .dcn,table.dct2 .dcm{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}table.dcdef th.dchd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:1000px){.dcgrid{grid-template-columns:1fr}}
 /* insights: bars, dumbbells */
 .irgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:10px 22px}.irh{margin:6px 0 2px;font-size:11px}.icols{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
@@ -810,7 +806,6 @@ table.skh td,table.skh th{padding:1px 2px;font-size:9.5px}table.skh td .c{min-wi
 .lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}
 .lgrid.td5{grid-template-columns:repeat(5,minmax(0,1fr))}
 .lgrid.td5.wide{grid-template-columns:1.32fr repeat(4,minmax(0,1fr))}
-@media(max-width:1500px){.lgrid.td5,.lgrid.td5.wide{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:1000px){.lgrid,.lgrid.td5,.lgrid.td5.wide{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:640px){.lgrid,.lgrid.td5,.lgrid.td5.wide{grid-template-columns:1fr}}
 /* full-length columns: the table runs down the page instead of scrolling inside a 72vh box,
    so its header sticks to the page under the fixed chrome rather than to a scroll box */
 .lgrid.full .lgcol{overflow:visible}
@@ -1212,8 +1207,7 @@ const SECTIONS=[
    {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
-const TESTMODE=(()=>{try{const h=new URLSearchParams(location.hash.replace(/^#/,''));if(h.get('test')==='1')localStorage.setItem('rm-test','1');if(h.get('test')==='0')localStorage.removeItem('rm-test');return localStorage.getItem('rm-test')==='1'}catch(_){return false}})();
-const itemOK=it=>!(it.sec&&it.sec.id==='test'&&!TESTMODE)&&!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
+const itemOK=it=>!(it.nfl&&!IS_NFL)&&!(it.props&&!((J.betting||{}).lines||[]).length&&!((J.betting||{}).td||[]).length)&&!(LG.hideTabs||[]).includes(it.c);
 const SEC_LAST={};
 function buildSide(){const secs=SECTIONS.filter(sec=>sec.items.some(itemOK));
   $('#tnav').innerHTML=secs.map(sec=>`<button data-s="${sec.id}" title="${esc(sec.items.filter(itemOK).map(i=>i.label).join(' · '))}"><span class="fk">${sec.fk}</span>${sec.label}</button>`).join('');
@@ -2270,7 +2264,7 @@ function dchart(){
       const starters=R.filter(r=>r[5]===1),backups=R.filter(r=>r[5]===2);if(!R.length)return '';
       const c=r=>`<div class="dcc${r[5]===1?' d1':''}" title="${esc(r[8]||'')} · ${r[9]||''} ${r[10]?r[10]+' lb':''}${r[11]!==''&&r[11]!=null?' · yr '+r[11]:''}"><span class="dcn"><i class="dcps">${r[3]}</i>${esc(r[6])}${r[13]&&r[13]!=='ACT'?` <span class="inj0">${esc(r[13])}</span>`:''}</span><span class="dcm">${esc(r[8]||'')}</span></div>`;
       return `<tr><td class="dcpos" style="color:var(--dim)">${grp}</td><td><div class="dcwrap">${starters.map(c).join('')}</div></td><td><div class="dcwrap">${backups.map(c).join('')}</div></td></tr>`}).join('');
-    return `<table class="dct2 dcdef"><thead><tr><th colspan="3" class="dchd">${tcell(t)} defense <span class="mini">${esc(front)}</span></th></tr><tr><th></th><th>starters</th><th>next up</th></tr></thead><tbody>${rows}</tbody></table>`}
+    return `<table class="dct2 dcdef"><thead><tr><th>${tcell(t)} defense <span class="mini">${esc(front)}</span></th><th>starters</th><th>next up</th></tr></thead><tbody>${rows}</tbody></table>`}
   function side(t){if(!t)return '';const g=gameOf(t,G.week);const at=g&&g[GM.home]===t?'home':g?'away':'';
     return `<div class="dcteam"><div class="dchead" style="--tc:${vivid(t)}">${tlogo(t,26)}<b style="color:${vividC(t)}">${t}</b><span class="mini">${TEAM[t]?TEAM[t].n:''}${at?' · '+at:''}${oppOf(t)?' · wk '+G.week+' vs '+oppOf(t):''}</span></div>${offTable(t)}${defTable(t)}</div>`}
   function render(){const a=$('#dcTeam').value,b=$('#dcTeam2').value;gameOpts();
@@ -2960,19 +2954,6 @@ function picksHome(){
   const pkEdgePct=pkEdgeVal;
   const EB=[[-9,0],[0,.03],[.03,.06],[.06,.10],[.10,.18],[.18,9]];
   const buckets=EB.map(([lo,hi])=>{const rs=graded.filter(p=>{const e=pkEdgePct(p);return e!=null&&e>=lo&&e<hi});return {lo,hi,...pkRec(rs)}}).filter(b=>b.n);
-  const notes=[];
-  /* ---- the model's actual picks: positions past PLAY_MIN on the one edge scale (6% = the first bucket from which every larger one has cleared 52.4%) */
-  const PLAY_MIN=0.06;const plays=F.filter(p=>(pkEdgePct(p)??-9)>=PLAY_MIN);const ptot=pkRec(plays);
-  /* ---- closing line value: did the market move toward the model's side between freeze and kickoff? (build_clv.py) */
-  const CLV=J.picksClv||[];const clvKey=p=>`${p.type}|${p.ref}|${p.market}|${p.side}|${p.line}`;const CLVM={};CLV.forEach(c=>{if(c.close_ts)CLVM[clvKey(c)]=c});
-  const withClv=F.map(p=>({p,c:CLVM[clvKey(p)]})).filter(x=>x.c);
-  const clvRec=xs=>{const b=xs.filter(x=>x.c.beat==='1'||x.c.beat==='0');const beat=b.filter(x=>x.c.beat==='1').length;
-    const pts=xs.map(x=>x.c.clv_pts).filter(v=>v!==''&&v!=null).map(Number),pr=xs.map(x=>x.c.clv_p).filter(v=>v!==''&&v!=null).map(Number);
-    return {n:xs.length,moved:b.length,beat,beatPct:b.length?beat/b.length:null,pts:pts.length?pts.reduce((a,v)=>a+v,0)/pts.length:null,prob:pr.length?pr.reduce((a,v)=>a+v,0)/pr.length:null,snaps:xs.length?xs.reduce((a,x)=>a+(+x.c.snaps||0),0)/xs.length:null}};
-  const clvT=TYPES.map(t=>({t,...clvRec(withClv.filter(x=>x.p.type===t))})).filter(x=>x.n);const clvAll=clvRec(withClv);
-  const clvB=EB.map(([lo,hi])=>({lo,hi,...clvRec(withClv.filter(x=>{const e=pkEdgePct(x.p);return e!=null&&e>=lo&&e<hi}))})).filter(b=>b.n);
-  if(clvAll.moved>=30)notes.push([clvAll.beatPct>0.5?'up':'down',`Closing line value: the market moved toward the model's side on ${pkPct(clvAll.beatPct,0)} of the ${clvAll.moved} positions whose line moved before kickoff${clvAll.beatPct>0.5?' — the faster signal that the model is seeing something real':' — the market is moving against it more often than for it'}.`]);
-  if(ptot.graded>=20)notes.push([ptot.roi>0?'up':'down',`Plays only (edge ≥ ${(100*PLAY_MIN).toFixed(0)}%): ${pkWL(ptot)} for ${pkU(ptot.units)} units — everything below that threshold is shown as data, not picked.`]);
   /* ---- calibration of the model's own probability against what happened */
   const probRows=graded.filter(p=>pkProb(p)!=null&&p.result!=='P');
   const CB=[[.3,.45],[.45,.5],[.5,.55],[.55,.6],[.6,.7],[.7,1]];
@@ -2986,6 +2967,7 @@ function picksHome(){
   const now=F.filter(p=>+p.week===wk);
   const best=now.filter(p=>!p.result).map(p=>({p,e:pkEdgePct(p)})).filter(x=>x.e!=null).sort((a,b)=>b.e-a.e).slice(0,8);
   /* ---- what the data says, in words */
+  const notes=[];
   const solid=byT.filter(x=>x.graded>=20);
   solid.filter(x=>x.roi>0.02).forEach(x=>notes.push(['up',`${PK_TL[x.t]} is ahead of the vig: ${pkWL(x)} for ${pkU(x.units)} units over ${x.graded} graded positions (${pkPct(x.roi,1)} per play).`]));
   solid.filter(x=>x.roi<-0.02).forEach(x=>notes.push(['down',`${PK_TL[x.t]} is behind: ${pkWL(x)} for ${pkU(x.units)} units over ${x.graded} graded (${pkPct(x.roi,1)} per play) — treat its edges as unproven.`]));
@@ -3024,9 +3006,7 @@ function picksHome(){
     ${kpi('record · graded',pkWL(tot),`${tot.graded} graded · ${tot.pend} pending`,'')}
     ${kpi('units',pkU(tot.units),tot.graded?`${pkPct(tot.roi,1)} per position`:'nothing graded yet',pkTone(tot.units))}
     ${kpi('hit rate',pkPct(tot.hit,1),`break-even ${pkPct(BE110,1)} at −110`,tot.hit==null?'':tot.hit>=BE110?'g':'r')}
-    ${kpi(`plays · edge ≥ ${(100*PLAY_MIN).toFixed(0)}%`,pkWL(ptot),`${pkU(ptot.units)} u · ${pkPct(ptot.hit,1)} hit · the model's actual picks; everything else is data`,pkTone(ptot.units))}
-    ${kpi('beat the close',pkPct(clvAll.beatPct,0),clvAll.moved?`${clvAll.beat} of ${clvAll.moved} positions whose line moved · ${clvAll.n} with a closing consensus`:'no closing consensus on file yet',clvAll.beatPct==null?'':clvAll.beatPct>0.5?'g':'r')}
-    ${kpi('this week',`${now.filter(p=>(pkEdgePct(p)??-9)>=PLAY_MIN).length}`,`plays past ${(100*PLAY_MIN).toFixed(0)}% · ${now.length} lines priced · wk ${wk}`,'','picks')}
+    ${kpi('this week',`${now.filter(p=>(pkEdgePct(p)??-9)>=0.03).length}`,`positions past 3% · ${now.length} lines priced · wk ${wk}`,'','picks')}
     ${kpi('game model',gmAts.length?`${gmAts.filter(g=>g.res_ats==='W').length}-${gmAts.filter(g=>g.res_ats==='L').length}`:'—',gmAts.length?`ATS this season · ${gmRows.length} games scored`:'no graded games yet','')}
     ${kpi('vs the closing spread',maeM!=null&&maeK!=null?`${maeM<maeK?'−':'+'}${Math.abs(maeM-maeK).toFixed(1)} pts`:'—',maeM!=null?`model ${maeM.toFixed(1)} · market ${maeK?maeK.toFixed(1):'—'} mean error`:'',maeM!=null&&maeK!=null?(maeM<maeK?'g':'r'):'')}
   </div>
@@ -3046,16 +3026,6 @@ function picksHome(){
       ${calib.length?`<table class="mkt pksm"><thead><tr><th>model said</th><th class="r">plays</th><th>actual</th><th class="r">expected</th><th class="r">gap</th></tr></thead><tbody>
       ${calib.map(c=>{const gap=c.hit-c.exp;return `<tr><td class="mono">${(100*c.lo).toFixed(0)}–${(100*c.hi).toFixed(0)}%</td><td class="r mini">${c.n}</td><td>${hitBar(c.hit,c.n)}</td><td class="r mini">${pkPct(c.exp,1)}</td><td class="r ${gap>=0?'g':'r'}">${(gap>=0?'+':'')+(100*gap).toFixed(1)}</td></tr>`}).join('')}</tbody></table>
       <p class="note">A model that is honest about itself sits near zero in the gap column. Positive means it is winning more than it claims, negative means its probabilities are too confident.</p>`:'<div class="pkempty">no graded probability positions yet</div>'}</div>
-  </div>
-  <div class="pkgrid2">
-    <div class="panel"><h3>closing line value <span class="f">frozen number vs the consensus at kickoff · positive = the market moved toward the model's side · the fastest honest read on whether the model sees anything</span></h3>
-      ${clvT.length?`<table class="mkt pksm"><thead><tr><th>market</th><th class="r">with a close</th><th class="r">line moved</th><th>beat the close</th><th class="r">avg pts</th><th class="r">avg prob</th><th class="r">snaps</th></tr></thead><tbody>
-      ${clvT.map(x=>`<tr><td><span class="ptype ${x.t}">${PK_TL[x.t]}</span></td><td class="r mini">${x.n}</td><td class="r mini">${x.moved}</td><td>${x.beatPct==null?'<span class="dim">—</span>':`<span class="pkhit"><span class="t"><i style="width:${(100*x.beatPct).toFixed(0)}%;background:${x.beatPct>=0.5?'var(--green)':'var(--red)'}"></i><em style="left:50%"></em></span><b class="${x.beatPct>=0.5?'g':'r'}">${pkPct(x.beatPct,0)}</b></span>`}</td><td class="r mini ${x.pts==null?'':x.pts>0?'g':x.pts<0?'r':''}">${x.pts==null?'—':(x.pts>=0?'+':'')+x.pts.toFixed(2)}</td><td class="r mini ${x.prob==null?'':x.prob>0?'g':x.prob<0?'r':''}">${x.prob==null?'—':(x.prob>=0?'+':'')+(100*x.prob).toFixed(1)+' pts'}</td><td class="r mini">${x.snaps==null?'—':x.snaps.toFixed(1)}</td></tr>`).join('')}
-      <tr class="tot"><td><b>all</b></td><td class="r mini">${clvAll.n}</td><td class="r mini">${clvAll.moved}</td><td><b class="${clvAll.beatPct==null?'':clvAll.beatPct>=0.5?'g':'r'}">${pkPct(clvAll.beatPct,0)}</b></td><td class="r mini">${clvAll.pts==null?'—':(clvAll.pts>=0?'+':'')+clvAll.pts.toFixed(2)}</td><td class="r mini">${clvAll.prob==null?'—':(clvAll.prob>=0?'+':'')+(100*clvAll.prob).toFixed(1)+' pts'}</td><td class="r mini">${clvAll.snaps==null?'—':clvAll.snaps.toFixed(1)}</td></tr></tbody></table>
-      <p class="note">Points = the number we took minus the closing number, in our favor (spreads, totals, prop lines). Prob = closing probability of our side minus the frozen market's, where the market speaks in prices (moneyline, anytime TD, props whose line did not move). Snaps = consensus pulls between the opener and the close — a close built on one snapshot is just the opener. Beating the close on more than half of the moved lines, consistently, is what a real edge looks like long before the W-L column can say so.</p>`:'<div class="pkempty">no closing consensus on file yet — fills as the Odds API pulls accumulate (data/raw/odds_api/*_history.csv)</div>'}</div>
-    <div class="panel"><h3>close by edge bucket <span class="f">if the edge is real, the biggest disagreements should beat the close most often</span></h3>
-      ${clvB.length?`<table class="mkt pksm"><thead><tr><th>model vs market</th><th class="r">with a close</th><th class="r">moved</th><th>beat the close</th><th class="r">avg pts</th></tr></thead><tbody>
-      ${clvB.map(b=>`<tr><td class="mono">${b.lo<0?'negative':`${(100*b.lo).toFixed(0)}–${b.hi>1?'∞':(100*b.hi).toFixed(0)}%`}</td><td class="r mini">${b.n}</td><td class="r mini">${b.moved}</td><td>${b.beatPct==null?'<span class="dim">—</span>':`<span class="pkhit"><span class="t"><i style="width:${(100*b.beatPct).toFixed(0)}%;background:${b.beatPct>=0.5?'var(--green)':'var(--red)'}"></i><em style="left:50%"></em></span><b class="${b.beatPct>=0.5?'g':'r'}">${pkPct(b.beatPct,0)}</b></span>`}</td><td class="r mini ${b.pts==null?'':b.pts>0?'g':b.pts<0?'r':''}">${b.pts==null?'—':(b.pts>=0?'+':'')+b.pts.toFixed(2)}</td></tr>`).join('')}</tbody></table>`:'<div class="pkempty">nothing to bucket yet</div>'}</div>
   </div>
   <div class="panel"><h3>what the model adds over just reading recent form <span class="f">walk-forward skill per prop market: how much of the variance the full model explains, against the same model using only the player's recent games · trained on games before the week it predicts, never after</span></h3>
     ${Object.keys(SK).length?`<table class="mkt pksm"><thead><tr><th>market</th><th class="r">sample</th><th>model skill</th><th class="r">form only</th><th class="r">what the matchup layer adds</th><th class="r">brier</th></tr></thead><tbody>
