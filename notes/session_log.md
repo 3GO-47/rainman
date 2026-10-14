@@ -507,3 +507,7 @@
 - F2 Matchups = Game View · TD Grid (was TD Board) · Player Grid · H2H Grid · TD Board (NEW: Player Board table on touchdowns only + anytime-TD model block) · Player Board · H2H Board.
 - One `rolePane(host, mode)` component drives the fields-by-role pane on TD Grid (td), Player Grid (psi — softest fields by Ψ) and H2H Grid (h2h — best history vs the opponent). Panes on the F2 copies only; TEST drafts unchanged (hidden via syncSub).
 - tdLab() renders into #tdBx (players container); same lab2 table, group headers, badges and arrows as Player Board and H2H Board.
+
+## n57 — 2026-10-14 · v8d (grid panes justify themselves)
+- Player Grid pane → "prop fields by role": per role the three best prop spots — stat, opponent allows/g + rank pill, his season & L5 averages, the posted line (book first; Kalshi rung nearest his average if no book line; o% = frozen model over prob). Score = softness of the field for that stat (0-100) ± 25 × his form vs the line (or vs his average when no line). One entry per player.
+- H2H Grid pane → "history by role": pill = PPR/g vs the opponent; stat line = games, per-game numbers by position, Δ vs his own average; ranked by Δ weighted by games.
