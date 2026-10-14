@@ -74,13 +74,15 @@ def wait_until(iso):
 def markets_only(G, st):
     did = []
     if any(G[lg]['active'] for lg in G):
+        if G['nfl']['active'] and step('injuries', pull_espn.injuries): step('build_injuries', run, ['scripts/build_injuries.py'], False); did.append('injuries')
         if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():
             if step('odds api', run, ['scripts/fetch_odds_api.py'], False): did.append('odds')
         if step('markets', pull_markets.main): did.append('exchanges')
         if step('tennis markets', pull_tennis.markets) and step('tennis', run, ['scripts/tennis/build.py']) is not None: did.append('tennis')
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb')
         if 'odds' in did:                                                                           # fresh book prices: re-price the bet board and the dashboard that shows it
-            step('bets', run, ['scripts/build_bets.py'], False); step('clv', run, ['scripts/build_clv.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False)
+            step('bets', run, ['scripts/build_bets.py'], False); step('clv', run, ['scripts/build_clv.py'], False)
+        if 'odds' in did or 'injuries' in did: step('dashboard', run, ['scripts/build_dashboard.py'], False); step('dev', run, ['scripts/build_dev.py'], False)
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
     if chg:
@@ -117,6 +119,7 @@ def main():
         if n == 0 and G['nfl']['unpulled']: log(f'  {G["nfl"]["unpulled"]} finished games still missing — retry tomorrow')
         snaps = sorted(glob.glob('data/processed/depth_charts_*.csv'))
         age = (TODAY - datetime.date.fromisoformat(snaps[-1][-14:-4])).days if snaps else 99
+        step('injuries', pull_espn.injuries)
         if FORCE or DOW in ('Tue', 'Wed', 'Thu', 'Sat', 'Sun') or age > 5:
             raw = step('depth', pull_espn.depth)
             if raw:

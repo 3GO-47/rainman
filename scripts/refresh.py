@@ -83,7 +83,10 @@ def main():
     if os.path.exists('data/raw/nflverse/depth_charts_2026.parquet'):
         run(['scripts/build_units.py'])
     run(['scripts/build_narratives.py'])
+    run(['scripts/build_injuries.py'], check=False) if 'check' in run.__code__.co_varnames else run(['scripts/build_injuries.py'])
     run(['scripts/build_dashboard.py'])
+    try: run(['scripts/build_dev.py'])
+    except Exception as e: print('  build_dev skipped:', e)
     # other sports (NBA / NHL / WNBA): sportsdataverse parquets from GitHub, then the generic Layer-1 builder
     if '--no-sports' not in sys.argv:
         r = subprocess.run([sys.executable, 'scripts/sports/fetch_sdv.py'])

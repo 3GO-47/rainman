@@ -328,6 +328,7 @@ def main():
         props = {k: {kk: vv for kk, vv in v.items() if kk != 'sens'} | {'sens': v.get('sens')} for k, v in (st.get('props') or {}).items() if isinstance(v, dict)}
         return dict(log=log[-600:], plan=100000, state=dict(lines=st.get('lines', {}), props=props, last_run=st.get('last_run', '')))
     data['api'] = api_payload()
+    data['injuries'] = rows_of('data/processed/injuries_current.csv')
     data['lineMoves'] = [{k: v for k, v in r.items() if k != 'series'} for r in rows_of('data/processed/line_moves.csv')]
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine

@@ -524,3 +524,13 @@
 - build_dashboard: data['api'] from notes/odds_usage.log + odds_state.json. Template: apiView() (plan/used/pace tiles, credits per day by reason, by reason, by league, per-game state, full log, the policy text).
 - rolePane: hide/show toggle (remembered per pane). pkHistory(type): click any market-type chip → modal with the model's full recorded history for that type (record, units, plays-only, by week with running units, by market, every position).
 - No credits spent in this session (dry run only). First policy pulls happen on the loop's next --markets run.
+
+## n60 — 2026-10-14 · v9
+- Home: slate above the edge board; both ribbons tightened (11px h3, 8px top padding).
+- F5 Picks → Board rebuilt (boardView): plays as cards (green by edge tier, side big, model vs market, edge bar, cohort + market record pills, source chip), leans table, passed lines folded, game model vs market with 3-pt gaps coloured, earlier weeks folded. Type chips open the history popup.
+- History popup (pkHistory): conditional formatting throughout — team logos/colours, player links, edge bars by tier, model/market probabilities coloured, side green/red, W/L row tint, source chips, last-20 streak strip; modal widened (.modalbox.wide 1480px).
+- Popups: collegePop (production rank Σ PPR/g of starters, allocation bars, this week's threads, alumni on offense + defense), teamPop (record, line, model positions, injuries, DvP per slot with injury lift, style + coaches, depth chart), slotPop (every defense ranked for the slot with per-stat pills + lift, every starter holding it). Delegated clicks on [data-c] chips/logos, .tc team cells, .slotchip.
+- Scheme: schemePanel() — player-level scheme edges (style index + injury lift + Ψ) on Insights (compact) and on top of Scheme (full, with game-by-game offense-style vs DC-style cards and per-slot bars).
+- Injuries (F4 Intel): build_injuries.py merges ESPN injuries feed (new pull_espn.injuries, every loop run) + nflverse report (only when it is the current week) with roles from depth charts (offense) and units (defense); injLift() = status × role weight × slot coupling → lift per opponent slot. Tab: KPIs, who gets a lift, game-by-game with status/practice/role/effect, full table.
+- Dev dashboard: scripts/build_dev.py → dashboard/dev.html (API spend, loop runs, freshness, builds, traffic hook); linked from the API tab; built by refresh.py and the markets pass.
+- Today's ESPN injuries file is a 4-team fixture pulled through Chrome (ARI/DEN/LAR/SEA); the loop's next pass writes all 32.

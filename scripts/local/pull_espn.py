@@ -187,6 +187,23 @@ def props(week=None):
 SLATE = [('nfl', 'football/nfl', ''), ('cfb', 'football/college-football', '&groups=80'), ('nba', 'basketball/nba', ''), ('ncaab', 'basketball/mens-college-basketball', '&groups=50'),
          ('wnba', 'basketball/wnba', ''), ('mlb', 'baseball/mlb', ''), ('nhl', 'hockey/nhl', '')] + [(s, f'soccer/{s}', '') for s in ['eng.1', 'usa.1', 'uefa.champions', 'esp.1', 'ger.1', 'ita.1', 'fra.1']]
 
+def injuries():
+    """ESPN's injuries feed for all 32 teams (status, injury, return date, the beat note) -> data/raw/espn_injuries_<today>.txt
+    I|team|player|pos|status|injury|return|date|fantasy|comment   Both sides of the ball; 'Active' rows (recently on a report, playing) are kept for the trail."""
+    try: j = get_json(f'{SITE}/football/nfl/injuries', pace=0.5)
+    except Exception as e: log(f'  injuries: {str(e)[:80]}'); return None
+    abbr = {str(v): k for k, v in ESPN_NFL.items()}
+    lines = []
+    for t in j.get('injuries', []):
+        tm = abbr.get(str(t.get('id')), '')
+        if not tm: continue
+        for i in t.get('injuries', []):
+            a = i.get('athlete') or {}; d = i.get('details') or {}
+            lines.append('|'.join(str(x or '').replace('|', '/') for x in ['I', tm, a.get('displayName'), (a.get('position') or {}).get('abbreviation'), i.get('status'), d.get('type'), d.get('returnDate'), (i.get('date') or '')[:10], (d.get('fantasyStatus') or {}).get('description'), (i.get('shortComment') or '')[:160]]))
+    out = f'data/raw/espn_injuries_{TODAY_S}.txt'
+    write_lines(out, lines, header=f'# I|team|player|pos|status|injury|return|date|fantasy|comment  (site.api.espn.com/apis/site/v2/sports/football/nfl/injuries; pulled {TODAY_S})')
+    log(f'  injuries: {len(lines)} rows, {sum(1 for l in lines if "|Active|" not in l)} not active -> {out}'); return out
+
 def slate(days=8):
     rows, seen = [], set()
     for lg, path, extra in SLATE:
