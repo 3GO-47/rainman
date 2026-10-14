@@ -502,3 +502,8 @@
 - Game View: card no longer padded to viewport height; tighter rows; deep strips in one row.
 - Depth Charts rebuilt: key-players table (usage, PPR/g, opponent allows + rank, Ψ, proj), depth chips, back seven with next-up folded, open connections panel.
 - Playwright: 29 views × 1540/390 + NCAA, 0 errors, 0 overflow.
+
+## n56 — 2026-10-14 · v8c (F2 names fixed)
+- F2 Matchups = Game View · TD Grid (was TD Board) · Player Grid · H2H Grid · TD Board (NEW: Player Board table on touchdowns only + anytime-TD model block) · Player Board · H2H Board.
+- One `rolePane(host, mode)` component drives the fields-by-role pane on TD Grid (td), Player Grid (psi — softest fields by Ψ) and H2H Grid (h2h — best history vs the opponent). Panes on the F2 copies only; TEST drafts unchanged (hidden via syncSub).
+- tdLab() renders into #tdBx (players container); same lab2 table, group headers, badges and arrows as Player Board and H2H Board.
