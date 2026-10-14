@@ -12,14 +12,17 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 file (inline CSS/JS, embedded JSON, Chart.js inlined) that opens from `file://` or from Pages.
 
 **NFL / CFB layout — five major tabs (F1–F5) + TEST (F6):**
-- **Home** — Overview (KPIs · slate ribbon · market board · DvP field · movers) · Insights · DFS (DraftKings Classic lineups).
+- **Home** — one page: KPI strip (slate, softest / stingiest D, bleeding / tightening, highest total, biggest spread, biggest line move, model plays) → edge board
+  (per role, the three softest and two hardest fields with each player's own PPR/g and projection) → the 16-tile slate → standings, leaders & movers and
+  every-defense-ranked folded underneath.
 - **Matchups** — Big Board (matchup rankings per starter and market, projection bands) · Matchups (every game, both offenses vs the
   opposing defense; open a card for the full slot-by-slot detail) · TD Board.
 - **Players** — Matchup Lab (the player board: his per-game averages this season and 2024–26 beside what the opponent allows
   to his slot, DvP rank per stat, Ψ, projection — every column sorts) · Head to Head · Player Explorer · Depth Charts.
-- **Intel** — scheme / personnel / turnover / coaching · Locker Room · Defenses · Matrix · Observatory · Schedule.
+- **Defenses** — Rankings (per slot: Ψ, waveform, L4 trend, rank + allowed per stat; ALL = the Ψ matrix + every stat rank) · Trends (one defense over the
+  season) · Schedule · Scheme (how each defense / offense plays, in plain English).
 - **Picks** — Model (record, units, calibration, edge buckets, closing line value) · Card (this week's frozen positions) · Markets
-  (one table per market: averages, allowed, projection band, the DK / Kalshi lines, edge).
+  (one table per market: averages, allowed, projection band, the DK / Kalshi lines, edge) · DFS (DraftKings Classic lineups).
 - **TEST (F6)** — the staging bay for drafts; hidden from visitors until the page is opened once with `#test=1` (remembered per
   browser; `#test=0` forgets).
 
@@ -218,6 +221,7 @@ the sum of the opposing players at that slot; combined = last season + this seas
 - **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-14 — **v6 product cut.** Home is one page with the edge board on top; Intel → Defenses (Rankings with the Ψ matrix under ALL · Trends · Schedule · Scheme); DFS under Picks; Insights, Locker Room and Matrix parked under TEST. Backup + restore point v5.2.
 - 2026-10-14 — **Core pass.** Player universe = the effective depth chart (Fantasy Master Key workbook and the owner filter retired);
   closing-line value for every frozen position (`build_clv.py`, Picks › Model) and a "plays ≥ 6% edge" record beside the all-lines record (Model tab + Layer 0);
   Chart.js inlined (charts draw offline); TEST tab gated behind `#test=1`; TD Board columns wrap at ≤1500 px; depth-chart tables fit their pane;

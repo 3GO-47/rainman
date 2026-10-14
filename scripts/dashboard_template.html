@@ -287,6 +287,17 @@ table.r11t{width:100%;border-collapse:collapse;font-size:11.5px}.r11t td,.r11t t
  .r11mg{grid-template-columns:1fr 1fr 1fr}.r11mg b{font-size:16px}.r11sum b{font-size:17px}.r11sum .hb b{font-size:22px}.r11side{margin-left:0}
  .r11dh.g .r11tot{min-width:0;width:100%;text-align:left}
  .r11back{width:100%;text-align:left}.r11sum{grid-template-columns:repeat(4,1fr)}.r11sum .hb{grid-column:span 4}.r11sum>div{padding:6px 7px}.r11sum b{font-size:15px}.r11sum em{font-size:9px}}
+.ebgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:10px}
+.ebcard{border:1px solid var(--edge);border-radius:6px;padding:6px 9px 4px;background:var(--s2);min-width:0}
+.ebh{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ebhd,.eb{display:grid;grid-template-columns:minmax(132px,1.5fr) minmax(64px,.9fr) 98px 46px 40px;gap:6px;align-items:center}
+.ebhd{font:600 9px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--dim2);padding:2px 0 3px;border-bottom:1px solid var(--edge)}.ebhd span:nth-child(n+3){text-align:right}
+.eb{padding:3px 0;border-bottom:1px solid var(--edge);font-size:11.5px}.eb:last-child{border-bottom:0}
+.ebn{display:flex;align-items:center;gap:4px;min-width:0;white-space:nowrap}.ebn .nm{min-width:0;overflow:hidden;text-overflow:ellipsis}.ebn i{font-style:normal;color:var(--dim);font-size:10px;flex:none}
+.ebt{display:flex;align-items:center;gap:5px;min-width:0}.ebk{flex:1 1 auto;min-width:0}.ebk i{display:block;height:8px;border-radius:2px;background:var(--dim);max-width:100%}.eb.g .ebk i{background:var(--green)}.eb.r .ebk i{background:var(--red)}.ebt b{font:600 11px var(--mono);min-width:26px;text-align:right}
+.ebs{font:11px var(--mono);white-space:nowrap;text-align:right}.ebs i{font-style:normal;color:var(--dim);font-size:9px}.ebp,.ebj{font:600 11.5px var(--mono);text-align:right;white-space:nowrap}.ebj{color:var(--accent-text)}
+details.hfold{margin:10px 0}details.hfold>summary{cursor:pointer;list-style:none;font:600 11px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);padding:9px 12px;border:1px solid var(--edge);border-radius:4px;background:var(--panel)}details.hfold>summary::-webkit-details-marker{display:none}details.hfold>summary:before{content:'\25B8  ';color:var(--accent-text)}details.hfold[open]>summary:before{content:'\25BE  '}details.hfold>summary .f{font-weight:400;letter-spacing:0;text-transform:none;color:var(--dim);margin-left:10px}details.hfold[open]>summary{border-radius:4px 4px 0 0;margin-bottom:8px}
+#sub:has(#snav[hidden]){display:none}
 .pintro .newn{cursor:pointer;color:var(--accent-text);border:1px solid var(--accent-text);border-radius:4px;padding:1px 6px}.pintro .pnew{font:11.5px var(--ui);color:var(--txt);padding:6px 2px 0;max-width:1100px}
 .lab2:not(.showcol) .ccol{display:none}
 a.kpi{text-decoration:none;color:inherit;display:block}
@@ -1147,29 +1158,26 @@ document.querySelectorAll('#legacyNav nav button').forEach(b=>b.onclick=()=>{
 /* ---------- task-based navigation: every legacy view / sub-panel has exactly one home in the sidebar ---------- */
 const SECTIONS=[
  {id:'home',fk:'F1',label:'Home',items:[
-   {id:'overview',label:'Overview',desc:'the week at a glance: slate, standings, season leaders, market board, every defense ranked by position, movers',c:'home',sub:'overview'},
-   {id:'insights',label:'Insights',desc:'best / worst matchup per role this week, the softest and stingiest defense per slot, schedule strength, volatility',c:'home',sub:'insights'},
-   {id:'fantasy',label:'DFS',desc:'DraftKings Classic: the frozen cap-legal lineup per slate, every priced play by position, stacks, and the best points per dollar',c:'home',sub:'fantasy',nfl:true}]},
+   {id:'overview',label:'This week',desc:'the week on one page: edge board (softest and hardest fields per role, with each player\'s own numbers), the slate with lines, then standings, leaders and every defense ranked by position folded underneath',c:'home',sub:'overview'}]},
  {id:'match',fk:'F2',label:'Matchups',items:[
-   {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
+   {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
    {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
    {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'h2hp',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent — his own per-game averages in every prior meeting we have logs for, four columns by position',c:'players',sub:'h2hp'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
- {id:'intel',fk:'F4',label:'Intel',items:[
-   {id:'scheme',label:'Intel',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true},
-   {id:'storylines',label:'Locker Room',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
-   {id:'ranks',label:'Defenses',desc:'rank + allowed per game, per slot and stat',c:'defenses',sub:'ranks'},
-   {id:'matrix',label:'Matrix',desc:'all defenses × slots heatmap with drill-down to per-stat ranks and raw averages',c:'defenses',sub:'matrix'},
-   {id:'observatory',label:'Observatory',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
-   {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'}]},
+ {id:'intel',fk:'F4',label:'Defenses',items:[
+   {id:'ranks',label:'Rankings',desc:'per slot: Ψ, weekly waveform, last-4 trend, rank and allowed per game for every stat · ALL = the Ψ matrix plus every stat rank',c:'defenses',sub:'ranks'},
+   {id:'observatory',label:'Trends',desc:'one defense over the season: waveform, radar, spectrum',c:'defenses',sub:'defense'},
+   {id:'schedule',label:'Schedule',desc:'offenses × weeks, colored by opponent softness',c:'sked'},
+   {id:'scheme',label:'Scheme',desc:'how every defense and offense plays (coverage, blitz, pace, personnel), what that style gives up to each position, who changed coaches or starters',c:'intel',nfl:true}]},
  {id:'picksec',fk:'F5',label:'Picks',items:[
    {id:'pkhome',label:'Model',desc:'how the model has actually done: record, units, calibration, what it is good at and what has changed',c:'pkhome',nfl:true},
    {id:'picks',label:'Card',desc:'this week\'s frozen positions — filter by game, slate, market or edge; the game model board underneath',c:'games',nfl:true},
-   {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'}]},
+   {id:'props',label:'Markets',desc:'every player market, anytime TD and game lines in one place — pick a market chip: his averages, what the opponent allows, the projection band, the DK / Kalshi lines and the edge',c:'bets',sub:'P'},
+   {id:'fantasy',label:'DFS',desc:'DraftKings Classic: the frozen cap-legal lineup per slate, every priced play by position, stacks, and the best points per dollar',c:'home',sub:'fantasy',nfl:true}]},
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'gameview',label:'Game View',desc:'one game: the Matchups card and the market with the model\'s edge beside it \u2014 depth charts, scheme, form and storylines open on demand underneath',c:'test',sub:'gameview'},
@@ -1178,7 +1186,10 @@ const SECTIONS=[
    {id:'markets2',label:'Markets v2',desc:'the Markets page with its market chips back \u2014 pass yards, rush yards, receptions, receiving yards, anytime TD and game lines are each one click',c:'test',sub:'markets2'},
    {id:'ddelta',label:'Depth Delta',desc:'what changed on the depth charts since last week \u2014 injuries, promotions, demotions, new names \u2014 and what each change means against this week\'s opponent',c:'test',sub:'ddelta'},
    {id:'splits',label:'Splits',desc:'PPR per game by situation \u2014 home / away, favorite / dog, dome / outdoors, division, last three \u2014 and the split that matches the spot he walks into this week',c:'test',sub:'splits'},
-   {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'}]}];
+   {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'},
+   {id:'insights',label:'Insights (old Home tab)',desc:'best / worst matchup per role this week, the softest and stingiest defense per slot, schedule strength, volatility',c:'home',sub:'insights'},
+   {id:'storylines',label:'Locker Room (parked)',desc:'rivalries, alumni, homecomings, revenge games',c:'locker',nfl:true},
+   {id:'matrix',label:'Matrix (merged into Rankings › ALL)',desc:'all defenses × slots heatmap with drill-down to per-stat ranks and raw averages',c:'defenses',sub:'matrix'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
 const TESTMODE=(()=>{try{const h=new URLSearchParams(location.hash.replace(/^#/,''));if(h.get('test')==='1')localStorage.setItem('rm-test','1');if(h.get('test')==='0')localStorage.removeItem('rm-test');return localStorage.getItem('rm-test')==='1'}catch(_){return false}})();
@@ -1187,7 +1198,7 @@ const SEC_LAST={};
 function buildSide(){const secs=SECTIONS.filter(sec=>sec.items.some(itemOK));
   $('#tnav').innerHTML=secs.map(sec=>`<button data-s="${sec.id}" title="${esc(sec.items.filter(itemOK).map(i=>i.label).join(' · '))}"><span class="fk">${sec.fk}</span>${sec.label}</button>`).join('');
   $('#tnav').querySelectorAll('button').forEach(bt=>bt.onclick=()=>{const sec=SECTIONS.find(x=>x.id===bt.dataset.s);go(SEC_LAST[sec.id]||sec.items.find(itemOK).id)})}
-function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec.items.filter(itemOK);nav.hidden=its.length<2;
+function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec.items.filter(itemOK);nav.hidden=its.length<2;requestAnimationFrame(()=>document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px'));
   nav.innerHTML=its.map(it=>`<a class="sitem" data-i="${it.id}" href="#v=${it.id}" title="${esc(it.desc)}">${it.label}</a>`).join('');
   nav.querySelectorAll('.sitem').forEach(el=>el.onclick=e=>{e.preventDefault();go(el.dataset.i)})}
 function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
@@ -1228,9 +1239,9 @@ const INTRO={
  picks:{what:'The model\u2019s frozen positions for this week, filterable by game, slate, market and how far the model is from the number.',how:['edge = how far the model disagrees with the market','a position is frozen the first time its week is built and graded later against that line','best per player keeps only the strongest line for each player and market','by game groups every position under the game it belongs to']}, props:{what:'Every player market: his averages, what the opponent allows, our projection band, the DraftKings and Kalshi lines, and the gap.',how:['pick a market chip at the top (yards, receptions, anytime TD, game lines…)','L10 over = how often he beat this line in his last ten games','gap = model probability minus the market price']}};
 /* per-view change notes: the date and what changed, shown as a chip in the reading key so a reviewer can see what moved on each tab */
 const NOTES={
- overview:['10-14','"biggest line move" tile: the week\'s largest consensus move across the books since the opener (from the Arb Engine history); click it for the Arb Engine STEAM view'],
+ overview:['10-14','Home is one page now: the edge board (per role, the three softest and two hardest fields with each player\'s own PPR/g and projection) sits on top, the slate under it, and standings / leaders / every-defense-ranked fold closed underneath (your choice is remembered); tiles for the biggest line move and the model\'s plays this week; the old Insights tab is parked under TEST'],
  insights:['10-14','reviewed — target / avoid lists per role with the field bars; no change'],
- fantasy:['10-14','with no DraftKings salary file the $K and V$ columns are hidden instead of printing dots; the salaries tile says where the file goes'],
+ fantasy:['10-14','moved under Picks (it is a DraftKings pick\'em, not a home-page item); with no salary file the $K and V$ columns are hidden instead of printing dots'],
  projections:['10-14','reviewed — no change to the numbers; the map is static (no motion) and every column of the board sorts'],
  matchups:['10-14','"his 2026 /g" reads as label · value pairs that never split across lines; the usage line wraps instead of truncating "opp/g"'],
  tdboard:['10-14','five full columns wrap to 3 / 2 / 1 below 1500 px so names and the TD/G header never clip; the fields pane scrolls inside its panel on a phone'],
@@ -1238,11 +1249,11 @@ const NOTES={
  h2hp:['10-14','reviewed — the College column follows the Matchup Lab\'s "college" box; last-meeting column already present; no other change'],
  explorer:['10-14','every directory column sorts (it did not); "opp Ψ" = this week\'s opponent\'s field for his slot, so the directory doubles as a quick board'],
  depth:['10-14','defense header on its own row (no more STARTERS over DEFENSE BASE); offense chips fit the pane, long names ellipsis with the full name on hover'],
- scheme:['10-14','every defense style carries a plain-English line under the tag — what that style gives up and to whom — instead of coverage jargon alone'],
+ scheme:['10-14','renamed Scheme under Defenses; every defense style carries a plain-English line under the tag — what that style gives up and to whom'],
  storylines:['10-14','reviewed — kept as is (Birthdays stays: added on request 10-05)'],
- ranks:['10-14','"L4 Δ" column per slot: the lead stat allowed over the last four games vs the season (▲ green = allowing more lately = softening); sorts'],
+ ranks:['10-14','tab renamed Defenses › Rankings; the Ψ matrix moved in here under ALL (same renderer, two data sets side by side); "L4 Δ" column per slot: the lead stat allowed over the last four games vs the season (▲ green = softening); sorts'],
  matrix:['10-14','reviewed — headers sort, two data sets side by side; no change'],
- observatory:['10-14','charts draw with no network (Chart.js is inlined now)'],
+ observatory:['10-14','renamed Trends; charts draw with no network (Chart.js is inlined now)'],
  schedule:['10-14','reviewed — lens / data set / sort all present; no change'],
  pkhome:['10-14','closing line value (beat the close, by market, by edge bucket) and the "plays ≥ 6% edge" record beside the all-lines record'],
  picks:['10-14','minimum edge defaults to 6% — the first bucket from which every larger one has cleared break-even — so the Card opens on plays, not data'],
@@ -1578,17 +1589,20 @@ function ranks(){
   const srcs=Object.keys(J.dvp);
   const tabs=[...J.slots,'ALL'];
   $('#ranks').innerHTML=`
-  <div class="tabs" id="rkTabs">${tabs.map((s,i)=>`<button data-s="${s}" class="${i===0?'on':''}">${s==='ALL'?s:posIcon(posOf(s),11)+' '+s}</button>`).join('')}</div>
+  <div class="tabs" id="rkTabs">${tabs.map((s,i)=>`<button data-s="${s}" class="${i===0?'on':''}">${s==='ALL'?'ALL · Ψ matrix':posIcon(posOf(s),11)+' '+s}</button>`).join('')}</div>
   <div class="controls"><select id="rkSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
   <span class="mini">vs</span><select id="rkSrcB"><option value="">— compare with —</option>${srcs.map(s=>`<option>${s}</option>`).join('')}</select>
   <span class="note">per-slot: rank + raw allowed per game &middot; ALL: every stat rank in one field &middot; rank 1 = most allowed &middot; pick a second data set to see both rankings side by side with the shift (A − B; negative = softer in A) &middot; every header sorts</span></div>
   <div id="rkTbl"></div><div id="rkDrill"></div>`;
   let slot='QB',sortK='psi',sortA=true,drillD=null;
+  const MX=$('#matrix'),MX_HOME=MX?MX.parentElement:null;
+  const mxPark=()=>{if(MX&&MX.parentElement&&MX.parentElement.id==='rkMatrixHost'){MX_HOME.appendChild(MX);MX.hidden=true}};
   function drill(){const el=$('#rkDrill');if(!drillD){el.innerHTML='';return}
     const slots=slot==='ALL'?J.slots.filter(x=>x!=='D/ST'&&inP(posOf(x))):[slot];
     el.innerHTML=`<div class="panel" style="border-left:3px solid ${vividC(drillD)}"><h3>${tlogo(drillD,20)} ${drillD} defense — game logs <span class="f">every game this defense played, by slot: the player who held the slot that week and his line · sortable · <span class="plink" id="rkDrillX" style="cursor:pointer;color:var(--acc)">close ✕</span></span></h3>
       ${slots.map(g=>defLogBlock(drillD,g)).join('')}</div>`;sortableAll(el);logoize(el);$('#rkDrillX').onclick=()=>{drillD=null;drill()}}
   function render(){
+    mxPark();
     const src=$('#rkSrc').value,D=J.dvp[src];
     const defs=Object.keys(D).filter(inD);
     if(slot==='ALL'){
@@ -1603,6 +1617,8 @@ function ranks(){
         </tbody></table>`;
       document.querySelectorAll('#rkTbl th[data-k]').forEach(th=>th.onclick=()=>{
         sortA=(sortK===th.dataset.k)?!sortA:true;sortK=th.dataset.k||'psi';render()});
+      /* the Ψ matrix (every defense × slot, two data sets side by side) lives here now — the same renderer, moved in, not copied */
+      if(MX){const host=document.createElement('div');host.id='rkMatrixHost';host.innerHTML='<p class="note" style="margin:6px 0 2px">Ψ matrix — every defense against every slot (green = allows the most); the stat-by-stat ranks follow underneath</p>';$('#rkTbl').insertBefore(host,$('#rkTbl').firstChild);host.appendChild(MX);MX.hidden=false}
       return;
     }
     const stats=J.groupStats[slot];
@@ -2017,6 +2033,15 @@ function dvpAllPanel(D,wk){const SL=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','
   return `<div class="panel" id="defHeat"><h3>every defense ranked by position <span class="f">${J.blend} · number = league rank of what the defense allows to that slot (1 = allows the most = smash spot, ${NT} = stingiest) · μ = mean across slots · opp = the offense it faces in wk ${wk} · click a defense for its detail · sort any column</span></h3>
     <div class="dvpsplit">${[rows.slice(0,Math.ceil(rows.length/2)),rows.slice(Math.ceil(rows.length/2))].map((half,hi)=>`<table class="heat dvpall"><thead><tr><th>#</th><th>def</th><th>wk ${wk} opp</th>${SL.map(c=>`<th>${c}</th>`).join('')}<th>μ</th></tr></thead><tbody>
     ${half.map((x,i)=>`<tr class="dlink" data-d="${x.t}"><td class="mini">${hi*Math.ceil(rows.length/2)+i+1}</td><td style="text-align:left">${tcell(x.t)}</td><td>${oppOf(x.t)}</td>${SL.map(c=>heatCell((D[x.t]||{comps:{}}).comps[c],null,`${x.t} vs ${c}: rank ${((D[x.t]||{comps:{}}).comps[c]||0).toFixed(1)}`)).join('')}<td><b>${x.v.toFixed(1)}</b></td></tr>`).join('')}</tbody></table>`).join('')}</div></div>`}
+/* ---------- Home: the edge board — aggregated insight per role, with the player's own numbers beside the field ---------- */
+function edgeBoard(wk){const D=J.dvp.adjusted||J.dvp.combined;const DS=J.dvp.adjusted?'adjusted':'combined';const ROLES=['QB','RB1','RB2','WR1','WR2','WR3','TE1'].filter(g=>inP(posOf(g)));
+  const rows=g=>UNIVERSE.filter(u=>u.grp===g&&u.inj!=='-1'&&inU(u)&&u.slot===(g==='QB'?'QB1':g)).map(u=>{const o=(J.sched26[u.team]||[])[wk-1]||'';if(!o||o==='BYE')return null;const def=o.replace('@','');const d=D[def];if(!d||!d.comps)return null;const v=d.comps[g];if(v==null)return null;
+    const pr=J.primary[g];const al=d.stats&&d.stats[pr];const L=(PLOGS[u.ln||u.player]||[]).filter(l=>l[LOG.season]===LAST_SE);const ppr=L.length?mean(L.map(l=>+l[LOG.fppr]||0)):null;let pj=null;try{pj=projection(u,wk)}catch(_){}
+    const g2=USG[u.ln||u.player]||{};if(g2.snp!=null&&g2.snp<0.3)return null;return {u,o,def,v,al,pr,ppr,gp:L.length,proj:pj?pj.p:null}}).filter(Boolean).sort((a,b)=>a.v-b.v);
+  const row=(r,g,tone)=>`<div class="eb ${tone}"><span class="ebn"><span class="nm">${pn(r.u.player,r.u.team,true)}</span><i>${r.o[0]==='@'?'@':'vs'} ${r.def}</i></span><span class="ebt" title="Ψ ${r.v.toFixed(1)} — ${r.def}'s average rank in the stats that matter for ${g} (1 = allows the most)"><span class="ebk"><i style="width:${Math.max(4,100*(NT+1-r.v)/NT).toFixed(0)}%"></i></span><b>${r.v.toFixed(1)}</b></span><span class="ebs" title="${r.def} allows per game to the ${g} slot (${DS}) · rank of ${NT}">${r.al?`${(+r.al.avg).toFixed(0)} <i>${lbl(r.pr)}</i> ${badge(r.al.rank)}`:'<span class="dim">—</span>'}</span><span class="ebp" title="his PPR per game this season (${r.gp} games)">${r.ppr==null?'—':r.ppr.toFixed(1)}</span><span class="ebj" title="projected PPR this week">${r.proj==null?'—':r.proj.toFixed(1)}</span></div>`;
+  const cards=ROLES.map(g=>{const R=rows(g);if(R.length<4)return '';return `<div class="ebcard"><div class="ebh">${slotchip(g)}<span class="mini">${R.length} starters · ${lbl(J.primary[g])} = the slot's lead stat</span></div><div class="ebhd"><span>player</span><span>field Ψ</span><span>allows /g</span><span>his ppr</span><span>proj</span></div>${R.slice(0,3).map(r=>row(r,g,'g')).join('')}${R.slice(-2).reverse().map(r=>row(r,g,'r')).join('')}</div>`}).join('');
+  if(!cards)return '';
+  return `<div class="panel ebwrap"><h3>edge board — wk ${wk} <span class="f">per role: the three softest fields this week (green) and the two hardest (red) · Ψ = the opponent's average rank in the stats that matter for the slot, 1 = allows the most · allows = what that defense gives up per game to the slot, with its rank · his ppr = the player's own PPR per game this season · proj = this week's projection · starters only, usage-qualified (≥ 30% snaps) · ${DS} data set · click a name for his card</span></h3><div class="ebgrid">${cards}</div></div>`}
 function home(){
   RR.push(render);
   function render(){
@@ -2077,7 +2102,7 @@ function home(){
   defs.forEach(d=>{const rows=J.weekly.filter(r=>r[0]===d&&r[1]===se).sort((a,b)=>a[2]-b[2]);
     J.slots.filter(x=>inP(posOf(x))).forEach(sl=>{const cst=J.primary[sl],all=rows.map(r=>r[WCOL[cst]]);
       const m=mean(all),m3=mean(all.slice(-3)),sd=stdev(all);
-      if(m>2){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});
+      if(m>12){mv.push({d,sl,pct:100*(m3-m)/m});vol.push({d,sl,cv:100*sd/m})}})});   // m>12: a 3-yard stat swinging 60% is noise, not a mover
   mv.sort((a,b)=>Math.abs(b.pct)-Math.abs(a.pct));vol.sort((a,b)=>b.cv-a.cv);
   const sos=g=>{const per=Object.keys(J.sched26).filter(inF).map(t=>({t,avg:mean(J.sched26[t].slice(wk-1).filter(o=>o!=='BYE')
       .map(o=>(D[o.replace('@','')]||{comps:{}}).comps[g]).filter(v=>v!=null))})).sort((a,b)=>a.avg-b.avg);
@@ -2111,6 +2136,7 @@ function home(){
     ${bigFav?kpi('biggest spread',`${bigFav.spread_line>0?bigFav.home_team:bigFav.away_team} −${Math.abs(bigFav.spread_line)}`,`${bigFav.away_team} @ ${bigFav.home_team} · O/U ${bigFav.total_line??'—'}`,'','glines'):''}
     ${(()=>{const mv=(J.lineMoves||[]).filter(m=>m.league===(IS_NFL?'nfl':'cfb')&&!m.player&&(inF(m.away)||inF(m.home))&&m.d_line!==''&&m.d_line!=null).map(m=>({...m,a:Math.abs(+m.d_line)})).sort((a,b)=>b.a-a.a)[0];
       return mv?`<a class="kpi a" href="arb.html#steam" title="opener → latest consensus across the books (Arb Engine · STEAM)"><span class="k">biggest line move</span><b class="v">${esc(mv.away)} @ ${esc(mv.home)} ${esc(mv.market)}</b><span class="s">${mv.open_line} → ${mv.line} (${+mv.d_line>0?'+':''}${mv.d_line}) · ${mv.snaps} pulls</span></a>`:''})()}
+    ${(()=>{if(!IS_NFL||typeof PICKS==='undefined')return '';const pl=PICKS.filter(p=>+p.week===wk&&p.type!=='DFS'&&!p.result&&(pkEdgeVal(p)??-9)>=0.06);const al=PICKS.filter(p=>+p.week===wk&&p.type!=='DFS');return al.length?kpi('model plays',`${pl.length}`,`past 6% edge · ${al.length} lines priced · open the Card`,pl.length?'g':'','picks'):''})()}
     ${(BET.props||[]).length?kpi('DK props posted',`${BET.props.length}`,`${new Set(BET.props.map(p=>p.event)).size} of ${GAMES(wk).length} games · wk ${BET.propsWeek}`,'','props'):''}
   </div>`;
   const srow=g=>{const v=g[GM.vis],h=g[GM.home],t=tilt(g),b=bg(v,h),e=envOfG(g),sc=storyCount(g,wk),np=(propsBy[v]||0)+(propsBy[h]||0);
@@ -2157,7 +2183,12 @@ function home(){
   const movers=`<div class="panel" id="moverSlot"><h3>movers <span class="f">last 3 games vs season ${se} · primary stat for the slot</span></h3><table><thead><tr><th>def</th><th>slot</th><th>L3 vs season</th><th>weekly</th></tr></thead><tbody>
     ${mv.slice(0,14).map(x=>`<tr><td>${tcell(x.d)}</td><td>${slotchip(x.sl)}</td><td class="${x.pct>0?'up':'dn'}">${x.pct>0?'&#9650;+':'&#9660;'}${x.pct.toFixed(0)}%</td><td>${sparkWave(series(x.d,J.primary[x.sl]),vivid(x.d),80,18)}</td></tr>`).join('')}</tbody></table></div>`;
   const dvpAll=dvpAllPanel(D,wk);
-  $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+kpis+slateBoard+standingsPanel()+'<div class="grid2 hgl">'+leadersPanel()+movers+'</div>'+dvpAll+'</div><div data-sub="insights"></div>';
+  const fold=(id,title,sub,body)=>body?`<details class="hfold" id="hf-${id}" ${localStorage.getItem('rm-hf-'+id)==='1'?'open':''}><summary>${title}<span class="f">${sub}</span></summary>${body}</details>`:'';
+  $('#homeTop').innerHTML='<div data-sub="fantasy"><div id="lineupSlot"></div></div><div data-sub="overview">'+kpis+edgeBoard(wk)+slateBoard
+    +fold('stand','standings','W-L, division, points, streak, seed',standingsPanel())
+    +fold('lead','season leaders & movers','top five per stat · defenses allowing more or less than their season rate over the last three games','<div class="grid2 hgl">'+leadersPanel()+movers+'</div>')
+    +fold('dvp','every defense ranked by position','rank of '+NT+' per slot, this week\'s opponent, μ = mean rank',dvpAll)+'</div><div data-sub="insights"></div>';
+  document.querySelectorAll('#homeTop details.hfold').forEach(d=>d.ontoggle=()=>{try{localStorage.setItem('rm-hf-'+d.id.slice(3),d.open?'1':'0')}catch(_){}});
   if(typeof syncSub==='function')syncSub();
   document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
   document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;G.game=k;G.slates.clear();apply();go('matchups')});
