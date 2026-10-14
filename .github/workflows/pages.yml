@@ -1,4 +1,4 @@
-# Deploys dashboard/rainman.html (root = v1) and dashboard/v2/ (-> /v2/) to GitHub Pages on every push to main.
+# Deploys every dashboard/*.html (index.html = Layer 0, rainman.html = NFL, ncaa.html = CFB, …) + dashboard/archive/ to GitHub Pages on every push to main.
 # One-time setup: repo Settings -> Pages -> Source = "GitHub Actions".
 # Live URL: https://3go-47.github.io/rainman/
 name: deploy-dashboard
@@ -29,8 +29,6 @@ jobs:
           cp dashboard/*.html _site/
           if [ ! -f _site/index.html ]; then cp dashboard/rainman.html _site/index.html; fi
           if [ -d dashboard/archive ]; then mkdir -p _site/archive && cp -r dashboard/archive/. _site/archive/; fi
-          # v2 (in progress) is served side-by-side at /v2/ ; the root stays v1 until v2 is signed off
-          if [ -d dashboard/v2 ]; then mkdir -p _site/v2 && cp -r dashboard/v2/. _site/v2/; fi
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -6,62 +6,26 @@ matchup. Replaces the legacy NFLLLLL.xlsx workbook. Rank convention everywhere:
 **rank 1 = most allowed = best matchup** (legacy RANK.AVG).
 
 ## The product
-`dashboard/rainman.html` (NFL) and `dashboard/ncaa.html` (NCAA FBS) — single self-contained files, same template.
-**v2 shell (2026-10-06):** a two-row top bar with the original tabs — row 1 is Home · Big Board · Weekly Matchups ·
-Players · Defenses · TD Board · Schedule · Intel · Games & Picks · Locker Room · Bets (F1–F11), row 2 is that tab's
-views (Players: Matchup Lab · Player Explorer · Depth Charts; Defenses: Rankings · Matrix · Observatory; Bets: Player
-props · Anytime TD · Game lines; Home: Overview · Insights · Fantasy) with a one-line description of the open view.
-Content gets the full width. Skin: pure black background, graphite panels with hairline borders, Inter for chrome and
-JetBrains Mono for data, one amber accent (active tab / league), white-filled selected chips, rank badges as tinted
-pills (green = allows the most = best matchup, red = stingiest). Long how-to-read paragraphs fold into a `?` chip.
-The landing view is the **Matchup Lab** (Players › Matchup Lab): every starter this week with his own per-game
-averages (this season, and cumulative across every scraped season — 2024–26) beside what the opponent allows to his
-slot, the opponent's DvP rank per stat, Ψ, Ψ+ and projection; every column sorts, every filter (position, depth, injury,
-college, slate, game, team, roster) narrows it. ▲/▼ in an avg cell = the opponent allows more / less than the player
-averages. F1–F11 jump between tabs, ctrl-K finds any player or team, and
-the week / slate / position / game / team filter bar underneath applies to every view. Type: Inter for chrome,
-JetBrains Mono for data; one amber accent; rank colors unchanged (green = allows the most = best matchup).
-**v3 visuals (2026-10-06):** the tabs that used to be loose stacks of tables are now dense, one-screen views built from a
-shared set of primitives (KPI tiles, field-tilt bars, heat cells, thread matrices). Home: KPI strip (smash / avoid /
-softest & stingiest D playing / movers / highest total / biggest spread / props posted) → slate board (spread, total,
-field tilt, environment rank, storylines, props per game; click filters everything) beside best & worst per role and
-movers → top projections beside the DvP field heat for the defenses on the slate → intel brief. TD Board: KPI strip,
-TD fields by role, an anytime-TD card board (rush + rec TD rate × end-zone softness), plots folded, table below.
-Schedule: lens (next 4 / rest of season / playoffs 15-17), N4 / ROS / PO / Σ columns, sort, legible opponent cells,
-sticky team column. Games & Picks: KPI strip + one board table over collapsible game cards, weekly W-L bars on the
-ledger (the duplicate props tab moved to Bets). Intel: "this week's scheme edges" — every offense × role vs the scheme
-family it faces. Locker Room: thread matrix (game × kind) over collapsible cards sorted by thread count. Bets: KPI
-strip (cleared ≥70% / ≤30% L10, biggest line move) and market chips with counts and hit bars.
+`dashboard/index.html` is Layer 0 (every sport, model record); `dashboard/rainman.html` (NFL) and `dashboard/ncaa.html`
+(NCAA FBS) are the same template fed each league's data; `nba.html` / `nhl.html` / `wnba.html` share `scripts/sport_template.html`;
+`arb.html` is the Arb Engine, `social.html` the bet tracker, `tennis.html` the tennis model. Each page is one self-contained
+file (inline CSS/JS, embedded JSON, Chart.js inlined) that opens from `file://` or from Pages.
 
-**v4 model & markets (2026-10-06):** the dashboard now tracks positions, not just matchups.
-*Markets (Bets tab)* — one dense table per market (pass yds / TD / att, rush yds / att, receptions, rec yds, anytime TD, game
-lines): his per-game averages, what the opponent allows to his slot (rank), volume × matchup (the ranking), the model's
-projection with its 10–90% band, the posted line (DraftKings or the Kalshi ladder's implied line), model P(over), his
-L10 over-rate at that line, the Kalshi exchange price and the model–exchange gap; click a row for game-by-game bars.
-*Projections (Big Board)* — projected statistics per starter and market (median + band) and the DK-points translation;
-PPR is no longer the headline. *Games & Picks* — one unified ledger (`data/processed/picks_all.csv`) with sub-tabs for
-Moneyline (model vs Kalshi mid, ≥6 pts), Spreads and Totals (game model vs DK, ≥3 pts), Props (prop model EV at −110),
-Anytime TD (model vs Kalshi, ≥8 pts) and DFS mock entries (one DK Classic lineup per slate — main / early / afternoon /
-primetime / full — frozen and graded on real DK points; capped when `data/raw/dk_salaries_wk{N}.csv` is present, uncapped
-otherwise); every row carries the market reference it was judged against and is graded in place. *Intel › Signals* — a
-walk-forward audit (`scripts/build_signals.py`) of what each input is worth: top-third vs bottom-third lift in actual ÷
-baseline for DvP rank, Ψ, scheme family, environment and role trend, per market, plus a Ψ-band table and the prop model's
-skill by market. Ψ is kept but no longer labels anything a "smash spot"; the Home market board ranks by volume × stat
-matchup. *Kalshi* — `scripts/build_kalshi.py` parses the exchange pull (notes/scrape_recipe.md) into implied lines and
-probabilities. Every player reference carries his team logo; ▲/green always means more production for the offense.
+**NFL / CFB layout — five major tabs (F1–F5) + TEST (F6):**
+- **Home** — Overview (KPIs · slate ribbon · market board · DvP field · movers) · Insights · DFS (DraftKings Classic lineups).
+- **Matchups** — Big Board (matchup rankings per starter and market, projection bands) · Matchups (every game, both offenses vs the
+  opposing defense; open a card for the full slot-by-slot detail) · TD Board.
+- **Players** — Matchup Lab (the player board: his per-game averages this season and 2024–26 beside what the opponent allows
+  to his slot, DvP rank per stat, Ψ, projection — every column sorts) · Head to Head · Player Explorer · Depth Charts.
+- **Intel** — scheme / personnel / turnover / coaching · Locker Room · Defenses · Matrix · Observatory · Schedule.
+- **Picks** — Model (record, units, calibration, edge buckets, closing line value) · Card (this week's frozen positions) · Markets
+  (one table per market: averages, allowed, projection band, the DK / Kalshi lines, edge).
+- **TEST (F6)** — the staging bay for drafts; hidden from visitors until the page is opened once with `#test=1` (remembered per
+  browser; `#test=0` forgets).
 
-**Effective depth charts (2026-10-06):** ESPN leaves injured starters in their slot for weeks (Baker Mayfield "QB1 · O"),
-which mis-slots the real starter. `scripts/build_depth_chart.py` now derives the *effective* chart: OUT/IR players drop to
-the bottom of their row and the next man holds the slot (Jalon Daniels QB1); within RB/TE/WR rows a player who has taken
-≥25% more opportunities than the man above him over the team's last two games (and a real workload) moves up, and the three
-WR starters are ordered by last-two-games targets. Every row carries `note` (why he moved), `trend` (▲ rising / ▼ fading
-workload vs his season rate), `l2`/`se` (opps per game, last 2 · season), `gp`, `espn_depth` and `log_name` (game-log
-spelling, so averages join). The dashboard shows ▲▼● glyphs next to names (hover for the reason) and the Depth Charts view
-shows workload and the ESPN listing where it differs.
-
-The legacy F1–F11 tab buttons still exist hidden (`#legacyNav`) as the routing model — every old cross-link and
-re-render path works unchanged; the top bar's `go(view)` clicks them and then selects the sub-panel. The URL hash
-carries `v=<view>` plus the filters, so a shared link opens the exact screen.
+Skin: pure black background, graphite panels, Inter for chrome and JetBrains Mono for data, rain-blue accent; three themes
+(dark / light / rain) from `scripts/brand.py`. Rank badges: green = allows the most = best matchup, red = stingiest. F1–F6 jump
+between tabs, ctrl-K finds any player or team, the URL hash carries `v=<view>` plus the filters so a shared link opens the exact screen.
 
 ## Global filter bar (every tab)
 The sticky bar under the nav drives every view at once:
@@ -107,18 +71,11 @@ log the ticket) · **Ledger** (model's frozen picks + your logged tickets, auto-
 live in this browser's storage) · **Model** (walk-forward skill and calibration per market).
 The v2 site opens on the Bet Board; Home is one click away.
 
-## Reverting the UI (kept on purpose)
-- Classic v1 UI is always live at **/v1/** (rebuilt every refresh from `scripts/dashboard_template.html`).
-- Frozen snapshots served at **/archive/**: `rainman_v1_2026-10-05.html` (last v1-as-main build, commit f13c159) and
-  `rainman_v2.0_2026-10-05.html` (first v2 build, commit e57433e).
-- One-step revert of the main site to v1: in `.github/workflows/pages.yml` change the root copy to
-  `cp dashboard/rainman.html _site/index.html` (or `git revert` the commits after f13c159). Git history keeps every build.
-
-## Live deploy
-`.github/workflows/pages.yml` publishes `dashboard/rainman.html` (root), `dashboard/ncaa.html`
-(/ncaa.html), `dashboard/v2/` and `dashboard/archive/` to GitHub Pages on every push to main.
-Live at https://3go-47.github.io/rainman/ — the original terminal UI; the NFL | NCAA switch in
-the header carries the current tab / week / filters across (hash is preserved).
+## Live deploy and restore points
+`.github/workflows/pages.yml` publishes every `dashboard/*.html` (index.html at the root) plus `dashboard/archive/` to GitHub Pages
+on every push to `main` — live at https://3go-47.github.io/rainman/. The PC loop pushes; commits land through it.
+Frozen snapshots stay served at `/archive/` (`rainman_v1_2026-10-05.html` is the last classic build) and every build is in git history;
+`notes/restore_points.md` lists the tagged commits.
 
 ## NCAA FBS layer (`ncaa/`, `scripts/ncaa/`) — same terminal, 138 defenses
 `dashboard/ncaa.html` is the same template fed college data. Everything lives under a league
@@ -261,6 +218,10 @@ the sum of the opposing players at that slot; combined = last season + this seas
 - **Picks** — Games & Picks (ML, ATS, totals, props, TD, DFS, ledger) · Markets · Anytime TD · Game lines.
 
 ## Changelog
+- 2026-10-14 — **Core pass.** Player universe = the effective depth chart (Fantasy Master Key workbook and the owner filter retired);
+  closing-line value for every frozen position (`build_clv.py`, Picks › Model) and a "plays ≥ 6% edge" record beside the all-lines record (Model tab + Layer 0);
+  Chart.js inlined (charts draw offline); TEST tab gated behind `#test=1`; TD Board columns wrap at ≤1500 px; depth-chart tables fit their pane;
+  v2 build retired from the refresh and the deploy; Arb Engine STEAM labels and kickoffs fixed.
 - 2026-10-13 — **Loop self-sufficiency.** Depth charts from the nflverse mirror of ESPN's chart (+ roster IR, weekly O/D/Q report) when espn.com won't serve the page; a missing geocoder no longer fails the refresh; verifier follows the in-season blend rule; live Markets chips unhidden.
 - 2026-10-07 — **other sports.** NBA, NHL and WNBA go live on the same framework: sportsdataverse parquets (GitHub) →
   `scripts/sports/build.py` → `nba.html`, `nhl.html`, `wnba.html` with DvP by slot, projections, ratings, game-line picks

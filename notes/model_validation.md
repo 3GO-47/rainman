@@ -30,7 +30,7 @@ should show — but it is one week. The model leaned Under on 91 of 118 lines an
 Result for the wk 5 lines: 34 Over / 36 Under (wk 4: 27 Over / 91 Under), 9 plays.
 
 <!-- props:start -->
-## Player props — walk-forward backtest (2026-10-13)
+## Player props — walk-forward backtest (2026-10-14)
 Skill = 1 − MSE / MSE(slot-mean) for yardage/count markets; anytime TD = 1 − logloss / logloss(slot-mean rate).
 Targets: every QB/RB/WR/TE game with ≥2 prior games, 2025 wk 3 → latest 2026 week; projections use only earlier data.
 "form + matchup + game" adds the opponent-adjusted defense effect (β) and the market-implied team total (γ).

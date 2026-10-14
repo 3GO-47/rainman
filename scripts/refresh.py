@@ -74,6 +74,7 @@ def main():
         run(['scripts/build_kalshi.py'])
     run(['scripts/build_dfs.py', '--week', str(week)])
     run(['scripts/build_picks.py', '--week', str(week)])
+    run(['scripts/build_clv.py'])
     if '--no-signals' not in sys.argv:
         run(['scripts/build_signals.py'])
     if glob.glob('data/raw/espn_birthplaces_*.txt'):
@@ -83,7 +84,6 @@ def main():
         run(['scripts/build_units.py'])
     run(['scripts/build_narratives.py'])
     run(['scripts/build_dashboard.py'])
-    run(['scripts/build_dashboard_v2.py'])
     # other sports (NBA / NHL / WNBA): sportsdataverse parquets from GitHub, then the generic Layer-1 builder
     if '--no-sports' not in sys.argv:
         r = subprocess.run([sys.executable, 'scripts/sports/fetch_sdv.py'])

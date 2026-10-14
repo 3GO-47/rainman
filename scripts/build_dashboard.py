@@ -307,6 +307,7 @@ def main():
     cur_week = int(_m[0]['week']) if _m else 1
     data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
     data['picksAll'] = rows_of('data/processed/picks_all.csv')
+    data['picksClv'] = rows_of('data/processed/picks_clv.csv')
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine
     _sal = {}
@@ -384,6 +385,10 @@ def main():
         _lgt = {k: {'c1': c} for k, c in re.findall(r"([A-Z]{2,4}):\{[^}]*?c1:'(#[0-9a-fA-F]{3,8})'", template)}
     _tc = brand.team_color_css({k: (v.get('c1') or '') for k, v in _lgt.items()})
     template = template[:_i] + _css + template[_j:]
+    vend = os.path.join(REPO, 'scripts/vendor/chart.umd.min.js')
+    if os.path.exists(vend):   # inline Chart.js so the Matrix / Observatory / player charts draw with no network
+        template = template.replace('<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>',
+                                    '<script>' + open(vend, encoding='utf-8').read() + '</script>', 1)
     html = (template.replace('__DATA__', payload).replace('__LEAGUE_NAME__', data['league']['title'])
             .replace('__BRAND_CSS__', brand.THEME_CSS + brand.alias_css('dash') + brand.SWITCH_CSS + BRAND_EXTRA_CSS + _blocks + _tc)
             .replace('__BRAND_BOOT__', brand.THEME_BOOT)

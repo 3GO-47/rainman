@@ -1,9 +1,14 @@
-"""Build matchups_current.csv: every rostered player (Fantasy Master Key) joined to
-current depth-chart slot, injury, next opponent (2026 week 1), and opponent DvP for his slot.
+"""Build matchups_current.csv: every player on the effective depth chart (QB / RB / WR / TE / FB) plus one D/ST per
+team, joined to his slot, injury flag, this week's opponent and the opponent's combined DvP ranks for his slot.
+
+The universe used to come from the preseason Fantasy Master Key workbook (a 300-player draft sheet with league owners);
+that left every player who emerged after the draft out of the file and carried 30 retired / moved names. The depth
+chart IS the universe now — the same rule the NCAA layer has always used. Columns are unchanged (mk_name = player,
+owner = '' — the roster/owner filter was retired with the workbook).
 
 Usage: python3 build_matchups.py <depth_chart_csv> <week>
 """
-import sys, csv, re, unicodedata
+import os, sys, csv, re, unicodedata
 import pandas as pd
 
 SLOT_GROUP = {'QB1':'QB','QB2':'QB','QB3':'QB','QB4':'QB','RB1':'RB1','RB2':'RB2','RB3':'RB2','RB4':'RB2',
@@ -18,85 +23,38 @@ GROUP_STATS = {'QB':['QB PY','QB RY','QB P+R','P TD','QB TD'],
  'WR3':['WR3 Recep','WR3 RecY','WR3 TD'],'WR4+':['WR4+ Recep','WR4+ RecY','WR4+ TD'],
  'TE1':['TE1 Recep','TE1 RecY','TE1 TD'],'TE2':['TE2 Recep','TE2 RecY','TE2 TD']}
 
-def norm(n):
-    n = unicodedata.normalize('NFKD', str(n)).encode('ascii','ignore').decode()
-    n = re.sub(r"[.'\-]", '', n).lower()
-    return re.sub(r'\s+(jr|sr|ii|iii|iv|v)$', '', n.strip())
-
 def main(dc_path, week):
     dc = list(csv.DictReader(open(dc_path, encoding='utf-8')))
-    mk = pd.read_excel('Fantasy Master Key 2026 2027.xlsx', sheet_name='Overall Rankings', header=1)
-    mk = mk.dropna(subset=['Player'])
-    mk['Team'] = mk['Team'].astype(str).str.upper().str.strip()
     sched = {r['team']: r for r in csv.DictReader(open('data/processed/schedule_2026.csv'))}
     dvp = pd.read_csv('data/processed/dvp_combined.csv').set_index('defense')
-
-    # index depth chart by (lastname_norm, first_initial, team) and (lastname_norm, team)
-    ix = {}
-    for r in dc:
-        parts = r['player'].split()
-        last = norm(parts[-1]); first = parts[0][0].lower()
-        for k in [(last, first, r['team']), (last, r['team'])]:
-            ix.setdefault(k, r)
-        if len(parts) > 2:  # suffix names: index second-to-last token too
-            ix.setdefault((norm(parts[-2]), first, r['team']), r)
-
-    # cross-team fallback: (last, first initial) -> candidates (the Master Key team column is the draft-day team;
-    # players traded / signed since are matched by name + position and moved to their current team)
-    import difflib
-    ix_any, lasts = {}, {}
-    for r in dc:
-        parts = r['player'].split(); last = norm(parts[-1]); first = parts[0][0].lower()
-        ix_any.setdefault((last, first), []).append(r)
-        lasts.setdefault(r['team'], {}).setdefault(last, []).append(r)
-        if len(parts) > 2: ix_any.setdefault((norm(parts[-2]), first), []).append(r)
-    def resolve(last, first, team, pos):
-        d = ix.get((last, first, team)) or ix.get((last, team))
-        if d: return d, 'team'
-        cands = [c for c in ix_any.get((last, first), []) if c['pos_row'].rstrip('0123456789+') == pos or (pos == 'RB' and c['pos_row'] == 'FB')]
-        if len(cands) == 1: return cands[0], 'moved'
-        if len(cands) > 1:  # several same-name players at the position: take the highest depth slot
-            return sorted(cands, key=lambda c: int(c['depth']))[0], 'moved?'
-        fz = difflib.get_close_matches(last, list(lasts.get(team, {})), n=1, cutoff=0.85)
-        if fz:
-            c = [x for x in lasts[team][fz[0]] if x['player'][0].lower() == first]
-            if len(c) == 1: return c[0], 'fuzzy'
-        return None, ''
-    out, unmatched, moved = [], [], []
-    for _, m in mk.iterrows():
-        pos = str(m.get('Pos.','')).upper().strip()
-        if pos not in ('QB','RB','WR','TE','D/ST','DST','K'): continue
-        team = m['Team']; nm = str(m['Player']).strip()
-        owner = m.get('Owner'); owner = '' if pd.isna(owner) else str(owner)
-        parts = nm.replace('.',' ').split()
-        last = norm(parts[-1]); first = parts[0][0].lower() if parts else ''
-        d, how = resolve(last, first, team, pos)
-        if d and how != 'team':
-            moved.append(f"{nm} {team}->{d['team']} ({how})"); team = d['team']
-        slot = d['slot'] if d else ''
-        inj = d['injury'] if d else ''
-        full = d['player'] if d else nm
-        if not d and pos in ('QB','RB','WR','TE'): unmatched.append(f'{nm} ({team} {pos})')
+    out = []
+    def row_for(player, team, pos, slot, inj):
         grp = SLOT_GROUP.get(slot, '')
-        opp_cell = sched.get(team, {}).get(f'week_{week}', '')
-        opp = opp_cell.lstrip('@') if opp_cell and opp_cell != 'BYE' else opp_cell
-        row = {'player': full, 'mk_name': nm, 'team': team, 'pos': pos, 'slot': slot,
-               'slot_group': grp, 'injury': inj, 'owner': owner, 'week': week,
-               'opponent': opp_cell, 'composite': '', 'stat_ranks': ''}
-        dkey = opp
-        if grp and dkey in dvp.index:
-            row['composite'] = dvp.loc[dkey, COMP_COL[grp]]
-            row['stat_ranks'] = ';'.join(f"{c}={dvp.loc[dkey, c+' rank']:g}" for c in GROUP_STATS[grp])
-        out.append(row)
-    with open('data/processed/matchups_current.csv','w',newline='',encoding='utf-8') as f:
+        cell = sched.get(team, {}).get(f'week_{week}', '')
+        opp = cell.lstrip('@') if cell and cell != 'BYE' else cell
+        row = {'player': player, 'mk_name': player, 'team': team, 'pos': pos, 'slot': slot, 'slot_group': grp,
+               'injury': inj, 'owner': '', 'week': week, 'opponent': cell, 'composite': '', 'stat_ranks': ''}
+        if grp and opp in dvp.index:
+            row['composite'] = dvp.loc[opp, COMP_COL[grp]]
+            row['stat_ranks'] = ';'.join(f"{c}={dvp.loc[opp, c+' rank']:g}" for c in GROUP_STATS[grp])
+        return row
+    seen = set()
+    for r in dc:
+        pos = r['pos_row'].rstrip('0123456789+')
+        if pos == 'FB': pos = 'RB'
+        if pos not in ('QB', 'RB', 'WR', 'TE'): continue
+        key = (r['player'], r['team'])
+        if key in seen: continue
+        seen.add(key)
+        out.append(row_for(r['player'], r['team'], pos, r['slot'], r['injury']))
+    for team in sorted(sched):
+        if team in dvp.index or team in {r['team'] for r in dc}:
+            out.append(row_for(f'{team} D/ST', team, 'D/ST', '', '1'))
+    with open('data/processed/matchups_current.csv', 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=list(out[0].keys())); w.writeheader(); w.writerows(out)
-    print(f'matchups_current.csv: {len(out)} rostered/ranked players, {len(unmatched)} unmatched vs depth chart, {len(moved)} matched on a new team')
-    if moved: print('  moved: ' + '; '.join(moved))
-    if unmatched: print('  unmatched: ' + '; '.join(unmatched))
-    if unmatched:
-        open('notes/matchup_unmatched.md','w',encoding='utf-8').write(
-            '# Master Key players not matched to ESPN depth chart\n\n' +
-            '\n'.join(f'- {u}' for u in unmatched))
+    byes = sorted({r['team'] for r in out if r['opponent'] == 'BYE'})
+    print(f'matchups_current.csv: {len(out)} depth-chart players + D/ST · week {week} · byes {", ".join(byes) or "none"}')
+    if os.path.exists('notes/matchup_unmatched.md'): os.remove('notes/matchup_unmatched.md')   # the Master Key join is gone
 
 if __name__ == '__main__':
-    main(sys.argv[1], int(sys.argv[2]) if len(sys.argv) > 2 else 1)
+    main(sys.argv[1], int(sys.argv[2]) if sys.argv[2].isdigit() else sys.argv[2])

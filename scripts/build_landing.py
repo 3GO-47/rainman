@@ -112,8 +112,17 @@ def model_records():
             except ValueError: mp = 0
             return (1 / mp - 1) if t in ('ML', 'TD') and 0 < mp < 1 else 0.909
         return -1.0 if res == 'L' else 0.0
+    PLAY_MIN = 0.06       # same scale as the dashboard's pkEdgeVal: props EV/100, ML/TD probability, spreads & totals |points|/14
+    def edge_val(r):
+        e = r.get('edge')
+        if e in ('', None): return None
+        try: e = float(e)
+        except ValueError: return None
+        t = (r.get('type') or '').upper()
+        return e / 100 if t == 'PROP' else abs(e) / 14 if t in ('ATS', 'TOTAL') else e
     def tally(rows, lg):
         by = {}; seq = []; u = 0.0; w = l = p_ = pend = 0
+        pw = pl = pp = 0; pu = 0.0
         rows = sorted(rows, key=lambda r: (r.get('frozen_on') or '', r.get('date') or '', str(r.get('week') or '').zfill(2)))
         for r in rows:
             t = (r.get('type') or '').upper() or 'ALL'
@@ -123,10 +132,14 @@ def model_records():
             if res in ('W', 'L', 'P'):
                 b[res] += 1; seq.append(res); b['u'] += units(r); u += units(r)
                 w += res == 'W'; l += res == 'L'; p_ += res == 'P'
+                ev = edge_val(r)
+                if ev is not None and ev >= PLAY_MIN:
+                    pw += res == 'W'; pl += res == 'L'; pp += res == 'P'; pu += units(r)
             else: b['pending'] += 1; pend += 1
         for b in by.values(): b['u'] = round(b['u'], 2)
         if by: out[lg] = dict(by=by, seq=seq[-80:], W=w, L=l, P=p_, pending=pend, u=round(u, 2),
-                              hit=round(w / (w + l), 4) if w + l else None, roi=round(u / (w + l + p_), 4) if w + l + p_ else None)
+                              hit=round(w / (w + l), 4) if w + l else None, roi=round(u / (w + l + p_), 4) if w + l + p_ else None,
+                              plays=dict(W=pw, L=pl, P=pp, u=round(pu, 2), hit=round(pw / (pw + pl), 4) if pw + pl else None, min=PLAY_MIN))
     f = 'data/processed/picks_all.csv'
     if os.path.exists(f): tally(list(csv.DictReader(open(f, encoding='utf-8'))), 'nfl')
     for lg in ('nba', 'nhl', 'wnba'):
@@ -337,7 +350,7 @@ h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:v
 .perf b{display:block;font:700 21px/1.25 var(--mono);margin-top:3px}
 .perf small{display:block;font:500 10.5px var(--mono);color:var(--dim)}
 .perf b.g{color:var(--g)}.perf b.r{color:var(--r)}
-table{border-collapse:collapse;width:100%;font-size:12.5px;border:1px solid var(--e);border-radius:8px;overflow:hidden}
+table{border-collapse:collapse;width:100%;font-size:12.5px;border:1px solid var(--e);border-radius:8px;overflow:hidden}.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%}
 th{font:600 9.5px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--mute);text-align:left;padding:8px 11px;background:var(--p);border-bottom:1px solid var(--e2);white-space:nowrap}
 td{padding:8px 11px;border-bottom:1px solid var(--e);white-space:nowrap}tbody tr:last-child td{border-bottom:0}
 tr.lg{cursor:pointer}tr.lg:hover td{background:var(--p)}
@@ -400,11 +413,13 @@ def page(games, pulled):
         tone = 'g' if r['u'] > 0 else 'rd' if r['u'] < 0 else 'dim'
         wl = '%d-%d%s' % (r['W'], r['L'], '-%d' % r['P'] if r['P'] else '')
         roi = '' if r['roi'] is None else '%s%.1f%%' % ('+' if r['roi'] >= 0 else '', 100 * r['roi'])
+        pr = r['plays']; pwl_ = '%d-%d%s' % (pr['W'], pr['L'], '-%d' % pr['P'] if pr['P'] else '') if pr['W'] + pr['L'] + pr['P'] else '&mdash;'
+        ptn = 'g' if pr['u'] > 0 else 'rd' if pr['u'] < 0 else 'dim'
         rows += ('<tr class="lg" data-go="%s"><td><span class="lgn"><img src="%s" alt="" onerror="this.style.display=\'none\'">%s</span></td>'
                  '<td class="r mono dim">%d</td><td class="r mono dim">%d</td><td class="mono">%s</td><td>%s</td>'
-                 '<td class="r mono %s">%s%.2f</td><td class="r mono %s">%s</td><td>%s</td></tr>'
+                 '<td class="r mono %s">%s%.2f</td><td class="r mono %s">%s</td><td class="mono %s">%s</td><td>%s</td></tr>'
                  % (PG.get(k, ''), LOGO.get(k, ''), LGLBL.get(k, k.upper()), r['W'] + r['L'] + r['P'], r['pending'], wl, bar(r['hit']),
-                    tone, '+' if r['u'] >= 0 else '', r['u'], tone, roi, seq(r['seq'])))
+                    tone, '+' if r['u'] >= 0 else '', r['u'], tone, roi, ptn, pwl_, seq(r['seq'])))
     tot = dict(W=sum(r['W'] for r in REC.values()), L=sum(r['L'] for r in REC.values()), P=sum(r['P'] for r in REC.values()),
                u=round(sum(r['u'] for r in REC.values()), 2), pend=sum(r['pending'] for r in REC.values()))
     dec = tot['W'] + tot['L']; hit = tot['W'] / dec if dec else None
@@ -416,15 +431,22 @@ def page(games, pulled):
     htone = 'g' if hit and hit >= BE else 'r' if hit else ''
     bts = '%d-%d' % (BT['ats'][0], BT['ats'][1]) if BT else '&mdash;'
     btsub = 'ATS over %d held-out 2024-25 games' % BT['n'] if BT else 'no backtest on file'
-    kp = ('<div><span>record</span><b>%s</b><small>%d graded &middot; %d live</small></div>'
+    PL = dict(W=sum(r['plays']['W'] for r in REC.values()), L=sum(r['plays']['L'] for r in REC.values()), P=sum(r['plays']['P'] for r in REC.values()),
+              u=round(sum(r['plays']['u'] for r in REC.values()), 2))
+    pdec = PL['W'] + PL['L']; phit = PL['W'] / pdec if pdec else None
+    pwl = '%d-%d%s' % (PL['W'], PL['L'], '-%d' % PL['P'] if PL['P'] else '')
+    ptone = 'g' if PL['u'] > 0 else 'r' if PL['u'] < 0 else ''
+    kp = ('<div><span>record &middot; every line</span><b>%s</b><small>%d graded &middot; %d live</small></div>'
+          '<div><span>plays &middot; edge &ge; 6%%</span><b class="%s">%s</b><small>%s &middot; %s%.2f u &middot; the model\'s actual picks</small></div>'
           '<div><span>units</span><b class="%s">%s%.2f</b><small>%s</small></div>'
           '<div><span>hit rate</span><b class="%s">%s</b><small>break-even 52.4%% at &minus;110</small></div>'
           '<div><span>game model &middot; backtest</span><b>%s</b><small>%s</small></div>'
           '<div><span>slate</span><b>%d</b><small>games in the window &middot; pulled %s</small></div>'
-          % (twl, graded, tot['pend'], utone, '+' if tot['u'] >= 0 else '', tot['u'], per, htone, htxt, bts, btsub, len(games), pulled))
-    table_html = ('<table><thead><tr><th>league</th><th class="r">graded</th><th class="r">live</th><th>record</th>'
-                  '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th>last 24</th></tr></thead><tbody>'
-                  + rows + '</tbody></table>') if rows else '<p class="note">No graded positions on file yet.</p>'
+          % (twl, graded, tot['pend'], ptone, pwl, ('&mdash;' if phit is None else '%.1f%% hit' % (100 * phit)), '+' if PL['u'] >= 0 else '', PL['u'],
+             utone, '+' if tot['u'] >= 0 else '', tot['u'], per, htone, htxt, bts, btsub, len(games), pulled))
+    table_html = ('<div class="tw"><table><thead><tr><th>league</th><th class="r">graded</th><th class="r">live</th><th>record</th>'
+                  '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th>plays &ge; 6%</th><th>last 24</th></tr></thead><tbody>'
+                  + rows + '</tbody></table></div>') if rows else '<p class="note">No graded positions on file yet.</p>'
     nsport = len([1 for k, l, g, p, s_, i in LEAGUES if cnt.get(k)])
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN</title>

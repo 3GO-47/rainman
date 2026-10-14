@@ -8,6 +8,9 @@ The offensive skill slots on the dashboard still come from the effective ESPN de
 adds what that chart lacks: the offensive line, the whole defense with its base front, special teams, and every bio field.
 Names are normalised (suffixes / punctuation dropped) so the two sources join; nflverse 'LA' -> LAR, 'WAS' kept.
 """
+def _int(v):
+    try: return '' if v is None or v != v else int(v)
+    except (TypeError, ValueError): return ''
 import os, re
 import pandas as pd
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
@@ -37,7 +40,7 @@ def main():
         bio[x.key] = dict(player=x.full_name, team=x.team, pos=x.position, jersey='' if x.jersey_number != x.jersey_number else int(x.jersey_number),
                           college=str(x.college if isinstance(x.college, str) else '').split(';')[0].strip(), colleges=(x.college if isinstance(x.college, str) else ''), height=ht, weight='' if x.weight != x.weight else int(x.weight), years_exp=x.years_exp,
                           age=age, draft_club=(x.draft_club or '') if isinstance(x.draft_club, str) else '', draft_number='' if x.draft_number != x.draft_number else int(x.draft_number),
-                          entry_year='' if x.entry_year != x.entry_year else int(x.entry_year), status=x.status, headshot=x.headshot_url if isinstance(x.headshot_url, str) else '', espn_id='' if x.espn_id != x.espn_id else int(x.espn_id))
+                          entry_year=_int(x.entry_year), status=x.status, headshot=x.headshot_url if isinstance(x.headshot_url, str) else '', espn_id=_int(x.espn_id))
     UNIT = {'3WR 1TE': 'OFF', 'Base 4-3 D': 'DEF', 'Base 3-4 D': 'DEF', 'Special Teams': 'ST'}
     rows = []
     for x in d.itertuples():
