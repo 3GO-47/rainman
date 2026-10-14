@@ -1201,11 +1201,12 @@ const SECTIONS=[
    {id:'overview',label:'Overview',desc:'the week at a glance: slate, standings, season leaders, market board, every defense ranked by position, movers',c:'home',sub:'overview'},
    {id:'insights',label:'Insights',desc:'best / worst matchup per role this week, the softest and stingiest defense per slot, schedule strength, volatility',c:'home',sub:'insights'}]},
  {id:'match',fk:'F2',label:'Matchups',items:[
+   {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'projections',label:'Big Board',desc:'matchup rankings for every starter and market — the opponent\'s rank vs his slot in each stat, his volume, the projection band — plus the matchup map',c:'board'},
    {id:'matchups',label:'Matchups',desc:'every game of the week, one card per game — both offenses vs the opposing defense, lines, tilt, narratives; open any game for the full slot-by-slot detail',c:'chamber'},
    {id:'tdboard',label:'TD Board',desc:'the softest and hardest end zone for every role this week, then touchdowns five ways \u2014 one board of every slot owner plus QB, RB, WR and TE',c:'tdb'}]},
  {id:'players',fk:'F3',label:'Players',items:[
-   {id:'lab',label:'Matchup Lab',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
+   {id:'labgridp',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'h2hp',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent — his own per-game averages in every prior meeting we have logs for, four columns by position',c:'players',sub:'h2hp'},
    {id:'explorer',label:'Player Explorer',desc:'any player: full game log, usage, fantasy points, next-4 schedule',c:'players',sub:'player'},
    {id:'depth',label:'Depth Charts',desc:'the field: both offenses and both defenses in formation, colleges, injuries, usage, and the game\'s storylines',c:'players',sub:'dchart'}]},
@@ -1294,7 +1295,7 @@ const NOTES={
  observatory:['v7','charts now draw with no network (Chart.js inlined)'],
  schedule:['v7','new strength-of-schedule bar chart above the grid — every offense ranked by the lens you picked, colored by softness'],
  pkhome:['v7','closing line value (beat the close, by market, by edge bucket) and a "plays ≥ 6% edge" record beside the all-lines record'],
- picks:['v7','the Board: every live position carries the graded record of its own cohort (same type, same size of edge) and of its market; the minimum-edge slider opens where the record says plays start winning (6% today); grouped by game with the edge as a bar'],
+ picks:['v7','the Board: every live position carries the graded record of its own cohort (same type, same size of edge) and of its market; the minimum-edge slider opens at the first edge bucket from which every larger bucket has cleared break-even on 10+ graded plays; grouped by game with the edge as a bar'],
  props:['v7','market chips were hidden by a leftover rule (page stuck on pass yards) — fixed; Kalshi ladders become the line for any player with no book line'],
  fantasy:['v7','moved under Picks; with no DraftKings salary file the $K and V$ columns are hidden instead of printing dots']};
 function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.innerHTML='';
