@@ -493,3 +493,12 @@
 - F2 Matchups = Matchup Lab · TD Board · Game View (Game View promoted from TEST; clicking a game on Home now opens it). Big Board and Matchups retired from F2 → kept under F6 TEST as "(retired)".
 - F4 Intel ordered Defenses · Matrix · Observatory · Schedule · Scheme (was "Intel") · Locker Room. F5 Picks ordered Board · Model · Markets · DFS. F6 TEST ordered Lab Grid · TD Grid · Head to Head first, then drafts, then retired tabs.
 - Playwright: all sections route, 0 page errors; Home game click → gameviewp with the game preselected.
+
+## n55 — 2026-10-14 · v8 (Josh's change list)
+- Nav: F2 Matchups = Game View · TD Board · Player Board (was Matchup Lab) · H2H Board (was F3 Head to Head) · Player Grid (was Lab Grid) · H2H Grid (TEST grid promoted). F3 Players = Locker Room (from Intel) · Player Splits · Depth Charts · Depth Delta · Player Explorer (kept — standing rule). F4 Intel = Defenses · Observatory · Scheme · Schedule (Matrix cut). TEST: retired Big Board / Matchups removed.
+- Home: edge board 2×4 incl. TE2 (stat column labelled per role, no clipping); slate tiles carry the model's frozen ML/ATS/O-U with plays in green; ribbon tiles colour + logo every team code.
+- Insights: volatility panel → 2-col grid on slots that matter; new "this week's lore" panel (rivalries/alumni · revenge/homecomings · birthdays/coach ties).
+- Player Board / H2H Board headers: OPPONENT ALLOWS/GAME TO POSITION · PLAYER AVERAGE/GAME.
+- Game View: card no longer padded to viewport height; tighter rows; deep strips in one row.
+- Depth Charts rebuilt: key-players table (usage, PPR/g, opponent allows + rank, Ψ, proj), depth chips, back seven with next-up folded, open connections panel.
+- Playwright: 29 views × 1540/390 + NCAA, 0 errors, 0 overflow.
