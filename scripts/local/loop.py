@@ -26,11 +26,18 @@ def git(*args, check=False):
     if check and r.returncode: raise RuntimeError(r.stderr.strip()[:200])
     return r
 
+CUR = {'step': '', 'since': None}
 def step(name, fn, *a):
+    CUR['step'] = name; CUR['since'] = datetime.datetime.now()
     try:
         out = fn(*a); return out
+    except KeyboardInterrupt:
+        raise
     except Exception as e:
         log(f'!! {name} failed: {e}'); log(traceback.format_exc().strip().splitlines()[-1]); return None
+    finally:
+        dt = (datetime.datetime.now() - CUR['since']).total_seconds()
+        if dt > 120: log(f'  ({name} took {dt/60:.1f} min)')
 
 SLEEPER = 'notes/close_sleeper.json'
 def plant_sleeper():
@@ -173,4 +180,7 @@ def main():
     log(f'=== done: {", ".join(did) or "no builds"}')
 
 if __name__ == '__main__':
-    main()
+    try: main()
+    except KeyboardInterrupt:
+        # Task Scheduler's time limit (or a user Ctrl-C) lands here: say where the run was when it died, so the next session can see it
+        log(f'!! run interrupted (time limit or Ctrl-C) during step "{CUR["step"]}" after {((datetime.datetime.now()-CUR["since"]).total_seconds()/60 if CUR["since"] else 0):.1f} min'); raise

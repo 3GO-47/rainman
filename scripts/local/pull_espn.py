@@ -5,7 +5,7 @@ Each sub-command writes the same raw file the recipe wrote, so every downstream 
   slate  -> data/raw/slate_all_<today>.txt     (every league's next 8 days, G| rows; preseason rows dropped)
   ncaa   -> ncaa/data/raw/espn_lines_2026_<today>.txt (GL| current-week scoreboard + pickcenter closes for played weeks)
 Usage: python scripts/local/pull_espn.py depth|props|slate|ncaa [...]"""
-import datetime, json, os, re, sys
+import datetime, glob, json, os, re, sys, time
 sys.path.insert(0, os.path.dirname(__file__))
 from common import get, get_json, log, write_lines, TODAY, TODAY_S, ESPN_NFL
 
@@ -204,14 +204,20 @@ def injuries():
     write_lines(out, lines, header=f'# I|team|player|pos|status|injury|return|date|fantasy|comment  (site.api.espn.com/apis/site/v2/sports/football/nfl/injuries; pulled {TODAY_S})')
     log(f'  injuries: {len(lines)} rows, {sum(1 for l in lines if "|Active|" not in l)} not active -> {out}'); return out
 
-def slate(days=8):
-    rows, seen = [], set()
+def slate(days=8, budget_s=300):
+    rows, seen = [], set(); t0 = time.time(); fails = 0
     for lg, path, extra in SLATE:
         for i in range(days):
+            if time.time() - t0 > budget_s:                       # never let the slate eat the task's time limit: keep yesterday's file instead
+                prev = sorted(glob.glob('data/raw/slate_all_*.txt'))
+                log(f'  slate: over the {budget_s}s budget after {len(rows)} games and {fails} failed calls — keeping {prev[-1] if prev else "nothing"}'); return prev[-1] if prev else None
             d = (TODAY + datetime.timedelta(days=i)).strftime('%Y%m%d')
-            try: sb = get_json(f'{SITE}/{path}/scoreboard?dates={d}{extra}&limit=400', pace=0.4)
+            try: sb = get_json(f'{SITE}/{path}/scoreboard?dates={d}{extra}&limit=400', pace=0.4, retries=1, timeout=20)
             except Exception as e:
-                log(f'  slate {lg} {d}: {str(e)[:60]}'); continue
+                fails += 1; log(f'  slate {lg} {d}: {str(e)[:60]}')
+                if fails >= 6 and not rows: 
+                    prev = sorted(glob.glob('data/raw/slate_all_*.txt')); log(f'  slate: ESPN is not answering — keeping {prev[-1] if prev else "nothing"}'); return prev[-1] if prev else None
+                continue
             for e in sb.get('events', []):
               try:
                 if e['id'] in seen: continue
