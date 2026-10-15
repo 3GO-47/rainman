@@ -537,3 +537,13 @@
 
 ## n61 — 2026-10-14 · v9b injuries everywhere
 - Game View card: "missing" line per team under the lines (defenders at weighted roles + top-2 skill players); lift chip beside each starter whose slot the opponent's absences touch. Player card: own status / practice / injury / return + lift for his slot. Slate tiles: "SEA 3 out 1 Q". Depth Charts key table: ESPN status + practice chips, lift in the allows cell. Prop / TD panes: lift chip.
+
+## n62 — 2026-10-15 · v10: the dev dashboard inside the site + hit counter
+- dev.html was live at /rainman/dev.html (not /dashboard/) but only linked from a sentence on the API tab — Josh had never seen it.
+- scripts/build_dev.py v2: scheduler-health grid (every Task Scheduler slot, 8 days: pushed / late / no push / died / missed), the three-pull
+  policy board per game (stage, probes, moves, DK sensor, what is due next, the planted sleeper), loop runs with state + minutes + slow steps,
+  the error trail, data freshness with row counts, game-log inventory, deploy state (git ahead/behind/dirty), builds with views, pull log,
+  traffic by day / page / tab via abacus.jasoncameron.dev (namespace rainman-3go47; no signup; file:// and frames never count; localStorage
+  rm-nocount opts a browser out). Fixed the credits-per-day bars (quotes were HTML-escaped → no height) and the .r color/align clash.
+- template: ⚙ dev in the league switch, F6 TEST › Dev frames dev.html (lazy), hit counter per page load + per tab opened (session-deduped).
+- Scheduler finding: 00:20 / 06:20 markets slots are mostly missed (PC asleep); the daily task catches up after wake (shown as "late").

@@ -955,7 +955,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="api" hidden></div><div id="injuries" hidden></div><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div><div id="markets2" hidden></div><div id="ddelta" hidden></div><div id="card2" hidden></div><div id="splits" hidden></div></div>
+<div id="test" hidden><div id="dev" hidden></div><div id="api" hidden></div><div id="injuries" hidden></div><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div><div id="markets2" hidden></div><div id="ddelta" hidden></div><div id="card2" hidden></div><div id="splits" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1184,7 +1184,7 @@ document.querySelector('.sfoot').innerHTML=document.querySelector('.sfoot').inne
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend).replace('__SEASONS__',[...new Set(J.logs.map(l=>l[2]))].sort().map(s=>String(s).slice(2)+'/'+String(s+1).slice(2)).join(' + ')).replace('__GAMES__',Math.round(J.weekly.length/2)).replace('__ROWS__',J.logs.length.toLocaleString());
 $('#ntHdr').textContent=NT;if(!IS_NFL)document.querySelectorAll('.lgnfl').forEach(e=>e.hidden=true);
 (LG.hideTabs||[]).forEach(v=>{const b=document.querySelector(`#legacyNav nav button[data-v="${v}"]`);if(b)b.hidden=true});
-(()=>{const o=LG.other;if(!o)return;const keep=location.hash||'';$('#lgSw').innerHTML=`<a href="index.html" title="Layer 0 — every sport" style="color:var(--acc)">◍ all sports</a><a class="${IS_NFL?'on':''}" href="${IS_NFL?'#':'rainman.html'+keep}">NFL</a><a class="${IS_NFL?'':'on'}" href="${IS_NFL?'ncaa.html'+keep:'#'}">NCAA</a>`;addEventListener('hashchange',()=>{[...$('#lgSw').children].forEach(a=>{if(!a.classList.contains('on'))a.href=a.href.split('#')[0]+location.hash})})})();
+(()=>{const o=LG.other;if(!o)return;const keep=location.hash||'';$('#lgSw').innerHTML=`<a href="index.html" title="Layer 0 — every sport" style="color:var(--acc)">◍ all sports</a><a class="${IS_NFL?'on':''}" href="${IS_NFL?'#':'rainman.html'+keep}">NFL</a><a class="${IS_NFL?'':'on'}" href="${IS_NFL?'ncaa.html'+keep:'#'}">NCAA</a><a href="dev.html" title="dev dashboard — API spend, loop runs, scheduler health, odds policy, freshness, deploy, traffic" style="color:var(--dim2)">⚙ dev</a>`;addEventListener('hashchange',()=>{[...$('#lgSw').children].forEach(a=>{if(!a.classList.contains('on'))a.href=a.href.split('#')[0]+location.hash})})})();
 document.querySelectorAll('#legacyNav nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#legacyNav nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   ['home','chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets','test'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
@@ -1228,6 +1228,7 @@ const SECTIONS=[
    {id:'splits',label:'Splits',desc:'PPR per game by situation \u2014 home / away, favorite / dog, dome / outdoors, division, last three \u2014 and the split that matches the spot he walks into this week',c:'test',sub:'splits'},
    {id:'markets2',label:'Markets v2',desc:'the Markets page with its market chips back \u2014 pass yards, rush yards, receptions, receiving yards, anytime TD and game lines are each one click',c:'test',sub:'markets2'},
    {id:'card2',label:'Card v2',desc:'the Card with every position carrying the graded record of its own cohort \u2014 same type, same size of edge \u2014 and the slider starting where the record says the edge is real',c:'test',sub:'card2'},
+   {id:'dev',label:'Dev',desc:'The dev dashboard inside the site: Odds API spend and the three-pull policy board, scheduler health (every task slot: ran, pushed, died, missed), loop runs with step timing, the error trail, data freshness and row counts, deploy state, builds, and site traffic by page and tab',c:'test',sub:'dev'},
    {id:'api',label:'API',desc:'The Odds API: every paid call with its real cost and reason, the month\'s spend against the plan, the three-pull policy, and where every game stands (probed, open, moved, closed)',c:'test',sub:'api'}]}];
 const ITEMS={};SECTIONS.forEach(sec=>sec.items.forEach(it=>{it.sec=sec;ITEMS[it.id]=it}));ITEMS.lines2=ITEMS.glines=ITEMS.td=ITEMS.props;
 let CUR_ITEM='overview';
@@ -1244,7 +1245,7 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',h2hp:'#h2hP',player:'#player',tdbx:'#tdBx'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h','markets2','ddelta','card2','splits','api','injuries'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub});const lf=$('#lgFields'),hf=$('#hhFields');if(lf)lf.hidden=it.id!=='labgridp';if(hf)hf.hidden=it.id!=='h2hgridp'}
+  if(it.c==='test'){['labgrid','gameview','tdgridTest','h2h','markets2','ddelta','card2','splits','api','injuries','dev'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub});const lf=$('#lgFields'),hf=$('#hhFields');if(lf)lf.hidden=it.id!=='labgridp';if(hf)hf.hidden=it.id!=='h2hgridp'}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
@@ -1284,11 +1285,12 @@ INTRO.depth={what:'Both rosters for one game.',how:['key players = the effective
 const NOTES={
  gameviewp:['v9','the card now names each defense\'s missing men under the lines and puts the injury lift beside every starter whose slot it touches'],
  depth:['v9','key-players table carries the ESPN status and practice chips and the injury lift from the opponent\'s missing men'],
+ dev:['v10','new: the dev dashboard framed inside the site — scheduler health, the policy board, error trail, deploy state and traffic'],
+ api:['v10','the dev dashboard (F6 TEST › Dev, or ⚙ dev in the league switch) now carries the policy board per game, scheduler health and the error trail'],
  injuries:['v9','new: every listed player on both sides, the practice trail, the role he holds, and the lift his absence hands the opponent slots — e.g. a CB1 out lifts the opposing WR1 / WR2'],
  picks:['v9','rebuilt: plays as cards (green by edge), leans as a table, passed lines folded; model vs market with the gap coloured at 3+ points; type chips open the model\'s history'],
  scheme:['v9','scheme edges on top: every starter against the defensive style he faces, with the injury lift, Ψ and projection; game-by-game cards pair the play-caller\'s style with the DC\'s'],
  insights:['v9','scheme edges now lead the page (top and bottom of the style × slot × injury ranking), then the field chart, the extremes, the volatility grid and the lore'],
- api:['v8','new: The Odds API spend — plan, used, pace, credits per day by reason, by league, where every game stands under the three-pull policy, the full call log, and the policy itself'],
  h2hgridp:['v8','promoted from TEST to F2 Matchups as H2H Grid; "history by role" on top: per role the three starters who have most beaten their own average against this opponent, with the stat line that says so'],
  labgridp:['v8','promoted from TEST to F2 Matchups as Player Grid; "prop fields by role" on top: per role the three best prop spots — the stat, what the opponent allows with its rank, his season and last-five averages, and the posted line'],
  tdbx:['v8','new: the Player Board on touchdowns only, with the anytime-TD model as the fourth block'],
@@ -1316,7 +1318,7 @@ function renderIntro(it){const x=INTRO[it.id];const cr=$('#crumb');if(cr)cr.inne
   /* the descriptive paragraph is gone on purpose — the tab name and the page say what it is. only the reading key stays. */
   const nt=t=>String(t).replace(/of 32/g,'of '+NT);const nn=NOTES[it.id];el.innerHTML=`<div class="pintro key"><div class="ph">${x.how.map(h=>`<span>${nt(h)}</span>`).join('')}${nn?`<span class="newn" title="click for what changed on this tab">updated ${nn[0]}</span>`:''}</div>${nn?`<div class="pnew" hidden>${esc(nn[1])}</div>`:''}</div>`;
   const b=el.querySelector('.newn');if(b)b.onclick=()=>{const d=el.querySelector('.pnew');d.hidden=!d.hidden}}
-function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return go('overview');CUR_ITEM=it.id;
+function go(id,opts={}){const it=ITEMS[id]||ITEMS.overview;if(!itemOK(it))return go('overview');CUR_ITEM=it.id;if(it.id==='dev'){const f=$('#devFrame');if(f&&!f.src)f.src=f.dataset.src}if(window.rmHitTab)rmHitTab(it.id);
   const b=document.querySelector(`#legacyNav nav button[data-v="${it.c}"]`);if(b)b.click();
   if(it.c==='defenses'){const t=document.querySelector(`#defTabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
   if(it.c==='bets'){const t=document.querySelector(`#r11Tabs button[data-t="${it.sub}"]`);if(t&&!t.classList.contains('on'))t.click()}
@@ -1904,6 +1906,10 @@ document.addEventListener('click',e=>{if(e.target.closest('button,select,input,l
   const s=e.target.closest('.slotchip');if(s){const t=s.textContent.trim();if(t)slotPop(t);return}
   const tc=e.target.closest('.tc');if(tc&&!e.target.closest('.pp,.plink')){const t=tc.textContent.trim();if(TEAM[t])teamPop(t)}});
 /* ---------- F6 TEST → API: The Odds API spend, policy and per-game state ---------- */
+function devView(){const el=$('#dev');if(!el)return;el.innerHTML=`<div class="panel" style="padding:6px 8px"><div class="mini" style="margin:0 0 6px">dev.html framed · <a href="dev.html" target="_blank">open it full-screen ↗</a> · rebuilt by the loop every pass (scripts/build_dev.py) · the counter here is read-only, the frame never counts as a view</div><iframe id="devFrame" data-src="dev.html" title="RAINMAN dev dashboard" style="width:100%;height:calc(100vh - 150px);min-height:600px;border:1px solid var(--edge);border-radius:4px;background:#000"></iframe></div>`}
+/* ---------- hit counter: one hit per page load and per tab opened (per session), keyed by page and tab, read by dev.html.
+   Never from file://, never from inside a frame, never when localStorage rm-nocount is set (my own live checks). ---------- */
+(function(){try{if(location.protocol==='file:'||window.top!==window||localStorage.getItem('rm-nocount'))return;const ns='rainman-3go47',pg=(location.pathname.split('/').pop()||'rainman').replace('.html','')||'rainman',d=new Date().toISOString().slice(0,10);const h=k=>{fetch('https://abacus.jasoncameron.dev/hit/'+ns+'/'+k,{keepalive:true}).catch(()=>{})};h('page.'+pg);h('all.'+d);h('day.'+pg+'.'+d);window.rmHitTab=t=>{if(!t)return;const k='tab.'+pg+'.'+t;try{if(sessionStorage.getItem('rm-h-'+k))return;sessionStorage.setItem('rm-h-'+k,'1')}catch(e){}h(k)}}catch(e){}})();
 function apiView(){const el=$('#api');if(!el)return;
   function render(){const A=J.api||{log:[],plan:100000,state:{props:{},lines:{}}};const L=A.log.slice();const plan=A.plan||100000;
     const num=s=>{const v=parseInt(s,10);return isNaN(v)?null:v};
@@ -5006,7 +5012,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',boardView],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['players',tdLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)],['test',splits],['test',apiView],['test',injuriesView]];
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',boardView],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['players',tdLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)],['test',splits],['test',apiView],['test',injuriesView],['test',devView]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();
