@@ -586,3 +586,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   combined price, de-vigged fair, model probability + EV, stake → payout; "save to Social" pushes a parlay play into rainman.plays).
   Links: ★ tracking in the league switch, Arb / Social / landing headers. The loop builds it after the Arb Engine every markets pass.
 - Overview slate: three rows of five.
+
+## n67 — 2026-10-15 · Arb Engine v2 + Social v2
+- Arb Engine: BOARD is the landing view — every market a row, every source's price side by side (books, then exchanges), best price per side lit,
+  fair / edge / steam / model / hold inline, arbs pinned on top; filters: market kind, game, search, sources ≥ n, arbs only; sort on any column;
+  row drawer = the full price ladder (old SHOP) + the line's path (old STEAM) + the edges on that market with save; ★ on every row. Tabs: BOARD · EDGES · SCORECARD (CLV).
+- Social: feed first (everyone / mine / friends / open), the DraftKings line now beside every play (green = you hold the better number), tail and fade
+  (fade drafts the other side), ★ to Tracking; grading extended to NBA / NHL / WNBA finals from the schedule feeds (9,945 finals keyed, was 606),
+  and grading no longer depends on the game still being on the slate; drafts accept parlays from Tracking; tools (profile, log, leaderboard, weekly) in the side column.
