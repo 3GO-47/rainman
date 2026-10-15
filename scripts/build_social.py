@@ -199,7 +199,37 @@ $('#wipe').onclick=()=>{if(confirm('clear every play, friend and the profile fro
 def page(games, results, pulled):
     J = dict(games=games, results={k: list(v) for k, v in results.items()}, props=prop_results(), pulled=pulled)
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Social</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}</style></head><body>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Social</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}
+@media (max-width:760px){{
+ html,body{{overflow-x:hidden;max-width:100vw}}
+ body{{font-size:12px}}
+ #hdr{{flex-wrap:wrap;height:auto!important;min-height:0;padding:6px 10px!important;gap:6px 10px!important;row-gap:4px}}
+ #hdr .brand{{font-size:13px}}#hdr .brand small{{display:none}}
+ #hdr .tag,#hdr .mini{{display:none}}
+ #hdr .hl,#hdr .tabs,#hdr nav{{flex-wrap:wrap;gap:3px;margin-left:0}}
+ #hdr .hl a,#hdr .tabs a,#hdr .tabs button,#hdr nav a{{padding:5px 8px;min-height:30px;display:inline-flex;align-items:center;font-size:11.5px}}
+ main{{padding:8px!important}}
+ .panel{{padding:8px!important;border-radius:5px}}
+ h1{{font-size:15px}}h2{{font-size:13px}}h3{{font-size:12px}}
+ .mscroll{{overflow-x:auto;width:0;min-width:100%;max-width:100%;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;position:relative}}
+ .mgrid1>*,.panel,main>*{{min-width:0}}
+ header{{flex-wrap:wrap;height:auto;padding:6px 10px;gap:6px 10px}}header nav{{flex-wrap:wrap}}
+ .mscroll>table{{font-size:11px;width:max-content;min-width:100%}}
+ .mscroll>table th,.mscroll>table td{{white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}}
+ .mscroll>table th:first-child,.mscroll>table td:first-child{{position:sticky;left:0;z-index:2;background:#000;box-shadow:1px 0 0 var(--edge2,#222)}}
+ .mscroll>table thead th{{position:sticky;top:0;z-index:3}}
+ .mscroll>table thead th:first-child{{z-index:4}}
+ .mscroll.one>table th:first-child,.mscroll.one>table td:first-child{{position:static;box-shadow:none}}
+ .mgrid1{{grid-template-columns:1fr!important}}
+ select,input[type=text],input[type=search],input[type=number]{{min-height:32px;font-size:13px}}
+ .chips button,button.sw,.chip{{min-height:30px;padding:5px 9px}}
+ .modal{{padding:0!important;align-items:stretch!important}}
+ .modal .modalbox,.modal .modalbox.wide,.modalbox{{max-width:100%!important;width:100%;min-height:100%;padding:10px 10px 40px!important;border-left:0;border-right:0}}
+ .mclose{{position:sticky!important;top:0;float:right;z-index:5;min-height:32px;padding:4px 12px}}
+ .sfoot{{flex-wrap:wrap;gap:8px}}
+ .trk{{min-width:26px;line-height:22px}}
+}}
+</style></head><body>
 <div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN</a><span class="tag">Social · plays, records, leaderboard</span><span class="hl"><a href="index.html">all sports</a><a href="arb.html">Arb Engine</a><a class="on" href="social.html">Social</a><a href="tracking.html" style="color:#ffd600">★ Tracking</a>{brand.theme_switch_html()}</span><span class="right"><span id="nfr"></span> · slate {pulled} · built {built}</span></div>
 <div class="wrap">
 <h1>Your plays. Your record. The feed.<small>Log every bet you place — by hand, or straight from the Arb Engine — and the site grades it, tracks your units week by week and ranks you against everyone whose plays you've imported. Share a link and friends can see and tail your plays. Everything here lives in this browser: no account yet, nothing leaves your machine unless you share a link.</small></h1>
@@ -221,7 +251,13 @@ def page(games, results, pulled):
 <h2>ledger <span>every play · click a header to sort · W / L / P sets the result by hand, × removes · NFL, CFB, NBA, NHL and WNBA game lines grade themselves from the finals; props grade from the box scores the site keeps</span><span class="sp"></span><button id="share" class="btn">share my plays</button> <button id="exp" class="btn ghost">backup</button> <label class="btn ghost" style="cursor:pointer">restore<input id="imp" type="file" accept="application/json" hidden></label> <button id="wipe" class="btn ghost">clear</button></h2><div id="ledger"></div>
 <div class="foot">RAINMAN · Social (local prototype) · plays are stored in this browser only; a share link carries a copy of your plays to whoever opens it. Automatic grading uses the finals the site already tracks (NFL now; other leagues as their results feeds land). Bet responsibly.</div></div>
 <div id="toast" class="toast"></div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script></body></html>"""
+<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script><script>(function(){{const mq=matchMedia('(max-width:760px)');let mo,tm;
+function wrap(){{document.querySelectorAll('table').forEach(t=>{{if(t.closest('.mscroll,.tw,.tscroll,#mnav'))return;if(t.parentElement&&t.parentElement.closest('table'))return;const w=document.createElement('div');w.className='mscroll';t.parentNode.insertBefore(w,t);w.appendChild(t);const f=t.querySelector('tr');if(f&&f.children.length<=2)w.classList.add('one')}})}}
+function grids(){{document.querySelectorAll('main *,body>div *').forEach(e=>{{if(e.classList.contains('mgrid1')||e.dataset.mg)return;const cs=getComputedStyle(e);if(cs.display!=='grid')return;const tr=cs.gridTemplateColumns.split(' ').filter(Boolean);e.dataset.mg='1';if(tr.length<2)return;if(e.scrollWidth>e.clientWidth+2||tr.length>=3&&!tr.some(x=>/^\d+(\.\d+)?px$/.test(x)&&parseFloat(x)<90))e.classList.add('mgrid1')}})}}
+function pass(){{wrap();grids()}}
+function on(){{document.documentElement.classList.add('mob');pass();mo=new MutationObserver(()=>{{clearTimeout(tm);tm=setTimeout(pass,150)}});mo.observe(document.body,{{childList:true,subtree:true}})}}
+function off(){{document.documentElement.classList.remove('mob');if(mo)mo.disconnect()}}
+if(mq.matches)on();mq.addEventListener('change',e=>e.matches?on():off());window.rmMobile=mq}})();</script></body></html>"""
 
 def main():
     games, pulled = slate(); R = results()

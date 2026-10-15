@@ -373,7 +373,37 @@ foot();render();
 
 def page(J):
     cal = ''.join(f"<tr><td class='mono dim'>{int(c['lo']*100)}–{int(c['lo']*100)+10}%</td><td class='num'>{c['n']}</td><td class='num'>{'' if c['hit'] is None else str(round(100*c['hit']))+'%'}</td></tr>" for c in J['calib'])
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Tennis</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}</style></head><body>
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">{brand.THEME_BOOT}<title>RAINMAN · Tennis</title>{HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{CSS_VARS}{CSS}
+@media (max-width:760px){{
+ html,body{{overflow-x:hidden;max-width:100vw}}
+ body{{font-size:12px}}
+ #hdr{{flex-wrap:wrap;height:auto!important;min-height:0;padding:6px 10px!important;gap:6px 10px!important;row-gap:4px}}
+ #hdr .brand{{font-size:13px}}#hdr .brand small{{display:none}}
+ #hdr .tag,#hdr .mini{{display:none}}
+ #hdr .hl,#hdr .tabs,#hdr nav{{flex-wrap:wrap;gap:3px;margin-left:0}}
+ #hdr .hl a,#hdr .tabs a,#hdr .tabs button,#hdr nav a{{padding:5px 8px;min-height:30px;display:inline-flex;align-items:center;font-size:11.5px}}
+ main{{padding:8px!important}}
+ .panel{{padding:8px!important;border-radius:5px}}
+ h1{{font-size:15px}}h2{{font-size:13px}}h3{{font-size:12px}}
+ .mscroll{{overflow-x:auto;width:0;min-width:100%;max-width:100%;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;position:relative}}
+ .mgrid1>*,.panel,main>*{{min-width:0}}
+ header{{flex-wrap:wrap;height:auto;padding:6px 10px;gap:6px 10px}}header nav{{flex-wrap:wrap}}
+ .mscroll>table{{font-size:11px;width:max-content;min-width:100%}}
+ .mscroll>table th,.mscroll>table td{{white-space:nowrap;max-width:220px;overflow:hidden;text-overflow:ellipsis}}
+ .mscroll>table th:first-child,.mscroll>table td:first-child{{position:sticky;left:0;z-index:2;background:#000;box-shadow:1px 0 0 var(--edge2,#222)}}
+ .mscroll>table thead th{{position:sticky;top:0;z-index:3}}
+ .mscroll>table thead th:first-child{{z-index:4}}
+ .mscroll.one>table th:first-child,.mscroll.one>table td:first-child{{position:static;box-shadow:none}}
+ .mgrid1{{grid-template-columns:1fr!important}}
+ select,input[type=text],input[type=search],input[type=number]{{min-height:32px;font-size:13px}}
+ .chips button,button.sw,.chip{{min-height:30px;padding:5px 9px}}
+ .modal{{padding:0!important;align-items:stretch!important}}
+ .modal .modalbox,.modal .modalbox.wide,.modalbox{{max-width:100%!important;width:100%;min-height:100%;padding:10px 10px 40px!important;border-left:0;border-right:0}}
+ .mclose{{position:sticky!important;top:0;float:right;z-index:5;min-height:32px;padding:4px 12px}}
+ .sfoot{{flex-wrap:wrap;gap:8px}}
+ .trk{{min-width:26px;line-height:22px}}
+}}
+</style></head><body>
 <div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN<small>TENNIS</small></a><div class="tabs" id="tabs"></div><div class="lg" id="lgs"></div><span class="hl"><a href="index.html">◍ sports</a><a href="tennis.html" style="color:var(--acc)">› tennis</a><a href="arb.html">arb engine</a><a href="social.html">social</a></span>{brand.theme_switch_html()}<button class="q" id="q" title="how it works">?</button></div>
 <main><div id="view"></div><div class="foot" id="foot"></div></main>
 <div id="how"><div class="box"><h3>How the tennis page is built</h3>
@@ -383,7 +413,13 @@ def page(J):
 <h5>Market</h5><p>Kalshi (one YES market per player; the ask is the price to buy) and Polymarket (one moneyline market per match). Market = the average of the exchange mid-points for the first-listed player. Δ = model − market: positive means Elo likes the first player more than the exchanges do. 5 points or more is worth a look; Elo knows nothing about injuries, fatigue or a retirement risk, so check the news before you act.</p>
 <h5>Form and records</h5><p>Form = the last ten tour matches, newest on the right; 12-month records overall and on the match surface; serve and return rates are the player's last 12 months against the tour average (the tick).</p></div></div>
 <div id="toast" class="toast"></div>
-<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script></body></html>"""
+<script>const J={json.dumps(J, separators=(',', ':'))};</script><script>{JS}</script><script>{brand.THEME_JS}</script><script>(function(){{const mq=matchMedia('(max-width:760px)');let mo,tm;
+function wrap(){{document.querySelectorAll('table').forEach(t=>{{if(t.closest('.mscroll,.tw,.tscroll,#mnav'))return;if(t.parentElement&&t.parentElement.closest('table'))return;const w=document.createElement('div');w.className='mscroll';t.parentNode.insertBefore(w,t);w.appendChild(t);const f=t.querySelector('tr');if(f&&f.children.length<=2)w.classList.add('one')}})}}
+function grids(){{document.querySelectorAll('main *,body>div *').forEach(e=>{{if(e.classList.contains('mgrid1')||e.dataset.mg)return;const cs=getComputedStyle(e);if(cs.display!=='grid')return;const tr=cs.gridTemplateColumns.split(' ').filter(Boolean);e.dataset.mg='1';if(tr.length<2)return;if(e.scrollWidth>e.clientWidth+2||tr.length>=3&&!tr.some(x=>/^\d+(\.\d+)?px$/.test(x)&&parseFloat(x)<90))e.classList.add('mgrid1')}})}}
+function pass(){{wrap();grids()}}
+function on(){{document.documentElement.classList.add('mob');pass();mo=new MutationObserver(()=>{{clearTimeout(tm);tm=setTimeout(pass,150)}});mo.observe(document.body,{{childList:true,subtree:true}})}}
+function off(){{document.documentElement.classList.remove('mob');if(mo)mo.disconnect()}}
+if(mq.matches)on();mq.addEventListener('change',e=>e.matches?on():off());window.rmMobile=mq}})();</script></body></html>"""
 
 if __name__ == '__main__':
     build()
