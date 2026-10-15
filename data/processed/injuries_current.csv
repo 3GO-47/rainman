@@ -1,19 +1,801 @@
 team,player,pos,side,role,depth,status,status_w,injury,ret,updated,practice,fantasy,comment,source
-ARI,Wydett Williams Jr.,S,DEF,S2,2,Out,1.0,Concussion,2026-10-25,2026-10-14,,OUT,,espn
-ARI,James Conner,RB,OFF,RB4,4,Injured Reserve,1.0,Foot,2026-10-25,2026-10-13,,IR-R,Conner (foot) is close to practicing,espn
-ARI,Isaiah Adams,G,OL/ST,,,Injured Reserve,1.0,Ankle,2026-11-08,2026-10-11,,IR,,espn
-ARI,Paris Johnson Jr.,OT,OL/ST,,,Injured Reserve,1.0,Biceps,2027-02-15,2026-10-07,,IR,,espn
-ARI,Andrew Wingard,S,DEF,S1,1,Questionable,0.4,Knee,2026-10-18,2026-10-13,,QUESTIONABLE,,espn
-ARI,Jeremiyah Love,RB,OFF,RB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,Love (ankle) won't practice Wednesday,espn
-DEN,Pat Surtain II,CB,DEF,CB1,1,Out,1.0,Ankle,2026-10-25,2026-10-14,,OUT,out,espn
-DEN,Talanoa Hufanga,S,DEF,S1,1,Out,1.0,Ankle,2026-10-25,2026-10-14,,OUT,Hufanga (ankle) is expected to miss multiple weeks,espn
-DEN,Pat Bryant,WR,OFF,WR4+,2,Injured Reserve,1.0,Ankle,2026-11-08,2026-10-09,,IR,,espn
-DEN,Riley Moss,CB,DEF,CB1,1,Questionable,0.4,Ribs,2026-10-15,2026-10-13,,QUESTIONABLE,,espn
-LAR,Myles Garrett,DE,DEF,LB3,3,Injured Reserve,1.0,Knee,2026-10-25,2026-10-14,,IR,,espn
-LAR,Terrance Ferguson,TE,OFF,TE5,5,Injured Reserve,1.0,Ankle,2026-11-01,2026-10-07,,IR,,espn
-LAR,Alaric Jackson,OT,OL/ST,,,Suspension,1.0,Suspension,2026-11-01,2026-10-14,,RESERVE-SUS,,espn
-SEA,Julian Neal,CB,DEF,CB2,2,Injured Reserve,1.0,Hamstring,2026-11-08,2026-10-11,,IR,,espn
-SEA,Drake Thomas,LB,DEF,LB1,1,Out,1.0,Ankle,2026-10-25,2026-10-14,,OUT,,espn
-SEA,Chazz Surratt,LB,DEF,LB3,3,Out,1.0,Calf,2026-10-25,2026-10-14,,OUT,,espn
-SEA,Zach Charbonnet,RB,OFF,RB5,5,Out,1.0,Knee - ACL,2026-10-25,2026-10-14,,PUP-R,,espn
-SEA,Leonard Williams,DT,DEF,EDGE1,1,Questionable,0.4,Ankle,2026-10-15,2026-10-12,,QUESTIONABLE,,espn
+ARI,Wydett Williams Jr.,S,DEF,S2,2,Out,1.0,Concussion,2026-10-25,2026-10-15,,OUT,"Coach Mike LaFleur has ruled out Williams (concussion) for Sunday's game against the Rams, Theo Mackie of The Arizona Republic reports.",espn
+ARI,Kitan Crawford,S,DEF,S3,3,Injured Reserve,1.0,Ankle,2026-10-18,2026-10-15,,IR-R,The Cardinals opened Crawford's (ankle) 21-day practice window Wednesday.,espn
+ARI,James Conner,RB,OFF,RB4,4,Injured Reserve,1.0,Foot,2026-10-25,2026-10-13,,IR-R,"Conner (foot) is close to practicing, but the Cardinals aren't expected to open his 21-day evaluation window this week, John Gambadoro of Arizona Sports 98.7 FM",espn
+ARI,Isaiah Adams,G,OL/ST,,,Injured Reserve,1.0,Ankle,2026-11-08,2026-10-11,,IR,"The Cardinals placed Adams (ankle) on injured reserve Saturday, Darren Urban of the team's official site reports.",espn
+ARI,Andrew Wingard,S,DEF,S1,1,Questionable,0.4,Knee,2026-10-18,2026-10-15,,QUESTIONABLE,"Wingard (knee) did not participate in Wednesday's practice, Tyler Drake of ArizonaSports.com reports.",espn
+ARI,Jeremiyah Love,RB,OFF,RB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,"Love (ankle) won't practice Wednesday, as head coach Mike LaFleur said the Cardinals want to ""get this ankle right and do it the right way,"" Theo Mackie of The ",espn
+ARI,Devin Duvernay,WR,OFF,WR4+,2,Questionable,0.4,Ribs,2026-10-18,2026-10-15,,QUESTIONABLE,questionable,espn
+ARI,Chad Ryland,PK,,,,Active,0.0,,,2026-10-12,,,Ryland made all three of his extra-point attempts but missed his lone field-goal try during the Cardinals' 45-21 loss to the Lions on Sunday.,espn
+ARI,Starling Thomas V,CB,DEF,CB3,3,Active,0.0,,,2026-10-12,,,,espn
+ARI,Walter Nolen III,DT,DEF,DT1,1,Active,0.0,,,2026-10-11,,,Nolen (calf) is active for Sunday's game against the Lions.,espn
+ARI,Andrew Billings,DT,DEF,DT2,2,Active,0.0,,,2026-10-12,,,,espn
+ARI,Karson Sharar,LB,DEF,LB2,2,Active,0.0,,,2026-10-11,,,,espn
+ARI,Budda Baker,S,DEF,S1,1,Active,0.0,,,2026-10-07,,,Baker tallied five tackles (two solo) and an interception during Arizona's loss versus the Giants on Sunday.,espn
+ARI,Dadrion Taylor-Demerson,S,DEF,S2,2,Active,0.0,,,2026-10-10,,,"Taylor-Demerson (back) does not have an injury designation against the Lions on Sunday, Zach Gershman of the Cardinals' official site reports.",espn
+ARI,Shawn Bowman,TE,OFF,,,Active,0.0,,,2026-10-14,,,Bowman was signed from the practice squad to the active roster Wednesday.,espn
+ARI,Jacoby Brissett,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,Brissett completed 29 of 47 passes for 292 yards with three touchdowns and one interception while adding two rushes for 19 yards and a seven-yard reception on h,espn
+ARI,Gardner Minshew II,QB,OFF,QB2,2,Active,0.0,,,2026-10-11,,,Minshew is active for Sunday's game against the Lions.,espn
+ARI,Carson Beck,QB,OFF,QB3,3,Active,0.0,,,2026-10-11,,,Beck (coach's decision) is inactive and is designated as Arizona's emergency third quarterback for Sunday's matchup versus the Lions.,espn
+ARI,Tyler Allgeier,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Allgeier rushed three times for seven yards and caught both of his targets for nine yards during Sunday's 45-21 loss to the Lions.,espn
+ARI,Trey McBride,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,McBride brought in nine of 10 targets for 66 yards and a touchdown in the Cardinals' 45-21 loss to the Lions on Sunday.,espn
+ARI,Teagan Quitoriano,TE,OFF,TE3,3,Active,0.0,,,2026-10-12,,,Quitoriano caught both of his targets for 15 yards and two touchdowns during Sunday's 45-21 loss to Detroit.,espn
+ARI,Michael Wilson,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Wilson brought in four of seven targets for 30 yards and completed his only pass attempt for seven yards in the Cardinals' 45-21 loss to the Lions on Sunday.,espn
+ARI,Kendrick Bourne,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Bourne caught five of eight targets for 70 yards during Sunday's 45-21 loss to the Lions.,espn
+ARI,Jalen Brooks,WR,OFF,WR3,1,Active,0.0,,,2026-10-14,,,Brooks recorded two catches for 16 yards on seven targets in Sunday's 45-21 loss to the Lions.,espn
+ARI,Reggie Virgil,WR,OFF,WR4+,2,Active,0.0,,,2026-10-14,,,Virgil recorded two receptions for 29 yards on five targets in Sunday's 45-21 loss to the Lions.,espn
+ATL,Yasir Abdullah,LB,DEF,LB3,3,Injured Reserve,1.0,Hamstring,2026-11-08,2026-10-11,,IR,"The Falcons placed Abdullah (hamstring) on injured reserve Saturday, Tori McElhaney of the team's official site reports.",espn
+ATL,C.J. Henderson,CB,DEF,CB1,1,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,"Henderson (groin) did not practice Wednesday, Marc Raimondi of ESPN.com reports.",espn
+ATL,Divine Deablo,LB,DEF,LB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-15,,QUESTIONABLE,"Deablo (hamstring) was a limited participant at practice Wednesday, Will McFadden of the Falcons' official site reports.",espn
+ATL,Za'Darius Smith,DE,DEF,LB1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+ATL,Nick Folk,PK,,,,Active,0.0,,,2026-10-12,,,"Folk converted all five of his kicks (three field goals, two extra points) during Sunday's 30-23 overtime loss to the Ravens.",espn
+ATL,Malcolm DeWalt IV,CB,DEF,CB3,3,Active,0.0,,,2026-10-12,,,,espn
+ATL,Robert Longerbeam,CB,DEF,CB3,3,Active,0.0,,,2026-10-12,,,,espn
+ATL,Samson Ebukam,DE,DEF,LB1,1,Active,0.0,,,2026-10-11,,,,espn
+ATL,Christian Harris,LB,DEF,LB2,2,Active,0.0,,,2026-10-12,,,,espn
+ATL,Cameron Thomas,DE,DEF,LB2,2,Active,0.0,,,2026-10-08,,,,espn
+ATL,Harold Perkins Jr.,LB,DEF,LB2,2,Active,0.0,,,2026-10-08,,,Perkins recorded 10 tackles (seven solo) including 0.5 sacks and a pass defensed during Monday's 45-24 win at New Orleans.,espn
+ATL,Michael Penix Jr.,QB,OFF,QB1,1,Active,0.0,,,2026-10-14,,,"Penix (ribs) was a full practice participant Wednesday, Tori McElhaney of the Falcons' official site reports.",espn
+ATL,Tua Tagovailoa,QB,OFF,QB2,2,Active,0.0,,,2026-10-12,,,Tagovailoa completed two of three passes for 34 yards and an interception in relief of Michael Penix (ribs) in Sunday's 30-23 overtime loss to the Ravens.,espn
+ATL,Cooper Rush,QB,OFF,QB3,3,Active,0.0,,,2026-10-11,,,"Rush (coach's decision) is inactive for Sunday's game against the Ravens but will serve as the emergency quarterback, Tori McElhaney of the Falcons' official si",espn
+ATL,Jack Strand,QB,OFF,QB4,4,Active,0.0,,,2026-10-12,,,,espn
+ATL,Bijan Robinson,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Robinson rushed 17 times for 86 yards while catching four of seven targets for 32 yards in Sunday's 30-23 overtime loss to the Ravens.,espn
+ATL,Brian Robinson Jr.,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Robinson handled seven carries for 16 yards and did not catch his only target during Sunday's 30-23 overtime loss versus the Ravens. He also returned two kickof,espn
+ATL,Kyle Pitts Sr.,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Pitts caught five of six targets for 42 yards and a touchdown in Sunday's 30-23 overtime loss to the Ravens.,espn
+ATL,Austin Hooper,TE,OFF,TE3,3,Active,0.0,,,2026-10-07,,,Hooper caught his only target for nine yards during Monday's 45-24 win at New Orleans.,espn
+ATL,Drake London,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,London caught seven of 11 targets for 118 yards in Sunday's 30-23 overtime loss to the Ravens.,espn
+ATL,Jahan Dotson,WR,OFF,WR2,1,Active,0.0,,,2026-10-14,,,Dotson caught two of four passes for 54 yards during the Falcons' 30-23 overtime loss to the Ravens on Sunday.,espn
+ATL,Zachariah Branch,WR,OFF,WR4+,2,Active,0.0,,,2026-10-07,,,Branch caught both of his targets for 10 yards while also adding 65 kickoff-return yards and 25 yards as a punt returner during Monday night's 45-24 win over th,espn
+ATL,Ethan Onianwa,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+ATL,Jake Matthews,OT,OL/ST,,,Active,0.0,,,2026-10-11,,,"Matthews (groin) is active for Sunday night's game against the Ravens, Tori McElhaney of the Falcons' official site reports.",espn
+ATL,Michael Jerrell,OT,OL/ST,,,Active,0.0,,,2026-10-08,,,,espn
+BAL,Ja'Kobi Lane,WR,OFF,WR4+,3,Injured Reserve,1.0,Wrist,2026-10-18,2026-10-14,,IR-R,Lane (wrist) was a full participant in practice Wednesday after being designated for return from injured reserve.,espn
+BAL,Marlon Humphrey,CB,DEF,CB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,Broderick Washington Jr.,DT,DEF,EDGE2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-15,,QUESTIONABLE,Washington (ankle) was a limited participant at the Ravens' practice Wednesday.,espn
+BAL,Trenton Simpson,LB,DEF,LB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,Teddye Buchanan,LB,DEF,LB2,2,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,Lamar Jackson,QB,OFF,QB3,3,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,"Jackson (ankle) was a non-participant in Wednesday's practice, Sam Cohn of The Baltimore Sun reports.",espn
+BAL,Matt Hibner,TE,OFF,TE2,2,Questionable,0.4,Hand,2026-10-18,2026-10-14,,QUESTIONABLE,Hibner (hand) did not participate at practice Wednesday.,espn
+BAL,Nick Vannett,TE,OFF,TE4,4,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,Vannett (knee) was a limited participant at practice Wednesday.,espn
+BAL,Rashod Bateman,WR,OFF,WR2,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,Bateman (shoulder) was a limited participant in Wednesday's practice.,espn
+BAL,Cam Jurgens,C,OL/ST,,,Questionable,0.4,Concussion,2026-10-18,2026-10-15,,QUESTIONABLE,Jurgens (concussion) was a limited participant at the Ravens' practice Wednesday.,espn
+BAL,Roger Rosengarten,OT,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,John Simpson,G,OL/ST,,,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,Emery Jones Jr.,OT,OL/ST,,,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BAL,Andrew Vorhees,G,OL/ST,,,Questionable,0.4,Foot,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+BAL,Tyler Loop,PK,,,,Active,0.0,,,2026-10-12,,,Loop went 3-for-3 on field-goal attempts and made his lone extra-point try during the Ravens' 30-23 overtime win over the Falcons on Sunday.,espn
+BAL,Aeneas Peebles,DT,DEF,EDGE3,3,Active,0.0,,,2026-10-12,,,,espn
+BAL,Trey Hendrickson,LB,DEF,LB1,1,Active,0.0,,,2026-10-15,,,Hendrickson (finger) was a full participant at practice Wednesday.,espn
+BAL,Kyle Hamilton,S,DEF,NB1,1,Active,0.0,,,2026-10-08,,,,espn
+BAL,Tyler Huntley,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,Huntley completed 24 of 32 passes for 201 yards and two touchdowns while rushing six times for 20 yards and a touchdown in Sunday's 30-23 overtime win over the ,espn
+BAL,Derrick Henry,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Henry rushed 24 times for 102 yards while catching one of two targets for an 18-yard touchdown in Sunday's 30-23 overtime win over the Falcons. He also ran in a,espn
+BAL,Justice Hill,RB,OFF,RB2,2,Active,0.0,,,2026-10-14,,,Hill turned four carries into 73 yards and caught two of four targets for five yards during the Ravens' 30-23 overtime win over the Falcons on Sunday.,espn
+BAL,Mark Andrews,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Andrews caught four of six targets for 28 yards and lost a fumble in Sunday's 30-23 overtime win over the Falcons.,espn
+BAL,Zay Flowers,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Flowers (foot) caught eight of nine targets for 53 yards and added a 13-yard rush in Sunday's 30-23 overtime win over the Falcons.,espn
+BAL,Elijah Sarratt,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,,espn
+BAL,Ronnie Stanley,OT,OL/ST,,,Active,0.0,,,2026-10-08,,,,espn
+BUF,Te'Cory Couch,CB,DEF,,,Questionable,0.4,Hamstring,2026-10-12,2026-10-04,,QUESTIONABLE,Couch suffered a hamstring injury Sunday versus New England and is doubtful to return.,espn
+BUF,Ed Oliver,DT,DEF,EDGE1,1,Questionable,0.4,Knee,2026-10-18,2026-10-15,,QUESTIONABLE,Oliver (knee) did not participate in Wednesday's practice.,espn
+BUF,T.J. Sanders,DT,DEF,EDGE1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+BUF,Dee Alford,CB,DEF,NB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+BUF,Ty Johnson,RB,OFF,RB2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Johnson (hamstring) was considered limited at the Bills' walkthrough practice Wednesday.,espn
+BUF,Joshua Palmer,WR,OFF,WR4+,3,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,Palmer (shoulder) was listed as a limited participant at the Bills' walkthrough practice Wednesday.,espn
+BUF,DJ Moore,WR,OFF,WR4+,2,Questionable,0.4,Shoulder - AC Joint,2026-10-18,2026-10-14,,QUESTIONABLE,Moore (shoulder) was listed as a non-participant on Wednesday's estimated injury report.,espn
+BUF,Spencer Brown,OT,OL/ST,,,Questionable,0.4,Back,2026-10-18,2026-10-13,,QUESTIONABLE,Brown (back) has been ruled out for the remainder of Monday night's game versus the Rams.,espn
+BUF,Tyler Bass,PK,,,,Active,0.0,,,2026-10-05,,,Bass went 2-for-2 on field-goal attempts and made both of his PATs during Sunday's 29-26 loss to the Patriots.,espn
+BUF,Mike Danna,DE,DEF,,,Active,0.0,,,2026-10-14,,,Danna re-signed with the Bills on Tuesday.,espn
+BUF,Christian Benford,CB,DEF,CB1,1,Active,0.0,,,2026-10-10,,,"Benford (toe) does not carry an injury designation into Monday night's game against the Rams, Joe Buscaglia of The Athletic reports.",espn
+BUF,Davison Igbinosun,CB,DEF,CB2,2,Active,0.0,,,2026-10-11,,,"Even with Christian Benford (toe) back from injury, Igbinosun is still expected to have a role in the Bills' secondary for Monday's game against the Rams, Nick ",espn
+BUF,Landon Jackson,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-15,,,Jackson (knee) was a full participant in Wednesday's walk-through practice.,espn
+BUF,Greg Rousseau,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,Rousseau logged four tackles (two solo) and two passes defensed in the Bills' 29-26 loss to the Patriots on Sunday.,espn
+BUF,Jalon Kilgore,S,DEF,S3,3,Active,0.0,,,2026-10-05,,,,espn
+BUF,Josh Allen,QB,OFF,QB1,1,Active,0.0,,,2026-10-13,,,Allen completed 12 of 19 passes for 210 yards with one touchdown and one interception while adding 10 carries for 121 yards and another score and a two-point co,espn
+BUF,James Cook III,RB,OFF,RB1,1,Active,0.0,,,2026-10-13,,,Cook rushed 10 times for 121 yards and a touchdown and brought in his only target for seven yards in the Bills' 37-34 overtime win over the Rams on Monday night,espn
+BUF,Ray Davis,RB,OFF,RB3,3,Active,0.0,,,2026-10-14,,,Davis caught his lone target for 31 yards while adding two carries for two yards and three kickoff returns for 114 yards during the Bills' 37-34 overtime win ov,espn
+BUF,Dalton Kincaid,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Kincaid brought in one of two targets for seven yards and recorded a two-point conversion catch in the Bills' 37-34 overtime win over the Rams on Monday night.,espn
+BUF,Dawson Knox,TE,OFF,TE2,2,Active,0.0,,,2026-10-06,,,Knox caught both of his targets for 13 yards in the Bills' 29-26 loss to the Patriots on Sunday.,espn
+BUF,Khalil Shakir,WR,OFF,WR1,1,Active,0.0,,,2026-10-13,,,Shakir brought in all three targets for 80 yards in the Bills' 37-34 overtime win over the Rams on Monday night.,espn
+BUF,Keon Coleman,WR,OFF,WR2,1,Active,0.0,,,2026-10-13,,,Coleman caught a seven-yard touchdown pass on two targets during the Bills' 37-34 overtime win over the Rams on Monday.,espn
+BUF,Skyler Bell,WR,OFF,WR4+,2,Active,0.0,,,2026-10-10,,,"Bell will make his NFL regular-season debut against the Rams on Monday due to the absence of Joshua Palmer (shoulder), Cameron Wolfe of NFL Network reports.",espn
+BUF,Jude Bowry,OT,OL/ST,,,Active,0.0,,,2026-10-13,,,,espn
+BUF,Ar'maj Reed-Adams,G,OL/ST,,,Active,0.0,,,2026-10-13,,,,espn
+CAR,Cam Jackson,DT,DEF,DT2,2,Injured Reserve,1.0,Shoulder,2027-02-15,2026-10-14,,IR,"The Panthers placed Jackson (shoulder) on injured reserve Tuesday, Darin Gantt of the team's official site reports.",espn
+CAR,Tershawn Wharton,DT,DEF,EDGE3,3,Out,1.0,Neck,2026-10-18,2026-10-13,,PUP-R,The Panthers designated Wharton (neck) to return from reserve/PUP list Tuesday.,espn
+CAR,Trevor Etienne,RB,OFF,RB3,3,Injured Reserve,1.0,Ankle,2026-10-18,2026-10-14,,IR-R,Etienne (ankle) was a full participant at practice Wednesday.,espn
+CAR,Xavier Legette,WR,OFF,WR4+,2,Injured Reserve,1.0,Knee,2026-11-08,2026-10-03,,IR,"The Panthers placed Legette (knee) on injured reserve Saturday, Darin Gantt of the team's official site reports.",espn
+CAR,Taylor Moton,OT,OL/ST,,,Out,1.0,Illness,2026-10-18,2026-10-15,,NFI-R,Moton (illness) was a full participant in Wednesday's practice.,espn
+CAR,Ikem Ekwonu,OT,OL/ST,,,Out,1.0,Knee,2026-11-08,2026-10-06,,PUP-R,"Coach Dave Canales said Monday that Ekwonu (knee) is still a considerable time away from returning to action, Mike Kaye of ESPN reports.",espn
+CAR,Jaelan Phillips,LB,DEF,LB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-05,,QUESTIONABLE,"Phillips (hamstring) could return to the Panthers' lineup as early as the Week 6 game against the Eagles on Sunday, Oct. 18, Mike Kaye of ESPN.com reported Mond",espn
+CAR,AJ Dillon,RB,OFF,RB2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,Dillon (ankle) did not participate at practice Wednesday.,espn
+CAR,Darren Waller,TE,OFF,TE1,1,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,Waller was listed as a limited participant on Wednesday's practice estimate due to a toe injury.,espn
+CAR,Tommy Tremble,TE,OFF,TE2,2,Questionable,0.4,Ribs,2026-10-18,2026-10-14,,QUESTIONABLE,Tremble (ribs) was a limited participant at practice Wednesday.,espn
+CAR,Damien Lewis,G,OL/ST,,,Questionable,0.4,Elbow,2026-10-18,2026-10-06,,QUESTIONABLE,questionable,espn
+CAR,Monroe Freeling,OT,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-06,,QUESTIONABLE,"Freeling (knee) could return to the field as soon as the Panthers' Week 6 game against the Eagles on Sunday, Oct. 18, Mike Kaye of ESPN.com reported Monday.",espn
+CAR,Ryan Fitzgerald,PK,,,,Active,0.0,,,2026-10-05,,,Fitzgerald connected on both of his field-goal tries and two of his four point-after attempts in Sunday's 32-26 win over the Lions.,espn
+CAR,Akayleb Evans,CB,DEF,CB1,1,Active,0.0,,,2026-10-07,,,Evans recorded 11 total tackles (nine solo) and a pass defensed during Sunday night's 32-26 win over the Lions.,espn
+CAR,Lee Hunter,DT,DEF,DT1,1,Active,0.0,,,2026-10-04,,,,espn
+CAR,Devin Lloyd,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Lloyd recorded nine total tackles (five solo) during Sunday night's 32-26 win against Detroit.,espn
+CAR,Bryce Young,QB,OFF,QB1,1,Active,0.0,,,2026-10-05,,,Young completed 29 of 41 passes for 329 yards and two touchdowns while rushing three times for three yards in Sunday's 32-26 win over the Lions.,espn
+CAR,Haynes King,QB,OFF,QB3,3,Active,0.0,,,2026-10-04,,,King (coach's decision) is inactive but will operate as the Panthers' emergency third quarterback Sunday night versus Detroit.,espn
+CAR,Chuba Hubbard,RB,OFF,RB1,1,Active,0.0,,,2026-10-05,,,Hubbard rushed 20 times for 122 yards and two touchdowns while catching one of two targets for seven yards in Sunday's 32-26 win over the Lions.,espn
+CAR,Ja'Tavion Sanders,TE,OFF,TE5,5,Active,0.0,,,2026-10-05,,,,espn
+CAR,Tetairoa McMillan,WR,OFF,WR1,1,Active,0.0,,,2026-10-05,,,McMillan caught 14 of 16 targets for 192 yards and two touchdowns in Sunday's 32-26 win over the Lions.,espn
+CAR,Jalen Coker,WR,OFF,WR2,1,Active,0.0,,,2026-10-14,,,"Coker (quadriceps) was listed as a full participant on the Panthers' estimated injury report Wednesday, Darin Gantt of the Panthers' official site reports.",espn
+CAR,Brycen Tremayne,WR,OFF,WR3,1,Active,0.0,,,2026-10-06,,,Tremayne caught two of three passes for 32 yards during Sunday's 32-26 win over the Lions.,espn
+CAR,John Metchie III,WR,OFF,WR4+,2,Active,0.0,,,2026-10-06,,,Metchie caught three of five targets for 37 yards during the Panthers' 32-26 win over the Lions on Sunday.,espn
+CAR,Albert Reese IV,OT,OL/ST,,,Active,0.0,,,2026-10-05,,,,espn
+CHI,Anthony Johnson Jr.,S,DEF,,,Injured Reserve,1.0,Undisclosed,2026-10-18,2026-10-15,,IR,ir,espn
+CHI,Montez Sweat,DE,DEF,EDGE1,1,Suspension,1.0,Suspension,2026-11-02,2026-10-13,,RESERVE-SUS,"The NFL announced Tuesday that Sweat has been suspended two games without pay for violating the league's performance-enhancing substances policy, Brad Biggs of ",espn
+CHI,Kyler Gordon,CB,DEF,NB3,3,Out,1.0,Calf,2026-10-18,2026-10-15,,PUP-R,Gordon (calf) was estimated as a full participant on the Bears' official injury report Wednesday.,espn
+CHI,Dayo Odeyingbo,DE,DEF,EDGE1,1,Doubtful,0.75,Quadriceps,2026-10-18,2026-10-14,,DOUBTFUL,"Odeyingbo (quadriceps) is expected to miss time, Adam Hoge of AllCHGO.com reports.",espn
+CHI,T.J. Edwards,LB,DEF,LB1,1,Doubtful,0.75,Hamstring,2026-10-18,2026-10-15,,DOUBTFUL,Edwards (hamstring) was estimated as a non-participant on the Bears' official injury report Wednesday.,espn
+CHI,Tyrique Stevenson Sr.,CB,DEF,CB1,1,Questionable,0.4,Hip,2026-10-18,2026-10-15,,QUESTIONABLE,Stevenson (hip) was estimated as a limited participant on the Bears' official injury report Wednesday.,espn
+CHI,Keyshaun Elliott,LB,DEF,LB3,3,Questionable,0.4,Quadriceps,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+CHI,Caleb Williams,QB,OFF,QB3,3,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,"Bears head coach Ben Johnson said that Williams (hamstring) will be listed as a full practice participant on Wednesday's estimated injury report, Sean Hammond o",espn
+CHI,Kyle Monangai,RB,OFF,RB3,3,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,Monangai (thumb/toe) was listed as a non-participant on Wednesday's practice estimate.,espn
+CHI,Cairo Santos,PK,,,,Active,0.0,,,2026-10-12,,,Santos missed his lone field-goal attempt and converted on his only PAT during the Bears' 31-7 loss to the Packers on Sunday.,espn
+CHI,Shemar Turner,DT,DEF,DT3,3,Active,0.0,,,2026-10-14,,,The Bears activated Turner (knee) from their reserve/PUP list Tuesday.,espn
+CHI,Jayden Loving,DT,DEF,DT3,3,Active,0.0,,,2026-10-12,,,,espn
+CHI,Jamree Kromah,DE,DEF,EDGE4,4,Active,0.0,,,2026-10-12,,,,espn
+CHI,Noah Sewell,LB,DEF,LB2,2,Active,0.0,,,2026-10-11,,,Sewell (Achilles) is active for Sunday's game against the Packers.,espn
+CHI,Tyson Bagent,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,"Head coach Ben Johnson said Monday that a decision hasn't been made regarding whether Bagent, Case Keenum or Caleb Williams (hamstring) will take reps with the ",espn
+CHI,Case Keenum,QB,OFF,QB2,2,Active,0.0,,,2026-10-12,,,"Keenum completed 11 of 18 passes for 108 yards, zero touchdowns and one interception while adding a four-yard carry during the Bears' 31-7 loss to the Packers o",espn
+CHI,D'Andre Swift,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Swift rushed nine times for 43 yards and a touchdown and brought in four of five targets for 30 yards in the Bears' 31-7 loss to the Packers on Sunday.,espn
+CHI,Colston Loveland,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Loveland brought in two of five targets for 19 yards in the Bears' 31-7 loss to the Packers on Sunday.,espn
+CHI,Rome Odunze,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Odunze brought in three of nine targets for 40 yards in the Bears' 31-7 loss to the Packers on Sunday. He also lost a fumble.,espn
+CHI,Luther Burden III,WR,OFF,WR2,1,Active,0.0,,,2026-10-11,,,Burden secured four of six targets for 47 yards and rushed four times for two yards in the Bears' 31-7 loss to the Packers on Sunday.,espn
+CHI,Kalif Raymond,WR,OFF,WR3,1,Active,0.0,,,2026-10-13,,,Raymond caught three of four passes for six yards and logged one carry for minus-2 yards during the Bears' 31-7 loss to the Packers on Sunday. He also returned ,espn
+CHI,Ozzy Trapilo,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+CHI,Darnell Wright,OT,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+CHI,Joe Thuney,G,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+CHI,Jonah Jackson,G,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+CIN,Swayze Bozeman,LB,DEF,LB3,3,Injured Reserve,1.0,Forearm,2026-11-23,2026-10-12,,IR,"The Bengals placed Bozeman on injured reserve Monday due to a fractured forearm, Ben Baby of ESPN.com reports.",espn
+CIN,Tanner Hudson,TE,OFF,TE4,4,Out,1.0,Pectoral,2027-02-15,2026-10-13,,OUT,Hudson's agent revealed Tuesday that the tight end sustained a torn pectoral in Sunday's 31-24 win over the Dolphins and is expected to miss the rest of the sea,espn
+CIN,Kyle Dugger,S,DEF,S2,2,Questionable,0.4,Quadriceps,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+CIN,Colbie Young,WR,OFF,WR3,1,Questionable,0.4,Knee,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+CIN,Evan McPherson,PK,,,,Active,0.0,,,2026-10-12,,,McPherson made his lone field-goal attempt and all four of his extra-point tries during the Bengals' 31-24 win over the Dolphins on Sunday.,espn
+CIN,DJ Turner II,CB,DEF,CB1,1,Active,0.0,,,2026-10-02,,,,espn
+CIN,Dexter Lawrence II,DT,DEF,DT1,1,Active,0.0,,,2026-10-09,,,,espn
+CIN,B.J. Hill,DT,DEF,DT2,2,Active,0.0,,,2026-10-09,,,,espn
+CIN,Landon Robinson,DT,DEF,DT3,3,Active,0.0,,,2026-10-12,,,,espn
+CIN,Barrett Carter,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,,espn
+CIN,Demetrius Knight Jr.,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Knight finished Sunday's 22-17 loss to the Jaguars with six tackles (three solo).,espn
+CIN,Bryan Cook,S,DEF,S1,1,Active,0.0,,,2026-10-11,,,Cook (ankle) is active for Sunday's game against Miami.,espn
+CIN,Jordan Battle,S,DEF,S1,1,Active,0.0,,,2026-10-08,,,,espn
+CIN,Joe Burrow,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Burrow completed 23 of 32 passes for 190 yards with four touchdowns and no interceptions and rushed four times for 10 yards in the Bengals' 31-24 win over the D,espn
+CIN,Chase Brown,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Brown rushed 13 times for 39 yards and brought in three of four targets for 21 yards in the Bengals' 31-24 win over the Dolphins on Sunday. He also lost a fumbl,espn
+CIN,Samaje Perine,RB,OFF,RB2,2,Active,0.0,,,2026-10-12,,,Perine rushed 14 times for 68 yards while catching both of his targets for 10 yards and a touchdown during Sunday's 31-24 win over Miami.,espn
+CIN,Mike Gesicki,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Gesicki brought in one of two targets for a four-yard touchdown in the Bengals' 31-24 win over the Dolphins on Sunday.,espn
+CIN,Jack Endries,TE,OFF,TE5,5,Active,0.0,,,2026-10-12,,,,espn
+CIN,Tee Higgins,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Higgins brought in two of four targets for 22 yards in the Bengals' 31-24 win over the Dolphins on Sunday.,espn
+CIN,Ja'Marr Chase,WR,OFF,WR2,1,Active,0.0,,,2026-10-11,,,Chase brought in six of 10 targets for 77 yards and a touchdown in the Bengals' 31-24 win over the Dolphins on Sunday.,espn
+CIN,Dohnte Meyers,WR,OFF,WR4+,2,Active,0.0,,,2026-10-14,,,Meyers brought in both of his targets for 12 yards during the Bengals' 31-24 win over the Dolphins on Sunday.,espn
+CIN,Mitchell Tinsley,WR,OFF,WR4+,2,Active,0.0,,,2026-10-06,,,Tinsley caught three of his seven targets for 49 yards in the Bengals' 22-17 loss to the Jaguars on Sunday.,espn
+CIN,Myles Hinton,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+CIN,Connor Lew,C,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+CIN,Dalton Risner,G,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+CLE,Kalia Davis,DT,DEF,DT4,4,Injured Reserve,1.0,Quadriceps,2026-10-18,2026-10-10,,IR-R,"Davis (quadriceps) has been ruled out ahead of Sunday's game against the Jets, Kelsey Russo of the Browns' official site reports.",espn
+CLE,Dillon Gabriel,QB,OFF,QB4,4,Injured Reserve,1.0,Back,2026-10-18,2026-10-10,,IR-R,"Gabriel (back) has been ruled out ahead of Sunday's game against the Jets, Daniel Oyefusi of ESPN.com reports.",espn
+CLE,Raheim Sanders,RB,OFF,RB2,2,Injured Reserve,1.0,Hip,2026-11-15,2026-10-13,,IR,The Browns placed Sanders (hip) on injured reserve Tuesday.,espn
+CLE,Dylan Sampson,RB,OFF,RB4,4,Injured Reserve,1.0,Knee,2026-10-18,2026-10-14,,IR-R,Sampson (knee) was a non-participant in Wednesday's practice.,espn
+CLE,Mason Graham,DT,DEF,DT1,1,Doubtful,0.75,Knee - MCL,2026-10-18,2026-10-14,,DOUBTFUL,doubtful,espn
+CLE,Maliek Collins,DT,DEF,DT1,1,Questionable,0.4,Foot,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+CLE,Mike Hall Jr.,DT,DEF,DT2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+CLE,Derek Barnett,DE,DEF,EDGE2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+CLE,Carson Schwesinger,LB,DEF,LB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-12,,QUESTIONABLE,"Schwesinger sustained a Grade 1 right ankle sprain during the Browns' 17-12 loss to the Jets on Sunday, Ian Rapoport of NFL Network reports.",espn
+CLE,Grant Delpit,S,DEF,S1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+CLE,Quinshon Judkins,RB,OFF,RB1,1,Questionable,0.4,Foot,2026-10-18,2026-10-14,,QUESTIONABLE,"Judkins (foot) didn't participate in Wednesday's practice, Chris Easterling of the Akron Beacon Journal reports.",espn
+CLE,Carsen Ryan,TE,OFF,TE3,3,Questionable,0.4,Calf,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+CLE,Denzel Boston,WR,OFF,WR1,1,Questionable,0.4,Foot,2026-10-18,2026-10-14,,QUESTIONABLE,"Boston was listed as a limited participant in Wednesday's practice due to a foot injury, Chris Easterling of the Akron Beacon Journal reports.",espn
+CLE,KC Concepcion,WR,OFF,WR2,1,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,Concepcion (concussion) was a limited participant in Wednesday's practice.,espn
+CLE,Tylan Wallace,WR,OFF,WR4+,2,Questionable,0.4,Knee,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+CLE,Tytus Howard,OT,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-15,,QUESTIONABLE,Howard (knee) did not participate at the Browns' practice Wednesday.,espn
+CLE,Elgton Jenkins,C,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+CLE,Teven Jenkins,G,OL/ST,,,Questionable,0.4,Back,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+CLE,Andre Szmyt,PK,,,,Active,0.0,,,2026-10-12,,,Szmyt made both of his field-goal attempts but missed his lone extra-point try during Sunday's 17-12 loss to the Jets on Sunday.,espn
+CLE,Audric Estime,RB,OFF,,,Active,0.0,,,2026-10-13,,,The Browns signed Estime to the 53-man roster Tuesday.,espn
+CLE,Deshaun Watson,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Watson completed 15 of 33 passes for 155 yards and a touchdown while rushing six times for 40 yards in Sunday's 17-12 loss to the Jets. He also lost a fumble.,espn
+CLE,Taylen Green,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+CLE,Harold Fannin Jr.,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Fannin caught one of four targets for four yards in Sunday's 17-12 loss to the Jets.,espn
+CLE,Jerry Jeudy,WR,OFF,WR3,1,Active,0.0,,,2026-10-13,,,Jeudy hauled in three of seven targets for 19 yards during Sunday's 17-12 loss against the Jets.,espn
+CLE,Parker Brailsford,C,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+DAL,Joey Porter Jr.,CB,DEF,CB1,1,Questionable,0.4,Illness,2026-10-18,2026-10-15,,QUESTIONABLE,"Porter (illness) was limited in Wednesday's practice session, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,Cobie Durant,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-15,,QUESTIONABLE,"Durant (hamstring) did not participate in Wednesday's practice, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,Ameer Speed,CB,DEF,CB2,2,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+DAL,DeMarvion Overshown,LB,DEF,LB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-15,,QUESTIONABLE,"Overshown (hamstring) did not practice Wednesday, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,Drew Shelton,OT,OL/ST,,,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+DAL,Brandon Aubrey,PK,,,,Active,0.0,,,2026-10-09,,,Aubrey made his only field-goal attempt and his lone extra-point try in a Week 5 loss to Tampa Bay on Thursday.,espn
+DAL,Caelen Carson,CB,DEF,CB3,3,Active,0.0,,,2026-10-05,,,,espn
+DAL,Dee Winters,LB,DEF,LB1,1,Active,0.0,,,2026-10-12,,,Winters registered 10 total tackles (six solo) during Thursday night's 24-16 loss to the Buccaneers.,espn
+DAL,Malachi Lawrence,LB,DEF,LB2,2,Active,0.0,,,2026-10-15,,,"Lawrence is expected to get more opportunities on the Cowboys' defense moving forward, Jon Machota of The Athletic reports.",espn
+DAL,James Houston,LB,DEF,LB3,3,Active,0.0,,,2026-10-12,,,,espn
+DAL,Caleb Downs,S,DEF,NB1,1,Active,0.0,,,2026-10-12,,,Downs recorded four total tackles (two solo) during Thursday night's 24-16 loss to Tampa Bay.,espn
+DAL,Alijah Clark,S,DEF,S3,3,Active,0.0,,,2026-10-15,,,"Clark (hamstring) was a full participant in Wednesday's practice, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,Emari Demercado,RB,OFF,,,Active,0.0,,,2026-10-14,,,"Dallas signed Demercado to its 53-man roster Tuesday, Tommy Yarrish of the Cowboys' official site reports.",espn
+DAL,Dak Prescott,QB,OFF,QB1,1,Active,0.0,,,2026-10-09,,,Prescott completed 24 of 42 passes for 316 yards with a touchdown and two interceptions in the Cowboys' 24-16 loss to the Buccaneers on Thursday night.,espn
+DAL,Javonte Williams,RB,OFF,RB1,1,Active,0.0,,,2026-10-09,,,Williams rushed 12 times for 45 yards and a touchdown and brought in two of three targets for 17 yards in the Cowboys' 24-16 loss to the Buccaneers on Thursday ,espn
+DAL,Jake Ferguson,TE,OFF,TE1,1,Active,0.0,,,2026-10-09,,,Ferguson brought in three of six targets for 19 yards in the Cowboys' 24-16 loss to the Buccaneers on Thursday night.,espn
+DAL,CeeDee Lamb,WR,OFF,WR1,1,Active,0.0,,,2026-10-14,,,"Lamb (thigh) was a full practice participant Wednesday, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,George Pickens,WR,OFF,WR2,1,Active,0.0,,,2026-10-09,,,Pickens secured nine of 13 targets for 130 yards and a touchdown in the Cowboys' 24-16 loss to the Buccaneers on Thursday night.,espn
+DAL,Ryan Flournoy,WR,OFF,WR3,1,Active,0.0,,,2026-10-09,,,Flournoy brought in three of four targets for 90 yards in the Cowboys' 24-16 loss to the Buccaneers on Thursday night.,espn
+DAL,Camden Brown,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,,espn
+DAL,Jonathan Mingo,WR,OFF,WR4+,2,Active,0.0,,,2026-10-10,,,Mingo caught two of four passes for 20 yards during the Cowboys' 24-16 loss to the Buccaneers on Thursday.,espn
+DAL,KaVontae Turpin,WR,OFF,WR4+,2,Active,0.0,,,2026-10-10,,,Turpin caught two of four passes for 22 yards during the Cowboys' 24-16 loss to the Buccaneers on Thursday. He also returned one punt for 10 yards and added 127,espn
+DAL,Tyler Guyton,OT,OL/ST,,,Active,0.0,,,2026-10-15,,,"Guyton (back) was a full participant in Wednesday's practice, Patrik Walker of the Cowboys' official site reports.",espn
+DAL,Ajani Cornelius,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+DAL,Tyler Smith,G,OL/ST,,,Active,0.0,,,2026-10-08,,,"Smith (thumb) is active for Thursday's game against the Buccaneers, Patrik Walker of the Cowboys' official site reports.",espn
+DEN,Pat Surtain II,CB,DEF,CB1,1,Out,1.0,Ankle,2026-10-25,2026-10-14,,OUT,Surtain (ankle) has been ruled out for Thursday's game against the Seahawks.,espn
+DEN,Talanoa Hufanga,S,DEF,S1,1,Out,1.0,Ankle,2026-10-25,2026-10-14,,OUT,"Hufanga (ankle) is expected to miss multiple weeks due to the injury he sustained in Sunday's 23-17 win over the Chargers, Jeremy Fowler and Jeff Legwold of ESP",espn
+DEN,Pat Bryant,WR,OFF,WR4+,2,Injured Reserve,1.0,Ankle,2026-11-08,2026-10-09,,IR,Bryant (ankle) was placed on the Broncos' injured reserve Friday.,espn
+DEN,Riley Moss,CB,DEF,CB1,1,Questionable,0.4,Ribs,2026-10-15,2026-10-14,,QUESTIONABLE,Moss (ribs) is listed as questionable for Thursday's game against the Seahawks.,espn
+DEN,Wil Lutz,PK,,,,Active,0.0,,,2026-10-12,,,Lutz went 3-for-4 on field-goal attempts and connected on both of his extra-point tries during the Broncos' 23-17 win over the Chargers on Sunday.,espn
+DEN,Sai'vion Jones,DE,DEF,DT2,2,Active,0.0,,,2026-10-13,,,,espn
+DEN,Jordan Jackson,DT,DEF,EDGE2,2,Active,0.0,,,2026-10-12,,,,espn
+DEN,Tyler Onyedim,DT,DEF,EDGE3,3,Active,0.0,,,2026-10-12,,,,espn
+DEN,Alex Singleton,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Singleton recorded 14 total tackles (seven solo) during Sunday's 24-14 loss to San Francisco.,espn
+DEN,Dondrea Tillman,LB,DEF,LB2,2,Active,0.0,,,2026-10-09,,,"Tillman (hamstring) was a full participant in Thursday's practice, Aric DiLalla of the team's official site reports.",espn
+DEN,Brandon Jones,S,DEF,S1,1,Active,0.0,,,2026-10-01,,,Jones posted 12 tackles (10 solo) and one pass defense during the Broncos' 30-26 win over the Rams on Sunday.,espn
+DEN,Adam Prentice,FB,OFF,FB1,1,Active,0.0,,,2026-10-03,,,"The Broncos signed Prentice from their practice squad to their 53-man roster Saturday, Aric DiLalla of the team's official site reports.",espn
+DEN,Bo Nix,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,"Nix was 16-for-27 passing for 123 yards, one touchdown and no interceptions, took four carries for 10 yards and fumbled twice (one lost) during Sunday's 23-17 v",espn
+DEN,Sam Ehlinger,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+DEN,J.K. Dobbins,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Dobbins recorded 18 carries for 68 yards and one touchdown and gathered in both targets for six yards during Sunday's 23-17 win at the Chargers.,espn
+DEN,RJ Harvey,RB,OFF,RB2,2,Active,0.0,,,2026-10-12,,,Harvey notched three carries for seven yards and didn't haul in his only target during Sunday's 23-17 road win versus the Chargers.,espn
+DEN,Tyler Badie,RB,OFF,RB3,3,Active,0.0,,,2026-10-06,,,"Badie carried twice for seven yards, caught both of his targets for 32 yards, ran in a two-point conversion and returned one kickoff for 21 yards in a loss to S",espn
+DEN,Evan Engram,TE,OFF,TE1,1,Active,0.0,,,2026-10-14,,,Engram caught all four of his targets for 55 yards during the Broncos' 23-17 win over the Chargers on Sunday.,espn
+DEN,Adam Trautman,TE,OFF,TE2,2,Active,0.0,,,2026-10-08,,,,espn
+DEN,Dallen Bentley,TE,OFF,TE4,4,Active,0.0,,,2026-10-12,,,,espn
+DEN,Jaylen Waddle,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Waddle corralled two of five targets for 19 yards and also had a nine-yard carry during Sunday's 23-17 road win against the Chargers.,espn
+DEN,Courtland Sutton,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Sutton posted two catches (on three targets) for 18 yards and one touchdown during Sunday's 23-17 victory at the Chargers.,espn
+DEN,Lil'Jordan Humphrey,WR,OFF,WR4+,2,Active,0.0,,,2026-10-10,,,The Broncos signed Humphrey off the practice squad to the active roster Friday.,espn
+DEN,Marvin Mims Jr.,WR,OFF,WR4+,2,Active,0.0,,,2026-09-30,,,Mims (foot) was a full participant in Wednesday's practice.,espn
+DEN,Kage Casey,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+DET,Brian Branch,S,DEF,S3,3,Out,1.0,Achilles,2026-10-25,2026-10-10,,PUP-R,Branch (Achilles) has been ruled out ahead of Sunday's game against the Cardinals.,espn
+DET,Tom Kennedy,WR,OFF,WR4+,2,Out,1.0,Knee - MCL,2027-02-15,2026-10-12,,OUT,"Head coach Dan Campbell confirmed Monday that Kennedy will undergo season-ending surgery to repair an MCL injury in his right knee, Nolan Bianchi of The Detroit",espn
+DET,Cade Mays,C,OL/ST,,,Injured Reserve,1.0,Wrist,2026-10-25,2026-10-10,,IR-R,Mays (wrist) has been ruled out for Sunday's game against the Cardinals.,espn
+DET,Devin White,LB,DEF,LB1,1,Doubtful,0.75,Forearm,2026-10-25,2026-10-12,,DOUBTFUL,"Head coach Dan Campbell confirmed Monday that White (forearm) will need surgery but is expected to return ""at some point"" later this season, Richard Silva of Th",espn
+DET,Rock Ya-Sin,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+DET,Ben Bartch,G,OL/ST,,,Questionable,0.4,Foot,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+DET,Jake Bates,PK,,,,Active,0.0,,,2026-10-12,,,Bates made his lone field-goal attempt and converted on all six of his extra-point tries during Sunday's 45-21 win over the Cardinals.,espn
+DET,D.J. Reed,CB,DEF,CB1,1,Active,0.0,,,2026-10-04,,,Reed (ribs) is active for Sunday night's matchup with the Panthers.,espn
+DET,Tyleik Williams,DT,DEF,DT1,1,Active,0.0,,,2026-10-11,,,Williams (foot) is active for Sunday's game against the Cardinals.,espn
+DET,Mekhi Wingo,DT,DEF,DT3,3,Active,0.0,,,2026-10-12,,,,espn
+DET,DJ Wonnum,LB,DEF,EDGE2,2,Active,0.0,,,2026-10-09,,,,espn
+DET,Ahmed Hassanein,DE,DEF,EDGE4,4,Active,0.0,,,2026-10-12,,,,espn
+DET,Jack Campbell,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Campbell recorded 14 tackles (six solo) during Sunday's 32-26 loss at Carolina.,espn
+DET,Derrick Barnes,LB,DEF,LB1,1,Active,0.0,,,2026-09-30,,,Barnes registered eight tackles (five solo) and a defensed pass Sunday in a 31-24 victory against the Jets.,espn
+DET,Christian Izien,S,DEF,NB2,2,Active,0.0,,,2026-10-07,,,Izien recorded 11 tackles (seven solo) including 1.0 sacks during Sunday's 32-26 loss at Carolina.,espn
+DET,Chuck Clark,S,DEF,S1,1,Active,0.0,,,2026-09-30,,,"Clark finished Sunday's 31-24 win over the Jets with seven tackles, including 1.0 sacks, and a forced fumble.",espn
+DET,Bishop Fitzgerald,S,DEF,S2,2,Active,0.0,,,2026-10-12,,,,espn
+DET,Jared Goff,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,Goff completed 19 of 30 passes for 271 yards with three touchdowns and no interceptions while adding a one-yard touchdown on his only rush attempt in the Lions',espn
+DET,Jahmyr Gibbs,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Gibbs rushed 25 times for 151 yards and two touchdowns while bringing in five of six targets for 56 yards in the Lions' 45-21 win over the Cardinals on Sunday.,espn
+DET,Sam LaPorta,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,LaPorta brought in all five of his targets for 88 yards and a touchdown in the Lions' 45-21 win over the Cardinals on Sunday.,espn
+DET,Tyler Conklin,TE,OFF,TE3,3,Active,0.0,,,2026-10-05,,,,espn
+DET,Jackson Meeks,WR,OFF,TE4,4,Active,0.0,,,2026-10-11,,,Meeks (coach's decision) is inactive for Sunday's game against Arizona.,espn
+DET,Amon-Ra St. Brown,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,St. Brown secured six of 11 targets for 69 yards and committed two fumbles that remained with Detroit in the Lions' 45-21 win over the Cardinals on Sunday.,espn
+DET,Jameson Williams,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Williams brought in two of four targets for 47 yards and two touchdowns in the Lions' 45-21 win over the Cardinals on Sunday.,espn
+DET,Isaac TeSlaa,WR,OFF,WR3,1,Active,0.0,,,2026-10-14,,,TeSlaa failed to haul in either of his two targets during the Lions' 45-21 win over the Cardinals on Sunday.,espn
+GB,Jordon Riley,DT,DEF,DT2,2,Out,1.0,Achilles,2026-10-18,2026-10-15,,PUP-R,"Riley (Achilles) had his 21-day practice window opened by the Packers on Wednesday, Mike Spofford of the team's official site reports.",espn
+GB,Javon Hargrave,DT,DEF,DT3,3,Out,1.0,Achilles,2027-02-15,2026-10-12,,OUT,"MRI tests Monday confirmed that Hargrave tore his Achilles during the Packers' 31-7 win over the Bears on Sunday, Adam Schefter of ESPN reports.",espn
+GB,Micah Parsons,DE,DEF,LB3,3,Out,1.0,Knee - ACL,2026-10-25,2026-10-12,,PUP-R,"The Packers aren't planning on opening Parsons' (knee) 21-day practice window this week ahead of Sunday's game against the Cowboys, Adam Schefter of ESPN report",espn
+GB,Chris Brooks,RB,OFF,RB4,4,Injured Reserve,1.0,Ankle,2026-11-08,2026-10-10,,IR,The Packers placed Brooks (ankle) on injured reserve Saturday.,espn
+GB,Keisean Nixon,CB,DEF,CB1,1,Questionable,0.4,Groin,2026-10-18,2026-10-15,,QUESTIONABLE,Nixon (groin) did not participate at the Packers' practice Wednesday.,espn
+GB,Benjamin St-Juste,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-11,,QUESTIONABLE,St-Juste (hamstring) is questionable to return to Sunday's game against the Bears.,espn
+GB,Jonathan Ford,DT,DEF,DT1,1,Questionable,0.4,Calf,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+GB,Devonte Wyatt,DT,DEF,EDGE1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+GB,Anthony Campbell,DT,DEF,EDGE2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+GB,Evan Williams,S,DEF,S1,1,Questionable,0.4,Illness,2026-10-18,2026-10-15,,QUESTIONABLE,Williams (illness) was a limited participant at the Packers' practice Wednesday.,espn
+GB,Skyy Moore,WR,OFF,WR3,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,Moore (ankle) did not participate at the Packers' practice Wednesday.,espn
+GB,Jacob Monk,C,OL/ST,,,Questionable,0.4,Quadriceps,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+GB,Aaron Banks,G,OL/ST,,,Questionable,0.4,Toe,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+GB,Trey Smack,PK,,,,Active,0.0,,,2026-10-12,,,Smack went 1-for-3 on field-goal attempts and 2-for-3 on extra-point tries during the Packers' 31-7 win over the Bears on Sunday.,espn
+GB,Lukas Van Ness,DE,DEF,LB1,1,Active,0.0,,,2026-10-10,,,"Van Ness (shoulder) does not have an injury designation for Sunday's game against the Bears, Wes Hodkiewicz of the Packers' official site reports.",espn
+GB,Jordan Love,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Love completed 25 of 31 passes for 367 yards with two touchdowns and no interceptions while adding one carry for six yards in the Packers' 31-7 win over the Bea,espn
+GB,Tyrod Taylor,QB,OFF,QB2,2,Active,0.0,,,2026-10-12,,,"Taylor played the final two snaps of Sunday's 31-7 win over the Bears, losing two yards on a pair of kneeldowns.",espn
+GB,MarShawn Lloyd,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Lloyd rushed 10 times for 31 yards and two touchdowns while catching one of two targets for six yards during Sunday's 31-7 win over the Bears.,espn
+GB,Pierre Strong Jr.,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,"Strong took the field for 24 of the Packers' 59 offensive snaps in Sunday's 31-7 win over the Bears, finishing with five carries for seven yards and three catch",espn
+GB,Tucker Kraft,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Kraft brought in all five targets for 64 yards and rushed once for two yards in the Packers' 31-7 win over the Bears on Sunday.,espn
+GB,Matthew Golden,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Golden secured six of seven targets for 123 yards in the Packers' 31-7 win over the Bears on Sunday. He also returned two punts for 27 yards.,espn
+GB,Christian Watson,WR,OFF,WR2,1,Active,0.0,,,2026-10-11,,,Watson brought in six of eight targets for 143 yards and two touchdowns in the Packers' 31-7 win over the Bears on Sunday.,espn
+GB,Donovan Jennings,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+GB,Jager Burton,C,OL/ST,,,Active,0.0,,,2026-10-11,,,Burton (back) is active Week 5 against Chicago.,espn
+GB,Anthony Belton,OT,OL/ST,,,Active,0.0,,,2026-10-10,,,"Belton (knee) does not have an injury designation ahead of Sunday's game against the Bears, Wes Hodkiewicz of the Packers' official site reports.",espn
+HOU,Henry To'oTo'o,LB,DEF,LB3,3,Injured Reserve,1.0,Shoulder,2026-10-18,2026-10-14,,IR-R,The Texans designated To'oTo'o (shoulder) for return from injured reserve Wednesday.,espn
+HOU,Ja'Marcus Ingram,CB,DEF,S3,3,Injured Reserve,1.0,Elbow,2026-10-18,2026-10-15,,IR-R,The Texans opened Ingram's (elbow) 21-day return window from injured reserve Wednesday.,espn
+HOU,Tank Dell,WR,OFF,WR4+,2,Injured Reserve,1.0,Knee - ACL + MCL,2026-10-18,2026-10-14,,IR-R,Dell (knee) was a full participant in Wednesday's practice.,espn
+HOU,Jalen Pitre,S,DEF,NB1,1,Doubtful,0.75,Shoulder - AC Joint,2026-10-18,2026-10-14,,DOUBTFUL,"Pitre will not need surgery and will not need to be placed on injured reserve as a result of the shoulder injury he suffered during Sunday's game at Tennessee, ",espn
+HOU,David Montgomery,RB,OFF,RB3,3,Doubtful,0.75,Groin,2026-10-18,2026-10-14,,DOUBTFUL,"Montgomery (groin) isn't practicing Wednesday, Aaron Wilson of KPRC 2 Houston reports.",espn
+HOU,Jadeveon Clowney,DE,DEF,EDGE2,2,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+HOU,Azeez Al-Shaair,LB,DEF,LB1,1,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+HOU,Trent Brown,OT,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+HOU,Ka'imi Fairbairn,PK,,,,Active,0.0,,,2026-10-12,,,"Fairbairn converted on all six of his kicks (four field goals, two extra points) during the Texans' 26-3 win over the Titans on Sunday.",espn
+HOU,Collin Wright,CB,DEF,CB2,2,Active,0.0,,,2026-10-12,,,,espn
+HOU,Kayden McDonald,DT,DEF,DT2,2,Active,0.0,,,2026-10-11,,,McDonald (ankle) is active for Sunday's game against the Titans.,espn
+HOU,Sabastian Harsh,DE,DEF,EDGE4,4,Active,0.0,,,2026-10-12,,,,espn
+HOU,Aiden Fisher,LB,DEF,LB1,1,Active,0.0,,,2026-10-12,,,,espn
+HOU,C.J. Stroud,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Stroud completed 26 of 34 passes for 261 yards and a touchdown in Sunday's 26-3 win over the Titans. He added five rushing yards and a TD on six carries.,espn
+HOU,Woody Marks,RB,OFF,RB1,1,Active,0.0,,,2026-10-13,,,Marks is expected to handle a lead role out of the backfield during Sunday's game against the Jaguars in London after Texans head coach DeMeco Ryans announced M,espn
+HOU,Dalton Schultz,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Schultz caught three of four targets for 30 yards during Sunday's 26-3 win over the Titans.,espn
+HOU,Marlin Klein,TE,OFF,TE5,5,Active,0.0,,,2026-10-12,,,,espn
+HOU,Nico Collins,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Collins caught five of seven targets for 56 yards in Sunday's 26-3 win over the Titans.,espn
+HOU,Kayshon Boutte,WR,OFF,WR2,1,Active,0.0,,,2026-10-13,,,Boutte caught three of five targets for 38 yards during Sunday's 26-3 win over the Titans.,espn
+HOU,Jaylin Noel,WR,OFF,WR3,1,Active,0.0,,,2026-10-12,,,Noel caught all five of his targets for 41 yards and a touchdown during Sunday's 26-3 win over Tennessee.,espn
+HOU,Marvin Harrison Jr.,WR,OFF,WR4+,2,Active,0.0,,,2026-10-14,,,"Texans head coach DeMeco Ryans confirmed Wednesday that Harrison will make his team debut Sunday versus the Jaguars in London, Jonathan M. Alexander of the Hous",espn
+HOU,Xavier Hutchinson,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,Hutchinson caught four of five targets for 65 yards in Sunday's 26-3 win over the Titans.,espn
+HOU,Braden Smith,OT,OL/ST,,,Active,0.0,,,2026-10-15,,,The Texans activated Smith (foot) from their injured reserve list Wednesday.,espn
+HOU,Febechi Nwaiwu,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+HOU,Nate Thomas,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+IND,Arden Key,DE,DEF,EDGE3,3,Injured Reserve,1.0,Hamstring,2026-11-08,2026-10-10,,IR,The Colts placed Key (hamstring) on injured reserve Saturday.,espn
+IND,Will Mallory,TE,OFF,TE4,4,Injured Reserve,1.0,Thumb,2026-10-18,2026-10-09,,IR-R,Mallory (thumb) has been ruled out ahead of Sunday's game against the Steelers.,espn
+IND,Alec Pierce,WR,OFF,WR4+,3,Injured Reserve,1.0,Heel,2026-10-25,2026-10-15,,IR,"Pierce was spotted without a cast on his left ankle/heel Wednesday, James Boyd of The Athletic reports.",espn
+IND,Jaylahn Tuimoloau,DE,DEF,EDGE1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+IND,Jaylon Carlies,LB,DEF,LB1,1,Questionable,0.4,Ribs,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+IND,Josh Downs,WR,OFF,WR1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Downs was a limited participant in Wednesday's practice due to a hamstring injury and rest.,espn
+IND,Ashton Dulin,WR,OFF,WR4+,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Dulin (hamstring) did not participate in Wednesday's practice session.,espn
+IND,Jalen Travis,OT,OL/ST,,,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+IND,Matt Goncalves,G,OL/ST,,,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+IND,Spencer Shrader,PK,,,,Active,0.0,,,2026-10-12,,,Shrader made all five of his field-goal attempts and converted on his lone point-after try during Sunday's 34-22 loss to the Steelers on Sunday.,espn
+IND,Charvarius Ward,CB,DEF,CB1,1,Active,0.0,,,2026-10-11,,,Ward (groin) is active for Sunday's game against Pittsburgh.,espn
+IND,George Gumbs Jr.,LB,DEF,EDGE2,2,Active,0.0,,,2026-10-05,,,,espn
+IND,Akeem Davis-Gaither,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,Davis-Gaither (knee) was a full participant at practice Thursday.,espn
+IND,Justin Walley,CB,DEF,NB1,1,Active,0.0,,,2026-10-07,,,"Walley recorded eight tackles (five solo), including 1.0 sacks, during the Colts' 30-13 win over the Commanders on Sunday in London.",espn
+IND,Pharaoh Brown,TE,OFF,,,Active,0.0,,,2026-10-13,,,Brown was signed to the 53-man roster Tuesday.,espn
+IND,Daniel Jones,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Jones completed 24 of 44 passes for 267 yards without a touchdown or interception and added four rushing yards on three carries in Sunday's 34-22 loss to the St,espn
+IND,Riley Leonard,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+IND,Jonathan Taylor,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Taylor carried the ball 15 times for 45 yards and caught three of four targets for 37 yards in Sunday's 34-22 loss to Pittsburgh.,espn
+IND,Seth McGowan,RB,OFF,RB2,2,Active,0.0,,,2026-10-06,,,McGowan turned six carries into 31 yards and caught one of two targets for seven yards during Sunday's 30-13 win over the Commanders in London. He also returned,espn
+IND,Tyler Warren,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Warren caught seven of nine targets for 83 yards and added a one-yard touchdown on his only carry in Sunday's 34-22 loss to the Steelers.,espn
+IND,Keenan Allen,WR,OFF,WR2,1,Active,0.0,,,2026-10-14,,,Allen was a non-participant in Wednesday's practice due to rest.,espn
+IND,Laquon Treadwell,WR,OFF,WR3,1,Active,0.0,,,2026-10-06,,,Treadwell caught five of six targets for 42 yards in Sunday's 30-13 win over the Commanders.,espn
+IND,Darius Slayton,WR,OFF,WR4+,3,Active,0.0,,,2026-10-14,,,Slayton (knee) was a full participant in Wednesday's practice.,espn
+IND,Dalton Tucker,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+IND,Tanor Bortolini,C,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+JAX,Anton Harrison,OT,OL/ST,,,Injured Reserve,1.0,Knee,2026-11-22,2026-10-13,,IR,"Harrison is slated to undergo arthroscopic surgery on his right knee next week and could be out for 3-to-5 weeks or 3-to-4 months, depending on what surgeons fi",espn
+JAX,Montaric Brown,CB,DEF,CB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-15,,QUESTIONABLE,Brown (hamstring) did not participate in Wednesday's practice.,espn
+JAX,Jourdan Lewis,CB,DEF,NB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+JAX,Jarrian Jones,CB,DEF,NB2,2,Questionable,0.4,Elbow,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+JAX,Eric Murray,S,DEF,S1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+JAX,Nate Boerkircher,TE,OFF,TE2,2,Questionable,0.4,Back,2026-10-18,2026-10-15,,QUESTIONABLE,Boerkircher (back) was a limited participant in Wednesday's practice.,espn
+JAX,Cole Van Lanen,OT,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+JAX,Emmanuel Pregnon,G,OL/ST,,,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+JAX,Ross Matiscik,LS,OL/ST,,,Questionable,0.4,Shoulder,2026-10-18,2026-10-11,,QUESTIONABLE,Matiscik (shoulder) will not return to Sunday's game against the Eagles in London.,espn
+JAX,Cam Little,PK,,,,Active,0.0,,,2026-10-12,,,Little made both of his field goals and went 1-for-2 on extra-point tries during the Jaguars' 19-17 win over the Eagles on Sunday in London.,espn
+JAX,Albert Regis,DT,DEF,DT2,2,Active,0.0,,,2026-10-12,,,,espn
+JAX,Bryan Thomas Jr.,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-11,,,Thomas was ejected from Sunday's game in London after receiving an unnecessary roughness penalty for fighting with the Eagles' Jeremiah Trotter following the op,espn
+JAX,Wesley Williams,DE,DEF,EDGE3,3,Active,0.0,,,2026-10-12,,,,espn
+JAX,Alijah Huzzie,CB,DEF,NB3,3,Active,0.0,,,2026-10-12,,,,espn
+JAX,Trevor Lawrence,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Lawrence completed 24 of 39 passes for 331 yards and two touchdowns with one interception in Sunday's 19-17 win over the Eagles. He added 25 rushing yards on th,espn
+JAX,Bhayshul Tuten,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Tuten carried the ball 22 times for 72 yards and caught two of three targets for 24 yards in Sunday's 19-17 win over the Eagles.,espn
+JAX,Chris Rodriguez Jr.,RB,OFF,RB2,2,Active,0.0,,,2026-10-12,,,Rodriguez rushed twice for five yards and caught his only target for six yards during Sunday's 19-17 win over Philadelphia.,espn
+JAX,Brenton Strange,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Strange caught seven of eight targets for 68 yards in Sunday's 19-17 win over the Eagles.,espn
+JAX,Parker Washington,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Washington caught six of nine targets for 124 yards and two touchdowns in Sunday's 19-17 win over the Eagles.,espn
+JAX,Jakobi Meyers,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Meyers caught two of three targets for 37 yards during Sunday's 19-17 win against the Eagles.,espn
+JAX,Brian Thomas Jr.,WR,OFF,WR3,1,Active,0.0,,,2026-10-11,,,Thomas failed to catch any of his three targets in Sunday's 19-17 win over the Eagles.,espn
+JAX,Travis Hunter,WR,OFF,WR4+,2,Active,0.0,,,2026-10-14,,,Hunter recorded a nine-yard reception and tallied six tackles and a pass breakup in Sunday's 19-17 win over the Eagles in London.,espn
+JAX,Josh Cameron,WR,OFF,WR4+,2,Active,0.0,,,2026-10-14,,,Cameron caught three of six targets for 43 yards during the Jaguars' 19-17 win over the Eagles on Sunday in London. He also returned one kickoff for 18 yards an,espn
+JAX,CJ Williams,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,,espn
+JAX,Daniel Faalele,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+KC,Tyquan Thornton,WR,OFF,WR4+,2,Injured Reserve,1.0,Ankle,2027-01-17,2026-10-13,,IR,The Chiefs placed Thornton (ankle) on injured reserve Tuesday.,espn
+KC,L'Jarius Sneed,CB,DEF,NB1,1,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+KC,Rashee Rice,WR,OFF,WR2,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,"Chiefs head coach Andy Reid said that Rice (hamstring/knee) won't practice Wednesday, Nate Taylor of ESPN.com reports.",espn
+KC,Josh Simmons,OT,OL/ST,,,Questionable,0.4,Back,2026-10-18,2026-10-15,,QUESTIONABLE,Simmons (back) was a limited participant at the Chiefs' practice Wednesday.,espn
+KC,Harrison Butker,PK,,,,Active,0.0,,,2026-10-05,,,Butker converted his only field-goal attempt and all three of his PATs during Sunday's 30-27 win over the Raiders.,espn
+KC,Tyreke Smith,DE,DEF,,,Active,0.0,,,2026-09-28,,,,espn
+KC,Mansoor Delane,CB,DEF,CB1,1,Active,0.0,,,2026-10-07,,,Delane tallied 10 tackles (seven solo) and one pass defense during the Chiefs' 30-27 win over the Raiders on Sunday.,espn
+KC,Chris Jones,DT,DEF,DT1,1,Active,0.0,,,2026-09-25,,,,espn
+KC,Felix Anudike-Uzomah,DE,DEF,EDGE1,1,Active,0.0,,,2026-09-24,,,,espn
+KC,Jack Pyburn,LB,DEF,EDGE3,3,Active,0.0,,,2026-10-05,,,,espn
+KC,Nick Bolton,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Bolton posted nine tackles (four solo) during the Chiefs' 30-27 win over the Raiders on Sunday.,espn
+KC,Jadon Canady,CB,DEF,NB2,2,Active,0.0,,,2026-10-05,,,,espn
+KC,Chamarri Conner,S,DEF,S1,1,Active,0.0,,,2026-09-30,,,Conner (knee) was a full participant at practice Wednesday.,espn
+KC,Jaden Hicks,S,DEF,S2,2,Active,0.0,,,2026-09-23,,,Hicks logged 10 tackles (five solo) during the Chiefs' 33-30 overtime win over the Colts on Sunday.,espn
+KC,Patrick Mahomes,QB,OFF,QB1,1,Active,0.0,,,2026-10-05,,,Mahomes completed 15 of 30 passes for 225 yards and two touchdowns in Sunday's 30-27 win over the Raiders. He also rushed twice for no gain.,espn
+KC,Garrett Nussmeier,QB,OFF,QB3,3,Active,0.0,,,2026-10-05,,,,espn
+KC,Kenneth Walker III,RB,OFF,RB1,1,Active,0.0,,,2026-10-05,,,Walker rushed 22 times for 177 yards and two touchdowns while catching his only target for two yards in Sunday's 30-27 win over the Raiders.,espn
+KC,Emmett Johnson,RB,OFF,RB2,2,Active,0.0,,,2026-10-06,,,Johnson caught his lone target for 10 yards in Sunday's 30-27 win over the Raiders.,espn
+KC,Travis Kelce,TE,OFF,TE1,1,Active,0.0,,,2026-10-05,,,Kelce caught two of four targets for 15 yards in Sunday's 30-27 win over the Raiders.,espn
+KC,Noah Gray,TE,OFF,TE2,2,Active,0.0,,,2026-10-06,,,Gray caught two of his three targets for 17 yards in the Chiefs' 30-27 win over the Raiders on Sunday.,espn
+KC,Jared Wiley,TE,OFF,TE4,4,Active,0.0,,,2026-10-05,,,,espn
+KC,Xavier Worthy,WR,OFF,WR1,1,Active,0.0,,,2026-10-05,,,Worthy caught four of seven targets for 70 yards in Sunday's 30-27 win over the Raiders.,espn
+KC,Jalen Royals,WR,OFF,WR3,1,Active,0.0,,,2026-09-23,,,Royals caught both of his targets for six yards and a touchdown while logging two tackles on kick coverage in Sunday's 33-30 overtime win against the Colts.,espn
+KC,Cyrus Allen,WR,OFF,WR4+,2,Active,0.0,,,2026-10-06,,,Allen failed to reel in his only target in Sunday's 30-27 win over the Raiders.,espn
+KC,Diego Pounds,OT,OL/ST,,,Active,0.0,,,2026-10-05,,,,espn
+LAC,Denzel Perryman,LB,DEF,LB3,3,Injured Reserve,1.0,Undisclosed,2026-11-01,2026-10-15,,IR,"Coach Jim Harbaugh said Wednesday that Perryman (undisclosed) will be out for Sunday's game against the Chiefs, Alex Insdorf of BoltBeat.com reports.",espn
+LAC,KeAndre Lambert-Smith,WR,OFF,WR4+,3,Injured Reserve,1.0,Hamstring,2026-10-18,2026-10-13,,IR-R,The Chargers designated Lambert-Smith (hamstring) for return from injured reserve Tuesday.,espn
+LAC,Tre' Harris,WR,OFF,WR4+,2,Doubtful,0.75,Hamstring,2026-10-18,2026-10-14,,DOUBTFUL,Harris (hamstring) was listed as a non-participant on Wednesday's injury report.,espn
+LAC,Donte Jackson,CB,DEF,CB1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LAC,Rodney Shelley,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LAC,Jamaree Caldwell,DT,DEF,DT1,1,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Dalvin Tomlinson,DT,DEF,DT2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Justin Eboigbe,DT,DEF,EDGE1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Daiyan Henley,LB,DEF,LB1,1,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Elijah Molden,CB,DEF,S1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Derwin James Jr.,S,DEF,S1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LAC,Kendall Williamson,S,DEF,S3,3,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LAC,Ladd McConkey,WR,OFF,WR1,1,Questionable,0.4,Foot,2026-10-18,2026-10-14,,QUESTIONABLE,McConkey (foot) was listed as a limited participant on Wednesday's injury report.,espn
+LAC,Marquez Valdes-Scantling,WR,OFF,WR2,1,Questionable,0.4,Ribs,2026-10-18,2026-10-14,,QUESTIONABLE,Valdes-Scantling (ribs) was a limited participant in Wednesday's practice.,espn
+LAC,Brenen Thompson,WR,OFF,WR4+,3,Questionable,0.4,Quadriceps,2026-10-18,2026-10-15,,QUESTIONABLE,Thompson (quadriceps) was a limited participant in Wednesday's practice.,espn
+LAC,Quentin Johnston,WR,OFF,WR4+,2,Questionable,0.4,Chest,2026-10-18,2026-10-14,,QUESTIONABLE,Johnston (chest) was listed as a limited participant on Wednesday's injury report.,espn
+LAC,Joe Alt,OT,OL/ST,,,Questionable,0.4,Neck,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LAC,Kayode Awosika,G,OL/ST,,,Questionable,0.4,Lower Leg,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LAC,Cameron Dicker,PK,,,,Active,0.0,,,2026-10-12,,,Dicker made his lone field-goal attempt and both of his extra-point tries during the Chargers' 23-17 loss to the Broncos on Sunday.,espn
+LAC,Jake Browning,QB,OFF,,,Active,0.0,,,2026-10-13,,,"The Chargers signed Browning to the practice squad Tuesday, Noah Furtado of The Athletic reports.",espn
+LAC,Justin Herbert,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,"Herbert completed 14 of 24 passes for 121 yards, one touchdown and one interception, reeled off 54 yards on six carries and fumbled twice (one lost) during Sund",espn
+LAC,Omarion Hampton,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Hampton turned 14 carries into 33 yards and one target into a six-yard catch during Sunday's 23-17 loss to the Broncos.,espn
+LAC,Keaton Mitchell,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Mitchell took six carries for 11 yards and caught three of four targets for 18 yards during Sunday's 23-17 loss versus the Broncos.,espn
+LAC,Kimani Vidal,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,"Vidal tallied eight carries for 57 yards and one touchdown, one catch (on two targets) for minus-1 yard and returned three kicks for 75 yards during Sunday's 23",espn
+LAC,Charlie Kolar,TE,OFF,TE2,2,Active,0.0,,,2026-10-13,,,Kolar reeled in three of four targets for 37 yards during Sunday's 23-17 loss versus the Broncos. He also lost a fumble.,espn
+LAR,Myles Garrett,DE,DEF,LB3,3,Injured Reserve,1.0,Knee,2026-10-25,2026-10-14,,IR,"Head coach Sean McVay told reporters Tuesday that Garrett (knee) will not return to practice this week and will not play against the Cardinals on Sunday, Camero",espn
+LAR,Alaric Jackson,OT,OL/ST,,,Suspension,1.0,Suspension,2026-10-25,2026-10-15,,RESERVE-SUS,"Jackson's suspension for an act of unsportsmanlike conduct during Monday's game versus the Bills has been reduced to one game, Tom Pelissero of Netflix reports.",espn
+LAR,Josh Wallace,CB,DEF,CB2,2,Questionable,0.4,Shoulder,2026-10-18,2026-10-15,,QUESTIONABLE,questionable,espn
+LAR,Nate Landman,LB,DEF,LB1,1,Questionable,0.4,Wrist,2026-10-18,2026-10-15,,QUESTIONABLE,"Landman (wrist) was listed as a limited participant on the Rams' estimated injury report Wednesday, Sarah Barshop of ESPN.com reports.",espn
+LAR,Colby Parkinson,TE,OFF,TE2,2,Questionable,0.4,Shoulder,2026-10-18,2026-10-15,,QUESTIONABLE,"Parkinson (shoulder) was listed as a limited participant on the Rams' estimated injury report Wednesday, Sarah Barshop of ESPN.com reports.",espn
+LAR,Davis Allen,TE,OFF,TE3,3,Questionable,0.4,Foot,2026-10-18,2026-10-15,,QUESTIONABLE,"Allen (foot) was listed as a non-participant on the Rams' estimated injury report, Sarah Barshop of ESPN.com reports.",espn
+LAR,Blake Grupe,PK,,,,Active,0.0,,,2026-10-13,,,"The Rams signed Grupe off the Jets' practice squad Tuesday, Mike Garafolo of NFL Network reports.",espn
+LAR,Jaylen Watson,CB,DEF,CB1,1,Active,0.0,,,2026-10-11,,,"Watson (shoulder) does not have an injury designation for Monday's game against the Bills, Sarah Barshop of ESPN.com reports.",espn
+LAR,Aaron Donald,DT,DEF,EDGE1,1,Active,0.0,,,2026-10-10,,,"Donald (back) didn't practice Saturday, per head coach Sean McVay, but he's ""good to go"" for Monday's game versus the Bills, Sarah Barshop of ESPN.com reports.",espn
+LAR,Larrell Murchison,DE,DEF,EDGE3,3,Active,0.0,,,2026-10-13,,,,espn
+LAR,Byron Young,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,Young recorded six tackles (four solo) including 2.5 sacks and a forced fumble during Sunday's 24-20 win against the Eagles.,espn
+LAR,Grant Stuard,LB,DEF,LB2,2,Active,0.0,,,2026-10-10,,,,espn
+LAR,Josaiah Stewart,LB,DEF,LB2,2,Active,0.0,,,2026-10-10,,,,espn
+LAR,Quentin Lake,S,DEF,NB1,1,Active,0.0,,,2026-10-12,,,"Lake (hip) is active for Monday's game against the Bills, Nate Atkins of The Athletic reports.",espn
+LAR,Matthew Stafford,QB,OFF,QB1,1,Active,0.0,,,2026-10-13,,,Stafford completed 40 of 54 passes for 383 yards with three touchdowns and no interceptions in the Rams' 37-34 overtime loss to the Bills on Monday night.,espn
+LAR,Ty Simpson,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,"Simpson (coach's decision) is inactive but will serve as the Rams' emergency third quarterback against the Bills on Monday, Nate Atkins of The Athletic reports.",espn
+LAR,Kyren Williams,RB,OFF,RB1,1,Active,0.0,,,2026-10-13,,,Williams rushed 16 times for 49 yards and a touchdown and brought in six of eight targets for 27 yards in the Rams' 37-34 overtime loss to the Bills on Monday n,espn
+LAR,Blake Corum,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Corum rushed five times for 19 yards and a touchdown and brought in three of four targets for 53 yards in the Rams' 37-34 overtime loss to the Bills on Monday n,espn
+LAR,Tyler Higbee,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Higbee brought in five of six targets for 83 yards in the Rams' 37-34 overtime loss to the Bills on Monday night.,espn
+LAR,Max Klare,TE,OFF,TE4,4,Active,0.0,,,2026-10-13,,,,espn
+LAR,Puka Nacua,WR,OFF,WR1,1,Active,0.0,,,2026-10-13,,,Nacua brought in 17 of 24 targets for 138 yards and a touchdown and rushed twice for nine yards in the Rams' 37-34 overtime loss to the Bills on Monday night.,espn
+LAR,Davante Adams,WR,OFF,WR2,1,Active,0.0,,,2026-10-13,,,Adams brought in five of seven targets for 51 yards and two touchdowns in the Rams' 37-34 overtime loss to the Bills on Monday night.,espn
+LAR,CJ Daniels,WR,OFF,WR4+,2,Active,0.0,,,2026-10-13,,,,espn
+LAR,Konata Mumpfield,WR,OFF,WR4+,2,Active,0.0,,,2026-10-09,,,"Mumpfield (shoulder) was a full participant in Thursday's practice, Sarah Barshop of ESPN.com reports.",espn
+LAR,Bill Murray,G,OL/ST,,,Active,0.0,,,2026-10-13,,,,espn
+LV,Carter Runyon,TE,OFF,TE4,4,Injured Reserve,1.0,Lower Body,2026-10-18,2026-10-14,,IR-R,The Raiders designated Runyon (lower body) for return to practice from their injured reserve list Wednesday.,espn
+LV,Dont'e Thornton Jr.,WR,OFF,WR4+,3,Injured Reserve,1.0,Hamstring,2026-10-18,2026-10-15,,IR-R,Thornton (hamstring) was a full participant at the Raiders' practice Wednesday.,espn
+LV,Tonka Hemingway,DT,DEF,EDGE1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-12,,QUESTIONABLE,"Hemingway is in concussion protocol ahead of Week 6 versus Buffalo, Sam Warren of The Athletic reports.",espn
+LV,Folorunso Fatukasi,DT,DEF,EDGE2,2,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+LV,Brock Bowers,TE,OFF,TE1,1,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,"Bowers (knee) was listed as a limited participant on Wednesday's practice report, Anthony Galaviz of The Fresno Bee reports.",espn
+LV,Jalen Nailor,WR,OFF,WR4+,2,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,"Nailor (concussion) isn't participating in Wednesday's practice, Sam Warren of The Athletic reports.",espn
+LV,Trey Zuhn III,C,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+LV,Matt Gay,PK,,,,Active,0.0,,,2026-10-12,,,Gay went 1-for-2 on field-goal attempts and converted both of his extra-point tries during the Raiders' 45-17 loss to the Patriots on Sunday.,espn
+LV,Darrell Luter Jr.,CB,DEF,CB3,3,Active,0.0,,,2026-10-05,,,,espn
+LV,JJ Pegues,DT,DEF,DT2,2,Active,0.0,,,2026-10-12,,,,espn
+LV,Quay Walker,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,"Walker registered six tackles (four solo), including 1.0 sacks, during the Raiders' 30-27 loss to the Chiefs on Sunday.",espn
+LV,Patrick Johnson,DE,DEF,LB2,2,Active,0.0,,,2026-10-15,,,Johnson (stinger/neck) was a full participant in Wednesday's practice.,espn
+LV,Dalton Johnson,S,DEF,S2,2,Active,0.0,,,2026-10-12,,,,espn
+LV,Tristin McCollum,S,DEF,S3,3,Active,0.0,,,2026-10-12,,,,espn
+LV,Kirk Cousins,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,Cousins completed 19 of 28 passes for 243 yards and a touchdown in Sunday's 45-17 loss to the Patriots.,espn
+LV,Fernando Mendoza,QB,OFF,QB2,2,Active,0.0,,,2026-10-12,,,Mendoza completed six of eight passes for 48 yards without a touchdown or turnover in Sunday's 45-17 loss to the Patriots. He added three yards on his only carr,espn
+LV,Aidan O'Connell,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+LV,Ashton Jeanty,RB,OFF,RB1,1,Active,0.0,,,2026-10-14,,,"Jeanty (foot) was listed as a full participant on Wednesday's injury report, Sam Warren of The Athletic reports.",espn
+LV,Mike Washington Jr.,RB,OFF,RB2,2,Active,0.0,,,2026-10-12,,,Washington logged a five-yard carry and caught his lone target for five yards during the Raiders' 45-17 loss to the Patriots on Sunday.,espn
+LV,Dylan Laube,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,Laube rushed four times for nine yards and a touchdown while also reeling in all three of his targets for 16 yards during Sunday's 45-17 loss to New England.,espn
+LV,Michael Mayer,TE,OFF,TE2,2,Active,0.0,,,2026-10-13,,,Mayer caught his only target for two yards during Sunday's 45-17 loss to the Patriots.,espn
+LV,Tre Tucker,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Tucker caught four of five targets for 41 yards during Sunday's 45-17 loss to the Patriots.,espn
+LV,Cody White,WR,OFF,WR2,1,Active,0.0,,,2026-10-14,,,White caught two of four passes for 44 yards during Sunday's 45-17 loss to the Patriots.,espn
+LV,Spencer Burford,G,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+LV,Jackson Powers-Johnson,G,OL/ST,,,Active,0.0,,,2026-10-09,,,Powers-Johnson (groin) was a full participant in practice Thursday.,espn
+MIA,Storm Duck,CB,DEF,CB3,3,Out,1.0,Knee,2026-10-25,2026-10-11,,PUP-R,"Duck (knee) has been downgraded to out for Sunday's game against the Bengals, David Furones of the South Florida Sun Sentinel reports.",espn
+MIA,JuJu Brents,CB,DEF,CB1,1,Questionable,0.4,Neck,2026-10-25,2026-10-11,,QUESTIONABLE,Brents exited in the fourth quarter of Sunday's game against the Bengals due to a stinger and is questionable to return.,espn
+MIA,Robert Beal Jr.,DE,DEF,EDGE2,2,Questionable,0.4,Hamstring,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIA,Reese Taylor,CB,DEF,NB2,2,Questionable,0.4,Quadriceps,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIA,Michael Taaffe,S,DEF,S2,2,Questionable,0.4,Chest,2026-10-25,2026-10-11,,QUESTIONABLE,Taaffe (chest) is questionable to return to Sunday's game against the Bengals.,espn
+MIA,Justin Joly,TE,OFF,TE4,4,Questionable,0.4,Concussion,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIA,Caleb Douglas,WR,OFF,WR4+,2,Questionable,0.4,Ankle,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIA,Jonah Savaiinaea,G,OL/ST,,,Questionable,0.4,Ankle,2026-10-25,2026-10-11,,QUESTIONABLE,Savaiinaea is questionable to return to Sunday's game against the Bengals due to an ankle injury.,espn
+MIA,Riley Patterson,PK,,,,Active,0.0,,,2026-10-12,,,Patterson made his lone field-goal attempt and went 1-for-2 one extra-point tries during the Dolphins' 31-24 loss to the Bengals on Sunday.,espn
+MIA,Kenneth Grant,DT,DEF,DT2,2,Active,0.0,,,2026-10-11,,,The Dolphins activated Grant (toe) from injured reserve Saturday.,espn
+MIA,Jordyn Brooks,LB,DEF,LB1,1,Active,0.0,,,2026-10-11,,,"Brooks (foot) returned to Sunday's game against the Bengals in the third quarter, Travis Wingfield of the Dolphins' official site reports.",espn
+MIA,Jackson Woodard,LB,DEF,LB2,2,Active,0.0,,,2026-10-11,,,Woodard (ankle) is listed as active for Sunday's game against the Bengals.,espn
+MIA,Dante Trader Jr.,S,DEF,S1,1,Active,0.0,,,2026-10-10,,,"Trader (shin) does not have an injury designation against the Bengals on Sunday, Paul Dehner Jr. of The Athletic reports.",espn
+MIA,Jared Wayne,WR,OFF,,,Active,0.0,,,2026-10-13,,,Wayne was claimed off waivers by the Dolphins on Tuesday.,espn
+MIA,Malik Willis,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Willis completed 15 of 27 passes for 137 yards with one touchdown and two interceptions and added eight carries for 74 yards and another score in the Dolphins' ,espn
+MIA,Ollie Gordon II,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Gordon rushed 18 times for 88 yards and a touchdown in the Dolphins' 31-24 loss to the Bengals on Sunday.,espn
+MIA,Jaylen Wright,RB,OFF,RB2,2,Active,0.0,,,2026-10-11,,,Wright (foot) is active for Sunday's game against the Bengals.,espn
+MIA,Kaytron Allen,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,,espn
+MIA,Greg Dulcich,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Dulcich caught four of five targets for 37 yards during Sunday's 31-24 loss to the Bengals.,espn
+MIA,Malik Washington,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,"Washington secured six of eight targets for 43 yards, rushed once for 18 yards, returned two kickoffs for 45 yards and ran back one punt for 28 yards in the Dol",espn
+MIA,Chris Bell,WR,OFF,WR2,1,Active,0.0,,,2026-10-09,,,"Bell (knee) does not have an injury designation for Sunday's game against the Bengals, Paul Dehner Jr. of The Athletic reports.",espn
+MIA,Kevin Coleman Jr.,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,Coleman caught three of seven targets for 30 yards and a touchdown during Sunday's 31-24 loss to the Bengals.,espn
+MIA,DJ Campbell,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+MIA,Chukwuebuka Godrick,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+MIA,Austin Jackson,OT,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
+MIN,Josh Oliver,TE,OFF,TE4,4,Injured Reserve,1.0,Biceps,2027-01-17,2026-09-30,,IR,"The Vikings placed Oliver (biceps) on injured reserve Tuesday, Craig Peters of the team's official site reports.",espn
+MIN,Donovan Jackson,G,OL/ST,,,Injured Reserve,1.0,Knee - Meniscus,2027-01-17,2026-10-07,,IR,Jackson (knee) was placed on injured reserve by the Vikings on Tuesday.,espn
+MIN,Charles Demmings,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIN,T.J. Hockenson,TE,OFF,TE1,1,Questionable,0.4,Concussion,2026-10-25,2026-10-11,,QUESTIONABLE,The Vikings downgraded Hockenson to out for Sunday's game against the Saints due to a concussion.,espn
+MIN,Jordan Addison,WR,OFF,WR4+,2,Questionable,0.4,Hamstring,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIN,Christian Darrisaw,OT,OL/ST,,,Questionable,0.4,Concussion,2026-10-25,2026-10-13,,QUESTIONABLE,questionable,espn
+MIN,Will Reichard,PK,,,,Active,0.0,,,2026-10-12,,,Reichard made all three of his field-goal attempts and both extra-point tries during the Vikings' 23-13 win over the Saints on Sunday.,espn
+MIN,Isaiah Rodgers,CB,DEF,CB1,1,Active,0.0,,,2026-09-30,,,Rodgers logged six tackles (two solo) and an interception in Sunday's 23-16 victory over Tampa Bay.,espn
+MIN,Zemaiah Vaughn,CB,DEF,CB2,2,Active,0.0,,,2026-09-28,,,,espn
+MIN,Elijah Williams,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-12,,,,espn
+MIN,Blake Cashman,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Cashman recorded eight tackles (three solo) and a fumble recovery during Sunday's 15-10 win versus the Dolphins.,espn
+MIN,Eric Wilson,LB,DEF,LB1,1,Active,0.0,,,2026-09-30,,,"Wilson finished Sunday's 23-16 victory over Tampa Bay with 10 tackles, including 1.5 sacks, and one defensed pass.",espn
+MIN,Kyle Van Noy,LB,DEF,LB2,2,Active,0.0,,,2026-09-30,,,"The Vikings signed Van Noy from the practice squad to the active roster Tuesday, Craig Peters of the team's official site reports.",espn
+MIN,Joshua Metellus,S,DEF,S1,1,Active,0.0,,,2026-09-30,,,"Metellus recorded nine tackles (four solo), including 0.5 sacks, and a defensed pass Sunday against Tampa Bay in a 23-16 victory.",espn
+MIN,Jakobe Thomas,S,DEF,S3,3,Active,0.0,,,2026-10-12,,,,espn
+MIN,Kyler Murray,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Murray completed 24 of 30 passes for 229 yards with a touchdown and no interceptions while adding 10 rushes for 51 yards in the Vikings' 23-13 win over the Sain,espn
+MIN,Max Brosmer,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+MIN,Aaron Jones Sr.,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Jones rushed 25 times for 113 yards and a touchdown and brought in all three targets for four yards in the Vikings' 23-13 win over the Saints on Sunday.,espn
+MIN,Demond Claiborne,RB,OFF,RB3,3,Active,0.0,,,2026-10-06,,,Claiborne carried the ball three times for 12 yards during Minnesota's win over the Dolphins on Sunday.,espn
+MIN,Ben Yurosek,TE,OFF,TE3,3,Active,0.0,,,2026-10-11,,,"Yurosek (ankle) is listed as active for Sunday's game against the Saints, Craig Peters of the Vikings' official site reports.",espn
+MIN,Justin Jefferson,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Jefferson (ankle) brought in six of seven targets for 79 yards and a touchdown and rushed once for minus-11 yards in the Vikings' 23-13 win over the Saints on S,espn
+MIN,Jauan Jennings,WR,OFF,WR3,1,Active,0.0,,,2026-10-13,,,Jennings did not reel in his only target during Sunday's 23-13 win at New Orleans.,espn
+MIN,Michael Jurgens,C,OL/ST,,,Active,0.0,,,2026-10-11,,,"Jurgens (elbow) is active for Sunday's game against the Saints, Craig Peters of the Vikings' official site reports.",espn
+MIN,Brian O'Neill,OT,OL/ST,,,Active,0.0,,,2026-10-11,,,"O'Neill (knee) is active for Sunday's game against the Saints, Craig Peters of the Vikings' official site reports.",espn
+MIN,Brett Thorson,P,OL/ST,,,Active,0.0,,,2026-10-09,,,Thorson (hamstring) was a full participant in practice Wednesday and Thursday.,espn
+NE,A.J. Brown,WR,OFF,WR4+,2,Injured Reserve,1.0,Ankle,2026-10-18,2026-10-14,,IR-R,Brown (ankle) was a limited practice participant Wednesday.,espn
+NE,Marcus Bryant,OT,OL/ST,,,Injured Reserve,1.0,Ankle,2026-10-18,2026-10-15,,IR-R,The Patriots opened the 21-day practice window Wednesday for Bryant (ankle) to return from injured reserve.,espn
+NE,Christian Gonzalez,CB,DEF,CB1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,Gonzalez (shoulder) was a limited participant in Wednesday's practice.,espn
+NE,Carlton Davis III,CB,DEF,CB1,1,Questionable,0.4,Neck,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NE,Charles Woods,CB,DEF,CB2,2,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,Woods (shoulder) was a limited participant in Wednesday's practice.,espn
+NE,Channing Canada,CB,DEF,CB2,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NE,Karon Prunty,CB,DEF,CB3,3,Questionable,0.4,Hamstring,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NE,Dre'Mont Jones,DE,DEF,LB1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,Jones (shoulder) was a limited participant in Wednesday's practice.,espn
+NE,Christian Elliss,LB,DEF,LB1,1,Questionable,0.4,Chest,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,Marcus Jones,CB,DEF,NB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,Craig Woodson,S,DEF,S1,1,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,Kevin Byard,S,DEF,S1,1,Questionable,0.4,Chest,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,TreVeyon Henderson,RB,OFF,RB2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,The Patriots listed Henderson (ankle) as a limited participant in Wednesday's practice.,espn
+NE,Morgan Moses,OT,OL/ST,,,Questionable,0.4,Foot,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,Will Campbell,OT,OL/ST,,,Questionable,0.4,Knee - MCL,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NE,Andy Borregales,PK,,,,Active,0.0,,,2026-10-12,,,Borregales made his lone field-goal attempt and all six extra-point tries during Sunday's 45-17 win over Las Vegas.,espn
+NE,Behren Morton,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+NE,Rhamondre Stevenson,RB,OFF,RB1,1,Active,0.0,,,2026-10-13,,,Stevenson is expected to take on a heavier workload for the next few weeks while TreVeyon Henderson recovers from a high-ankle sprain that he sustained in Sunda,espn
+NE,Corey Kiner,RB,OFF,RB3,3,Active,0.0,,,2026-10-13,,,Kiner is expected to move into the No. 2 spot on the depth chart behind lead back Rhamondre Stevenson in Sunday's game against the Jets with TreVeyon Henderson ,espn
+NE,Hunter Henry,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Henry caught three of four targets for 44 yards and a touchdown during Sunday's 45-17 win over the Raiders.,espn
+NE,Eli Raridon,TE,OFF,TE2,2,Active,0.0,,,2026-10-14,,,Raridon caught all five of his targets for 57 yards during the Patriots' 45-17 win over the Raiders on Sunday.,espn
+NE,Romeo Doubs,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Doubs caught one of three targets for 16 yards in Sunday's 45-17 win over the Raiders.,espn
+NE,DeMario Douglas,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Douglas caught four of five targets for 65 yards and two touchdowns in Sunday's 45-17 win over the Raiders.,espn
+NE,Efton Chism III,WR,OFF,WR3,1,Active,0.0,,,2026-10-12,,,Chism caught five of six targets for 57 yards and added a two-yard rush during Sunday's 45-17 win over the Raiders.,espn
+NE,Dametrious Crownover,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+NO,Jordyn Tyson,WR,OFF,WR4+,2,Injured Reserve,1.0,Hamstring,2026-11-08,2026-10-12,,IR-R,"Saints head coach Kellen Moore said Monday that Tyson (hamstring) is ""progressing well"" but isn't on track to return to practice this week, Jeff Nowak of WWL Ne",espn
+NO,Zach Wood,LS,OL/ST,,,Injured Reserve,1.0,Calf,2026-10-18,2026-10-15,,IR-R,The Saints designated Wood (calf) to return from injured reserve Wednesday.,espn
+NO,Nathan Shepherd,DT,DEF,DT1,1,Questionable,0.4,Illness,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NO,Vernon Broughton,DT,DEF,EDGE1,1,Questionable,0.4,Illness,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NO,Tyree Wilson,DE,DEF,EDGE2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NO,Colby Wooden,DT,DEF,EDGE2,2,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NO,Kaden Elliss,LB,DEF,LB1,1,Questionable,0.4,Calf,2026-10-18,2026-10-14,,QUESTIONABLE,Elliss (calf) did not participate at practice Wednesday.,espn
+NO,Anfernee Jennings,LB,DEF,LB2,2,Questionable,0.4,Knee,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NO,Alvin Kamara,RB,OFF,RB1,1,Questionable,0.4,Back,2026-10-18,2026-10-14,,QUESTIONABLE,Kamara (back) was a limited practice participant Wednesday.,espn
+NO,Chris Olave,WR,OFF,WR1,1,Questionable,0.4,Illness,2026-10-18,2026-10-14,,QUESTIONABLE,"Olave didn't practice Wednesday due to an illness, Nick Underhill of NewOrleans.Football reports.",espn
+NO,Jeremiah Wright,G,OL/ST,,,Questionable,0.4,Concussion,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NO,Daniel Carlson,PK,,,,Active,0.0,,,2026-10-12,,,Carlson went 1-for-2 on extra-point tries during the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Mike Reid,CB,DEF,,,Active,0.0,,,2026-10-12,,,,espn
+NO,Davon Godchaux,DT,DEF,DT2,2,Active,0.0,,,2026-10-10,,,Godchaux (groin) does not have an injury designation for Sunday's game against the Vikings.,espn
+NO,Christen Miller,DT,DEF,DT3,3,Active,0.0,,,2026-10-11,,,Miller is active for Sunday's game against the Vikings.,espn
+NO,Jaylan Ford,LB,DEF,LB3,3,Active,0.0,,,2026-10-11,,,Ford (ankle) is active for Sunday's game against the Vikings.,espn
+NO,Julian Blackmon,S,DEF,S1,1,Active,0.0,,,2026-10-11,,,Blackmon (shoulder) is active for Sunday's game against the Vikings.,espn
+NO,Lorenzo Styles Jr.,S,DEF,S2,2,Active,0.0,,,2026-10-11,,,Styles (calf) is listed as active for Sunday's game against the Vikings.,espn
+NO,Tyler Shough,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Shough completed 16 of 25 passes for 96 yards with no touchdowns and two interceptions in the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Zach Wilson,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+NO,Kendre Miller,RB,OFF,RB2,2,Active,0.0,,,2026-10-14,,,Miller turned 10 carries into 30 yards and a touchdown during the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Juwan Johnson,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Johnson brought in four of five targets for 16 yards in the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Noah Fant,TE,OFF,TE2,2,Active,0.0,,,2026-10-13,,,Fant brought in his lone target for seven yards during the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Devaughn Vele,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Vele secured four of six targets for 26 yards in the Saints' 23-13 loss to the Vikings on Sunday.,espn
+NO,Barion Brown,WR,OFF,WR4+,2,Active,0.0,,,2026-10-11,,,Brown (thigh) is active for Sunday's game against the Vikings.,espn
+NYG,Chauncey Golston,DE,DEF,EDGE3,3,Injured Reserve,1.0,Neck,2026-11-12,2026-10-11,,IR,"The Giants placed Golston (neck) on injured reserve Saturday, Dan Salomone of the Giants' official site reports.",espn
+NYG,Braxton Berrios,WR,OFF,WR4+,3,Injured Reserve,1.0,Foot,2027-02-15,2026-10-14,,IR,"Berrios (foot) underwent successful surgery Friday to repair a Lisfranc injury, Jordan Raanan of ESPN.com reports.",espn
+NYG,Greg Newsome II,CB,DEF,CB1,1,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NYG,Colton Hood,CB,DEF,CB2,2,Questionable,0.4,Concussion,2026-10-18,2026-10-12,,QUESTIONABLE,"Hood (concussion) is considered day-to-day ahead of the Giants' matchup with the Saints in Week 6, Pat Leonard of the New York Daily News reports.",espn
+NYG,Abdul Carter,LB,DEF,LB1,1,Questionable,0.4,Calf,2026-10-18,2026-10-14,,QUESTIONABLE,"Carter (calf) was listed as a DNP on Wednesday's injury report, Dan Salomone of the Giants' official site reports.",espn
+NYG,Tyler Nubin,S,DEF,S1,1,Questionable,0.4,Neck,2026-10-18,2026-10-14,,QUESTIONABLE,"Nubin (neck) did not practice Wednesday, Dan Salomone of the Giants' official site reports.",espn
+NYG,Jason Pinnock,S,DEF,S2,2,Questionable,0.4,Concussion,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+NYG,Theo Johnson,TE,OFF,TE2,2,Questionable,0.4,Neck,2026-10-18,2026-10-14,,QUESTIONABLE,"Johnson (neck) was listed as a limited practice participant on Wednesday's injury report, Dan Salomone of the Giants' official site reports.",espn
+NYG,Darnell Mooney,WR,OFF,WR2,1,Questionable,0.4,Neck,2026-10-18,2026-10-14,,QUESTIONABLE,"Mooney (neck) was a limited participant during Wednesday's practice, Dan Salomone of the Giants' official site reports.",espn
+NYG,Jermaine Eluemunor,OT,OL/ST,,,Questionable,0.4,Calf,2026-10-18,2026-10-15,,QUESTIONABLE,questionable,espn
+NYG,Andrew Thomas,OT,OL/ST,,,Questionable,0.4,Groin,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NYG,Dominic Zvada,PK,,,,Active,0.0,,,2026-10-12,,,Zvada went 2-for-5 on field-goal attempts and made all three of his extra-point tries during Sunday's 27-27 tie with the Commanders.,espn
+NYG,Malik Harrison,LB,DEF,,,Active,0.0,,,2026-10-14,,,"Harrison was signed to the Giants' active roster Tuesday, Dan Salomone of the team's official site reports.",espn
+NYG,Bobby Jamison-Travis,DT,DEF,EDGE2,2,Active,0.0,,,2026-10-12,,,,espn
+NYG,Dru Phillips,CB,DEF,NB1,1,Active,0.0,,,2026-10-13,,,Phillips had five total tackles (five solo) and 2.0 sacks in Sunday's 27-27 tie with the Commanders.,espn
+NYG,Nikko Reed,CB,DEF,NB3,3,Active,0.0,,,2026-10-12,,,,espn
+NYG,Jameis Winston,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Winston completed 33 of 54 passes for 326 yards and three touchdowns in Sunday's 27-27 tie against the Commanders. He also rushed five times for 27 yards and lo,espn
+NYG,J.J. McCarthy,QB,OFF,QB2,2,Active,0.0,,,2026-10-11,,,"McCarthy is serving as the Giants No. 2 quarterback for Sunday's game against the Commanders, Jordan Raanan of ESPN.com reports.",espn
+NYG,Jake Haener,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+NYG,Cam Skattebo,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Skattebo rushed 13 times for 59 yards and caught two of three targets for 12 yards in Sunday's 27-27 tie against the Commanders. He also lost a fumble.,espn
+NYG,Devin Singletary,RB,OFF,RB4,4,Active,0.0,,,2026-10-12,,,,espn
+NYG,Isaiah Likely,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Likely caught 11 of 13 targets for 94 yards and two touchdowns in Sunday's 27-27 tie against the Commanders.,espn
+NYG,Malik Nabers,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Nabers caught 11 of 20 targets for 121 yards and a touchdown in Sunday's 27-27 tie against the Commanders.,espn
+NYG,Malachi Fields,WR,OFF,WR3,1,Active,0.0,,,2026-10-14,,,Fields hauled in both of his targets for 20 yards during the Giants' 27-27 tie with the Commanders on Sunday.,espn
+NYG,J.C. Davis,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+NYJ,Braiden McGregor,DE,DEF,EDGE4,4,Injured Reserve,1.0,Pectoral,2027-02-15,2026-10-07,,IR,"McGregor (pectoral) was placed on the Jets' injured reserve list Wednesday, Eric Allen of the team's official site reports.",espn
+NYJ,Omar Cooper Jr.,WR,OFF,WR4+,2,Injured Reserve,1.0,Ankle,2026-10-18,2026-10-14,,IR-R,Cooper (ankle) was a limited participant in Wednesday's practice.,espn
+NYJ,Joseph Ossai,DE,DEF,EDGE2,2,Doubtful,0.75,Ankle,2026-10-18,2026-10-14,,DOUBTFUL,"Ossai (ankle) was estimated to be a nonparticipant at Wednesday's walkthrough, Rich Cimini of ESPN.com reports.",espn
+NYJ,Breece Hall,RB,OFF,RB4,4,Doubtful,0.75,Quadriceps,2026-10-18,2026-10-14,,DOUBTFUL,"Jets head coach Aaron Glenn said that Hall (quadriceps) won't practice Wednesday and remains week-to-week, Al Iannazzone of Newsday reports.",espn
+NYJ,Adonai Mitchell,WR,OFF,WR4+,2,Doubtful,0.75,Finger,2026-10-18,2026-10-14,,DOUBTFUL,"Jets head coach Aaron Glenn said Wednesday that Mitchell (finger) underwent a small procedure on his hand and remains week-to-week, Zack Rosenblatt of The Athle",espn
+NYJ,Dylan Parham,G,OL/ST,,,Doubtful,0.75,Knee,2026-10-18,2026-10-15,,DOUBTFUL,"Coach Aaron Glenn said Wednesday that Parham (knee) is still week-to-week as the Jets start preparing for Week 6, Antwan V. Staley of the New York Daily News re",espn
+NYJ,Dane Belton,S,DEF,S1,1,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+NYJ,Kenyon Sadiq,TE,OFF,TE1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,Sadiq (concussion) was a limited practice participant Wednesday.,espn
+NYJ,Jason Sanders,PK,,,,Active,0.0,,,2026-10-12,,,Sanders made his lone field-goal attempt and both of his extra-point tries during the Jets' 17-12 win over the Browns on Sunday.,espn
+NYJ,Nahshon Wright,CB,DEF,CB2,2,Active,0.0,,,2026-10-12,,,,espn
+NYJ,David Bailey,LB,DEF,EDGE1,1,Active,0.0,,,2026-10-12,,,"Bailey recorded seven tackles (five solo), including 3.0 sacks, during the Jets' 17-12 win over the Browns on Sunday.",espn
+NYJ,Kingsley Enagbare,LB,DEF,EDGE1,1,Active,0.0,,,2026-10-11,,,Enagbare (knee) is active for Sunday's game against the Browns.,espn
+NYJ,Will McDonald IV,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-11,,,McDonald (calf) is active for Sunday's game against the Browns.,espn
+NYJ,Nate Lynn,DE,DEF,EDGE3,3,Active,0.0,,,2026-10-12,,,,espn
+NYJ,Kiko Mauigoa,LB,DEF,LB1,1,Active,0.0,,,2026-10-15,,,Mauigoa (quadriceps) was estimated as a full participant on the Jets' official injury report Wednesday.,espn
+NYJ,Jamien Sherwood,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,Sherwood finished with 13 total tackles (five solo) and one forced fumble in Sunday's 23-12 loss to Chicago.,espn
+NYJ,Demario Davis,LB,DEF,LB1,1,Active,0.0,,,2026-10-08,,,Davis ended with 10 total tackles (five solo) and 1.0 sacks in Sunday's 23-12 loss to Chicago.,espn
+NYJ,Jarvis Brownlee Jr.,CB,DEF,NB1,1,Active,0.0,,,2026-10-10,,,"Brownlee (concussion) does not have an injury designation ahead of Sunday's game against the Browns, Daniel Oyefusi of ESPN.com reports.",espn
+NYJ,Geno Smith,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Smith completed 17 of 30 pass attempts for 182 yards and a touchdown in Sunday's 17-12 win over the Browns. He also rushed five times for seven yards and lost a,espn
+NYJ,Braelon Allen,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Allen rushed 24 times for 116 yards and a touchdown while catching one of four targets for no gain in Sunday's 17-12 win over the Browns.,espn
+NYJ,Isaiah Davis,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Davis rushed twice for eight yards while catching one of two targets for nine yards during Sunday's 17-12 win over the Browns.,espn
+NYJ,Mason Taylor,TE,OFF,TE2,2,Active,0.0,,,2026-10-09,,,"Taylor (thumb) does not carry an injury designation into Sunday's game against the Browns, Daniel Oyefusi of ESPN.com reports.",espn
+NYJ,Garrett Wilson,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Wilson caught seven of 11 targets for 104 yards and a touchdown in Sunday's 17-12 win over the Browns.,espn
+NYJ,Tim Patrick,WR,OFF,WR2,1,Active,0.0,,,2026-10-11,,,The Jets activated Patrick (groin) from injured reserve Saturday.,espn
+NYJ,Isaiah Williams,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,Williams caught one of two targets for 16 yards and added a three-yard carry in Sunday's 17-12 win over the Browns. He also had a 26-yard kickoff return and net,espn
+PHI,Jakorian Bennett,CB,DEF,CB3,3,Injured Reserve,1.0,Knee,2026-10-18,2026-10-15,,IR-R,Bennett (knee) had his  21-day practice window opened by the Eagles on Wednesday.,espn
+PHI,Grant Calcaterra,TE,OFF,TE5,5,Injured Reserve,1.0,Back,2026-10-18,2026-10-14,,IR-R,The Eagles opened the 21-day practice window for Calcaterra (back) on Wednesday.,espn
+PHI,Eli Stowers,TE,OFF,TE6,6,Injured Reserve,1.0,Quadriceps,2026-10-18,2026-10-15,,IR-R,Stowers (quadriceps) was a limited participant at the Eagles' practice Wednesday.,espn
+PHI,Landon Dickerson,G,OL/ST,,,Injured Reserve,1.0,Knee,2026-10-18,2026-10-15,,IR-R,Dickerson (knee) was designated to return from injured reserve Wednesday.,espn
+PHI,Jalyx Hunt,LB,DEF,LB2,2,Doubtful,0.75,Ankle,2026-10-18,2026-10-13,,DOUBTFUL,"Eagles defensive coordinator Vic Fangio said Tuesday it would take something ""miraculous"" for Hunt (ankle) to play Week 6 against the Panthers, Dave Zangaro of ",espn
+PHI,Will Shipley,RB,OFF,RB4,4,Doubtful,0.75,Foot,2026-10-18,2026-10-14,,DOUBTFUL,Shipley (foot) did not participate in Wednesday's practice.,espn
+PHI,Jonathan Greenard,LB,DEF,LB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-15,,QUESTIONABLE,Greenard (ankle) was a limited participant at the Eagles' practice Wednesday.,espn
+PHI,AJ Epenesa,DE,DEF,LB3,3,Questionable,0.4,Back,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+PHI,Marcus Epps,S,DEF,S1,1,Questionable,0.4,Groin,2026-10-18,2026-10-15,,QUESTIONABLE,Epps (groin) was a limited participant at the Eagles' practice Wednesday.,espn
+PHI,Michael Carter II,CB,DEF,S2,2,Questionable,0.4,Abdomen,2026-10-18,2026-10-11,,QUESTIONABLE,Carter (abdomen) has been ruled out for the remainder of Sunday's game against the Jaguars in London.,espn
+PHI,Saquon Barkley,RB,OFF,RB3,3,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Barkley (hamstring) officially didn't practice Wednesday.,espn
+PHI,E.J. Jenkins,TE,OFF,TE4,4,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+PHI,Dontayvion Wicks,WR,OFF,WR1,1,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Wicks (hamstring) practiced in a limited capacity Wednesday.,espn
+PHI,Hollywood Brown,WR,OFF,WR4+,3,Questionable,0.4,Ankle,2026-10-18,2026-10-15,,QUESTIONABLE,Brown (ankle) was a limited participant at the Eagles' practice Wednesday.,espn
+PHI,DeVonta Smith,WR,OFF,WR4+,2,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Smith (hamstring/toe) was a non-participant at Wednesday's practice.,espn
+PHI,Tyler Steen,G,OL/ST,,,Questionable,0.4,Shoulder,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+PHI,Drew Kendall,C,OL/ST,,,Questionable,0.4,Knee,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+PHI,Jake Elliott,PK,,,,Active,0.0,,,2026-10-12,,,Elliott made his lone field-goal attempt and both of his extra-point tries during Sunday's 19-17 loss to the Jaguars in London.,espn
+PHI,Jalen Carter,DT,DEF,EDGE1,1,Active,0.0,,,2026-10-12,,,"Carter logged five tackles (three solo), including 2.0 sacks, one pass defense and two forced fumbles during the Eagles' 19-17 loss to the Jaguars on Sunday in ",espn
+PHI,Jalen Hurts,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Hurts completed 21 of 40 passes for 220 yards and a touchdown in Sunday's 19-17 loss to the Jaguars. He added two rushing yards on two carries.,espn
+PHI,Dameon Pierce,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Pierce carried the ball 11 times for 14 yards and caught two of five targets for minus-2 yards in Sunday's 19-17 loss to the Jaguars.,espn
+PHI,Dallas Goedert,TE,OFF,TE1,1,Active,0.0,,,2026-10-11,,,Goedert caught six of nine targets for 38 yards in Sunday's 19-17 loss to the Jaguars.,espn
+PHI,Zach Ertz,TE,OFF,TE3,3,Active,0.0,,,2026-10-13,,,"Ertz reverted to the Eagles' practice squad Monday, per the NFL's transaction log.",espn
+PHI,Makai Lemon,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Lemon caught five of seven targets for 43 yards during Sunday's 19-17 loss to the Jaguars.,espn
+PHI,Darius Cooper,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,Cooper caught two of three targets for 71 yards and a touchdown during Sunday's 19-17 loss to the Jaguars.,espn
+PIT,Derrick Harmon,DT,DEF,EDGE3,3,Injured Reserve,1.0,Foot,2026-11-15,2026-10-05,,IR,"The Steelers placed Harmon (foot) on injured reserve Monday, Teresa Varley of the team's official site reports.",espn
+PIT,DeShon Elliott,S,DEF,S2,2,Injured Reserve,1.0,Knee,2026-10-18,2026-10-09,,IR-R,"Elliott (knee) has been ruled out ahead of Sunday's game against the Colts, Mark Kaboly of 93.7 The Fan Pittsburgh reports.",espn
+PIT,Ben Skowronek,WR,OFF,WR4+,2,Out,1.0,Calf,2026-10-25,2026-10-12,,OUT,"Head coach Mike McCarthy said Monday that Skowronek (calf) will not play against the Buccaneers this Sunday, Alan Saunders of SteelersNow.com reports.",espn
+PIT,Roman Wilson,WR,OFF,WR4+,2,Out,1.0,Finger,2026-10-25,2026-10-12,,OUT,"Steelers head coach Mike McCarthy said Monday that Wilson (finger) has been ruled out for Sunday's game against the Buccaneers, Nick Farabaugh of PennLive.com r",espn
+PIT,Michael Pittman Jr.,WR,OFF,WR4+,3,Injured Reserve,1.0,Foot,2026-11-15,2026-10-10,,IR,The Steelers placed Pittman (foot) on injured reserve Saturday.,espn
+PIT,Jamel Dean,CB,DEF,CB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,"Dean (ankle) was a limited participant at the Steelers' practice Wednesday, Mike DeFabo of The Athletic reports.",espn
+PIT,Keeanu Benton,DT,DEF,DT1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+PIT,Jalen Ramsey,CB,DEF,NB1,1,Questionable,0.4,Wrist,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+PIT,Rico Dowdle,RB,OFF,RB5,5,Questionable,0.4,Toe,2026-10-18,2026-10-14,,QUESTIONABLE,"Dowdle (toe) was a limited participant in Wednesday's practice, Alan Saunders of SteelersNow.com reports.",espn
+PIT,Chris Boswell,PK,,,,Active,0.0,,,2026-10-12,,,Boswell made both of his field-goal attempts and went 4-for-4 on extra-point tries during the Steelers' 34-22 win over the Colts on Sunday.,espn
+PIT,Sean Murphy-Bunting,CB,DEF,CB2,2,Active,0.0,,,2026-10-06,,,"The Steelers signed Murphy-Bunting off the Buccaneers' practice squad Monday, Teresa Varley of the Steelers' official site reports.",espn
+PIT,Terell Smith,CB,DEF,CB3,3,Active,0.0,,,2026-10-12,,,,espn
+PIT,Yahya Black,DE,DEF,EDGE1,1,Active,0.0,,,2026-10-10,,,,espn
+PIT,Kevin Jobity Jr.,DT,DEF,EDGE2,2,Active,0.0,,,2026-10-12,,,,espn
+PIT,Gabriel Rubio,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-05,,,,espn
+PIT,Robert Spears-Jennings,S,DEF,S1,1,Active,0.0,,,2026-10-08,,,"Spears-Jennings is on track to start Sunday's contest against the Colts, Nick Farabaugh of PennLive.com reports.",espn
+PIT,Aaron Rodgers,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,Rodgers completed 22 of 31 passes for 235 yards and three touchdowns while adding six yards on his only carry in Sunday's 34-22 win over the Colts.,espn
+PIT,Will Howard,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+PIT,Drew Allar,QB,OFF,QB4,4,Active,0.0,,,2026-10-12,,,,espn
+PIT,Jaylen Warren,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,"Head coach Mike McCarthy said Monday that he views Warren as ""our featured player right now,"" Brooke Pryor of ESPN.com reports.",espn
+PIT,Eli Heidenreich,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,,espn
+PIT,Pat Freiermuth,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Freiermuth caught five of seven targets for 44 yards and two touchdowns in Sunday's 34-22 win over the Colts. He added one yard on his lone carry.,espn
+PIT,Darnell Washington,TE,OFF,TE2,2,Active,0.0,,,2026-10-14,,,Washington caught two of three targets for 12 yards during the Steelers' 34-22 win over the Colts on Sunday.,espn
+PIT,DK Metcalf,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Metcalf caught three of four targets for 12 yards in Sunday's 34-22 win over the Colts.,espn
+PIT,Germie Bernard,WR,OFF,WR2,1,Active,0.0,,,2026-10-12,,,Bernard caught six of nine targets for 90 yards during Sunday's 34-22 win over the Colts.,espn
+SEA,Julian Neal,CB,DEF,CB2,2,Injured Reserve,1.0,Hamstring,2026-11-08,2026-10-11,,IR,"The Seahawks placed Neal (hamstring) on injured reserve Saturday, John Boyle of the team's official site reports.",espn
+SEA,Drake Thomas,LB,DEF,LB1,1,Out,1.0,Ankle,2026-10-25,2026-10-15,,OUT,"Thomas (ankle) has been ruled out for Thursday night's game against the Broncos, John Boyle of the Seahawks' official site reports.",espn
+SEA,Chazz Surratt,LB,DEF,LB3,3,Out,1.0,Calf,2026-10-25,2026-10-15,,OUT,"Surratt (calf) has been ruled out for Thursday night's contest against the Broncos, John Boyle of the Seahawks' official site reports.",espn
+SEA,Zach Charbonnet,RB,OFF,RB5,5,Out,1.0,Knee - ACL,2026-10-25,2026-10-14,,PUP-R,"Charbonnet (knee) has been ruled out for Thursday's game at Denver, Corbin K. Smith of EmeraldCitySpectrum.com reports.",espn
+SEA,Jason Myers,PK,,,,Active,0.0,,,2026-10-12,,,"Myers made all seven of his kicks (five field goals, two extra points) during the Seahawks' 32-29 loss to the 49ers on Sunday.",espn
+SEA,Nehemiah Pritchett,CB,DEF,CB2,2,Active,0.0,,,2026-10-09,,,,espn
+SEA,Leonard Williams,DT,DEF,EDGE1,1,Active,0.0,,,2026-10-14,,,,espn
+SEA,Ernest Jones IV,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,"Jones recorded 12 total tackles (six solo), including 1.0 sacks, and added an interception during Sunday's 30-23 win over the Chargers.",espn
+SEA,Tyrice Knight,LB,DEF,LB2,2,Active,0.0,,,2026-10-08,,,,espn
+SEA,Nick Emmanwori,S,DEF,NB1,1,Active,0.0,,,2026-10-07,,,"Emmanwori registered nine total tackles (eight solo), including 1.0 sacks, and added a pass defensed during Sunday's 30-23 win over the Chargers.",espn
+SEA,Ty Okada,S,DEF,S1,1,Active,0.0,,,2026-10-07,,,"Okada (hamstring) was a full participant in Wednesday's practice, John Boyle of the Seahawks' official site reports.",espn
+SEA,Sam Darnold,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,"Darnold completed 18 of 29 passes for 195 yards, one touchdown and two interceptions in Sunday's 32-29 loss to the 49ers. He added one rushing attempt for five ",espn
+SEA,Drew Lock,QB,OFF,QB2,2,Active,0.0,,,2026-10-14,,,"Lock (forearm) won't carry an injury designation into Thursday night's matchup with Denver, John Boyle of the Seahawks' official site reports.",espn
+SEA,Jalen Milroe,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+SEA,Emanuel Wilson,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,Wilson rushed 20 times for 61 yards and a touchdown in Sunday's 32-29 loss to the 49ers. He also caught both of his targets for 11 yards and lost a fumble.,espn
+SEA,George Holani,RB,OFF,RB2,2,Active,0.0,,,2026-10-13,,,Holani rushed four times for seven yards and lost a fumble while reeling in all four of his targets for 24 yards during Sunday's 32-29 loss to the 49ers.,espn
+SEA,Robert Henry Jr.,RB,OFF,RB4,4,Active,0.0,,,2026-10-12,,,,espn
+SEA,AJ Barner,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Barner caught three of five targets for 20 yards during Sunday's 32-29 loss versus the 49ers.,espn
+SEA,Nick Kallerup,TE,OFF,TE4,4,Active,0.0,,,2026-10-12,,,,espn
+SEA,Jaxon Smith-Njigba,WR,OFF,WR1,1,Active,0.0,,,2026-10-14,,,"Smith-Njigba (ankle) practiced fully Wednesday and doesn't have a designation for Thursday's game in Denver, Curtis Crabtree of Fox 13 Seattle reports.",espn
+SEA,Rashid Shaheed,WR,OFF,WR2,1,Active,0.0,,,2026-10-13,,,Shaheed caught two of four targets for 23 yards while also adding 86 kickoff-return yards during Sunday's 32-29 loss to the 49ers.,espn
+SEA,Cooper Kupp,WR,OFF,WR3,1,Active,0.0,,,2026-10-14,,,Kupp caught two of three passes for 15 yards during Sunday's 32-29 loss to the 49ers.,espn
+SEA,Tory Horton,WR,OFF,WR4+,2,Active,0.0,,,2026-10-13,,,Horton did not draw any targets during Sunday's 32-29 loss versus the 49ers.,espn
+SEA,Montorie Foster Jr.,WR,OFF,WR4+,2,Active,0.0,,,2026-10-12,,,,espn
+SEA,Beau Stephens,G,OL/ST,,,Active,0.0,,,2026-10-14,,,,espn
+SF,Dre Greenlaw,LB,DEF,LB1,1,Suspension,1.0,Suspension,2026-10-25,2026-10-14,,RESERVE-SUS,"Greenlaw's appeal of a one-game suspension was denied by the NFL on Tuesday, Adam Schefter of ESPN reports.",espn
+SF,Garret Wallow,LB,DEF,LB2,2,Out,1.0,Hamstring,2026-11-08,2026-10-12,,OUT,"San Francisco head coach Kyle Shanahan said Monday that Wallow will miss ""at least a couple of weeks"" due to a hamstring strain, Nick Wagoner of ESPN.com report",espn
+SF,Nick Martin,LB,DEF,LB3,3,Injured Reserve,1.0,Hamstring,2026-10-19,2026-10-13,,IR,"Head coach Kyle Shanahan said Monday that Martin's (hamstring) status will be evaluated ""in these next couple of days,"" Nick Wagoner of ESPN.com reports.",espn
+SF,Christian Kirk,WR,OFF,WR4+,2,Injured Reserve,1.0,Calf,2026-10-25,2026-10-12,,IR-R,"Head coach Kyle Shanahan said Monday that Kirk (calf) is ""unlikely"" to return to practice this week, Nick Wagoner of ESPN.com reports.",espn
+SF,Deebo Samuel Sr.,WR,OFF,WR4+,2,Out,1.0,Hamstring,2026-11-08,2026-10-12,,OUT,"San Francisco head coach Kyle Shanahan said that Samuel strained his right hamstring ""pretty good"" during Sunday's 32-29 win over Seattle and is ""going to miss ",espn
+SF,Marques Sigle,S,DEF,S1,1,Doubtful,0.75,Ankle,2026-10-19,2026-10-13,,DOUBTFUL,doubtful,espn
+SF,James Thompson Jr.,DT,DEF,DT2,2,Questionable,0.4,Ankle,2026-10-19,2026-10-12,,QUESTIONABLE,"Thompson (ankle) could return in Week 6 against Washington, Matt Barrows of The Athletic reports.",espn
+SF,Nick Bosa,DE,DEF,EDGE1,1,Questionable,0.4,Calf,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+SF,Kyle Juszczyk,FB,OFF,FB1,1,Questionable,0.4,Knee,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+SF,Eddy Pineiro,PK,,,,Active,0.0,,,2026-10-12,,,Pineiro went 1-for-2 on field-goal attempts and made all three of his extra-point tries during the 49ers' 32-29 win over the Seahawks on Sunday.,espn
+SF,Renardo Green,CB,DEF,CB1,1,Active,0.0,,,2026-10-12,,,Green logged one solo tackle and three pass defenses (including two interceptions) during the 49ers' 32-29 win over the Seahawks on Sunday.,espn
+SF,Ephesians Prysock,CB,DEF,CB2,2,Active,0.0,,,2026-10-05,,,,espn
+SF,Keion White,DE,DEF,EDGE1,1,Active,0.0,,,2026-10-04,,,,espn
+SF,Mykel Williams,DE,DEF,EDGE2,2,Active,0.0,,,2026-10-11,,,"The 49ers activated Williams (knee) from the reserve/PUP list Saturday, and he no longer carries an injury designation into Sunday's NFC West tilt against the S",espn
+SF,Fred Warner,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Warner recorded seven tackles (three solo) and two passes defensed during Sunday's 24-14 win versus the Broncos.,espn
+SF,Tatum Bethune,LB,DEF,LB2,2,Active,0.0,,,2026-10-12,,,,espn
+SF,Upton Stout,CB,DEF,NB1,1,Active,0.0,,,2026-10-11,,,"Stout (shoulder) is active for Sunday's game against the Seahawks, Brooke Evans of the 49ers' official site reports.",espn
+SF,Brock Purdy,QB,OFF,QB1,1,Active,0.0,,,2026-10-12,,,"Purdy completed 19 of 29 passes for 189 yards, two touchdowns and one interception in Sunday's 32-29 win over the Seahawks. He also rushed five times for six ya",espn
+SF,Kurtis Rourke,QB,OFF,QB3,3,Active,0.0,,,2026-10-12,,,,espn
+SF,Christian McCaffrey,RB,OFF,RB1,1,Active,0.0,,,2026-10-12,,,McCaffrey rushed 11 times for 68 yards and a touchdown while catching all three of his targets for 15 yards in Sunday's 32-29 win over the Seahawks.,espn
+SF,Kaelon Black,RB,OFF,RB2,2,Active,0.0,,,2026-10-08,,,"Black (illness) upgraded to a full practice Thursday, Harrison Rich of the San Francisco Chronicle reports.",espn
+SF,Jordan James,RB,OFF,RB3,3,Active,0.0,,,2026-10-04,,,James (coach's decision) is inactive against Denver on Sunday.,espn
+SF,George Kittle,TE,OFF,TE1,1,Active,0.0,,,2026-10-12,,,Kittle (illness) caught five of six targets for 24 yards in Sunday's 32-29 win over the Seahawks.,espn
+SF,Mike Evans,WR,OFF,WR1,1,Active,0.0,,,2026-10-12,,,Evans caught seven of 10 targets for 113 yards and a touchdown in Sunday's 32-29 win over the Seahawks. He also caught a successful two-point conversion.,espn
+SF,Enrique Cruz Jr.,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+TB,David Sills V,WR,OFF,WR4+,2,Injured Reserve,1.0,Hamstring,2026-10-18,2026-10-12,,IR-R,"Sills (hamstring) had his 21-day practice window opened by the Buccaneers on Monday, Scott Smith &amp; Brianna Dix of the team's official website reports.",espn
+TB,Baker Mayfield,QB,OFF,QB2,2,Doubtful,0.75,Thumb,2026-10-18,2026-10-14,,DOUBTFUL,Mayfield (right thumb) officially didn't practice Wednesday.,espn
+TB,Benjamin Morrison,CB,DEF,CB1,1,Questionable,0.4,Quadriceps,2026-10-18,2026-10-14,,QUESTIONABLE,Morrison (quadriceps) was a limited participant at the Buccaneers' practice Wednesday.,espn
+TB,Ayden Garnes,CB,DEF,CB2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+TB,SirVocea Dennis,LB,DEF,LB2,2,Questionable,0.4,Ankle,2026-10-18,2026-10-13,,QUESTIONABLE,questionable,espn
+TB,Antoine Winfield Jr.,S,DEF,S1,1,Questionable,0.4,Ribs,2026-10-18,2026-10-14,,QUESTIONABLE,Winfield (ribs) did not participate at the Buccaneers' practice Wednesday.,espn
+TB,Sean Tucker,RB,OFF,RB3,3,Questionable,0.4,Quadriceps,2026-10-18,2026-10-14,,QUESTIONABLE,Tucker did not participate in Wednesday's practice session due to a quadriceps injury.,espn
+TB,Chase McLaughlin,PK,,,,Active,0.0,,,2026-10-09,,,McLaughlin made his only field-goal attempt and all three extra-point tries Thursday in a 24-16 win against Dallas.,espn
+TB,DeMonte Capehart,DT,DEF,EDGE2,2,Active,0.0,,,2026-10-12,,,,espn
+TB,Josiah Trotter,LB,DEF,LB1,1,Active,0.0,,,2026-10-12,,,Trotter recorded seven total tackles (five solo) during Thursday night's 24-16 victory against the Cowboys.,espn
+TB,Alex Anzalone,LB,DEF,LB1,1,Active,0.0,,,2026-10-12,,,Anzalone recorded five total tackles (one solo) and an interception during Thursday night's 24-16 win over Dallas.,espn
+TB,Anthony Nelson,LB,DEF,LB2,2,Active,0.0,,,2026-10-07,,,,espn
+TB,Jacob Parrish,CB,DEF,NB1,1,Active,0.0,,,2026-10-12,,,Parrish recorded nine total tackles (eight solo) and four passes defensed during Thursday night's 24-16 win over the Cowboys.,espn
+TB,Tykee Smith,S,DEF,S1,1,Active,0.0,,,2026-10-07,,,Smith recorded six tackles (four solo) and a forced fumble during the Buccaneers' 17-14 loss to the Packers on Sunday.,espn
+TB,Jalon Daniels,QB,OFF,QB1,1,Active,0.0,,,2026-10-09,,,"Buccaneers coach Todd Bowles said Friday that he plans on starting Daniels in Week 6 against Pittsburgh, Scott Smith of the team's official site reports.",espn
+TB,Bucky Irving,RB,OFF,RB1,1,Active,0.0,,,2026-10-09,,,Irving rushed 21 times for 165 yards and a touchdown and brought in two of three targets for 10 yards and another score in the Buccaneers' 24-16 win over the Co,espn
+TB,Kenny Gainwell,RB,OFF,RB2,2,Active,0.0,,,2026-10-09,,,Gainwell rushed four times for 18 yards and brought in three of four targets for 10 yards in the Buccaneers' 24-16 win over the Cowboys on Thursday night.,espn
+TB,Cade Otton,TE,OFF,TE1,1,Active,0.0,,,2026-10-09,,,Otton caught three of four targets for 25 yards in a 24-16 win over Dallas on Thursday.,espn
+TB,Ko Kieft,TE,OFF,TE3,3,Active,0.0,,,2026-10-07,,,"Kieft (elbow) does not carry an injury designation into Thursday's game against the Cowboys, Brianna Dix of the Buccaneers' official site reports.",espn
+TB,Emeka Egbuka,WR,OFF,WR1,1,Active,0.0,,,2026-10-09,,,Egbuka secured six of nine targets for 38 yards and rushed once for a 14-yard touchdown in the Buccaneers' 24-16 win over the Cowboys on Thursday night.,espn
+TB,Chris Godwin Jr.,WR,OFF,WR2,1,Active,0.0,,,2026-10-09,,,Godwin secured all three targets for 37 yards and rushed once for three yards in the Buccaneers' 24-16 win over the Cowboys on Thursday night.,espn
+TB,Ted Hurst III,WR,OFF,WR3,1,Active,0.0,,,2026-10-10,,,Hurst did not record a target during the Buccaneers' 24-16 win over the Cowboys on Thursday.,espn
+TB,Tez Johnson,WR,OFF,WR4+,2,Active,0.0,,,2026-10-10,,,Johnson caught his lone target for 64 yards during Thursday's 24-16 win over the Cowboys.,espn
+TB,Luke Haggard,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+TB,Billy Schrauth,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+TEN,Joshua Williams,CB,DEF,CB3,3,Injured Reserve,1.0,Pectoral,2026-10-18,2026-10-10,,IR-R,"Williams (pectoral) has been downgraded to out for Sunday's game against the Texans, Jim Wyatt of the Titans' official site reports.",espn
+TEN,Kevin Winston Jr.,S,DEF,S1,1,Doubtful,0.75,Quadriceps,2026-10-18,2026-10-14,,DOUBTFUL,Winston (quadriceps) did not practice Wednesday.,espn
+TEN,Marcus Harris,CB,DEF,NB1,1,Questionable,0.4,Ankle,2026-10-18,2026-10-14,,QUESTIONABLE,questionable,espn
+TEN,Amani Hooker,S,DEF,S1,1,Questionable,0.4,Concussion,2026-10-18,2026-10-14,,QUESTIONABLE,Hooker (concussion) was a limited participant in Wednesday's practice.,espn
+TEN,Tyjae Spears,RB,OFF,RB2,2,Questionable,0.4,Knee,2026-10-18,2026-10-14,,QUESTIONABLE,Spears was a limited participant in Wednesday's practice due to a knee injury.,espn
+TEN,David Martin-Robinson,TE,OFF,TE4,4,Questionable,0.4,Hamstring,2026-10-18,2026-10-14,,QUESTIONABLE,Martin-Robinson (hamstring) was a limited participant in Wednesday's practice.,espn
+TEN,Joey Slye,PK,,,,Active,0.0,,,2026-10-12,,,Slye made his lone field-goal attempt during the Titans' 26-3 loss to the Texans on Sunday.,espn
+TEN,Cor'Dale Flott,CB,DEF,CB1,1,Active,0.0,,,2026-10-14,,,Flott (chest) was a full participant in Wednesday's practice session.,espn
+TEN,Jaylon Jones,CB,DEF,CB2,2,Active,0.0,,,2026-10-12,,,,espn
+TEN,Jeffery Simmons,DT,DEF,DT1,1,Active,0.0,,,2026-10-09,,,,espn
+TEN,Jackie Marshall,DT,DEF,DT3,3,Active,0.0,,,2026-10-12,,,,espn
+TEN,John Franklin-Myers,DE,DEF,EDGE1,1,Active,0.0,,,2026-10-09,,,,espn
+TEN,Anthony Hill Jr.,LB,DEF,LB1,1,Active,0.0,,,2026-10-07,,,Hill tallied eight tackles (three solo) during the Titans' 24-18 loss to the Ravens on Sunday.,espn
+TEN,Cam Ward,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,Ward completed 23 of 36 passes for 170 yards and an interception in Sunday's 26-3 loss to the Texans. He added two yards on his lone carry.,espn
+TEN,Tony Pollard,RB,OFF,RB1,1,Active,0.0,,,2026-10-14,,,Pollard was a non-participant in Wednesday's practice due to rest.,espn
+TEN,Nicholas Singleton,RB,OFF,RB5,5,Active,0.0,,,2026-10-12,,,,espn
+TEN,Michael Carter,RB,OFF,RB6,6,Active,0.0,,,2026-10-12,,,,espn
+TEN,Gunnar Helm,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Helm failed to catch his only target during Sunday's 26-3 loss to the Texans.,espn
+TEN,Kylen Granson,TE,OFF,TE3,3,Active,0.0,,,2026-10-05,,,,espn
+TEN,Carnell Tate,WR,OFF,WR1,1,Active,0.0,,,2026-10-11,,,Tate caught one of five targets for six yards in Sunday's 26-3 loss to the Texans.,espn
+TEN,Wan'Dale Robinson,WR,OFF,WR2,1,Active,0.0,,,2026-10-11,,,Robinson caught six of seven targets for 53 yards in Sunday's 26-3 loss to the Texans.,espn
+TEN,Elic Ayomanor,WR,OFF,WR3,1,Active,0.0,,,2026-10-14,,,Ayomanor caught one of two passes for 17 yards during the Titans' 26-3 loss to the Texans on Sunday. He also added a tackle on special teams.,espn
+TEN,Calvin Ridley,WR,OFF,WR4+,2,Active,0.0,,,2026-10-13,,,Ridley caught two of three targets for 33 yards during Sunday's 26-3 loss to the Texans.,espn
+TEN,Brandon Crenshaw-Dickson,OT,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+TEN,Drew Moss,G,OL/ST,,,Active,0.0,,,2026-10-05,,,,espn
+WAS,Trey Amos,CB,DEF,CB2,2,Injured Reserve,1.0,Ankle,2026-10-19,2026-10-11,,IR-R,Amos (ankle) has been downgraded to out for Sunday's game against the Giants.,espn
+WAS,Jeremy McNichols,RB,OFF,RB4,4,Injured Reserve,1.0,Quadriceps,2026-10-19,2026-10-11,,IR-R,McNichols (quadriceps) has been ruled out for Sunday's game against the Giants.,espn
+WAS,Marcus Mariota,QB,OFF,QB3,3,Doubtful,0.75,Knee - MCL,2026-10-19,2026-10-13,,DOUBTFUL,doubtful,espn
+WAS,Charles Omenihu,DE,DEF,EDGE2,2,Questionable,0.4,Groin,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+WAS,Nick Cross,S,DEF,S1,1,Questionable,0.4,Illness,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+WAS,Tyler Owens,S,DEF,S2,2,Questionable,0.4,Hamstring,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+WAS,Percy Butler,S,DEF,S2,2,Questionable,0.4,Hamstring,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+WAS,Stefon Diggs,WR,OFF,WR4+,2,Questionable,0.4,Hamstring,2026-10-19,2026-10-13,,QUESTIONABLE,questionable,espn
+WAS,Drew Stevens,PK,,,,Active,0.0,,,2026-10-12,,,Stevens made both of his field-goal attempts and went 1-for-2 on extra-point tries during the Commanders' 27-27 tie with the Giants on Sunday.,espn
+WAS,Deatrich Wise Jr.,DE,DEF,EDGE3,3,Active,0.0,,,2026-10-11,,,"The Commanders activated Wise (quadriceps) from the reserve/PUP list Saturday, and he no longer has an injury designation for Sunday's game against the Giants.",espn
+WAS,Frankie Luvu,LB,DEF,LB1,1,Active,0.0,,,2026-10-10,,,Luvu (groin) does not have any injury designation ahead of Sunday's game against the Giants.,espn
+WAS,Sonny Styles,LB,DEF,LB1,1,Active,0.0,,,2026-10-09,,,Styles (groin) was a full participant at practice Thursday.,espn
+WAS,Jeremy Reaves,S,DEF,S1,1,Active,0.0,,,2026-10-07,,,Reaves (finger) was listed as a full practice participant on Wednesday's injury report.,espn
+WAS,Jayden Daniels,QB,OFF,QB1,1,Active,0.0,,,2026-10-11,,,"Daniels (elbow) completed 17 of 25 passes for 199 yards, no touchdowns and no interceptions while rushing nine times for 103 yards and two touchdowns in Sunday'",espn
+WAS,Jacory Croskey-Merritt,RB,OFF,RB1,1,Active,0.0,,,2026-10-11,,,Croskey-Merritt rushed 11 times for 82 yards and a touchdown but wasn't targeted in Sunday's 27-27 tie against the Giants.,espn
+WAS,Rachaad White,RB,OFF,RB3,3,Active,0.0,,,2026-10-12,,,White (shoulder) rushed seven times for 18 yards while catching his only target for two yards in Sunday's 27-27 tie against the Giants.,espn
+WAS,Chig Okonkwo,TE,OFF,TE1,1,Active,0.0,,,2026-10-13,,,Okonkwo caught four of six targets for 60 yards during Sunday's 27-27 tie against the Giants.,espn
+WAS,Ben Sinnott,TE,OFF,TE2,2,Active,0.0,,,2026-10-08,,,Sinnott (ribs) upgraded to full participation at Thursday's practice.,espn
+WAS,Antonio Williams,WR,OFF,WR1,1,Active,0.0,,,2026-10-14,,,Williams hauled in all three of his targets for 31 yards and added a two-yard punt return during the Commanders' 27-27 tie with the Giants on Sunday.,espn
+WAS,Treylon Burks,WR,OFF,WR2,1,Active,0.0,,,2026-10-14,,,Burks caught two passes on five targets for 16 yards during Sunday's 27-27 tie with the Giants.,espn
+WAS,Van Jefferson,WR,OFF,WR4+,3,Active,0.0,,,2026-10-13,,,Jefferson reverted to the Commanders' practice squad Monday.,espn
+WAS,Terry McLaurin,WR,OFF,WR4+,2,Active,0.0,,,2026-10-11,,,McLaurin (hamstring) caught all four of his targets for 62 yards and also caught a two-point conversion in Sunday's 27-27 tie against the Giants.,espn
+WAS,Tanoa Togiai,G,OL/ST,,,Active,0.0,,,2026-10-12,,,,espn
+WAS,Sam Cosmi,G,OL/ST,,,Active,0.0,,,2026-10-10,,,Cosmi (concussion/throat) does not have an injury designation for Sunday's game against the Giants.,espn
+WAS,Nick Allegretti,G,OL/ST,,,Active,0.0,,,2026-10-09,,,,espn
