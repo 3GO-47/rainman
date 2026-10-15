@@ -547,3 +547,19 @@
   rm-nocount opts a browser out). Fixed the credits-per-day bars (quotes were HTML-escaped → no height) and the .r color/align clash.
 - template: ⚙ dev in the league switch, F6 TEST › Dev frames dev.html (lazy), hit counter per page load + per tab opened (session-deduped).
 - Scheduler finding: 00:20 / 06:20 markets slots are mostly missed (PC asleep); the daily task catches up after wake (shown as "late").
+
+## n63 — 2026-10-15 · refinement pass, every page, every sport (v11)
+Audit: Playwright over every view of every page (33 NFL, 26 NCAA, 6 × NBA/NHL/WNBA, arb, social, tennis, landing, shells, dev) —
+JS errors, horizontal overflow, undefined/NaN text, unsortable tables, clipped headers, sparse tables, tiny fonts, animations, background.
+Fixed:
+- landing: soccer never reached its page or the landing lanes (slate codes eng.1/usa.1/… vs keys epl/mls/…) → 107 soccer games now on soccer.html and the landing;
+  hour-only ESPN timestamps (…T00Z) parsed everywhere (MLB page was blank with "Invalid time value", tennis showed "Invalid Date");
+  the Kelly bob + rain canvas removed (no animation rule); the model-record table sorts (shared sort helper on every non-template page).
+- tennis: matches table scrolls inside its panel instead of widening the page.
+- NBA / NHL / WNBA: Matchups and Big Board open on the first day's games with day chips (was 69–128 cards, 33–90k px tall); dates tolerant; minimum font 9.5px.
+- template: DFS lineup fields (proj undefined); fixed-layout and grid headers wrap instead of clipping (TD Grid / TD Board);
+  NCAA hides Depth Delta until a second snapshot exists and the model-only Card; college depth charts drop snap/target columns with no data;
+  injuries rows wrap; minimum font 9.5px (56 rules raised).
+- dev.html: every table sorts; policy board/sched grid fonts.
+- loop.py: PYTHONIOENCODING=utf-8 for every child (build_arb died on '≥' under cp1252 on 10-12).
+Left as designed: Player Board / H2H / Splits tables scroll horizontally inside their panel; NCAA Card v2 / Markets v2 await CFB markets.

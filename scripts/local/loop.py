@@ -10,6 +10,7 @@ Run it once a day (Windows Task Scheduler, see scripts/local/install.ps1). It de
 
 Usage: python scripts/local/loop.py [--force] [--no-push] [--dry]      (--force ignores the weekday cadence, --dry = gate only)
 Log: notes/local_runs.log · state: notes/local_state.json"""
+import os as _os0; _os0.environ.setdefault('PYTHONIOENCODING', 'utf-8'); _os0.environ.setdefault('PYTHONUTF8', '1')
 import datetime, glob, json, os, subprocess, sys, traceback
 sys.path.insert(0, os.path.dirname(__file__))
 from common import log, state, save_state, run, TODAY, TODAY_S

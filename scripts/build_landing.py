@@ -21,6 +21,7 @@ LEAGUES = [  # key, label, sport group, page, status, logo (real league marks: E
     ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png'),
     ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', CDN + 'espn/misc_logos/500-dark/tennis.png')]
 SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'laliga': 'La Liga', 'bund': 'Bundesliga', 'seriea': 'Serie A', 'ligue1': 'Ligue 1'}
+SOCCER_CODE = {'eng.1': 'epl', 'usa.1': 'mls', 'uefa.champions': 'ucl', 'esp.1': 'laliga', 'ger.1': 'bund', 'ita.1': 'seriea', 'fra.1': 'ligue1'}   # ESPN slate code -> key
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
 SOCCER_LOGO = {k: CDN + f'leaguelogos/soccer/500-dark/{v}.png' for k, v in SOCCER_LOGO.items()}
 COMING = [('f1', 'Formula 1', CDN + 'teamlogos/leagues/500-dark/f1.png'), ('ufc', 'UFC', CDN + 'teamlogos/leagues/500/ufc.png')]
@@ -72,6 +73,11 @@ def sport_teaser(lg, labels):
     n = len({r['opp'].replace('@', '') for r in rows} | {r['team'] for r in rows})
     return dict(week='', n=n, markets={k: v for k, v in out.items() if v})
 
+SORTJS = r'''(function(){function val(td){var t=td.textContent.trim().replace(/[,%$u+]/g,'');var n=parseFloat(t);return isNaN(n)||!/^[-+]?[\d.]/.test(t)?t.toLowerCase():n}
+document.addEventListener('click',function(e){var th=e.target.closest('table th');if(!th||th.closest('table').classList.contains('nosort')||th.dataset.k||th.classList.contains('srt'))return;var tb=th.closest('table'),body=tb.tBodies[0];if(!body)return;var i=[...th.parentNode.children].indexOf(th),asc=th.classList.contains('sa');
+tb.querySelectorAll('th').forEach(function(h){h.classList.remove('sa','sd')});th.classList.add(asc?'sd':'sa');var rows=[...body.rows];rows.sort(function(a,b){var x=val(a.cells[i]||{textContent:''}),y=val(b.cells[i]||{textContent:''});if(typeof x==='number'&&typeof y==='number')return asc?y-x:x-y;if(typeof x==='number')return -1;if(typeof y==='number')return 1;return asc?(y>x?1:-1):(x>y?1:-1)});rows.forEach(function(r){body.appendChild(r)})});
+var st=document.createElement('style');st.textContent='table th{cursor:pointer;user-select:none}table th.sa:after{content:" \\25B4";opacity:.7}table th.sd:after{content:" \\25BE";opacity:.7}';document.head.appendChild(st)})();'''
+
 def load_slate():
     files = sorted(glob.glob('data/raw/slate_all_*.txt'))
     if not files: raise SystemExit('no data/raw/slate_all_*.txt — pull the multi-sport slate first (notes/scrape_recipe.md)')
@@ -82,7 +88,7 @@ def load_slate():
         p = line.rstrip('\n').split('|')
         if len(p) < 26: continue
         if p[22] == '1': continue            # preseason is ignored everywhere (Josh, 2026-10-07)
-        lg = p[1]
+        lg = SOCCER_CODE.get(p[1], p[1])
         games.append(dict(lg=lg, sport='soccer' if lg in SOCCER else lg, sub=SOCCER.get(lg, ''), id=p[2], date=p[3], status=p[4],
                           away=dict(id=p[5], abbr=p[6], name=p[7], rec=p[8], logo=p[9], rank=p[10] if p[10] not in ('', '99') else ''),
                           home=dict(id=p[11], abbr=p[12], name=p[13], rec=p[14], logo=p[15], rank=p[16] if p[16] not in ('', '99') else ''),
@@ -174,7 +180,7 @@ h2{font:600 10.5px var(--mono);letter-spacing:2px;text-transform:uppercase;color
 .bub{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;min-width:120px;flex:1}
 .bub .o{border-radius:50%;background:var(--panel);border:1px solid var(--edge2);display:flex;align-items:center;justify-content:center;position:relative}.bub.on .o{border:2px solid var(--acc);box-shadow:0 0 0 4px rgba(232,179,57,.12)}.bub:hover .o{border-color:var(--dim)}.bub.on:hover .o{border-color:var(--acc)}
 .bub .o img{width:56%;height:56%;object-fit:contain}.bub .o .n{position:absolute;right:-2px;bottom:-2px;font:700 10.5px var(--mono);background:var(--s3);border:1px solid var(--edge2);border-radius:10px;padding:1px 7px;color:var(--fg)}.bub.on .o .n{background:var(--acc);color:#000;border-color:var(--acc)}
-.bub b{font-size:12.5px}.bub small{color:var(--dim);font-size:10.5px;text-align:center}.bub .live{font:600 8.5px var(--mono);letter-spacing:1px;color:var(--acc)}.bub .shell{font:600 8.5px var(--mono);letter-spacing:1px;color:var(--mute)}
+.bub b{font-size:12.5px}.bub small{color:var(--dim);font-size:10.5px;text-align:center}.bub .live{font:600 9.5px var(--mono);letter-spacing:1px;color:var(--acc)}.bub .shell{font:600 9.5px var(--mono);letter-spacing:1px;color:var(--mute)}
 .seq{display:flex;gap:2px;height:7px}.seq i{display:block;width:5px;border-radius:1px;background:var(--s3)}.seq i.W{background:var(--green)}.seq i.L{background:var(--red)}.seq i.P{background:var(--dim)}
 /* timeline */
 .tlwrap{border:1px solid var(--edge);border-radius:10px;background:var(--panel);padding:10px 12px 8px;overflow:hidden}
@@ -191,7 +197,7 @@ h2{font:600 10.5px var(--mono);letter-spacing:2px;text-transform:uppercase;color
 .gc .mid{display:flex;flex-direction:column;align-items:center;gap:1px;font:500 10px var(--mono);color:var(--dim);min-width:68px;text-align:center}.gc .mid b{color:var(--fg);font-size:11px}.gc .mid .at{color:var(--mute)}
 .gc .tilt{height:7px;border-radius:2px;background:var(--s3);overflow:hidden;display:flex}.gc .tilt i{display:block;height:100%}.gc .tilt .a{background:var(--s3)}.gc .tilt .f{background:var(--acc)}.gc .tilt .u{background:#3a3b40}
 .gc .nums{display:flex;justify-content:space-between;font:600 10.5px var(--mono);color:var(--dim)}.gc .nums b{color:var(--fg)}.gc .nums .c{color:var(--mute);font-weight:500}
-.gc .tagl{position:absolute;top:7px;left:10px;font:600 8.5px var(--mono);letter-spacing:1px;color:var(--mute)}.gc .tagr{position:absolute;top:7px;right:10px;font:600 8.5px var(--mono);letter-spacing:1px;color:var(--acc)}
+.gc .tagl{position:absolute;top:7px;left:10px;font:600 9.5px var(--mono);letter-spacing:1px;color:var(--mute)}.gc .tagr{position:absolute;top:7px;right:10px;font:600 9.5px var(--mono);letter-spacing:1px;color:var(--acc)}
 /* bar panels */
 .panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:10px}
 .card{border:1px solid var(--edge);border-radius:10px;background:var(--panel);padding:12px 14px}.card h3{margin:0 0 8px;font:600 10.5px var(--mono);letter-spacing:2px;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;align-items:baseline;gap:8px}.card h3 span{font:400 11px var(--sans);letter-spacing:0;text-transform:none;color:var(--mute)}
@@ -219,11 +225,11 @@ const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"]/
 const LG=J.leagues,LGBY={};LG.forEach(l=>LGBY[l.key]=l);const SHELL=!!J.shell;
 let SEL=SHELL?LG[0].key:(new URLSearchParams(location.hash.replace('#','')).get('lg')||'nfl');if(!LGBY[SEL])SEL=LG[0].key;
 const TZ='America/Chicago';
-const CT=d=>new Date(d).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:TZ}).replace(':00','');
-const DAY=d=>new Date(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:TZ});
-const DAYS=d=>new Date(d).toLocaleDateString('en-US',{weekday:'short',timeZone:TZ});
-const DKEY=d=>new Date(d).toLocaleDateString('en-CA',{timeZone:TZ});
-const HOUR=d=>{const p=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'numeric',hour12:false,timeZone:TZ}).formatToParts(new Date(d));const h=+p.find(x=>x.type==='hour').value%24,m=+p.find(x=>x.type==='minute').value;return h+m/60};
+const CT=d=>PD(d).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:TZ}).replace(':00','');
+const PD=d=>new Date(String(d).replace(/T(\d{2})Z$/,'T$1:00Z'));const DAY=d=>PD(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:TZ});
+const DAYS=d=>PD(d).toLocaleDateString('en-US',{weekday:'short',timeZone:TZ});
+const DKEY=d=>PD(d).toLocaleDateString('en-CA',{timeZone:TZ});
+const HOUR=d=>{const p=new Intl.DateTimeFormat('en-US',{hour:'numeric',minute:'numeric',hour12:false,timeZone:TZ}).formatToParts(PD(d));const h=+p.find(x=>x.type==='hour').value%24,m=+p.find(x=>x.type==='minute').value;return h+m/60};
 const TODAY=DKEY(new Date());
 const L=t=>t&&t.logo?`<img src="https://a.espncdn.com/i/teamlogos/${t.logo}" alt="" onerror="this.style.visibility='hidden'">`:'';
 const tm=(t,nm)=>`<span class="tm">${L(t)}${t.rank?`<span class="rk">${t.rank}</span>`:''}<b>${esc(nm?t.name:t.abbr)}</b>${t.rec?`<small>${esc(t.rec)}</small>`:''}</span>`;
@@ -324,7 +330,7 @@ h1{font:800 30px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 6px}
 .sub{color:var(--dim);font-size:13.5px;margin:0}
 .hero{display:flex;align-items:center;gap:16px;margin:0 0 26px}
 .hero>.rmask{flex:none;width:82px;height:72px}
-.hero .kel{flex:none;margin:14px 2px 0 -26px;display:block;animation:rmbob 3.6s ease-in-out infinite}
+.hero .kel{flex:none;margin:14px 2px 0 -26px;display:block}
 .hero .kel .rmask{width:50px;height:50px;display:block}
 @keyframes rmbob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-6px) rotate(2deg)}}
 #rainfx{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
@@ -346,7 +352,7 @@ h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:v
 .sp.soon{opacity:.45}.sp.soon:hover{border-color:var(--e)}
 .perf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:12px}
 .perf>div{border:1px solid var(--e);border-radius:8px;background:var(--p);padding:11px 13px}
-.perf span{display:block;font:600 9px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--mute)}
+.perf span{display:block;font:600 9.5px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--mute)}
 .perf b{display:block;font:700 21px/1.25 var(--mono);margin-top:3px}
 .perf small{display:block;font:500 10.5px var(--mono);color:var(--dim)}
 .perf b.g{color:var(--g)}.perf b.r{color:var(--r)}
@@ -453,7 +459,7 @@ def page(games, pulled):
 {HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}{CSS_VARS}{CSS}</style>{brand.THEME_BOOT}</head><body>
 <div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a>{brand.theme_switch_html()}</span></div>
 <main>
-<canvas id="rainfx" aria-hidden="true"></canvas>
+
 <div class="hero">{brand.mascot("counting", 82, "rmask", anim=True)}<span class="kel">{brand.kelly("counting", 50, "rmask")}</span><div><h1>RAINMAN</h1>
 <p class="sub">Matchup intelligence, one dashboard per sport.</p></div></div>
 <h2>sports <span>{nsport} with games in the window</span></h2>
@@ -465,33 +471,10 @@ def page(games, pulled):
 <div class="foot"><a href="brand.html" style="color:var(--accent-text)">brand</a> · RAINMAN · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}) · player models from game logs (Pro Football Reference, ESPN, sportsdataverse, the Sackmann tennis archive) · built {built} · information, not advice</div>
 </main>
 <script>{brand.THEME_JS}</script>
-<script>
-(function(){{
- var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
- if (reduce) {{ document.querySelectorAll('#rainfx,animate').forEach(function(n){{n.remove()}}); return; }}
- var c = document.getElementById('rainfx'); if (!c) return; var g = c.getContext('2d');
- var W, H, drops = [], dpr = Math.min(devicePixelRatio || 1, 2);
- function mk(y){{ return {{x: Math.random()*W, y: y, l: (9 + Math.random()*30)*dpr,
-                         v: (2.2 + Math.random()*4.4)*dpr, a: .06 + Math.random()*.26}}; }}
- function size(){{ W = c.width = innerWidth*dpr; H = c.height = innerHeight*dpr;
-   c.style.width = innerWidth+'px'; c.style.height = innerHeight+'px';
-   var n = Math.max(40, Math.min(190, Math.round(innerWidth*innerHeight/11000)));
-   drops = []; for (var i=0;i<n;i++) drops.push(mk(Math.random()*H)); }}
- var col = '#2b6bff', fade = 1;
- function theme(){{ var cs = getComputedStyle(document.documentElement), t = document.documentElement.dataset.theme;
-   col = (t === 'light' ? cs.getPropertyValue('--dim2') : cs.getPropertyValue('--accent')).trim() || col;
-   fade = t === 'light' ? .5 : 1; }}                         // paper takes a lighter shower
- function tick(){{
-   theme(); g.clearRect(0,0,W,H); g.lineWidth = 1.15*dpr; g.lineCap = 'round'; g.strokeStyle = col;
-   for (var i=0;i<drops.length;i++){{ var d = drops[i];
-     g.globalAlpha = d.a*fade; g.beginPath(); g.moveTo(d.x, d.y); g.lineTo(d.x + 1.3*dpr, d.y + d.l); g.stroke();
-     d.y += d.v*2.1; if (d.y > H) drops[i] = mk(-d.l); }}
-   g.globalAlpha = 1; requestAnimationFrame(tick); }}
- addEventListener('resize', size); size(); tick();
-}})();
-</script>
+
 
 <script>document.querySelectorAll('tr.lg[data-go]').forEach(t=>{{if(t.dataset.go)t.onclick=()=>location.href=t.dataset.go}});</script>
+<script>{SORTJS}</script>
 </body></html>"""
 
 LEAGUES_BY = {k: dict(key=k, label=l, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES}
@@ -514,7 +497,7 @@ def shell(key, label, games, pulled, logo=''):
 <div class="foot">RAINMAN · {label} · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}). <a href="index.html">← all sports</a></div>
 </div>
 <script>const J={json.dumps(J, separators=(',', ':'))};</script>
-<script>{brand.THEME_JS}</script><script>{SJS}</script></body></html>"""
+<script>{brand.THEME_JS}</script><script>{SJS}</script><script>{SORTJS}</script></body></html>"""
 
 def main():
     games, pulled = load_slate()
