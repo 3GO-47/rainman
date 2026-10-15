@@ -563,3 +563,8 @@ Fixed:
 - dev.html: every table sorts; policy board/sched grid fonts.
 - loop.py: PYTHONIOENCODING=utf-8 for every child (build_arb died on '≥' under cp1252 on 10-12).
 Left as designed: Player Board / H2H / Splits tables scroll horizontally inside their panel; NCAA Card v2 / Markets v2 await CFB markets.
+
+## n64 — 2026-10-15 · v12 Overview slate + security check
+- Overview: slate tiles compact, eight across (two rows hold a full week), bye week as a strip under the grid, every tile opens a game pane
+  (line / implied / ML / Kalshi, model win %, model positions incl. props & anytime TD, env rank, DC schemes, scheme edges, each starter's Ψ + proj + injury lift, injuries both sides, "open in Game View").
+- Security check: see notes/security_2026-10-15.md — one finding (private workbooks in the public history, first commit); remedies left to Josh.
