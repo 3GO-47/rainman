@@ -1039,8 +1039,8 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
  .dcsr{grid-template-columns:44px minmax(0,1fr)}
  #gameview .gsides,.gsides{grid-template-columns:1fr!important;gap:10px}
  .gcard{min-height:0}
- #gameview .grow,.grow{grid-template-columns:38px minmax(0,1.1fr) minmax(0,.8fr) minmax(0,1.2fr)!important;gap:4px;padding:3px 4px;min-height:30px}
- .grow>*:nth-child(5){display:none}
+ #gameview .grow,.grow{grid-template-columns:40px minmax(0,1.1fr) minmax(0,1fr)!important;gap:2px 6px;padding:4px 4px;min-height:30px}
+ .grow>*{min-width:0;overflow:hidden}.grow>*:nth-child(4){grid-column:2/-1}.grow>*:nth-child(5){grid-column:1;grid-row:2;font-size:10px}
  .gvdeep,#gameview .gvdeep{grid-template-columns:1fr!important}
  .hg2,.hg3,.hg2b,.r11wrap,.r11two,.dvpsplit,.sc2,.inj2,.scgrid,.lore3,.volgrid,.standgrid,.standgrid>div,.pkgrid2,.apipol,.hgl{grid-template-columns:1fr!important}
  .r11sum,.kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
@@ -5237,7 +5237,7 @@ buildSide();go(CUR_ITEM,{silent:true});
 addEventListener('hashchange',()=>{const h=new URLSearchParams(location.hash.replace(/^#/,''));const v=h.get('v')||'lab';if(ITEMS[v]&&v!==CUR_ITEM)go(v,{silent:true})});
 (function(){const mq=matchMedia('(max-width:760px)');let mo,tm;
 function wrap(){document.querySelectorAll('table').forEach(t=>{if(t.closest('.mscroll,.tw,.tscroll,#mnav'))return;if(t.parentElement&&t.parentElement.closest('table'))return;const w=document.createElement('div');w.className='mscroll';t.parentNode.insertBefore(w,t);w.appendChild(t);const f=t.querySelector('tr');if(f&&f.children.length<=2)w.classList.add('one')})}
-function grids(){document.querySelectorAll('main *,body>div *').forEach(e=>{if(e.classList.contains('mgrid1')||e.dataset.mg)return;const cs=getComputedStyle(e);if(cs.display!=='grid')return;const tr=cs.gridTemplateColumns.split(' ').filter(Boolean);e.dataset.mg='1';if(tr.length<2)return;if(e.scrollWidth>e.clientWidth+2||tr.length>=3&&!tr.some(x=>/^\d+(\.\d+)?px$/.test(x)&&parseFloat(x)<90))e.classList.add('mgrid1')})}
+function grids(){document.querySelectorAll('main *,body>div *').forEach(e=>{if(e.classList.contains('mgrid1')||e.dataset.mg)return;const cs=getComputedStyle(e);if(cs.display!=='grid')return;const tr=cs.gridTemplateColumns.split(' ').filter(Boolean);e.dataset.mg='1';if(tr.length<2)return;const row=tr.some(x=>/^\d+(\.\d+)?px$/.test(x)&&parseFloat(x)<90);if(row)return;if(e.scrollWidth>e.clientWidth+2||tr.length>=3)e.classList.add('mgrid1')})}
 function pass(){wrap();grids()}
 function on(){document.documentElement.classList.add('mob');pass();mo=new MutationObserver(()=>{clearTimeout(tm);tm=setTimeout(pass,150)});mo.observe(document.body,{childList:true,subtree:true})}
 function off(){document.documentElement.classList.remove('mob');if(mo)mo.disconnect()}
