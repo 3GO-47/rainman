@@ -47,7 +47,7 @@ th.srt{cursor:pointer;user-select:none}th.srt:hover{color:var(--acc)}th.srt-asc:
 .hint.fi{display:inline-block;margin-left:6px;font-size:12px;color:var(--dim);cursor:pointer;position:relative;font-weight:400;letter-spacing:0;text-transform:none}.hint.fi.blk{display:block;margin:4px 0 0}.hint.fi .hb{display:none;position:absolute;left:0;top:100%;z-index:20;min-width:260px;max-width:560px;background:#111214;border:1px solid var(--edge2);border-radius:8px;padding:8px 10px;font:400 11px/1.5 var(--sans);color:var(--txt);box-shadow:0 8px 24px rgba(0,0,0,.6)}.hint.fi.open .hb,.hint.fi:hover .hb{display:block}.hint.fi.blk .hb{position:static;display:none;max-width:none}.hint.fi.blk.open .hb,.hint.fi.blk:hover .hb{display:block}
 </style>__BRAND_BOOT__
 </head><body>
-<div id="hdr"><a class="brand" href="index.html">__BRAND_MARK__ RAINMAN</a><img id="lgLogo" alt="" style="height:26px;width:auto"><span class="lg" id="lgName"></span><nav id="tnav"></nav><span class="right"><a class="all" href="index.html">◍ all sports</a><a class="all" href="rainman.html">NFL</a><span id="built"></span>__BRAND_SWITCH__</span></div>
+<div id="hdr"><a class="brand" href="index.html">__BRAND_MARK__ RAINMAN</a><img id="lgLogo" alt="" style="height:26px;width:auto"><span class="lg" id="lgName"></span><nav id="tnav"></nav><span class="right"><a class="all" href="index.html">◍ sports</a><a class="all" id="catLink" href="index.html">›</a><span id="built"></span>__BRAND_SWITCH__</span></div>
 <div id="sub"></div>
 <div id="gbar"><label>game</label><select id="gGame"><option value="">all games</option></select><label>team</label><select id="gTeam"><option value="">all teams</option></select><label>slot</label><span id="gSlots"></span><label>source</label><select id="gSrc"></select><span class="mini" id="gInfo"></span></div>
 <main>
@@ -118,6 +118,7 @@ const nextGame=t=>J.games.find(g=>g.away===t||g.home===t);const oppOf=t=>{const 
   $('#gSrc').innerHTML=Object.keys(J.dvp).map(k=>`<option ${k==='combined'?'selected':''}>${k}</option>`).join('');
   $('#gGame').onchange=()=>{G.game=$('#gGame').value;G.team='';$('#gTeam').value='';render()};$('#gTeam').onchange=()=>{G.team=$('#gTeam').value;G.game='';$('#gGame').value='';render()};$('#gSrc').onchange=()=>{G.src=$('#gSrc').value;render()};
   $('#gSlots').querySelectorAll('.chip').forEach(c=>c.onclick=()=>{G.slots.has(c.dataset.s)?G.slots.delete(c.dataset.s):G.slots.add(c.dataset.s);c.classList.toggle('on');render()});
+  (()=>{const C={basketball:['basketball.html','basketball'],hockey:['hockey.html','hockey'],football:['football.html','football'],baseball:['baseball.html','baseball']}[J.sport];const a=document.getElementById('catLink');if(a&&C){a.href=C[0];a.textContent='› '+C[1]}})();
   $('#gInfo').textContent=`${J.games.length} games in the next 14 days · ${Object.keys(TEAM).length} teams · seasons ${J.seasons.join(' + ')} · ${J.logs.length.toLocaleString()} player-games`})();
 /* ---- helpers ---- */
 const D=()=>J.dvp[G.src]||J.dvp.combined;

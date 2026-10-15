@@ -19,7 +19,33 @@ LEAGUES = [  # key, label, sport group, page, status, logo (real league marks: E
     ('mlb', 'MLB', 'baseball', 'mlb.html', 'shell', CDN + 'teamlogos/leagues/500-dark/mlb.png'),
     ('nhl', 'NHL', 'hockey', 'nhl.html', 'live', CDN + 'teamlogos/leagues/500-dark/nhl.png'),
     ('soccer', 'Soccer', 'soccer', 'soccer.html', 'shell', CDN + 'leaguelogos/soccer/500-dark/2.png'),
-    ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', CDN + 'espn/misc_logos/500-dark/tennis.png')]
+    ('tennis', 'Tennis', 'tennis', 'tennis.html', 'live', CDN + 'espn/misc_logos/500-dark/tennis.png'),
+    # ---- registered 2026-10-15 for the category layer: shells build when the slate carries games, 'planned' shows as a coming bubble
+    ('cfl', 'CFL', 'football', 'cfl.html', 'shell', CDN + 'teamlogos/leagues/500-dark/cfl.png'),
+    ('ufl', 'UFL', 'football', 'ufl.html', 'planned', CDN + 'teamlogos/leagues/500-dark/ufl.png'),
+    ('ncaaw', "Women's College Basketball", 'basketball', 'ncaaw.html', 'shell', NCAA_LOGO),
+    ('ncaah', 'College Hockey', 'hockey', 'ncaah.html', 'shell', NCAA_LOGO),
+    ('ncaabsb', 'College Baseball', 'baseball', '#', 'planned', NCAA_LOGO),
+    ('kbo', 'KBO', 'baseball', '#', 'planned', ''),
+    ('ufc', 'UFC', 'combat', '#', 'planned', CDN + 'teamlogos/leagues/500/ufc.png'),
+    ('boxing', 'Boxing', 'combat', '#', 'planned', ''),
+    ('bjj', 'Jiu-Jitsu', 'combat', '#', 'planned', ''),
+    ('f1', 'Formula 1', 'racing', '#', 'planned', CDN + 'teamlogos/leagues/500-dark/f1.png'),
+    ('nascar', 'NASCAR', 'racing', '#', 'planned', CDN + 'teamlogos/leagues/500-dark/nascar.png'),
+    ('indycar', 'IndyCar', 'racing', '#', 'planned', CDN + 'teamlogos/leagues/500-dark/indycar.png'),
+    ('pga', 'PGA Tour', 'events', '#', 'planned', CDN + 'teamlogos/leagues/500-dark/pga.png'),
+    ('olympics', 'Olympics', 'events', '#', 'planned', '')]
+# ---- Layer 0 categories -> Layer 1 hub page. Soccer and Tennis already carry every league on one page, so that page is the hub.
+CATS = [('football', 'Football', 'football.html', 'NFL · College Football · CFL · UFL'),
+        ('basketball', 'Basketball', 'basketball.html', "NBA · WNBA · men's and women's college"),
+        ('soccer', 'Soccer', 'soccer.html', 'MLS · Champions League · Premier League · La Liga · Bundesliga · Serie A · Ligue 1'),
+        ('baseball', 'Baseball', 'baseball.html', 'MLB · college · KBO'),
+        ('hockey', 'Hockey', 'hockey.html', 'NHL · college hockey'),
+        ('tennis', 'Tennis', 'tennis.html', 'ATP · WTA · the slams'),
+        ('combat', 'MMA &amp; Combat', 'combat.html', 'UFC · boxing · jiu-jitsu'),
+        ('racing', 'Racing', 'racing.html', 'Formula 1 · NASCAR · IndyCar'),
+        ('events', 'Golf &amp; Events', 'events.html', 'PGA Tour · Olympics · everything else ESPN scores')]
+CAT_BY = {c[0]: c for c in CATS}
 SOCCER = {'epl': 'Premier League', 'mls': 'MLS', 'ucl': 'Champions League', 'laliga': 'La Liga', 'bund': 'Bundesliga', 'seriea': 'Serie A', 'ligue1': 'Ligue 1'}
 SOCCER_CODE = {'eng.1': 'epl', 'usa.1': 'mls', 'uefa.champions': 'ucl', 'esp.1': 'laliga', 'ger.1': 'bund', 'ita.1': 'seriea', 'fra.1': 'ligue1'}   # ESPN slate code -> key
 SOCCER_LOGO = {'epl': 23, 'mls': 19, 'ucl': 2, 'laliga': 15, 'bund': 10, 'seriea': 12, 'ligue1': 9}
@@ -223,7 +249,7 @@ SCSS, SCSS_VARS = brand.themed_css(SCSS, 'scss')
 SJS = r"""
 const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LG=J.leagues,LGBY={};LG.forEach(l=>LGBY[l.key]=l);const SHELL=!!J.shell;
-let SEL=SHELL?LG[0].key:(new URLSearchParams(location.hash.replace('#','')).get('lg')||'nfl');if(!LGBY[SEL])SEL=LG[0].key;
+let SEL=(new URLSearchParams(location.hash.replace('#','')).get('lg'))||(SHELL?((J.hub&&(LG.find(l=>J.games.some(g=>g.sport===l.key))||{}).key)||LG[0].key):'nfl');if(!LGBY[SEL])SEL=LG[0].key;
 const TZ='America/Chicago';
 const CT=d=>PD(d).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:TZ}).replace(':00','');
 const PD=d=>new Date(String(d).replace(/T(\d{2})Z$/,'T$1:00Z'));const DAY=d=>PD(d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:TZ});
@@ -243,13 +269,13 @@ const lgName=g=>g.sport==='soccer'?(J.soccer[g.lg]||g.lg):(LGBY[g.sport]||{label
 const open=(l)=>{if(!SHELL&&l&&l.page&&l.page!=='#')location.href=l.page};
 const seqStrip=(seq,n)=>seq&&seq.length?`<span class="seq" title="last ${Math.min(n,seq.length)} graded positions, oldest → newest">${seq.slice(-n).map(r=>`<i class="${r}"></i>`).join('')}</span>`:'';
 // ---- 1. sports as bubbles — size = games this week
-function rail(){const el=$('#sports');if(!el||SHELL){if(el)el.hidden=true;return}
+function rail(){const el=$('#sports');if(!el||(SHELL&&!J.hub)){if(el)el.hidden=true;return}
   const mx=Math.max(1,...LG.map(l=>(byLg[l.key]||[]).length));
   el.innerHTML=LG.map(l=>{const G=byLg[l.key]||[];const n=G.length,td=G.filter(g=>DKEY(g.date)===TODAY).length;const R=J.records&&J.records[l.key];let rec='';
     if(R){let w=0,x=0;Object.values(R.by||{}).forEach(b=>{w+=b.W;x+=b.L});if(w+x)rec=`<small>model <b>${w}-${x}</b></small>${seqStrip(R.seq,20)}`}
     const d=Math.round(60+56*Math.sqrt(n/mx));
-    return `<div class="bub${l.key===SEL?' on':''}" data-k="${l.key}" title="${esc(l.label)} · ${n} games this week"><span class="o" style="width:${d}px;height:${d}px"><img src="${l.logo}" alt="" onerror="this.style.visibility='hidden'"><span class="n">${n}</span></span><b>${l.label}</b><small>${td?td+' today · ':''}${n} this week</small><span class="${l.status==='live'?'live':'shell'}">${l.status==='live'?'PLAYER MODEL':'SCHEDULE + LINES'}</span>${rec}</div>`}).join('');
-  el.querySelectorAll('.bub').forEach(d=>d.onclick=()=>{SEL=d.dataset.k;history.replaceState(null,'','#lg='+SEL);render()})}
+    return `<div class="bub${l.key===SEL?' on':''}" data-k="${l.key}" title="${esc(l.label)} · ${n} games this week"><span class="o" style="width:${d}px;height:${d}px">${l.logo?`<img src="${l.logo}" alt="" onerror="this.style.visibility='hidden'">`:`<span style="font:800 18px var(--mono);color:var(--dim2)">${esc(l.label.slice(0,2).toUpperCase())}</span>`}<span class="n">${n}</span></span><b>${l.label}</b><small>${l.status==='planned'?'not wired yet':(td?td+' today · ':'')+n+' this week'}</small><span class="${l.status==='live'?'live':'shell'}">${l.status==='live'?'PLAYER MODEL ↗':l.status==='planned'?'COMING':'SCHEDULE + LINES'}</span>${rec}</div>`}).join('');
+  el.querySelectorAll('.bub').forEach(d=>d.onclick=()=>{const l=LGBY[d.dataset.k];if(J.hub&&l&&l.status==='live'&&l.page&&l.page!=='#'){location.href=l.page;return}SEL=d.dataset.k;history.replaceState(null,'','#lg='+SEL);render()})}
 // ---- 2. today on a clock — one lane per league, every game at its kickoff
 function timeline(){const el=$('#tl');let day=TODAY;let T=games.filter(g=>DKEY(g.date)===day);
   if(!T.length){const nxt=games.find(g=>DKEY(g.date)>TODAY);if(nxt){day=DKEY(nxt.date);T=games.filter(g=>DKEY(g.date)===day)}}
@@ -343,11 +369,11 @@ h2 span{font:400 11.5px var(--sans);letter-spacing:0;text-transform:none;color:v
 .sp{display:flex;flex-direction:column;gap:9px;border:1px solid var(--e);border-radius:10px;background:var(--p);padding:14px 15px;transition:none;min-height:116px}
 .sp:hover{border-color:var(--acc);background:var(--p2)}
 .sp .t{display:flex;align-items:center;gap:10px;min-width:0}
-.sp .t img{width:30px;height:30px;object-fit:contain;flex:none}
+.sp .t img{width:30px;height:30px;object-fit:contain;flex:none}.sp .t .lgs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}.sp .t .lgs img{width:22px;height:22px}.sp .k2{color:var(--dim2);font-size:11px}
 .sp .t b{font:700 16px/1.2 var(--sans);letter-spacing:-.2px}
 .sp .k{font:600 9.5px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--mute)}
 .sp .k i{font-style:normal;color:var(--acc)}
-.sp .m{margin-top:auto;display:flex;align-items:baseline;gap:8px;font:500 11.5px var(--mono);color:var(--dim)}
+.sp .m{margin-top:auto;display:block;line-height:1.6;font:500 11.5px var(--mono);color:var(--dim)}
 .sp .m b{font-weight:700;color:var(--fg)}.sp .m .g{color:var(--g)}.sp .m .r{color:var(--r)}
 .sp.soon{opacity:.45}.sp.soon:hover{border-color:var(--e)}
 .perf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-bottom:12px}
@@ -390,15 +416,18 @@ def page(games, pulled):
         tone = 'g' if r['u'] > 0 else 'r' if r['u'] < 0 else ''
         wl = '%d-%d%s' % (r['W'], r['L'], '-%d' % r['P'] if r['P'] else '')
         return '<b>%s</b> <span class="%s">%s%.2fu</span>' % (wl, tone, '+' if r['u'] >= 0 else '', r['u'])
-    def tile(k, label, pg, status, logo):
-        n = cnt.get(k, 0)
-        soon = status == 'shell' and not n
-        img = '<img src="%s" alt="" onerror="this.style.display=\'none\'">' % logo if logo else ''
+    def ctile(ck, clabel, cpage, cdesc):
+        members = [x for x in LEAGUES if x[2] == ck]
+        n = sum(cnt.get(k, 0) for k, l, g, p, st, i in members)
+        live = [x for x in members if x[4] == 'live']; shells = [x for x in members if x[4] == 'shell']; planned = [x for x in members if x[4] == 'planned']
+        logos = ''.join('<img src="%s" alt="" title="%s" onerror="this.style.display=\'none\'">' % (i, l) for k, l, g, p, st, i in members if i)
+        W = sum(REC[k]['W'] for k, l, g, p, st, i in members if REC.get(k)); Lo = sum(REC[k]['L'] for k, l, g, p, st, i in members if REC.get(k)); U = sum(REC[k]['u'] for k, l, g, p, st, i in members if REC.get(k))
+        rec = ' &middot; model <b>%d-%d</b> <span class="%s">%s%.2fu</span>' % (W, Lo, 'g' if U > 0 else 'r' if U < 0 else '', '+' if U >= 0 else '', U) if W + Lo else ''
         gm = '<b>%d</b> this week' % n if n else '<span class="mute">no games in the window</span>'
-        rec = (' &middot; ' + rec_line(k)) if REC.get(k) else ''
-        return ('<a class="sp%s" href="%s"><span class="t">%s<b>%s</b></span><span class="k">%s</span><span class="m">%s%s</span></a>'
-                % (' soon' if soon else '', pg, img, label, KIND.get(k, ''), gm, rec))
-    tiles = ''.join(tile(k, l, p, s, i) for k, l, g, p, s, i in LEAGUES)
+        what = ' &middot; '.join(x for x in ['%d with a player model' % len(live) if live else '', '%d schedule &amp; lines' % len(shells) if shells else '', '%d coming' % len(planned) if planned else ''] if x)
+        return ('<a class="sp%s" href="%s"><span class="t"><b>%s</b><span class="lgs">%s</span></span><span class="k">%s</span><span class="m">%s%s</span><span class="k2">%s</span></a>'
+                % (' soon' if not n and not live else '', cpage, clabel, logos, cdesc, gm, rec, what))
+    tiles = ''.join(ctile(*c) for c in CATS)
     # ---- model performance, per league, from the frozen ledgers
     BE = 0.5238
     def bar(hit):
@@ -453,7 +482,7 @@ def page(games, pulled):
     table_html = ('<div class="tw"><table><thead><tr><th>league</th><th class="r">graded</th><th class="r">live</th><th>record</th>'
                   '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th>plays &ge; 6%</th><th>last 24</th></tr></thead><tbody>'
                   + rows + '</tbody></table></div>') if rows else '<p class="note">No graded positions on file yet.</p>'
-    nsport = len([1 for k, l, g, p, s_, i in LEAGUES if cnt.get(k)])
+    nsport = len([c for c in CATS if sum(cnt.get(k, 0) for k, l, g, p, s_, i in LEAGUES if g == c[0])])
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN</title>
 {HEAD}<style>{brand.THEME_CSS}{brand.alias_css("app")}{brand.SWITCH_CSS}{CSS_VARS}{CSS}</style>{brand.THEME_BOOT}</head><body>
@@ -462,7 +491,7 @@ def page(games, pulled):
 
 <div class="hero">{brand.mascot("counting", 82, "rmask", anim=True)}<span class="kel">{brand.kelly("counting", 50, "rmask")}</span><div><h1>RAINMAN</h1>
 <p class="sub">Matchup intelligence, one dashboard per sport.</p></div></div>
-<h2>sports <span>{nsport} with games in the window</span></h2>
+<h2>sports <span>{nsport} with games in the window · pick a sport, then a league</span></h2>
 <div class="grid">{tiles}</div>
 <h2>model performance <span>every position the models froze, graded against the line it was frozen at · one unit risked per position</span></h2>
 <div class="perf">{kp}</div>
@@ -479,11 +508,36 @@ def page(games, pulled):
 
 LEAGUES_BY = {k: dict(key=k, label=l, page=p, status=s, logo=i) for k, l, g, p, s, i in LEAGUES}
 
+def hub(ck, clabel, cpage, cdesc, games, pulled):
+    """Layer 1: one sport category — its leagues as bubbles (size = games this week, click = open that league), then the slate machinery
+    (clock, week wall, edges, standings) for the selected league. Same page as a shell, one level up."""
+    members = [dict(key=k, label=l, page=p, status=st, logo=i) for k, l, g, p, st, i in LEAGUES if g == ck]
+    gs = [x for x in games if x['sport'] in {m['key'] for m in members}]
+    J = dict(games=gs, leagues=members, soccer=SOCCER, soccerLogo=SOCCER_LOGO, pulled=pulled, shell=True, hub=True, cat=ck, catLabel=re.sub('&amp;', '&', clabel), teasers={}, records=model_records())
+    built = datetime.now().strftime('%Y-%m-%d %H:%M')
+    crumbs = ''.join('<a href="%s" class="%s">%s</a>' % (p, 'on' if k == ck else '', l) for k, l, p, d in CATS)
+    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · {re.sub('&amp;', '&', clabel)}</title>
+{SHEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{SCSS_VARS}{SCSS}.hl a.on{{color:var(--acc);border-color:var(--acc)}}</style>{brand.THEME_BOOT}</head><body>
+<div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN</a><span class="tag"><a href="index.html" style="color:var(--acc)">sports</a> › {clabel}</span><span class="hl">{crumbs}</span><span class="right">slate {pulled} · built {built}{brand.theme_switch_html()}</span></div>
+<div class="wrap">
+<h1>{clabel}<small>{cdesc}. Pick a league: the ones with a player model open their dashboard, the rest show schedules and lines here. Below, the selected league's week on one clock, its slate, the edges and the standings.</small></h1>
+<div id="sports" class="bubs"></div>
+<h2 id="tlH"></h2><div id="tl" class="tlwrap"></div>
+<h2 id="weekH"></h2><div id="filt" class="chips"></div><div id="week"></div>
+<h2 id="edgesH"></h2><div id="edges"></div>
+<h2 id="standH"></h2><div id="stand"></div>
+<div class="foot">RAINMAN · {clabel} · schedules, records and lines from ESPN's public scoreboard (pulled {pulled}). <a href="index.html">← all sports</a></div>
+</div>
+<script>const J={json.dumps(J, separators=(',', ':'))};</script>
+<script>{brand.THEME_JS}</script><script>{SJS}</script><script>{SORTJS}</script></body></html>"""
+
 def shell(key, label, games, pulled, logo=''):
     """Schedule-and-lines page for a league without a player data source yet (same page, one league)."""
     J = dict(games=games, leagues=[dict(key=key, label=label, page='#', status='shell', logo=logo)], soccer=SOCCER, soccerLogo=SOCCER_LOGO, pulled=pulled, shell=True, teasers={}, records={})
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
-    links = ''.join(f'<a href="{p}">{l}</a>' for k, l, g, p, s, i in LEAGUES)
+    cat = next((g for k, l, g, p, s, i in LEAGUES if k == key), '')
+    cpage = CAT_BY.get(cat, ('', '', 'index.html', ''))[2]; clabel = CAT_BY.get(cat, ('', cat, '', ''))[1]
+    links = f'<a href="index.html">sports</a><a href="{cpage}" style="color:var(--acc)">{clabel}</a>' + ''.join('<a href="%s" class="%s">%s</a>' % (p, 'on' if k == key else '', l) for k, l, g, p, s, i in LEAGUES if g == cat and s != 'planned')
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RAINMAN · {label}</title>
 {SHEAD}<style>{brand.THEME_CSS}{brand.alias_css("alt")}{brand.SWITCH_CSS}.brand .rmask{{vertical-align:-5px;margin-right:4px}}{SCSS_VARS}{SCSS}</style>{brand.THEME_BOOT}</head><body>
 <div id="hdr"><a class="brand" href="index.html">{brand.mascot("counting", 20, "rmask hdr")}RAINMAN</a><span class="tag">{label} · schedule &amp; lines</span><span class="hl">{links}</span><span class="right">slate {pulled} · built {built}{brand.theme_switch_html()}</span></div>
@@ -508,6 +562,9 @@ def main():
         if s != 'shell': continue
         gs = [x for x in games if x['sport'] == k]
         open('dashboard/' + p, 'w', encoding='utf-8').write(shell(k, l, gs, pulled, i)); n[p] = len(gs)
+    for ck, cl, cp, cd in CATS:
+        if ck in ('soccer', 'tennis'): continue          # their existing multi-league pages are the hub
+        open('dashboard/' + cp, 'w', encoding='utf-8').write(hub(ck, cl, cp, cd, games, pulled)); n[cp] = len([x for x in games if x['sport'] in {k for k, l, g, p, st, i in LEAGUES if g == ck}])
     print(f"dashboard/index.html: {len(games)} games across {len(set(g['lg'] for g in games))} leagues (pulled {pulled}) · shells {n}")
 
 if __name__ == '__main__':

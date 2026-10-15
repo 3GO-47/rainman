@@ -568,3 +568,12 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Overview: slate tiles compact, eight across (two rows hold a full week), bye week as a strip under the grid, every tile opens a game pane
   (line / implied / ML / Kalshi, model win %, model positions incl. props & anytime TD, env rank, DC schemes, scheme edges, each starter's Ψ + proj + injury lift, injuries both sides, "open in Game View").
 - Security check: see notes/security_2026-10-15.md — one finding (private workbooks in the public history, first commit); remedies left to Josh.
+
+## n65 — 2026-10-15 · v13 slate colors + Ψ strips · the category layer
+- Overview: every slate window has its own color (chip, SLATE filter buttons, tile edge: TNF violet, INTL teal, SUN 1P green, SUN 4P amber, SNF blue, MNF red, SAT cyan…);
+  every tile carries the Game View Ψ strip (both offenses' composite rank per slot, white edge = softer side) with a data-set picker on the slate header (2024 / 2025 / 2026 / combined / adjusted → G.ovSrc).
+- Layers: Layer 0 index.html = sport categories (Football, Basketball, Soccer, Baseball, Hockey, Tennis, MMA & Combat, Racing, Golf & Events);
+  Layer 1 = a hub per category (football.html, basketball.html, baseball.html, hockey.html, combat.html, racing.html, events.html; soccer.html and tennis.html are their own hubs)
+  with league bubbles (size = games this week; a league with a player model opens its dashboard, the rest select in place) and the slate machinery for the selected league;
+  Layer 2/3 = the league dashboards and their tabs, unchanged. Crumbs (sports › football) on every league page.
+- Registry: CFL, UFL, women's college basketball, college hockey (shells; CFL / NCAAW / NCAAH join the ESPN slate pull), college baseball, KBO, UFC, boxing, jiu-jitsu, F1, NASCAR, IndyCar, PGA, Olympics (coming bubbles).

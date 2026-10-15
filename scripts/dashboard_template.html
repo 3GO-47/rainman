@@ -416,6 +416,11 @@ tr.rw td{background:rgba(0,200,83,.06)}tr.rl td{background:rgba(255,82,82,.06)}
 @media(max-width:1500px){.sribbon.g16{grid-template-columns:repeat(6,minmax(0,1fr))!important}}@media(max-width:1100px){.sribbon.g16{grid-template-columns:repeat(4,minmax(0,1fr))!important}}@media(max-width:700px){.sribbon.g16{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .sribbon.g16>.stile{padding:5px 7px 4px;border-radius:7px}.sribbon.g16 .stteam{font-size:12px;gap:4px}.sribbon.g16 .stteam img{width:18px;height:18px}.sribbon.g16 .stteam i{font-size:9.5px}.sribbon.g16 .stt{margin:3px 0 2px}.sribbon.g16 .stln{font-size:10px}
 .sribbon.g16 .stpk{gap:2px;margin-top:2px}.sribbon.g16 .pkc{font-size:9.5px;padding:0 3px;line-height:14px}.sribbon.g16 .pkl{display:none}.sribbon.g16 .stf{font-size:9.5px}.sribbon.g16 .sttl{margin:2px 0}.sribbon.g16 .stl .mini{font-size:9.5px}
+.slate[data-s]{color:var(--w);border-color:color-mix(in srgb,var(--w) 55%,transparent);background:color-mix(in srgb,var(--w) 12%,transparent)}
+#gSlates button.sw{color:var(--w);border-color:color-mix(in srgb,var(--w) 50%,transparent)}#gSlates button.sw .n{color:color-mix(in srgb,var(--w) 70%,#fff)}#gSlates button.sw.on{background:var(--w);color:#000;border-color:var(--w)}#gSlates button.sw.on .n{color:#000}
+.sribbon.g16>.stile{border-left:3px solid var(--w,var(--edge2))}
+.stcomp{margin:3px 0 1px}.stcomp>div{display:flex;align-items:center;gap:2px;margin-top:2px}.stcomp b{font:600 9px var(--mono);width:22px;flex:none}.stcomp i{flex:1 1 0;display:block;text-align:center;font:600 9px/14px var(--mono);border-radius:2px;font-style:normal;min-width:0;background:var(--s2);color:var(--dim2)}
+#ovSrc{background:var(--s2);color:var(--txt);border:1px solid var(--edge2);border-radius:3px;font:500 10.5px var(--ui);padding:1px 4px}
 .byestrip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:6px;padding:4px 9px;border:1px dashed var(--edge2);border-radius:7px;background:var(--s2)}.byestrip .bt{display:inline-flex;align-items:center;gap:4px;font:800 12px var(--ui)}
 #ppModal tr.pl td{background:color-mix(in srgb,var(--green) 8%,transparent)}#ppModal table.mkt td,#ppModal table.mkt th{text-align:left}
 #ppModal table.fx td,#ppModal table.fx th{max-width:none;overflow:visible;text-overflow:clip}#ppModal .fx td:first-child{white-space:nowrap}
@@ -1192,7 +1197,7 @@ document.querySelector('.sfoot').innerHTML=document.querySelector('.sfoot').inne
   .replace('__BUILT__',J.built).replace('__BLEND__',J.blend).replace('__SEASONS__',[...new Set(J.logs.map(l=>l[2]))].sort().map(s=>String(s).slice(2)+'/'+String(s+1).slice(2)).join(' + ')).replace('__GAMES__',Math.round(J.weekly.length/2)).replace('__ROWS__',J.logs.length.toLocaleString());
 $('#ntHdr').textContent=NT;if(!IS_NFL)document.querySelectorAll('.lgnfl').forEach(e=>e.hidden=true);
 (LG.hideTabs||[]).forEach(v=>{const b=document.querySelector(`#legacyNav nav button[data-v="${v}"]`);if(b)b.hidden=true});
-(()=>{const o=LG.other;if(!o)return;const keep=location.hash||'';$('#lgSw').innerHTML=`<a href="index.html" title="Layer 0 — every sport" style="color:var(--acc)">◍ all sports</a><a class="${IS_NFL?'on':''}" href="${IS_NFL?'#':'rainman.html'+keep}">NFL</a><a class="${IS_NFL?'':'on'}" href="${IS_NFL?'ncaa.html'+keep:'#'}">NCAA</a><a href="dev.html" title="dev dashboard — API spend, loop runs, scheduler health, odds policy, freshness, deploy, traffic" style="color:var(--dim2)">⚙ dev</a>`;addEventListener('hashchange',()=>{[...$('#lgSw').children].forEach(a=>{if(!a.classList.contains('on'))a.href=a.href.split('#')[0]+location.hash})})})();
+(()=>{const o=LG.other;if(!o)return;const keep=location.hash||'';$('#lgSw').innerHTML=`<a href="index.html" title="Layer 0 — every sport" style="color:var(--acc)">◍ sports</a><a href="sport.html#football" title="Layer 1 — football leagues" style="color:var(--dim)">› football</a><a class="${IS_NFL?'on':''}" href="${IS_NFL?'#':'rainman.html'+keep}">NFL</a><a class="${IS_NFL?'':'on'}" href="${IS_NFL?'ncaa.html'+keep:'#'}">NCAA</a><a href="dev.html" title="dev dashboard — API spend, loop runs, scheduler health, odds policy, freshness, deploy, traffic" style="color:var(--dim2)">⚙ dev</a>`;addEventListener('hashchange',()=>{[...$('#lgSw').children].forEach(a=>{if(!a.classList.contains('on'))a.href=a.href.split('#')[0]+location.hash})})})();
 document.querySelectorAll('#legacyNav nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#legacyNav nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   ['home','chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets','test'].forEach(v=>$('#'+v).hidden=v!==b.dataset.v);window.scrollTo({top:0});
@@ -1292,7 +1297,8 @@ INTRO.insights.how.unshift('scheme edges first: the starters whose opponent\'s d
 INTRO.depth={what:'Both rosters for one game.',how:['key players = the effective starters: usage, season PPR, what the opponent allows to his slot (rank 1 of 32 = allows the most), Ψ and the projection','the rest of the depth chart sits under each position as chips; Q = questionable, OUT = out, ▲▼ = workload rising or fading','the back seven: starters shown, next up folded','connections = every thread between the two rosters: rivalries, alumni, revenge, homecomings, birthdays, coaching ties']};
 const NOTES={
  gameviewp:['v9','the card now names each defense\'s missing men under the lines and puts the injury lift beside every starter whose slot it touches'],
- overview:['v12','slate tiles are compact — eight across, the whole week in two rows — the bye week is a strip under them, and every tile opens a game pane: line, model positions with props and anytime TD, scheme edges, every starter\'s matchup rank, injuries both sides'],
+ overview:['v13','every slate window has its own color (chips, filter buttons, tile edge); each tile carries the Game View Ψ strip — both offenses\' composite rank per slot — with a data-set picker (2024 / 2025 / 2026 / combined / adjusted) on the slate header'],
+ overview_v12:['v12','slate tiles are compact — eight across, the whole week in two rows — the bye week is a strip under them, and every tile opens a game pane: line, model positions with props and anytime TD, scheme edges, every starter\'s matchup rank, injuries both sides'],
  depth:['v11','college charts drop the snap / target columns they have no data for; column headers wrap instead of clipping'],
  injuries:['v11','the lift table wraps its reasons instead of clipping them'],
  dev:['v10','new: the dev dashboard framed inside the site — scheduler health, the policy board, error trail, deploy state and traffic'],
@@ -1371,7 +1377,9 @@ const ctTime=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return '';let h
 const GAMES=wk=>J.games26.filter(g=>g[GM.wk]===wk).sort((a,b)=>(a[GM.date]<b[GM.date]?-1:a[GM.date]>b[GM.date]?1:0)||tmin(a[GM.time])-tmin(b[GM.time]));
 const gameOf=(t,wk)=>GAMES(wk).find(g=>g[GM.vis]===t||g[GM.home]===t);
 const oppFor=(t,wk)=>(J.sched26[t]||[])[wk-1]||'';
-const slateChip=s=>s?`<span class="slate" title="${SLATE_TIP[s]||''}">${SLATE_LBL[s]||s}</span>`:'';
+const SLATE_C=LG.slateColor||{TNF:'#c39bff',THU:'#ffb347',FRI:'#ff9f43',SAT:'#61dcff',INTL:'#2ee6a6',EARLY:'#00c853',LATE:'#e8b339',SNF:'#4da3ff',MNF:'#ff5252',TBD:'#8b98a5',MIDWK:'#c39bff',SAT_AM:'#2ee6a6',SAT_PM:'#00c853',SAT_NT:'#4da3ff',SAT_LT:'#e8b339',SUNMON:'#ff5252'};
+const slateC=s=>SLATE_C[s]||'#8b98a5';
+const slateChip=s=>s?`<span class="slate" data-s="${s}" style="--w:${slateC(s)}" title="${SLATE_TIP[s]||''}">${SLATE_LBL[s]||s}</span>`:'';
 const kickLbl=g=>!g?'':g[GM.time]?`${g[GM.day]} ${g[GM.time]} ET / ${ctTime(g[GM.time])} ${slateChip(g[GM.slate])}`:`${g[GM.day]} kickoff TBD`;
 let ACT=null,DEFSET=null;   // null = no filter
 function recompute(){
@@ -1438,7 +1446,7 @@ function apply(){
   const gs=GAMES(G.week);
   const cnt={};gs.forEach(g=>cnt[g[GM.slate]]=(cnt[g[GM.slate]]||0)+1);
   $('#gSlates').innerHTML=`<button data-s="" class="${G.slates.size?'':'on'}">all</button>`+SLATE_ORDER.filter(s=>cnt[s]).map(s=>
-    `<button data-s="${s}" class="${G.slates.has(s)?'on':''}" title="${SLATE_TIP[s]} — click to toggle, combine several">${SLATE_LBL[s]}<span class="n">${cnt[s]}</span></button>`).join('');
+    `<button data-s="${s}" class="sw ${G.slates.has(s)?'on':''}" style="--w:${slateC(s)}" title="${SLATE_TIP[s]} — click to toggle, combine several">${SLATE_LBL[s]}<span class="n">${cnt[s]}</span></button>`).join('');
   document.querySelectorAll('#gSlates button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;if(!v)G.slates.clear();else G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
   $('#gPos').innerHTML=`<button data-p="" class="${G.pos.size?'':'on'}">all</button>`+POSLIST.map(pp=>
     `<button data-p="${pp}" class="${G.pos.has(pp)?'on':''}" style="${G.pos.has(pp)?'':'color:'+POSC[pp]}" title="toggle ${pp} — combine several">${posIcon(pp,10)} ${pp}</button>`).join('');
@@ -2569,10 +2577,14 @@ function home(){
       <span class="mini" title="storylines · DK props posted">${sc.riv+sc.alum+sc.conn} st${np?` · ${np} pr`:''}</span></div>`};
   const stile=g=>{const v=g[GM.vis],h=g[GM.home],t=tilt(g),b=bg(v,h),e=envOfG(g),sc=storyCount(g,wk);const N=(J.narr||[]).filter(n=>+n.week===wk&&n.game===v+'@'+h);const riv=N.find(n=>n.kind==='rivalry'),rev=N.filter(n=>n.kind==='revenge').length;
     const sp=b&&b.spread_line!=null?b.spread_line:null,tot=b&&b.total_line!=null?b.total_line:null;const impH=sp!=null&&tot!=null?(tot-sp)/2:null;const kg=kalGame(wk,v,h);const kml=kg&&kg.ml[h]?+kg.ml[h].p_mid:null;
-    return `<div class="stile" data-game="${v}@${h}" title="click for this game's pane — line, model positions, scheme edges, every starter's rank, injuries" style="--a:${vividC(v)};--h:${vividC(h)}">
+    const OV9=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];const Dx=J.dvp[G.ovSrc||'combined']||J.dvp.combined;const A=OV9.map(s=>(Dx[h]||{comps:{}}).comps[s]),Hh=OV9.map(s=>(Dx[v]||{comps:{}}).comps[s]);
+    const cc=(x,s,o,off,def)=>`<i style="${x==null?'':gradeStyle(x)}${x!=null&&o!=null&&x<o?';box-shadow:inset 0 0 0 1px #fff':''}" title="${s} · ${off} offense vs ${def} D · Ψ ${x==null?'—':x.toFixed(1)} (${G.ovSrc||'combined'}; 1 = ${def} allows the most)">${x==null?'·':x.toFixed(0)}</i>`;
+    const comp=`<div class="stcomp" title="Ψ per slot: QB RB1 RB2 WR1 WR2 WR3 WR4+ TE1 TE2 · top row ${v} offense vs ${h} D · bottom row ${h} offense vs ${v} D · white edge = the softer of the two · data set: ${G.ovSrc||'combined'}"><div><b style="color:${vividC(v)}">${v}</b>${OV9.map((s,i)=>cc(A[i],s,Hh[i],v,h)).join('')}</div><div><b style="color:${vividC(h)}">${h}</b>${OV9.map((s,i)=>cc(Hh[i],s,A[i],h,v)).join('')}</div></div>`;
+    return `<div class="stile" data-game="${v}@${h}" title="click for this game's pane — line, model positions, scheme edges, every starter's rank, injuries" style="--a:${vividC(v)};--h:${vividC(h)};--w:${slateC(g[GM.slate])}">
       <div class="stl"><span>${slateChip(g[GM.slate])}</span><span class="mini">${g[GM.day]} ${g[GM.time]?g[GM.time].replace(' ',''):'TBD'}</span></div>
       <div class="stt"><span class="stteam">${tlogo(v,26)}<b style="color:${vividC(v)}">${v}</b><i>${impH!=null?(tot-impH).toFixed(1):''}</i></span><span class="mini">@</span><span class="stteam r">${tlogo(h,26)}<b style="color:${vividC(h)}">${h}</b><i>${impH!=null?impH.toFixed(1):''}</i></span></div>
       <div class="stln mono">${sp!=null?`<b>${sp>0?h:v} -${Math.abs(sp).toFixed(1).replace('.0','')}</b>`:'<span class="dim">no line</span>'}${tot!=null?` · O/U ${tot}`:''}${kml!=null?` · <span title="Kalshi: ${h} to win">K ${(kml*100).toFixed(0)}%</span>`:''}</div>
+      ${comp}
       ${(()=>{if(!IS_NFL||typeof PICKS==='undefined')return '';const P=PICKS.filter(p=>+p.week===wk&&['ML','ATS','TOTAL'].includes(p.type)&&pkGame(p)===v+'@'+h);if(!P.length)return '<div class="stpk"><span class="dim">no line frozen</span></div>';const ord={ML:0,ATS:1,TOTAL:2};
         return `<div class="stpk"><span class="pkl" title="the model's frozen positions on this game's lines · green = a play (edge ≥ 6%) · grey = priced, not played">model</span>${P.sort((a,b)=>ord[a.type]-ord[b.type]).map(p=>{const e=pkEdgeVal(p);const play=e!=null&&e>=0.06;const et=p.type==='ML'?(p.model!==''&&p.model!=null?`${(100*+p.model).toFixed(0)}%`:''):(p.edge!==''&&p.edge!=null?`${+p.edge>0?'+':''}${(+p.edge).toFixed(1)}`:'');const tip=p.type==='ML'?`model ${(100*+p.model).toFixed(0)}% to win vs market ${(100*+p.market_ref).toFixed(0)}% (${esc(p.market_src||'')})`:`model ${esc(String(p.model))} vs market ${esc(String(p.market_ref))} (${esc(p.market_src||'')}) · edge ${esc(String(p.edge))} pts`;return `<span class="pkc${play?' on':''}" title="${tip}${play?' · PLAY':''}${p.result?' · '+p.result:''}">${({ML:'ML',ATS:'ATS',TOTAL:'O/U'})[p.type]||p.type} <b>${esc(String(p.side)).replace('UNDER','U').replace('OVER','O')}</b>${et?` <i>${et}</i>`:''}</span>`}).join('')}</div>`})()}
       <div class="sttl"><span class="mini" style="color:${vividC(v)}">${v}</span>${tiltBar(t.a,t.b)}<span class="mini" style="color:${vividC(h)}">${h}</span></div>
@@ -2591,7 +2603,8 @@ function home(){
   const tiles=marquee.map(stile).join('');
   const nTiles=marquee.length;
   const byeStrip=MANY?'':`<div class="byestrip"><span class="slate">BYE</span><span class="mini">wk ${wk}</span>${byeT.length?byeT.map(t=>`<span class="bt">${tlogo(t,18)}<b style="color:${vividC(t)}">${t}</b></span>`).join(''):'<span class="dim">nobody idle</span>'}<span class="mini dim" style="margin-left:auto">${byeT.length?`${byeT.length} team${byeT.length===1?'':'s'} idle · out of every lineup, market and DvP row this week`:`every team plays in week ${wk}`}</span></div>`;
-  const slateBoard=`<div class="panel" id="slateBoard"><h3>wk ${wk} ${MANY?'marquee games':'slate'} <span class="f">implied team totals under the logos · DK spread and total · K = Kalshi home win price · tilt bar leans toward the offense in the softer field · env = scoring-environment rank · click a game to open it${MANY?' · marquee = closest spreads, highest totals, power-conference teams':''}</span></h3>
+  const srcOpts=Object.keys(J.dvp).map(k=>`<option value="${k}" ${(G.ovSrc||'combined')===k?'selected':''}>${k}</option>`).join('');
+  const slateBoard=`<div class="panel" id="slateBoard"><h3 style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">wk ${wk} ${MANY?'marquee games':'slate'} <span class="f">implied totals under the logos · DK spread and total · K = Kalshi home win price · the strip = both offenses' composite rank (Ψ) per slot — QB RB1 RB2 WR1 WR2 WR3 WR4+ TE1 TE2, green = soft field, white edge = the softer side · env = scoring-environment rank · click a game for its pane${MANY?' · marquee = closest spreads, highest totals, power-conference teams':''}</span><label class="mini" style="margin-left:auto;white-space:nowrap">ranks <select id="ovSrc" title="which defense-vs-position data set the strip and the tilt use">${srcOpts}</select></label></h3>
     <div class="sribbon${nTiles<=16?' g16':''}">${marquee.length?tiles:'<p class="note">no games in the current filter</p>'}</div>${byeStrip}
     ${MANY?`<table class="gboard slatetbl"><thead><tr><th>kick</th><th>game</th><th>spread</th><th>total</th><th>implied</th><th>softer field</th><th title="scoring environment rank">env</th></tr></thead><tbody>${gsw.map(grow).join('')}</tbody></table>`:''}</div>`;
   const rrow=g=>{const {best,worst}=pick(g);const who=(x,tone)=>x?`<span class="who"><span class="pp plink" data-p="${x.u.player}"><b>${esc(x.u.player)}</b></span><span class="mini">${x.o[0]==='@'?'@':'vs'} ${tcell(x.def)}</span>${psi(x.v)}</span>`:'<span class="dim">—</span>';
@@ -2613,7 +2626,8 @@ function home(){
   document.querySelectorAll('#homeTop details.hfold').forEach(d=>d.ontoggle=()=>{try{localStorage.setItem('rm-hf-'+d.id.slice(3),d.open?'1':'0')}catch(_){}});
   if(typeof syncSub==='function')syncSub();
   document.querySelectorAll('#homeTop [data-slate]').forEach(el=>el.onclick=()=>{const v=el.dataset.slate;G.slates.has(v)?G.slates.delete(v):G.slates.add(v);G.game='';apply()});
-  document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp'))return;const k=el.dataset.game;if(window.gamePop){const [a,b]=k.split('@');gamePop(a,b)}else{G.game=k;G.slates.clear();apply();go('gameviewp')}});
+  const ovS=document.getElementById('ovSrc');if(ovS)ovS.onchange=()=>{G.ovSrc=ovS.value;apply()};
+  document.querySelectorAll('#slateBoard .stile[data-game],#slateBoard tr.gb[data-game]').forEach(el=>el.onclick=e=>{if(e.target.closest('.pp,select,label'))return;const k=el.dataset.game;if(window.gamePop){const [a,b]=k.split('@');gamePop(a,b)}else{G.game=k;G.slates.clear();apply();go('gameviewp')}});
   document.querySelectorAll('#defHeat tr.dlink').forEach(el=>el.onclick=()=>{go('observatory');const sel=$('#dDef');if(sel){sel.value=el.dataset.d;sel.dispatchEvent(new Event('change'))}});
   }
 }

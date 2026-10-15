@@ -185,7 +185,8 @@ def props(week=None):
 
 # ---------------------------------------------------------------- multi-sport slate
 SLATE = [('nfl', 'football/nfl', ''), ('cfb', 'football/college-football', '&groups=80'), ('nba', 'basketball/nba', ''), ('ncaab', 'basketball/mens-college-basketball', '&groups=50'),
-         ('wnba', 'basketball/wnba', ''), ('mlb', 'baseball/mlb', ''), ('nhl', 'hockey/nhl', '')] + [(s, f'soccer/{s}', '') for s in ['eng.1', 'usa.1', 'uefa.champions', 'esp.1', 'ger.1', 'ita.1', 'fra.1']]
+         ('wnba', 'basketball/wnba', ''), ('mlb', 'baseball/mlb', ''), ('nhl', 'hockey/nhl', ''),
+         ('cfl', 'football/cfl', ''), ('ncaaw', 'basketball/womens-college-basketball', '&groups=50'), ('ncaah', 'hockey/mens-college-hockey', '')] + [(s, f'soccer/{s}', '') for s in ['eng.1', 'usa.1', 'uefa.champions', 'esp.1', 'ger.1', 'ita.1', 'fra.1']]
 
 def injuries():
     """ESPN's injuries feed for all 32 teams (status, injury, return date, the beat note) -> data/raw/espn_injuries_<today>.txt
