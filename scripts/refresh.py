@@ -85,6 +85,8 @@ def main():
     run(['scripts/build_narratives.py'])
     run(['scripts/build_injuries.py'], check=False) if 'check' in run.__code__.co_varnames else run(['scripts/build_injuries.py'])
     run(['scripts/build_dashboard.py'])
+    try: run(['scripts/build_tracking.py'])
+    except Exception as e: print('  build_tracking skipped:', e)
     try: run(['scripts/build_dev.py'])
     except Exception as e: print('  build_dev skipped:', e)
     # other sports (NBA / NHL / WNBA): sportsdataverse parquets from GitHub, then the generic Layer-1 builder

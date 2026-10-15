@@ -577,3 +577,12 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   with league bubbles (size = games this week; a league with a player model opens its dashboard, the rest select in place) and the slate machinery for the selected league;
   Layer 2/3 = the league dashboards and their tabs, unchanged. Crumbs (sports › football) on every league page.
 - Registry: CFL, UFL, women's college basketball, college hockey (shells; CFL / NCAAW / NCAAH join the ESPN slate pull), college baseball, KBO, UFC, boxing, jiu-jitsu, F1, NASCAR, IndyCar, PGA, Olympics (coming bubbles).
+
+## n66 — 2026-10-15 · Tracking (v14) + slate 3×5
+- New Layer-0 project: Tracking (dashboard/tracking.html, scripts/build_tracking.py, scripts/track_js.py). A shared ★ (localStorage rainman.track)
+  on Overview slate tiles (whole game), on every game-pane line / prop / anytime-TD row, and on every Arb Engine edge row. The page holds each
+  item against the live board (same loaders as the Arb Engine): saved line/price, best price now, consensus move since the save (Odds API
+  snapshots + sparkline), fair, model + EV, status (open / kicked off / final), notes; filters; backup / restore; a parlay slip (tick legs →
+  combined price, de-vigged fair, model probability + EV, stake → payout; "save to Social" pushes a parlay play into rainman.plays).
+  Links: ★ tracking in the league switch, Arb / Social / landing headers. The loop builds it after the Arb Engine every markets pass.
+- Overview slate: three rows of five.
