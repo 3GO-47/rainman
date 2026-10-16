@@ -594,3 +594,9 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Social: feed first (everyone / mine / friends / open), the DraftKings line now beside every play (green = you hold the better number), tail and fade
   (fade drafts the other side), ★ to Tracking; grading extended to NBA / NHL / WNBA finals from the schedule feeds (9,945 finals keyed, was 606),
   and grading no longer depends on the game still being on the slate; drafts accept parlays from Tracking; tools (profile, log, leaderboard, weekly) in the side column.
+
+## n68 — 2026-10-15 · v15 mobile mode
+- scripts/mobile.py: the shared ≤760px shim (MOB_CSS + MOB_JS) injected into every page builder: header folds to one row, every data table becomes a horizontal scroll strip with the first column pinned (.mscroll, width:0/min-width:100% so it never widens its parent), wide grids drop to one column (row-style grids with a fixed column <90px are left alone), pop-ups go full screen, touch targets ≥30px.
+- dashboard_template.html: bottom section bar (#mnav from SECTIONS, F1–F6), sub-tabs as a scrolling row with a FILTERS toggle (#gbar hidden until opened), ☰ sheet (leagues · every view · glossary · share link), notes clamp to two lines (tap to expand), slate tiles one per row ≤540px, Game View sides stacked with starter rows re-flowed to two lines, scheme rows / depth charts slide sideways.
+- patches: scripts/patch_v15_mobile.py, patch_v15b_mobile.py (+ the grid-heuristic edit applied in place). Verified in Playwright at 390×844 across all 40 views + 9 pages (docW 390, no errors) and live through same-origin 390px frames.
+- deployed: 4 web-upload commits (23 files); ncaa.html waits on the PC loop (its 18:24 markets pass pushed, so the loop is healthy again). Local main = reconcile c015dd5 ahead of origin by 2.
