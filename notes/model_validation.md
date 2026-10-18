@@ -30,23 +30,23 @@ should show — but it is one week. The model leaned Under on 91 of 118 lines an
 Result for the wk 5 lines: 34 Over / 36 Under (wk 4: 27 Over / 91 Under), 9 plays.
 
 <!-- props:start -->
-## Player props — walk-forward backtest (2026-10-14)
+## Player props — walk-forward backtest (2026-10-18)
 Skill = 1 − MSE / MSE(slot-mean) for yardage/count markets; anytime TD = 1 − logloss / logloss(slot-mean rate).
 Targets: every QB/RB/WR/TE game with ≥2 prior games, 2025 wk 3 → latest 2026 week; projections use only earlier data.
 "form + matchup + game" adds the opponent-adjusted defense effect (β) and the market-implied team total (γ).
 
 | market | games | player form only | form + matchup + game | tuned |
 |---|---|---|---|---|
-| pass_yds | 734 | +6.34% | +12.53% | H=4 K=6 role-w=0.5 β=1.0 γ=0.5 |
-| pass_td | 734 | +1.85% | +6.45% | H=4 K=6 role-w=1 β=0.5 γ=1.0 |
-| pass_att | 734 | +6.61% | +7.47% | H=4 K=3 role-w=0.25 β=1.0 γ=0.0 |
-| completions | 734 | +7.33% | +9.51% | H=8 K=3 role-w=0.25 β=1.5 γ=0.0 |
-| interceptions | 734 | -0.98% | -0.95% | H=4 K=6 role-w=1 β=0.0 γ=0.0 |
-| rush_yds | 4694 | +12.61% | +13.30% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
-| rush_att | 2313 | +18.67% | +18.67% | H=4 K=1.5 role-w=0.25 β=0.0 γ=0.0 |
-| receptions | 5246 | +12.83% | +13.18% | H=8 K=3 role-w=0.5 β=0.5 γ=0.0 |
-| rec_yds | 5246 | +8.77% | +9.92% | H=8 K=3 role-w=0.25 β=0.5 γ=0.5 |
-| rush_rec_yds | 1579 | +13.50% | +14.46% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
-| pass_rush_yds | 734 | +5.88% | +12.19% | H=4 K=6 role-w=0.5 β=1.0 γ=0.5 |
-| anytime_td | 5980 | +1.79% | +2.41% | H=8 K=6 role-w=0.25 β=0.0 γ=1.0 c=1.0 |
+| pass_yds | 736 | +6.35% | +12.60% | H=4 K=6 role-w=0.5 β=1.0 γ=0.5 |
+| pass_td | 736 | +1.85% | +6.55% | H=4 K=6 role-w=1 β=0.5 γ=1.0 |
+| pass_att | 736 | +6.41% | +7.23% | H=4 K=3 role-w=0.25 β=1.0 γ=0.0 |
+| completions | 736 | +7.23% | +9.39% | H=8 K=3 role-w=0.25 β=1.5 γ=0.0 |
+| interceptions | 736 | -0.83% | -0.81% | H=4 K=6 role-w=1 β=0.0 γ=0.0 |
+| rush_yds | 4710 | +12.62% | +13.33% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
+| rush_att | 2321 | +18.67% | +18.67% | H=4 K=1.5 role-w=0.25 β=0.0 γ=0.0 |
+| receptions | 5263 | +12.91% | +13.24% | H=8 K=3 role-w=0.5 β=0.5 γ=0.0 |
+| rec_yds | 5263 | +8.89% | +10.04% | H=8 K=3 role-w=0.25 β=0.5 γ=0.5 |
+| rush_rec_yds | 1585 | +13.60% | +14.57% | H=8 K=3 role-w=0.25 β=0.0 γ=0.5 |
+| pass_rush_yds | 736 | +5.90% | +12.29% | H=4 K=6 role-w=0.5 β=1.0 γ=0.5 |
+| anytime_td | 5999 | +1.77% | +2.38% | H=8 K=6 role-w=0.25 β=0.0 γ=1.0 c=1.0 |
 <!-- props:end -->
