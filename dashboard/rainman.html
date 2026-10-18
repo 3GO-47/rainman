@@ -1696,14 +1696,21 @@ const LABDEF={
  RB:{heads:['*R*','*C*','*Y*','*R+Y*','*TD*'],stats:g=>J.groupStats[g==='RB1'?'RB1':'RB2']},
  WR:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g]||J.groupStats['WR4+']},
  TE:{heads:['*C*','*Y*','*TD*'],stats:g=>J.groupStats[g==='TE1'?'TE1':'TE2']}};
-function lab(){
+/* ---------- the player filter: the TD Grid's slot chips, shared by every board that lists players ----------
+   chips = depth-chart slots (WR order re-ranked by depth, as on the TD Grid); ALL = every body on the chart */
+function slotChipsHTML(id,on){on=on||new Set(TD_SLOTS);return `<span class="chips" id="${id}" title="which depth slots the board covers — click to toggle, ALL for every body on the chart"><button data-s="" class="${on.size?'':'on'}">all</button>${TD_SLOTS.map(x=>`<button data-s="${x}" class="${on.has(x)?'on':''}">${x}</button>`).join('')}</span>`}
+function slotChipsWire(id,live,cb){const box=document.getElementById(id);if(!box)return;box.querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
+  if(!v)live.clear();else live.has(v)?live.delete(v):live.add(v);box.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));cb()})}
+const slotOK=(live,sl)=>!live.size||live.has(sl);
+function lab(){const labLive=new Set(TD_SLOTS);
   const srcs=Object.keys(J.dvp);const POS4=['QB','RB','WR','TE'];
   $('#lab').innerHTML=`
   <div class="tabs" id="labTabs"><button data-p="ALL">ALL</button>${POS4.map((p,i)=>
     `<button data-p="${p}" class="${i===0?'on':''}" title="click to toggle · combine several">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
+    ${slotChipsHTML('labSlots',labLive)}
     <select id="labSrc">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-    <select id="labDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    
     <select id="labInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <select id="labAvg" title="which of the player's own per-game averages leads each avg cell (and sorts) — the other sits small beside it"><option value="S">player avg: this season</option><option value="C">player avg: ${ALL_SE.length>1?ALL_SE[0]+'–'+String(ALL_SE[ALL_SE.length-1]).slice(2):ALL_SE[0]}</option></select>
     <select id="labCol" class="lgnfl" title="filter by college tier / conference / school">${(()=>{const t={},c={},sc={};UNIVERSE.forEach(u=>{const ci=cinfo(u.player);if(!ci)return;t[ci.tier]=(t[ci.tier]||0)+1;c[ci.confL]=(c[ci.confL]||0)+1;sc[ci.disp]=(sc[ci.disp]||0)+1});
@@ -1719,10 +1726,10 @@ function lab(){
   function rows(){
     const src=$('#labSrc').value,D=J.dvp[src];
     const q=$('#labQ').value.toLowerCase();
-    const dep=$('#labDepth').value,hin=$('#labInj').value;const act=new Set(active());
+    const hin=$('#labInj').value;const act=new Set(active());
     return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp
       &&inU(u)
-      &&(!dep||u.depth<=+dep)
+      &&slotOK(labLive,u.dslot||u.slot)
       &&(hin!=='x'||u.inj!=='-1')
       &&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q))
       &&(()=>{const f=$('#labCol').value;if(!f)return true;const ci=cinfo(u.player);if(!ci)return false;const [k,v]=[f.slice(0,1),f.slice(2)];
@@ -1816,7 +1823,7 @@ function lab(){
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
     else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
     if(/^[rvuwax]/.test(sortK))sortK='psi';paint();render()});
-  ['labSrc','labDepth','labInj','labCol','labAvg'].forEach(id=>$('#'+id).onchange=render);
+  ['labSrc','labInj','labCol','labAvg'].forEach(id=>$('#'+id).onchange=render);slotChipsWire('labSlots',labLive,render);
   $('#labQ').oninput=render;
   RR.push(()=>{const tabs=[...document.querySelectorAll('#labTabs button')];tabs.forEach(b=>{if(b.dataset.p!=='ALL')b.hidden=!inP(b.dataset.p)});
     if(!active().length){const f=POS4.find(p=>inP(p));if(f)posSet=new Set([f])}paint();render()});
@@ -1827,13 +1834,14 @@ function lab(){
 const TDX_COLS={QB:[['PaTD','P TD',l=>l[LOG.ptd],'passing TDs'],['RuTD','QB TD',l=>l[LOG.rtd],'rushing TDs (QB)']],
   RB:[['TD',null,l=>l[LOG.rtd]+l[LOG.rectd],'rushing + receiving TDs']],WR:[['TD',null,l=>l[LOG.rtd]+l[LOG.rectd],'rushing + receiving TDs']],TE:[['TD',null,l=>l[LOG.rtd]+l[LOG.rectd],'rushing + receiving TDs']]};
 const TDX_U=[['PaTD','passing TDs allowed (QB)'],['RuTD','rushing TDs allowed (QB)'],['TD','TDs allowed to the slot (RB · WR · TE)']];
-function tdLab(){
+function tdLab(){const tdxLive=new Set(TD_SLOTS);
   const srcs=Object.keys(J.dvp);const POS4=['QB','RB','WR','TE'];
   $('#tdBx').innerHTML=`
   <div class="tabs" id="tdxTabs"><button data-p="ALL">ALL</button>${POS4.map((p,i)=>`<button data-p="${p}" class="${i===0?'on':''}" title="click to toggle · combine several">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
+    ${slotChipsHTML('tdxSlots',tdxLive)}
     <select id="tdxSrc">${srcs.map(x=>`<option ${x==='combined'?'selected':''}>${x}</option>`).join('')}</select>
-    <select id="tdxDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    
     <select id="tdxInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <select id="tdxAvg" title="which of the player's own per-game averages leads each avg cell (and sorts) — the other sits small beside it"><option value="S">player avg: this season</option><option value="C">player avg: ${ALL_SE.length>1?ALL_SE[0]+'–'+String(ALL_SE[ALL_SE.length-1]).slice(2):ALL_SE[0]}</option></select>
     <input id="tdxQ" placeholder="search player / college..." size="18">
@@ -1844,9 +1852,9 @@ function tdLab(){
   const tdCol=(pos,g)=>TDX_COLS[pos].map(c=>c[1]||(g+' TD'));
   const ucol=(pos,i)=>pos==='QB'?i:2;
   function rows(){
-    const src=$('#tdxSrc').value,D=J.dvp[src];const q=$('#tdxQ').value.toLowerCase();const dep=$('#tdxDepth').value,hin=$('#tdxInj').value;const act=new Set(active());const wk=G.week;
+    const src=$('#tdxSrc').value,D=J.dvp[src];const q=$('#tdxQ').value.toLowerCase();const hin=$('#tdxInj').value;const act=new Set(active());const wk=G.week;
     const T=((J.betting||{}).td||[]).filter(r=>+r.week===wk);const tdOf=u=>T.find(r=>r.player===u.player&&r.team===u.team)||T.find(r=>r.player===u.player);
-    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&(!dep||u.depth<=+dep)&&(hin!=='x'||u.inj!=='-1')&&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q)))
+    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&slotOK(tdxLive,u.dslot||u.slot)&&(hin!=='x'||u.inj!=='-1')&&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q)))
     .map(u=>{const cols=tdCol(u.pos,u.grp);const oppRaw=(J.sched26[u.team]||[])[wk-1]||'';const opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';const d=opp&&D[opp]?D[opp]:null;const gm=gameOf(u.team,wk);const ug=USG[u.ln||u.player]||{};
       const L=PLOGS[u.ln||u.player]||[],Lc=L.filter(l=>l[LOG.season]===LAST_SE);const fs=TDX_COLS[u.pos];
       const avgS=fs.map(c=>Lc.length?mean(Lc.map(c[2])):null),avgC=fs.map(c=>L.length?mean(L.map(c[2])):null);
@@ -1901,7 +1909,7 @@ function tdLab(){
   document.querySelectorAll('#tdxTabs button').forEach(b=>b.onclick=()=>{const p=b.dataset.p;
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['RB']):new Set(POS4)}else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
     if(/^[ruax]/.test(sortK))sortK='atd';paint();render()});
-  ['tdxSrc','tdxDepth','tdxInj','tdxAvg'].forEach(id=>$('#'+id).onchange=render);$('#tdxQ').oninput=render;
+  ['tdxSrc','tdxInj','tdxAvg'].forEach(id=>$('#'+id).onchange=render);slotChipsWire('tdxSlots',tdxLive,render);$('#tdxQ').oninput=render;
   RR.push(()=>{const tabs=[...document.querySelectorAll('#tdxTabs button')];tabs.forEach(b=>{if(b.dataset.p!=='ALL')b.hidden=!inP(b.dataset.p)});if(!active().length){const f=POS4.find(p=>inP(p));if(f)posSet=new Set([f])}paint();render()});
 }
 /* ---------- injuries: who is listed, and what each absence does to the matchups ---------- */
@@ -4444,13 +4452,13 @@ function erf(x){const t=1/(1+0.3275911*Math.abs(x));const y=1-(((((1.061405429*t
 /* ---------------- BETS -> MARKETS (our own board: one dense table per market, expandable game-by-game) ---------------- */
 function bets11(root='#bets',px=''){const el=$(root);const W=G.week;
   const tabs=MKT.filter(m=>m.k!=='td').map(m=>`<button data-t="${m.k}">${m.label}</button>`).join('')+`<button data-t="T">Anytime TD</button><button data-t="G">Game lines</button>`;
-  el.innerHTML=`<div class="r11top"><div class="tabs" id="${px}r11Tabs">${tabs}</div></div><div id="${px}mkKpi"></div><div id="${px}mkOut"></div>`;
+  el.innerHTML=`<div class="r11top"><div class="tabs" id="${px}r11Tabs">${tabs}</div></div><div class="controls" id="${px}mkCtl">${slotChipsHTML(px+'mkSlots')}<input id="${px}mkQ" placeholder="search player..." size="15"><span class="note kept">OUT players never get a market, so they never appear here</span></div><div id="${px}mkKpi"></div><div id="${px}mkOut"></div>`;
   const T=$('#'+px+'r11Tabs');let cur='pass_yds';T.querySelector('[data-t="pass_yds"]').classList.add('on');
   T.onclick=e=>{const b=e.target.closest('button');if(!b)return;const t=b.dataset.t==='P'?'pass_yds':b.dataset.t;cur=t;[...T.children].forEach(x=>x.classList.toggle('on',x.dataset.t===t));render()};
   // go() clicks data-t="P"/"T"/"G"; provide hidden aliases so those resolve
   T.insertAdjacentHTML('beforeend','<button data-t="P" hidden></button>');
-  let sortK='score',sortA=false,open=null;
-  function playerTable(mk){const R=marketRows(mk);const line=r=>r.dk?+r.dk.line:r.kl&&r.kl.line!==''?+r.kl.line:null;
+  let sortK='score',sortA=false,open=null;const mkLive=new Set(TD_SLOTS);const mkKeep=r=>{const q=(($('#'+px+'mkQ')||{}).value||'').toLowerCase();return slotOK(mkLive,r.u.dslot||r.u.slot)&&(!q||r.u.player.toLowerCase().includes(q))};
+  function playerTable(mk){const R=marketRows(mk).filter(mkKeep);const line=r=>r.dk?+r.dk.line:r.kl&&r.kl.line!==''?+r.kl.line:null;
     R.forEach(r=>{r.line=line(r);r.src=r.dk?'DK':r.kl?'Kalshi':'';r.pOver=pOverLine(r.pj,r.line);r.l10=overRate(r.L,mk.own,r.line);r.kp=r.kl&&r.kl.p_mid!==''?+r.kl.p_mid:null;
       r.edge=r.pOver!=null&&r.kp!=null?r.pOver-r.kp:null});
     const V={score:r=>r.score,own:r=>r.own,l5:r=>r.l5,allowed:r=>r.allowed,rank:r=>-r.rank,proj:r=>r.pj?r.pj.proj:-1,line:r=>r.line??-1,pover:r=>r.pOver??-1,edge:r=>r.edge==null?-9:Math.abs(r.edge),l10:r=>r.l10?r.l10.o/r.l10.n:-1,player:r=>r.u.player,team:r=>r.u.team};
@@ -4479,7 +4487,7 @@ function bets11(root='#bets',px=''){const el=$(root);const W=G.week;
     return `<div class="gb"><div class="mini" style="margin-bottom:4px">${esc(r.u.player)} · ${mk.label} game by game · dashed = line ${r.line??'—'} · green = over · ${r.own!=null?`avg ${fmt(r.own,mk.dec)}`:''}</div>
       <svg width="${w}" height="${h+22}" viewBox="0 0 ${w} ${h+22}">${L.map((l,i)=>{const v=vals[i];const bh=v/mx*h;const over=r.line!=null&&v>r.line;return `<rect x="${x(i)}" y="${h-bh}" width="${bw}" height="${bh}" rx="1.5" fill="${r.line==null?'#8ab4d8':over?'var(--green)':'var(--red)'}" opacity=".85"><title>${l[LOG.season]} wk${l[LOG.week]} ${l[LOG.ha]==='A'?'@':'vs'} ${l[LOG.opp]}: ${v}</title></rect><text x="${x(i)+bw/2}" y="${h-bh-3}" text-anchor="middle" font-size="9" fill="var(--txt)">${mk.dec?v.toFixed(mk.dec):v}</text><text x="${x(i)+bw/2}" y="${h+12}" text-anchor="middle" font-size="8.5" fill="var(--dim2)">${l[LOG.ha]==='A'?'@':''}${l[LOG.opp]}</text><text x="${x(i)+bw/2}" y="${h+21}" text-anchor="middle" font-size="8" fill="var(--dim2)">${String(l[LOG.season]).slice(2)}w${l[LOG.week]}</text>`}).join('')}
       ${r.line!=null?`<line x1="0" x2="${w}" y1="${h-r.line/mx*h}" y2="${h-r.line/mx*h}" stroke="var(--amber)" stroke-dasharray="4 3"/>`:''}</svg></div>`}
-  function tdTable(){const mk=MKT_BY.td;const R=marketRows(mk);
+  function tdTable(){const mk=MKT_BY.td;const R=marketRows(mk).filter(mkKeep);
     R.forEach(r=>{r.pm=r.tdm?+r.tdm.p_model:null;r.kp=r.kl&&r.kl.p_mid!==''?+r.kl.p_mid:null;r.l10=overRate(r.L,mk.own,0.5);r.edge=r.pm!=null&&r.kp!=null?r.pm-r.kp:null});
     const V={score:r=>r.score,own:r=>r.own,allowed:r=>r.allowed,rank:r=>-r.rank,pm:r=>r.pm??-1,kp:r=>r.kp??-1,edge:r=>r.edge==null?-9:Math.abs(r.edge),l10:r=>r.l10?r.l10.o/r.l10.n:-1,player:r=>r.u.player};
     R.sort((a,b)=>{const x=(V[sortK]||V.score)(a),y=(V[sortK]||V.score)(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
@@ -4505,9 +4513,10 @@ function bets11(root='#bets',px=''){const el=$(root);const W=G.week;
     $('#'+px+'mkKpi').innerHTML=`<div class="kpis">${kpi('games',gs.length,`wk ${W}`)}${kpi('Kalshi priced',kcnt,'moneyline · spread ladder · total ladder (exchange mids)')}${kpi('DK lines',Object.keys(BG).length,'spread · total · moneyline (DraftKings consensus)')}</div>`;
     return `<div class="panel"><table class="mkt"><thead><tr><th>kick</th><th>game</th><th>Kalshi win prob</th><th>model win prob</th><th>Kalshi spread</th><th>DK spread</th><th>model spread</th><th>Kalshi total</th><th>DK total</th><th>model total</th><th>final</th></tr></thead><tbody>${rows}</tbody></table>
       <p class="note">Kalshi spread = the favorite's ladder interpolated to the 50% rung · Kalshi total = the over ladder interpolated to 50% (the nearest rung and its price beside it) · model numbers are the game model's, shown as reference</p></div>`}
-  function render(){const O=$('#'+px+'mkOut');O.innerHTML=cur==='T'?tdTable():cur==='G'?gameTable():playerTable(MKT_BY[cur]||MKT[0]);
+  function render(){const C=$('#'+px+'mkCtl');if(C)C.hidden=cur==='G';const O=$('#'+px+'mkOut');O.innerHTML=cur==='T'?tdTable():cur==='G'?gameTable():playerTable(MKT_BY[cur]||MKT[0]);
     O.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=['player','team'].includes(k)}render()});
     O.querySelectorAll('tr.mkr').forEach(tr=>tr.onclick=e=>{if(e.target.closest('.pp'))return;open=open===tr.dataset.p?null:tr.dataset.p;render()});logoize(O)}
+  slotChipsWire(px+'mkSlots',mkLive,render);$('#'+px+'mkQ').oninput=render;
   RR.push(()=>{sortK=cur==='T'?'score':'score';render()})}
 /* ---------------- BIG BOARD -> STAT PROJECTIONS ---------------- */
 function board(){const POS=['ALL','QB','RB','WR','TE'];
@@ -4646,11 +4655,12 @@ function tWire(root){if(!root)return;root.querySelectorAll('.plink[data-p]').for
   try{logoize(root)}catch(_){}}
 
 /* ---------------- Lab Grid — four positions side by side ---------------- */
-function labGrid(){
+function labGrid(){const lgLive=new Set(TD_SLOTS);
   const srcs=Object.keys(J.dvp);
   $('#labgrid').innerHTML=`<div class="panel rpane" id="lgFields" hidden></div><div class="controls">
+    ${slotChipsHTML('lgSlots',lgLive)}
     <select id="lgSrc" title="which data set every column reads">${srcs.map(s=>`<option ${s==='combined'?'selected':''}>${s}</option>`).join('')}</select>
-    <select id="lgDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    
     <select id="lgInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <input id="lgQ" placeholder="search player..." size="15">
     <span class="note">the Matchup Lab dealt four ways. Every number is <b>what this week's opponent allows per game to that slot</b>, shaded by where that sits among the ${NT} defenses — green = allows the most = the best matchup, red = the least. Hover any cell for the exact rank &middot; each column sorts on its own &middot; click a name for his card</span>
@@ -4659,7 +4669,7 @@ function labGrid(){
   const sort={};TPOS.forEach(p=>sort[p]={k:'psi',a:true});
   function col(p){
     const src=$('#lgSrc').value,st=sort[p];
-    const R=tRows(p,src,{dep:$('#lgDepth').value,hin:$('#lgInj').value,q:$('#lgQ').value});
+    const R=tRows(p,src,{slots:lgLive.size?lgLive:null,hin:$('#lgInj').value,q:$('#lgQ').value});
     R.sort((a,b)=>{const x=tSortVal(a,st.k,st.a),y=tSortVal(b,st.k,st.a);return (x<y?-1:x>y?1:0)*(st.a?1:-1)});
     const heads=LABDEF[p].heads,sample=LABDEF[p].stats(tKey(p));
     $('#lgN'+p).textContent=R.length+(R.length===1?' player':' players');
@@ -4684,7 +4694,7 @@ function labGrid(){
     tWire($('#lgB'+p));
   }
   const all=()=>{TPOS.forEach(col);const f=$('#lgFields');if(f)rolePane(f,'prop')};
-  ['lgSrc','lgDepth','lgInj'].forEach(i=>$('#'+i).onchange=all);$('#lgQ').oninput=all;all();
+  ['lgSrc','lgInj'].forEach(i=>$('#'+i).onchange=all);slotChipsWire('lgSlots',lgLive,all);$('#lgQ').oninput=all;all();
   RR.push(all);
 }
 
@@ -4801,7 +4811,7 @@ const H2H_STATS={
   WR:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]],
   TE:[['Tgt',l=>l[LOG.tgt]],['Rec',l=>l[LOG.rec]],['ReY',l=>l[LOG.recy]],['TD',l=>l[LOG.rectd]+l[LOG.rtd]]]};
 /* ---------- Depth Delta (F6): what changed on the depth charts since the previous snapshot, and what it means this week ---------- */
-function depthDelta(){
+function depthDelta(){const ddLive=new Set(TD_SLOTS);
   const el=$('#ddelta');if(!el)return;const PV=J.depthPrev;
   if(!PV){el.innerHTML='<p class="note">only one depth-chart snapshot in the build — the diff appears once a second week is pulled</p>';return}
   const INJ={'1':'active','0':'Q','-1':'OUT'};const injOrd={'1':0,'0':1,'-1':2};
@@ -4834,8 +4844,9 @@ function depthDelta(){
   const teams=[...new Set(rowsAll.concat(gone).map(r=>r.u.team))].sort();
   el.innerHTML=`<div class="kpis" id="ddKpi"></div><div class="controls">
     <span class="tabs" id="ddKinds"><button data-k="" class="on">all</button>${KINDS.map(([k,l])=>`<button data-k="${k}">${l}</button>`).join('')}</span>
+    ${slotChipsHTML('ddSlots',ddLive)}
     <select id="ddTeam"><option value="">all teams</option>${teams.map(t=>`<option>${t}</option>`).join('')}</select>
-    <select id="ddDepth"><option value="2" selected>top 2 depths</option><option value="1">starters only</option><option value="">every depth</option></select>
+    
     <input id="ddQ" placeholder="search player..." size="15">
     <span class="note">every body whose slot, injury flag or team is different from the <b>${PV.date}</b> chart, with what it means this week: the opponent, how soft that opponent is to his new slot (Ψ, 1 = allows the most), his own PPR per game and snap share this season, and who steps in behind an OUT or demoted player &middot; every column sorts &middot; click a name for his card</span>
   </div><div id="ddTbl"></div>`;
@@ -4843,8 +4854,8 @@ function depthDelta(){
   const kindOrd=r=>KINDS.findIndex(([k])=>r.kinds.includes(k));
   const S={kind:r=>kindOrd(r),team:r=>r.u.team,player:r=>r.u.player,pos:r=>r.u.pos,slot:r=>r.u.slot,was:r=>r.was,inj:r=>injOrd[r.inj]??9,opp:r=>r.u.opp||'zz',kick:r=>r.kickord,comp:r=>r.comp==null?(sa?99:-1):r.comp,ppr:r=>r.ppr==null?(sa?1e9:-1):r.ppr,snp:r=>r.snp==null?(sa?1e9:-1):r.snp,next:r=>r.next||'zz'};
   function render(){
-    const kind=$('#ddKinds button.on').dataset.k,tm=$('#ddTeam').value,dep=$('#ddDepth').value,q=$('#ddQ').value.toLowerCase();
-    let R=rowsAll.concat(gone).filter(r=>(!kind||r.kinds.includes(kind))&&(!tm||r.u.team===tm)&&(!dep||r.u.depth<=+dep||r.kinds.includes('off'))&&(!q||r.u.player.toLowerCase().includes(q))&&inF(r.u.team));
+    const kind=$('#ddKinds button.on').dataset.k,tm=$('#ddTeam').value,q=$('#ddQ').value.toLowerCase();
+    let R=rowsAll.concat(gone).filter(r=>(!kind||r.kinds.includes(kind))&&(!tm||r.u.team===tm)&&slotOK(ddLive,r.u.dslot||r.u.slot)&&(!q||r.u.player.toLowerCase().includes(q))&&inF(r.u.team));
     R.sort((a,b)=>{const x=S[sk](a),y=S[sk](b);return (x<y?-1:x>y?1:0)*(sa?1:-1)||kindOrd(a)-kindOrd(b)||(b.ppr||0)-(a.ppr||0)});
     const n=k=>rowsAll.concat(gone).filter(r=>r.kinds.includes(k)&&r.u.depth<=2).length;
     $('#ddKpi').innerHTML=kpi('changes',String(R.length),`vs the ${PV.date} chart · ${J.depthDate}`)+kpi('ruled out',String(rowsAll.filter(r=>r.kinds.includes('hurt')&&r.inj==='-1'&&r.u.depth<=2).length),'top-2 bodies now OUT','r')+kpi('promoted',String(n('up')),'moved up a slot','g')+kpi('cleared',String(n('back')),'injury flag improved','g')+kpi('new starters',String(rowsAll.filter(r=>(r.kinds.includes('new')||r.kinds.includes('team'))&&r.u.depth===1).length),'first on a chart, or a new team','');
@@ -4861,11 +4872,11 @@ function depthDelta(){
     logoize($('#ddTbl'));
   }
   $('#ddKinds').onclick=e=>{const b=e.target.closest('button');if(!b)return;[...$('#ddKinds').children].forEach(x=>x.classList.toggle('on',x===b));render()};
-  ['ddTeam','ddDepth'].forEach(i=>$('#'+i).onchange=render);$('#ddQ').oninput=render;
+  $('#ddTeam').onchange=render;slotChipsWire('ddSlots',ddLive,render);$('#ddQ').oninput=render;
   render();RR.push(render);
 }
 /* ---------- Splits (F6): the player's PPR per game by situation — home / away, favorite / dog, dome / outdoors, division, last 3 — and the split that matches this week ---------- */
-function splits(){
+function splits(){const spLive=new Set(TD_SLOTS);
   const el=$('#splits');if(!el)return;const POS4=['QB','RB','WR','TE'];
   const GLX={};(BT11.glh||[]).forEach(r=>{GLX[r[0]+'|'+r[1]+'|'+r[2]]=r;GLX[r[0]+'|'+r[1]+'|'+r[3]]=r});
   const ctx=(se,wk,tm)=>{const g=GLX[se+'|'+wk+'|'+tm];if(!g)return null;const home=g[3]===tm,sp=g[6];
@@ -4874,8 +4885,9 @@ function splits(){
   el.innerHTML=`
   <div class="tabs" id="spTabs"><button data-p="ALL">ALL</button>${POS4.map((p,i)=>`<button data-p="${p}" class="${i===0?'on':''}" title="click to toggle · combine several">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
+    ${slotChipsHTML('spSlots',spLive)}
     <select id="spSe"><option value="" selected>all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option><option value="${LAST_SE}">${LAST_SE} only</option></select>
-    <select id="spDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    
     <select id="spInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <select id="spMin" title="hide splits built on fewer games than this"><option value="1">1+ game per split</option><option value="2" selected>2+ games per split</option><option value="3">3+ games per split</option></select>
     <input id="spQ" placeholder="search player / college..." size="18">
@@ -4885,9 +4897,9 @@ function splits(){
   const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
   const mean=a=>a.length?a.reduce((t,v)=>t+v,0)/a.length:null;
   function rows(){
-    const se=+$('#spSe').value,dep=$('#spDepth').value,hin=$('#spInj').value,q=$('#spQ').value.toLowerCase(),min=+$('#spMin').value;
+    const se=+$('#spSe').value,hin=$('#spInj').value,q=$('#spQ').value.toLowerCase(),min=+$('#spMin').value;
     const act=new Set(active()),wk=G.week;
-    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&(!dep||u.depth<=+dep)&&(hin!=='x'||u.inj!=='-1')
+    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&slotOK(spLive,u.dslot||u.slot)&&(hin!=='x'||u.inj!=='-1')
       &&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q)))
     .map(u=>{
       const oppRaw=(J.sched26[u.team]||[])[wk-1]||'',opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
@@ -4936,19 +4948,20 @@ function splits(){
   document.querySelectorAll('#spTabs button').forEach(b=>b.onclick=()=>{const p=b.dataset.p;
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
     else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);paint();render()});
-  ['spSe','spDepth','spInj','spMin'].forEach(i=>$('#'+i).onchange=render);$('#spQ').oninput=render;
+  ['spSe','spInj','spMin'].forEach(i=>$('#'+i).onchange=render);slotChipsWire('spSlots',spLive,render);$('#spQ').oninput=render;
   render();RR.push(render);
 }
 /* ---------- Head to Head (F3 Players): the Matchup Lab's table, with the opponent block replaced by what the player has actually done against this week's opponent ---------- */
 const H2H_COLS=[['PaY',l=>l[LOG.py],1,'passing yards'],['PaTD',l=>l[LOG.ptd],2,'passing TDs'],['RuY',l=>l[LOG.ry],1,'rushing yards'],['Tgt',l=>l[LOG.tgt],1,'targets'],['Rec',l=>l[LOG.rec],1,'receptions'],['RcY',l=>l[LOG.recy],1,'receiving yards'],['TD',l=>l[LOG.rtd]+l[LOG.rectd],2,'rushing + receiving TDs']];
 const H2H_VIS={QB:[0,1,2,6],RB:[2,3,4,5,6],WR:[3,4,5,6],TE:[3,4,5,6],ALL:[0,1,2,4,5,6]};
-function h2hLab(){
+function h2hLab(){const h2hLive=new Set(TD_SLOTS);
   const POS4=['QB','RB','WR','TE'];
   $('#h2hP').innerHTML=`
   <div class="tabs" id="h2hTabs"><button data-p="ALL">ALL</button>${POS4.map((p,i)=>`<button data-p="${p}" class="${i===0?'on':''}" title="click to toggle · combine several">${posIcon(p,12)} ${p}</button>`).join('')}</div>
   <div class="controls">
+    ${slotChipsHTML('h2hSlots',h2hLive)}
     <select id="h2hSe" title="which seasons of history count as prior meetings"><option value="">prior meetings: all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option>${ALL_SE.slice().reverse().map(x=>`<option value="${x}">prior meetings: ${x} only</option>`).join('')}</select>
-    <select id="h2hDepth"><option value="1" selected>1st string only</option><option value="2">top 2 depths</option><option value="">all depths</option></select>
+    
     <select id="h2hInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <select id="h2hMin" title="hide players with fewer prior meetings than this"><option value="0">any history</option><option value="1" selected>1+ prior game</option><option value="2">2+ prior games</option><option value="3">3+ prior games</option></select>
     <select id="h2hAvg" title="which of the player's own per-game averages leads each avg cell (and the ▲ / ▼ comparison) — the other sits small beside it"><option value="S">player avg: this season</option><option value="C">player avg: ${ALL_SE.length>1?ALL_SE[0]+'–'+String(ALL_SE[ALL_SE.length-1]).slice(2):ALL_SE[0]}</option></select>
@@ -4959,9 +4972,9 @@ function h2hLab(){
   const active=()=>POS4.filter(p=>posSet.has(p)&&inP(p));
   const mean=(a,f)=>a.length?a.reduce((t,l)=>t+(f(l)||0),0)/a.length:null;
   function rows(){
-    const q=$('#h2hQ').value.toLowerCase(),dep=$('#h2hDepth').value,hin=$('#h2hInj').value,se=+$('#h2hSe').value,min=+$('#h2hMin').value,AV=$('#h2hAvg').value;
+    const q=$('#h2hQ').value.toLowerCase(),hin=$('#h2hInj').value,se=+$('#h2hSe').value,min=+$('#h2hMin').value,AV=$('#h2hAvg').value;
     const act=new Set(active()),wk=G.week;
-    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&(!dep||u.depth<=+dep)&&(hin!=='x'||u.inj!=='-1')
+    return UNIVERSE.filter(u=>act.has(u.pos)&&u.grp&&inU(u)&&slotOK(h2hLive,u.dslot||u.slot)&&(hin!=='x'||u.inj!=='-1')
       &&(!q||(u.player+' '+((cinfo(u.player)||{}).disp||'')).toLowerCase().includes(q)))
     .map(u=>{
       const oppRaw=(J.sched26[u.team]||[])[wk-1]||'',opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
@@ -5030,7 +5043,7 @@ function h2hLab(){
     if(p==='ALL'){posSet=POS4.every(x=>posSet.has(x))?new Set(['QB']):new Set(POS4)}
     else if(posSet.has(p)){if(posSet.size>1)posSet.delete(p)}else posSet.add(p);
     if(/^[ha]\d/.test(sortK))sortK='dp';paint();render()});
-  ['h2hSe','h2hDepth','h2hInj','h2hMin','h2hAvg'].forEach(i=>$('#'+i).onchange=render);$('#h2hQ').oninput=render;
+  ['h2hSe','h2hInj','h2hMin','h2hAvg'].forEach(i=>$('#'+i).onchange=render);slotChipsWire('h2hSlots',h2hLive,render);$('#h2hQ').oninput=render;
   render();RR.push(render);
 }
 function h2hGrid(root='#h2h',px='hh',legacy=true){
@@ -5367,12 +5380,11 @@ function wkSeasonStory(AL,SG){if(AL.length<2)return '';const out=[];const tot={n
 function weeklies(){
   const el=$('#weeklies');if(!el)return;
   const SES=ALL_SE.slice().reverse();let S=SES[0];if(!wkFeat(S).weeks.length&&SES[1])S=SES[1];
-  let W=null,show='sc';const posSet=new Set();
+  let W=null,show='sc';const CORE7=['QB1','RB1','RB2','WR1','WR2','WR3','TE1'],wkLive=new Set(CORE7);
   el.innerHTML=`<div class="controls">
     <select id="wkSe" title="which season to look back on">${SES.map(s=>`<option value="${s}" ${s===S?'selected':''}>${s} season</option>`).join('')}</select>
     <span class="chips" id="wkW" title="every week whose games are all played and logged"></span>
-    <select id="wkPool" title="who counts"><option value="core" selected>starters: QB1 · RB1-2 · WR1-3 · TE1</option><option value="all">every slot that played</option></select>
-    <span class="chips" id="wkPos" title="narrow the pool to one or more positions — click to toggle"><button data-p="" class="on">all</button>${TPOS.map(p=>`<button data-p="${p}">${posIcon(p,11)} ${p}</button>`).join('')}</span>
+    ${slotChipsHTML('wkSlots',wkLive)}
     <span class="note">the touchdown lookback. A week appears once every game is played and logged. Every signal is rebuilt <b>as it stood before that week kicked off</b> — the defense ranks from the games before it, his earlier meetings with the opponent, his form to that point, the closing line — then checked against who actually scored a rushing or receiving touchdown. <b>hit rate</b> = share of the players carrying a signal who scored &middot; <b>×</b> = that rate over the whole pool's rate that week &middot; a TD / fantasy matchup rank of 1 = the defense allowing the most to his slot &middot; "core signals" for the surprise and near-miss lines are the TD and fantasy matchups, a TD vs them before, last game, two of the last three, a TD every other game, implied 24+ and a lead role</span>
   </div>
   <div class="kpis" id="wkKpi"></div>
@@ -5381,8 +5393,8 @@ function weeklies(){
   <div class="panel"><h3 id="wkTlh">week by week — what produced the scorers</h3><p class="wkss" id="wkSS"></p><div class="wktl" id="wkTl"></div></div>
   <div class="panel"><h3 id="wkMh"></h3><div id="wkMx"></div></div>
   <div class="panel"><h3 id="wkPh"></h3><div class="controls" style="margin:0 0 6px"><span class="chips" id="wkShow"><button data-s="sc" class="on">every scorer</button><button data-s="nm">near misses</button><button data-s="all">everyone in the pool</button></span></div><div id="wkPl"></div></div>`;
-  const keep=x=>($('#wkPool').value==='all'||x.core)&&(!posSet.size||posSet.has(x.pos));
-  const poolL=()=>{const p=posSet.size?[...posSet].join(' / ')+' ':'';return $('#wkPool').value==='all'?`every ${p}player who played`:`the ${p}starters`};
+  const keep=x=>slotOK(wkLive,x.slot)&&inP(x.pos);
+  const poolL=()=>{const p=G.pos&&G.pos.size?[...G.pos].join(' / ')+' ':'';if(!wkLive.size)return `every ${p}player who played`;if(wkLive.size===CORE7.length&&CORE7.every(x=>wkLive.has(x)))return `the ${p}starters`;return `the ${p}${[...wkLive].join(' · ')} players`};
   function chipsW(F){const box=$('#wkW');box.innerHTML=F.weeks.map(w=>`<button data-w="${w}" class="${w===W?'on':''}">wk ${w}</button>`).join('')+(F.pending.length?`<span class="mini" style="margin-left:6px" title="a week appears once every game is logged">wk ${F.pending.join(', ')} in progress</span>`:'');
     box.querySelectorAll('button').forEach(b=>b.onclick=()=>{W=+b.dataset.w;render()})}
   function render(){
@@ -5448,11 +5460,9 @@ function weeklies(){
         <td class="n" data-v="${x.imp??''}">${x.imp==null?'<span class="dim">—</span>':`<span style="color:${x.imp>=24?'var(--green)':x.imp<18?'var(--red)':'var(--txt)'}">${x.imp.toFixed(1)}</span>`}</td>
         <td class="n" data-v="${x.cs}"><span class="badge" style="${gradeStyle(1+(1-x.cs/8)*(NT-1))}">${x.cs}</span></td></tr>`).join('')||'<tr><td colspan="14" class="dim">nobody here</td></tr>'}</tbody></table>`;
     tWire(el)}
-  $('#wkSe').onchange=()=>{W=null;render()};$('#wkPool').onchange=render;
-  $('#wkPos').querySelectorAll('button').forEach(b=>b.onclick=()=>{const p=b.dataset.p;if(!p)posSet.clear();else posSet.has(p)?posSet.delete(p):posSet.add(p);
-    $('#wkPos').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.p?posSet.has(x.dataset.p):posSet.size===0));render()});
+  $('#wkSe').onchange=()=>{W=null;render()};slotChipsWire('wkSlots',wkLive,render);
   $('#wkShow').querySelectorAll('button').forEach(b=>b.onclick=()=>{show=b.dataset.s;$('#wkShow').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));render()});
-  render();
+  render();RR.push(render);
 }
 
 /* ---------------- Game View — one game, everything the site knows about it ----------------
@@ -5615,6 +5625,19 @@ function gameView(){
   fill();RR.push(fill);
 }
 
+Object.assign(NOTES,{
+ lab:['v18','the TD Grid\'s slot chips replace the depth dropdown — click QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2 on or off, ALL for every body on the chart; hide OUT and search unchanged'],
+ tdbx:['v18','slot chips (QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2, ALL for everyone) replace the depth dropdown, the same filter as the TD Grid'],
+ labgridp:['v18','now carries the TD Grid\'s player filter: slot chips in place of the depth dropdown, hide OUT, search'],
+ labgrid:['v18','slot chips in place of the depth dropdown — the same player filter as the TD Grid'],
+ h2hp:['v18','slot chips replace the depth dropdown — the same player filter as the TD Grid and H2H Grid'],
+ splitsp:['v18','slot chips replace the depth dropdown — the same player filter as the TD Grid'],
+ splits:['v18','slot chips replace the depth dropdown — the same player filter as the TD Grid'],
+ ddeltap:['v18','slot chips replace the depth dropdown (a body that left the chart is filed under his old slot)'],
+ ddelta:['v18','slot chips replace the depth dropdown (a body that left the chart is filed under his old slot)'],
+ props:['v18','slot chips and a player search on every player market and anytime TD (hidden on game lines)'],
+ markets2:['v18','slot chips and a player search on every player market and anytime TD (hidden on game lines)'],
+ weeklies:['v18','the pool is now the slot chips (default = the starters, ALL = every slot that played) and it follows the POS filter in the top bar']});
 const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',boardView],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',metaGrid],['test',weeklies],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['players',tdLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)],['test',splits],['test',apiView],['test',injuriesView],['test',devView]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
