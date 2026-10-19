@@ -692,3 +692,14 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   category cards, link to Category Grid; the global week picker now moves Weeklies (recorded week -> lookback, later -> ahead).
 - Checked in Playwright: all 41 views boot clean, TD Picks weeks 1/5/6/7/9/18, grid weeks 4/6/7 + WR filter, Weeklies chips/
   pane/back, 390 px no overflow, NCAA clean.
+
+## n80 · 2026-10-19 · week 6 box scores (13 of 14 games; WAS@SF Monday night still to play)
+- PFR now sits behind a Cloudflare human check (Chrome and the loop both refused), so scripts/local/pull_box.py took its nflverse
+  fallback: 12 Sunday games, 228 P lines + 1 D line (TEN return TD), every player on a PFR id (roster_2026 map), appended to
+  data/raw/box_lines_2026.txt; scrape_state boxscores_done updated (weeks_done stays 1-5 until MNF lands).
+- refresh.py --no-sports (the detached run was cut after build_clv; the remaining steps run by hand: signals, connections, units,
+  narratives, injuries, td_picks, dashboard, tracking, dev, landing). game_logs_2026 1,806 rows (wk 6: 247 rows, 26 teams),
+  dvp/adjusted/prop model/bets/picks/clv rebuilt; matchup week stays 6 until MNF is played.
+- verify_data 64/64 · audit_extended 89 pass / 1 warn (Davidson 2024) / 0 fail · 2026 logs = nflverse 100% (targets 2 rows).
+- Page: TD Picks wk 6 graded (top 10 5/10, listed 32/126), Weeklies wk 6 ▸ 35/163 scored so far, Category Grid wk 6 ✓34 ✗112;
+  Weeklies keeps wk 6 'in progress' until WAS@SF is logged — the PC loop pulls it automatically once nflverse posts the result.

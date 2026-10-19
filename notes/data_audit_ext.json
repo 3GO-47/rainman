@@ -162,7 +162,7 @@
  {
   "status": "PASS",
   "check": "2026: every log row found in nflverse weekly stats",
-  "detail": "1578 of 1578 matched"
+  "detail": "1806 of 1806 matched"
  },
  {
   "status": "PASS",
@@ -207,7 +207,7 @@
  {
   "status": "PASS",
   "check": "2026 logs vs nflverse: targets",
-  "detail": "99.87% agree \u00b7 2 rows differ"
+  "detail": "99.89% agree \u00b7 2 rows differ"
  },
  {
   "status": "PASS",
@@ -227,7 +227,7 @@
  {
   "status": "PASS",
   "check": "2026 logs vs nflverse: fumbles_lost",
-  "detail": "99.62% agree \u00b7 the 6 others are fumbles on kick / punt returns, which PFR counts and nflverse's offensive columns leave out"
+  "detail": "99.67% agree \u00b7 the 6 others are fumbles on kick / punt returns, which PFR counts and nflverse's offensive columns leave out"
  },
  {
   "status": "PASS",
@@ -237,7 +237,7 @@
  {
   "status": "PASS",
   "check": "2026: rushing + receiving TDs per team-game = nflverse",
-  "detail": "160 of 160 team-games equal"
+  "detail": "184 of 184 team-games equal"
  },
  {
   "status": "PASS",
@@ -277,7 +277,7 @@
  {
   "status": "PASS",
   "check": "2026: every finished game is in the logs",
-  "detail": "80 finished games, all logged"
+  "detail": "92 finished games, all logged"
  },
  {
   "status": "PASS",
@@ -287,7 +287,7 @@
  {
   "status": "PASS",
   "check": "upcoming games: nflverse spread sign = the live books (no flipped favourite)",
-  "detail": "14 games compared \u00b7 nflverse trails the books on: DEN@ARI total 45.5 vs books 43.0; KC@SEA total 44.5 vs books 42.0 \u2014 the site uses the books' consensus for unplayed games"
+  "detail": "15 games compared"
  },
  {
   "status": "PASS",
@@ -317,7 +317,7 @@
  {
   "status": "PASS",
   "check": "page game logs = game_logs csv (same player-games)",
-  "detail": "12280 matched \u00b7 0 unmatched"
+  "detail": "12508 matched \u00b7 0 unmatched"
  },
  {
   "status": "PASS",
@@ -332,12 +332,12 @@
  {
   "status": "PASS",
   "check": "footer games = logged games",
-  "detail": "footer 624 \u00b7 logs 624"
+  "detail": "footer 636 \u00b7 logs 636"
  },
  {
   "status": "PASS",
   "check": "footer rows = log rows",
-  "detail": "12280 vs 12280"
+  "detail": "12508 vs 12508"
  },
  {
   "status": "PASS",
@@ -357,17 +357,17 @@
  {
   "status": "PASS",
   "check": "TD Picks backtest: top-10 total = sum of weeks",
-  "detail": "[137, 230]"
+  "detail": "[142, 240]"
  },
  {
   "status": "PASS",
   "check": "TD Picks backtest: tier counts add up to every graded pick",
-  "detail": "n 6757 \u00b7 hits 1426"
+  "detail": "n 7003 \u00b7 hits 1474"
  },
  {
   "status": "PASS",
   "check": "TD Picks backtest: the top lists agree with the weekly top-10 counts",
-  "detail": "23 weeks"
+  "detail": "24 weeks"
  },
  {
   "status": "PASS",
@@ -382,7 +382,7 @@
  {
   "status": "PASS",
   "check": "TD Picks ledger: no pick written at or after its kickoff",
-  "detail": "154 rows \u00b7 0 late"
+  "detail": "162 rows \u00b7 0 late"
  },
  {
   "status": "PASS",
