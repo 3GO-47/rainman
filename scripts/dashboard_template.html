@@ -886,6 +886,20 @@ table.wks td.n,table.wkp td.n{text-align:right;font-family:var(--mono)}table.wks
 table.wkm th.c,table.wkm td.c{text-align:center}table.wkm th.on{color:var(--amber)}table.wkm td.gs,table.wkm th.gs{border-left:1px solid var(--edge2)}
 table.wkm .hc{display:inline-block;min-width:36px;padding:1px 4px;border-radius:3px;font:600 10.5px var(--mono)}table.wkm td.thin .hc{opacity:.45}table.wkm tr.fld td{border-bottom:1px solid var(--edge2);font-family:var(--mono)}
 table.wkp td.c{text-align:center}
+/* ---- v21 TD Picks ---- */
+.tpcols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-items:start}@media(max-width:1300px){.tpcols{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.tpcols{grid-template-columns:1fr!important}}
+.tpcol{display:flex;flex-direction:column;gap:6px;min-width:0}.tpcol h4{margin:0 0 2px;font:600 10px var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--dim2);display:flex;gap:6px;align-items:center}.tpcol h4 b{font:700 11px var(--mono);color:var(--txt)}.tpcol h4 .mini{text-transform:none;letter-spacing:0}
+.tpc{background:rgba(255,255,255,.02);border:1px solid var(--edge);border-left:3px solid #55606a;border-radius:7px;padding:7px 9px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tpc.g{border-left-color:var(--green)}.tpc.g2{border-left-color:#7dd87d}.tpc.a{border-left-color:var(--amber)}.tpc.b{border-left-color:#6db3e8}.tpc.out{opacity:.5}
+.tpc .h{display:flex;align-items:center;gap:5px;font-size:12.5px;white-space:nowrap;overflow:hidden}.tpc .h .pp{font-weight:600}.tpc .st{margin-left:auto}
+.tpc .m{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.tpc .pp2{font:700 21px/1 var(--mono);color:var(--txt)}.tpc.g .pp2{color:var(--green)}.tpc.g2 .pp2{color:#7dd87d}.tpc.a .pp2{color:var(--amber)}.tpc.b .pp2{color:#6db3e8}
+.tpc .tier{font:600 9.5px var(--ui);letter-spacing:.08em;text-transform:uppercase;color:var(--dim2)}.tpc .fo{font-size:11px;color:var(--dim)}.tpc .fo b{font-family:var(--mono);color:var(--txt)}.tpc .ev{font:700 11.5px var(--mono)}
+.tpc .why{display:flex;flex-wrap:wrap;gap:3px}.tpc .why i{font-style:normal;font-size:10.5px;color:var(--dim);border:1px solid var(--edge2);border-radius:3px;padding:0 5px;line-height:16px}.tpc .why i.risk{color:var(--red);border-color:#ff525255}
+.tpvals{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:6px}.tpv{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto;gap:8px;align-items:center;font-size:12px;border:1px solid var(--edge);border-radius:6px;padding:5px 8px}.tpv .mini b{font-family:var(--mono);color:var(--txt)}
+.tpwk{display:flex;align-items:flex-end;gap:3px;height:74px;border-bottom:1px solid var(--edge2);padding-bottom:14px;position:relative}.tpwk .b{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;position:relative;min-width:6px}
+.tpwk .b i{display:block;border-radius:2px 2px 0 0;opacity:.85}.tpwk .b em{position:absolute;bottom:-14px;left:0;right:0;text-align:center;font:500 8.5px var(--mono);color:var(--dim2);font-style:normal}
+.tpled{margin:0 0 10px}.tpled h4{margin:0 0 6px;font:600 11px var(--ui);color:var(--txt)}.tpled h4 .mini{margin-left:8px;font-weight:500}
+.wkpc.w{border-color:#00c85366}.wkpc.l{opacity:.55}.wkpc b{font:700 10px var(--mono);margin-left:3px}.wkpc.w b{color:var(--green)}.wkpc.l b{color:var(--red)}
 /* ---- v19 Weeklies at a glance ---- */
 .wktiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:0 0 10px}@media(max-width:1300px){.wktiles{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:760px){.wktiles{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 .wkt{background:var(--panel);border:1px solid var(--edge);border-top:2px solid var(--edge2);border-radius:8px;padding:9px 11px;display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -1139,7 +1153,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <div id="ranks"></div><div id="matrix" hidden></div><div id="defense" hidden></div></div>
 <div id="sked" hidden></div>
 <div id="tdb" hidden></div>
-<div id="test" hidden><div id="meta" hidden></div><div id="weeklies" hidden></div><div id="dev" hidden></div><div id="api" hidden></div><div id="injuries" hidden></div><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div><div id="markets2" hidden></div><div id="ddelta" hidden></div><div id="card2" hidden></div><div id="splits" hidden></div></div>
+<div id="test" hidden><div id="meta" hidden></div><div id="weeklies" hidden></div><div id="tdpicks" hidden></div><div id="dev" hidden></div><div id="api" hidden></div><div id="injuries" hidden></div><div id="labgrid" hidden></div><div id="gameview" hidden></div><div id="tdgridTest" hidden></div><div id="h2h" hidden></div><div id="markets2" hidden></div><div id="ddelta" hidden></div><div id="card2" hidden></div><div id="splits" hidden></div></div>
 <div id="intel" hidden></div>
 <div id="board" hidden></div>
 <div id="pkhome" hidden></div>
@@ -1406,6 +1420,7 @@ const SECTIONS=[
  {id:'test',fk:'F6',label:'TEST',items:[
    {id:'meta',label:'META',desc:'every board at once: the TD Board, Player Grid, H2H Grid, Scheme and the anytime-TD model folded into one score per starter, in the TD Grid\'s five columns \u2014 every position together, then QB, RB, WR and TE \u2014 with the week\'s best spot on each signal across the top',c:'test',sub:'meta'},
    {id:'weeklies',label:'Weeklies',desc:'the touchdown lookback: once a week\'s games are all played and logged, who scored, which pre-game signals pointed at them \u2014 TD and fantasy matchup ranks, a TD against the same opponent before, form, usage, the line \u2014 a written read of the week, the week-by-week trends and the season grid of which signals keep producing scorers',c:'test',sub:'weeklies'},
+   {id:'tdpicks',nfl:true,label:'TD Picks',desc:'next week\'s anytime touchdowns: every slot owner\'s chance to score from the model built on the Weeklies study, with fair odds, the best posted price and its edge, the reasons and the risk \u2014 plus the blind week-by-week record and the frozen picks graded as games are logged',c:'test',sub:'tdpicks'},
    {id:'labgrid',label:'Lab Grid',desc:'the Matchup Lab split four ways — QB, RB, WR and TE side by side, showing only what each opponent allows per game, so the softest field at every position is one glance',c:'test',sub:'labgrid'},
    {id:'tdgrid',label:'TD Grid',desc:'the draft the F2 TD Board was promoted from, kept here untouched \u2014 scrolling columns and the original depth filter',c:'test',sub:'tdgridTest'},
    {id:'h2h',label:'Head to Head',desc:'what every starter has actually done against this week\'s opponent \u2014 his own averages in every prior meeting we have logs for, four columns by position',c:'test',sub:'h2h'},
@@ -1431,10 +1446,11 @@ function syncSub(){const it=ITEMS[CUR_ITEM];if(!it)return;
   if(it.c==='players'){const m={dchart:'#dcView',lab:'#lab',h2hp:'#h2hP',player:'#player',tdbx:'#tdBx'};Object.entries(m).forEach(([k,q])=>{const e=$(q);if(e)e.hidden=k!==it.sub});const hr=$('#players hr.sep');if(hr)hr.hidden=true;
     if(it.sub==='dchart'){const b=$('#dcBody');if(b)b.hidden=false}
     if(it.sub==='player'&&typeof pEmpty==='function')pEmpty()}
-  if(it.c==='test'){['meta','weeklies','labgrid','gameview','tdgridTest','h2h','markets2','ddelta','card2','splits','api','injuries','dev'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub});const lf=$('#lgFields'),hf=$('#hhFields');if(lf)lf.hidden=it.id!=='labgridp';if(hf)hf.hidden=it.id!=='h2hgridp'}
+  if(it.c==='test'){['meta','weeklies','tdpicks','labgrid','gameview','tdgridTest','h2h','markets2','ddelta','card2','splits','api','injuries','dev'].forEach(k=>{const e=$('#'+k);if(e)e.hidden=k!==it.sub});const lf=$('#lgFields'),hf=$('#hhFields');if(lf)lf.hidden=it.id!=='labgridp';if(hf)hf.hidden=it.id!=='h2hgridp'}
   document.body.classList.toggle('fan',it.id==='fantasy')}
 /* ---------- plain-English page intros: what the page shows and how to read it ---------- */
 const INTRO={
+ tdpicks:{what:'Next week\'s anytime touchdowns.',how:['% = his chance to score a rushing or receiving TD · fair = the odds that chance is worth','green tags = why · red tag = the main risk','record = every week of 2025–26 picked blind, then graded']},
  weeklies:{what:'The touchdown lookback.',how:['bar = how often players with that signal scored · white line = everyone who played','green = beat the field · red = fell short','a week appears once all its games are logged']},
  meta:{what:'Every board at once.',how:['META = every signal in one score, 0–100 — 100 = the softest spot on all of them; hover a META cell for the breakdown','TD and Ψ = the opponent\'s rank of 32, 1 = allows the most · ATD = the model\'s chance he scores · H2H = his own PPR vs this opponent, ▲ / ▼ vs his norm · SCH = the defense\'s style edge for his slot','lens chips re-rank every column at once; the data-set select (2024 · 2025 · 2026 · combined · adjusted · μ) drives TD, Ψ and META']},
  matrix:{what:'All 32 defenses against every position slot in one heatmap. Click a cell for that defense\'s per-stat ranks and raw averages.',how:['green = allows the most to that slot (best matchup), red = the least','toggle current season, prior seasons or the combined blend']},
@@ -5435,7 +5451,7 @@ function weeklies(){
   <div class="panel"><h3 id="wkMh"></h3><div id="wkMx"></div></div>
   <details class="panel wkdet"><summary id="wkPh"></summary>
     <div class="controls" style="margin:6px 0"><span class="chips" id="wkShow"><button data-s="sc" class="on">scorers</button><button data-s="nm">near misses</button><button data-s="all">everyone</button></span></div><div id="wkPl"></div></details>`;
-  const keep=x=>slotOK(wkLive,x.slot)&&inP(x.pos);
+  const keep=x=>slotOK(wkLive,x.slot==='WR4+'?'WR4':x.slot)&&inP(x.pos);
   function chipsW(F){const box=$('#wkW');box.innerHTML=F.weeks.map(w=>`<button data-w="${w}" class="${w===W?'on':''}">wk ${w}</button>`).join('')+(F.pending.length?`<span class="mini" style="margin-left:6px" title="a week appears once every game is logged">wk ${F.pending.join(', ')} in progress</span>`:'');
     box.querySelectorAll('button').forEach(b=>b.onclick=()=>{W=+b.dataset.w;render()})}
   const col=(s,l)=>l==null?'var(--dim2)':s.kind==='neg'?(wkR(l)<=.9?'var(--green)':wkR(l)>=1.1?'var(--red)':'#8b98a5'):(wkR(l)>=1.1?'var(--green)':wkR(l)<=.9?'var(--red)':'#8b98a5');
@@ -5539,6 +5555,87 @@ function weeklies(){
     tWire(el)}
   $('#wkSe').onchange=()=>{W=null;render()};slotChipsWire('wkSlots',wkLive,render);
   $('#wkShow').querySelectorAll('button').forEach(b=>b.onclick=()=>{show=b.dataset.s;$('#wkShow').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));render()});
+  render();RR.push(render);
+}
+
+
+/* ---------------- TD Picks (F6 TEST) — the coming week's anytime touchdowns ----------------
+   Everything here is computed by scripts/build_td_picks.py and embedded as J.tdpicks: a ridge logistic model on the pre-kickoff profile
+   the Weeklies tab tests (form vs career, career TD rate, share of his team's TDs, touches / targets / carries, snap share, implied
+   total, spread, what the defense allows his slot season-long and lately, a TD vs this opponent before, slot), calibrated with
+   isotonic regression fitted only on earlier weeks. The record on this page is walk-forward (every week of 2025-26 scored by a model
+   that had not seen it) plus the frozen ledger: a week's picks are written down the first time it is scored and graded from the logs. */
+function tdPicks(){
+  const el=$('#tdpicks');if(!el)return;const T=J.tdpicks;
+  if(!T){el.innerHTML='<p class="note">no TD picks in this build yet — scripts/build_td_picks.py writes them</p>';return}
+  const live=new Set(TD_SLOTS);let sortK='p',show='board';
+  const TIER={lock:['lock','50%+','g'],strong:['strong','40–50%','g2'],solid:['solid','30–40%','a'],long:['longshot','20–30%','b'],low:['low','under 20%','d']};
+  const pct=v=>v==null?'—':Math.round(100*v)+'%',ml=v=>v==null?'—':(v>0?'+':'')+v;
+  const BT=T.bt||{},tk=Object.keys(TIER);
+  el.innerHTML=`<div class="controls">
+    ${slotChipsHTML('tpSlots',live)}
+    <select id="tpInj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
+    <select id="tpSort" title="how each column is ordered"><option value="p" selected>rank by chance to score</option><option value="ev">rank by value at the posted price</option></select>
+    <input id="tpQ" placeholder="search player..." size="15">
+    <span class="note kept">week ${T.week} · depth chart ${T.depth} · built ${T.built}</span>
+  </div>
+  <div class="wktiles" id="tpTiles" data-mg="1"></div>
+  <div class="panel"><h3 id="tpBh"></h3><div class="tpcols" id="tpCols" data-mg="1"></div></div>
+  <div class="panel"><h3 id="tpVh"></h3><div id="tpVal"></div></div>
+  <div class="wk2b"><div class="panel"><h3>track record — every week of 2025–26, scored blind <span class="f">the model is refit before each week on games it has already seen, then graded on that week</span></h3><div id="tpRec"></div></div>
+    <div class="panel"><h3>does the % mean what it says? <span class="f">predicted chance vs how often those players actually scored · white tick = the prediction</span></h3><div id="tpCal"></div></div></div>
+  <div class="panel"><h3 id="tpLh"></h3><div id="tpLed"></div></div>
+  <details class="panel wkdet"><summary id="tpAh"></summary><div id="tpAll"></div></details>`;
+  const keep=x=>slotOK(live,x.s==='WR4+'?'WR4':x.s)&&($('#tpInj').value!=='x'||x.inj!=='-1')&&inP(x.pos)&&inF(x.t)&&(()=>{const q=$('#tpQ').value.toLowerCase();return !q||x.n.toLowerCase().includes(q)})();
+  const trk=x=>TRK.btn({kind:'player',league:'nfl',away:x.h?x.o:x.t,home:x.h?x.t:x.o,kickoff:'',market:'td',stat:'anytime_td',player:x.n,team:x.t,selection:'Yes',point:'',price:x.price!=null?String(x.price):'',source:x.book||'',label:`${x.n} anytime TD`,from:'td picks'});
+  const evC=v=>v==null?'var(--dim)':v>=.05?'var(--green)':v<=-.05?'var(--red)':'var(--txt)';
+  const card=x=>{const t=TIER[x.tier]||TIER.low;return `<div class="tpc ${t[2]}${x.inj==='-1'?' out':''}">
+      <div class="h">${pn(x.n,x.t,true)} ${slotchip(x.b)} <span class="mini">${x.h?'vs':'@'} ${tcell(x.o)}</span>${x.inj==='0'?' <span class="inj0">Q</span>':x.inj==='-1'?' <span class="injm1">OUT</span>':''}<span class="st">${trk(x)}</span></div>
+      <div class="m"><b class="pp2">${pct(x.p)}</b><span class="tier">${t[0]}</span><span class="fo" title="the price this chance is worth">fair <b>${ml(x.fair)}</b></span>${x.price!=null?`<span class="fo" title="best posted anytime-TD price">${esc(x.book||'')} <b>${ml(x.price)}</b></span><span class="ev" style="color:${evC(x.ev)}" title="expected return at that price">${x.ev>=0?'+':''}${Math.round(100*x.ev)}%</span>`:''}</div>
+      <div class="why">${(x.why||[]).map(w=>`<i>${esc(w)}</i>`).join('')}${x.risk?`<i class="risk">${esc(x.risk)}</i>`:''}</div></div>`};
+  function render(){
+    const P=T.picks.filter(keep),sk=$('#tpSort').value;
+    const ord=(a,b)=>sk==='ev'?((b.ev??-9)-(a.ev??-9)||b.p-a.p):b.p-a.p;
+    /* tiles */
+    const lk=P.filter(x=>x.tier==='lock'),rec=(T.record||[]).filter(r=>r.graded),rw=rec.reduce((s,r)=>s+r.wins,0),rg=rec.reduce((s,r)=>s+r.graded,0),bl=BT.tiers&&BT.tiers.lock;
+    $('#tpTiles').innerHTML=wkTile(`week ${T.week}`,String(T.games),`games · ${T.dates?T.dates[0].slice(5)+' to '+T.dates[1].slice(5):''}`)
+      +wkTile('locks',String(lk.length),lk.slice(0,2).map(x=>esc(pshort(x.n))).join(' · ')||'none above 50%','g')
+      +wkTile('top 10 each week',BT.top10?pct(BT.top10[0]/BT.top10[1]):'—',`scored · ${BT.top10?BT.top10[0]+' of '+BT.top10[1]:''} blind picks`,'g')
+      +wkTile('lock tier',bl&&bl[0]?pct(bl[1]/bl[0]):'—',`hit · ${bl?bl[1]+' of '+bl[0]:''} picks rated 50%+`,'g')
+      +wkTile('prices posted',String(T.priced),T.priced?'best anytime-TD price across books':'books post props midweek — fair odds until then',T.priced?'':'')
+      +wkTile('frozen record',rg?`${rw}-${rg-rw}`:'—',rg?`${pct(rw/rg)} of frozen picks scored`:`week ${T.week} picks frozen ${(T.record||[]).length?(T.record[T.record.length-1].frozen||'').slice(5):''} · graded as games log`);
+    /* the board: four positions */
+    const N={QB:5,RB:10,WR:12,TE:7};
+    $('#tpBh').innerHTML=`week ${T.week} — the picks <span class="f">chance he scores a rushing or receiving TD · tier = lock 50%+, strong 40–50%, solid 30–40%, longshot 20–30% · fair = the odds that chance is worth${T.priced?' · EV = expected return at the best posted price':''} · ★ sends it to Tracking</span>`;
+    $('#tpCols').innerHTML=TPOS.filter(p=>inP(p)).map(p=>{const L=P.filter(x=>x.pos===p).sort(ord);return `<div class="tpcol"><h4>${posIcon(p,11)} ${p} <b>${Math.min(N[p],L.length)}</b><span class="mini">of ${L.length}</span></h4>${L.slice(0,N[p]).map(card).join('')||'<span class="mini dim">nobody matches</span>'}</div>`}).join('');
+    /* value: the posted price beats the model's fair price */
+    const V=P.filter(x=>x.ev!=null&&x.ev>=.05).sort((a,b)=>b.ev-a.ev);
+    $('#tpVh').innerHTML=`value at the posted price <span class="f">players whose best posted anytime-TD price pays more than the model's fair price · biggest edge first</span>`;
+    $('#tpVal').innerHTML=!T.priced?'<p class="mini dim">no week-'+T.week+' anytime-TD prices are posted yet — the loop picks them up as books open them, and this fills in on its own</p>'
+      :V.length?`<div class="tpvals">${V.slice(0,16).map(x=>`<div class="tpv"><span>${pn(x.n,x.t,true)} ${slotchip(x.b)}</span><span class="mini">model <b>${pct(x.p)}</b> · fair ${ml(x.fair)}</span><span class="mini">${esc(x.book||'')} <b>${ml(x.price)}</b></span><b style="color:var(--green)">+${Math.round(100*x.ev)}%</b>${trk(x)}</div>`).join('')}</div>`:'<p class="mini dim">every posted price is at or below the model\'s fair price right now</p>';
+    /* track record: weekly top-10, tiers */
+    const W=BT.weeks||[];
+    $('#tpRec').innerHTML=`<div class="tpwk">${W.map(w=>{const r=w[5]?w[4]/w[5]:0;return `<span class="b" title="${w[0]} wk ${w[1]}: ${w[4]} of the top ${w[5]} scored · field ${pct(w[3]/w[2])}"><i style="height:${Math.max(4,Math.round(100*r))}%;background:${r>=.6?'var(--green)':r>=.4?'var(--amber)':'var(--red)'}"></i><em>${w[1]}</em></span>`}).join('')}</div>
+      <div class="mini" style="margin:4px 0 10px">each bar = how many of that week's ten highest-rated players scored · ${BT.top10?BT.top10[0]+' of '+BT.top10[1]:''} overall · top three per position ${BT.top3pos?pct(BT.top3pos[0]/BT.top3pos[1]):''} · model AUC ${BT.auc} vs ${BT.auc_base} for slot alone</div>
+      ${tk.map(k=>{const v=(BT.tiers||{})[k]||[0,0],t=TIER[k],r=v[0]?v[1]/v[0]:null;return `<div class="wkb"><span class="l">${t[0]} <span class="mini">${t[1]}</span></span><span class="t"><i style="width:${(100*(r||0)/.75).toFixed(1)}%;background:${k==='lock'||k==='strong'?'var(--green)':k==='solid'?'var(--amber)':k==='long'?'#6db3e8':'#55606a'}"></i></span><span class="r"><b>${pct(r)}</b><span class="mini"> ${v[1]}/${v[0]}</span></span></div>`}).join('')}`;
+    $('#tpCal').innerHTML=(BT.calib||[]).map(c=>{const off=Math.abs(c[1]-c[0]);return `<div class="wkb" title="${c[2]} players rated about ${pct(c[0])} — ${pct(c[1])} scored"><span class="l">rated ~${pct(c[0])}</span><span class="t"><i style="width:${(100*c[1]/.75).toFixed(1)}%;background:${off<=.04?'var(--green)':off<=.08?'var(--amber)':'var(--red)'}"></i><u style="left:${(100*c[0]/.75).toFixed(1)}%"></u></span><span class="r"><b>${pct(c[1])}</b><span class="mini"> ${c[2]}</span></span></div>`}).join('');
+    /* the frozen ledger */
+    const R=T.record||[];
+    $('#tpLh').innerHTML=`frozen picks <span class="f">written down the first time a week is scored and never re-scored · ✓ scored · ✗ didn't · blank = not played yet</span>`;
+    $('#tpLed').innerHTML=R.length?R.slice().reverse().map(r=>`<div class="tpled"><h4>week ${r.w} <span class="mini">frozen ${r.frozen} · ${r.graded?`${r.wins} of ${r.graded} graded picks scored · top ten ${r.top10[0]}/${r.top10[1]}`:'not graded yet'}</span></h4>
+      <div class="wkpcs">${r.rows.slice().sort((a,b)=>(a[6]||99)-(b[6]||99)).slice(0,24).map(x=>`<span class="wkpc ${x[9]==='W'?'w':x[9]==='L'?'l':''}">${pn(x[0],x[1],true)}<i>${pct(x[4])}</i>${x[9]==='W'?'<b>✓</b>':x[9]==='L'?'<b>✗</b>':''}</span>`).join('')}</div></div>`).join(''):'<p class="mini dim">no frozen week yet</p>';
+    /* every player, folded */
+    const A=P.slice().sort(ord);
+    $('#tpAh').innerHTML=`every player — week ${T.week} <span class="mini">${A.length} · open for the full sortable table</span>`;
+    $('#tpAll').innerHTML=`<table class="fx wkp"><thead><tr><th>player</th><th>slot</th><th>opp</th><th title="chance he scores">P(TD)</th><th>tier</th><th title="the odds that chance is worth">fair</th><th title="best posted price">price</th><th title="expected return at the posted price">EV</th><th title="games with a TD this season">season</th><th title="games with a TD in his last three">L3</th><th title="his share of his team's TDs">team TD share</th><th title="carries + targets a game">touches</th><th title="team implied total">implied</th><th title="TDs the defense allows his slot per game">D allows</th><th>★</th></tr></thead><tbody>
+      ${A.map(x=>`<tr><td>${pn(x.n,x.t,true)}${x.inj==='0'?' <span class="inj0">Q</span>':x.inj==='-1'?' <span class="injm1">OUT</span>':''}</td><td>${slotchip(x.b)}</td><td>${x.h?'':'@'}${tcell(x.o)}</td>
+        <td class="n" data-v="${x.p}"><span class="badge" style="${gradeStyle(1+(1-Math.min(1,x.p/.6))*(NT-1))}">${pct(x.p)}</span></td><td>${(TIER[x.tier]||TIER.low)[0]}</td><td class="n" data-v="${x.fair}">${ml(x.fair)}</td>
+        <td class="n" data-v="${x.price??''}">${x.price!=null?`${ml(x.price)} <span class="mini">${esc(x.book||'')}</span>`:'<span class="dim">—</span>'}</td><td class="n" data-v="${x.ev??''}">${x.ev!=null?`<b style="color:${evC(x.ev)}">${x.ev>=0?'+':''}${Math.round(100*x.ev)}%</b>`:'<span class="dim">—</span>'}</td>
+        <td class="n" data-v="${x.gpS?x.hitS/x.gpS:''}">${x.gpS?`${x.hitS}/${x.gpS}`:'<span class="dim">—</span>'}</td><td class="n" data-v="${x.l3n?x.l3k/x.l3n:''}">${x.l3n?`${x.l3k}/${x.l3n}`:'<span class="dim">—</span>'}</td>
+        <td class="n" data-v="${x.share??''}">${x.share!=null?pct(x.share):'<span class="dim">—</span>'}</td><td class="n" data-v="${x.touch}">${x.touch}</td>
+        <td class="n" data-v="${x.imp??''}">${x.imp!=null?`<span style="color:${x.imp>=24?'var(--green)':x.imp<19?'var(--red)':'var(--txt)'}">${x.imp}</span>`:'<span class="dim">—</span>'}</td><td class="n" data-v="${x.dr??''}">${x.dr??'—'}</td><td>${trk(x)}</td></tr>`).join('')}</tbody></table>`;
+    tWire(el);TRK.paint()}
+  slotChipsWire('tpSlots',live,render);['tpInj','tpSort'].forEach(i=>$('#'+i).onchange=render);$('#tpQ').oninput=render;
   render();RR.push(render);
 }
 
@@ -5714,8 +5811,9 @@ Object.assign(NOTES,{
  ddelta:['v18','slot chips replace the depth dropdown (a body that left the chart is filed under his old slot)'],
  props:['v18','slot chips and a player search on every player market and anytime TD (hidden on game lines)'],
  markets2:['v18','slot chips and a player search on every player market and anytime TD (hidden on game lines)'],
- weeklies:['v20','built out from a three-season study: new signals (volume, team TD share, career TD rate, a defense that just gave his slot TDs, big underdogs), a what-to-trust board, the stacking chart, best signal by position and this week\'s players who carry what works']});
-const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',boardView],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',metaGrid],['test',weeklies],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['players',tdLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)],['test',splits],['test',apiView],['test',injuriesView],['test',devView]];
+ weeklies:['v20','built out from a three-season study: new signals (volume, team TD share, career TD rate, a defense that just gave his slot TDs, big underdogs), a what-to-trust board, the stacking chart, best signal by position and this week\'s players who carry what works'],
+ tdpicks:['v21','new tab: next week\'s TD picks from the model built on the Weeklies study — chance to score, fair odds, best posted price and edge, the reasons, the blind record and the frozen picks']});
+const BOOT=[['home',home],['players',dchart],['players',lab],['defenses',ranks],['defenses',matrix],['sked',sked],['tdb',tdboard],['chamber',chamber],['defenses',defense],['players',player],['home',insights],['intel',intel],['home',brief],['home',lineup],['home',homeBoard],['board',board],['games',boardView],['pkhome',pkhomeView],['locker',locker],['home',socialHome],['bets',bets11],['test',labGrid],['test',metaGrid],['test',weeklies],['test',tdPicks],['test',gameView],['test',()=>tdGrid('#tdgridTest','tt',true)],['test',()=>h2hGrid('#h2h','hh',true)],['players',h2hLab],['players',tdLab],['test',()=>bets11('#markets2','m2')],['test',depthDelta],['test',()=>games('#card2','c2',true)],['test',splits],['test',apiView],['test',injuriesView],['test',devView]];
 BOOT.forEach(([v,f])=>{CURV=v;f()});CURV='home';palette();glossary();
 ['chamber','players','defenses','sked','tdb','intel','board','pkhome','games','locker','bets'].forEach(v=>DIRTY.add(v));
 gbarInit();

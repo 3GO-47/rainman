@@ -298,6 +298,9 @@ def main():
     data['bets'] = bets_payload()
     data['college'] = college_payload(logs)
     data['betting'] = betting_payload()
+    # TD Picks (build_td_picks.py): next week's anytime-TD picks, the walk-forward record and the frozen ledger
+    if LEAGUE == 'nfl' and os.path.exists('data/processed/td_picks.json'):
+        data['tdpicks'] = json.load(open('data/processed/td_picks.json'))
     # v4: exchange prices, unified picks ledger, DFS entries, signal efficacy
     def rows_of(path, flt=None):
         if not os.path.exists(path): return []

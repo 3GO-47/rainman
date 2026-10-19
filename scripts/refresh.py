@@ -84,6 +84,8 @@ def main():
         run(['scripts/build_units.py'])
     run(['scripts/build_narratives.py'])
     run(['scripts/build_injuries.py'], check=False) if 'check' in run.__code__.co_varnames else run(['scripts/build_injuries.py'])
+    try: run(['scripts/build_td_picks.py'])
+    except Exception as e: print('  build_td_picks skipped:', e)
     run(['scripts/build_dashboard.py'])
     try: run(['scripts/build_tracking.py'])
     except Exception as e: print('  build_tracking skipped:', e)
