@@ -84,7 +84,7 @@ def markets_only(G, st):
     if any(G[lg]['active'] for lg in G):
         if G['nfl']['active'] and step('injuries', pull_espn.injuries): step('build_injuries', run, ['scripts/build_injuries.py'], False); did.append('injuries')
         if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():
-            if step('odds api', run, ['scripts/fetch_odds_api.py'], False): did.append('odds')
+            if step('odds api', run, ['scripts/fetch_odds_api.py'], False) == 0: did.append('odds')      # run() returns the exit code: 0 = fresh prices
         if step('markets', pull_markets.main): did.append('exchanges')
         if step('tennis markets', pull_tennis.markets) and step('tennis', run, ['scripts/tennis/build.py']) is not None: did.append('tennis')
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb'); step('tracking', run, ['scripts/build_tracking.py'])
@@ -163,6 +163,8 @@ def main():
         if step('markets', pull_markets.main):
             if step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb'); step('tracking', run, ['scripts/build_tracking.py'])
         step('social', run, ['scripts/build_social.py'])
+        if 'arb' in did and G['nfl']['active']:                                                    # prices land after refresh.py built the page: re-price TD Picks, rebuild it
+            step('td picks', run, ['scripts/build_td_picks.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False)
     # ---------------- commit / push
     git('add', '-A')
     chg = git('status', '--porcelain').stdout.strip()

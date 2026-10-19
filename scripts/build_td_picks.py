@@ -9,17 +9,33 @@ Honesty:
   * point in time — every feature uses only games played before the one being predicted;
   * walk-forward backtest — for every week of 2025 and 2026 the model is refit on everything before that week and scored on it,
     so the track record on the page is out of sample;
-  * frozen picks — the first time a week is scored its picks are written to data/processed/td_picks_ledger.csv and never
-    re-scored; results are filled in from the game logs as games are logged (prices may update until kickoff, p never does).
+  * locked at kickoff — every run rewrites a game's picks in data/processed/td_picks_ledger.csv with the latest depth chart,
+    injuries, lines and prices until that game kicks off; from kickoff on its rows are locked and only the result is filled in
+    (from the game logs). A game that has already started is never written, so nothing in the record was picked after the fact.
+
+The target week is the first week whose games through Sunday night have not all kicked off (US Eastern time, from
+kickoffs_2026.csv): the board holds a week until the Sunday night game starts, then moves on (Monday night is already locked
+in by then as far as the board is concerned — its picks stay as last written before the switch, all before kickoff).
 
 Writes data/processed/td_picks.json (embedded by build_dashboard.py) and data/processed/td_picks_ledger.csv.
-Inputs: data/game_logs/game_logs_*.csv, data/processed/{player_usage, game_lines, schedule_2026, games_2026, depth_charts_*,
-arb_board, bet_td}.csv — all already produced by the pipeline."""
+Inputs: data/game_logs/game_logs_*.csv, data/processed/{player_usage, game_lines, lines_all, kickoffs_2026, schedule_2026,
+games_2026, depth_charts_*, arb_board, bet_td}.csv — all already produced by the pipeline."""
 import csv, glob, json, os, math, datetime, collections, re, sys
 import numpy as np
 
 P = 'data/processed/'
-TODAY = datetime.date.today()
+def _now_et():
+    """wall-clock US Eastern without depending on tzdata (Windows Python has no zone database by default)."""
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo('America/New_York')).replace(tzinfo=None)
+    except Exception:
+        u = datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None)
+        y = u.year; mar = datetime.datetime(y, 3, 8 + (6 - datetime.date(y, 3, 8).weekday()) % 7, 7); nov = datetime.datetime(y, 11, 1 + (6 - datetime.date(y, 11, 1).weekday()) % 7, 6)
+        return u - datetime.timedelta(hours=4 if mar <= u < nov else 5)
+NOW = _now_et()
+if '--now' in sys.argv: NOW = datetime.datetime.fromisoformat(sys.argv[sys.argv.index('--now') + 1])     # testing: pretend it is this ET time
+TODAY = NOW.date()
 SEASON = 2026
 BUCKET = {'QB1': 'QB1', 'RB1': 'RB1', 'RB2': 'RB2', 'RB3': 'RB3', 'FB1': 'RB3', 'WR1': 'WR1', 'WR2': 'WR2', 'WR3': 'WR3', 'WR4+': 'WR4', 'WR4': 'WR4',
           'TE1': 'TE1', 'TE2': 'TE2', 'TE3': 'TE2', 'TE4': 'TE2'}
@@ -154,7 +170,8 @@ def predict(m, X):
 
 # ---------------- walk-forward backtest ----------------
 TIERS = [('lock', .5, 1.01), ('strong', .4, .5), ('solid', .3, .4), ('long', .2, .3), ('low', 0, .2)]
-bt_weeks, allp, ally, allb, allk = [], [], [], [], []
+bt_weeks, allp, ally, allb, allk, bt_top = [], [], [], [], [], []
+nm_all = [x[5] for x in rows]; tm_all = [x[6] for x in rows]
 eval_keys = sorted(set(k for k in key if k >= 202501))
 for ek in eval_keys:
     tr = key < ek; te = key == ek
@@ -163,9 +180,10 @@ for ek in eval_keys:
     # base: league slot rate from the training rows
     base = np.array([yall[tr][bk[tr] == b].mean() if (bk[tr] == b).any() else yall[tr].mean() for b in bb])
     o = np.argsort(-p); top10 = y[o[:10]]
-    pos = np.array([POS(b) for b in bb]); top3 = []
+    pos = np.array([POS(b) for b in bb]); top3 = []; sel = [int(j) for j in o[:10]]
     for ps in ('QB', 'RB', 'WR', 'TE'):
-        idx = np.where(pos == ps)[0]; idx = idx[np.argsort(-p[idx])][:3]; top3 += list(y[idx])
+        idx = np.where(pos == ps)[0]; idx = idx[np.argsort(-p[idx])][:3]; top3 += list(y[idx]); sel += [int(j) for j in idx]
+    bt_top.append((int(ek), len(allp), sel, np.where(te)[0]))
     ll = -np.mean(y * np.log(np.clip(p, 1e-6, 1)) + (1 - y) * np.log(np.clip(1 - p, 1e-6, 1)))
     llb = -np.mean(y * np.log(np.clip(base, 1e-6, 1)) + (1 - y) * np.log(np.clip(1 - base, 1e-6, 1)))
     bt_weeks.append([int(ek // 100), int(ek % 100), int(te.sum()), int(y.sum()), int(top10.sum()), int(len(top10)), int(sum(top3)), int(len(top3)), round(float(ll), 4), round(float(llb), 4)])
@@ -187,6 +205,15 @@ for ek in sorted(set(allk)):
     prior = allk < ek
     if prior.sum() >= 2000: cal = pav(raw[prior], ally[prior]); allp[allk == ek] = cal(raw[allk == ek])
 CAL = pav(raw, ally)
+# each backtest week's picks by name (calibrated as they would have been shown) — the Weeklies lookback grades them
+BT_TOP = {}
+for ek, off, sel, gidx in bt_top:
+    seen, L = set(), []
+    for j in sel:
+        if j in seen: continue
+        seen.add(j); g = int(gidx[j])
+        L.append([nm_all[g], tm_all[g], str(bk[g]), round(float(allp[off + j]), 3), int(yall[g])])
+    BT_TOP[f'{ek // 100}-{ek % 100}'] = L                     # first ten = the overall top ten, then each position's top three
 def auc(p, y):
     o = np.argsort(p); r = np.empty(len(p)); r[o] = np.arange(1, len(p) + 1); n1 = y.sum(); n0 = len(y) - n1
     return float((r[y == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * n0)) if n1 and n0 else None
@@ -199,18 +226,46 @@ tiers = {t: [int(((allp >= a) & (allp < b)).sum()), int(ally[(allp >= a) & (allp
 ll = float(-np.mean(ally * np.log(np.clip(allp, 1e-6, 1)) + (1 - ally) * np.log(np.clip(1 - allp, 1e-6, 1))))
 llb = float(-np.mean(ally * np.log(np.clip(allb, 1e-6, 1)) + (1 - ally) * np.log(np.clip(1 - allb, 1e-6, 1))))
 bt = dict(calibrated=True, weeks=bt_weeks, calib=calib, tiers=tiers, auc=round(auc(allp, ally), 3), auc_base=round(auc(allb, ally), 3), ll=round(ll, 4), ll_base=round(llb, 4),
-          n=int(len(allp)), hits=int(ally.sum()), top10=[sum(w[4] for w in bt_weeks), sum(w[5] for w in bt_weeks)], top3pos=[sum(w[6] for w in bt_weeks), sum(w[7] for w in bt_weeks)])
+          n=int(len(allp)), hits=int(ally.sum()), top10=[sum(w[4] for w in bt_weeks), sum(w[5] for w in bt_weeks)], top3pos=[sum(w[6] for w in bt_weeks), sum(w[7] for w in bt_weeks)],
+          top=BT_TOP)
 print(f'  walk-forward {len(bt_weeks)} weeks · AUC {bt["auc"]} (slot-only {bt["auc_base"]}) · log loss {bt["ll"]} vs {bt["ll_base"]} · top-10 {bt["top10"][0]}/{bt["top10"][1]} · tiers {tiers}')
 
 # ---------------- the target week ----------------
 games = list(csv.DictReader(open(P + 'games_2026.csv')))
 by_wk = collections.defaultdict(list)
 for g in games: by_wk[int(g['week'])].append(g)
-def main_date(w):
-    c = collections.Counter(g['date'] for g in by_wk[w]); return datetime.date.fromisoformat(c.most_common(1)[0][0])
-target = next((w for w in sorted(by_wk) if main_date(w) >= TODAY), max(by_wk))
+# kickoff of every game, US Eastern (kickoffs_2026.csv from build_kickoffs.py; a game without a time counts as 1 PM on its date)
+KO = {}
+if os.path.exists(P + 'kickoffs_2026.csv'):
+    for r in csv.DictReader(open(P + 'kickoffs_2026.csv')):
+        try: t = datetime.datetime.strptime(f"{r['date']} {r['time_et'].strip()}", '%Y-%m-%d %I:%M %p')
+        except Exception: t = datetime.datetime.fromisoformat(r['date']) + datetime.timedelta(hours=13)
+        KO[(int(r['week']), r['vis'])] = KO[(int(r['week']), r['home'])] = t
+def kick(w, team, date=None):
+    return KO.get((w, team)) or (datetime.datetime.fromisoformat(date) + datetime.timedelta(hours=13) if date else None)
+def main_date(w): return collections.Counter(g['date'] for g in by_wk[w]).most_common(1)[0][0]
+def still_to_play(w):         # games through the main (Sunday) slate not yet kicked off — Monday night doesn't hold the board
+    md = main_date(w); return sum(1 for g in by_wk[w] if g['date'] <= md and (kick(w, g['home'], g['date']) or NOW) > NOW)
+target = next((w for w in sorted(by_wk) if still_to_play(w) >= 1), max(by_wk))
 if '--week' in sys.argv: target = int(sys.argv[sys.argv.index('--week') + 1])
 tgames = by_wk[target]; tdates = sorted(g['date'] for g in tgames)
+# lines the nflverse file doesn't carry yet: fill from the live book board (lines_all.csv — DraftKings and the other books the loop pulls)
+FIX = {'WSH': 'WAS', 'JAC': 'JAX', 'LA': 'LAR', 'OAK': 'LV', 'SD': 'LAC', 'STL': 'LAR'}
+if os.path.exists(P + 'lines_all.csv'):
+    bk_sp, bk_tot = collections.defaultdict(list), collections.defaultdict(list)
+    for r in csv.DictReader(open(P + 'lines_all.csv', encoding='utf-8')):
+        if r.get('league') != 'nfl' or r.get('market') not in ('spread', 'total') or r.get('point') in ('', None): continue
+        a, h = FIX.get(r['away'], r['away']), FIX.get(r['home'], r['home'])
+        if r['market'] == 'spread' and FIX.get(r['selection'], r['selection']) == h: bk_sp[(a, h)].append(-float(r['point']))     # nflverse: + = home favoured
+        if r['market'] == 'total' and r['selection'].lower().startswith('o'): bk_tot[(a, h)].append(float(r['point']))
+    filled = 0
+    for g in tgames:
+        a, h = g['vis'], g['home']
+        if (SEASON, target, h) in LN or not bk_sp.get((a, h)) or not bk_tot.get((a, h)): continue
+        sp, tot = float(np.median(bk_sp[(a, h)])), float(np.median(bk_tot[(a, h)]))
+        LN[(SEASON, target, h)] = (tot / 2 + sp / 2, sp); LN[(SEASON, target, a)] = (tot / 2 - sp / 2, -sp); filled += 1
+    if filled: print(f'  lines: {filled} week-{target} games filled from the book board')
+nolines = [f"{g['vis']}@{g['home']}" for g in tgames if (SEASON, target, g['home']) not in LN]
 sched = {r['team']: r for r in csv.DictReader(open(P + 'schedule_2026.csv'))}
 dcp = sorted(glob.glob(P + 'depth_charts_*.csv'))[-1]
 depth = list(csv.DictReader(open(dcp, encoding='utf-8')))
@@ -235,6 +290,25 @@ if os.path.exists(P + 'bet_td.csv'):
         if r.get('week') and int(r['week']) == target and r.get('p_model'): oldm[norm(r['player'])] = float(r['p_model'])
 def fair(p): return int(round(-100 * p / (1 - p))) if p >= .5 else int(round(100 * (1 - p) / p))
 
+# ESPN's injury report (injuries_current.csv, refreshed every loop run) over the depth chart's flag: the more severe one wins.
+# Out / IR / suspended with an expected return after his game = out; a return on or before it = leave the chart's flag alone;
+# Out / Doubtful / Questionable with no return date only counts when the report is about this week (filed after last week's games).
+INJ = {}
+if os.path.exists(P + 'injuries_current.csv'):
+    gday = {}
+    for g in tgames: gday[g['vis']] = gday[g['home']] = g['date']
+    prev_last = max((g['date'] for g in by_wk.get(target - 1, [])), default='0000-00-00')
+    for r in csv.DictReader(open(P + 'injuries_current.csv', encoding='utf-8')):
+        st = (r.get('status') or '').strip(); t = r.get('team'); gd = gday.get(t)
+        if not gd or st in ('', 'Active', 'nan'): continue
+        ret = (r.get('ret') or '').strip(); ret = '' if ret in ('nan', 'None') else ret[:10]; this_wk = (r.get('updated') or '')[:10] > prev_last
+        if ret: f = '-1' if ret > gd else None
+        elif st in ('Injured Reserve', 'Suspension', 'Physically Unable to Perform', 'PUP', 'Reserve'): f = '-1'
+        elif st in ('Out', 'Doubtful'): f = '-1' if this_wk else '0'
+        elif st == 'Questionable': f = '0' if this_wk else None
+        else: f = None
+        if f: INJ[(t, norm(r['player']))] = (f, f"{st}{' · ' + r['injury'] if r.get('injury') not in ('', None, 'nan') else ''}{' · back ' + ret if ret else ''}")
+iflag = lambda v: int(v) if str(v).lstrip('-').isdigit() else 1
 picks = []
 for dr in depth:
     slot = dr['slot']
@@ -243,6 +317,8 @@ for dr in depth:
     if not raw or raw == 'BYE': continue
     opp = raw.replace('@', ''); home = not raw.startswith('@')
     nm = dr.get('log_name') or dr['player']
+    inj, ri = str(iflag(dr.get('injury', '1'))), INJ.get((dr['team'], norm(dr['player'])))
+    if ri and int(ri[0]) < int(inj): inj = ri[0]
     prev = [r for r in byname.get(nm, []) if (r['s'], r['w']) < (SEASON, target)]
     f, d = profile(prev, SEASON, target, dr['team'], opp, slot, home)
     x = np.array([f[k] for k in FEATS], float); z = (x - mu) / sd; contrib = beta[1:] * z
@@ -283,7 +359,10 @@ for dr in depth:
     pr = price.get(norm(dr['player'])) or price.get(norm(nm))
     ev = round(p * pr[1] - 1, 3) if pr else None
     tier = next(t for t, a, b in TIERS if a <= p < b)
-    picks.append(dict(n=dr['player'], t=dr['team'], o=opp, h=home, s=slot, b=d['b'], pos=POS(d['b']), inj=dr.get('injury', '1'), p=round(p, 4), fair=fair(p),
+    ko = kick(target, dr['team'])
+    done = next((r for r in byname.get(nm, []) if (r['s'], r['w']) == (SEASON, target)), None)
+    picks.append(dict(n=dr['player'], t=dr['team'], o=opp, h=home, s=slot, b=d['b'], pos=POS(d['b']), inj=inj, injn=ri[1] if ri else None, p=round(p, 4), fair=fair(p),
+                      ko=ko.isoformat(timespec='minutes') if ko else None, lk=bool(ko and ko <= NOW), res=done['td'] if done else None,
                       tier=tier, why=why, risk=risk, praw=round(p_raw, 4), price=int(pr[0]) if pr else None, book=pr[2] if pr else None, ev=ev, pm=oldm.get(norm(dr['player'])),
                       imp=round(d['imp'], 1) if d['imp'] is not None else None, sp=d['sp'], hitS=d['hitS'], gpS=d['gpS'], l3k=d['l3k'], l3n=d['l3n'],
                       share=round(d['mine'] / d['tt'], 3) if d['tt'] else None, touch=round(d['touch'], 1), dr=round(d['dr'], 2) if d['dr'] is not None else None))
@@ -292,28 +371,33 @@ for ps in ('QB', 'RB', 'WR', 'TE'):
     for i, x in enumerate([x for x in picks if x['pos'] == ps and x['inj'] != '-1']): x['rp'] = i + 1
 for i, x in enumerate([x for x in picks if x['inj'] != '-1']): x['ra'] = i + 1
 
-# ---------------- the frozen ledger: first scoring of a week is the record ----------------
+# ---------------- the record: a game's picks update until it kicks off, then lock ----------------
 LP = P + 'td_picks_ledger.csv'
-COLS = ['season', 'week', 'frozen_on', 'player', 'team', 'opp', 'slot', 'pos', 'p', 'fair', 'tier', 'rank_all', 'rank_pos', 'price', 'book', 'result']
+COLS = ['season', 'week', 'frozen_on', 'kickoff', 'player', 'team', 'opp', 'slot', 'pos', 'p', 'fair', 'tier', 'rank_all', 'rank_pos', 'price', 'book', 'result']
 led = list(csv.DictReader(open(LP, encoding='utf-8'))) if os.path.exists(LP) else []
-if '--refreeze' in sys.argv and not any(r['result'] in ('W', 'L') for r in led if int(r['season']) == SEASON and int(r['week']) == target):
-    led = [r for r in led if not (int(r['season']) == SEASON and int(r['week']) == target)]
-have = {(int(r['season']), int(r['week'])) for r in led}
-if (SEASON, target) not in have:
-    for x in picks:
-        if x['inj'] == '-1' or x['p'] < .15: continue
-        led.append(dict(season=SEASON, week=target, frozen_on=str(TODAY), player=x['n'], team=x['t'], opp=x['o'], slot=x['s'], pos=x['pos'], p=x['p'], fair=x['fair'],
-                        tier=x['tier'], rank_all=x.get('ra', ''), rank_pos=x.get('rp', ''), price=x['price'] if x['price'] is not None else '', book=x['book'] or '', result=''))
-    print(f'  froze {sum(1 for r in led if int(r["week"]) == target and int(r["season"]) == SEASON)} picks for week {target}')
-# prices may improve until kickoff; p never changes
-pk = {(x['n'], target): x for x in picks}
+for r in led:                                                       # rows written before the kickoff column existed
+    if not r.get('kickoff'):
+        k = kick(int(r['week']), r['team']) if int(r['season']) == SEASON else None
+        r['kickoff'] = k.isoformat(timespec='minutes') if k else ''
+def started(r): return bool(r.get('kickoff')) and datetime.datetime.fromisoformat(r['kickoff']) <= NOW
+is_t = lambda r: (int(r['season']), int(r['week'])) == (SEASON, target)
+keep_rows = [r for r in led if not is_t(r) or started(r)]           # other weeks + this week's locked games stay exactly as written
+locked_teams = {r['team'] for r in led if is_t(r) and started(r)}
+stamp = NOW.strftime('%Y-%m-%d %H:%M')
+fresh = 0
+for x in picks:
+    if x['inj'] == '-1' or x['p'] < .15 or not x['ko'] or x['lk'] or x['t'] in locked_teams: continue
+    keep_rows.append(dict(season=SEASON, week=target, frozen_on=stamp, kickoff=x['ko'], player=x['n'], team=x['t'], opp=x['o'], slot=x['s'], pos=x['pos'], p=x['p'],
+                          fair=x['fair'], tier=x['tier'], rank_all=x.get('ra', ''), rank_pos=x.get('rp', ''), price=x['price'] if x['price'] is not None else '',
+                          book=x['book'] or '', result=''))
+    fresh += 1
+led = sorted(keep_rows, key=lambda r: (int(r['season']), int(r['week']), -float(r['p'])))
+print(f'  week {target}: {fresh} picks written for games still to kick off · {sum(1 for r in led if is_t(r) and started(r))} locked')
 logged = {(r['s'], r['w'], r['player']): r for r in logs}
 teams_logged = collections.defaultdict(set)
 for r in logs: teams_logged[(r['s'], r['w'])].add(r['team'])
 for r in led:
     s, w = int(r['season']), int(r['week'])
-    if w == target and s == SEASON and (r['player'], w) in pk and pk[(r['player'], w)]['price'] is not None:
-        r['price'], r['book'] = pk[(r['player'], w)]['price'], pk[(r['player'], w)]['book']
     lg = logged.get((s, w, r['player']))
     if lg: r['result'] = 'W' if lg['td'] > 0 else 'L'
     elif r['team'] in teams_logged.get((s, w), ()): r['result'] = 'void'
@@ -321,14 +405,15 @@ with open(LP, 'w', newline='', encoding='utf-8') as fh:
     wr = csv.DictWriter(fh, fieldnames=COLS); wr.writeheader(); [wr.writerow({c: r.get(c, '') for c in COLS}) for r in led]
 rec = []
 for (s, w) in sorted({(int(r['season']), int(r['week'])) for r in led}):
-    R = [r for r in led if int(r['season']) == s and int(r['week']) == w]
+    R = sorted([r for r in led if int(r['season']) == s and int(r['week']) == w], key=lambda r: -float(r['p']))
     g = [r for r in R if r['result'] in ('W', 'L')]
-    top = sorted([r for r in g if r['rank_all']], key=lambda r: int(r['rank_all']))[:10]
+    top = g[:10] if R and all(r['result'] for r in R) else []                # the week's ten best who played, once every game is logged
     t = {k: [sum(1 for r in g if r['tier'] == k), sum(1 for r in g if r['tier'] == k and r['result'] == 'W')] for k, _, _ in TIERS}
-    rec.append(dict(s=s, w=w, frozen=R[0]['frozen_on'], n=len(R), graded=len(g), wins=sum(r['result'] == 'W' for r in g), top10=[sum(r['result'] == 'W' for r in top), len(top)], tiers=t,
-                    rows=[[r['player'], r['team'], r['opp'], r['slot'], float(r['p']), r['tier'], int(r['rank_all']) if r['rank_all'] else None, r['price'], r['book'], r['result']] for r in R if r['rank_all'] and int(r['rank_all']) <= 40]))
+    rec.append(dict(s=s, w=w, frozen=max(r['frozen_on'] for r in R), n=len(R), graded=len(g), wins=sum(r['result'] == 'W' for r in g),
+                    locked=sum(1 for r in R if started(r)), top10=[sum(r['result'] == 'W' for r in top), len(top)], tiers=t,
+                    rows=[[r['player'], r['team'], r['opp'], r['slot'], float(r['p']), r['tier'], i + 1, r['price'], r['book'], r['result'], int(started(r))] for i, r in enumerate(R[:40])]))
 
-out = dict(built=str(TODAY), season=SEASON, week=target, dates=[tdates[0], tdates[-1]] if tdates else None, games=len(tgames), depth=dcp.split('_')[-1][:10],
+out = dict(built=str(TODAY), now=NOW.strftime('%Y-%m-%d %H:%M'), season=SEASON, week=target, nolines=nolines, dates=[tdates[0], tdates[-1]] if tdates else None, games=len(tgames), depth=dcp.split('_')[-1][:10],
            priced=sum(1 for x in picks if x['price'] is not None),
            model=dict(feats=FEATS, coef=[round(float(c), 4) for c in beta[1:]], icpt=round(float(beta[0]), 4), n=len(rows), field=round(float(yall.mean()), 4),
                       labels={k: LBL.get(k, k) for k in FEATS}),
