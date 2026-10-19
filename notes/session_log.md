@@ -723,3 +723,14 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   pair-accuracy in build_backtest.py), strategy cards WINNING / LOSING / too few to tell. Season, position, Combined/Adjusted chips.
 - 2026: Adjusted 53.1% vs Combined 51.8% (2024 50.7%); Anytime-TD model 59.8%, Vegas total 59.6%, META 53.9%, Ψ 53.5%, TD allowed 53.0%,
   SCH 49.5%, H2H 49.1%.
+
+## n83 · 2026-10-19 · v29 Backtest proof: every card and bar opens its history; units at the price taken
+- Josh: cards without pop-ups showing the history are pointless. patch_v29_backtest_pops.py: signal bars / verdict cards -> week by week +
+  the players each number rated highest / lowest each week with TD, PPR, vs-norm (build_backtest.py hist + ex); data-set bars -> week by
+  week by stat family, every stat best to worst (prc, prwf); strategy cards -> every graded pick (J.picksAll + J.picksClv) with record, units,
+  week by week + running units, by market / by edge, full list with week chips; TD Picks card -> each week's top ten with ✓ / ✗.
+- Found while building the proof: props were counted at −110 but many were posted at other prices (Kalshi strikes up to ±4900). patch_v29_prices.py:
+  picks_all.csv gains 'price' (bet_ledger side price, first freeze; 2222 of 2409 props backfilled, results untouched), market_ref = its
+  break-even; pkUnits (site-wide) and the Backtest use the real price. Props every lean: 1156-1113, −79.4u (needs 52.9%). Props plays (EV 3%+):
+  252-213-23, +35.2u (needs 51.1%), edge 6+ 132-97 +40.1u. ATD 12-15 +13.8u, ML −1.6u, totals −5.4u, ATS −0.4u (all small samples).
+- patch_v29b_units.py: strategy cards show units and 'making money / losing money / too few to tell'; a separate 'plays (EV 3%+)' card.

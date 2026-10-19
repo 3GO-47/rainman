@@ -134,7 +134,8 @@ for S, g in DR.groupby('S'):
     wins = wk_mean.idxmax(axis=1).value_counts()
     for k, h in g.groupby('src'):
         rows.append(dict(k=k, lbl=LBL(S)[k], role=ROLE[k], all=r3(h.r.mean()), pr=PR(h), prf={f: PR(x) for f, x in h.groupby('fam')},
-                         prg={p: PR(x) for p, x in h.groupby('grp')}, prw={int(w): PR(x) for w, x in h.groupby('wk')}, se=r3(h.r.std() / np.sqrt(len(h))), n=len(h),
+                         prg={p: PR(x) for p, x in h.groupby('grp')}, prc={c: PR(x) for c, x in h.groupby('c')},
+                         prwf={int(w): {f: PR(y) for f, y in x.groupby('fam')} for w, x in h.groupby('wk')}, prw={int(w): PR(x) for w, x in h.groupby('wk')}, se=r3(h.r.std() / np.sqrt(len(h))), n=len(h),
                          fam={f: r3(x.r.mean()) for f, x in h.groupby('fam')}, grp={p: r3(x.r.mean()) for p, x in h.groupby('grp')},
                          wins=int(wins.get(k, 0)), weeks=int(h.wk.nunique()),
                          wk={int(w): r3(v) for w, v in wk_mean[k].dropna().items()}))
@@ -173,7 +174,7 @@ for i, r in enumerate(logs.itertuples()):
         hb = np.mean([h[3] for h in H]) if H else None; hp = np.mean([h[3] for h in vs]) if vs else None
         hS = (hp - hb) * min(len(vs), 3) / 3 if hp is not None and hb is not None else None
         fam = TAG.get((S, r.opponent)); e = EFF.get((fam, g)) if fam else None
-        row = dict(S=S, wk=wk, pos=POSOF(g), grp=g, opp=r.opponent, ppr=r.fantasy_pts_ppr, res=r.fantasy_pts_ppr - base, tdg=int(r.tdg),
+        row = dict(S=S, wk=wk, pos=POSOF(g), grp=g, opp=r.opponent, name=r.player, team=r.team, slot=r.slot, ppr=r.fantasy_pts_ppr, res=r.fantasy_pts_ppr - base, tdg=int(r.tdg),
                    h2h=hS, sch=None if e is None else e - 100, atd=WF.get((S, wk, r.player, r.team)), imp=LN.get((S, wk, r.team)), form=base, tdr=tdr)
         for k, G in dvpcache(S, wk).items():
             x = G[g]
@@ -237,6 +238,9 @@ def score(df, col, minn=20):
     out.update({k: v for k, v in fold(list(per)).items() if k != 'n'})
     return out
 
+VFMT = dict(tdA=lambda v: f'{v:.2f} TD/g', ydA=lambda v: f'{v:.0f} yd/g', psi=lambda v: f'Ψ {-v:.1f}', meta=lambda v: f'META {v:.0f}',
+            h2h=lambda v: f'{v:+.1f} vs norm', sch=lambda v: f'{v:+.0f}%', atd=lambda v: f'{100 * v:.0f}%', imp=lambda v: f'{v:.1f} pts',
+            form=lambda v: f'{v:.1f} PPR/g', tdr=lambda v: f'{100 * v:.0f}%')
 sigs = {}
 for S in EVAL:
     D = F[F.S == S]; sd = {}
@@ -249,34 +253,57 @@ for S in EVAL:
     wkly = {}
     for wk, x in D.groupby('wk'):
         wkly[int(wk)] = {key: (lambda s: {'auc': s.get('auc'), 'rn': s.get('rn')})(score(x, f'{key}_comb' if srcdep else key)) for key, _, _, srcdep in SIGS}
-    sigs[str(int(S))] = dict(sig=sd, wk=wkly, n=int(len(D)), weeks=[int(w) for w in sorted(D.wk.unique())], td=r3(D.tdg.mean()))
+    # the proof behind every bar: week by week, and the players each signal rated highest / lowest each week (with what happened)
+    hist, ex = {}, {}
+    NEX = 5 if S == CUR else 2
+    for key, lbl, desc, srcdep in SIGS:
+        for var, col in ([(f'{key}@{k}', f'{key}_{k}') for k in ('comb', 'adj')] if srcdep else [(key, key)]):
+            if col not in D: continue
+            h, e = {}, {}
+            for wk, x in D.groupby('wk'):
+                m = score(x, col)
+                h[int(wk)] = [m.get('n'), m.get('auc'), m.get('tdt'), m.get('tdb'), r3(m.get('edge'))]
+                y = x[x[col].notna()]
+                if not len(y): continue
+                y = y.assign(q=y.groupby('grp')[col].rank(pct=True)).sort_values(['q', col], ascending=False)
+                ro = lambda r: [r['name'], r['team'], r['opp'], r['slot'], VFMT[key](r[col]), int(r['tdg']), round(float(r['ppr']), 1), round(float(r['res']), 1)]
+                e[int(wk)] = dict(top=[ro(r) for _, r in y.head(NEX).iterrows()], bot=[ro(r) for _, r in y.tail(NEX).iloc[::-1].iterrows()])
+            hist[var], ex[var] = h, e
+    sigs[str(int(S))] = dict(sig=sd, wk=wkly, hist=hist, ex=ex, n=int(len(D)), weeks=[int(w) for w in sorted(D.wk.unique())], td=r3(D.tdg.mean()))
 
 # ---------------- 3. strategies: the frozen picks, graded ----------------
 strat = []
+def _win(r):
+    """profit on a win, per unit staked: the posted price when the pick has one, the market's price for ML / TD, else -110."""
+    try: a = float(r['price'])
+    except (KeyError, TypeError, ValueError): a = float('nan')
+    if a == a and a != 0: return a / 100 if a > 0 else 100 / -a
+    try: m = float(r['market_ref'])
+    except (TypeError, ValueError): m = float('nan')
+    if r['type'] in ('ML', 'TD') and 0 < m < 1: return 1 / m - 1
+    return 100 / 110
 if os.path.exists(P + 'picks_all.csv'):
     pk = pd.read_csv(P + 'picks_all.csv')
+    if 'price' not in pk: pk['price'] = np.nan
     clv = pd.read_csv(P + 'picks_clv.csv') if os.path.exists(P + 'picks_clv.csv') else None
-    NAME = {'ML': 'Moneyline picks', 'ATS': 'Against the spread', 'TOTAL': 'Game totals', 'PROP': 'Player props', 'TD': 'Anytime-TD bets', 'DFS': 'DFS lineups'}
-    for t, g in pk.groupby('type'):
+    pk['dw'] = [_win(r) for _, r in pk.iterrows()]
+    pk['u'] = np.where(pk.result == 'W', pk.dw, np.where(pk.result == 'L', -1.0, 0.0))
+    pk['be'] = 1 / (1 + pk.dw)
+    NAME = {'ML': 'Moneyline picks', 'ATS': 'Against the spread', 'TOTAL': 'Game totals', 'PROP': 'Player props — every lean', 'TD': 'Anytime-TD bets',
+            'PLAY': 'Player props — plays (EV 3%+)'}
+    e_ = pd.to_numeric(pk.edge, errors='coerce')
+    sets = [(t, g) for t, g in pk[pk.type != 'DFS'].groupby('type')] + [('PLAY', pk[(pk.type == 'PROP') & (e_ >= 3)])]
+    for t, g in sets:
         gr = g[g.result.isin(['W', 'L'])]
         if not len(gr): continue
         w = int((gr.result == 'W').sum()); l = int((gr.result == 'L').sum())
-        mr = pd.to_numeric(gr.market_ref, errors='coerce')
-        be = .524 if t in ('PROP', 'ATS', 'TOTAL') else (float(mr.mean()) if mr.notna().any() else None)
-        row = dict(k=t, lbl=NAME.get(t, t), w=w, l=l, p=int((g.result == 'P').sum()), hit=r3(w / (w + l)), be=r3(be), open=int(g.result.isna().sum()))
+        row = dict(k=t, lbl=NAME.get(t, t), w=w, l=l, p=int((g.result == 'P').sum()), hit=r3(w / (w + l)), be=r3(gr.be.mean()),
+                   units=round(float(g.u.sum()), 1), open=int((~g.result.isin(['W', 'L', 'P', 'G'])).sum()), priced=int(pd.to_numeric(g.price, errors='coerce').notna().sum()))
         if clv is not None:
-            c = clv[(clv.type == t) & clv.beat.notna()]
+            base = 'PROP' if t == 'PLAY' else t
+            c = clv[(clv.type == base) & clv.beat.notna()]
+            if t == 'PLAY': c = c[c.ref.isin(g.ref)]
             if len(c): row['clv'] = r3(c.beat.astype(str).str.lower().isin(['true', '1', '1.0']).mean()); row['clvn'] = int(len(c))
-        if t == 'PROP':
-            e = pd.to_numeric(gr.edge, errors='coerce'); bk = []
-            for a, b, lab in ((-99, 3, 'edge under 3'), (3, 6, 'edge 3–6'), (6, 99, 'edge 6+')):
-                x = gr[(e >= a) & (e < b)]
-                if len(x): bk.append(dict(lbl=lab, n=int(len(x)), hit=r3((x.result == 'W').mean())))
-            row['buckets'] = bk
-            mk = []
-            for m, x in gr.groupby('market'):
-                if len(x) >= 15: mk.append(dict(lbl=m.replace('_', ' '), n=int(len(x)), hit=r3((x.result == 'W').mean())))
-            row['markets'] = sorted(mk, key=lambda z: -z['hit'])
         strat.append(row)
 tdp = {}
 if os.path.exists(P + 'td_picks.json'):
@@ -324,9 +351,9 @@ for S in (str(CUR), str(CUR - 1)):
                         f"only {h['cov']:.0%} of players had a prior meeting." if h['auc'] < .52 else f"{S}: H2H AUC {h['auc']:.3f} on the {h['cov']:.0%} of players with a prior meeting."))
 for st in strat:
     if st['w'] + st['l'] >= 10:
-        d = (st['hit'] or 0) - (st['be'] or 0)
+        d = st['units']
         ins.append(dict(k='st', s='all', t=f"{st['lbl']}: {st['w']}-{st['l']} ({st['hit']:.1%}) against a break-even of {st['be']:.1%} — "
-                        + ('<b style="color:var(--green)">ahead</b>' if d > .01 else '<b style="color:var(--red)">behind</b>' if d < -.01 else 'even')
+                        + (f'<b style="color:var(--green)">+{d:.1f} units</b>' if d > 0 else f'<b style="color:var(--red)">{d:.1f} units</b>')
                         + (f" · beat the closing line {st['clv']:.0%} of the time" if st.get('clv') is not None else '') + '.'))
 
 out = dict(built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), cur=CUR, eval={str(k): v for k, v in EVAL.items()}, dsets=dsets, sigs=sigs,

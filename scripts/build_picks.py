@@ -19,7 +19,7 @@ import numpy as np, pandas as pd
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 P = 'data/processed/'
 TODAY = str(pd.Timestamp.today().date())
-COLS = ['type', 'week', 'frozen_on', 'ref', 'player', 'team', 'opp', 'market', 'side', 'line', 'model', 'market_ref', 'market_src', 'edge', 'result', 'actual', 'note']
+COLS = ['type', 'week', 'frozen_on', 'ref', 'player', 'team', 'opp', 'market', 'side', 'line', 'model', 'market_ref', 'market_src', 'edge', 'result', 'actual', 'note', 'price']
 
 def main(week=None):
     gm = pd.read_csv(P + 'game_model.csv'); gm = gm[gm.season == 2026]
@@ -141,6 +141,22 @@ def main(week=None):
             s = dfs[(dfs.week == r.week) & (dfs.slate == r.side)]
             if len(s) and str(s.actual_total.iloc[0]) not in ('', 'nan'):
                 allp.at[i, 'actual'] = s.actual_total.iloc[0]; allp.at[i, 'result'] = 'G'   # graded; DFS has no W/L without a contest cash line
+    # v29: every prop carries the price it was posted at (bet_ledger: that side's price the first time the line was frozen) —
+    # units and break-even use it instead of assuming -110; older rows are backfilled the same way, results untouched
+    if 'price' not in allp: allp['price'] = ''
+    allp['price'] = allp['price'].astype(object)
+    BLP = {}
+    if os.path.exists(P + 'bet_ledger.csv'):
+        for b in pd.read_csv(P + 'bet_ledger.csv').itertuples():
+            pr = b.over_price if b.side == 'Over' else b.under_price
+            if pr == pr: BLP.setdefault((int(b.week), b.player, b.market, float(b.line), b.side), int(pr))
+    for i, r in allp[allp.type == 'PROP'].iterrows():
+        try: k = (int(r.week), r.player, r.market, float(r.line), r.side)
+        except Exception: continue
+        if k in BLP and str(r.price) in ('', 'nan', 'None'):
+            a_ = BLP[k]; allp.at[i, 'price'] = a_
+            allp.at[i, 'market_ref'] = round(100 / (a_ + 100) if a_ > 0 else -a_ / (-a_ + 100), 3)
+            allp.at[i, 'note'] = 'at its posted price'
     allp = allp[COLS].sort_values(['week', 'type', 'ref']).reset_index(drop=True)
     allp.to_csv(P + 'picks_all.csv', index=False)
     gr = allp[allp.result.isin(['W', 'L'])]
