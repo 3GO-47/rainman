@@ -715,3 +715,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   ML 6-10, totals 4-9, ATS 4-4-1.
 - Tab: tiles, takeaways, data-set table + week by week, signal table (position chips, data-set select), data set x signal matrix
   (TD AUC / vs-norm / soft-tough), signals week by week, strategies with prop edge buckets and markets, TD Picks walk-forward line.
+
+## n82 · 2026-10-19 · v28 Backtest rebuilt in plain words
+- Josh: v27 was unreadable (ρ / AUC tables). patch_v28_backtest_plain.py replaces backtestView + CSS: four verdict cards (trust these
+  tables · best TD picker · best matchup number · ignore), ranked bars 'who picks touchdowns best' (% of the time it picked the right
+  player, coin flip 50%, + soft vs tough points), 'which defense tables to trust' (% it called the softer defense right — new 'pr'
+  pair-accuracy in build_backtest.py), strategy cards WINNING / LOSING / too few to tell. Season, position, Combined/Adjusted chips.
+- 2026: Adjusted 53.1% vs Combined 51.8% (2024 50.7%); Anytime-TD model 59.8%, Vegas total 59.6%, META 53.9%, Ψ 53.5%, TD allowed 53.0%,
+  SCH 49.5%, H2H 49.1%.

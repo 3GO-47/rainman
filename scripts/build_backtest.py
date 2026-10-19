@@ -95,6 +95,12 @@ def dvpcache(S, wk):
         _DC[(S, wk)] = out
     return _DC[(S, wk)]
 
+def conc(a, b):
+    """pairs ordered the same way / the opposite way (ties in either skipped): 'called the softer defense right' counts."""
+    a, b = np.asarray(a, float), np.asarray(b, float); iu = np.triu_indices(len(a), 1)
+    x = np.sign(a[:, None] - a[None, :])[iu] * np.sign(b[:, None] - b[None, :])[iu]
+    return int((x > 0).sum()), int((x < 0).sum())
+
 def rho(a, b):
     a, b = pd.Series(np.asarray(a, float)).rank(), pd.Series(np.asarray(b, float)).rank()
     if a.std() == 0 or b.std() == 0 or len(a) < 5: return None
@@ -117,8 +123,9 @@ for S, weeks in EVAL.items():
             dd = [d for d in act.index if d in T.index]
             for c in DSTATS:
                 r = rho(T.loc[dd, c].values, act.loc[dd, c].values)
-                if r is not None: DR.append((S, wk, k, c, r))
-DR = pd.DataFrame(DR, columns=['S', 'wk', 'src', 'c', 'r'])
+                if r is not None: DR.append((S, wk, k, c, r) + conc(T.loc[dd, c].values, act.loc[dd, c].values))
+DR = pd.DataFrame(DR, columns=['S', 'wk', 'src', 'c', 'r', 'cr', 'dc'])
+PR = lambda x: r3(x.cr.sum() / max(1, x.cr.sum() + x.dc.sum()))
 DR['fam'] = DR.c.map(FAM); DR['grp'] = DR.c.map(GRPC)
 dsets = {}
 for S, g in DR.groupby('S'):
@@ -126,11 +133,12 @@ for S, g in DR.groupby('S'):
     wk_mean = g.groupby(['wk', 'src']).r.mean().unstack()
     wins = wk_mean.idxmax(axis=1).value_counts()
     for k, h in g.groupby('src'):
-        rows.append(dict(k=k, lbl=LBL(S)[k], role=ROLE[k], all=r3(h.r.mean()), se=r3(h.r.std() / np.sqrt(len(h))), n=len(h),
+        rows.append(dict(k=k, lbl=LBL(S)[k], role=ROLE[k], all=r3(h.r.mean()), pr=PR(h), prf={f: PR(x) for f, x in h.groupby('fam')},
+                         prg={p: PR(x) for p, x in h.groupby('grp')}, prw={int(w): PR(x) for w, x in h.groupby('wk')}, se=r3(h.r.std() / np.sqrt(len(h))), n=len(h),
                          fam={f: r3(x.r.mean()) for f, x in h.groupby('fam')}, grp={p: r3(x.r.mean()) for p, x in h.groupby('grp')},
                          wins=int(wins.get(k, 0)), weeks=int(h.wk.nunique()),
                          wk={int(w): r3(v) for w, v in wk_mean[k].dropna().items()}))
-    rows.sort(key=lambda r: -(r['all'] or -9))
+    rows.sort(key=lambda r: -(r['pr'] or -9))
     dsets[str(int(S))] = dict(rows=rows, weeks=[int(w) for w in sorted(g.wk.unique())], cells=len(g))
 
 # ---------------- 2. signals: the player's game ----------------
