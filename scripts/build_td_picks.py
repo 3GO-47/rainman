@@ -217,6 +217,11 @@ for ek, off, sel, gidx in bt_top:
         seen.add(j); g = int(gidx[j])
         L.append([nm_all[g], tm_all[g], str(bk[g]), round(float(allp[off + j]), 3), int(yall[g])])
     BT_TOP[f'{ek // 100}-{ek % 100}'] = L                     # first ten = the overall top ten, then each position's top three
+# every walk-forward prediction, for the Backtest tab (scripts/build_backtest.py)
+with open(P + 'td_picks_wf.csv', 'w', newline='', encoding='utf-8') as fh:
+    _w = csv.writer(fh); _w.writerow(['season', 'week', 'player', 'team', 'bucket', 'p', 'scored'])
+    for ek, off, sel, gidx in bt_top:
+        for j, g in enumerate(gidx): _w.writerow([ek // 100, ek % 100, nm_all[g], tm_all[g], bk[g], round(float(allp[off + j]), 4), int(yall[g])])
 def auc(p, y):
     o = np.argsort(p); r = np.empty(len(p)); r[o] = np.arange(1, len(p) + 1); n1 = y.sum(); n0 = len(y) - n1
     return float((r[y == 1].sum() - n1 * (n1 + 1) / 2) / (n1 * n0)) if n1 and n0 else None

@@ -310,6 +310,8 @@ def main():
     # TD Picks (build_td_picks.py): next week's anytime-TD picks, the walk-forward record and the frozen ledger
     if LEAGUE == 'nfl' and os.path.exists('data/processed/td_picks.json'):
         data['tdpicks'] = json.load(open('data/processed/td_picks.json'))
+    if LEAGUE == 'nfl' and os.path.exists('data/processed/backtest.json'):
+        data['backtest'] = json.load(open('data/processed/backtest.json'))
     # v4: exchange prices, unified picks ledger, DFS entries, signal efficacy
     def rows_of(path, flt=None):
         if not os.path.exists(path): return []

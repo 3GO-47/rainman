@@ -703,3 +703,15 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - verify_data 64/64 · audit_extended 89 pass / 1 warn (Davidson 2024) / 0 fail · 2026 logs = nflverse 100% (targets 2 rows).
 - Page: TD Picks wk 6 graded (top 10 5/10, listed 32/126), Weeklies wk 6 ▸ 35/163 scored so far, Category Grid wk 6 ✓34 ✗112;
   Weeklies keeps wk 6 'in progress' until WAS@SF is logged — the PC loop pulls it automatically once nflverse posts the result.
+
+## n81 · 2026-10-19 · v27 Backtest tab (F6 TEST, last tab)
+- scripts/build_backtest.py -> data/processed/backtest.json (J.backtest, 42 KB); refresh.py runs it after TD Picks (patch_v27_bd.py
+  also embeds it in build_dashboard.py). build_td_picks.py now writes every walk-forward prediction to td_picks_wf.csv (patch_v27_wf.py).
+- Data sets (defense level, point in time, Spearman per stat column per week vs what each defense allowed that week): adjusted best in
+  both replays (2026 wks 2-6 +.067, 2025 wks 2-18 +.054); 2024 worst (+.019 / +.037); combined (site default) +.041 / +.049.
+- Signals (player level, within slot group + week): TD AUC 2026 — anytime-TD model .598, implied total .596, his PPR .595, META .559
+  (adjusted), TD allowed .554, Ψ .553, SCH .495, H2H .491; adjusted beat combined for all four DvP signals on vs-norm ρ (Ψ +.10 vs +.03).
+  H2H carries no signal in either season. Strategies: props 1156-1113 (50.9%, BE 52.4%; edge 6+ 58%), ATD bets 12-15 vs BE 31.8%,
+  ML 6-10, totals 4-9, ATS 4-4-1.
+- Tab: tiles, takeaways, data-set table + week by week, signal table (position chips, data-set select), data set x signal matrix
+  (TD AUC / vs-norm / soft-tough), signals week by week, strategies with prop edge buckets and markets, TD Picks walk-forward line.

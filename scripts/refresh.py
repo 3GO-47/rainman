@@ -86,6 +86,8 @@ def main():
     run(['scripts/build_injuries.py'], check=False) if 'check' in run.__code__.co_varnames else run(['scripts/build_injuries.py'])
     try: run(['scripts/build_td_picks.py'])
     except (Exception, SystemExit) as e: print('  build_td_picks skipped:', e)
+    try: run(['scripts/build_backtest.py'])
+    except SystemExit as e: print('!! build_backtest failed — the Backtest tab keeps its last build:', e)
     run(['scripts/build_dashboard.py'])
     try: run(['scripts/build_tracking.py'])
     except (Exception, SystemExit) as e: print('  build_tracking skipped:', e)
