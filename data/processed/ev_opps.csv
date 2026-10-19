@@ -1,204 +1,79 @@
 league,event_id,kickoff,away,home,market,selection,point,source,player,stat,dec,american,fair,ev,kelly_quarter,sources,disp,exch,basis,model_p,ev_model,steam,conf,tier,liq,note,key
-cfb,401871094,2026-10-24T20Z,ULM,TROY,moneyline,ULM,,ESPN,,,9.0,+800,0.1263,0.1363,0.0043,7,0.0098,1,market,,,0.0056,74,A,,,moneyline|
-cfb,401858498,2026-10-24T16Z,RUTG,NU,moneyline,RUTG,,ESPN,,,8.5,+750,0.1418,0.2055,0.0068,6,0.0114,0,market,,,0.0089,51,B,,,moneyline|
-cfb,401860907,2026-10-24T22Z,BOIS,WSU,moneyline,WSU,,FD,,,5.5,+450,0.1937,0.0653,0.0036,6,0.0104,0,market,,,0.031,84,A,,,moneyline|
-cfb,401858274,2026-10-24T16Z,PITT,MIA,moneyline,PITT,,BR,,,14.0,+1300,0.08,0.12,0.0023,6,0.0075,0,market,,,0.0091,70,A,,,moneyline|
-cfb,401858274,2026-10-24T16Z,PITT,MIA,moneyline,PITT,,ESPN,,,14.0,+1300,0.0799,0.1191,0.0023,6,0.0075,0,market,,,0.0091,70,A,,,moneyline|
-nfl,401873021,2026-10-25T20:25Z,LAR,LV,moneyline,LV,,DK,,,3.2,+220,0.3226,0.0323,0.0037,5,0.0111,1,market,,,0.0473,91,A,,,moneyline|
-nfl,401873020,2026-10-25T20:25Z,GB,DET,moneyline,GB,,BR,,,2.75,+175,0.3848,0.0581,0.0083,5,0.015,1,market,,,0.0105,81,A,,,moneyline|
-cfb,401856835,2026-10-24T19:30Z,BYU,UCF,moneyline,UCF,,KAL,,,3.285,+228,0.3132,0.029,0.0032,7,0.0135,1,market,,,0.039,88,A,1976,yes 0.28/0.29,moneyline|
-nfl,401873012,2026-10-25T17Z,CIN,BAL,moneyline,CIN,,DK,,,2.5,+150,0.4042,0.0106,0.0018,6,0.009,1,market,,,0.0222,92,A,,,moneyline|
-cfb,401856836,2026-10-24T23Z,COLO,OKST,moneyline,COLO,,BR,,,5.6,+460,0.184,0.0302,0.0016,7,0.0071,1,market,,,,85,A,,,moneyline|
-cfb,401862807,2026-10-22T23:30Z,ECU,MEM,moneyline,ECU,,ESPN,,,4.4,+340,0.2341,0.03,0.0022,7,0.0076,1,market,,,0.0012,85,A,,,moneyline|
-cfb,401858270,2026-10-24T16Z,CAL,SMU,moneyline,CAL,,ESPN,,,9.0,+800,0.1225,0.1029,0.0032,7,0.0105,1,market,,,-0.0151,65,B,,,moneyline|
-cfb,401856840,2026-10-24T16Z,TTU,CIN,moneyline,CIN,,KAL,,,4.5124,+351,0.2242,0.0119,0.0008,7,0.0102,1,market,,,0.0116,86,A,2085,yes 0.20/0.21,moneyline|
-cfb,401856838,2026-10-24T23:30Z,ISU,ARIZ,moneyline,ISU,,BR,,,3.8,+280,0.2688,0.0216,0.0019,6,0.0114,0,market,,,0.0341,83,A,,,moneyline|
-cfb,401858270,2026-10-24T16Z,CAL,SMU,moneyline,CAL,,KAL,,,8.5578,+756,0.1229,0.0513,0.0017,7,0.0105,1,market,,,-0.0151,75,A,2930,yes 0.10/0.11,moneyline|
-cfb,401856840,2026-10-24T16Z,TTU,CIN,total,Under,56.5,KAL,,,2.0515,+105,0.5006,0.027,0.0064,6,0.0137,1,market,,,0.0005,79,A,3,no @ 0.47,total|56.5
-nfl,401873016,2026-10-25T17Z,NYG,HOU,moneyline,NYG,,DK,,,4.6,+360,0.2235,0.0282,0.002,6,0.0092,1,market,,,-0.0128,78,A,,,moneyline|
-cfb,401866476,2026-10-24T17Z,M-OH,CMU,moneyline,M-OH,,FD,,,1.9524,-105,0.5219,0.0189,0.005,6,0.0135,0,market,,,0.0246,80,A,,,moneyline|
-cfb,401856729,2026-10-24T23:30Z,VAN,UK,moneyline,VAN,,KAL,,,4.7348,+373,0.2235,0.0582,0.0039,7,0.0134,1,market,,,-0.0257,69,B,3061,yes 0.19/0.20,moneyline|
-cfb,401858499,2026-10-24T19:30Z,MSU,UCLA,moneyline,MSU,,FD,,,6.4,+540,0.1689,0.0808,0.0037,7,0.0099,1,market,,,-0.0239,63,B,,,moneyline|
-cfb,401862808,2026-10-24T00:30Z,ARMY,TLSA,moneyline,TLSA,,ESPN,,,2.05,+105,0.5036,0.0323,0.0077,7,0.0158,1,market,,,-0.0058,74,A,,,moneyline|
+cfb,401858274,2026-10-24T16Z,PITT,MIA,moneyline,PITT,,ESPN,,,14.0,+1300,0.088,0.2316,0.0045,6,0.0079,0,market,,,0.0158,57,B,,,moneyline|
+cfb,401871094,2026-10-24T20Z,ULM,TROY,moneyline,ULM,,ESPN,,,8.0,+700,0.1379,0.1035,0.0037,7,0.007,1,market,,,0.0155,81,A,,,moneyline|
+cfb,401858495,2026-10-24T19Z,ORE,ILL,moneyline,ILL,,BR,,,4.4,+340,0.2375,0.0451,0.0033,7,0.011,1,market,,,0.019,89,A,,,moneyline|
+cfb,401864525,2026-10-24T01Z,AFA,WYO,moneyline,WYO,,ESPN,,,2.95,+195,0.351,0.0354,0.0045,7,0.0114,1,market,,,0.0299,91,A,,,moneyline|
+cfb,401856840,2026-10-24T16Z,TTU,CIN,moneyline,CIN,,KAL,,,4.5124,+351,0.2279,0.0283,0.002,7,0.0125,1,market,,,0.0153,86,A,2355,yes 0.20/0.21,moneyline|
+cfb,401860907,2026-10-24T22Z,BOIS,WSU,moneyline,WSU,,BR,,,5.1,+410,0.2016,0.0282,0.0017,6,0.0093,0,market,,,0.0397,85,A,,,moneyline|
+cfb,401856836,2026-10-24T23Z,COLO,OKST,moneyline,COLO,,BR,,,5.6,+460,0.1826,0.0225,0.0012,7,0.0066,1,market,,,-0.0015,85,A,,,moneyline|
+cfb,401856838,2026-10-24T23:30Z,ISU,ARIZ,moneyline,ISU,,BR,,,3.8,+280,0.2702,0.0266,0.0024,6,0.0111,0,market,,,0.0352,83,A,,,moneyline|
+cfb,401858270,2026-10-24T16Z,CAL,SMU,moneyline,CAL,,KAL,,,8.5578,+756,0.1232,0.0545,0.0018,7,0.0102,1,market,,,-0.0148,76,A,6473,yes 0.10/0.11,moneyline|
+cfb,401858499,2026-10-24T19:30Z,MSU,UCLA,moneyline,MSU,,FD,,,6.4,+540,0.1644,0.0523,0.0024,7,0.0074,1,market,,,-0.0287,75,A,,,moneyline|
+nfl,401873016,2026-10-25T17Z,NYG,HOU,moneyline,NYG,,DK,,,4.7,+370,0.2183,0.0262,0.0018,6,0.0059,1,market,,,-0.0149,80,A,,,moneyline|
+nfl,401873020,2026-10-25T20:25Z,GB,DET,total,Over,51.5,ESPN,,,1.8696,-115,0.71,0.3274,0.0941,2,0.1016,1,market,,,-0.0065,2,C,,,total|51.5
+cfb,401858270,2026-10-24T16Z,CAL,SMU,moneyline,CAL,,ESPN,,,8.5,+750,0.1208,0.0265,0.0009,7,0.0102,1,market,,,-0.0148,76,A,,,moneyline|
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,2.5,MGM,Brock Purdy,pass_td,2.5,+150,0.4074,0.0186,0.0031,5,0.0144,0,market,0.5109,0.2772,0.0192,77,A,,,prop|pass_td|Brock Purdy|2.5
-cfb,401871056,2026-10-22T23Z,LIB,KENN,moneyline,KENN,,KAL,,,4.7348,+373,0.2147,0.0166,0.0011,7,0.008,1,market,,,-0.0189,76,A,2394,yes 0.19/0.20,moneyline|
-nfl,401873015,2026-10-25T17Z,MIA,NYJ,moneyline,MIA,,BR,,,3.1,+210,0.3317,0.0283,0.0034,6,0.0149,1,market,,,-0.0097,73,A,,,moneyline|
-cfb,401858272,2026-10-24T02:30Z,NCSU,STAN,moneyline,STAN,,BR,,,3.65,+265,0.2831,0.0334,0.0031,6,0.0097,0,market,,,-0.0288,64,B,,,moneyline|
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,ESPN,Matthew Golden,receptions,2.2,+120,0.4315,-0.0508,0.0,4,0.0025,0,market,0.5775,0.2705,0.0325,83,A,,,prop|receptions|Matthew Golden|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,ESPN,Bo Melton,receptions,1.6452,-155,0.6031,-0.0077,0.0,4,0.0164,0,market,0.683,0.1236,0.0369,70,A,,,prop|receptions|Bo Melton|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,FD,Matthew Golden,receptions,2.18,+118,0.4313,-0.0597,0.0,4,0.0025,0,market,0.5775,0.2589,0.0325,83,A,,,prop|receptions|Matthew Golden|4.5
+cfb,401858499,2026-10-24T19:30Z,MSU,UCLA,moneyline,MSU,,MGM,,,6.25,+525,0.1634,0.0215,0.001,7,0.0074,1,market,,,-0.0287,75,A,,,moneyline|
+cfb,401856729,2026-10-24T23:30Z,VAN,UK,moneyline,VAN,,KAL,,,4.5124,+351,0.2256,0.0182,0.0013,7,0.011,1,market,,,-0.0236,72,A,3112,yes 0.20/0.21,moneyline|
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,FD,Mike Evans,receptions,1.8772,-114,0.5198,-0.0243,0.0,4,0.0116,0,market,0.6214,0.1664,0.0264,74,A,,,prop|receptions|Mike Evans|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,5.5,ESPN,George Pickens,receptions,1.6452,-155,0.5824,-0.0418,0.0,4,0.0076,0,market,0.6489,0.0676,0.0956,78,A,,,prop|receptions|George Pickens|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,5.5,DK,George Pickens,receptions,1.6452,-155,0.582,-0.0424,0.0,4,0.0076,0,market,0.6489,0.0676,0.0956,78,A,,,prop|receptions|George Pickens|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,DK,Matthew Golden,receptions,2.18,+118,0.4299,-0.0629,0.0,4,0.0025,0,market,0.5775,0.2589,0.0325,83,A,,,prop|receptions|Matthew Golden|4.5
-cfb,401858270,2026-10-24T16Z,CAL,SMU,spread,SMU,-17.5,BR,,,1.9174,-109,0.527,0.0105,0.0028,3,0.0167,1,market,,,0.0145,63,B,,,spread|17.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,1.5,DK,Dak Prescott,pass_td,2.41,+141,0.4018,-0.0316,0.0,5,0.0051,0,market,0.4456,0.074,-0.0141,73,A,,,prop|pass_td|Dak Prescott|1.5
+cfb,401856730,2026-10-24T19:30Z,OU,MSST,moneyline,MSST,,ESPN,,,2.45,+145,0.4142,0.0147,0.0025,6,0.0126,0,market,,,-0.036,61,B,,,moneyline|
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,4.5,FD,Christian McCaffrey,receptions,1.9804,-102,0.4871,-0.0353,0.0,4,0.0113,0,market,0.6817,0.35,0.0206,73,A,,,prop|receptions|Christian McCaffrey|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,MGM,Matthew Golden,receptions,2.15,+115,0.4296,-0.0764,0.0,4,0.0025,0,market,0.5775,0.2416,0.0325,83,A,,,prop|receptions|Matthew Golden|4.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,DK,Mike Evans,receptions,1.8547,-117,0.517,-0.0412,0.0,4,0.0116,0,market,0.6214,0.1524,0.0264,74,A,,,prop|receptions|Mike Evans|5.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,2.5,BR,Brock Purdy,pass_td,2.35,+135,0.4018,-0.0557,0.0,5,0.0144,0,market,0.5109,0.2006,0.0192,77,A,,,prop|pass_td|Brock Purdy|2.5
+cfb,401858270,2026-10-24T16Z,CAL,SMU,spread,SMU,-17.5,BR,,,1.9174,-109,0.533,0.022,0.006,3,0.021,1,market,,,0.0109,57,B,,,spread|17.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,DK,George Kittle,receptions,1.8547,-117,0.5249,-0.0264,0.0,5,0.012,0,market,0.6669,0.2368,-0.0099,68,B,,,prop|receptions|George Kittle|5.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,14.5,MGM,Christian McCaffrey,rush_att,1.9091,-110,0.51,-0.0263,0.0,4,0.0104,0,market,0.548,0.0463,0.0029,67,B,,,prop|rush_att|Christian McCaffrey|14.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,5.5,MGM,George Pickens,receptions,1.6061,-165,0.5786,-0.0707,0.0,4,0.0076,0,market,0.6489,0.0423,0.0956,78,A,,,prop|receptions|George Pickens|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,DK,Bo Melton,receptions,1.6061,-165,0.5979,-0.0397,0.0,4,0.0164,0,market,0.683,0.0969,0.0369,70,A,,,prop|receptions|Bo Melton|0.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,4.5,MGM,Christian McCaffrey,receptions,1.9524,-105,0.4845,-0.054,0.0,4,0.0113,0,market,0.6817,0.3309,0.0206,73,A,,,prop|receptions|Christian McCaffrey|4.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,4.5,ESPN,Christian McCaffrey,receptions,1.9524,-105,0.4845,-0.054,0.0,4,0.0113,0,market,0.6817,0.3309,0.0206,73,A,,,prop|receptions|Christian McCaffrey|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,1.5,FD,Dak Prescott,pass_td,2.36,+136,0.4002,-0.0555,0.0,5,0.0051,0,market,0.4456,0.0517,-0.0141,73,A,,,prop|pass_td|Dak Prescott|1.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,2.5,DK,Brock Purdy,pass_td,2.32,+132,0.3995,-0.0733,0.0,5,0.0144,0,market,0.5109,0.1852,0.0192,77,A,,,prop|pass_td|Brock Purdy|2.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,MGM,George Kittle,receptions,1.8333,-120,0.5248,-0.0379,0.0,5,0.012,0,market,0.6669,0.2225,-0.0099,68,B,,,prop|receptions|George Kittle|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,17.5,DK,Javonte Williams,rush_att,1.8,-125,0.5315,-0.0433,0.0,3,0.0037,0,market,0.6739,0.213,0.0175,69,B,,,prop|rush_att|Javonte Williams|17.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,1.5,ESPN,Dak Prescott,pass_td,2.35,+135,0.4002,-0.0595,0.0,5,0.0051,0,market,0.4456,0.0472,-0.0141,73,A,,,prop|pass_td|Dak Prescott|1.5
+cfb,401858270,2026-10-24T16Z,CAL,SMU,spread,CAL,17.5,KAL,,,2.0947,+109,0.4952,0.0372,0.0085,3,0.021,1,market,,,-0.0109,49,C,784,no @ 0.46,spread|17.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,59.5,FD,Christian McCaffrey,rush_yds,1.8772,-114,0.5021,-0.0574,0.0,4,0.0027,0,market,0.607,0.1395,-0.0032,72,A,,,prop|rush_yds|Christian McCaffrey|59.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,59.5,MGM,Christian McCaffrey,rush_yds,1.8696,-115,0.5021,-0.0612,0.0,4,0.0027,0,market,0.607,0.1349,-0.0032,72,A,,,prop|rush_yds|Christian McCaffrey|59.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,59.5,ESPN,Christian McCaffrey,rush_yds,1.8696,-115,0.5021,-0.0612,0.0,4,0.0027,0,market,0.607,0.1349,-0.0032,72,A,,,prop|rush_yds|Christian McCaffrey|59.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,2.5,ESPN,Brock Purdy,pass_td,2.3,+130,0.399,-0.0822,0.0,5,0.0144,0,market,0.5109,0.175,0.0192,77,A,,,prop|pass_td|Brock Purdy|2.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,FD,Tucker Kraft,receptions,1.7353,-136,0.5564,-0.0345,0.0,4,0.0108,0,market,0.6373,0.1059,-0.0015,65,B,,,prop|receptions|Tucker Kraft|4.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,59.5,DK,Christian McCaffrey,rush_yds,1.8696,-115,0.5,-0.0652,0.0,4,0.0027,0,market,0.607,0.1349,-0.0032,72,A,,,prop|rush_yds|Christian McCaffrey|59.5
-cfb,401858270,2026-10-24T16Z,CAL,SMU,spread,CAL,17.5,KAL,,,2.0515,+105,0.4952,0.0158,0.0038,3,0.0167,1,market,,,-0.0145,51,B,670,no @ 0.47,spread|17.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,MGM,Mike Evans,receptions,1.8,-125,0.513,-0.0766,0.0,4,0.0116,0,market,0.6214,0.1185,0.0264,74,A,,,prop|receptions|Mike Evans|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,DK,KaVontae Turpin,receptions,1.6757,-148,0.5961,-0.0011,0.0,3,0.0162,0,market,0.7377,0.2362,0.0134,55,B,,,prop|receptions|KaVontae Turpin|0.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,ESPN,George Kittle,receptions,1.8,-125,0.5219,-0.0605,0.0,5,0.012,0,market,0.6669,0.2003,-0.0099,68,B,,,prop|receptions|George Kittle|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,17.5,ESPN,Javonte Williams,rush_att,1.7692,-130,0.5282,-0.0656,0.0,3,0.0037,0,market,0.6739,0.1922,0.0175,69,B,,,prop|rush_att|Javonte Williams|17.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,MGM,Tucker Kraft,receptions,1.7143,-140,0.5542,-0.0499,0.0,4,0.0108,0,market,0.6373,0.0925,-0.0015,65,B,,,prop|receptions|Tucker Kraft|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,3.5,FD,Jake Ferguson,receptions,2.24,+124,0.4359,-0.0235,0.0,4,0.0083,0,market,0.4729,0.0593,-0.0426,58,B,,,prop|receptions|Jake Ferguson|3.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,18.5,DK,Brock Purdy,rush_yds,1.8929,-112,0.4985,-0.0564,0.0,3,0.0014,0,market,0.6196,0.1729,0.0035,66,B,,,prop|rush_yds|Brock Purdy|18.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,6.5,FD,Jonnu Smith,rec_yds,1.9804,-102,0.4824,-0.0446,0.0,3,0.0037,0,market,0.76,0.505,,62,B,,,prop|rec_yds|Jonnu Smith|6.5
+cfb,401858500,2026-10-24T23:30Z,USC,WIS,spread,WIS,2.5,KAL,,,2.1398,+114,0.4892,0.0467,0.0102,2,0.0225,1,market,,,0.0043,39,C,5608,no @ 0.45,spread|-2.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,18.5,BR,Brock Purdy,rush_yds,1.8772,-114,0.5,-0.0614,0.0,3,0.0014,0,market,0.6196,0.1631,0.0035,66,B,,,prop|rush_yds|Brock Purdy|18.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,ESPN,Jonnu Smith,receptions,1.5,-200,0.6297,-0.0555,0.0,3,0.0023,0,market,0.8181,0.2271,,64,B,,,prop|receptions|Jonnu Smith|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,6.5,DK,CeeDee Lamb,receptions,1.8547,-117,0.5302,-0.0166,0.0,4,0.016,0,market,0.5604,0.0394,-0.0162,54,B,,,prop|receptions|CeeDee Lamb|6.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,ESPN,Brevyn Spann-Ford,receptions,1.7407,-135,0.5647,-0.017,0.0,3,0.0124,0,market,0.7066,0.2299,,54,B,,,prop|receptions|Brevyn Spann-Ford|0.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,ESPN,Mike Evans,receptions,1.7692,-130,0.5096,-0.0985,0.0,4,0.0116,0,market,0.6214,0.0993,0.0264,74,A,,,prop|receptions|Mike Evans|5.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,2.5,FD,Brock Purdy,pass_td,2.24,+124,0.3969,-0.1109,0.0,5,0.0144,0,market,0.5109,0.1444,0.0192,77,A,,,prop|pass_td|Brock Purdy|2.5
-cfb,401858500,2026-10-24T23:30Z,USC,WIS,spread,WIS,2.5,KAL,,,2.0947,+109,0.4892,0.0246,0.0056,2,0.0174,1,market,,,0.0016,43,C,5529,no @ 0.46,spread|-2.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,DK,Jonnu Smith,receptions,1.5,-200,0.6269,-0.0597,0.0,3,0.0023,0,market,0.8181,0.2271,,64,B,,,prop|receptions|Jonnu Smith|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,1.5,ESPN,MarShawn Lloyd,receptions,1.6452,-155,0.5958,-0.0198,0.0,4,0.0131,0,market,0.666,0.0958,-0.0226,54,B,,,prop|receptions|MarShawn Lloyd|1.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,31.5,FD,Ryan Flournoy,rec_yds,1.885,-113,0.5051,-0.0479,0.0,3,0.0048,0,market,0.593,0.1178,-0.0005,61,B,,,prop|rec_yds|Ryan Flournoy|31.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,18.5,MGM,Brock Purdy,rush_yds,1.8696,-115,0.4985,-0.068,0.0,3,0.0014,0,market,0.6196,0.1584,0.0035,66,B,,,prop|rush_yds|Brock Purdy|18.5
-cfb,401871056,2026-10-22T23Z,LIB,KENN,total,Under,47.5,KAL,,,2.0947,+109,0.4926,0.0318,0.0073,2,0.0191,1,market,,,0.0013,41,C,0,no @ 0.46,total|47.5
+cfb,401871056,2026-10-22T23Z,LIB,KENN,total,Under,47.5,KAL,,,2.0947,+109,0.4822,0.01,0.0023,2,0.0139,1,market,,,-0.0007,46,C,904,no @ 0.46,total|47.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,39.5,FD,Christian McCaffrey,rec_yds,1.8772,-114,0.5102,-0.0423,0.0,3,0.0096,0,market,0.6116,0.1481,0.0057,59,B,,,prop|rec_yds|Christian McCaffrey|39.5
-cfb,401856836,2026-10-24T23Z,COLO,OKST,total,Under,56.5,ESPN,,,1.9091,-110,0.55,0.05,0.0138,2,0.0255,1,market,,,,35,C,,,total|56.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,FD,Jonnu Smith,receptions,1.4878,-205,0.6278,-0.066,0.0,3,0.0023,0,market,0.8181,0.2171,,64,B,,,prop|receptions|Jonnu Smith|0.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,39.5,BR,Christian McCaffrey,rec_yds,1.8696,-115,0.5102,-0.0462,0.0,3,0.0096,0,market,0.6116,0.1435,0.0057,59,B,,,prop|rec_yds|Christian McCaffrey|39.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,31.5,MGM,Ryan Flournoy,rec_yds,1.8696,-115,0.5051,-0.0557,0.0,3,0.0048,0,market,0.593,0.1087,-0.0005,61,B,,,prop|rec_yds|Ryan Flournoy|31.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,4.5,DK,Christian McCaffrey,receptions,1.8772,-114,0.4771,-0.1044,0.0,4,0.0113,0,market,0.6817,0.2796,0.0206,73,A,,,prop|receptions|Christian McCaffrey|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,49.5,FD,Tucker Kraft,rec_yds,1.885,-113,0.4985,-0.0604,0.0,3,0.0014,0,market,0.5494,0.0355,-0.0069,62,B,,,prop|rec_yds|Tucker Kraft|49.5
-cfb,401858500,2026-10-24T23:30Z,USC,WIS,spread,USC,-2.5,ESPN,,,1.8696,-115,0.545,0.0189,0.0054,2,0.0174,1,market,,,-0.0016,42,C,,,spread|-2.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,49.5,BR,Tucker Kraft,rec_yds,1.8772,-114,0.5,-0.0614,0.0,3,0.0014,0,market,0.5494,0.0312,-0.0069,62,B,,,prop|rec_yds|Tucker Kraft|49.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,6.5,ESPN,Jonnu Smith,rec_yds,1.9524,-105,0.4807,-0.0615,0.0,3,0.0037,0,market,0.76,0.4838,,62,B,,,prop|rec_yds|Jonnu Smith|6.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,FD,Bo Melton,receptions,1.5319,-188,0.5904,-0.0956,0.0,4,0.0164,0,market,0.683,0.0462,0.0369,70,A,,,prop|receptions|Bo Melton|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,5.5,BR,Jordan Love,rush_yds,1.8475,-118,0.5154,-0.0477,0.0,3,0.0063,0,market,0.677,0.2507,-0.005,58,B,,,prop|rush_yds|Jordan Love|5.5
+cfb,401862807,2026-10-22T23:30Z,ECU,MEM,total,Under,53.5,KAL,,,2.0515,+105,0.4947,0.0149,0.0035,2,0.0151,1,market,,,-0.0049,43,C,14,no @ 0.47,total|53.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,18.5,ESPN,Jayden Daniels,completions,1.9524,-105,0.4833,-0.0563,0.0,2,0.0018,0,market,0.5415,0.0572,0.0449,60,B,,,prop|completions|Jayden Daniels|18.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,5.5,DK,Jordan Love,rush_yds,1.8547,-117,0.5127,-0.0491,0.0,3,0.0063,0,market,0.677,0.2556,-0.005,58,B,,,prop|rush_yds|Jordan Love|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,22.5,ESPN,Jordan Love,completions,1.8,-125,0.5302,-0.0457,0.0,2,0.0049,0,market,0.5847,0.0524,0.0335,57,B,,,prop|completions|Jordan Love|22.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,DK,Tucker Kraft,receptions,1.6803,-147,0.5486,-0.0782,0.0,4,0.0108,0,market,0.6373,0.0708,-0.0015,65,B,,,prop|receptions|Tucker Kraft|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,6.5,DK,Jonnu Smith,rec_yds,1.9524,-105,0.4779,-0.0669,0.0,3,0.0037,0,market,0.76,0.4838,,62,B,,,prop|rec_yds|Jonnu Smith|6.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,MGM,Bo Melton,receptions,1.5263,-190,0.5901,-0.0993,0.0,4,0.0164,0,market,0.683,0.0424,0.0369,70,A,,,prop|receptions|Bo Melton|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,17.5,FAN,Javonte Williams,rush_att,1.7143,-140,0.5272,-0.0962,0.0,3,0.0037,0,market,0.6739,0.1552,0.0175,69,B,,,prop|rush_att|Javonte Williams|17.5
-cfb,401871056,2026-10-22T23Z,LIB,KENN,total,Over,47.5,BR,,,1.8696,-115,0.545,0.0189,0.0054,2,0.0191,1,market,,,-0.0013,40,C,,,total|47.5
+cfb,401858500,2026-10-24T23:30Z,USC,WIS,spread,USC,-2.5,ESPN,,,1.8696,-115,0.555,0.0376,0.0108,2,0.0225,1,market,,,-0.0043,36,C,,,spread|-2.5
+cfb,401866446,2026-10-24T17Z,AKR,KENT,total,Over,44.5,BR,,,1.885,-113,0.545,0.0273,0.0077,2,0.0213,1,market,,,-0.0028,38,C,,,total|44.5
+cfb,401866446,2026-10-24T17Z,AKR,KENT,total,Under,44.5,KAL,,,2.0515,+105,0.4968,0.0192,0.0046,2,0.0213,1,market,,,0.0028,40,C,21,no @ 0.47,total|44.5
+cfb,401858275,2026-10-24T23:30Z,SYR,UNC,total,Over,45.5,BR,,,1.9259,-108,0.525,0.0111,0.003,2,0.0165,1,market,,,-0.0027,42,C,,,total|45.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,18.5,DK,Jayden Daniels,completions,1.9524,-105,0.4797,-0.0635,0.0,2,0.0018,0,market,0.5415,0.0572,0.0449,60,B,,,prop|completions|Jayden Daniels|18.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,ESPN,Tucker Kraft,receptions,1.6667,-150,0.5479,-0.0867,0.0,4,0.0108,0,market,0.6373,0.0622,-0.0015,65,B,,,prop|receptions|Tucker Kraft|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,DK,Christian Watson,receptions,2.18,+118,0.4391,-0.0428,0.0,3,0.0034,0,market,0.6444,0.4048,-0.0205,54,B,,,prop|receptions|Christian Watson|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,5.5,FD,KaVontae Turpin,rec_yds,1.885,-113,0.5021,-0.0536,0.0,2,0.001,0,market,0.7627,0.4377,0.0118,56,B,,,prop|rec_yds|KaVontae Turpin|5.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,FD,George Kittle,receptions,1.7353,-136,0.5175,-0.1019,0.0,5,0.012,0,market,0.6669,0.1572,-0.0099,68,B,,,prop|receptions|George Kittle|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,1.5,MGM,MarShawn Lloyd,receptions,1.6061,-165,0.592,-0.0491,0.0,4,0.0131,0,market,0.666,0.0697,-0.0226,54,B,,,prop|receptions|MarShawn Lloyd|1.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,5.5,DK,KaVontae Turpin,rec_yds,1.885,-113,0.5,-0.0575,0.0,2,0.001,0,market,0.7627,0.4377,0.0118,56,B,,,prop|rec_yds|KaVontae Turpin|5.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,5.5,FAN,George Kittle,receptions,1.7143,-140,0.5189,-0.1104,0.0,5,0.012,0,market,0.6669,0.1432,-0.0099,68,B,,,prop|receptions|George Kittle|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,31.5,ESPN,Ryan Flournoy,rec_yds,1.8333,-120,0.5,-0.0834,0.0,3,0.0048,0,market,0.593,0.0872,-0.0005,61,B,,,prop|rec_yds|Ryan Flournoy|31.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,25.5,MGM,Jake Ferguson,rec_yds,1.8696,-115,0.5455,0.0198,0.0057,2,0.0227,0,market,0.4452,-0.1677,0.0154,35,C,,,prop|rec_yds|Jake Ferguson|25.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,14.5,ESPN,Javonte Williams,rec_yds,2.1,+110,0.5122,0.0755,0.0172,2,0.0314,0,market,0.5401,0.1343,-0.0022,21,C,,,prop|rec_yds|Javonte Williams|14.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,9.5,FD,Bo Melton,rec_yds,1.885,-113,0.5408,0.0194,0.0055,2,0.0204,0,market,0.4092,-0.2287,0.0097,35,C,,,prop|rec_yds|Bo Melton|9.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,23.5,DK,Dak Prescott,completions,2.0,+100,0.4954,-0.0092,0.0,2,0.0122,0,market,0.6395,0.2789,0.0045,42,C,,,prop|completions|Dak Prescott|23.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,4.5,MGM,KaVontae Turpin,rec_yds,1.8333,-120,0.5306,-0.0272,0.0,2,0.0102,0,market,0.7821,0.4337,0.0118,46,C,,,prop|rec_yds|KaVontae Turpin|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,ESPN,Christian Watson,receptions,2.15,+115,0.4374,-0.0597,0.0,3,0.0034,0,market,0.6444,0.3854,-0.0205,54,B,,,prop|receptions|Christian Watson|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,22.5,DK,Jordan Love,completions,1.7812,-128,0.5203,-0.0732,0.0,2,0.0049,0,market,0.5847,0.0414,0.0335,57,B,,,prop|completions|Jordan Love|22.5
+cfb,401858495,2026-10-24T19Z,ORE,ILL,spread,ORE,-10.5,FD,,,2.0,+100,0.5053,0.0106,0.0027,2,0.0144,0,market,,,-0.0047,36,C,,,spread|-10.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,4.5,DK,Brock Purdy,rush_att,2.12,+112,0.4495,-0.0472,0.0,2,0.0023,0,market,0.5151,0.0921,,50,B,,,prop|rush_att|Brock Purdy|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,11.5,FD,MarShawn Lloyd,rec_yds,1.885,-113,0.5,-0.0575,0.0,2,0.0,0,market,0.6376,0.2019,-0.0012,52,B,,,prop|rec_yds|MarShawn Lloyd|11.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,76.5,FD,Christian Watson,rec_yds,1.885,-113,0.5042,-0.0496,0.0,2,0.0021,0,market,0.6295,0.1867,0.0005,50,B,,,prop|rec_yds|Christian Watson|76.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,14.5,BR,Javonte Williams,rec_yds,1.9174,-109,0.5505,0.0556,0.0152,2,0.0314,0,market,0.4599,-0.1183,0.0022,23,C,,,prop|rec_yds|Javonte Williams|14.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,FD,Brevyn Spann-Ford,receptions,1.6757,-148,0.5559,-0.0686,0.0,3,0.0124,0,market,0.7066,0.184,,54,B,,,prop|receptions|Brevyn Spann-Ford|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,5.5,MGM,Jordan Love,rush_yds,1.8,-125,0.5078,-0.086,0.0,3,0.0063,0,market,0.677,0.2185,-0.005,58,B,,,prop|rush_yds|Jordan Love|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,13.5,FD,Javonte Williams,rec_yds,1.885,-113,0.5101,-0.0384,0.0,2,0.0051,0,market,0.5665,0.0679,-0.0022,46,C,,,prop|rec_yds|Javonte Williams|13.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,11.5,MGM,MarShawn Lloyd,rec_yds,1.8696,-115,0.5,-0.0652,0.0,2,0.0,0,market,0.6376,0.1921,-0.0012,52,B,,,prop|rec_yds|MarShawn Lloyd|11.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,FD,KaVontae Turpin,receptions,1.5814,-172,0.5824,-0.0789,0.0,3,0.0162,0,market,0.7377,0.1666,0.0134,55,B,,,prop|receptions|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,6.5,ESPN,Jordan Love,rush_yds,2.0,+100,0.5,0.0,0.0,2,0.0153,0,market,0.6386,0.2771,-0.005,35,C,,,prop|rush_yds|Jordan Love|6.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,76.5,DK,Christian Watson,rec_yds,1.8772,-114,0.5,-0.0614,0.0,2,0.0021,0,market,0.6295,0.1817,0.0005,50,B,,,prop|rec_yds|Christian Watson|76.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,10.5,ESPN,MarShawn Lloyd,rec_yds,1.8696,-115,0.5106,-0.0455,0.0,2,0.0053,0,market,0.6607,0.2352,-0.0012,46,C,,,prop|rec_yds|MarShawn Lloyd|10.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,4.5,FD,Christian Watson,receptions,2.12,+112,0.435,-0.0779,0.0,3,0.0034,0,market,0.6444,0.3661,-0.0205,54,B,,,prop|receptions|Christian Watson|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,274.5,DK,Dak Prescott,pass_yds,1.9009,-111,0.5101,-0.0303,0.0,2,0.0061,0,market,0.6467,0.2293,-0.0106,42,C,,,prop|pass_yds|Dak Prescott|274.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,9.5,ESPN,Bo Melton,rec_yds,2.05,+105,0.5,0.025,0.006,2,0.0204,0,market,0.5908,0.2112,-0.0097,28,C,,,prop|rec_yds|Bo Melton|9.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,39.5,ESPN,Christian McCaffrey,rec_yds,1.8,-125,0.5,-0.1,0.0,3,0.0096,0,market,0.6116,0.1009,0.0057,59,B,,,prop|rec_yds|Christian McCaffrey|39.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,4.5,ESPN,Brock Purdy,rush_att,2.1,+110,0.4449,-0.0657,0.0,2,0.0023,0,market,0.5151,0.0818,,50,B,,,prop|rush_att|Brock Purdy|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,1.5,FD,MarShawn Lloyd,receptions,1.5618,-178,0.5873,-0.0827,0.0,4,0.0131,0,market,0.666,0.0402,-0.0226,54,B,,,prop|receptions|MarShawn Lloyd|1.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,8.5,FD,Dak Prescott,rush_yds,1.885,-113,0.5091,-0.0404,0.0,2,0.0045,0,market,0.6602,0.2445,-0.0125,42,C,,,prop|rush_yds|Dak Prescott|8.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,1.5,DK,MarShawn Lloyd,receptions,1.5587,-179,0.5844,-0.089,0.0,4,0.0131,0,market,0.666,0.0382,-0.0226,54,B,,,prop|receptions|MarShawn Lloyd|1.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,DK,Brevyn Spann-Ford,receptions,1.6536,-153,0.5497,-0.0911,0.0,3,0.0124,0,market,0.7066,0.1684,,54,B,,,prop|receptions|Brevyn Spann-Ford|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,0.5,ESPN,KaVontae Turpin,receptions,1.5556,-180,0.5768,-0.1027,0.0,3,0.0162,0,market,0.7377,0.1476,0.0134,55,B,,,prop|receptions|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,10.5,ESPN,Dak Prescott,rush_yds,2.1,+110,0.4452,-0.065,0.0,2,0.0021,0,market,0.6051,0.2707,-0.0125,45,C,,,prop|rush_yds|Dak Prescott|10.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,10.5,DK,MarShawn Lloyd,rec_yds,1.8547,-117,0.5,-0.0726,0.0,2,0.0053,0,market,0.6607,0.2254,-0.0012,46,C,,,prop|rec_yds|MarShawn Lloyd|10.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,35.5,DK,Dak Prescott,pass_att,1.9804,-102,0.4797,-0.05,0.0,2,0.0018,0,market,0.6011,0.1905,-0.0409,40,C,,,prop|pass_att|Dak Prescott|35.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,30.5,ESPN,Brock Purdy,pass_att,2.0,+100,0.4732,-0.0537,0.0,2,0.0019,0,market,0.5154,0.0307,-0.0307,40,C,,,prop|pass_att|Brock Purdy|30.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,10.5,FAN,Dak Prescott,rush_yds,2.05,+105,0.4495,-0.0786,0.0,2,0.0021,0,market,0.6051,0.2404,-0.0125,45,C,,,prop|rush_yds|Dak Prescott|10.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,13.5,MGM,Javonte Williams,rec_yds,1.8333,-120,0.5,-0.0834,0.0,2,0.0051,0,market,0.5665,0.0386,-0.0022,46,C,,,prop|rec_yds|Javonte Williams|13.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,2.5,FD,Ryan Flournoy,receptions,2.4,+140,0.3896,-0.0649,0.0,1,,0,market,0.4403,0.0567,0.1273,40,C,,,prop|receptions|Ryan Flournoy|2.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,25.5,FAN,Jake Ferguson,rec_yds,2.0,+100,0.5,0.0,0.0,2,0.0227,0,market,0.5548,0.1096,-0.0154,23,C,,,prop|rec_yds|Jake Ferguson|25.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,35.5,ESPN,Dak Prescott,pass_att,1.9524,-105,0.4761,-0.0704,0.0,2,0.0018,0,market,0.6011,0.1737,-0.0409,40,C,,,prop|pass_att|Dak Prescott|35.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,4.5,ESPN,KaVontae Turpin,rec_yds,1.7692,-130,0.5101,-0.0974,0.0,2,0.0102,0,market,0.7821,0.3836,0.0118,46,C,,,prop|rec_yds|KaVontae Turpin|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,8.5,MGM,Dak Prescott,rush_yds,1.8333,-120,0.5,-0.0834,0.0,2,0.0045,0,market,0.6602,0.2103,-0.0125,42,C,,,prop|rush_yds|Dak Prescott|8.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,16.5,MGM,Javonte Williams,rush_att,1.9091,-110,0.4899,-0.0648,0.0,1,,0,market,0.6097,0.1641,0.0175,37,C,,,prop|rush_att|Javonte Williams|16.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,274.5,ESPN,Dak Prescott,pass_yds,1.8333,-120,0.4979,-0.0872,0.0,2,0.0061,0,market,0.6467,0.1856,-0.0106,42,C,,,prop|pass_yds|Dak Prescott|274.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,38.5,DK,Christian McCaffrey,rec_yds,1.8772,-114,0.5042,-0.0535,0.0,1,,0,market,0.5941,0.1153,0.0057,32,C,,,prop|rec_yds|Christian McCaffrey|38.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,24.5,ESPN,Dak Prescott,completions,1.7407,-135,0.5408,-0.0586,0.0,1,,0,market,0.7033,0.2242,0.0045,32,C,,,prop|completions|Dak Prescott|24.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,32.5,DK,Ryan Flournoy,rec_yds,1.8929,-112,0.5,-0.0535,0.0,1,,0,market,0.5772,0.0927,-0.0005,30,C,,,prop|rec_yds|Ryan Flournoy|32.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,4.5,DK,Brevyn Spann-Ford,rec_yds,1.8772,-114,0.5042,-0.0535,0.0,1,,0,market,0.7046,0.3227,,30,C,,,prop|rec_yds|Brevyn Spann-Ford|4.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,5.5,FAN,Matthew Golden,receptions,1.4878,-205,0.6072,-0.0966,0.0,1,,0,market,0.7356,0.0945,0.0325,40,C,,,prop|receptions|Matthew Golden|5.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,12.5,DK,Javonte Williams,rec_yds,1.8547,-117,0.5106,-0.0531,0.0,1,,0,market,0.5926,0.0991,-0.0022,29,C,,,prop|rec_yds|Javonte Williams|12.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Under,40.5,MGM,Christian McCaffrey,rec_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.6289,0.1758,0.0057,32,C,,,prop|rec_yds|Christian McCaffrey|40.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,16.5,FD,Brock Purdy,rush_yds,1.8772,-114,0.5,-0.0614,0.0,1,,0,market,0.664,0.2465,0.0035,31,C,,,prop|rush_yds|Brock Purdy|16.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,3.5,FD,Brevyn Spann-Ford,rec_yds,1.885,-113,0.5,-0.0575,0.0,1,,0,market,0.7329,0.3814,,30,C,,,prop|rec_yds|Brevyn Spann-Ford|3.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,250.5,DK,Brock Purdy,pass_yds,1.885,-113,0.5021,-0.0536,0.0,1,,0,market,0.5927,0.1172,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|250.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,17.5,ESPN,Brock Purdy,rush_yds,1.8,-125,0.5203,-0.0634,0.0,1,,0,market,0.642,0.1557,0.0035,31,C,,,prop|rush_yds|Brock Purdy|17.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,74.5,ESPN,Christian Watson,rec_yds,1.9524,-105,0.4797,-0.0635,0.0,1,,0,market,0.6112,0.1934,0.0005,30,C,,,prop|rec_yds|Christian Watson|74.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,12.5,BR,MarShawn Lloyd,rec_yds,1.8929,-112,0.4939,-0.0651,0.0,1,,0,market,0.6141,0.1623,-0.0012,30,C,,,prop|rec_yds|MarShawn Lloyd|12.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,75.5,MGM,Christian Watson,rec_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.6204,0.1599,0.0005,30,C,,,prop|rec_yds|Christian Watson|75.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,50.5,DK,Tucker Kraft,rec_yds,1.8696,-115,0.5063,-0.0533,0.0,1,,0,market,0.5624,0.0514,-0.0069,27,C,,,prop|rec_yds|Tucker Kraft|50.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,246.5,FD,Brock Purdy,pass_yds,1.8772,-114,0.5,-0.0614,0.0,1,,0,market,0.614,0.1526,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|246.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,33.5,BR,Ryan Flournoy,rec_yds,1.885,-113,0.495,-0.067,0.0,1,,0,market,0.5614,0.0582,-0.0005,30,C,,,prop|rec_yds|Ryan Flournoy|33.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,71.5,BR,Christian Watson,rec_yds,1.8772,-114,0.497,-0.0671,0.0,1,,0,market,0.5833,0.095,0.0005,30,C,,,prop|rec_yds|Christian Watson|71.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,249.5,ESPN,Brock Purdy,pass_yds,1.8333,-120,0.5101,-0.0647,0.0,1,,0,market,0.598,0.0964,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|249.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,61.5,BR,Christian McCaffrey,rush_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.5923,0.1073,-0.0032,29,C,,,prop|rush_yds|Christian McCaffrey|61.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,251.5,MGM,Brock Purdy,pass_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.5873,0.0981,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|251.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,245.5,FAN,Brock Purdy,pass_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.6193,0.1578,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|245.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,8.5,DK,Bo Melton,rec_yds,1.885,-113,0.5021,-0.0536,0.0,1,,0,market,0.6185,0.166,-0.0097,26,C,,,prop|rec_yds|Bo Melton|8.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,247.5,BR,Brock Purdy,pass_yds,1.8772,-114,0.497,-0.0671,0.0,1,,0,market,0.6087,0.1426,-0.0023,29,C,,,prop|pass_yds|Brock Purdy|247.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,272.5,FD,Dak Prescott,pass_yds,1.885,-113,0.5,-0.0575,0.0,1,,0,market,0.6356,0.1981,-0.0106,26,C,,,prop|pass_yds|Dak Prescott|272.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,9.5,DK,Dak Prescott,rush_yds,1.8547,-117,0.5094,-0.0551,0.0,1,,0,market,0.633,0.174,-0.0125,25,C,,,prop|rush_yds|Dak Prescott|9.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,23.5,DK,Jake Ferguson,rec_yds,1.8621,-116,0.5084,-0.0533,0.0,1,,0,market,0.5835,0.0864,-0.0154,24,C,,,prop|rec_yds|Jake Ferguson|23.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,48.5,MGM,Tucker Kraft,rec_yds,2.05,+105,0.4554,-0.0664,0.0,1,,0,market,0.5363,0.0994,-0.0069,27,C,,,prop|rec_yds|Tucker Kraft|48.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,270.5,FAN,Dak Prescott,pass_yds,1.9091,-110,0.4899,-0.0648,0.0,1,,0,market,0.6244,0.1921,-0.0106,26,C,,,prop|pass_yds|Dak Prescott|270.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,7.5,MGM,Bo Melton,rec_yds,1.8696,-115,0.5,-0.0652,0.0,1,,0,market,0.6457,0.2071,-0.0097,26,C,,,prop|rec_yds|Bo Melton|7.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,22.5,FD,Jake Ferguson,rec_yds,1.885,-113,0.5,-0.0575,0.0,1,,0,market,0.5976,0.1265,-0.0154,24,C,,,prop|rec_yds|Jake Ferguson|22.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,281.5,BR,Dak Prescott,pass_yds,1.8772,-114,0.497,-0.0671,0.0,1,,0,market,0.6845,0.2849,-0.0106,26,C,,,prop|pass_yds|Dak Prescott|281.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,269.5,MGM,Dak Prescott,pass_yds,2.1,+110,0.4425,-0.0708,0.0,1,,0,market,0.6188,0.2994,-0.0106,26,C,,,prop|pass_yds|Dak Prescott|269.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,11.5,BR,Dak Prescott,rush_yds,1.8475,-118,0.505,-0.0669,0.0,1,,0,market,0.5766,0.0654,-0.0125,25,C,,,prop|rush_yds|Dak Prescott|11.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,24.5,ESPN,Jake Ferguson,rec_yds,1.9524,-105,0.4797,-0.0635,0.0,1,,0,market,0.5692,0.1113,-0.0154,24,C,,,prop|rec_yds|Jake Ferguson|24.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Under,23.5,FAN,Dak Prescott,completions,1.8333,-120,0.4711,-0.1364,0.0,2,0.0122,0,market,0.6395,0.1723,0.0045,42,C,,,prop|completions|Dak Prescott|23.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,6.5,FD,Jordan Love,rush_yds,1.885,-113,0.4694,-0.1152,0.0,2,0.0153,0,market,0.6386,0.2037,-0.005,35,C,,,prop|rush_yds|Jordan Love|6.5
 nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Over,60.5,FAN,Christian McCaffrey,rush_yds,1.8696,-115,0.4822,-0.0986,0.0,1,,0,market,0.5997,0.1211,-0.0032,29,C,,,prop|rush_yds|Christian McCaffrey|60.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,MGM,Brock Purdy,anytime_td,4.2,+320,0.2133,-0.1041,0.0,0,,0,market,0.2665,0.1193,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,9.5,FD,Bo Melton,rec_yds,1.885,-113,0.4592,-0.1344,0.0,2,0.0204,0,market,0.5908,0.1137,-0.0097,28,C,,,prop|rec_yds|Bo Melton|9.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,DK,KaVontae Turpin,anytime_td,8.5,+750,0.1049,-0.1082,0.0,0,,0,market,0.1553,0.32,-0.0046,13,C,,,prop|anytime_td|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Over,25.5,MGM,Jake Ferguson,rec_yds,1.8696,-115,0.4545,-0.1502,0.0,2,0.0227,0,market,0.5548,0.0373,-0.0154,23,C,,,prop|rec_yds|Jake Ferguson|25.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,FD,Brock Purdy,anytime_td,4.0,+300,0.2133,-0.1468,0.0,0,,0,market,0.2665,0.066,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Brock Purdy,anytime_td,3.95,+295,0.2133,-0.1575,0.0,0,,0,market,0.2665,0.0527,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,BR,Jake Ferguson,anytime_td,3.95,+295,0.2184,-0.1373,0.0,0,,0,market,0.3542,0.3991,-0.0013,14,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,FD,KaVontae Turpin,anytime_td,8.0,+700,0.1049,-0.1607,0.0,0,,0,market,0.1553,0.2424,-0.0046,13,C,,,prop|anytime_td|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,BR,KaVontae Turpin,anytime_td,8.0,+700,0.1049,-0.1607,0.0,0,,0,market,0.1553,0.2424,-0.0046,13,C,,,prop|anytime_td|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,DK,Jake Ferguson,anytime_td,3.8,+280,0.2184,-0.1701,0.0,0,,0,market,0.3542,0.346,-0.0013,14,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,FD,Jake Ferguson,anytime_td,3.8,+280,0.2184,-0.1701,0.0,0,,0,market,0.3542,0.346,-0.0013,14,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,MGM,Jake Ferguson,anytime_td,3.7,+270,0.2184,-0.1919,0.0,0,,0,market,0.3542,0.3105,-0.0013,14,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,FAN,Jake Ferguson,anytime_td,3.7,+270,0.2184,-0.1919,0.0,0,,0,market,0.3542,0.3105,-0.0013,14,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,MGM,KaVontae Turpin,anytime_td,7.5,+650,0.1049,-0.2131,0.0,0,,0,market,0.1553,0.1647,-0.0046,13,C,,,prop|anytime_td|KaVontae Turpin|0.5
-nfl,401873007,2026-10-19T00:20Z,DAL,GB,prop,Yes,0.5,FAN,KaVontae Turpin,anytime_td,7.5,+650,0.1049,-0.2131,0.0,0,,0,market,0.1553,0.1647,-0.0046,13,C,,,prop|anytime_td|KaVontae Turpin|0.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Stefon Diggs,anytime_td,3.15,+215,0.2206,-0.3051,0.0,0,,0,market,0.3751,0.1816,0.0169,22,C,,,prop|anytime_td|Stefon Diggs|0.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,MGM,Stefon Diggs,anytime_td,3.0,+200,0.2206,-0.3382,0.0,0,,0,market,0.3751,0.1253,0.0169,22,C,,,prop|anytime_td|Stefon Diggs|0.5
-nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Jayden Daniels,anytime_td,3.75,+275,0.1786,-0.3302,0.0,0,,0,market,0.2924,0.0965,0.0068,18,C,,,prop|anytime_td|Jayden Daniels|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,MGM,Brock Purdy,anytime_td,4.2,+320,0.2172,-0.0877,0.0,0,,0,market,0.2665,0.1193,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,FD,Brock Purdy,anytime_td,4.0,+300,0.2172,-0.1312,0.0,0,,0,market,0.2665,0.066,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Brock Purdy,anytime_td,3.95,+295,0.2172,-0.142,0.0,0,,0,market,0.2665,0.0527,0.0148,21,C,,,prop|anytime_td|Brock Purdy|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Stefon Diggs,anytime_td,3.15,+215,0.2246,-0.2924,0.0,0,,0,market,0.3751,0.1816,0.0169,22,C,,,prop|anytime_td|Stefon Diggs|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,MGM,Stefon Diggs,anytime_td,3.0,+200,0.2246,-0.3261,0.0,0,,0,market,0.3751,0.1253,0.0169,22,C,,,prop|anytime_td|Stefon Diggs|0.5
+nfl,401873008,2026-10-20T00:15Z,WSH,SF,prop,Yes,0.5,BR,Jayden Daniels,anytime_td,3.75,+275,0.1819,-0.3179,0.0,0,,0,market,0.2924,0.0965,0.0068,18,C,,,prop|anytime_td|Jayden Daniels|0.5
