@@ -1,0 +1,452 @@
+[
+ {
+  "status": "PASS",
+  "check": "2024: every log row found in nflverse weekly stats",
+  "detail": "5328 of 5329 matched \u00b7 unmatched: "
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: pass_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: pass_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: int",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: pass_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: cmp",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rush_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rush_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rush_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: targets",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rec",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rec_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: rec_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2024 logs vs nflverse: fumbles_lost",
+  "detail": "99.72% agree \u00b7 the 15 others are fumbles on kick / punt returns, which PFR counts and nflverse's offensive columns leave out"
+ },
+ {
+  "status": "WARN",
+  "check": "2024: no skill player with a touch in nflverse is missing from the logs",
+  "detail": "1 missing: Zach Davidson wk13 BUF"
+ },
+ {
+  "status": "PASS",
+  "check": "2024: rushing + receiving TDs per team-game = nflverse",
+  "detail": "544 of 544 team-games equal"
+ },
+ {
+  "status": "PASS",
+  "check": "2025: every log row found in nflverse weekly stats",
+  "detail": "5373 of 5373 matched"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: pass_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: pass_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: int",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: pass_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: cmp",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rush_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rush_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rush_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: targets",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rec",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rec_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: rec_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2025 logs vs nflverse: fumbles_lost",
+  "detail": "99.68% agree \u00b7 the 17 others are fumbles on kick / punt returns, which PFR counts and nflverse's offensive columns leave out"
+ },
+ {
+  "status": "PASS",
+  "check": "2025: no skill player with a touch in nflverse is missing from the logs",
+  "detail": "0 missing"
+ },
+ {
+  "status": "PASS",
+  "check": "2025: rushing + receiving TDs per team-game = nflverse",
+  "detail": "544 of 544 team-games equal"
+ },
+ {
+  "status": "PASS",
+  "check": "2026: every log row found in nflverse weekly stats",
+  "detail": "1578 of 1578 matched"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: pass_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: pass_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: int",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: pass_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: cmp",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rush_att",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rush_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rush_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: targets",
+  "detail": "99.87% agree \u00b7 2 rows differ"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rec",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rec_yds",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: rec_td",
+  "detail": "100.00% agree"
+ },
+ {
+  "status": "PASS",
+  "check": "2026 logs vs nflverse: fumbles_lost",
+  "detail": "99.62% agree \u00b7 the 6 others are fumbles on kick / punt returns, which PFR counts and nflverse's offensive columns leave out"
+ },
+ {
+  "status": "PASS",
+  "check": "2026: no skill player with a touch in nflverse is missing from the logs",
+  "detail": "0 missing"
+ },
+ {
+  "status": "PASS",
+  "check": "2026: rushing + receiving TDs per team-game = nflverse",
+  "detail": "160 of 160 team-games equal"
+ },
+ {
+  "status": "PASS",
+  "check": "2024: snap share on the page = nflverse snap counts",
+  "detail": "100.00% of 5329 agree (\u00b11 pt)"
+ },
+ {
+  "status": "PASS",
+  "check": "2025: snap share on the page = nflverse snap counts",
+  "detail": "100.00% of 5373 agree (\u00b11 pt)"
+ },
+ {
+  "status": "PASS",
+  "check": "2026: snap share on the page = nflverse snap counts",
+  "detail": "100.00% of 1558 agree (\u00b11 pt)"
+ },
+ {
+  "status": "PASS",
+  "check": "schedule_2026: every team-week = nflverse schedule",
+  "detail": "576 of 576 cells \u00b7 32 byes"
+ },
+ {
+  "status": "PASS",
+  "check": "page schedule = schedule_2026.csv",
+  "detail": "544 game cells + byes identical"
+ },
+ {
+  "status": "PASS",
+  "check": "kickoffs_2026: date + ET time = nflverse (week 18 times are TBD)",
+  "detail": "272 of 272 games"
+ },
+ {
+  "status": "PASS",
+  "check": "games_2026 (PFR) = nflverse game list",
+  "detail": "272 vs 272 games"
+ },
+ {
+  "status": "PASS",
+  "check": "2026: every finished game is in the logs",
+  "detail": "80 finished games, all logged"
+ },
+ {
+  "status": "PASS",
+  "check": "game_lines.csv = nflverse spread / total (every game)",
+  "detail": "816 games \u00b7 0 differ"
+ },
+ {
+  "status": "PASS",
+  "check": "upcoming games: nflverse spread sign = the live books (no flipped favourite)",
+  "detail": "14 games compared \u00b7 nflverse trails the books on: DEN@ARI total 45.5 vs books 43.0; KC@SEA total 44.5 vs books 42.0 \u2014 the site uses the books' consensus for unplayed games"
+ },
+ {
+  "status": "PASS",
+  "check": "page line table (Weeklies' implied totals) = nflverse closing lines + the books' consensus for unplayed games",
+  "detail": "816 games (15 on the live consensus) \u00b7 0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "page DvP [2024] = dvp_season_2024.csv (avg + rank, every cell)",
+  "detail": "1088 cells \u00b7 0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "page DvP [2025] = dvp_season_2025.csv (avg + rank, every cell)",
+  "detail": "1088 cells \u00b7 0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "page DvP [2026] = dvp_season_2026.csv (avg + rank, every cell)",
+  "detail": "1088 cells \u00b7 0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "page DvP [adjusted] = dvp_adjusted.csv (avg + rank, every cell)",
+  "detail": "1088 cells \u00b7 0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "page game logs = game_logs csv (same player-games)",
+  "detail": "12280 matched \u00b7 0 unmatched"
+ },
+ {
+  "status": "PASS",
+  "check": "page game logs: every stat = csv",
+  "detail": "0 values off"
+ },
+ {
+  "status": "PASS",
+  "check": "page slots + teams + opponents = csv",
+  "detail": "0 differ"
+ },
+ {
+  "status": "PASS",
+  "check": "footer games = logged games",
+  "detail": "footer 624 \u00b7 logs 624"
+ },
+ {
+  "status": "PASS",
+  "check": "footer rows = log rows",
+  "detail": "12280 vs 12280"
+ },
+ {
+  "status": "PASS",
+  "check": "page week = first week not finished",
+  "detail": "page 6 \u00b7 expected 6"
+ },
+ {
+  "status": "PASS",
+  "check": "one player per slot per team-game (QB1 RB1 RB2 WR1-3 TE1 TE2)",
+  "detail": "0 doubles"
+ },
+ {
+  "status": "PASS",
+  "check": "every team-game has a QB1",
+  "detail": "0 without"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks backtest: top-10 total = sum of weeks",
+  "detail": "[137, 230]"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks backtest: tier counts add up to every graded pick",
+  "detail": "n 6757 \u00b7 hits 1426"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks backtest: the top lists agree with the weekly top-10 counts",
+  "detail": "23 weeks"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks: top 60 cards recomputed from the logs (games, TDs, last 3, touches, TD share, opponent)",
+  "detail": "60 players"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks: implied totals = total/2 \u00b1 spread/2 (live consensus before kickoff, nflverse otherwise)",
+  "detail": "427 players"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks ledger: no pick written at or after its kickoff",
+  "detail": "154 rows \u00b7 0 late"
+ },
+ {
+  "status": "PASS",
+  "check": "TD Picks ledger: every W / L = the box score",
+  "detail": "0 graded \u00b7 0 wrong"
+ },
+ {
+  "status": "PASS",
+  "check": "prop board: every line's opponent = the schedule",
+  "detail": "708 lines"
+ },
+ {
+  "status": "PASS",
+  "check": "prop board: over + under probabilities = 1",
+  "detail": "0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "prop board: prices are valid American odds",
+  "detail": "0 off"
+ },
+ {
+  "status": "PASS",
+  "check": "prop board: every player's team = the depth chart",
+  "detail": "0 differ"
+ },
+ {
+  "status": "PASS",
+  "check": "injuries: nflverse wk6 OUT list also OUT on the ESPN report",
+  "detail": "82 out \u00b7 0 not flagged by ESPN"
+ },
+ {
+  "status": "PASS",
+  "check": "depth chart QB1s = nflverse depth charts (2026-10-18)",
+  "detail": "32 teams"
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: page logs = game_logs csv",
+  "detail": "51431 vs 51431"
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: no duplicate player-games",
+  "detail": "0 dups"
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: fantasy std = formula",
+  "detail": "max off 0.00"
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: ppr = std + rec",
+  "detail": ""
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: every (week, A vs B) has (week, B vs A) when both are tracked",
+  "detail": "4600 of 4600 team-games have the reverse side (FCS / untracked opponents excepted)"
+ },
+ {
+  "status": "PASS",
+  "check": "NCAA: page DvP combined = dvp_combined.csv",
+  "detail": "4692 cells \u00b7 0 off"
+ }
+]

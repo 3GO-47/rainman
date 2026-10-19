@@ -3,6 +3,10 @@
 Sources (both in data/raw/, both fetched from Pro Football Reference):
   pfr_games_2026.md         /years/2026/games.htm markdown dump (has Day + Time columns; truncated at wk 14)
   pfr_week_pages_2026.txt   /years/2026/week_N.htm lines for the weeks the dump is missing
+Then, because the schedule moves (flexes, international slots, Saturday games), two fresher sources override PFR's dump:
+  data/raw/nflverse/games.csv   nflverse's game list (gameday + ET gametime), refreshed by the loop every day
+  data/raw/slate_all_*.txt      ESPN's scoreboard (UTC kickoff) for the days each slate file covers — the latest file wins
+Week 18 stays TBD until the NFL sets it (nflverse shows a 1:00 placeholder until then).
 Output joins 1:1 onto data/processed/games_2026.csv on (week, vis, home).
 
 Slate buckets (Eastern kickoff):  TNF  Thu/Wed night      EARLY  Sun 1:00 PM      LATE  Sun 4:05/4:25 PM
@@ -10,7 +14,7 @@ Slate buckets (Eastern kickoff):  TNF  Thu/Wed night      EARLY  Sun 1:00 PM    
   FRI / SAT  holiday + late-season Saturday windows                   TBD  week 18 (NFL flexes all times)
 Usage: python3 scripts/build_kickoffs.py
 """
-import csv, re, datetime, os, sys
+import csv, glob, re, datetime, os, sys
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 
 SLUG2ABBR = {'crd':'ARI','atl':'ATL','rav':'BAL','buf':'BUF','car':'CAR','chi':'CHI','cin':'CIN',
@@ -81,6 +85,40 @@ def main():
             day = datetime.date.fromisoformat(g['date']).strftime('%a')
         out.append({'week': key[0], 'vis': g['vis'], 'home': g['home'], 'date': g['date'],
                     'day': day, 'time_et': t, 'slate': slate(key[0], day, t)})
+    # ---- fresher sources override PFR's preseason times: nflverse's daily game list, then ESPN's scoreboard (latest wins)
+    ESPN = {'WSH': 'WAS', 'JAC': 'JAX', 'LA': 'LAR'}
+    upd = {}
+    if os.path.exists('data/raw/nflverse/games.csv'):
+        for g in csv.DictReader(open('data/raw/nflverse/games.csv')):
+            if g.get('season') != '2026' or g.get('game_type') != 'REG' or not g.get('gametime') or int(g['week']) == 18: continue
+            hh, mm = map(int, g['gametime'].split(':'))
+            upd[(int(g['week']), ESPN.get(g['away_team'], g['away_team']), ESPN.get(g['home_team'], g['home_team']))] = (g['gameday'], f"{(hh % 12) or 12}:{mm:02d} {'PM' if hh >= 12 else 'AM'}", 'nflverse')
+    def to_et(u):
+        try:
+            from zoneinfo import ZoneInfo
+            return u.replace(tzinfo=datetime.timezone.utc).astimezone(ZoneInfo('America/New_York')).replace(tzinfo=None)
+        except Exception:
+            y = u.year; a = datetime.datetime(y, 3, 8 + (6 - datetime.date(y, 3, 8).weekday()) % 7, 7); b = datetime.datetime(y, 11, 1 + (6 - datetime.date(y, 11, 1).weekday()) % 7, 6)
+            return u - datetime.timedelta(hours=4 if a <= u < b else 5)
+    for f in sorted(glob.glob('data/raw/slate_all_*.txt')):
+        for line in open(f, encoding='utf-8', errors='replace'):
+            q = line.rstrip('\n').split('|')
+            if len(q) < 13 or q[0] != 'G' or q[1] != 'nfl': continue
+            try: et = to_et(datetime.datetime.strptime(q[3], '%Y-%m-%dT%H:%MZ'))
+            except ValueError: continue
+            a, h = ESPN.get(q[6], q[6]), ESPN.get(q[12], q[12])
+            for g in games:
+                if g['vis'] == a and g['home'] == h and g['date'] and abs((datetime.date.fromisoformat(g['date']) - et.date()).days) <= 6 and int(g['week']) != 18:
+                    upd[(int(g['week']), a, h)] = (et.date().isoformat(), f"{(et.hour % 12) or 12}:{et.minute:02d} {'PM' if et.hour >= 12 else 'AM'}", 'espn')
+    moved = []
+    for r in out:
+        k = (r['week'], r['vis'], r['home'])
+        if k not in upd: continue
+        d, t, src = upd[k]
+        if (r['date'], r['time_et']) != (d, t): moved.append(f"wk{k[0]} {k[1]}@{k[2]} {r['date']} {r['time_et'] or 'TBD'} -> {d} {t} ({src})")
+        day = datetime.date.fromisoformat(d).strftime('%a')
+        r.update(date=d, day=day, time_et=t, slate=slate(k[0], day, t))
+    if moved: print('  moved since PFR\'s schedule: ' + '; '.join(moved))
     with open('data/processed/kickoffs_2026.csv', 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['week','vis','home','date','day','time_et','slate'])
         w.writeheader(); w.writerows(out)

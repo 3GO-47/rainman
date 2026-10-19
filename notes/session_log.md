@@ -665,3 +665,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Pane (ppModal, wide): tiles = every-season hit rate / lift / sample, verdict tier + weeks beat, lift by season, the week on screen (carried / scored vs field), week-ahead count. Tab 1 = week-ahead carriers from wkAhead(...,TDpicks week): next opp, opp TD / PPR rank vs slot (point-in-time ctx), Ψ rank (blend comps), TD Picks % (+price), implied, spread, TD share, TD/g, L3, touches, snap, core signals, ✓/✗ once logged; sorted by TD %. Tab 2 = carriers in the lookback week with TD/PPR. Follows the Weeklies slot / position filters. Sortable via wireModal.
 - render() now stores CUR={S,W,st,TR,AH,W0,SG}; one delegated click listener on #weeklies.
 - Loop push confirmed working: origin/main = 63327f0 (markets 00:24, 'odds' now flagged).
+
+## n78 · 2026-10-19 · v25 full data audit + fixes; Weeklies works on the week being played
+- New scripts/audit_extended.py (rerunnable; nflverse weekly stats 2024-25 now cached in data/raw/nflverse). Results and fixes: notes/data_audit_ext_2026-10-19.md. verify_data 64/64, extended 89/1 warn/0 fail, browser numbers = Python.
+- build_game_logs.py: nflverse positions for players PFR's fantasy page doesn't list; OL/K/P/LS and no-offensive-snap defenders -> pos X / slot X (67 rows), out of DvP. Full downstream rebuild (dvp, matchups, advanced, adjusted, prop model, bets, dfs, picks, clv, signals, narratives, td picks, dashboards).
+- build_kickoffs.py: nflverse + ESPN slate overrides PFR (CHI@GB wk5 4:25 -> 1:00).
+- live_lines.py: book consensus for unplayed games -> TD Picks LN and page glh (11th field 'books').
+- verify_data.py: in-progress week expects finished games only; X rows allowed.
+- patch_v25_pending.py: Weeklies forward list + signal panes target the first incomplete week (wk 6 now), graded as box scores import; pane tabs wk6 / wk7 next up / wk5 lookback; NOTES v25.

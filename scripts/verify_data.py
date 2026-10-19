@@ -70,6 +70,12 @@ def main():
         # in-season aware: only the scraped weeks are expected to be complete
         wk_done = sorted(logs['week'].unique())
         games_w = games[games['week'].isin(wk_done)]
+        # a week still being played: expect only the games that are final (nflverse results), not the whole week
+        if os.path.exists('data/raw/nflverse/games.csv'):
+            _g = pd.read_csv('data/raw/nflverse/games.csv'); _g = _g[(_g.season == se) & (_g.game_type == 'REG') & _g.home_score.notna()]
+            _fix = {'LA': 'LAR', 'OAK': 'LV', 'SD': 'LAC', 'STL': 'LAR'}
+            _fin = {(int(w), _fix.get(a, a), _fix.get(h, h)) for w, a, h in zip(_g.week, _g.away_team, _g.home_team)}
+            if _fin: games_w = games_w[[(int(r.week), r.vis, r.home) in _fin for r in games_w.itertuples()]]
         exp_box = len(games_w); exp_tg = 2*exp_box
         # --- raw layer ---
         ok(f'{se} raw: {exp_box} unique boxscores (weeks {min(wk_done)}-{max(wk_done)})',
@@ -104,8 +110,10 @@ def main():
         ok(f'{se} fantasy_pts_std formula exact', (abs(std.round(2)-logs['fantasy_pts_std'])<0.011).all())
         ok(f'{se} ppr = std + rec', (abs((logs['fantasy_pts_std']+logs['rec']).round(2)-logs['fantasy_pts_ppr'])<0.011).all())
         # --- slot utilization: every row lands in a DvP bucket ---
-        ok(f'{se} all rows have valid pos', logs['pos'].isin(['QB','RB','WR','TE']).all())
-        ok(f'{se} all rows have a slot', logs['slot'].notna().all() and (logs['slot']!='').all())
+        ok(f'{se} all rows have valid pos (QB RB WR TE, or X = lineman / specialist / fake-punt defender, out of DvP)', logs['pos'].isin(['QB','RB','WR','TE','X']).all())
+        sk = logs[logs['pos'] != 'X']
+        ok(f'{se} every skill row has a slot, every X row is slot X', sk['slot'].notna().all() and (sk['slot'].astype(str)!='').all() and (logs[logs['pos']=='X']['slot']=='X').all(),
+           f"{(logs['pos']=='X').sum()} X rows")
         # --- independent DvP recompute, EVERY cell ---
         ind = independent_weekly(logs, dst)
         w_se = wdf[wdf.season==se]

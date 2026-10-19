@@ -71,6 +71,35 @@ def main(season):
     for f in prows: f[2] = canon[f[1]]
     if fixed: print(f'  {fixed} box lines renamed to the id\'s first spelling')
 
+    # the fantasy page lists skill players only. For anyone else take nflverse's position — the week's player stats by team +
+    # name, then the rosters by PFR id. Linemen, kickers, punters and long snappers become pos 'X': kept in the logs (team TD
+    # totals stay whole) but out of every slot and DvP bucket. A defender counts on offense only if he played offensive snaps
+    # that game (Travis Hunter, a defensive tackle at fullback); a fake-punt run by a safety does not.
+    NVPOS, NVNAME, OFFSNAP, SNAPWK = {}, {}, set(), set()
+    _n = lambda s_: s_
+    try:
+        import pandas as _pd, re as _re, unicodedata as _ud
+        _n = lambda s_: _re.sub(r'[^a-z]', '', _re.sub(r'\b(jr|sr|ii|iii|iv|v)\b\.?', '', _ud.normalize('NFKD', str(s_)).encode('ascii', 'ignore').decode().lower()))
+        _fx = {'LA': 'LAR', 'OAK': 'LV', 'SD': 'LAC', 'STL': 'LAR'}
+        for rf in sorted(_glob.glob('data/raw/nflverse/roster_*.parquet')):
+            _R = _pd.read_parquet(rf, columns=['pfr_id', 'position'])
+            for a_, b_ in zip(_R.pfr_id, _R.position):
+                if isinstance(a_, str) and isinstance(b_, str): NVPOS[a_] = b_
+        wf = f'data/raw/nflverse/stats_player_week_{season}.parquet'
+        if os.path.exists(wf):
+            _W = _pd.read_parquet(wf, columns=['week', 'team', 'player_display_name', 'position'])
+            for wk_, tm_, nm_, ps_ in zip(_W.week, _W.team, _W.player_display_name, _W.position):
+                if isinstance(ps_, str) and isinstance(tm_, str): NVNAME[(int(wk_), _fx.get(tm_, tm_), _n(nm_))] = ps_
+        sf = f'data/raw/nflverse/snap_counts_{season}.parquet'
+        if os.path.exists(sf):
+            _S = _pd.read_parquet(sf, columns=['week', 'pfr_player_id', 'offense_snaps'])
+            SNAPWK = set(int(w_) for w_ in _S.week)
+            OFFSNAP = {(p_, int(w_)) for p_, w_, o_ in zip(_S.pfr_player_id, _S.week, _S.offense_snaps) if o_ and o_ > 0}
+    except Exception as e:
+        print('WARN nflverse positions unavailable:', e)
+    NONOFF = {'C', 'G', 'OG', 'OT', 'T', 'OL', 'K', 'P', 'LS'}
+    DEFP = {'DT', 'DE', 'DL', 'NT', 'LB', 'ILB', 'OLB', 'MLB', 'CB', 'DB', 'SAF', 'S', 'FS', 'SS'}
+    excluded = []
     inferred = 0
     recs = []
     for f in prows:
@@ -83,10 +112,16 @@ def main(season):
         p = pos.get(pid, '')
         if p == 'FB': p = 'RB'
         if p not in ('QB','RB','WR','TE'):
-            inferred += 1
-            if att >= 3: p = 'QB'
-            elif tgt > 0 and ratt <= 1: p = 'WR'
-            else: p = 'RB'
+            wk_ = int(g['week']); nvp = NVNAME.get((wk_, team, _n(name))) or NVPOS.get(pid, '')
+            if nvp in ('FB', 'HB'): nvp = 'RB'
+            if nvp in ('QB', 'RB', 'WR', 'TE'): p = nvp
+            elif nvp in NONOFF or (nvp in DEFP and ((pid, wk_) not in OFFSNAP if wk_ in SNAPWK else (ratt + tgt) < 2)):
+                p = 'X'; excluded.append(f'{name} {nvp} wk{wk_}')
+            else:
+                inferred += 1
+                if att >= 3: p = 'QB'
+                elif tgt > 0 and ratt <= 1: p = 'WR'
+                else: p = 'RB'
         opp = g['vis'] if team == g['home'] else g['home']
         ha = 'H' if team == g['home'] else 'A'
         std = payds/25 + patd*4 - pint*2 + ryds/10 + rtd*6 + recyds/10 + rectd*6 - fl*2
@@ -122,9 +157,11 @@ def main(season):
         return (cum[r['player_id']] + K * pr) / (gp[r['player_id']] + K)
     for wk in sorted(by_week):
         for r in by_week[wk]:
+            if r['pos'] not in USAGE: continue
             cum[r['player_id']] += USAGE[r['pos']](r); gp[r['player_id']] += 1
         teams = defaultdict(list)
-        for r in by_week[wk]: teams[(r['team'], r['pos'])].append(r)
+        for r in by_week[wk]:
+            if r['pos'] in USAGE: teams[(r['team'], r['pos'])].append(r)
         for (t, p), lst in teams.items():
             lst.sort(key=lambda r: -rate(r))
             for i, r in enumerate(lst, 1):
@@ -133,6 +170,8 @@ def main(season):
                 elif p == 'WR': r['slot'] = f'WR{i}' if i <= 3 else 'WR4+'
                 elif p == 'TE': r['slot'] = f'TE{min(i,3)}'
 
+    for r in recs:
+        if r['pos'] == 'X': r['slot'] = 'X'                            # out of every slot / DvP bucket, never an empty cell
     os.makedirs('data/game_logs', exist_ok=True)
     cols = ['season','week','date','player','player_id','team','opponent','home_away','slot','pos',
             'pass_yds','pass_td','pass_att','cmp','int','rush_att','rush_yds','rush_td',
@@ -150,7 +189,8 @@ def main(season):
             w.writerow([season, g['week'], t, opp, cnt])
 
     print(f'game_logs_{season}.csv: {len(recs)} rows, weeks {min(by_week)}-{max(by_week)}, '
-          f'inferred pos: {inferred}, dst rows: {len(drows)}')
+          f'inferred pos: {inferred}, non-offense (pos X, out of DvP): {len(excluded)}, dst rows: {len(drows)}')
+    if excluded: print('  pos X: ' + '; '.join(excluded[:40]) + (' …' if len(excluded) > 40 else ''))
 
 if __name__ == '__main__':
     main(sys.argv[1])

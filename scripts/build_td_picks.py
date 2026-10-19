@@ -18,7 +18,7 @@ kickoffs_2026.csv): the board holds a week until the Sunday night game starts, t
 in by then as far as the board is concerned — its picks stay as last written before the switch, all before kickoff).
 
 Writes data/processed/td_picks.json (embedded by build_dashboard.py) and data/processed/td_picks_ledger.csv.
-Inputs: data/game_logs/game_logs_*.csv, data/processed/{player_usage, game_lines, lines_all, kickoffs_2026, schedule_2026,
+Inputs: data/game_logs/game_logs_*.csv, data/processed/{player_usage, game_lines, lines_all (via live_lines.py), kickoffs_2026, schedule_2026,
 games_2026, depth_charts_*, arb_board, bet_td}.csv — all already produced by the pipeline."""
 import csv, glob, json, os, math, datetime, collections, re, sys
 import numpy as np
@@ -249,22 +249,20 @@ def still_to_play(w):         # games through the main (Sunday) slate not yet ki
 target = next((w for w in sorted(by_wk) if still_to_play(w) >= 1), max(by_wk))
 if '--week' in sys.argv: target = int(sys.argv[sys.argv.index('--week') + 1])
 tgames = by_wk[target]; tdates = sorted(g['date'] for g in tgames)
-# lines the nflverse file doesn't carry yet: fill from the live book board (lines_all.csv — DraftKings and the other books the loop pulls)
-FIX = {'WSH': 'WAS', 'JAC': 'JAX', 'LA': 'LAR', 'OAK': 'LV', 'SD': 'LAC', 'STL': 'LAR'}
-if os.path.exists(P + 'lines_all.csv'):
-    bk_sp, bk_tot = collections.defaultdict(list), collections.defaultdict(list)
-    for r in csv.DictReader(open(P + 'lines_all.csv', encoding='utf-8')):
-        if r.get('league') != 'nfl' or r.get('market') not in ('spread', 'total') or r.get('point') in ('', None): continue
-        a, h = FIX.get(r['away'], r['away']), FIX.get(r['home'], r['home'])
-        if r['market'] == 'spread' and FIX.get(r['selection'], r['selection']) == h: bk_sp[(a, h)].append(-float(r['point']))     # nflverse: + = home favoured
-        if r['market'] == 'total' and r['selection'].lower().startswith('o'): bk_tot[(a, h)].append(float(r['point']))
-    filled = 0
-    for g in tgames:
-        a, h = g['vis'], g['home']
-        if (SEASON, target, h) in LN or not bk_sp.get((a, h)) or not bk_tot.get((a, h)): continue
-        sp, tot = float(np.median(bk_sp[(a, h)])), float(np.median(bk_tot[(a, h)]))
-        LN[(SEASON, target, h)] = (tot / 2 + sp / 2, sp); LN[(SEASON, target, a)] = (tot / 2 - sp / 2, -sp); filled += 1
-    if filled: print(f'  lines: {filled} week-{target} games filled from the book board')
+# the target week's lines: the books' current consensus for every game still to play (scripts/live_lines.py — lines_all.csv,
+# refreshed every markets pass), nflverse's line otherwise; a game that has kicked off keeps the line it closed at
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from live_lines import consensus
+    LIVE = consensus()
+except Exception as e:
+    print('  live lines unavailable:', e); LIVE = {}
+live = 0
+for g in tgames:
+    a, h = g['vis'], g['home']
+    if (a, h) in LIVE and (kick(target, h, g['date']) or NOW) > NOW:
+        sp, tot, nb = LIVE[(a, h)]
+        LN[(SEASON, target, h)] = (tot / 2 + sp / 2, sp); LN[(SEASON, target, a)] = (tot / 2 - sp / 2, -sp); live += 1
+print(f'  lines: {live} week-{target} games on the live book consensus, the rest on nflverse')
 nolines = [f"{g['vis']}@{g['home']}" for g in tgames if (SEASON, target, g['home']) not in LN]
 sched = {r['team']: r for r in csv.DictReader(open(P + 'schedule_2026.csv'))}
 dcp = sorted(glob.glob(P + 'depth_charts_*.csv'))[-1]

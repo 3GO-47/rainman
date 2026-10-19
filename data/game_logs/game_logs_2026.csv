@@ -27,7 +27,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,1,2026-09-10,Mike Evans,EvanMi00,SF,LAR,A,WR1,WR,0,0,0,0,0,0,0,0,7,6,49,1,0,10.9,16.9
 2026,1,2026-09-10,Luke Farrell,FarrLu00,SF,LAR,A,TE2,TE,0,0,0,0,0,0,0,0,2,2,19,0,0,1.9,3.9
 2026,1,2026-09-10,George Kittle,KittGe00,SF,LAR,A,TE1,TE,0,0,0,0,0,0,0,0,5,2,12,0,0,1.2,3.2
-2026,1,2026-09-10,Jake Brendel,BrenJa01,SF,LAR,A,WR4+,WR,0,0,0,0,0,0,0,0,1,1,2,0,0,0.2,1.2
+2026,1,2026-09-10,Jake Brendel,BrenJa01,SF,LAR,A,X,X,0,0,0,0,0,0,0,0,1,1,2,0,0,0.2,1.2
 2026,1,2026-09-10,Matthew Stafford,StafMa00,LAR,SF,H,QB1,QB,155,0,25,15,1,2,-1,0,0,0,0,0,0,4.1,4.1
 2026,1,2026-09-10,Stetson Bennett,BennSt00,LAR,SF,H,QB2,QB,13,0,3,2,0,1,9,0,0,0,0,0,0,1.42,1.42
 2026,1,2026-09-10,Blake Corum,CoruBl00,LAR,SF,H,RB2,RB,0,0,0,0,0,10,54,0,0,0,0,0,0,5.4,5.4
@@ -190,7 +190,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,1,2026-09-13,Olamide Zaccheaus,ZaccOl01,ATL,PIT,A,WR2,WR,0,0,0,0,0,0,0,0,1,1,5,0,0,0.5,1.5
 2026,1,2026-09-13,Kyle Pitts,PittKy00,ATL,PIT,A,TE1,TE,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
 2026,1,2026-09-13,Aaron Rodgers,RodgAa00,PIT,ATL,H,QB1,QB,221,1,40,24,0,3,-3,0,0,0,0,0,0,12.54,12.54
-2026,1,2026-09-13,Cameron Johnston,JohnCa02,PIT,ATL,H,RB3,RB,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0
+2026,1,2026-09-13,Cameron Johnston,JohnCa02,PIT,ATL,H,X,X,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0
 2026,1,2026-09-13,Jaylen Warren,WarrJa01,PIT,ATL,H,RB1,RB,0,0,0,0,0,10,46,0,6,5,27,0,1,5.3,10.3
 2026,1,2026-09-13,Rico Dowdle,DowdRi01,PIT,ATL,H,RB2,RB,0,0,0,0,0,8,15,0,5,2,6,0,0,2.1,4.1
 2026,1,2026-09-13,Michael Pittman Jr.,PittMi01,PIT,ATL,H,WR2,WR,0,0,0,0,0,0,0,0,3,3,58,0,0,5.8,8.8
@@ -380,7 +380,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,2,2026-09-20,Erick All,AllxEr00,CIN,HOU,A,TE1,TE,0,0,0,0,0,0,0,0,3,2,5,0,0,0.5,2.5
 2026,2,2026-09-20,Dohnte Meyers,MeyeDo00,CIN,HOU,A,WR4+,WR,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
 2026,2,2026-09-20,C.J. Stroud,StroCJ00,HOU,CIN,H,QB1,QB,353,0,55,30,0,3,29,0,0,0,0,0,0,17.02,17.02
-2026,2,2026-09-20,Kai Kroeger,KroeKa00,HOU,CIN,H,RB3,RB,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0
+2026,2,2026-09-20,Kai Kroeger,KroeKa00,HOU,CIN,H,X,X,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0
 2026,2,2026-09-20,Jaylin Noel,NoelJa00,HOU,CIN,H,WR3,WR,0,0,0,0,0,1,13,0,5,1,31,0,0,4.4,5.4
 2026,2,2026-09-20,David Montgomery,MontDa01,HOU,CIN,H,RB1,RB,0,0,0,0,0,6,10,0,2,2,14,0,0,2.4,4.4
 2026,2,2026-09-20,Woody Marks,MarkWo00,HOU,CIN,H,RB2,RB,0,0,0,0,0,8,8,0,6,5,27,0,0,3.5,8.5
@@ -583,7 +583,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,2,2026-09-20,Greg Dulcich,DulcGr00,MIA,SF,A,TE1,TE,0,0,0,0,0,0,0,0,3,2,17,0,0,1.7,3.7
 2026,2,2026-09-20,Will Kacmarek,KacmWi00,MIA,SF,A,TE2,TE,0,0,0,0,0,0,0,0,1,1,4,0,0,0.4,1.4
 2026,2,2026-09-20,Chris Bell,BellCh00,MIA,SF,A,WR3,WR,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
-2026,2,2026-09-20,Bradley Pinion,PiniBr00,MIA,SF,A,RB3,RB,0,0,0,0,0,1,0,0,0,0,0,0,0,0.0,0.0
+2026,2,2026-09-20,Bradley Pinion,PiniBr00,MIA,SF,A,X,X,0,0,0,0,0,1,0,0,0,0,0,0,0,0.0,0.0
 2026,2,2026-09-20,Brock Purdy,PurdBr00,SF,MIA,H,QB1,QB,287,2,22,20,0,3,30,1,0,0,0,0,0,28.48,28.48
 2026,2,2026-09-20,Kaelon Black,BlacKa00,SF,MIA,H,RB2,RB,0,0,0,0,0,7,25,0,0,0,0,0,0,2.5,2.5
 2026,2,2026-09-20,Christian McCaffrey,McCaCh01,SF,MIA,H,RB1,RB,0,0,0,0,0,10,23,2,4,4,43,0,0,18.6,22.6
@@ -989,7 +989,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,4,2026-10-04,Treylon Burks,BurkTr00,WAS,IND,H,WR4+,WR,0,0,0,0,0,0,0,0,3,1,47,1,0,10.7,11.7
 2026,4,2026-10-04,Stefon Diggs,DiggSt00,WAS,IND,H,WR1,WR,0,0,0,0,0,0,0,0,9,5,35,0,0,3.5,8.5
 2026,4,2026-10-04,Antonio Williams,WillAn04,WAS,IND,H,WR2,WR,0,0,0,0,0,0,0,0,8,3,21,0,0,2.1,5.1
-2026,4,2026-10-04,Brandon Coleman,ColeBr02,WAS,IND,H,WR4+,WR,0,0,0,0,0,0,0,0,1,1,13,0,0,1.3,2.3
+2026,4,2026-10-04,Brandon Coleman,ColeBr02,WAS,IND,H,X,X,0,0,0,0,0,0,0,0,1,1,13,0,0,1.3,2.3
 2026,4,2026-10-04,Chig Okonkwo,OkonCh00,WAS,IND,H,TE1,TE,0,0,0,0,0,0,0,0,4,2,5,0,0,0.5,2.5
 2026,4,2026-10-04,Colson Yankoff,YankCo00,WAS,IND,H,TE2,TE,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
 2026,4,2026-10-04,Drake Maye,MayeDr00,NE,BUF,A,QB1,QB,269,3,37,22,1,8,54,0,0,0,0,0,1,24.16,24.16
@@ -1168,7 +1168,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,4,2026-10-04,Jordan Addison,AddiJo00,MIN,MIA,H,WR1,WR,0,0,0,0,0,1,-1,0,6,4,52,0,0,5.1,9.1
 2026,4,2026-10-04,Patrick Mahomes,MahoPa00,KC,LV,A,QB1,QB,225,2,30,15,0,2,0,0,0,0,0,0,0,17.0,17.0
 2026,4,2026-10-04,Kenneth Walker III,WalkKe00,KC,LV,A,RB1,RB,0,0,0,0,0,22,177,2,1,1,2,0,0,29.9,30.9
-2026,4,2026-10-04,Matt Araiza,AraiMa00,KC,LV,A,RB3,RB,0,0,0,0,0,1,12,0,0,0,0,0,0,1.2,1.2
+2026,4,2026-10-04,Matt Araiza,AraiMa00,KC,LV,A,X,X,0,0,0,0,0,1,12,0,0,0,0,0,0,1.2,1.2
 2026,4,2026-10-04,Tyquan Thornton,ThorTy00,KC,LV,A,WR2,WR,0,0,0,0,0,0,0,0,8,5,111,2,0,23.1,28.1
 2026,4,2026-10-04,Xavier Worthy,WortXa00,KC,LV,A,WR1,WR,0,0,0,0,0,0,0,0,7,4,70,0,0,7.0,11.0
 2026,4,2026-10-04,Noah Gray,GrayNo00,KC,LV,A,TE2,TE,0,0,0,0,0,0,0,0,3,2,17,0,0,1.7,3.7
@@ -1291,7 +1291,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,5,2026-10-11,Keenan Allen,AlleKe00,IND,PIT,A,WR1,WR,0,0,0,0,0,0,0,0,9,5,45,0,0,4.5,9.5
 2026,5,2026-10-11,Geno Smith,SmitGe00,NYJ,CLE,H,QB1,QB,182,1,30,17,0,5,7,0,0,0,0,0,1,9.98,9.98
 2026,5,2026-10-11,Brandin Cooks,CookBr00,SF,SEA,A,WR4+,WR,0,0,0,0,0,0,0,0,2,1,7,1,0,6.7,7.7
-2026,5,2026-10-11,Jake Matthews,00-0031279,ATL,BAL,H,WR3,WR,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
+2026,5,2026-10-11,Jake Matthews,00-0031279,ATL,BAL,H,X,X,0,0,0,0,0,0,0,0,1,0,0,0,0,0.0,0.0
 2026,5,2026-10-12,Davante Adams,AdamDa01,LAR,BUF,H,WR2,WR,0,0,0,0,0,0,0,0,7,5,51,2,0,17.1,22.1
 2026,5,2026-10-11,Mike Evans,EvanMi00,SF,SEA,A,WR1,WR,0,0,0,0,0,0,0,0,10,7,113,1,0,17.3,24.3
 2026,5,2026-10-11,Jameis Winston,WinsJa00,NYG,WAS,A,QB1,QB,326,3,54,33,0,5,27,0,0,0,0,0,1,25.74,25.74
@@ -1321,7 +1321,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,5,2026-10-11,Ian Thomas,ThomIa00,LV,NE,A,TE3,TE,0,0,0,0,0,0,0,0,1,1,9,0,0,0.9,1.9
 2026,5,2026-10-11,Dalton Schultz,SchuDa00,HOU,TEN,A,TE1,TE,0,0,0,0,0,0,0,0,4,3,30,0,0,3.0,6.0
 2026,5,2026-10-11,Tanner Hudson,HudsTa00,CIN,MIA,A,TE3,TE,0,0,0,0,0,0,0,0,3,3,14,1,0,7.4,10.4
-2026,5,2026-10-11,Corey Bojorquez,BojoCo00,CLE,NYJ,A,RB3,RB,0,0,0,0,0,1,0,0,0,0,0,0,1,-2.0,-2.0
+2026,5,2026-10-11,Corey Bojorquez,BojoCo00,CLE,NYJ,A,X,X,0,0,0,0,0,1,0,0,0,0,0,0,1,-2.0,-2.0
 2026,5,2026-10-11,Mark Andrews,AndrMa00,BAL,ATL,A,TE1,TE,0,0,0,0,0,0,0,0,6,4,28,0,1,0.8,4.8
 2026,5,2026-10-11,Mason Rudolph,RudoMa00,PIT,IND,H,QB2,QB,0,0,0,0,0,2,-2,0,0,0,0,0,0,-0.2,-0.2
 2026,5,2026-10-11,Mike Gesicki,GesiMi00,CIN,MIA,A,TE1,TE,0,0,0,0,0,0,0,0,2,1,4,1,0,6.4,7.4
@@ -1538,7 +1538,7 @@ season,week,date,player,player_id,team,opponent,home_away,slot,pos,pass_yds,pass
 2026,5,2026-10-11,Denzel Boston,BostDe00,CLE,NYJ,A,WR1,WR,0,0,0,0,0,0,0,0,7,3,46,1,0,10.6,13.6
 2026,5,2026-10-11,Antonio Williams,WillAn04,WAS,NYG,H,WR2,WR,0,0,0,0,0,0,0,0,3,3,31,0,0,3.1,6.1
 2026,5,2026-10-11,Malachi Fields,FielMa00,NYG,WAS,A,WR3,WR,0,0,0,0,0,0,0,0,2,2,20,0,0,2.0,4.0
-2026,5,2026-10-11,Zachariah Branch,BranZa00,ATL,BAL,H,WR4+,WR,0,0,0,0,0,0,0,0,2,2,15,0,0,1.5,3.5
+2026,5,2026-10-11,Zachariah Branch,BranZa00,ATL,BAL,H,WR3,WR,0,0,0,0,0,0,0,0,2,2,15,0,0,1.5,3.5
 2026,5,2026-10-11,Zavion Thomas,ThomZa05,CHI,GB,A,WR4+,WR,0,0,0,0,0,1,11,0,1,1,11,0,0,2.2,3.2
 2026,5,2026-10-11,Kaelon Black,BlacKa00,SF,SEA,A,RB2,RB,0,0,0,0,0,6,16,0,0,0,0,0,0,1.6,1.6
 2026,5,2026-10-11,Bryce Lance,LancBr00,NO,MIN,H,WR3,WR,0,0,0,0,0,0,0,0,3,0,0,0,0,0.0,0.0
