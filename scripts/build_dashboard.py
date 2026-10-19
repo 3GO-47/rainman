@@ -320,8 +320,11 @@ def main():
     _m = list(csv.DictReader(open('data/processed/matchups_current.csv', encoding='utf-8'))) if os.path.exists('data/processed/matchups_current.csv') else []
     cur_week = int(_m[0]['week']) if _m else 1
     data['kalshi'] = rows_of('data/processed/kalshi_implied.csv', lambda r: r['week'] != '' and int(r['week']) >= cur_week)
-    data['picksAll'] = rows_of('data/processed/picks_all.csv')
-    data['picksClv'] = rows_of('data/processed/picks_clv.csv')
+    # v30: only bets reach the page (props that failed the card stay in picks_all.csv as leans)
+    data['picksAll'] = rows_of('data/processed/picks_all.csv', lambda r: r.get('bet', '1') in ('1', '1.0'))
+    for r in data['picksAll']: r.pop('bet', None); r.pop('why', None)
+    _bk = {(r['type'], r['ref'], r['side'], r['week']) for r in data['picksAll']}
+    data['picksClv'] = rows_of('data/processed/picks_clv.csv', lambda r: (r['type'], r['ref'], r['side'], r['week']) in _bk)
     # Odds API spend: every paid call with its real cost (x-requests-last) and reason, plus the per-game pull state
     def api_payload():
         log = []

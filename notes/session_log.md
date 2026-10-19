@@ -734,3 +734,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
   break-even; pkUnits (site-wide) and the Backtest use the real price. Props every lean: 1156-1113, −79.4u (needs 52.9%). Props plays (EV 3%+):
   252-213-23, +35.2u (needs 51.1%), edge 6+ 132-97 +40.1u. ATD 12-15 +13.8u, ML −1.6u, totals −5.4u, ATS −0.4u (all small samples).
 - patch_v29b_units.py: strategy cards show units and 'making money / losing money / too few to tell'; a separate 'plays (EV 3%+)' card.
+
+## n84 — v30 (2026-10-19): the card, not every lean
+- build_picks.py CARD rules (patch_v30_card.py): edge >= 6%, price -200..+200 (drops absurd extreme lines), model >= 50% on the side, one bet per player (biggest edge), max 3 per game. Every PROP row gets bet=1/'' and a why.
+- build_dashboard.py embeds bets only (picksAll + picksClv filtered); old leans kept in picks_all.csv for the backtest.
+- build_backtest.py: card {rules, funnel}; strat PROP = card bets, LEAN = every lean. Funnel wk4-6 in-sample: 2412 (-79.4u) -> 246 (+40.1) -> 233 (+28.9) -> 220 (+34.0) -> 129 (+26.3) -> 78 card (+20.4u, 47-25-3). Real out-of-sample test starts week 7.
+- Backtest tab: funnel strip + card pop-up (rules, week columns, 78 rows); TD Picks card.
+- MNF WAS@SF lines refreshed via Chrome: Kalshi (95 groups + K2) and DK game line (SF -7.5, 52.5, ML -395/+310). Sportsbook props refresh at the PC loop's 7 PM ET close pull.
+- MNF card: A. Williams rec O2.5 +144, McCaffrey rec U4.5 -105, McLaurin rec U3.5 +100.

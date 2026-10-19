@@ -19,7 +19,7 @@ import numpy as np, pandas as pd
 os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 P = 'data/processed/'
 TODAY = str(pd.Timestamp.today().date())
-COLS = ['type', 'week', 'frozen_on', 'ref', 'player', 'team', 'opp', 'market', 'side', 'line', 'model', 'market_ref', 'market_src', 'edge', 'result', 'actual', 'note', 'price']
+COLS = ['type', 'week', 'frozen_on', 'ref', 'player', 'team', 'opp', 'market', 'side', 'line', 'model', 'market_ref', 'market_src', 'edge', 'result', 'actual', 'note', 'price', 'bet', 'why']
 
 def main(week=None):
     gm = pd.read_csv(P + 'game_model.csv'); gm = gm[gm.season == 2026]
@@ -157,11 +157,38 @@ def main(week=None):
             a_ = BLP[k]; allp.at[i, 'price'] = a_
             allp.at[i, 'market_ref'] = round(100 / (a_ + 100) if a_ > 0 else -a_ / (-a_ + 100), 3)
             allp.at[i, 'note'] = 'at its posted price'
+    # v30: the card — which props are actually bet (rules in scripts/patch_v30_card.py and the Backtest tab)
+    CARD = dict(edge=6.0, lo=-200, hi=200, model=0.5, per_game=3)
+    SPM = {}
+    if os.path.exists(P + 'bet_ledger.csv'):
+        for b in pd.read_csv(P + 'bet_ledger.csv').itertuples():
+            SPM.setdefault((int(b.week), b.player, b.market, float(b.line), b.side), b.p_over_model if b.side == 'Over' else 1 - b.p_over_model)
+    allp['bet'] = '1'; allp['why'] = ''
+    pm = allp.type == 'PROP'
+    def _f(v):
+        try: return float(v)
+        except (TypeError, ValueError): return float('nan')
+    cand = []
+    for i, r in allp[pm].iterrows():
+        e, a_ = _f(r.edge), _f(r.price)
+        try: sp = SPM.get((int(r.week), r.player, r.market, float(r.line), r.side))
+        except (TypeError, ValueError): sp = None
+        why = ('edge under 6%' if not e >= CARD['edge'] else
+               'price outside -200..+200' if a_ == a_ and not (CARD['lo'] <= a_ <= CARD['hi']) else
+               'model under 50%' if sp is None or sp != sp or sp < CARD['model'] else '')
+        allp.at[i, 'why'] = why
+        if not why: cand.append((e, i, int(r.week), r.player, frozenset({str(r.team), str(r.opp).replace('@', '')})))
+    seen_p, per_g = set(), {}
+    for e, i, w, pl, g in sorted(cand, key=lambda c: -c[0]):
+        if (w, pl) in seen_p: allp.at[i, 'why'] = 'not his best edge'; continue
+        if per_g.get((w, g), 0) >= CARD['per_game']: allp.at[i, 'why'] = 'game already has 3'; continue
+        seen_p.add((w, pl)); per_g[(w, g)] = per_g.get((w, g), 0) + 1
+    allp.loc[pm & (allp.why != ''), 'bet'] = ''
     allp = allp[COLS].sort_values(['week', 'type', 'ref']).reset_index(drop=True)
     allp.to_csv(P + 'picks_all.csv', index=False)
-    gr = allp[allp.result.isin(['W', 'L'])]
+    gr = allp[allp.result.isin(['W', 'L']) & (allp.bet.astype(str) == '1')]
     rec = {t: f"{(gr[gr.type == t].result == 'W').sum()}-{(gr[gr.type == t].result == 'L').sum()}" for t in ['ML', 'ATS', 'TOTAL', 'PROP', 'TD']}
-    print(f'picks_all.csv: {len(allp)} positions ({len(new)} new this run) · wk {week}: ' + ', '.join(f"{t} {int((allp[(allp.week == week) & (allp.type == t)]).shape[0])}" for t in ['ML', 'ATS', 'TOTAL', 'PROP', 'TD', 'DFS']) + f' · record {rec}')
+    print(f'picks_all.csv: {len(allp)} positions ({len(new)} new this run) · wk {week}: ' + ', '.join(f"{t} {int((allp[(allp.week == week) & (allp.type == t) & (allp.bet.astype(str) == '1')]).shape[0])}" for t in ['ML', 'ATS', 'TOTAL', 'PROP', 'TD', 'DFS']) + f' · record {rec}')
 
 if __name__ == '__main__':
     wk = int(sys.argv[sys.argv.index('--week') + 1]) if '--week' in sys.argv else None

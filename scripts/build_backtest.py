@@ -289,10 +289,11 @@ if os.path.exists(P + 'picks_all.csv'):
     pk['dw'] = [_win(r) for _, r in pk.iterrows()]
     pk['u'] = np.where(pk.result == 'W', pk.dw, np.where(pk.result == 'L', -1.0, 0.0))
     pk['be'] = 1 / (1 + pk.dw)
-    NAME = {'ML': 'Moneyline picks', 'ATS': 'Against the spread', 'TOTAL': 'Game totals', 'PROP': 'Player props — every lean', 'TD': 'Anytime-TD bets',
-            'PLAY': 'Player props — plays (EV 3%+)'}
-    e_ = pd.to_numeric(pk.edge, errors='coerce')
-    sets = [(t, g) for t, g in pk[pk.type != 'DFS'].groupby('type')] + [('PLAY', pk[(pk.type == 'PROP') & (e_ >= 3)])]
+    NAME = {'ML': 'Moneyline picks', 'ATS': 'Against the spread', 'TOTAL': 'Game totals', 'PROP': 'Player props — the card', 'TD': 'Anytime-TD bets',
+            'LEAN': 'Player props — every lean (the old way)'}
+    if 'bet' not in pk: pk['bet'] = '1'
+    isbet = pk.bet.astype(str).isin(['1', '1.0'])
+    sets = [(t, g) for t, g in pk[(pk.type != 'DFS') & isbet].groupby('type')] + [('LEAN', pk[pk.type == 'PROP'])]
     for t, g in sets:
         gr = g[g.result.isin(['W', 'L'])]
         if not len(gr): continue
@@ -300,11 +301,27 @@ if os.path.exists(P + 'picks_all.csv'):
         row = dict(k=t, lbl=NAME.get(t, t), w=w, l=l, p=int((g.result == 'P').sum()), hit=r3(w / (w + l)), be=r3(gr.be.mean()),
                    units=round(float(g.u.sum()), 1), open=int((~g.result.isin(['W', 'L', 'P', 'G'])).sum()), priced=int(pd.to_numeric(g.price, errors='coerce').notna().sum()))
         if clv is not None:
-            base = 'PROP' if t == 'PLAY' else t
+            base = 'PROP' if t == 'LEAN' else t
             c = clv[(clv.type == base) & clv.beat.notna()]
-            if t == 'PLAY': c = c[c.ref.isin(g.ref)]
+            if t == 'PROP': c = c[c.ref.isin(g.ref)]
             if len(c): row['clv'] = r3(c.beat.astype(str).str.lower().isin(['true', '1', '1.0']).mean()); row['clvn'] = int(len(c))
         strat.append(row)
+    # the card, built step by step from every lean: what each rule removed and what it did to the money
+    pp = pk[pk.type == 'PROP'].copy(); pp['why'] = pp.get('why', '').fillna('') if 'why' in pp else ''
+    steps = [('every prop the books posted (the old way)', []), ('the model\'s edge is 6% or more', ['edge under 6%']),
+             ('the price is between −200 and +200', ['edge under 6%', 'price outside -200..+200']),
+             ('the model itself gives the side 50%+', ['edge under 6%', 'price outside -200..+200', 'model under 50%']),
+             ('one bet per player — his biggest edge', ['edge under 6%', 'price outside -200..+200', 'model under 50%', 'not his best edge']),
+             ('at most 3 per game — the card', ['edge under 6%', 'price outside -200..+200', 'model under 50%', 'not his best edge', 'game already has 3'])]
+    funnel = []
+    for lbl, drop in steps:
+        y = pp[~pp.why.isin(drop)]; g2 = y[y.result.isin(['W', 'L'])]; w = int((g2.result == 'W').sum())
+        funnel.append(dict(lbl=lbl, n=int(len(y)), w=w, l=int(len(g2) - w), hit=r3(w / len(g2)) if len(g2) else None, units=round(float(g2.u.sum()), 1),
+                           wk={int(k): round(float(v), 1) for k, v in g2.groupby('week').u.sum().items()}, wn={int(k): int(v) for k, v in y.groupby('week').size().items()}))
+    CARD = dict(rules=['the model\'s edge at the posted price is 6% or more', 'the price is between −200 and +200 — no long-shot strikes, no heavy juice',
+                       'the model\'s own chance for that side is 50% or more', 'one bet per player per game — his biggest edge',
+                       'at most 3 bets per game — the biggest edges'], funnel=funnel,
+                note='rules picked on Oct 19 from weeks 4–6, so those weeks are in-sample — week 7 on is the real test')
 tdp = {}
 if os.path.exists(P + 'td_picks.json'):
     bt = json.load(open(P + 'td_picks.json')).get('bt', {})
@@ -356,7 +373,7 @@ for st in strat:
                         + (f'<b style="color:var(--green)">+{d:.1f} units</b>' if d > 0 else f'<b style="color:var(--red)">{d:.1f} units</b>')
                         + (f" · beat the closing line {st['clv']:.0%} of the time" if st.get('clv') is not None else '') + '.'))
 
-out = dict(built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), cur=CUR, eval={str(k): v for k, v in EVAL.items()}, dsets=dsets, sigs=sigs,
+out = dict(card=CARD if 'CARD' in dir() else None, built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), cur=CUR, eval={str(k): v for k, v in EVAL.items()}, dsets=dsets, sigs=sigs,
            srcs=SRCS, lbl={str(S): LBL(S) for S in EVAL}, role=ROLE, strat=strat, tdp=tdp, ins=ins)
 json.dump(out, open(P + 'backtest.json', 'w'), separators=(',', ':'), default=lambda o: o.item() if hasattr(o, 'item') else str(o))
 print(f'backtest: data sets {len(DR)} defense-stat-weeks · signals {len(F)} player-games ({", ".join(f"{S}: {sigs[str(S)][chr(110)]}" for S in EVAL)}) · '
