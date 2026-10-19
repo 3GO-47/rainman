@@ -673,3 +673,22 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - live_lines.py: book consensus for unplayed games -> TD Picks LN and page glh (11th field 'books').
 - verify_data.py: in-progress week expects finished games only; X rows allowed.
 - patch_v25_pending.py: Weeklies forward list + signal panes target the first incomplete week (wk 6 now), graded as box scores import; pane tabs wk6 / wk7 next up / wk5 lookback; NOTES v25.
+
+## n79 · 2026-10-19 · v26 TD Picks follows the selected week; Category Grid; Weeklies week-ahead view
+- Josh: TD Picks was stuck on the model's target week (7) whatever week was picked up top. Fixed.
+- build_td_picks.py (patch_v26_tdpy.py): td_picks.json gains 'wk' (a board for every other 2026 week), 'base', 'grp'.
+  Finished week = every player who played, rated by that week's walk-forward model (calibrated on earlier weeks), graded.
+  Week not fully logged = model refit on rows before it, run on the depth-chart snapshot before its first game, graded as logs land.
+  Weeks after the target = early look (current depth chart/form, that week's opponent; implied/spread estimated from team
+  season averages when no line, marked ~). Rated 15%+ only; reasons stored as feature codes (why_codes/risk_of; why_text
+  shared with the live board). +250 KB payload; rainman.html ~9.3 MB. 'TD in 0 of his last 0' -> 'no games yet this season'.
+- Template (patch_v26_tdweek.py): tdBoard(w) / tdP(n,t,w) / tdSetWk(w) globals; TD Picks reads G.week (live board when it is
+  the target week), tiles/headers per mode, 'live board: week N →' link, track-record bars jump to their week; Weeklies tpOf = tdP.
+- New F6 TEST tab Category Grid (patch_v26_catgrid.py): wgData(slots, window, picks, W0) = consistency of every Weeklies
+  category over recorded weeks before the selected week (pips per week), top 6 (chips add/drop up to 8), every player on
+  that week's slate: CAT / REC / TD % / squares per category (+ red fades), TD Grid five columns, best-picks + category
+  leader cards; global week/slate/game/team/POS filters apply.
+- Weeklies: 'wk N ▸' chips (pending week, TD Picks week, selected week) open a forward view — tiles, 12 best-pick cards,
+  category cards, link to Category Grid; the global week picker now moves Weeklies (recorded week -> lookback, later -> ahead).
+- Checked in Playwright: all 41 views boot clean, TD Picks weeks 1/5/6/7/9/18, grid weeks 4/6/7 + WR filter, Weeklies chips/
+  pane/back, 390 px no overflow, NCAA clean.
