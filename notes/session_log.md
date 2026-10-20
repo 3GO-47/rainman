@@ -742,3 +742,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Backtest tab: funnel strip + card pop-up (rules, week columns, 78 rows); TD Picks card.
 - MNF WAS@SF lines refreshed via Chrome: Kalshi (95 groups + K2) and DK game line (SF -7.5, 52.5, ML -395/+310). Sportsbook props refresh at the PC loop's 7 PM ET close pull.
 - MNF card: A. Williams rec O2.5 +144, McCaffrey rec U4.5 -105, McLaurin rec U3.5 +100.
+
+## n85 — MNF import + gate fix (2026-10-20)
+- Root cause of `unpulled=0` with MNF unpulled: gate.py and pull_box.py keyed "finished" on nfldata's `result`, which lagged WAS@SF (10-19 20:15 ET) past the next afternoon; the 00:20 / 16:13 / 18:21 runs on 10-20 were `--markets` runs (no box step, games.csv never refetched). The daily 06:50 full loop has no log line on 10-20 at all (PC asleep/off?) — the 16:13 markets run is the one that died at the Kalshi step (^C).
+- Fix: common.kicked_off(g) = result posted OR kickoff (ET) 5h+ ago; gate.nfl() and pull_box.main() both use it, so a played game is pulled (PFR, else nflverse) even before nfldata posts the score.
+- Pulled WAS@SF (SF 23-17) via the nflverse fallback from the device VM: +20 player lines, game_logs_2026 1,806 -> 1,826 rows, week 6 complete (14/14). Depth snapshot 2026-10-20 (nflverse mirror of ESPN). fetch_nflverse + full rebuild run step-by-step (device shell caps calls at 180 s; refresh.py can't be backgrounded there).
+- Week 6 card graded: A. Williams rec O2.5 +144 W (3), McCaffrey rec U4.5 -105 L (9), McLaurin rec U3.5 +100 W (1) -> +1.39u. Card wk4-6 in-sample: 81 bets, 49-26 (65.3%), +21.9u. Every lean: 1257-1185, -61.7u. TD top-10 wk6 5/10; 24-wk walk-forward 142/240 (59.2%).
+- verify_data 64/64 · audit_extended 88 pass, 2 warn (Zach Davidson wk13 2024, known; 5 nflverse wk6 OUTs not on ESPN's current wk7 report — transient Tuesday mismatch).
+- Not done here: sports/fetch_sdv + build_landing (other-sports pages; left to the PC loop), ESPN depth direct (VM can't reach espn.com; nflverse mirror used).

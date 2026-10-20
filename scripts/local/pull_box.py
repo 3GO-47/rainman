@@ -9,7 +9,7 @@ Usage: python scripts/local/pull_box.py [--season 2026]"""
 import json, os, re, sys
 import pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
-from common import get, log, run, ROOT
+from common import get, log, run, ROOT, kicked_off
 
 SEASON = int(sys.argv[sys.argv.index('--season') + 1]) if '--season' in sys.argv else 2026
 BOX = f'data/raw/box_lines_{SEASON}.txt'
@@ -107,7 +107,8 @@ def positions():
 def main():
     run(['scripts/fetch_games.py'])                       # nfldata games.csv: scores + pfr boxscore ids
     g = pd.read_csv('data/raw/nflverse/games.csv')
-    g = g[(g.season == SEASON) & (g.game_type != 'PRE') & g.result.notna() & g.pfr.notna()]
+    g = g[(g.season == SEASON) & (g.game_type != 'PRE') & g.pfr.notna()]
+    g = g[kicked_off(g)]                                  # result posted OR kickoff 5h+ ago — nfldata's result lags, the stats parquet may not
     have = set()
     if os.path.exists(BOX):
         have = {l.split('|')[1] for l in open(BOX, encoding='utf-8') if l.startswith('P|')}

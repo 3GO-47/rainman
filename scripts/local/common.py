@@ -75,3 +75,17 @@ def run(cmd, check=True):
 ESPN_NFL = {'ARI': 22, 'ATL': 1, 'BAL': 33, 'BUF': 2, 'CAR': 29, 'CHI': 3, 'CIN': 4, 'CLE': 5, 'DAL': 6, 'DEN': 7, 'DET': 8, 'GB': 9, 'HOU': 34, 'IND': 11,
             'JAX': 30, 'KC': 12, 'LV': 13, 'LAC': 24, 'LAR': 14, 'MIA': 15, 'MIN': 16, 'NE': 17, 'NO': 18, 'NYG': 19, 'NYJ': 20, 'PHI': 21, 'PIT': 23,
             'SF': 25, 'SEA': 26, 'TB': 27, 'TEN': 10, 'WSH': 28}
+
+
+def kicked_off(g, hours=5):
+    """Boolean mask over an nfldata games frame: the game is finished — nfldata has a `result`, OR kickoff (ET) was at least
+    `hours` ago. nfldata posts results with a lag (MNF WAS@SF 2026-10-19 still had result=NaN through the next afternoon), and
+    gate.py / pull_box.py keyed on `result` alone, so the gate said unpulled=0 and the box pull skipped a finished game."""
+    import pandas as pd
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.datetime.now(ZoneInfo('America/New_York')).replace(tzinfo=None)
+    except Exception:
+        now = datetime.datetime.now()
+    ko = pd.to_datetime(g.gameday.astype(str) + ' ' + g.gametime.fillna('13:00').astype(str), errors='coerce')
+    return g.result.notna() | (ko + pd.Timedelta(hours=hours) <= now)

@@ -162,7 +162,7 @@
  {
   "status": "PASS",
   "check": "2026: every log row found in nflverse weekly stats",
-  "detail": "1806 of 1806 matched"
+  "detail": "1826 of 1826 matched"
  },
  {
   "status": "PASS",
@@ -237,7 +237,7 @@
  {
   "status": "PASS",
   "check": "2026: rushing + receiving TDs per team-game = nflverse",
-  "detail": "184 of 184 team-games equal"
+  "detail": "186 of 186 team-games equal"
  },
  {
   "status": "PASS",
@@ -252,7 +252,7 @@
  {
   "status": "PASS",
   "check": "2026: snap share on the page = nflverse snap counts",
-  "detail": "100.00% of 1558 agree (\u00b11 pt)"
+  "detail": "100.00% of 1825 agree (\u00b11 pt)"
  },
  {
   "status": "PASS",
@@ -277,7 +277,7 @@
  {
   "status": "PASS",
   "check": "2026: every finished game is in the logs",
-  "detail": "92 finished games, all logged"
+  "detail": "93 finished games, all logged"
  },
  {
   "status": "PASS",
@@ -287,12 +287,12 @@
  {
   "status": "PASS",
   "check": "upcoming games: nflverse spread sign = the live books (no flipped favourite)",
-  "detail": "15 games compared"
+  "detail": "14 games compared"
  },
  {
   "status": "PASS",
   "check": "page line table (Weeklies' implied totals) = nflverse closing lines + the books' consensus for unplayed games",
-  "detail": "816 games (15 on the live consensus) \u00b7 0 off"
+  "detail": "816 games (14 on the live consensus) \u00b7 0 off"
  },
  {
   "status": "PASS",
@@ -317,7 +317,7 @@
  {
   "status": "PASS",
   "check": "page game logs = game_logs csv (same player-games)",
-  "detail": "12508 matched \u00b7 0 unmatched"
+  "detail": "12528 matched \u00b7 0 unmatched"
  },
  {
   "status": "PASS",
@@ -332,17 +332,17 @@
  {
   "status": "PASS",
   "check": "footer games = logged games",
-  "detail": "footer 636 \u00b7 logs 636"
+  "detail": "footer 637 \u00b7 logs 637"
  },
  {
   "status": "PASS",
   "check": "footer rows = log rows",
-  "detail": "12508 vs 12508"
+  "detail": "12528 vs 12528"
  },
  {
   "status": "PASS",
   "check": "page week = first week not finished",
-  "detail": "page 6 \u00b7 expected 6"
+  "detail": "page 7 \u00b7 expected 7"
  },
  {
   "status": "PASS",
@@ -362,7 +362,7 @@
  {
   "status": "PASS",
   "check": "TD Picks backtest: tier counts add up to every graded pick",
-  "detail": "n 7003 \u00b7 hits 1474"
+  "detail": "n 7023 \u00b7 hits 1478"
  },
  {
   "status": "PASS",
@@ -377,12 +377,12 @@
  {
   "status": "PASS",
   "check": "TD Picks: implied totals = total/2 \u00b1 spread/2 (live consensus before kickoff, nflverse otherwise)",
-  "detail": "427 players"
+  "detail": "422 players"
  },
  {
   "status": "PASS",
   "check": "TD Picks ledger: no pick written at or after its kickoff",
-  "detail": "162 rows \u00b7 0 late"
+  "detail": "161 rows \u00b7 0 late"
  },
  {
   "status": "PASS",
@@ -392,7 +392,7 @@
  {
   "status": "PASS",
   "check": "prop board: every line's opponent = the schedule",
-  "detail": "708 lines"
+  "detail": "305 lines"
  },
  {
   "status": "PASS",
@@ -410,13 +410,13 @@
   "detail": "0 differ"
  },
  {
-  "status": "PASS",
+  "status": "WARN",
   "check": "injuries: nflverse wk6 OUT list also OUT on the ESPN report",
-  "detail": "82 out \u00b7 0 not flagged by ESPN"
+  "detail": "82 out \u00b7 5 not flagged by ESPN: Matthew Hibner BAL, Keyshaun Elliott CHI, Dillon Gabriel CLE, Will Shipley PHI, Jordan Elliott TEN"
  },
  {
   "status": "PASS",
-  "check": "depth chart QB1s = nflverse depth charts (2026-10-18)",
+  "check": "depth chart QB1s = nflverse depth charts (2026-10-20)",
   "detail": "32 teams"
  },
  {

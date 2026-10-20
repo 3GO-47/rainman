@@ -4,7 +4,7 @@ to pull and build; `python scripts/local/gate.py` prints the verdict."""
 import datetime, glob, json, os, sys
 import pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
-from common import TODAY
+from common import TODAY, kicked_off
 
 def nfl():
     f = 'data/raw/nflverse/games.csv'
@@ -14,7 +14,7 @@ def nfl():
     win = g[(g.d >= TODAY - datetime.timedelta(days=7)) & (g.d <= TODAY + datetime.timedelta(days=7))]
     box = 'data/raw/box_lines_2026.txt'
     have = {l.split('|')[1] for l in open(box, encoding='utf-8') if l.startswith('P|')} if os.path.exists(box) else set()
-    fin = g[g.result.notna() & g.pfr.notna()]
+    fin = g[kicked_off(g) & g.pfr.notna()]                 # finished = result posted OR kickoff 5h+ ago (nfldata lags)
     return dict(active=len(win) > 0, games_today=int((g.d == TODAY).sum()), games_next7=int(((g.d >= TODAY) & (g.d <= TODAY + datetime.timedelta(days=7))).sum()),
                 unpulled=int((~fin.pfr.isin(have)).sum()), week=int(win.week.min()) if len(win) else None)
 
