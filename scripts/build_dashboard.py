@@ -406,6 +406,21 @@ def main():
     data['depthPrev'] = {'date': prev[-1].split('_')[-1][:10], 'rows': [[r['player'], r['team'], r['slot'], r['injury'], r.get('depth', '')]
                         for r in csv.DictReader(open(prev[-1], encoding='utf-8'))]} if prev else None
     data['ph'] = headshots(logs, data['depth']) if LEAGUE == 'nfl' else ncaa_headshots()
+    # v32: one snapshot per week -- the chart as it stood before that week's first kickoff -- so Depth Delta can follow the week
+    # selector (snapshot vs snapshot for earlier weeks). A week whose chart is the same file as the week before carries `same`.
+    wk_first = {}
+    for r in (csv.DictReader(open('data/processed/games_2026.csv')) if LEAGUE == 'nfl' else []):
+        w = int(r['week']); wk_first[w] = min(wk_first.get(w, r['date']), r['date'])
+    hist, seen = [], {}
+    for w in sorted(wk_first):
+        if w > data['week']: break
+        cand = [f for f in allp if f.split('_')[-1][:10] <= wk_first[w]]
+        if not cand: continue
+        f = cand[-1]; d = f.split('_')[-1][:10]
+        if d in seen: hist.append(dict(week=w, date=d, same=seen[d])); continue
+        seen[d] = w
+        hist.append(dict(week=w, date=d, rows=[[r['player'], r['team'], r['slot'], r['injury'], r.get('depth', '')] for r in csv.DictReader(open(f, encoding='utf-8'))]))
+    data['depthHist'] = hist
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}
     data['league'] = league_config()

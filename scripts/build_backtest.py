@@ -305,6 +305,7 @@ if os.path.exists(P + 'picks_all.csv'):
             c = clv[(clv.type == base) & clv.beat.notna()]
             if t == 'PROP': c = c[c.ref.isin(g.ref)]
             if len(c): row['clv'] = r3(c.beat.astype(str).str.lower().isin(['true', '1', '1.0']).mean()); row['clvn'] = int(len(c))
+        row['wk'] = {int(k): [int((x.result == 'W').sum()), int((x.result == 'L').sum()), round(float(x.u.sum()), 1), int(len(x))] for k, x in g.groupby('week')}   # v32: per week W, L, units, frozen
         strat.append(row)
     # the card, built step by step from every lean: what each rule removed and what it did to the money
     pp = pk[pk.type == 'PROP'].copy(); pp['why'] = pp.get('why', '').fillna('') if 'why' in pp else ''
@@ -321,6 +322,7 @@ if os.path.exists(P + 'picks_all.csv'):
     CARD = dict(rules=['the model\'s edge at the posted price is 6% or more', 'the price is between −200 and +200 — no long-shot strikes, no heavy juice',
                        'the model\'s own chance for that side is 50% or more', 'one bet per player per game — his biggest edge',
                        'at most 3 bets per game — the biggest edges'], funnel=funnel,
+                insample=[4, 5, 6],
                 note='rules picked on Oct 19 from weeks 4–6, so those weeks are in-sample — week 7 on is the real test')
 tdp = {}
 if os.path.exists(P + 'td_picks.json'):
