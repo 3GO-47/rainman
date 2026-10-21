@@ -377,7 +377,7 @@
  {
   "status": "PASS",
   "check": "TD Picks: implied totals = total/2 \u00b1 spread/2 (live consensus before kickoff, nflverse otherwise)",
-  "detail": "422 players"
+  "detail": "420 players"
  },
  {
   "status": "PASS",
@@ -392,7 +392,7 @@
  {
   "status": "PASS",
   "check": "prop board: every line's opponent = the schedule",
-  "detail": "305 lines"
+  "detail": "690 lines"
  },
  {
   "status": "PASS",
@@ -410,13 +410,13 @@
   "detail": "0 differ"
  },
  {
-  "status": "WARN",
-  "check": "injuries: nflverse wk6 OUT list also OUT on the ESPN report",
-  "detail": "82 out \u00b7 5 not flagged by ESPN: Matthew Hibner BAL, Keyshaun Elliott CHI, Dillon Gabriel CLE, Will Shipley PHI, Jordan Elliott TEN"
+  "status": "PASS",
+  "check": "injuries: nflverse wk7 OUT list also OUT on the ESPN report",
+  "detail": "0 out \u00b7 0 not flagged by ESPN"
  },
  {
   "status": "PASS",
-  "check": "depth chart QB1s = nflverse depth charts (2026-10-20)",
+  "check": "depth chart QB1s = nflverse depth charts (2026-10-21)",
   "detail": "32 teams"
  },
  {

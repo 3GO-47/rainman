@@ -78,7 +78,8 @@ Haynes King,Haynes King,CAR,QB,QB3,QB,1,,7,TB,14.2,QB PY=5;QB RY=27;QB P+R=9;P T
 Chuba Hubbard,Chuba Hubbard,CAR,RB,RB1,RB1,1,,7,TB,16.8,RB1 RY=29;RB1 Recep=1;RB1 RecY=1;RB R+R=26;RB1 TD=27
 AJ Dillon,AJ Dillon,CAR,RB,RB2,RB2,1,,7,TB,23.2,RB2+ RY=30;RB2 Recep=20;RB2 RecY=13;RB R+R=26;RB2 TD=27
 Trevor Etienne,Trevor Etienne,CAR,RB,RB3,RB2,1,,7,TB,23.2,RB2+ RY=30;RB2 Recep=20;RB2 RecY=13;RB R+R=26;RB2 TD=27
-Jonathon Brooks,Jonathon Brooks,CAR,RB,RB4,RB2,-1,,7,TB,23.2,RB2+ RY=30;RB2 Recep=20;RB2 RecY=13;RB R+R=26;RB2 TD=27
+Anthony Tyus III,Anthony Tyus III,CAR,RB,RB4,RB2,1,,7,TB,23.2,RB2+ RY=30;RB2 Recep=20;RB2 RecY=13;RB R+R=26;RB2 TD=27
+Jonathon Brooks,Jonathon Brooks,CAR,RB,RB5,,-1,,7,TB,,
 Tommy Tremble,Tommy Tremble,CAR,TE,TE1,TE1,1,,7,TB,9.33,TE1 Recep=9;TE1 RecY=9;TE1 TD=10
 Darren Waller,Darren Waller,CAR,TE,TE2,TE2,1,,7,TB,7.67,TE2 Recep=7;TE2 RecY=7;TE2 TD=9
 Mitchell Evans,Mitchell Evans,CAR,TE,TE3,TE2,1,,7,TB,7.67,TE2 Recep=7;TE2 RecY=7;TE2 TD=9
@@ -327,8 +328,8 @@ Terrance Ferguson,Terrance Ferguson,LAR,TE,TE5,,-1,,7,@LV,,
 Puka Nacua,Puka Nacua,LAR,WR,WR1,WR1,1,,7,@LV,26.0,WR1 Recep=28;WR1 RecY=27;WR1 TD=23
 Konata Mumpfield,Konata Mumpfield,LAR,WR,WR2,WR2,1,,7,@LV,3.0,WR2 Recep=4;WR2 RecY=4;WR2 TD=1
 Jordan Whittington,Jordan Whittington,LAR,WR,WR3,WR3,1,,7,@LV,21.17,WR3 Recep=28.5;WR3 RecY=16;WR3 TD=19
-Davante Adams,Davante Adams,LAR,WR,WR4+,WR4+,1,,7,@LV,11.0,WR4+ Recep=13;WR4+ RecY=9;WR4+ TD=11
 Tutu Atwell,Tutu Atwell,LAR,WR,WR4+,WR4+,1,,7,@LV,11.0,WR4+ Recep=13;WR4+ RecY=9;WR4+ TD=11
+Davante Adams,Davante Adams,LAR,WR,WR4+,WR4+,-1,,7,@LV,11.0,WR4+ Recep=13;WR4+ RecY=9;WR4+ TD=11
 CJ Daniels,CJ Daniels,LAR,WR,WR4+,WR4+,1,,7,@LV,11.0,WR4+ Recep=13;WR4+ RecY=9;WR4+ TD=11
 Alex Bachman,Alex Bachman,LAR,WR,WR4+,WR4+,1,,7,@LV,11.0,WR4+ Recep=13;WR4+ RecY=9;WR4+ TD=11
 Kirk Cousins,Kirk Cousins,LV,QB,QB1,QB,1,,7,LAR,18.1,QB PY=31;QB RY=5;QB P+R=28;P TD=16;QB TD=10.5
@@ -349,7 +350,6 @@ Cody White,Cody White,LV,WR,WR3,WR3,1,,7,LAR,10.33,WR3 Recep=20;WR3 RecY=6;WR3 T
 Dareke Young,Dareke Young,LV,WR,WR4+,WR4+,1,,7,LAR,28.0,WR4+ Recep=32;WR4+ RecY=32;WR4+ TD=20
 Jack Bech,Jack Bech,LV,WR,WR4+,WR4+,-1,,7,LAR,28.0,WR4+ Recep=32;WR4+ RecY=32;WR4+ TD=20
 Malik Benson,Malik Benson,LV,WR,WR4+,WR4+,1,,7,LAR,28.0,WR4+ Recep=32;WR4+ RecY=32;WR4+ TD=20
-Corey Rucker,Corey Rucker,LV,WR,WR4+,WR4+,-1,,7,LAR,28.0,WR4+ Recep=32;WR4+ RecY=32;WR4+ TD=20
 Dont'e Thornton Jr.,Dont'e Thornton Jr.,LV,WR,WR4+,WR4+,-1,,7,LAR,28.0,WR4+ Recep=32;WR4+ RecY=32;WR4+ TD=20
 Malik Willis,Malik Willis,MIA,QB,QB1,QB,1,,7,@NYJ,22.1,QB PY=29;QB RY=15;QB P+R=30;P TD=14;QB TD=22.5
 Kyle McCord,Kyle McCord,MIA,QB,QB2,QB,1,,7,@NYJ,22.1,QB PY=29;QB RY=15;QB P+R=30;P TD=14;QB TD=22.5
@@ -403,7 +403,7 @@ DeMario Douglas,DeMario Douglas,NE,WR,WR1,WR1,1,,7,@CHI,18.0,WR1 Recep=22;WR1 Re
 A.J. Brown,A.J. Brown,NE,WR,WR2,WR2,1,,7,@CHI,4.17,WR2 Recep=7.5;WR2 RecY=2;WR2 TD=3
 Efton Chism III,Efton Chism III,NE,WR,WR3,WR3,1,,7,@CHI,29.33,WR3 Recep=32;WR3 RecY=32;WR3 TD=24
 Kyle Williams,Kyle Williams,NE,WR,WR4+,WR4+,1,,7,@CHI,25.83,WR4+ Recep=24;WR4+ RecY=25;WR4+ TD=28.5
-Jeremiah Webb,Jeremiah Webb,NE,WR,WR4+,WR4+,-1,,7,@CHI,25.83,WR4+ Recep=24;WR4+ RecY=25;WR4+ TD=28.5
+Jeremiah Webb,Jeremiah Webb,NE,WR,WR4+,WR4+,1,,7,@CHI,25.83,WR4+ Recep=24;WR4+ RecY=25;WR4+ TD=28.5
 Mack Hollins,Mack Hollins,NE,WR,WR4+,WR4+,-1,,7,@CHI,25.83,WR4+ Recep=24;WR4+ RecY=25;WR4+ TD=28.5
 Romeo Doubs,Romeo Doubs,NE,WR,WR4+,WR4+,-1,,7,@CHI,25.83,WR4+ Recep=24;WR4+ RecY=25;WR4+ TD=28.5
 Tyler Shough,Tyler Shough,NO,QB,QB1,QB,1,,7,PIT,20.8,QB PY=15;QB RY=22;QB P+R=16;P TD=25;QB TD=26
@@ -431,8 +431,7 @@ Jake Haener,Jake Haener,NYG,QB,QB3,QB,1,,7,@HOU,15.4,QB PY=14;QB RY=25;QB P+R=15
 Jaxson Dart,Jaxson Dart,NYG,QB,QB4,QB,-1,,7,@HOU,15.4,QB PY=14;QB RY=25;QB P+R=15;P TD=12.5;QB TD=10.5
 Cam Skattebo,Cam Skattebo,NYG,RB,RB1,RB1,1,,7,@HOU,21.6,RB1 RY=22;RB1 Recep=12;RB1 RecY=27;RB R+R=30;RB1 TD=17
 Tyrone Tracy Jr.,Tyrone Tracy Jr.,NYG,RB,RB2,RB2,1,,7,@HOU,26.9,RB2+ RY=32;RB2 Recep=18;RB2 RecY=25;RB R+R=30;RB2 TD=29.5
-Najee Harris,Najee Harris,NYG,RB,RB3,RB2,1,,7,@HOU,26.9,RB2+ RY=32;RB2 Recep=18;RB2 RecY=25;RB R+R=30;RB2 TD=29.5
-Devin Singletary,Devin Singletary,NYG,RB,RB4,RB2,1,,7,@HOU,26.9,RB2+ RY=32;RB2 Recep=18;RB2 RecY=25;RB R+R=30;RB2 TD=29.5
+Devin Singletary,Devin Singletary,NYG,RB,RB3,RB2,1,,7,@HOU,26.9,RB2+ RY=32;RB2 Recep=18;RB2 RecY=25;RB R+R=30;RB2 TD=29.5
 Patrick Ricard,Patrick Ricard,NYG,RB,FB1,RB2,1,,7,@HOU,26.9,RB2+ RY=32;RB2 Recep=18;RB2 RecY=25;RB R+R=30;RB2 TD=29.5
 Isaiah Likely,Isaiah Likely,NYG,TE,TE1,TE1,1,,7,@HOU,19.83,TE1 Recep=19;TE1 RecY=18;TE1 TD=22.5
 Theo Johnson,Theo Johnson,NYG,TE,TE2,TE2,1,,7,@HOU,25.0,TE2 Recep=28;TE2 RecY=31;TE2 TD=16
@@ -470,10 +469,8 @@ Joe Milton III,Joe Milton III,PHI,QB,QB3,QB,1,,7,DAL,4.4,QB PY=8;QB RY=1;QB P+R=
 Jalen Hurts,Jalen Hurts,PHI,QB,QB4,QB,-1,,7,DAL,4.4,QB PY=8;QB RY=1;QB P+R=3;P TD=7;QB TD=3
 Dameon Pierce,Dameon Pierce,PHI,RB,RB1,RB1,1,,7,DAL,13.6,RB1 RY=11;RB1 Recep=29;RB1 RecY=12;RB R+R=11;RB1 TD=5
 Saquon Barkley,Saquon Barkley,PHI,RB,RB2,RB2,1,,7,DAL,12.0,RB2+ RY=11;RB2 Recep=12;RB2 RecY=17;RB R+R=11;RB2 TD=9
-Carson Steele,Carson Steele,PHI,RB,RB3,RB2,1,,7,DAL,12.0,RB2+ RY=11;RB2 Recep=12;RB2 RecY=17;RB R+R=11;RB2 TD=9
-Jaydon Blue,Jaydon Blue,PHI,RB,RB4,RB2,1,,7,DAL,12.0,RB2+ RY=11;RB2 Recep=12;RB2 RecY=17;RB R+R=11;RB2 TD=9
-Tank Bigsby,Tank Bigsby,PHI,RB,RB5,,-1,,7,DAL,,
-Will Shipley,Will Shipley,PHI,RB,RB6,,-1,,7,DAL,,
+Tank Bigsby,Tank Bigsby,PHI,RB,RB3,RB2,-1,,7,DAL,12.0,RB2+ RY=11;RB2 Recep=12;RB2 RecY=17;RB R+R=11;RB2 TD=9
+Will Shipley,Will Shipley,PHI,RB,RB4,RB2,-1,,7,DAL,12.0,RB2+ RY=11;RB2 Recep=12;RB2 RecY=17;RB R+R=11;RB2 TD=9
 Dallas Goedert,Dallas Goedert,PHI,TE,TE1,TE1,1,,7,DAL,18.33,TE1 Recep=18;TE1 RecY=24;TE1 TD=13
 Johnny Mundt,Johnny Mundt,PHI,TE,TE2,TE2,1,,7,DAL,21.0,TE2 Recep=25;TE2 RecY=16;TE2 TD=22
 E.J. Jenkins,E.J. Jenkins,PHI,TE,TE3,TE2,1,,7,DAL,21.0,TE2 Recep=25;TE2 RecY=16;TE2 TD=22
@@ -543,14 +540,13 @@ Jake Tonges,Jake Tonges,SF,TE,TE4,TE2,-1,,7,@ATL,19.5,TE2 Recep=19;TE2 RecY=13;T
 Mike Evans,Mike Evans,SF,WR,WR1,WR1,1,,7,@ATL,11.33,WR1 Recep=4;WR1 RecY=7;WR1 TD=23
 Deebo Samuel,Deebo Samuel,SF,WR,WR2,WR2,1,,7,@ATL,4.67,WR2 Recep=2;WR2 RecY=5;WR2 TD=7
 Brandin Cooks,Brandin Cooks,SF,WR,WR3,WR3,1,,7,@ATL,13.0,WR3 Recep=15;WR3 RecY=18;WR3 TD=6
-Jacob Cowing,Jacob Cowing,SF,WR,WR4+,WR4+,1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
-Christian Kirk,Christian Kirk,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
-Ricky Pearsall,Ricky Pearsall,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
 Jordan Watkins,Jordan Watkins,SF,WR,WR4+,WR4+,1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
 Brandon Aiyuk,Brandon Aiyuk,SF,WR,WR4+,WR4+,1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
 Demarcus Robinson,Demarcus Robinson,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
-Malik Turner,Malik Turner,SF,WR,WR4+,WR4+,1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
+Jacob Cowing,Jacob Cowing,SF,WR,WR4+,WR4+,1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
 De'Zhaun Stribling,De'Zhaun Stribling,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
+Christian Kirk,Christian Kirk,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
+Ricky Pearsall,Ricky Pearsall,SF,WR,WR4+,WR4+,-1,,7,@ATL,18.0,WR4+ Recep=14;WR4+ RecY=22;WR4+ TD=18
 Baker Mayfield,Baker Mayfield,TB,QB,QB1,QB,1,,7,@CAR,11.4,QB PY=17;QB RY=4;QB P+R=13;P TD=18;QB TD=5
 Jalon Daniels,Jalon Daniels,TB,QB,QB2,QB,1,,7,@CAR,11.4,QB PY=17;QB RY=4;QB P+R=13;P TD=18;QB TD=5
 Bucky Irving,Bucky Irving,TB,RB,RB1,RB1,1,,7,@CAR,8.8,RB1 RY=2;RB1 Recep=11;RB1 RecY=26;RB R+R=1;RB1 TD=4
@@ -587,8 +583,8 @@ Chimere Dike,Chimere Dike,TEN,WR,WR4+,WR4+,1,,7,CLE,6.0,WR4+ Recep=8;WR4+ RecY=4
 Jayden Daniels,Jayden Daniels,WAS,QB,QB1,QB,1,,7,BYE,,
 Marcus Mariota,Marcus Mariota,WAS,QB,QB2,QB,1,,7,BYE,,
 Athan Kaliakmanis,Athan Kaliakmanis,WAS,QB,QB3,QB,1,,7,BYE,,
-Austin Ekeler,Austin Ekeler,WAS,RB,RB1,RB1,1,,7,BYE,,
-Rachaad White,Rachaad White,WAS,RB,RB2,RB2,1,,7,BYE,,
+Rachaad White,Rachaad White,WAS,RB,RB1,RB1,1,,7,BYE,,
+Austin Ekeler,Austin Ekeler,WAS,RB,RB2,RB2,1,,7,BYE,,
 Jacory Croskey-Merritt,Jacory Croskey-Merritt,WAS,RB,RB3,RB2,1,,7,BYE,,
 Jeremy McNichols,Jeremy McNichols,WAS,RB,RB4,RB2,1,,7,BYE,,
 Chig Okonkwo,Chig Okonkwo,WAS,TE,TE1,TE1,1,,7,BYE,,
@@ -596,12 +592,12 @@ Ben Sinnott,Ben Sinnott,WAS,TE,TE2,TE2,1,,7,BYE,,
 John Bates,John Bates,WAS,TE,TE3,TE2,1,,7,BYE,,
 Colson Yankoff,Colson Yankoff,WAS,TE,TE4,TE2,1,,7,BYE,,
 Stefon Diggs,Stefon Diggs,WAS,WR,WR1,WR1,1,,7,BYE,,
-Antonio Williams,Antonio Williams,WAS,WR,WR2,WR2,1,,7,BYE,,
-Treylon Burks,Treylon Burks,WAS,WR,WR3,WR3,1,,7,BYE,,
-Terry McLaurin,Terry McLaurin,WAS,WR,WR4+,WR4+,1,,7,BYE,,
-Jaylin Lane,Jaylin Lane,WAS,WR,WR4+,WR4+,1,,7,BYE,,
+Treylon Burks,Treylon Burks,WAS,WR,WR2,WR2,1,,7,BYE,,
+Antonio Williams,Antonio Williams,WAS,WR,WR3,WR3,1,,7,BYE,,
 Dyami Brown,Dyami Brown,WAS,WR,WR4+,WR4+,1,,7,BYE,,
+Jaylin Lane,Jaylin Lane,WAS,WR,WR4+,WR4+,1,,7,BYE,,
 Luke McCaffrey,Luke McCaffrey,WAS,WR,WR4+,WR4+,1,,7,BYE,,
+Terry McLaurin,Terry McLaurin,WAS,WR,WR4+,WR4+,1,,7,BYE,,
 ARI D/ST,ARI D/ST,ARI,D/ST,,,1,,7,DEN,,
 ATL D/ST,ATL D/ST,ATL,D/ST,,,1,,7,SF,,
 BAL D/ST,BAL D/ST,BAL,D/ST,,,1,,7,CIN,,

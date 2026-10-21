@@ -55,7 +55,16 @@ def depth_nflverse():
         log('depth (nflverse): no depth_charts parquet — NOT writing a snapshot; the last good one stands'); return None
     d = pd.read_parquet(files['depth_charts'])
     asof = str(d.dt.max())
-    d = d[(d.dt == d.dt.max()) & (d.pos_grp == '3WR 1TE') & d.pos_abb.isin(['QB', 'RB', 'WR', 'TE', 'FB'])].copy()
+    # v32: the mirror sometimes publishes a team with its WR/TE rows missing (NE on 2026-10-21 had QB/RB/TE only, 9 rows
+    # instead of 20) -- for any team whose newest chart has fewer than 3 WR or no TE/QB, keep that team's newest COMPLETE chart
+    off = d[(d.pos_grp == '3WR 1TE') & d.pos_abb.isin(['QB', 'RB', 'WR', 'TE', 'FB'])]
+    cnt = off.groupby(['team', 'dt']).pos_abb.value_counts().unstack(fill_value=0)
+    good = cnt[(cnt.get('WR', 0) >= 3) & (cnt.get('TE', 0) >= 1) & (cnt.get('QB', 0) >= 1)].reset_index()
+    pick = good.groupby('team').dt.max()
+    stale = {t: str(dt)[:16] for t, dt in pick.items() if dt != d.dt.max()}
+    if stale: log(f'  depth (nflverse): newest chart incomplete for {", ".join(sorted(stale))} -- using each one\'s last complete chart ({"; ".join(f"{t} {v}" for t, v in sorted(stale.items()))})')
+    off = off.merge(pick.rename('pk'), left_on='team', right_index=True, how='left')
+    d = off[off.dt == off.pk.fillna(d.dt.max())].drop(columns='pk').copy()
     TEAM = {'LA': 'LAR'}                                   # nflverse -> ESPN/RAINMAN codes (everything else already matches)
     d['team'] = d.team.map(lambda t: TEAM.get(t, t))
     d['gsis'] = d.gsis_id.astype(str)
