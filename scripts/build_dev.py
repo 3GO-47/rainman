@@ -241,6 +241,10 @@ def main():
     pace = mo_cost / max(1, dom) * dim
     by_reason = {}
     for r in L: by_reason.setdefault(r['rk'], [0, 0]); by_reason[r['rk']][0] += 1; by_reason[r['rk']][1] += r['cost']
+    by_lg = {}                                            # v36: the API tab's by-league split lives here now
+    for r in L:
+        w = str(r.get('what', '')); k = next((x for x in ('nfl', 'cfb', 'nba', 'nhl', 'wnba', 'mlb', 'ncaab') if w.startswith(x)), 'other')
+        by_lg.setdefault(k, [0, 0]); by_lg[k][0] += 1; by_lg[k][1] += r['cost']
     runs7 = [r for r in R if r['start'][:10] >= (NOW - datetime.timedelta(days=7)).strftime('%Y-%m-%d')]
     fails7 = sum(len(r['fails']) for r in runs7); dead7 = sum(1 for r in runs7 if r['state'] in ('died', 'killed'))
     slots = [c for d, row in SH for c in row if c['state'] not in ('future', 'due', 'before')]
@@ -383,6 +387,8 @@ th.sa:after{{content:' \\25B4';opacity:.7}}th.sd:after{{content:' \\25BE';opacit
 <div class="panel"><h3>Odds API · three-pull policy board <span class="f">where every game inside the window stands · sensor = DraftKings spread / total / home ML from the free ESPN feed · {esc(key_note)}</span></h3>{SLP}<div class="scroll">{PBT}</div>{POL}</div>
 <div class="panel"><h3>Odds API · credits per day <span class="f">last {len(days)} days with calls · split by reason · hover for the calls</span></h3>
 <div class="bars">{BARS}</div><p class="dim" style="margin:4px 0 0">{LEG}</p></div>
+<div class="grid2"><div class="panel"><h3>Odds API · by reason <span class="f">what the credits bought, all time</span></h3><table><thead><tr><th>reason</th><th class="n">calls</th><th class="n">credits</th></tr></thead><tbody>{''.join(f'<tr><td>{k}</td><td class="n">{v[0]}</td><td class="n">{v[1]:,}</td></tr>' for k, v in sorted(by_reason.items(), key=lambda kv: -kv[1][1]))}</tbody></table></div>
+<div class="panel"><h3>Odds API · by league <span class="f">all time</span></h3><table><thead><tr><th>league</th><th class="n">calls</th><th class="n">credits</th></tr></thead><tbody>{''.join(f'<tr><td>{k}</td><td class="n">{v[0]}</td><td class="n">{v[1]:,}</td></tr>' for k, v in sorted(by_lg.items(), key=lambda kv: -kv[1][1]))}</tbody></table></div></div>
 <div class="grid2">
 <div class="panel"><h3>loop runs <span class="f">newest first · a run = one Task Scheduler pass or one planted sleeper · amber = over 20 min</span></h3><div class="scroll"><table><thead><tr><th>start</th><th>kind</th><th>state</th><th class="n">min</th><th class="n">steps</th><th>failures / slow steps</th><th>push</th><th>did</th></tr></thead><tbody>{RT}</tbody></table></div></div>
 <div class="panel"><h3>error trail <span class="f">every failure, traceback, kill and skip in the logs · newest first</span></h3><div class="scroll"><table><thead><tr><th>when</th><th>log</th><th>line</th></tr></thead><tbody>{ET}</tbody></table></div></div>

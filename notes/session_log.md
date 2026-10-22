@@ -772,3 +772,7 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n89 — v35 (2026-10-21, Josh's call): promotions out of TEST
 - META → F2 Matchups · TD Picks, Backtest, Card v2 → F5 Picks · Weeklies v2 + Category Grid v2 → F1 Home (v1 of each rides along, hidden behind the tab's v2 | v1 switch) · API → behind Dev (Dev | API switch) · removed from TEST: Lab Grid, TD Grid, Head to Head, Game View, Splits, Depth Delta (F2/F3 copies untouched). TEST now: METAPROP, Markets v2, Dev.
 - v34c: the pair switch is a small segment at the right end of the tab's own filter row (the #pairBar banner from v34a/b is gone — Josh's call, rightly).
+
+## n90 — v36 (2026-10-21): Dev/API out of TEST · position letters + depth slots
+- Verified the F6 Dev tab = framed dev.html and that every API-tab section (plan/used/logged tiles, credits per day, policy board, pull log) is on dev.html; added the by-reason / by-league credit tables to build_dev.py (the one thing missing). Dev and API removed from TEST (⚙ dev link stays). TEST now: METAPROP, Markets v2.
+- posIcon renders a letter (Q R W T D) instead of the glyphs; wherever a player row knows his depth slot (META, METAPROP, Lab/Player grids, Category Grid cards, Player Board tables) it shows the slot (QB1, RB2, WR3…) instead; slotchip drops the glyph.
