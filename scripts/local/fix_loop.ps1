@@ -1,5 +1,5 @@
-# RAINMAN — diagnose and repair the "RAINMAN local loop" (daily 06:50) and "RAINMAN markets" (6-hourly) scheduled tasks.
-# Run in an ADMIN PowerShell:  Win+X -> "Terminal (Admin)" -> paste:
+﻿# RAINMAN - diagnose and repair the "RAINMAN local loop" (daily 06:50) and "RAINMAN markets" (6-hourly) scheduled tasks.
+# Run in an ADMIN PowerShell:  Win+X, Terminal (Admin), then paste:
 #   powershell -ExecutionPolicy Bypass -File C:\Users\jwlar\rainman\scripts\local\fix_loop.ps1
 # What it does: shows each task's state / last result / next run / settings, pulls the last Task Scheduler events for them
 # (the "why" when a run never started), then re-applies the settings that let a sleeping or logged-off PC still run them
@@ -31,9 +31,9 @@ Write-Host "`n== TASK SCHEDULER EVENTS, last 4 days (why a run did or did not ha
 try {
     $ev = Get-WinEvent -FilterHashtable @{LogName='Microsoft-Windows-TaskScheduler/Operational'; StartTime=(Get-Date).AddDays(-4)} -ErrorAction Stop |
           Where-Object { $_.Message -match 'RAINMAN' } | Select-Object -First 40
-    if (-not $ev) { Write-Host "  no events mention RAINMAN — the Operational log may be disabled (Event Viewer > Task Scheduler > Operational > Enable Log)" -ForegroundColor DarkYellow }
+    if (-not $ev) { Write-Host "  no events mention RAINMAN - the Operational log may be disabled (Event Viewer, Task Scheduler, Operational, Enable Log)" -ForegroundColor DarkYellow }
     foreach ($e in $ev) { Write-Host ("  {0:yyyy-MM-dd HH:mm}  id {1,-4} {2}" -f $e.TimeCreated, $e.Id, ($e.Message -replace '\s+',' ').Substring(0, [Math]::Min(150, ($e.Message -replace '\s+',' ').Length))) }
-    Write-Host "  (id 100/102 = started/finished · 129 = process launched · 200/201 = action start/end · 322 = skipped, previous still running · 324 = queued · 327 = stopped (battery) · 329 = killed (time limit) · 332 = launch condition not met, e.g. not logged on · 109 = missed, will run when available · 141 = task deleted)" -ForegroundColor DarkGray
+    Write-Host "  (id 100/102 = started/finished - 129 = process launched - 200/201 = action start/end - 322 = skipped, previous still running - 324 = queued - 327 = stopped (battery) - 329 = killed (time limit) - 332 = launch condition not met, e.g. not logged on - 109 = missed, will run when available - 141 = task deleted)" -ForegroundColor DarkGray
 } catch { Write-Host "  could not read the event log: $($_.Exception.Message)" -ForegroundColor DarkYellow }
 
 Write-Host "`n== POWER: can the PC wake itself? ==" -ForegroundColor Yellow
@@ -81,6 +81,6 @@ for ($i = 0; $i -lt 18; $i++) {
     $tail = Get-Content $log -Tail 5 -ErrorAction SilentlyContinue
     if ($tail -match '=== local loop' -and ($tail -join ' ') -match $mark.Substring(0, 13)) { $seen = $true; break }
 }
-if ($seen) { Write-Host "  the loop started and is logging — let it finish (box scores, depth, odds, rebuild, push; ~10-20 min)" -ForegroundColor Green }
+if ($seen) { Write-Host "  the loop started and is logging - let it finish (box scores, depth, odds, rebuild, push; ~10-20 min)" -ForegroundColor Green }
 else { Write-Host "  no new '=== local loop' line in 90 s. Last lines of the log:" -ForegroundColor Red; Get-Content $log -Tail 5 | ForEach-Object { Write-Host "    $_" }; Write-Host "  and the task's last result:"; Show-Task 'RAINMAN local loop' | Out-Null }
 Write-Host "`nDone. Send me the output of this window." -ForegroundColor Yellow
