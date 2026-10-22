@@ -780,3 +780,8 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n91 — v37 (2026-10-21): Markets v2 deleted · METAPROP behind META · fix_loop.ps1
 - Markets v2 removed from the registry and BOOT (it was bets11() rendered twice). METAPROP moved into F2 Matchups as META's pair (META | METAPROP switch). F6 TEST is empty and the top nav hides it. Every registered view renders, 0 JS errors.
 - scripts/local/fix_loop.ps1: diagnose + repair the two Task Scheduler tasks (state, last result, events, power wake timers; re-applies wake-to-run / start-when-available / battery / S4U "run whether logged on or not"; adds a 12:10 safety trigger; starts the loop and watches the log). Josh runs it in an admin PowerShell.
+
+## n92 — v38 (2026-10-21): loop diagnosed · categories on the player card · v2 category pop-ups list qualifiers
+- fix_loop.ps1 run by Josh (admin): both tasks re-registered S4U (run whether logged on or not), wake-to-run, start-when-available, battery allowed; 12:10 safety trigger added. Diagnosis: the daily task DID fire (06:50 slipped to 08:50 on wake) but exited 1 and the old settings refused it on battery; the test run at 21:30 completed end-to-end in 11 min and pushed (origin got every commit incl. the 10 MB ncaa.html).
+- Player card: a "categories" panel — the Weeklies signals he carries into the week (chips; red = fade) and what he carried into each played week with ✓/✗.
+- Weeklies v2 / Category Grid v2 category pop-ups now add "everyone who carried it, week by week" (and, on the grid, "carrying it into week N") — the lists v1's signal pane had.

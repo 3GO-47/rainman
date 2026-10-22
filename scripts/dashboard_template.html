@@ -2985,6 +2985,17 @@ function ppGlance(n,team,slot,grp,opp,oppRaw,L){
   return `<div class="ppg">${tiles.length?`<div class="ppk" data-mg="1">${tiles.join('')}</div>`:''}
     ${tp&&((tp.why||[]).length||tp.risk)?`<div class="ppwhy">${(tp.why||[]).map(w=>`<i>${esc(w)}</i>`).join('')}${tp.risk?`<i class="risk">${esc(tp.risk)}</i>`:''}</div>`:''}
     ${tbl}${nx.length?`<div class="ppnx"><span class="mini">next ${nx.length} · rank vs ${grp}s:</span>${nx.join('')}</div>`:''}</div>`}
+/* v38: the Weeklies categories a player carries — on his card */
+function wkPlayerCats(n){try{if(typeof wkFeat!=='function')return '';const S=LAST_SE,F=wkFeat(S),SG=wkSigs();if(!F.rows.length)return '';
+  const TR=wkTrust(x=>true,SG,'card38'),W0=J.week||1;
+  const ah=wkAhead(u=>u.player===n,TR,W0).find(x=>x.name===n);
+  const hist=F.rows.filter(x=>x.name===n&&F.weeks.includes(x.w)).sort((a,b)=>b.w-a.w).slice(0,8);
+  const ahead=ah?(ah.on||SG.filter(z=>z.f(ah))):[];
+  if(!ahead.length&&!hist.length)return '';
+  const chip=z=>`<span class="wkpc ${z.kind==='neg'?'l':'w'}" title="${esc(z.long||'')}">${esc(z.lbl)}</span>`;
+  return `<div class="panel" style="margin-top:8px"><h3>categories <span class="f">the Weeklies signals he carries into week ${W0}${ah&&ah.raw?' ('+esc(ah.raw)+')':''}, then what he carried into each played week · red chip = a fade</span></h3>
+    <div class="wkpcs" style="margin-bottom:6px">${ahead.map(chip).join('')||'<span class="mini dim">none going into this week</span>'}</div>
+    ${hist.length?`<table class="fx"><thead><tr><th>week</th><th>opp</th><th style="text-align:left">carried</th><th>TDs</th></tr></thead><tbody>${hist.map(h=>`<tr><td>${h.w}</td><td>${h.l?tcell(h.l[LOG.opp]):''}</td><td style="text-align:left">${SG.filter(z=>z.f(h)).map(z=>`<span class="${z.kind==='neg'?'dim':''}">${esc(z.lbl)}</span>`).join(' · ')||'<span class="dim">—</span>'}</td><td>${h.td>0?'<b style="color:var(--green)">✓ '+h.td+'</b>':'<span style="color:var(--red)">✗</span>'}</td></tr>`).join('')}</tbody></table>`:''}</div>`}catch(e){return ''}}
 window.playerPop=function(n){
   if(!n)return;const old=document.getElementById('ppModal');if(old)old.remove();
   const dc=J.depth.find(d=>d.player===n)||J.depth.find(d=>d.log_name===n)||{};const ln=dc.log_name||n;
@@ -3037,6 +3048,7 @@ window.playerPop=function(n){
    return `<p class="mini" style="margin-top:8px">full ${se3} game log (${F.length} games) &middot; ${se3>2024?'2024 in the deep dive':''}</p>
    <table><thead>${ghead}</thead><tbody>${F.map(gr).join('')}</tbody></table>`})():''}
    </div><div id="ppV2" hidden>${rkT}</div>
+   ${wkPlayerCats(n)}
    <p style="margin-top:10px"><button class="mclose" style="position:static" id="ppDeepBtn">open full deep dive &rarr;</button></p>
   </div></div>`;
   document.body.insertAdjacentHTML('beforeend',html);
@@ -4582,6 +4594,8 @@ function weeklies2(){const el=$('#weeklies2');if(!el)return;
     const need=Math.max(2,Math.ceil(AL.length/2)),steady=rel.filter(r=>r.s.kind==='pos'&&r.qw>=need)[0],fade=rel.filter(r=>r.s.kind==='neg'&&r.qw>=2&&r.bw/r.qw>=.5)[0];
     const sigRows=s=>()=>({title:esc(s.lbl)+' · week by week',sub:esc(s.long||'')+' · '+S,cols:[{l:'week',g:false},{l:'carried it',g:false},{l:'scored',g:false},'hit rate','field',{l:'vs the field'},{l:'who scored',g:false}],
       rows:AL.map(a=>{const x=a.sig.find(y=>y.id===s.id);return Object.assign([a.w,x.n,x.k,x.hr!=null?{v:x.hr,h:wkPct(x.hr)}:null,{v:a.base,h:wkPct(a.base)},x.lift!=null?{v:x.lift,h:wkX(x.lift)}:null,a.P.filter(s.f).filter(p=>p.td>0).slice(0,4).map(p=>pshort(p.name)).join(', ')],{hi:a.w===W})})});
+    const sigRows2=s=>()=>{const p=sigRows(s)();const Q=[];AL.slice().reverse().forEach(a=>a.P.filter(s.f).sort((x,y)=>y.td-x.td).forEach(x=>Q.push(Object.assign([a.w,pn(x.name,x.team,true),tcell(x.team),slotchip(x.slot),w2opp(x),x.td,x.cs,w2res(x)],{hi:a.w===W}))));
+      p.sections=[{cols:p.cols,rows:p.rows},{h:`everyone who carried it, week by week · ${Q.length} player-games`,cols:[{l:'week',g:false},'player','team',{l:'slot',g:false},{l:'opp',g:false},{l:'TDs',g:false},{l:'signals',t:'how many of the eight core signals he carried'},{l:'scored',g:false}],rows:Q}];return p};
     const who=s=>()=>({title:esc(s.lbl)+` · week ${W}`,sub:`${esc(s.long||'')} · everyone carrying it, scorers first`,cols:['player','team',{l:'slot',g:false},{l:'opp',g:false},{l:'TDs',g:false},{l:'signals',t:'how many of the eight core signals he carried'},{l:'scored',g:false}],
       rows:st.P.filter(s.f).sort((a,b)=>b.td-a.td||b.cs-a.cs).map(x=>[pn(x.name,x.team,true),tcell(x.team),slotchip(x.slot),w2opp(x),x.td,x.cs,w2res(x)])});
     const wkRows=()=>({title:`${S} · week by week`,sub:'touchdowns, scorers and the best signal each week',cols:[{l:'week',g:false},'TDs',{l:'scored / field'},'field rate',{l:'best signal',g:false}],
@@ -4590,7 +4604,7 @@ function weeklies2(){const el=$('#weeklies2');if(!el)return;
       +(pos[0]?wkTile('best signal this week',esc(pos[0].lbl),`<b style="color:var(--green)">${wkPct(pos[0].hr)}</b> scored · ${wkX(pos[0].lift)} the field · ${pos[0].n} players`,'g',true):'')
       +(steady?wkTile('most reliable this season',esc(steady.s.lbl),`beat the field <b>${steady.bw} of ${steady.qw}</b> weeks · ${wkPct(steady.hr)} scored`,'g',true):'')
       +(fade?wkTile('best fade',esc(fade.s.lbl),`only <b>${wkPct(fade.hr)}</b> scored · held ${fade.bw} of ${fade.qw} weeks`,'r',true):''),
-      [wkRows,pos[0]?sigRows(pos[0]):null,steady?sigRows(steady.s):null,fade?sigRows(fade.s):null].filter(Boolean));
+      [wkRows,pos[0]?sigRows2(pos[0]):null,steady?sigRows2(steady.s):null,fade?sigRows2(fade.s):null].filter(Boolean));
     const mx=Math.max(.5,...ok.map(s=>s.hr))*1.05,good=s=>s.kind==='neg'?wkR(s.lift)<=.9:wkR(s.lift)>=1.1,bad=s=>s.kind==='neg'?wkR(s.lift)>=1.1:wkR(s.lift)<=.9;
     const bar=s=>`<div class="w2bar" data-th="${thReg(who(s))}" title="click for everyone carrying it"><span class="l">${esc(s.lbl)}<i>${s.n} players</i></span><span class="b"><u style="left:${(100*st.base/mx).toFixed(1)}%" title="the field: ${wkPct(st.base)}"></u><i style="width:${(100*s.hr/mx).toFixed(1)}%;background:${good(s)?'var(--green)':bad(s)?'var(--red)':'#6b6b6b'}"></i></span><b style="color:${good(s)?'var(--green)':bad(s)?'var(--red)':'var(--txt)'}">${wkPct(s.hr)}</b><em>${s.k} of ${s.n}</em></div>`;
     $('#w2Bh').innerHTML=`what called the touchdowns — week ${W} <span class="f">how often the players carrying each signal scored · the white line is the field (${wkPct(st.base)}) · green = beat it by 10%+, red = fell short · click a bar for the players</span>`;
@@ -4598,7 +4612,7 @@ function weeklies2(){const el=$('#weeklies2');if(!el)return;
     const verdict=r=>r.qw<2?['thin sample','']:r.bw/r.qw>=.67?[r.s.kind==='neg'?'trust the fade':'trust','g']:r.bw/r.qw>=.5?['lean on','a']:['noise','r'];
     $('#w2Gh').innerHTML=`reliable, or noise? — ${S}, weeks ${AL[0].w}–${W} <span class="f">one square per week: green = beat the field by 10%+ that week, red = didn't, grey = too few players · a row of green is a signal to trust · click a row for the numbers</span>`;
     $('#w2Grid').innerHTML=`<div class="w2gh"><span>signal</span><span class="sq">${AL.map(a=>`<i title="week ${a.w}">${a.w}</i>`).join('')}</span><span>beat the field</span></div>`+rel.map(r=>{const [v,t]=verdict(r);
-      return `<div class="w2row" data-th="${thReg(sigRows(r.s))}"><span class="l">${esc(r.s.lbl)}${r.s.kind==='neg'?' <i class="tg">fade</i>':''}</span><span class="sq">${r.cells.map((c,i)=>`<i class="${c>0?'w':c<0?'l':'o'}" title="week ${AL[i].w}"></i>`).join('')}</span><span class="r"><b style="color:${r.bw/r.qw>=.67?'var(--green)':r.bw/r.qw<.5?'var(--red)':'var(--txt)'}">${r.bw} / ${r.qw}</b><em class="${t}">${v}</em></span></div>`}).join('');
+      return `<div class="w2row" data-th="${thReg(sigRows2(r.s))}"><span class="l">${esc(r.s.lbl)}${r.s.kind==='neg'?' <i class="tg">fade</i>':''}</span><span class="sq">${r.cells.map((c,i)=>`<i class="${c>0?'w':c<0?'l':'o'}" title="week ${AL[i].w}"></i>`).join('')}</span><span class="r"><b style="color:${r.bw/r.qw>=.67?'var(--green)':r.bw/r.qw<.5?'var(--red)':'var(--txt)'}">${r.bw} / ${r.qw}</b><em class="${t}">${v}</em></span></div>`}).join('');
     const sc=st.P.filter(x=>x.td>0).sort((a,b)=>b.td-a.td||b.cs-a.cs),miss=st.P.filter(x=>x.td===0&&x.cs>=4).sort((a,b)=>b.cs-a.cs).slice(0,20);
     const chip=x=>`<span class="wkpc ${x.td>0?'w':'l'}">${pn(x.name,x.team,true)}<i>${x.td>1?x.td+' TD':x.td===1?'TD':''}${x.td>0&&x.cs?' · ':''}${x.cs?x.cs+' sig':''}</i></span>`;
     $('#w2Sh').innerHTML=`who scored — week ${W} <span class="f">${sc.length} starters · "sig" = how many of the eight core signals pointed at him before kickoff · click a name for his card</span>`;
@@ -4620,6 +4634,10 @@ function wkGrid2(){const el=$('#wkgrid2');if(!el)return;
     const played=W0<=Math.max(...F.weeks);$('#g2Note').innerHTML=`week ${W0}${played?' · played':gr.length?' · grading':' · ahead'} · ${R.length} starters in view · categories judged on ${esc(D.lbl)}`;
     const cat=r=>()=>({title:esc(r.s.lbl)+' · week by week',sub:esc(r.s.long||'')+' · green squares = beat the field by 10%+ that week',cols:[{l:'week',g:false},{l:'carried it',g:false},{l:'scored',g:false},'hit rate','field',{l:'vs the field'},{l:'who scored',g:false}],
       rows:D.Wk.map(w=>{const a=wkStats(F,w,w2keep,SG),x=a.sig.find(y=>y.id===r.s.id);return [w,x.n,x.k,x.hr!=null?{v:x.hr,h:wkPct(x.hr)}:null,{v:a.base,h:wkPct(a.base)},x.lift!=null?{v:x.lift,h:wkX(x.lift)}:null,a.P.filter(r.s.f).filter(p=>p.td>0).slice(0,4).map(p=>pshort(p.name)).join(', ')]})});
+    const cat2=r=>()=>{const p=cat(r)();const now=R.filter(x=>x.cells[r.s.id]&&x.cells[r.s.id].now).sort((a,b)=>(wgTp(b)??-1)-(wgTp(a)??-1));
+      const Q=[];D.Wk.slice().reverse().forEach(w=>{const a=wkStats(F,w,w2keep,SG);a.P.filter(r.s.f).sort((x,y)=>y.td-x.td).forEach(x=>Q.push([w,pn(x.name,x.team,true),tcell(x.team),slotchip(x.slot),w2opp(x),x.td,w2res(x)]))});
+      p.sections=[{cols:p.cols,rows:p.rows},{h:`carrying it into week ${W0} · ${now.length} starters`,cols:['player','team',{l:'slot',g:false},{l:'opp',g:false},{l:'TD %',t:'TD Picks chance'},{l:'categories',t:'reliable categories he carries'},{l:'result',g:false}],rows:now.map(x=>[pn(x.name,x.team,true),tcell(x.team),slotchip(x.slot),w2opp(x),x.tp?{v:x.tp.p,h:Math.round(100*x.tp.p)+'%'}:null,x.cat,x.done?w2res(x.done):'—'])},
+        {h:`everyone who carried it in a played week · ${Q.length} player-games`,cols:[{l:'week',g:false},'player','team',{l:'slot',g:false},{l:'opp',g:false},{l:'TDs',g:false},{l:'scored',g:false}],rows:Q}];return p};
     const hist=()=>{const wks=F.weeks.concat([Math.max(...F.weeks)+1]).filter(w=>w>=2);
       return {title:'Category Grid v2 · week by week',sub:'each week judged only from the weeks before it · the week on screen is tinted',cols:[{l:'week',g:false},{l:'in view',g:false},{l:'most consistent',g:false},'carry 3+',{l:'top pick',g:false},{l:'graded',t:'listed players who scored'},{l:'field'}],
         rows:wks.map(w=>{const d=wgData(W2CORE,'cur',null,w),R2=d.R.filter(x=>inP(x.pos)),B2=d.best.filter(x=>inP(x.pos)),g2=R2.filter(x=>x.done),k2=g2.filter(x=>x.done.td>0).length,t2=d.PK[0];
@@ -4629,9 +4647,9 @@ function wkGrid2(){const el=$('#wkgrid2');if(!el)return;
       +wkTile('carry three or more',String(c3),'starters stacking 3+ reliable categories',c3?'g':'')
       +(B[0]?wkTile('top pick',esc(pshort(B[0].name)),`${B[0].cat} categories${B[0].tp?' · TD chance '+Math.round(100*B[0].tp.p)+'%':''}${B[0].done?' · '+(B[0].done.td>0?'scored':'no TD'):''}`,'g',true):'')
       +wkTile('graded',gr.length?`${gk}<span class="dim"> / ${gr.length}</span>`:'—',gr.length?`scored · ${wkPct(gk/gr.length)} vs field ${wkPct(D.base)}`:'✓ / ✗ land as the games are played',gr.length&&D.base?(gk/gr.length>=D.base*1.1?'g':gk/gr.length<=D.base*.9?'r':''):''),
-      [hist,...(top?[cat(top)]:[]),hist,...(B[0]?[hist]:[]),hist]);
+      [hist,...(top?[cat2(top)]:[]),hist,...(B[0]?[hist]:[]),hist]);
     const PKs=D.PK.slice().sort(wgRank),fad=D.fades.slice(0,3);
-    const cbar=(r,tone)=>`<div class="g2cat" data-th="${thReg(cat(r))}" title="click for the week-by-week"><span>${esc(r.s.lbl)}</span><span class="b"><i style="width:${(100*r.bw/Math.max(1,r.qw)).toFixed(0)}%;background:${tone==='r'?'var(--red)':'var(--green)'}"></i></span><b>${r.bw}/${r.qw}</b><em>${wkX(r.lift)}</em></div>`;
+    const cbar=(r,tone)=>`<div class="g2cat" data-th="${thReg(cat2(r))}" title="click for the week-by-week"><span>${esc(r.s.lbl)}</span><span class="b"><i style="width:${(100*r.bw/Math.max(1,r.qw)).toFixed(0)}%;background:${tone==='r'?'var(--red)':'var(--green)'}"></i></span><b>${r.bw}/${r.qw}</b><em>${wkX(r.lift)}</em></div>`;
     $('#g2Ch').innerHTML=`the categories that keep working <span class="f">weeks beaten the field by 10%+ over the weeks qualified (${esc(D.lbl)}) · × = scored vs the field overall · click for the numbers</span>`;
     $('#g2Cats').innerHTML=(PKs.map(r=>cbar(r,'g')).join('')||'<p class="note mini">no category has beaten the field consistently yet</p>')+(fad.length?`<div class="w2sub">fades — carrying these has meant fewer touchdowns</div>${fad.map(r=>cbar(r,'r')).join('')}`:'');
     const sq=x=>`<span class="g2sq" title="${PKs.filter(r=>x.cells[r.s.id]&&x.cells[r.s.id].now).map(r=>r.s.lbl).join(' · ')||'none'}">${PKs.map(r=>`<i class="${x.cells[r.s.id]&&x.cells[r.s.id].now?'on':''}"></i>`).join('')}</span>`;
@@ -6661,6 +6679,7 @@ Object.assign(NOTES,{
 Object.assign(NOTES,{metaprop:['v23','new tab: META for player props — every posted prop line scored over / under on the defense\'s rank for that exact stat, the prop model, his last-10 hit rate, his average and his head-to-head; META\'s five columns, data sets, filters and leader cards']});
 Object.assign(NOTES,{tdpicks:['v26','follows the week picked up top like every other tab — the live board for the week being picked; a finished week shows every player who played, rated by the model refit on earlier weeks only and graded; the week importing is rated from the games before it and graded as box scores land; weeks to come get an early look (today\'s depth chart and form vs that opponent, implied totals estimated until lines post) · track-record bars jump to their week']});
 Object.assign(NOTES,{wkgrid:['v26','new tab: the Weeklies categories as one composite board — the most consistent categories across every recorded week as columns, every player on the week\'s slate as a row with his own record in each, CAT / REC / TD % and a square per category, a best-picks card, the TD Grid\'s five columns; follows the week, slate, game, team and position filters up top']});
+Object.assign(NOTES,{v38:['v38','every player card lists the Weeklies categories he carries into the week and what he carried each played week \u00b7 the category pop-ups on Weeklies v2 / Category Grid v2 list every qualifying player week by week']});
 Object.assign(NOTES,{v37:['v37','Markets v2 deleted (it was F5 Markets rendered twice) · METAPROP lives behind a META | METAPROP switch on F2 Matchups · F6 TEST is empty']});
 Object.assign(NOTES,{pos36:['v36','positions are letters now (Q R W T D), and a player row shows his depth slot (QB1, RB2, WR3\u2026) wherever it knows it \u00b7 the F6 Dev / API tab is gone: everything it showed is on the \u2699 dev page']});
 Object.assign(NOTES,{promote35:['v35','META now lives on F2 Matchups \u00b7 TD Picks, Backtest and Card v2 on F5 Picks \u00b7 Weeklies and Category Grid (v2 first, v1 behind the switch) on F1 Home \u00b7 API behind Dev \u00b7 Lab Grid, TD Grid, Head to Head, Game View, Splits and Depth Delta left TEST (their F2 / F3 versions stay)']});
