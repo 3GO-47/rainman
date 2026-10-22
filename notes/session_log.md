@@ -776,3 +776,7 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n90 — v36 (2026-10-21): Dev/API out of TEST · position letters + depth slots
 - Verified the F6 Dev tab = framed dev.html and that every API-tab section (plan/used/logged tiles, credits per day, policy board, pull log) is on dev.html; added the by-reason / by-league credit tables to build_dev.py (the one thing missing). Dev and API removed from TEST (⚙ dev link stays). TEST now: METAPROP, Markets v2.
 - posIcon renders a letter (Q R W T D) instead of the glyphs; wherever a player row knows his depth slot (META, METAPROP, Lab/Player grids, Category Grid cards, Player Board tables) it shows the slot (QB1, RB2, WR3…) instead; slotchip drops the glyph.
+
+## n91 — v37 (2026-10-21): Markets v2 deleted · METAPROP behind META · fix_loop.ps1
+- Markets v2 removed from the registry and BOOT (it was bets11() rendered twice). METAPROP moved into F2 Matchups as META's pair (META | METAPROP switch). F6 TEST is empty and the top nav hides it. Every registered view renders, 0 JS errors.
+- scripts/local/fix_loop.ps1: diagnose + repair the two Task Scheduler tasks (state, last result, events, power wake timers; re-applies wake-to-run / start-when-available / battery / S4U "run whether logged on or not"; adds a 12:10 safety trigger; starts the loop and watches the log). Josh runs it in an admin PowerShell.
