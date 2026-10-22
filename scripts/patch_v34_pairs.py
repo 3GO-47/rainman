@@ -12,15 +12,17 @@ def rep(old, new, n=1):
     c = s.count(old); assert c == n, ('match count %d != %d for: %s' % (c, n, old[:100])); s = s.replace(old, new)
 
 # ---------- A. paired views ----------
-rep("/* v33 Weeklies v2 / Category Grid v2 */", "/* v34 paired views */#pairBar{display:flex;gap:10px;align-items:center;padding:5px 12px;border-bottom:1px solid var(--edge);background:#050505;font-size:11.5px}#pairBar .seg button.on{background:#1a1a1a;color:var(--txt)}#pairBar .seg button{padding:4px 11px;font-size:11px}@media(max-width:760px){#pairBar .dim{display:none}}\n/* v33 Weeklies v2 / Category Grid v2 */")
+rep("/* v33 Weeklies v2 / Category Grid v2 */", "/* v34 paired views */.pairseg{margin-left:auto}.controls.pairrow{justify-content:flex-end;padding:4px 0 0}.pairseg button.on{background:#1a1a1a;color:var(--txt)}\n/* v33 Weeklies v2 / Category Grid v2 */")
 pairs = r'''/* v34: paired views — two views of the same thing live under ONE sub-tab with a switch; the choice sticks for the session */
 const PAIRS={tdboard:['tdbx','Grid','Board','TD'],labgridp:['lab','Grid','Board','Players'],h2hgridp:['h2hp','Grid','Board','H2H'],weeklies:['weeklies2','v1','v2','Weeklies'],wkgrid:['wkgrid2','v1','v2','Category Grid']};
 const PAIR_OF={};Object.entries(PAIRS).forEach(([a,[b]])=>{PAIR_OF[b]=a});const PAIR_PREF={};
-function pairBar(it){let bar=$('#pairBar');if(!bar){bar=document.createElement('div');bar.id='pairBar';$('#sub').insertAdjacentElement('afterend',bar)}
-  const a=PAIRS[it.id]?it.id:PAIR_OF[it.id];if(!a||!itemOK(ITEMS[a])||!itemOK(ITEMS[PAIRS[a][0]])){bar.hidden=true;return}
-  const [b,la,lb,name]=PAIRS[a],isB=it.id===b;bar.hidden=false;
-  bar.innerHTML=`<span class="mini">${name}</span><span class="seg"><button class="${isB?'':'on'}" data-g="${a}" title="${esc(ITEMS[a].desc)}">${esc(ITEMS[a].label)}</button><button class="${isB?'on':''}" data-g="${b}" title="${esc(ITEMS[b].desc)}">${esc(ITEMS[b].label)}</button></span><span class="mini dim">two views of the same thing — pick one, it sticks</span>`;
-  bar.querySelectorAll('button').forEach(x=>x.onclick=()=>{PAIR_PREF[a]=x.dataset.g===b?'b':'a';go(x.dataset.g,{pair:1})})}
+function pairBar(it){document.querySelectorAll('.pairseg').forEach(e=>e.remove());const old=$('#pairBar');if(old)old.remove();
+  const a=PAIRS[it.id]?it.id:PAIR_OF[it.id];if(!a||!itemOK(ITEMS[a])||!itemOK(ITEMS[PAIRS[a][0]]))return;
+  const [b]=PAIRS[a],isB=it.id===b,M={tdbx:'#tdBx',lab:'#lab',h2hp:'#h2hP',tdboard:'#tdb'};
+  const panel=document.querySelector(M[it.id]||('#'+(it.sub||it.c)));if(!panel)return;
+  let row=panel.querySelector(':scope > .controls');if(!row){row=document.createElement('div');row.className='controls pairrow';panel.insertBefore(row,panel.firstChild)}
+  const seg=document.createElement('span');seg.className='seg pairseg';seg.innerHTML=`<button class="${isB?'':'on'}" data-g="${a}">${esc(ITEMS[a].label)}</button><button class="${isB?'on':''}" data-g="${b}">${esc(ITEMS[b].label)}</button>`;
+  row.appendChild(seg);seg.querySelectorAll('button').forEach(x=>x.onclick=()=>{PAIR_PREF[a]=x.dataset.g===b?'b':'a';go(x.dataset.g,{pair:1})})}
 '''
 rep("function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec.items.filter(itemOK);nav.hidden=its.length<2;\n  nav.innerHTML=its.map(it=>`<a class=\"sitem\" data-i=\"${it.id}\" href=\"#v=${it.id}\" title=\"${esc(it.desc)}\">${it.label}</a>`).join('');",
     pairs + "function buildSub(sec){const nav=$('#snav');nav.dataset.sec=sec.id;const its=sec.items.filter(itemOK).filter(it=>!(PAIR_OF[it.id]&&itemOK(ITEMS[PAIR_OF[it.id]])));nav.hidden=its.length<2;\n  nav.innerHTML=its.map(it=>`<a class=\"sitem\" data-i=\"${it.id}\" href=\"#v=${it.id}\" title=\"${esc(PAIRS[it.id]&&itemOK(ITEMS[PAIRS[it.id][0]])?it.desc+' · or: '+ITEMS[PAIRS[it.id][0]].desc:it.desc)}\">${PAIRS[it.id]&&itemOK(ITEMS[PAIRS[it.id][0]])?PAIRS[it.id][3]:it.label}</a>`).join('');")
