@@ -421,6 +421,8 @@ def main():
         seen[d] = w
         hist.append(dict(week=w, date=d, rows=[[r['player'], r['team'], r['slot'], r['injury'], r.get('depth', '')] for r in csv.DictReader(open(f, encoding='utf-8'))]))
     data['depthHist'] = hist
+    # v39: first-TD layer (scripts/build_first_td.py)
+    data['firstTd'] = json.load(open('data/processed/first_td.json')) if LEAGUE == 'nfl' and os.path.exists('data/processed/first_td.json') else None
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}
     data['league'] = league_config()

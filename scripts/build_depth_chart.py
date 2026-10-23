@@ -7,12 +7,8 @@ Usage: python3 build_depth_chart.py <raw_txt> <date YYYY-MM-DD>
 ESPN lists injured starters in their old spot (Baker Mayfield QB1 with an "O" tag for weeks), so the raw
 chart alone mis-slots the actual starter. Effective slotting, per team and position row:
   1. players tagged OUT / IR / PUP / SUSP / NFI / D drop to the bottom of the row; everyone else moves up
-  2. usage check (RB, TE, FB and the three WR rows): if the man directly below has at least 25% more
-     opportunities (RB: carries + targets, WR/TE: targets) over the team's last two games AND a real
-     workload (>= 10 RB, >= 8 WR/TE), he moves above — one adjacent pass, so a committee cannot leapfrog
-     two spots on one hot week. QBs never swap on usage (QB changes are injury / benching, visible in ESPN).
-  3. WR starters (the top of rows WR1/WR2/WR3) are then ordered by the same last-two-games targets rule, so
-     the DvP slot "WR1" is the receiver actually being fed, not ESPN's row label
+  2. (removed 2026-10-22) usage never moves a player; ESPN's order is the chart. Usage is carried as l2 / se / trend only.
+  3. WR starters = the top of ESPN rows WR1 / WR2 / WR3, in that order; everyone deeper is WR4+.
 Slot convention: QB1/QB2.., RB1/RB2.., TE1/TE2.. by effective depth; WR starters = WR1/WR2/WR3, the rest WR4+.
 Injury: 1 active, 0 questionable (Q), -1 out.
 Extra columns: espn_depth (raw listing), note (why a player moved), trend (+1 rising / 0 / -1 fading:
@@ -103,16 +99,9 @@ def main(raw, date):
         for r in act:
             ahead_out = [o['player'].split()[-1] for o in out if o['espn_depth'] < r['espn_depth']]
             if ahead_out: r['note'] = 'promoted — ' + ', '.join(ahead_out) + ' out'
-        if kind != 'QB':
-            floor = 10 if kind == 'RB' else 8
-            for i in range(len(act) - 1):
-                a, b = act[i], act[i + 1]
-                n2 = len(last2.get(a['team'], [])) or 1
-                la, lb = a['l2'] * n2, b['l2'] * n2
-                if lb >= 1.25 * la and lb >= floor:
-                    act[i], act[i + 1] = b, a
-                    b['note'] = (b['note'] + ' · ' if b['note'] else '') + f'usage — {lb:g} vs {la:g} opps last {n2} gms'
-                    a['note'] = (a['note'] + ' · ' if a['note'] else '') + f'passed by {b["player"].split()[-1]} ({lb:g} vs {la:g} opps)'
+        # v39 (2026-10-22, Josh): NO usage-based swapping — ESPN's order is the depth chart. The old rule put Saquon Barkley at
+        # RB2 behind Dameon Pierce ("33 vs 0 opps") after two missed games, Breece Hall at RB3, Kamara at RB2, Harrison Jr. at WR4+.
+        # Usage still rides along as l2 / se / trend for the dashboard to show; it never moves a man.
         return act + out
 
     out_rows = []
@@ -129,16 +118,7 @@ def main(raw, date):
         for pos in ('WR1', 'WR2', 'WR3'):
             g = sorted([r for r in T if r['pos_row'] == pos], key=lambda r: r['espn_depth'])
             if g: wr_rows[pos] = settle(g, 'WR')
-        starters = [v[0] for v in wr_rows.values() if v]
-        # pecking order = targets per game this season (shrunk toward 3/gm over 2 games of prior) blended 70/30 with the last two games;
-        # ESPN's WR1/WR2/WR3 rows are alignments (X / Z / slot), not a pecking order, and a single hot week should not flip them
-        def wr_rate(r):
-            se = (float(r.get('se') or 0) * int(r.get('gp') or 0) + 2 * 3.0) / (int(r.get('gp') or 0) + 2)
-            return 0.7 * se + 0.3 * float(r.get('l2') or 0) if int(r.get('gp') or 0) else 0.0
-        order = sorted(starters, key=lambda r: -wr_rate(r))
-        for i, (a, b) in enumerate(zip(starters, order)):
-            if a is not b: b['note'] = (b['note'] + ' · ' if b['note'] else '') + f'usage — {wr_rate(b):.1f} vs {wr_rate(a):.1f} tgt/gm (ESPN row {b["pos_row"]})'
-        starters = order
+        starters = [v[0] for v in wr_rows.values() if v]          # ESPN row order: WR1 row -> WR1, WR2 row -> WR2, WR3 row -> WR3 (v39: no target-based reorder)
         for i, r in enumerate(starters, 1):
             r['depth'] = 1; r['slot'] = f'WR{i}'; out_rows.append(r)
         for pos, v in wr_rows.items():

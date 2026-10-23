@@ -2,8 +2,8 @@ player,team,slot,injury,pos_row,depth,espn_depth,note,trend,l2,se,gp,log_name
 Jacoby Brissett,ARI,QB1,1,QB,1,1,,0,41.0,39.0,6,Jacoby Brissett
 Gardner Minshew II,ARI,QB2,1,QB,2,2,,0,0.0,0.0,0,Gardner Minshew II
 Carson Beck,ARI,QB3,1,QB,3,3,,0,0.0,0.0,0,Carson Beck
-Tyler Allgeier,ARI,RB1,1,RB,1,2,usage — 25 vs 13 opps last 2 gms,0,12.5,11.2,6,Tyler Allgeier
-Jeremiyah Love,ARI,RB2,1,RB,2,1,passed by Allgeier (25 vs 13 opps),-1,6.5,16.2,5,Jeremiyah Love
+Jeremiyah Love,ARI,RB1,1,RB,1,1,,-1,6.5,16.2,5,Jeremiyah Love
+Tyler Allgeier,ARI,RB2,1,RB,2,2,,0,12.5,11.2,6,Tyler Allgeier
 Bam Knight,ARI,RB3,1,RB,3,3,,0,0.0,0.0,0,Bam Knight
 James Conner,ARI,RB4,-1,RB,4,4,,0,0.0,0.0,0,James Conner
 Trey Benson,ARI,RB5,-1,RB,5,5,,0,0.0,0.0,0,Trey Benson
@@ -65,9 +65,9 @@ Dalton Kincaid,BUF,TE1,1,TE,1,1,,0,5.0,4.8,6,Dalton Kincaid
 Dawson Knox,BUF,TE2,1,TE,2,2,,0,2.0,1.7,6,Dawson Knox
 Jackson Hawes,BUF,TE3,1,TE,3,3,,0,0.0,1.0,1,Jackson Hawes
 Keleki Latu,BUF,TE4,1,TE,4,4,,0,0.0,0.0,0,Keleki Latu
-Khalil Shakir,BUF,WR1,1,WR2,1,1,usage — 4.7 vs 3.0 tgt/gm (ESPN row WR2),0,4.5,5.3,6,Khalil Shakir
-Keon Coleman,BUF,WR2,1,WR3,1,1,usage — 3.8 vs 4.7 tgt/gm (ESPN row WR3),0,4.0,4.0,6,Keon Coleman
-DJ Moore,BUF,WR3,1,WR1,1,1,usage — 3.0 vs 3.8 tgt/gm (ESPN row WR1),-1,0.0,5.0,4,D.J. Moore
+DJ Moore,BUF,WR1,1,WR1,1,1,,-1,0.0,5.0,4,D.J. Moore
+Khalil Shakir,BUF,WR2,1,WR2,1,1,,0,4.5,5.3,6,Khalil Shakir
+Keon Coleman,BUF,WR3,1,WR3,1,1,,0,4.0,4.0,6,Keon Coleman
 Joshua Palmer,BUF,WR4+,1,WR1,2,2,,0,1.0,2.8,4,Josh Palmer
 Tyrell Shavers,BUF,WR4+,1,WR1,3,3,,0,0.0,0.0,0,Tyrell Shavers
 Greg Dortch,BUF,WR4+,1,WR2,2,2,,0,0.0,0.0,0,Greg Dortch
@@ -96,16 +96,16 @@ Caleb Williams,CHI,QB1,1,QB,1,1,,-1,18.0,30.3,3,Caleb Williams
 Tyson Bagent,CHI,QB2,1,QB,2,2,,-1,10.5,21.3,3,Tyson Bagent
 Case Keenum,CHI,QB3,1,QB,3,3,,-1,9.5,26.5,2,Case Keenum
 D'Andre Swift,CHI,RB1,1,RB,1,1,,0,17.5,19.2,6,D'Andre Swift
-Roschon Johnson,CHI,RB2,1,RB,2,3,usage — 27 vs 0 opps last 2 gms,1,13.5,10.7,3,Roschon Johnson
-Kyle Monangai,CHI,RB3,1,RB,3,2,passed by Johnson (27 vs 0 opps),-1,0.0,16.2,4,Kyle Monangai
+Kyle Monangai,CHI,RB2,1,RB,2,2,,-1,0.0,16.2,4,Kyle Monangai
+Roschon Johnson,CHI,RB3,1,RB,3,3,,1,13.5,10.7,3,Roschon Johnson
 Brittain Brown,CHI,RB4,-1,RB,4,4,,0,0.0,0.0,0,Brittain Brown
 Colston Loveland,CHI,TE1,1,TE,1,1,,0,6.0,5.0,6,Colston Loveland
 Cole Kmet,CHI,TE2,1,TE,2,2,,0,2.0,1.8,6,Cole Kmet
 Sam Roush,CHI,TE3,1,TE,3,3,,0,0.0,1.7,3,Sam Roush
 Nikola Kalinic,CHI,TE4,-1,TE,4,4,,0,0.0,0.0,0,Nikola Kalinic
 Hayden Large,CHI,TE5,-1,TE,5,5,,0,0.0,0.0,0,Hayden Large
-Luther Burden III,CHI,WR1,1,WR2,1,1,usage — 6.4 vs 5.4 tgt/gm (ESPN row WR2),0,7.0,7.2,6,Luther Burden
-Rome Odunze,CHI,WR2,1,WR1,1,1,usage — 5.4 vs 6.4 tgt/gm (ESPN row WR1),0,6.5,5.5,6,Rome Odunze
+Rome Odunze,CHI,WR1,1,WR1,1,1,,0,6.5,5.5,6,Rome Odunze
+Luther Burden III,CHI,WR2,1,WR2,1,1,,0,7.0,7.2,6,Luther Burden
 Kalif Raymond,CHI,WR3,1,WR3,1,1,,0,3.0,4.8,6,Kalif Raymond
 Zavion Thomas,CHI,WR4+,1,WR1,2,2,,0,2.0,1.7,3,Zavion Thomas
 Jahdae Walker,CHI,WR4+,1,WR2,2,2,,0,0.5,1.0,2,Jahdae Walker
@@ -119,8 +119,8 @@ Drew Sample,CIN,TE2,1,TE,2,2,,0,0.5,2.0,3,Drew Sample
 Erick All Jr.,CIN,TE3,1,TE,3,3,,0,1.5,3.0,2,Erick All
 Jack Endries,CIN,TE4,1,TE,4,4,,0,0.0,0.0,0,Jack Endries
 Tanner Hudson,CIN,TE5,-1,TE,5,5,,0,2.0,1.8,4,Tanner Hudson
-Tee Higgins,CIN,WR1,1,WR2,1,1,usage — 7.9 vs 6.3 tgt/gm (ESPN row WR2),0,10.0,8.6,5,Tee Higgins
-Ja'Marr Chase,CIN,WR2,1,WR1,1,1,usage — 6.3 vs 7.9 tgt/gm (ESPN row WR1),0,6.5,7.6,5,Ja'Marr Chase
+Ja'Marr Chase,CIN,WR1,1,WR1,1,1,,0,6.5,7.6,5,Ja'Marr Chase
+Tee Higgins,CIN,WR2,1,WR2,1,1,,0,10.0,8.6,5,Tee Higgins
 Colbie Young,CIN,WR3,1,WR3,1,1,,0,0.0,1.0,2,Colbie Young
 Dohnte Meyers,CIN,WR4+,1,WR1,2,2,,0,5.5,3.6,5,Dohnte Meyers
 Mitchell Tinsley,CIN,WR4+,1,WR2,2,2,,0,3.5,7.0,1,Mitchell Tinsley
@@ -211,8 +211,8 @@ Mark Redman,GB,TE3,1,TE,3,3,,0,0.0,2.0,1,Mark Redman
 Josh Whyle,GB,TE4,1,TE,4,4,,0,0.0,0.0,0,Josh Whyle
 Luke Musgrave,GB,TE5,-1,TE,5,5,,0,0.0,0.0,0,Luke Musgrave
 Thomas Yassmin,GB,TE6,-1,TE,6,6,,0,0.0,0.0,0,Thomas Yassmin
-Matthew Golden,GB,WR1,1,WR2,1,1,usage — 8.5 vs 7.1 tgt/gm (ESPN row WR2),0,10.0,9.5,6,Matthew Golden
-Christian Watson,GB,WR2,1,WR1,1,1,usage — 7.1 vs 8.5 tgt/gm (ESPN row WR1),0,8.0,8.0,6,Christian Watson
+Christian Watson,GB,WR1,1,WR1,1,1,,0,8.0,8.0,6,Christian Watson
+Matthew Golden,GB,WR2,1,WR2,1,1,,0,10.0,9.5,6,Matthew Golden
 Savion Williams,GB,WR3,1,WR3,1,1,,0,2.0,4.0,1,Savion Williams
 Bo Melton,GB,WR4+,1,WR1,2,2,,0,2.0,1.6,5,Bo Melton
 Jayden Reed,GB,WR4+,-1,WR1,3,3,,-1,0.0,4.0,2,Jayden Reed
@@ -221,8 +221,8 @@ Skyy Moore,GB,WR4+,-1,WR3,2,2,,0,0.5,2.8,5,Skyy Moore
 C.J. Stroud,HOU,QB1,1,QB,1,1,,0,34.0,36.5,6,C.J. Stroud
 Davis Mills,HOU,QB2,1,QB,2,2,,0,0.0,0.0,0,Davis Mills
 Graham Mertz,HOU,QB3,-1,QB,3,3,,0,0.0,0.0,0,Graham Mertz
-Woody Marks,HOU,RB1,1,RB,1,2,usage — 37 vs 5 opps last 2 gms,1,18.5,12.3,6,Woody Marks
-David Montgomery,HOU,RB2,1,RB,2,1,passed by Marks (37 vs 5 opps),-1,2.5,11.8,5,David Montgomery
+David Montgomery,HOU,RB1,1,RB,1,1,,-1,2.5,11.8,5,David Montgomery
+Woody Marks,HOU,RB2,1,RB,2,2,,1,18.5,12.3,6,Woody Marks
 Dare Ogunbowale,HOU,RB3,1,RB,3,3,,0,0.0,0.0,0,Dare Ogunbowale
 British Brooks,HOU,RB4,-1,RB,4,4,,0,0.0,0.0,0,British Brooks
 Dalton Schultz,HOU,TE1,1,TE,1,1,,0,5.0,6.2,6,Dalton Schultz
@@ -231,11 +231,11 @@ Cade Stover,HOU,TE3,1,TE,3,3,,0,0.0,0.7,3,Cade Stover
 Brevin Jordan,HOU,TE4,1,TE,4,4,,0,0.5,1.0,2,Brevin Jordan
 Marlin Klein,HOU,TE5,1,TE,5,5,,0,0.0,1.0,1,Marlin Klein
 Nico Collins,HOU,WR1,1,WR1,1,1,,0,6.0,7.5,4,Nico Collins
-Jaylin Noel,HOU,WR2,1,WR3,1,1,usage — 3.7 vs 3.6 tgt/gm (ESPN row WR3),0,4.5,3.5,6,Jaylin Noel
-Kayshon Boutte,HOU,WR3,1,WR2,1,2,usage — 8 vs 4 opps last 2 gms · usage — 3.6 vs 3.7 tgt/gm (ESPN row WR2),0,4.0,3.5,6,Kayshon Boutte
+Marvin Harrison Jr.,HOU,WR2,1,WR2,1,1,,0,2.0,4.0,1,Marvin Harrison Jr.
+Jaylin Noel,HOU,WR3,1,WR3,1,1,,0,4.5,3.5,6,Jaylin Noel
 Xavier Hutchinson,HOU,WR4+,1,WR1,2,2,,0,4.0,5.7,6,Xavier Hutchinson
 Jayden Higgins,HOU,WR4+,-1,WR1,3,3,,0,0.0,0.0,0,Jayden Higgins
-Marvin Harrison Jr.,HOU,WR4+,1,WR2,2,1,passed by Boutte (8 vs 4 opps),0,2.0,4.0,1,Marvin Harrison Jr.
+Kayshon Boutte,HOU,WR4+,1,WR2,2,2,,0,4.0,3.5,6,Kayshon Boutte
 Tank Dell,HOU,WR4+,-1,WR3,2,2,,0,0.0,0.0,0,Tank Dell
 Daniel Jones,IND,QB1,1,QB,1,1,,0,43.0,36.3,6,Daniel Jones
 Anthony Richardson Sr.,IND,QB2,1,QB,2,2,,0,0.0,0.0,0,Anthony Richardson
@@ -249,8 +249,8 @@ Mo Alie-Cox,IND,TE3,1,TE,3,3,,0,1.5,1.3,3,Mo Alie-Cox
 Drew Ogletree,IND,TE4,1,TE,4,4,,0,0.0,0.0,0,Drew Ogletree
 Pharaoh Brown,IND,TE5,1,TE,5,5,,0,0.5,1.0,1,Pharaoh Brown
 Carson Towt,IND,TE6,-1,TE,6,6,,0,0.0,0.0,0,Carson Towt
-Keenan Allen,IND,WR1,1,WR2,1,1,usage — 7.6 vs 6.3 tgt/gm (ESPN row WR2),1,10.0,8.0,5,Keenan Allen
-Josh Downs,IND,WR2,1,WR1,1,1,usage — 6.3 vs 7.6 tgt/gm (ESPN row WR1),0,7.0,7.0,6,Josh Downs
+Josh Downs,IND,WR1,1,WR1,1,1,,0,7.0,7.0,6,Josh Downs
+Keenan Allen,IND,WR2,1,WR2,1,1,,1,10.0,8.0,5,Keenan Allen
 Laquon Treadwell,IND,WR3,1,WR3,1,1,,1,6.5,4.0,6,Laquon Treadwell
 Ashton Dulin,IND,WR4+,1,WR1,2,2,,0,0.0,3.5,2,Ashton Dulin
 Alec Pierce,IND,WR4+,-1,WR1,3,3,,0,0.0,3.5,2,Alec Pierce
@@ -285,8 +285,8 @@ Noah Gray,KC,TE2,1,TE,2,2,,0,3.0,2.2,5,Noah Gray
 Jake Briningstool,KC,TE3,1,TE,3,3,,0,0.0,1.0,2,Jake Briningstool
 Jared Wiley,KC,TE4,1,TE,4,4,,0,0.0,0.0,0,Jared Wiley
 John Michael Gyllenborg,KC,TE5,-1,TE,5,5,,0,0.0,0.0,0,John Michael Gyllenborg
-Xavier Worthy,KC,WR1,1,WR2,1,1,usage — 5.6 vs 3.2 tgt/gm (ESPN row WR2),0,7.0,5.8,5,Xavier Worthy
-Rashee Rice,KC,WR2,1,WR1,1,1,usage — 3.2 vs 5.6 tgt/gm (ESPN row WR1),-1,0.0,5.7,3,Rashee Rice
+Rashee Rice,KC,WR1,1,WR1,1,1,,-1,0.0,5.7,3,Rashee Rice
+Xavier Worthy,KC,WR2,1,WR2,1,1,,0,7.0,5.8,5,Xavier Worthy
 Jalen Royals,KC,WR3,1,WR3,1,1,,0,3.0,2.2,4,Jalen Royals
 Cyrus Allen,KC,WR4+,1,WR1,2,2,,0,1.5,1.3,3,Cyrus Allen
 Jeff Caldwell,KC,WR4+,-1,WR1,3,3,,0,0.0,0.0,0,Jeff Caldwell
@@ -297,20 +297,20 @@ Justin Herbert,LAC,QB1,1,QB,1,1,,0,30.5,30.0,6,Justin Herbert
 DJ Uiagalelei,LAC,QB2,1,QB,2,2,,0,0.0,0.0,0,DJ Uiagalelei
 Trey Lance,LAC,QB3,1,QB,3,3,,0,0.0,0.0,0,Trey Lance
 Omarion Hampton,LAC,RB1,1,RB,1,1,,0,13.0,15.0,6,Omarion Hampton
-Kimani Vidal,LAC,RB2,1,RB,2,3,usage — 21 vs 13 opps last 2 gms,1,10.5,8.2,4,Kimani Vidal
-Keaton Mitchell,LAC,RB3,1,RB,3,2,passed by Vidal (21 vs 13 opps),0,6.5,8.3,6,Keaton Mitchell
+Keaton Mitchell,LAC,RB2,1,RB,2,2,,0,6.5,8.3,6,Keaton Mitchell
+Kimani Vidal,LAC,RB3,1,RB,3,3,,1,10.5,8.2,4,Kimani Vidal
 Scott Matlock,LAC,FB1,1,FB,1,1,,0,0.0,0.0,0,Scott Matlock
 Alec Ingold,LAC,FB2,1,FB,2,2,,0,0.0,4.0,1,Alec Ingold
 Charlie Kolar,LAC,TE1,1,TE,1,1,,0,5.0,4.3,3,Charlie Kolar
 Oronde Gadsden,LAC,TE2,1,TE,2,2,,0,3.0,3.5,6,Oronde Gadsden II
 Hayden Rucci,LAC,TE3,1,TE,3,3,,0,0.5,1.0,1,Hayden Rucci
 David Njoku,LAC,TE4,1,TE,4,4,,-1,0.0,4.0,2,David Njoku
-KeAndre Lambert-Smith,LAC,WR1,1,WR2,1,2,usage — 9 vs 3 opps last 2 gms · usage — 4.8 vs 2.5 tgt/gm (ESPN row WR2),0,4.5,9.0,1,KeAndre Lambert-Smith
-Tre' Harris,LAC,WR2,1,WR3,1,1,usage — 3.7 vs 4.8 tgt/gm (ESPN row WR3),-1,2.0,5.0,5,Tre Harris
-Ladd McConkey,LAC,WR3,1,WR1,1,1,usage — 2.5 vs 3.7 tgt/gm (ESPN row WR1),0,0.5,3.6,5,Ladd McConkey
+Ladd McConkey,LAC,WR1,1,WR1,1,1,,0,0.5,3.6,5,Ladd McConkey
+Quentin Johnston,LAC,WR2,1,WR2,1,1,,-1,1.5,4.4,5,Quentin Johnston
+Tre' Harris,LAC,WR3,1,WR3,1,1,,-1,2.0,5.0,5,Tre Harris
 Brenen Thompson,LAC,WR4+,1,WR1,2,2,,0,0.0,3.0,1,Brenen Thompson
 Derius Davis,LAC,WR4+,1,WR1,3,3,,0,0.0,0.8,4,Derius Davis
-Quentin Johnston,LAC,WR4+,1,WR2,2,1,passed by Lambert-Smith (9 vs 3 opps),-1,1.5,4.4,5,Quentin Johnston
+KeAndre Lambert-Smith,LAC,WR4+,1,WR2,2,2,,0,4.5,9.0,1,KeAndre Lambert-Smith
 Theo Wease Jr.,LAC,WR4+,1,WR3,2,2,,0,2.0,2.0,2,Theo Wease Jr.
 Matthew Stafford,LAR,QB1,1,QB,1,1,,0,43.5,41.5,6,Matthew Stafford
 Stetson Bennett IV,LAR,QB2,1,QB,2,2,,0,0.0,3.0,1,Stetson Bennett
@@ -320,14 +320,14 @@ Kyren Williams,LAR,RB1,1,RB,1,1,,0,20.0,19.8,6,Kyren Williams
 Blake Corum,LAR,RB2,1,RB,2,2,,0,10.0,10.0,6,Blake Corum
 Dean Connors,LAR,RB3,1,RB,3,3,,0,0.0,0.0,0,Dean Connors
 Ronnie Rivers,LAR,RB4,-1,RB,4,4,,0,0.0,6.0,1,Ronnie Rivers
-Tyler Higbee,LAR,TE1,1,TE,1,2,usage — 10 vs 8 opps last 2 gms,0,5.0,5.8,5,Tyler Higbee
-Colby Parkinson,LAR,TE2,1,TE,2,1,passed by Higbee (10 vs 8 opps),0,4.0,2.6,5,Colby Parkinson
+Colby Parkinson,LAR,TE1,1,TE,1,1,,0,4.0,2.6,5,Colby Parkinson
+Tyler Higbee,LAR,TE2,1,TE,2,2,,0,5.0,5.8,5,Tyler Higbee
 Davis Allen,LAR,TE3,1,TE,3,3,,0,1.0,1.5,6,Davis Allen
 Max Klare,LAR,TE4,1,TE,4,4,,0,0.0,0.0,0,Max Klare
 Terrance Ferguson,LAR,TE5,-1,TE,5,5,,-1,0.0,4.0,3,Terrance Ferguson
 Puka Nacua,LAR,WR1,1,WR1,1,1,,0,15.5,13.0,4,Puka Nacua
-Konata Mumpfield,LAR,WR2,1,WR3,1,1,usage — 2.8 vs 1.6 tgt/gm (ESPN row WR3),0,1.5,3.4,5,Konata Mumpfield
-Jordan Whittington,LAR,WR3,1,WR2,1,1,usage — 1.6 vs 2.8 tgt/gm (ESPN row WR2),0,0.0,1.5,2,Jordan Whittington
+Jordan Whittington,LAR,WR2,1,WR2,1,1,,0,0.0,1.5,2,Jordan Whittington
+Konata Mumpfield,LAR,WR3,1,WR3,1,1,,0,1.5,3.4,5,Konata Mumpfield
 Tutu Atwell,LAR,WR4+,1,WR1,2,2,,0,0.5,1.3,3,Tutu Atwell
 Davante Adams,LAR,WR4+,-1,WR1,3,3,,-1,5.5,8.2,6,Davante Adams
 CJ Daniels,LAR,WR4+,1,WR2,2,2,,0,0.0,0.0,0,CJ Daniels
@@ -364,8 +364,8 @@ Seydou Traore,MIA,TE3,1,TE,3,3,,0,0.0,0.0,0,Seydou Traore
 Justin Joly,MIA,TE4,1,TE,4,4,,0,0.0,0.0,0,Justin Joly
 Cole Turner,MIA,TE5,-1,TE,5,5,,0,0.0,0.0,0,Cole Turner
 Malik Washington,MIA,WR1,1,WR1,1,1,,0,6.5,7.2,5,Malik Washington
-Chris Bell,MIA,WR2,1,WR3,1,1,usage — 2.8 vs 2.8 tgt/gm (ESPN row WR3),0,2.5,3.0,5,Chris Bell
-Caleb Douglas,MIA,WR3,1,WR2,1,1,usage — 2.8 vs 2.8 tgt/gm (ESPN row WR2),-1,0.0,5.0,2,Caleb Douglas
+Caleb Douglas,MIA,WR2,1,WR2,1,1,,-1,0.0,5.0,2,Caleb Douglas
+Chris Bell,MIA,WR3,1,WR3,1,1,,0,2.5,3.0,5,Chris Bell
 Kevin Coleman Jr.,MIA,WR4+,1,WR1,2,2,,0,5.5,4.2,4,Kevin Coleman
 Jalen Tolbert,MIA,WR4+,1,WR2,2,2,,0,1.5,1.5,2,Jalen Tolbert
 Jared Wayne,MIA,WR4+,1,WR3,2,2,,0,0.0,0.0,0,Jared Wayne
@@ -390,8 +390,8 @@ Drake Maye,NE,QB1,1,QB,1,1,,0,33.0,30.5,6,Drake Maye
 Tommy DeVito,NE,QB2,1,QB,2,2,,0,0.0,5.0,1,Tommy DeVito
 Behren Morton,NE,QB3,1,QB,3,3,,0,0.0,0.0,0,Behren Morton
 Rhamondre Stevenson,NE,RB1,1,RB,1,1,,0,15.0,15.0,6,Rhamondre Stevenson
-Corey Kiner,NE,RB2,1,RB,2,3,usage — 18 vs 13 opps last 2 gms,1,9.0,6.6,5,Corey Kiner
-TreVeyon Henderson,NE,RB3,1,RB,3,2,passed by Kiner (18 vs 13 opps),-1,6.5,10.8,5,TreVeyon Henderson
+TreVeyon Henderson,NE,RB2,1,RB,2,2,,-1,6.5,10.8,5,TreVeyon Henderson
+Corey Kiner,NE,RB3,1,RB,3,3,,1,9.0,6.6,5,Corey Kiner
 Myles Montgomery,NE,RB4,-1,RB,4,4,,0,0.0,0.0,0,Myles Montgomery
 Reggie Gilliam,NE,FB1,-1,FB,1,1,,0,0.0,2.0,1,Reggie Gilliam
 Hunter Henry,NE,TE1,1,TE,1,1,,0,4.5,4.0,6,Hunter Henry
@@ -399,8 +399,8 @@ Eli Raridon,NE,TE2,1,TE,2,2,,0,4.0,2.4,5,Eli Raridon
 Cameron Latu,NE,TE3,1,TE,3,3,,0,0.0,0.0,0,Cameron Latu
 Tanner Arkin,NE,TE4,1,TE,4,4,,0,0.0,0.0,0,Tanner Arkin
 Julian Hill,NE,TE5,-1,TE,5,5,,0,0.0,0.0,0,Julian Hill
-DeMario Douglas,NE,WR1,1,WR2,1,1,usage — 5.1 vs 5.0 tgt/gm (ESPN row WR2),0,6.5,5.0,6,DeMario Douglas
-A.J. Brown,NE,WR2,1,WR1,1,1,usage — 5.0 vs 5.1 tgt/gm (ESPN row WR1),-1,5.0,7.0,2,A.J. Brown
+A.J. Brown,NE,WR1,1,WR1,1,1,,-1,5.0,7.0,2,A.J. Brown
+DeMario Douglas,NE,WR2,1,WR2,1,1,,0,6.5,5.0,6,DeMario Douglas
 Efton Chism III,NE,WR3,1,WR3,1,1,,0,3.5,2.8,5,Efton Chism
 Kyle Williams,NE,WR4+,1,WR1,2,2,,0,2.0,2.2,5,Kyle Williams
 Jeremiah Webb,NE,WR4+,1,WR1,3,3,,0,0.0,0.0,0,Jeremiah Webb
@@ -409,8 +409,8 @@ Romeo Doubs,NE,WR4+,-1,WR3,2,2,,-1,2.0,4.0,6,Romeo Doubs
 Tyler Shough,NO,QB1,1,QB,1,1,,-1,27.5,39.2,6,Tyler Shough
 Spencer Rattler,NO,QB2,1,QB,2,2,,0,0.0,0.0,0,Spencer Rattler
 Zach Wilson,NO,QB3,1,QB,3,3,,0,0.0,0.0,0,Zach Wilson
-Kendre Miller,NO,RB1,1,RB,1,2,usage — 32 vs 16 opps last 2 gms,1,16.0,11.4,5,Kendre Miller
-Alvin Kamara,NO,RB2,1,RB,2,1,passed by Miller (32 vs 16 opps),-1,8.0,11.0,5,Alvin Kamara
+Alvin Kamara,NO,RB1,1,RB,1,1,,-1,8.0,11.0,5,Alvin Kamara
+Kendre Miller,NO,RB2,1,RB,2,2,,1,16.0,11.4,5,Kendre Miller
 CJ Donaldson,NO,RB3,1,RB,3,3,,1,6.0,3.8,6,CJ Donaldson
 Travis Etienne Jr.,NO,RB4,-1,RB,4,4,,-1,0.0,14.3,3,Travis Etienne
 Ty Chandler,NO,RB5,-1,RB,5,5,,0,0.0,0.0,0,Ty Chandler
@@ -446,9 +446,9 @@ Calvin Austin III,NYG,WR4+,-1,WR2,2,2,,0,0.0,0.0,0,Calvin Austin III
 Braxton Berrios,NYG,WR4+,-1,WR3,2,2,,0,0.0,1.0,1,Braxton Berrios
 Geno Smith,NYJ,QB1,1,QB,1,1,,0,30.0,29.5,6,Geno Smith
 Cade Klubnik,NYJ,QB2,1,QB,2,2,,0,0.0,0.0,0,Cade Klubnik
-Braelon Allen,NYJ,RB1,1,RB,1,2,usage — 47 vs 0 opps last 2 gms,1,23.5,14.5,6,Braelon Allen
-Isaiah Davis,NYJ,RB2,1,RB,2,3,usage — 12 vs 0 opps last 2 gms,0,6.0,6.0,2,Isaiah Davis
-Breece Hall,NYJ,RB3,1,RB,3,1,passed by Allen (47 vs 0 opps) · passed by Davis (12 vs 0 opps),-1,0.0,20.3,3,Breece Hall
+Breece Hall,NYJ,RB1,1,RB,1,1,,-1,0.0,20.3,3,Breece Hall
+Braelon Allen,NYJ,RB2,1,RB,2,2,,1,23.5,14.5,6,Braelon Allen
+Isaiah Davis,NYJ,RB3,1,RB,3,3,,0,6.0,6.0,2,Isaiah Davis
 Kene Nwangwu,NYJ,RB4,1,RB,4,4,,0,0.0,0.0,0,Kene Nwangwu
 Chip Trayanum,NYJ,RB5,-1,RB,5,5,,0,0.0,0.0,0,Chip Trayanum
 Mason Taylor,NYJ,TE1,1,TE,1,1,,0,4.5,4.0,3,Mason Taylor
@@ -467,8 +467,8 @@ Tanner McKee,PHI,QB1,1,QB,1,1,,0,22.5,45.0,1,Tanner McKee
 Cole Payton,PHI,QB2,1,QB,2,2,,0,0.0,0.0,0,Cole Payton
 Joe Milton III,PHI,QB3,1,QB,3,3,,0,0.0,0.0,0,Joe Milton III
 Jalen Hurts,PHI,QB4,-1,QB,4,4,,-1,20.0,30.8,5,Jalen Hurts
-Dameon Pierce,PHI,RB1,1,RB,1,2,usage — 33 vs 0 opps last 2 gms,0,16.5,16.5,2,Dameon Pierce
-Saquon Barkley,PHI,RB2,1,RB,2,1,passed by Pierce (33 vs 0 opps),-1,0.0,10.8,4,Saquon Barkley
+Saquon Barkley,PHI,RB1,1,RB,1,1,,-1,0.0,10.8,4,Saquon Barkley
+Dameon Pierce,PHI,RB2,1,RB,2,2,,0,16.5,16.5,2,Dameon Pierce
 Tank Bigsby,PHI,RB3,-1,RB,3,3,,-1,0.0,8.0,4,Tank Bigsby
 Will Shipley,PHI,RB4,-1,RB,4,4,,-1,3.5,5.6,5,Will Shipley
 Dallas Goedert,PHI,TE1,1,TE,1,1,,1,8.5,6.0,4,Dallas Goedert
@@ -585,15 +585,15 @@ Marcus Mariota,WAS,QB2,1,QB,2,2,,-1,0.0,17.0,3,Marcus Mariota
 Athan Kaliakmanis,WAS,QB3,1,QB,3,3,,0,0.0,33.0,1,Athan Kaliakmanis
 Rachaad White,WAS,RB1,1,RB,1,1,,0,10.0,10.2,5,Rachaad White
 Austin Ekeler,WAS,RB2,1,RB,2,2,,0,3.5,4.3,3,Austin Ekeler
-Jacory Croskey-Merritt,WAS,RB3,1,RB,3,4,usage — 11 vs 5 opps last 2 gms,-1,5.5,14.8,5,Jacory Croskey-Merritt
-Jeremy McNichols,WAS,RB4,1,RB,4,3,passed by Croskey-Merritt (11 vs 5 opps),0,2.5,5.0,1,Jeremy McNichols
+Jeremy McNichols,WAS,RB3,1,RB,3,3,,0,2.5,5.0,1,Jeremy McNichols
+Jacory Croskey-Merritt,WAS,RB4,1,RB,4,4,,-1,5.5,14.8,5,Jacory Croskey-Merritt
 Chig Okonkwo,WAS,TE1,1,TE,1,1,,0,6.5,5.0,4,Chig Okonkwo
 Ben Sinnott,WAS,TE2,1,TE,2,2,,0,0.0,1.0,2,Ben Sinnott
 John Bates,WAS,TE3,1,TE,3,3,,0,1.0,1.5,4,John Bates
 Colson Yankoff,WAS,TE4,1,TE,4,4,,0,0.0,1.3,3,Colson Yankoff
 Stefon Diggs,WAS,WR1,1,WR1,1,1,,-1,3.5,7.6,5,Stefon Diggs
-Treylon Burks,WAS,WR2,1,WR3,1,1,usage — 3.9 vs 3.8 tgt/gm (ESPN row WR3),1,5.5,3.4,5,Treylon Burks
-Antonio Williams,WAS,WR3,1,WR2,1,1,usage — 3.8 vs 3.9 tgt/gm (ESPN row WR2),0,3.5,4.3,6,Antonio Williams
+Antonio Williams,WAS,WR2,1,WR2,1,1,,0,3.5,4.3,6,Antonio Williams
+Treylon Burks,WAS,WR3,1,WR3,1,1,,1,5.5,3.4,5,Treylon Burks
 Dyami Brown,WAS,WR4+,1,WR1,2,2,,0,1.5,2.7,6,Dyami Brown
 Jaylin Lane,WAS,WR4+,1,WR1,3,3,,0,0.0,1.0,2,Jaylin Lane
 Luke McCaffrey,WAS,WR4+,1,WR2,2,2,,0,0.5,1.0,1,Luke McCaffrey
