@@ -1,7 +1,7 @@
 ARI|QB|1|Jacoby Brissett|
 ARI|QB|2|Gardner Minshew II|
-ARI|QB|3|Carson Beck|
-ARI|RB|1|Jeremiyah Love|
+ARI|QB|3|Carson Beck|Q
+ARI|RB|1|Jeremiyah Love|O
 ARI|RB|2|Tyler Allgeier|
 ARI|RB|3|Bam Knight|
 ARI|RB|4|James Conner|IR
@@ -23,19 +23,19 @@ ATL|QB|2|Tua Tagovailoa|
 ATL|QB|3|Andy Dalton|
 ATL|QB|4|Jack Strand|
 ATL|RB|1|Bijan Robinson|
-ATL|RB|2|Brian Robinson Jr.|
+ATL|RB|2|Brian Robinson Jr.|O
 ATL|RB|3|Trey Sermon|IR
 ATL|WR1|1|Drake London|
 ATL|WR1|2|Zachariah Branch|
 ATL|WR2|1|Jahan Dotson|
 ATL|WR2|2|Chris Blair|
-ATL|WR3|1|Olamide Zaccheaus|
+ATL|WR3|1|Olamide Zaccheaus|Q
 ATL|WR3|2|Beaux Collins|IR
 ATL|TE|1|Kyle Pitts Sr.|
 ATL|TE|2|Charlie Woerner|
 ATL|TE|3|Austin Hooper|
 ATL|TE|4|Nick Muse|
-BAL|QB|1|Lamar Jackson|
+BAL|QB|1|Lamar Jackson|Q
 BAL|QB|2|Tyler Huntley|
 BAL|QB|3|Joe Fagnano|
 BAL|QB|4|Skylar Thompson|IR
@@ -96,16 +96,15 @@ CHI|QB|3|Case Keenum|
 CHI|RB|1|D'Andre Swift|
 CHI|RB|2|Kyle Monangai|O
 CHI|RB|3|Roschon Johnson|
-CHI|RB|4|Zavier Scott|
-CHI|RB|5|Brittain Brown|IR
+CHI|RB|4|Brittain Brown|IR
 CHI|WR1|1|Rome Odunze|
 CHI|WR1|2|Zavion Thomas|
 CHI|WR2|1|Luther Burden III|
 CHI|WR2|2|Jahdae Walker|
 CHI|WR3|1|Kalif Raymond|
 CHI|TE|1|Colston Loveland|
-CHI|TE|2|Cole Kmet|
-CHI|TE|3|Sam Roush|
+CHI|TE|2|Sam Roush|
+CHI|TE|3|Cole Kmet|
 CHI|TE|4|Nikola Kalinic|IR
 CHI|TE|5|Hayden Large|IR
 CIN|QB|1|Joe Burrow|
@@ -167,7 +166,7 @@ DEN|QB|2|Jarrett Stidham|
 DEN|QB|3|Sam Ehlinger|
 DEN|RB|1|J.K. Dobbins|
 DEN|RB|2|RJ Harvey|
-DEN|RB|3|Tyler Badie|
+DEN|RB|3|Tyler Badie|O
 DEN|RB|4|Jonah Coleman|IR
 DEN|WR1|1|Jaylen Waddle|
 DEN|WR1|2|Marvin Mims Jr.|
@@ -206,7 +205,7 @@ GB|RB|3|Pierre Strong Jr.|
 GB|RB|4|Kaleb Johnson|
 GB|RB|5|Chris Brooks|IR
 GB|WR1|1|Christian Watson|
-GB|WR1|2|Bo Melton|
+GB|WR1|2|Bo Melton|Q
 GB|WR1|3|Jayden Reed|IR
 GB|WR2|1|Matthew Golden|
 GB|WR2|2|J. Michael Sturdivant|
@@ -221,7 +220,7 @@ GB|TE|6|Thomas Yassmin|IR
 HOU|QB|1|C.J. Stroud|
 HOU|QB|2|Davis Mills|
 HOU|QB|3|Graham Mertz|IR
-HOU|RB|1|David Montgomery|
+HOU|RB|1|David Montgomery|O
 HOU|RB|2|Woody Marks|
 HOU|RB|3|Dare Ogunbowale|
 HOU|RB|4|British Brooks|IR
@@ -250,8 +249,8 @@ IND|WR2|1|Keenan Allen|
 IND|WR2|2|Deion Burks|
 IND|WR2|3|D.J. Montgomery|IR
 IND|WR3|1|Laquon Treadwell|
-IND|WR3|2|Anthony Gould|
-IND|TE|1|Tyler Warren|
+IND|WR3|2|Anthony Gould|O
+IND|TE|1|Tyler Warren|O
 IND|TE|2|Will Mallory|
 IND|TE|3|Mo Alie-Cox|
 IND|TE|4|Drew Ogletree|
@@ -278,15 +277,16 @@ KC|QB|2|Justin Fields|
 KC|QB|3|Garrett Nussmeier|
 KC|RB|1|Kenneth Walker III|
 KC|RB|2|Emmett Johnson|
-KC|RB|3|Brashard Smith|
-KC|WR1|1|Rashee Rice|
+KC|RB|3|Brashard Smith|O
+KC|WR1|1|Rashee Rice|O
 KC|WR1|2|Cyrus Allen|
-KC|WR1|3|Jeff Caldwell|IR
+KC|WR1|3|Tyquan Thornton|IR
 KC|WR2|1|Xavier Worthy|
 KC|WR2|2|Nikko Remigio|
-KC|WR2|3|Jimmy Holiday|IR
+KC|WR2|3|Jeff Caldwell|IR
 KC|WR3|1|Jalen Royals|
-KC|WR3|2|Tyquan Thornton|IR
+KC|WR3|2|Andrew Armstrong|
+KC|WR3|3|Jimmy Holiday|IR
 KC|TE|1|Travis Kelce|
 KC|TE|2|Noah Gray|
 KC|TE|3|Jake Briningstool|
@@ -320,7 +320,7 @@ LAR|RB|1|Kyren Williams|
 LAR|RB|2|Blake Corum|
 LAR|RB|3|Dean Connors|
 LAR|RB|4|Ronnie Rivers|IR
-LAR|WR1|1|Puka Nacua|
+LAR|WR1|1|Puka Nacua|Q
 LAR|WR1|2|Tutu Atwell|
 LAR|WR1|3|Davante Adams|IR
 LAR|WR2|1|Konata Mumpfield|
@@ -336,7 +336,7 @@ LV|QB|1|Kirk Cousins|
 LV|QB|2|Fernando Mendoza|
 LV|QB|3|Aidan O'Connell|
 LV|RB|1|Ashton Jeanty|
-LV|RB|2|Mike Washington Jr.|
+LV|RB|2|Mike Washington Jr.|Q
 LV|RB|3|Dylan Laube|
 LV|RB|4|Chris Collier|IR
 LV|WR1|1|Tre Tucker|
@@ -373,9 +373,8 @@ MIN|QB|1|Kyler Murray|
 MIN|QB|2|Carson Wentz|
 MIN|QB|3|Max Brosmer|
 MIN|RB|1|Aaron Jones Sr.|
-MIN|RB|2|DeeJay Dallas|
-MIN|RB|3|Demond Claiborne|
-MIN|RB|4|Jordan Mason|IR
+MIN|RB|2|Demond Claiborne|
+MIN|RB|3|Jordan Mason|IR
 MIN|WR1|1|Justin Jefferson|
 MIN|WR1|2|Tai Felton|
 MIN|WR2|1|Jordan Addison|
@@ -439,16 +438,16 @@ NYG|WR2|2|Calvin Austin III|IR
 NYG|WR3|1|Darnell Mooney|
 NYG|WR3|2|Braxton Berrios|IR
 NYG|TE|1|Isaiah Likely|
-NYG|TE|2|Theo Johnson|
-NYG|TE|3|None|
+NYG|TE|2|Theo Johnson|D
+NYG|TE|3|nan|
 NYG|TE|4|Thomas Fidone II|
 NYG|FB|1|Patrick Ricard|
 NYJ|QB|1|Geno Smith|
 NYJ|QB|2|Cade Klubnik|
-NYJ|RB|1|Breece Hall|
+NYJ|RB|1|Breece Hall|Q
 NYJ|RB|2|Braelon Allen|
 NYJ|RB|3|Isaiah Davis|
-NYJ|RB|4|Kene Nwangwu|
+NYJ|RB|4|Kene Nwangwu|Q
 NYJ|RB|5|Chip Trayanum|IR
 NYJ|WR1|1|Garrett Wilson|
 NYJ|WR1|2|Tim Patrick|
@@ -488,7 +487,7 @@ PIT|QB|2|Mason Rudolph|
 PIT|QB|3|Will Howard|
 PIT|QB|4|Drew Allar|
 PIT|RB|1|Jaylen Warren|
-PIT|RB|2|Rico Dowdle|
+PIT|RB|2|Rico Dowdle|Q
 PIT|RB|3|Travis Homer|
 PIT|RB|4|Eli Heidenreich|
 PIT|RB|5|Lew Nichols|
@@ -504,10 +503,10 @@ PIT|TE|2|Pat Freiermuth|
 PIT|TE|3|Robert Tonyan|
 PIT|FB|1|Riley Nowakowski|
 SEA|QB|1|Sam Darnold|
-SEA|QB|2|Drew Lock|
+SEA|QB|2|Drew Lock|Q
 SEA|QB|3|Jalen Milroe|
 SEA|RB|1|Emanuel Wilson|
-SEA|RB|2|Zach Charbonnet|
+SEA|RB|2|Zach Charbonnet|O
 SEA|RB|3|George Holani|
 SEA|RB|4|Velus Jones Jr.|
 SEA|RB|5|Robert Henry Jr.|
@@ -531,11 +530,11 @@ SF|RB|1|Christian McCaffrey|
 SF|RB|2|Kaelon Black|
 SF|RB|3|Jordan James|
 SF|RB|4|Isaac Guerendo|IR
-SF|WR1|1|Mike Evans|
+SF|WR1|1|Mike Evans|O
 SF|WR1|2|Jordan Watkins|
 SF|WR1|3|Demarcus Robinson|IR
 SF|WR1|4|Brandon Aiyuk|
-SF|WR2|1|Deebo Samuel|
+SF|WR2|1|Deebo Samuel|O
 SF|WR2|2|Jacob Cowing|
 SF|WR2|3|De'Zhaun Stribling|IR
 SF|WR3|1|Brandin Cooks|
@@ -546,12 +545,12 @@ SF|TE|2|Luke Farrell|
 SF|TE|3|Brayden Willis|
 SF|TE|4|Jake Tonges|IR
 SF|FB|1|Kyle Juszczyk|
-TB|QB|1|Baker Mayfield|
+TB|QB|1|Baker Mayfield|Q
 TB|QB|2|Jalon Daniels|
 TB|RB|1|Bucky Irving|
 TB|RB|2|Kenny Gainwell|
 TB|RB|3|Sean Tucker|
-TB|WR1|1|Emeka Egbuka|
+TB|WR1|1|Emeka Egbuka|O
 TB|WR1|2|Tez Johnson|
 TB|WR1|3|Jalen McMillan|IR
 TB|WR2|1|Chris Godwin Jr.|
@@ -565,12 +564,12 @@ TB|TE|4|Bauer Sharp|
 TEN|QB|1|Cam Ward|
 TEN|QB|2|Mitchell Trubisky|
 TEN|RB|1|Tony Pollard|
-TEN|RB|2|Tyjae Spears|
+TEN|RB|2|Tyjae Spears|Q
 TEN|RB|3|Julius Chestnut|
 TEN|RB|4|Nicholas Singleton|
 TEN|RB|5|Michael Carter|
 TEN|WR1|1|Carnell Tate|
-TEN|WR1|2|Calvin Ridley|
+TEN|WR1|2|Calvin Ridley|Q
 TEN|WR2|1|Wan'Dale Robinson|
 TEN|WR2|2|Chimere Dike|
 TEN|WR3|1|Elic Ayomanor|
