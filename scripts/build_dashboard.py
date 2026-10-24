@@ -229,6 +229,50 @@ def headshots(logs, depth):
         if e: out[d['player']] = e
     return out
 
+def ncaa_lines(matchups):
+    """v40 — CFB players with a posted book line this week, from the Odds API pull (data/raw/odds_api/props_current.csv, league=cfb).
+    Keyed "player|team" exactly like the owner map so the global LINES filter can gate every board. Per player: td (anytime-TD
+    line offered), pr (a yardage/reception/pass prop offered), b (books), m: best-known line per market [market, line, price, book].
+    Names are matched on (normalized name, team) then on a unique normalized name; book team codes are mapped onto ours (BUFF->BUF)."""
+    import unicodedata
+    f = os.path.join(REPO, 'data/raw/odds_api/props_current.csv')   # the NCAA build runs inside ncaa/; the odds pull lives at the repo root
+    if not os.path.exists(f): return {}
+    def norm(x):
+        x = unicodedata.normalize('NFKD', str(x)).encode('ascii', 'ignore').decode().lower()
+        x = re.sub(r"\b(jr|sr|ii|iii|iv|v)\b\.?", '', x); return re.sub(r'[^a-z]', '', x)
+    fix = {'BUFF': 'BUF'}
+    byteam, byname = {}, {}
+    for r in matchups:
+        n = norm(r['player']); byteam[(n, r['team'])] = (r['player'], r['team']); byname.setdefault(n, set()).add((r['player'], r['team']))
+    out, asof = {}, ''
+    for r in csv.DictReader(open(f, encoding='utf-8')):
+        if r.get('league') != 'cfb': continue
+        n = norm(r['player']); hit = None
+        for t in (fix.get(r['home'], r['home']), fix.get(r['away'], r['away'])):
+            if (n, t) in byteam: hit = byteam[(n, t)]; break
+        if not hit and len(byname.get(n, ())) == 1: hit = next(iter(byname[n]))
+        if not hit: continue
+        k = hit[0] + '|' + hit[1]
+        e = out.setdefault(k, {'td': 0, 'pr': 0, 'b': set(), 'm': {}})
+        mk = r['market']; td = mk == 'anytime_td'
+        if td: e['td'] = 1
+        else: e['pr'] = 1
+        e['b'].add(r['book'])
+        if td and r.get('side') not in ('Yes', '', None): continue
+        if not td and r.get('side') not in ('Over', '', None): continue
+        try: line = float(r['line']) if r.get('line') not in ('', None) else None
+        except ValueError: line = None
+        try: price = int(float(r['price']))
+        except (TypeError, ValueError): price = None
+        cur = e['m'].get(mk)
+        if cur is None or (r.get('updated') or '') > cur[4]: e['m'][mk] = [mk, line, price, r['book'], r.get('updated') or '']
+        asof = max(asof, r.get('updated') or '')
+    for e in out.values():
+        e['b'] = len(e['b']); e['m'] = [v[:4] for v in sorted(e['m'].values())]
+    out['__asof__'] = asof[:16].replace('T', ' ')
+    print(f"ncaa lines: {len(out) - 1} players with a book line · anytime TD {sum(1 for v in out.values() if isinstance(v, dict) and v['td'])} · props {sum(1 for v in out.values() if isinstance(v, dict) and v['pr'])} · as of {out['__asof__']}Z")
+    return out
+
 def league_config():
     """Per-league UI config embedded as J.league. NFL keeps the template's built-in team map / slates; NCAA injects its own."""
     if LEAGUE == 'nfl':
@@ -423,6 +467,7 @@ def main():
     data['depthHist'] = hist
     # v39: first-TD layer (scripts/build_first_td.py)
     data['firstTd'] = json.load(open('data/processed/first_td.json')) if LEAGUE == 'nfl' and os.path.exists('data/processed/first_td.json') else None
+    data['cfbLines'] = ncaa_lines(data['matchups']) if LEAGUE == 'ncaa' else None   # v40: which CFB players have a book line (prop / anytime TD)
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}
     data['league'] = league_config()

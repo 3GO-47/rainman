@@ -1195,6 +1195,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 <span class="gl">POS</span><div class="chips" id="gPos"></div>
 <span class="gl">GAME</span><select id="gGame"></select>
 <span class="gl lgncaa" hidden>CONF</span><select class="lgncaa" id="gConf" hidden></select>
+<span class="gl lgncaa" hidden>LINES</span><select class="lgncaa" id="gLines" hidden title="only players a sportsbook has posted a line on this week (Odds API: FanDuel / DraftKings / ESPN BET / BetRivers / BetMGM)"></select>
 <span class="gl">TEAM</span><select id="gTeam"></select>
 <span class="gl lgnfl fanonly">ROSTER</span><select class="lgnfl fanonly" id="gOwner" title="draft-results owner — every board narrows to that roster"></select>
 <button id="gClear">&#10005; clear</button><span id="gSum"></span>
@@ -1627,7 +1628,12 @@ const GM={wk:0,vis:1,home:2,date:3,day:4,time:5,slate:6};
 const SLATE_LBL=LG.slateLbl||{TNF:'TNF',THU:'THU DAY',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
 const SLATE_TIP=LG.slateTip||{TNF:'Thursday night (incl. the Wednesday opener)',THU:'Thanksgiving-day afternoon games',FRI:'Friday holiday windows',SAT:'Saturday windows',INTL:'Sunday 9:30 AM ET international games',EARLY:'Sunday 1:00 PM ET / 12:00 CT',LATE:'Sunday 4:05-4:25 PM ET / 3:05-3:25 CT',SNF:'Sunday night',MNF:'Monday night',TBD:'kickoff not yet set (NFL flex)'};
 const SLATE_ORDER=LG.slateOrder||['TNF','THU','FRI','SAT','INTL','EARLY','LATE','SNF','MNF','TBD'];
-const G={week:J.week||1,slates:new Set(),pos:new Set(),game:'',team:'',owner:'',conf:''};
+const G={week:J.week||1,slates:new Set(),pos:new Set(),game:'',team:'',owner:'',conf:'',lines:''};
+/* v40: book lines on CFB players (J.lines, 'player|team' -> {td,pr,b,m}); power-conference groups for the CONF filter */
+const LINES=J.cfbLines||{};const P4=new Set(['SEC','Big Ten','Big 12','ACC']);
+const CONF_GROUPS=[['__P4__','Power 4 (SEC · Big Ten · Big 12 · ACC)',t=>P4.has(t.conf)],['__G5__','Group of 5 + independents',t=>t.fbs&&!P4.has(t.conf)]];
+const confHas=(t,c)=>{const g=CONF_GROUPS.find(x=>x[0]===c);return g?g[2](TEAM[t]||{}):(TEAM[t]||{}).conf===c};
+const inL=(p,t)=>{if(!G.lines)return true;const x=LINES[p+'|'+t];return !!x&&(G.lines==='any'||(G.lines==='td'?!!x.td:!!x.pr))};
 const CONFS=IS_NFL?[]:[...new Set(Object.values(TEAM).filter(t=>t.fbs).map(t=>t.conf))].sort();
 const POSLIST=['QB','RB','WR','TE','D/ST'];
 const inP=p=>!G.pos.size||G.pos.has(p);   // position filter (posOf(slot))
@@ -1647,13 +1653,14 @@ function recompute(){
   if(G.game)gs=gs.filter(g=>g[GM.vis]+'@'+g[GM.home]===G.game);
   ACT=null;
   if(G.slates.size||G.game){ACT=new Set();gs.forEach(g=>{ACT.add(g[GM.vis]);ACT.add(g[GM.home])});}
-  if(G.conf){const c=new Set(Object.keys(TEAM).filter(t=>TEAM[t].conf===G.conf));ACT=ACT?new Set([...ACT].filter(t=>c.has(t))):c}
+  if(G.conf){const c=new Set(Object.keys(TEAM).filter(t=>confHas(t,G.conf)));ACT=ACT?new Set([...ACT].filter(t=>c.has(t))):c}
   if(G.team)ACT=(!ACT||ACT.has(G.team))?new Set([G.team]):new Set();
   DEFSET=null;
   if(ACT){DEFSET=new Set(ACT);ACT.forEach(t=>{const o=oppFor(t,G.week).replace('@','');if(o&&o!=='BYE')DEFSET.add(o)});}
 }
 const inF=t=>!ACT||ACT.has(t);        // offense / player side: team is in the filter
-const inO=(p,t)=>!G.owner||(G.owner==='__FA__'?!OWNER[p+'|'+t]:OWNER[p+'|'+t]===G.owner);   // roster (owner) filter — draft results from the Master Key
+const inO0=(p,t)=>!G.owner||(G.owner==='__FA__'?!OWNER[p+'|'+t]:OWNER[p+'|'+t]===G.owner);   // roster (owner) filter — draft results from the Master Key
+const inO=(p,t)=>inL(p,t)&&inO0(p,t);
 const inU=u=>inF(u.team)&&inO(u.player,u.team);          // universe entry passes team + roster filters
 const inD=t=>!DEFSET||DEFSET.has(t);  // defense side: filtered teams + the defenses they face this week
 // every view registers its re-render here, tagged with the tab it lives in; apply() only runs the hooks of the
@@ -1669,14 +1676,15 @@ function readHash(){
   if(h.get('game'))G.game=h.get('game');
   if(h.get('team')&&J.sched26[h.get('team')])G.team=h.get('team');
   if(h.get('owner'))G.owner=h.get('owner');
-  if(h.get('conf')&&CONFS.includes(h.get('conf')))G.conf=h.get('conf');
+  if(h.get('conf')&&(CONFS.includes(h.get('conf'))||CONF_GROUPS.some(g=>g[0]===h.get('conf'))))G.conf=h.get('conf');
+  if(h.get('lines')&&['any','td','pr'].includes(h.get('lines')))G.lines=h.get('lines');
   if(h.get('v')&&ITEMS[h.get('v')])CUR_ITEM=h.get('v');
 }
 function writeHash(){
   const h=new URLSearchParams();
   if(CUR_ITEM&&CUR_ITEM!=='overview')h.set('v',CUR_ITEM);
   if(G.week!==(J.week||1))h.set('wk',G.week);
-  if(G.slates.size)h.set('slate',[...G.slates].join(','));if(G.pos.size)h.set('pos',[...G.pos].join(','));if(G.game)h.set('game',G.game);if(G.team)h.set('team',G.team);if(G.owner)h.set('owner',G.owner);if(G.conf)h.set('conf',G.conf);
+  if(G.slates.size)h.set('slate',[...G.slates].join(','));if(G.pos.size)h.set('pos',[...G.pos].join(','));if(G.game)h.set('game',G.game);if(G.team)h.set('team',G.team);if(G.owner)h.set('owner',G.owner);if(G.conf)h.set('conf',G.conf);if(G.lines)h.set('lines',G.lines);
   const str=h.toString();
   try{history.replaceState(null,'',str?'#'+str:location.pathname+location.search)}catch(e){}
 }
@@ -1687,15 +1695,18 @@ function gbarInit(){
   $('#gTeam').innerHTML=`<option value="">all teams</option>`+teams.map(t=>`<option value="${t}" ${t===G.team?'selected':''}>${t} ${TEAM[t]?TEAM[t].n:''}</option>`).join('');
   $('#gWk').onchange=()=>{G.week=+$('#gWk').value;G.slates.clear();G.game='';apply()};
   $('#gTeam').onchange=()=>{G.team=$('#gTeam').value;apply()};
-  if(CONFS.length){document.querySelectorAll('.lgncaa').forEach(e=>e.hidden=false);$('#gConf').innerHTML=`<option value="">all conferences</option>`+CONFS.map(c=>`<option value="${esc(c)}" ${c===G.conf?'selected':''}>${esc(c)}</option>`).join('');$('#gConf').onchange=()=>{G.conf=$('#gConf').value;apply()}}
+  if(CONFS.length){document.querySelectorAll('.lgncaa').forEach(e=>e.hidden=false);$('#gConf').innerHTML=`<option value="">all conferences</option>`+CONF_GROUPS.map(g=>`<option value="${g[0]}" ${g[0]===G.conf?'selected':''}>${g[1]}</option>`).join('')+`<option disabled>──</option>`+CONFS.map(c=>`<option value="${esc(c)}" ${c===G.conf?'selected':''}>${esc(c)}</option>`).join('');$('#gConf').onchange=()=>{G.conf=$('#gConf').value;apply()};
+    const nL=Object.keys(LINES).filter(k=>k!=='__asof__'),nTd=nL.filter(k=>LINES[k].td).length,nPr=nL.filter(k=>LINES[k].pr).length;
+    $('#gLines').innerHTML=`<option value="">all players</option><option value="any" ${G.lines==='any'?'selected':''}>has a line (${nL.length})</option><option value="td" ${G.lines==='td'?'selected':''}>anytime TD line (${nTd})</option><option value="pr" ${G.lines==='pr'?'selected':''}>yardage / reception prop (${nPr})</option>`;
+    $('#gLines').onchange=()=>{G.lines=$('#gLines').value;apply()}}
   const owners=[...new Set(Object.values(OWNER))].sort();
   $('#gOwner').innerHTML=`<option value="">all rosters</option><option value="__FA__" ${G.owner==='__FA__'?'selected':''}>free agents (unrostered)</option>`+owners.map(o=>`<option value="${esc(o)}" ${o===G.owner?'selected':''}>${esc(o)}</option>`).join('');
   $('#gOwner').onchange=()=>{G.owner=$('#gOwner').value;apply()};
   $('#gGame').onchange=()=>{G.game=$('#gGame').value;apply()};
-  $('#gClear').onclick=()=>{G.slates.clear();G.pos.clear();G.game='';G.team='';G.owner='';G.conf='';$('#gTeam').value='';$('#gOwner').value='';if($('#gConf'))$('#gConf').value='';apply()};
+  $('#gClear').onclick=()=>{G.slates.clear();G.pos.clear();G.game='';G.team='';G.owner='';G.conf='';G.lines='';$('#gTeam').value='';$('#gOwner').value='';if($('#gConf'))$('#gConf').value='';if($('#gLines'))$('#gLines').value='';apply()};
   $('#gShare').onclick=()=>{writeHash();const u=location.href;const done=()=>{$('#gShare').textContent='copied';setTimeout(()=>$('#gShare').innerHTML='&#128279;',1200)};
     (navigator.clipboard?navigator.clipboard.writeText(u).then(done,()=>prompt('link',u)):prompt('link',u));};
-  addEventListener('hashchange',()=>{const w=G.week;G.slates.clear();G.pos.clear();G.game='';G.team='';G.owner='';G.conf='';readHash();
+  addEventListener('hashchange',()=>{const w=G.week;G.slates.clear();G.pos.clear();G.game='';G.team='';G.owner='';G.conf='';G.lines='';readHash();if($('#gLines'))$('#gLines').value=G.lines;if($('#gConf'))$('#gConf').value=G.conf;
     if(G.week!==w)$('#gWk').value=G.week;$('#gTeam').value=G.team;$('#gOwner').value=G.owner;apply()});
   addEventListener('resize',()=>document.documentElement.style.setProperty('--sticky',$('#top').offsetHeight+'px'));
   apply();
@@ -1716,9 +1727,9 @@ function apply(){
   const nT=ACT?ACT.size:NT,nG=ACT?gs.filter(g=>ACT.has(g[GM.vis])||ACT.has(g[GM.home])).length:gs.length;
   const byes=Object.keys(J.sched26).filter(t=>J.sched26[t][G.week-1]==='BYE');
   const tg=G.team?gameOf(G.team,G.week):null;
-  $('#gSum').innerHTML=`wk ${G.week} · ${nG} game${nG===1?'':'s'} · ${nT} team${nT===1?'':'s'}`
+  $('#gSum').innerHTML=`wk ${G.week} · ${nG} game${nG===1?'':'s'} · ${nT} team${nT===1?'':'s'}`+(G.lines?` · <span style="color:#e8b100">${G.lines==='td'?'anytime-TD lines only':G.lines==='pr'?'prop lines only':'priced players only'}</span>`:'')
     +(G.team&&!tg?' · <span class="inj0">'+G.team+' on BYE</span>':tg?' · '+tg[GM.vis]+' @ '+tg[GM.home]+' '+kickLbl(tg):'')
-    +(!ACT&&byes.length?' · bye: '+(byes.length>8?byes.length+' teams':byes.join(' ')):'')+(G.pos.size?' · pos: '+[...G.pos].join('+'):'')+(G.owner?' · roster: <b>'+(G.owner==='__FA__'?'free agents':esc(G.owner))+'</b>':'')+(G.conf?' · <b>'+esc(G.conf)+'</b>':'');
+    +(!ACT&&byes.length?' · bye: '+(byes.length>8?byes.length+' teams':byes.join(' ')):'')+(G.pos.size?' · pos: '+[...G.pos].join('+'):'')+(G.owner?' · roster: <b>'+(G.owner==='__FA__'?'free agents':esc(G.owner))+'</b>':'')+(G.conf?' · <b>'+esc(G.conf==='__P4__'?'Power 4':G.conf==='__G5__'?'Group of 5':G.conf)+'</b>':'');
   $('#gbar').classList.toggle('live',!!ACT||!!G.pos.size||!!G.owner||!!G.conf);
   $('#gbar').classList.toggle('has',!!(G.slates.size||G.pos.size||G.game||G.team||G.owner||G.conf));
   if(G.game&&!gl.some(g=>g[GM.vis]+'@'+g[GM.home]===G.game)){G.game='';recompute();}
@@ -2998,6 +3009,11 @@ function wkPlayerCats(n){try{if(typeof wkFeat!=='function')return '';const S=LAS
   return `<div class="panel" style="margin-top:8px"><h3>categories <span class="f">the Weeklies signals he carries into week ${W0}${ah&&ah.raw?' ('+esc(ah.raw)+')':''}, then what he carried into each played week · red chip = a fade</span></h3>
     <div class="wkpcs" style="margin-bottom:6px">${ahead.map(chip).join('')||'<span class="mini dim">none going into this week</span>'}</div>
     ${hist.length?`<table class="fx"><thead><tr><th>week</th><th>opp</th><th style="text-align:left">carried</th><th>TDs</th></tr></thead><tbody>${hist.map(h=>`<tr><td>${h.w}</td><td>${h.l?tcell(h.l[LOG.opp]):''}</td><td style="text-align:left">${SG.filter(z=>z.f(h)).map(z=>`<span class="${z.kind==='neg'?'dim':''}">${esc(z.lbl)}</span>`).join(' · ')||'<span class="dim">—</span>'}</td><td>${h.td>0?'<b style="color:var(--green)">✓ '+h.td+'</b>':'<span style="color:var(--red)">✗</span>'}</td></tr>`).join('')}</tbody></table>`:''}</div>`}catch(e){return ''}}
+/* v40: the book lines posted on a CFB player this week */
+const MKL={anytime_td:'anytime TD',rec_yds:'rec yds',receptions:'receptions',rush_yds:'rush yds',pass_yds:'pass yds',pass_td:'pass TD',rush_att:'rush att',pass_att:'pass att',completions:'completions',interceptions:'INT'};
+function ppLines(n,team){const x=LINES[n+'|'+team];if(!x)return IS_NFL||!Object.keys(LINES).length?'':'<p class="mini dim" style="margin-top:8px">no sportsbook line posted on him this week</p>';
+  const am=p=>p==null?'':(p>0?'+':'')+p;
+  return `<div class="panel" style="margin-top:8px"><h3>lines <span class="f">posted this week · ${x.b} book${x.b===1?'':'s'} · as of ${esc(LINES.__asof__||'')}Z</span></h3><table class="fx"><thead><tr><th style="text-align:left">market</th><th>line</th><th>price</th><th>book</th></tr></thead><tbody>${x.m.map(r=>`<tr><td style="text-align:left">${MKL[r[0]]||r[0]}</td><td>${r[1]==null?'—':r[1]}</td><td>${am(r[2])}</td><td class="dim">${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>`}
 window.playerPop=function(n){
   if(!n)return;const old=document.getElementById('ppModal');if(old)old.remove();
   const dc=J.depth.find(d=>d.player===n)||J.depth.find(d=>d.log_name===n)||{};const ln=dc.log_name||n;
@@ -3051,6 +3067,7 @@ window.playerPop=function(n){
    <table><thead>${ghead}</thead><tbody>${F.map(gr).join('')}</tbody></table>`})():''}
    </div><div id="ppV2" hidden>${rkT}</div>
    ${wkPlayerCats(n)}
+   ${ppLines(n,team)}
    <p style="margin-top:10px"><button class="mclose" style="position:static" id="ppDeepBtn">open full deep dive &rarr;</button></p>
   </div></div>`;
   document.body.insertAdjacentHTML('beforeend',html);
@@ -6727,6 +6744,7 @@ Object.assign(NOTES,{
 Object.assign(NOTES,{metaprop:['v23','new tab: META for player props — every posted prop line scored over / under on the defense\'s rank for that exact stat, the prop model, his last-10 hit rate, his average and his head-to-head; META\'s five columns, data sets, filters and leader cards']});
 Object.assign(NOTES,{tdpicks:['v26','follows the week picked up top like every other tab — the live board for the week being picked; a finished week shows every player who played, rated by the model refit on earlier weeks only and graded; the week importing is rated from the games before it and graded as box scores land; weeks to come get an early look (today\'s depth chart and form vs that opponent, implied totals estimated until lines post) · track-record bars jump to their week']});
 Object.assign(NOTES,{wkgrid:['v26','new tab: the Weeklies categories as one composite board — the most consistent categories across every recorded week as columns, every player on the week\'s slate as a row with his own record in each, CAT / REC / TD % and a square per category, a best-picks card, the TD Grid\'s five columns; follows the week, slate, game, team and position filters up top']});
+Object.assign(NOTES,{v40:['v40','NCAA: a LINES filter in the global bar keeps only players a sportsbook has priced this week (any line / anytime TD / yardage-reception prop) \u00b7 CONF gains Power 4 and Group of 5 groups \u00b7 a player card lists his posted lines']});
 Object.assign(NOTES,{v39:['v39','First TD tab on F5 Picks: who scored first in every game of a played week, the board for the week ahead (model chance, fair odds, Kalshi, edge), first TD allowed by slot per defense, each offense\'s habits, and the model\'s walk-forward record \u00b7 depth charts: ESPN\'s order is the chart again \u2014 usage no longer moves anyone']});
 Object.assign(NOTES,{v38:['v38','every player card lists the Weeklies categories he carries into the week and what he carried each played week \u00b7 the category pop-ups on Weeklies v2 / Category Grid v2 list every qualifying player week by week']});
 Object.assign(NOTES,{v37:['v37','Markets v2 deleted (it was F5 Markets rendered twice) · METAPROP lives behind a META | METAPROP switch on F2 Matchups · F6 TEST is empty']});
