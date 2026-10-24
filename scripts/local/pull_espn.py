@@ -70,9 +70,14 @@ def depth_nflverse():
     d['gsis'] = d.gsis_id.astype(str)
     tag = {}
     try:
-        played = int(pd.read_csv(f'data/game_logs/game_logs_{season}.csv', usecols=['week']).week.max())
+        # a week is "played" only once its LAST game date has passed — one Thursday game used to mark the whole week
+        # played and the week's O/D/Q report was skipped on Fri/Sat/Sun (2026-10-24)
+        gs = pd.read_csv('data/processed/games_2026.csv', usecols=['week', 'date'])
+        last = pd.to_datetime(gs.date).groupby(gs.week).max()
+        played = int(max([0] + [int(w) for w, d in last.items() if d.date() < datetime.date.today()]))
     except Exception:
-        played = 0
+        try: played = int(pd.read_csv(f'data/game_logs/game_logs_{season}.csv', usecols=['week']).week.max())
+        except Exception: played = 0
     if 'injuries' in files:
         i = pd.read_parquet(files['injuries'], columns=['team', 'week', 'gsis_id', 'report_status'])
         wk = int(i.week.max())

@@ -105,7 +105,7 @@ def main(seasons):
             a = acc.setdefault(k, {'name': r.athlete_name, 'team_id': int(r.team_id), 'cmp': 0, 'att': 0, 'py': 0, 'ptd': 0, 'int': 0,
                                   'ra': 0, 'ry': 0, 'rtd': 0, 'rec': 0, 'recy': 0, 'rectd': 0, 'fl': 0})
             if r.category == 'passing':   # two upstream schemas: stat_1..stat_5 (C/ATT,YDS,AVG,TD,INT) or named columns
-                if isinstance(r.stat_1, str):
+                if isinstance(getattr(r, 'stat_1', None), str):
                     ca = r.stat_1.split('/'); a['cmp'] += num(ca[0]); a['att'] += num(ca[-1])
                     a['py'] += num(r.stat_2); a['ptd'] += num(r.stat_4); a['int'] += num(r.stat_5)
                 else:
@@ -116,7 +116,7 @@ def main(seasons):
             elif r.category == 'receiving':
                 a['rec'] += num(r.receptions); a['recy'] += num(r.receivingYards); a['rectd'] += num(r.receivingTouchdowns)
             elif r.category == 'fumbles':
-                a['fl'] += num(r.fumblesLost)
+                a['fl'] += num(getattr(r, 'fumblesLost', 0))
         recs, inferred = [], 0
         for (gid, aid), a in acc.items():
             g = games[gid]

@@ -52,7 +52,9 @@ def main():
     for old in glob.glob(P + 'depth_charts_*.csv'):
         # normpath on both sides: on Windows glob hands back backslashes, the literal has a forward slash, and the
         # plain != compare deleted today's file along with the old ones (2026-10-10), leaving no snapshot at all
-        if os.path.normpath(old) != keep: os.remove(old)   # usage snapshots are fully reproducible from the logs
+        if os.path.normpath(old) != keep:   # usage snapshots are fully reproducible from the logs
+            try: os.remove(old)
+            except OSError: pass   # read-only mount: an extra old snapshot is harmless
     sched = {r['team']: r for r in csv.DictReader(open(P + f'schedule_{SEASON}.csv', encoding='utf-8'))}
     dvp = pd.read_csv(P + 'dvp_combined.csv').set_index('defense')
     out = []
