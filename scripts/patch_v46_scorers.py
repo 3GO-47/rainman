@@ -16,14 +16,13 @@ core = r'''
 /* ---------------- v46: today's scorers, mapped to where each was ranked highest ---------------- */
 const LIVE_TD=(J.liveTd&&J.liveTd.week===J.week&&J.liveTd.season===(J.season||2026))?J.liveTd:null;
 const nmKey=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'').replace(/(jr|sr|ii|iii|iv)$/,'');
-function liveScorers(){if(!LIVE_TD)return [];const agg={};LIVE_TD.plays.forEach(pl=>{const k=nmKey(pl.player)+'|'+pl.team;(agg[k]=agg[k]||{player:pl.player,team:pl.team,game:pl.game,n:0,how:[],q:[]}).n++;agg[k].how.push(pl.how);agg[k].q.push(pl.q+' '+pl.clock)});return Object.values(agg)}
-const liveTdOf=(name,team)=>{if(!LIVE_TD)return null;const k=nmKey(name);const r=liveScorers().find(x=>nmKey(x.player)===k&&x.team===team)||liveScorers().find(x=>nmKey(x.player)===k);return r?r.n:null};
+let LIVE_SC=null;
+function liveScorers(){if(!LIVE_TD)return [];if(LIVE_SC)return LIVE_SC;const agg={};LIVE_TD.plays.forEach(pl=>{const k=nmKey(pl.player)+'|'+pl.team;(agg[k]=agg[k]||{player:pl.player,team:pl.team,game:pl.game,n:0,how:[],q:[]}).n++;agg[k].how.push(pl.how);agg[k].q.push(pl.q+' '+pl.clock)});return LIVE_SC=Object.values(agg)}
+let LIVE_IX=null;
+const liveTdOf=(name,team)=>{if(!LIVE_TD)return null;if(!LIVE_IX){LIVE_IX={};liveScorers().forEach(x=>{const k=nmKey(x.player);LIVE_IX[k+'|'+x.team]=x;if(!LIVE_IX[k])LIVE_IX[k]=x})}const k=nmKey(name);const r=LIVE_IX[k+'|'+team]||LIVE_IX[k];return r?r.n:null};
 /* game state at the last pull: pre / in / post (older files: inferred from kickoff) */
-const liveState=team=>{if(!LIVE_TD)return null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)return LIVE_TD.games[k]}const g=gameOf(team,J.week);return g?(kickedOff(g)?'in':'pre'):null};
-/* a player's live result: touchdowns if he has one, 0 once his game is final, null while it is on or before kickoff */
-const liveRes=(name,team)=>{const lv=liveTdOf(name,team);if(lv!=null)return lv;return liveState(team)==='post'?0:null};const liveOpen=team=>liveState(team)==='in';
-/* game state at the last pull: pre / in / post (older files: inferred from kickoff) */
-const liveState=team=>{if(!LIVE_TD)return null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)return LIVE_TD.games[k]}const g=gameOf(team,J.week);return g?(kickedOff(g)?'in':'pre'):null};
+const LIVE_ST={};
+const liveState=team=>{if(!LIVE_TD)return null;if(team in LIVE_ST)return LIVE_ST[team];let v=null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)v=LIVE_TD.games[k]}if(v==null){const g=gameOf(team,J.week);v=g?(kickedOff(g)?'in':'pre'):null}return LIVE_ST[team]=v};
 /* a player's live result: touchdowns if he has one, 0 once his game is final, null while it is on or before kickoff */
 const liveRes=(name,team)=>{const lv=liveTdOf(name,team);if(lv!=null)return lv;return liveState(team)==='post'?0:null};const liveOpen=team=>liveState(team)==='in';
 /* rank of val among arr by key (1 = best); higher = better unless lo */

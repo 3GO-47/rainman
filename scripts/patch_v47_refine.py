@@ -25,7 +25,7 @@ rep("    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.s
 
 # (b) TD Picks: live results on the live board
 rep("  if(w===T.week)return {m:'live',w,P:T.picks,g:T.games,d:T.dates};",
-    "  if(w===T.week){if(typeof LIVE_TD!=='undefined'&&LIVE_TD&&LIVE_TD.week===w)T.picks.forEach(x=>{x.res=liveRes(x.n,x.t);x.live=x.res!=null;x.open=liveOpen(x.t)});return {m:'live',w,P:T.picks,g:T.games,d:T.dates}}")
+    "  if(w===T.week){if(typeof LIVE_TD!=='undefined'&&LIVE_TD&&LIVE_TD.week===w&&!T._lv){T._lv=1;T.picks.forEach(x=>{x.res=liveRes(x.n,x.t);x.live=x.res!=null;x.open=liveOpen(x.t)})}return {m:'live',w,P:T.picks,g:T.games,d:T.dates}}")
 rep("    else $('#tpTiles').innerHTML=wkTile(`week ${T.week}`,String(T.games),`games · ${T.dates?T.dates[0].slice(5)+' to '+T.dates[1].slice(5):''}`)",
     "    else if(P.some(x=>x.res!=null)){const gr=P.filter(x=>x.res!=null),gk=gr.filter(x=>x.res>0).length,T10=gr.slice().sort((a,b)=>b.p-a.p).slice(0,10),k10=T10.filter(x=>x.res>0).length,LKg=lk.filter(x=>x.res!=null),lkk=LKg.filter(x=>x.res>0).length,open=P.filter(x=>x.res==null).length;\n"
     "      $('#tpTiles').innerHTML=wkTile(`week ${T.week} · in play`,`${gk}<span class=\"dim\"> / ${gr.length}</span>`,`listed players scored so far · ${pct(gk/gr.length)} · ${open} still to kick off`,gk/gr.length>=.3?'g':'')\n"
