@@ -34,7 +34,7 @@ function wkResults(){const el=$('#wkres');if(!el)return;
     <span class="chips" id="wrMode" title="a row must carry ANY of the picked categories, or ALL of them"><button data-m="any" class="on">any of</button><button data-m="all">all of</button></span>
     <input id="wrQ" placeholder="search player / team..." size="18">
     <span class="btnlk" id="wrClear">&#10005; categories</span>
-    <span class="note mini" id="wrN"></span></div>
+    <span class="mini kept" id="wrN" style="color:var(--dim)"></span></div>
     <div class="wrcats" id="wrCats">${GL.map(g=>`<div class="wrg"><span class="gl" title="${esc(WK_GL[g])}">${g}</span><span class="chips">${SG.filter(x=>x.g===g).map(x=>`<button data-c="${x.id}" class="${x.kind==='neg'?'neg':''}" title="${esc(x.long)}">${esc(x.lbl)}</button>`).join('')}</span></div>`).join('')}</div>
     <div class="panel"><div id="wrTbl" class="tscroll"></div><p class="mini dim" id="wrMore"></p></div>`;
   const keepRow=x=>(!st.core||WK_CORE.has(x.slot==='WR4+'?'WR4':x.slot))&&inP(x.pos)&&inF(x.team)&&inO(x.name,x.team);
