@@ -467,6 +467,7 @@ def main():
     data['depthHist'] = hist
     # v39: first-TD layer (scripts/build_first_td.py)
     data['firstTd'] = json.load(open('data/processed/first_td.json')) if LEAGUE == 'nfl' and os.path.exists('data/processed/first_td.json') else None
+    data['metaBT'] = json.load(open(os.path.join(REPO, 'data/processed/meta_backtest.json'))) if LEAGUE == 'nfl' and os.path.exists(os.path.join(REPO, 'data/processed/meta_backtest.json')) else None   # v42: META weights + audit
     data['cfbLines'] = ncaa_lines(data['matchups']) if LEAGUE == 'ncaa' else None   # v40: which CFB players have a book line (prop / anytime TD)
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}

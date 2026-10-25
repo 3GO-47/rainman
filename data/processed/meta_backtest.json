@@ -1,0 +1,935 @@
+{
+ "built": "2026-10-25",
+ "rows": 4102,
+ "coverage": {
+  "psi": 1.0,
+  "td": 1.0,
+  "sch": 1.0,
+  "h2h": 0.437,
+  "atd": 0.997,
+  "env": 1.0,
+  "form": 0.884
+ },
+ "single": {
+  "psi": {
+   "rho": 0.0593,
+   "n": 4102,
+   "lift": 0.115,
+   "rho_td": 0.0312
+  },
+  "td": {
+   "rho": 0.043,
+   "n": 4102,
+   "lift": 0.08,
+   "rho_td": 0.029
+  },
+  "sch": {
+   "rho": 0.0472,
+   "n": 4102,
+   "lift": 0.092,
+   "rho_td": -0.017
+  },
+  "h2h": {
+   "rho": -0.0041,
+   "n": 1791,
+   "lift": -0.003,
+   "rho_td": -0.0206
+  },
+  "atd": {
+   "rho": 0.046,
+   "n": 4088,
+   "lift": -0.035,
+   "rho_td": 0.2139
+  },
+  "env": {
+   "rho": 0.046,
+   "n": 4102,
+   "lift": 0.017,
+   "rho_td": 0.1093
+  },
+  "form": {
+   "rho": 0.0413,
+   "n": 3625,
+   "lift": 0.062,
+   "rho_td": -0.0145
+  }
+ },
+ "variants": [
+  {
+   "name": "v40 hand weights (\u03a8 TD SCH H2H ATD)",
+   "note": "the tab before v41",
+   "weights": {
+    "psi": 0.3,
+    "td": 0.25,
+    "sch": 0.15,
+    "h2h": 0.15,
+    "atd": 0.15
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 4102,
+   "rho": 0.0693,
+   "lift": 0.107,
+   "top3": 1.072,
+   "bot3": 0.965,
+   "over_top3": 0.452,
+   "over_bot3": 0.389,
+   "dec_top": 1.12,
+   "dec_bot": 0.923,
+   "over_dec_top": 0.47
+  },
+  {
+   "name": "v41 lift weights (+ENV +FORM)",
+   "note": "weights from signals.json lift; ENV there was EPA-based, here it is the implied total",
+   "weights": {
+    "psi": 0.122,
+    "td": 0.142,
+    "sch": 0.109,
+    "env": 0.316,
+    "form": 0.059,
+    "h2h": 0.084,
+    "atd": 0.168
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 4102,
+   "rho": 0.0787,
+   "lift": 0.082,
+   "top3": 1.064,
+   "bot3": 0.982,
+   "over_top3": 0.458,
+   "over_bot3": 0.389,
+   "dec_top": 1.052,
+   "dec_bot": 0.929,
+   "over_dec_top": 0.445
+  },
+  {
+   "name": "equal weights, 7 signals",
+   "note": "",
+   "weights": {
+    "psi": 0.143,
+    "td": 0.143,
+    "sch": 0.143,
+    "h2h": 0.143,
+    "atd": 0.143,
+    "env": 0.143,
+    "form": 0.143
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 4102,
+   "rho": 0.0886,
+   "lift": 0.13,
+   "top3": 1.089,
+   "bot3": 0.959,
+   "over_top3": 0.459,
+   "over_bot3": 0.387,
+   "dec_top": 1.077,
+   "dec_bot": 0.893,
+   "over_dec_top": 0.453
+  },
+  {
+   "name": "equal \u00b7 no shrink terms",
+   "note": "",
+   "weights": {
+    "psi": 0.143,
+    "td": 0.143,
+    "sch": 0.143,
+    "h2h": 0.143,
+    "atd": 0.143,
+    "env": 0.143,
+    "form": 0.143
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": false,
+    "agree": false
+   },
+   "n": 4102,
+   "rho": 0.0886,
+   "lift": 0.137,
+   "top3": 1.093,
+   "bot3": 0.956,
+   "over_top3": 0.461,
+   "over_bot3": 0.386,
+   "dec_top": 1.051,
+   "dec_bot": 0.891,
+   "over_dec_top": 0.443
+  },
+  {
+   "name": "NNLS \u00b7 base \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0868,
+   "lift": 0.142,
+   "top3": 1.119,
+   "bot3": 0.977,
+   "over_top3": 0.458,
+   "over_bot3": 0.405,
+   "dec_top": 1.218,
+   "dec_bot": 0.902,
+   "over_dec_top": 0.486
+  },
+  {
+   "name": "NNLS \u00b7 no agree \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": true,
+    "agree": false
+   },
+   "n": 2470,
+   "rho": 0.0861,
+   "lift": 0.135,
+   "top3": 1.111,
+   "bot3": 0.976,
+   "over_top3": 0.455,
+   "over_bot3": 0.403,
+   "dec_top": 1.204,
+   "dec_bot": 0.912,
+   "over_dec_top": 0.474
+  },
+  {
+   "name": "NNLS \u00b7 no cov \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": false,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0868,
+   "lift": 0.139,
+   "top3": 1.118,
+   "bot3": 0.978,
+   "over_top3": 0.46,
+   "over_bot3": 0.403,
+   "dec_top": 1.212,
+   "dec_bot": 0.93,
+   "over_dec_top": 0.478
+  },
+  {
+   "name": "NNLS \u00b7 gamma 1.5 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0897,
+   "lift": 0.154,
+   "top3": 1.129,
+   "bot3": 0.975,
+   "over_top3": 0.466,
+   "over_bot3": 0.403,
+   "dec_top": 1.238,
+   "dec_bot": 0.912,
+   "over_dec_top": 0.49
+  },
+  {
+   "name": "NNLS \u00b7 gamma 2 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 2.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.09,
+   "lift": 0.18,
+   "top3": 1.141,
+   "bot3": 0.961,
+   "over_top3": 0.471,
+   "over_bot3": 0.394,
+   "dec_top": 1.187,
+   "dec_bot": 0.886,
+   "over_dec_top": 0.466
+  },
+  {
+   "name": "NNLS \u00b7 pct ranks \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.378,
+    "td": 0.0,
+    "sch": 0.204,
+    "h2h": 0.083,
+    "atd": 0.0,
+    "env": 0.074,
+    "form": 0.262
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": true,
+    "agree": true,
+    "pct_rank": true
+   },
+   "n": 2470,
+   "rho": 0.0896,
+   "lift": 0.143,
+   "top3": 1.118,
+   "bot3": 0.975,
+   "over_top3": 0.461,
+   "over_bot3": 0.4,
+   "dec_top": 1.193,
+   "dec_bot": 0.936,
+   "over_dec_top": 0.466
+  },
+  {
+   "name": "NNLS \u00b7 log target \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.293,
+    "td": 0.0,
+    "sch": 0.187,
+    "h2h": 0.0,
+    "atd": 0.217,
+    "env": 0.078,
+    "form": 0.224
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": true,
+    "agree": true,
+    "target": "log"
+   },
+   "n": 2470,
+   "rho": 0.0825,
+   "lift": 0.073,
+   "top3": 1.074,
+   "bot3": 1.002,
+   "over_top3": 0.444,
+   "over_bot3": 0.388,
+   "dec_top": 1.068,
+   "dec_bot": 0.952,
+   "over_dec_top": 0.449
+  },
+  {
+   "name": "NNLS \u00b7 log \u00b7 gamma 1.5 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.293,
+    "td": 0.0,
+    "sch": 0.187,
+    "h2h": 0.0,
+    "atd": 0.217,
+    "env": 0.078,
+    "form": 0.224
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true,
+    "target": "log"
+   },
+   "n": 2470,
+   "rho": 0.0827,
+   "lift": 0.063,
+   "top3": 1.066,
+   "bot3": 1.003,
+   "over_top3": 0.438,
+   "over_bot3": 0.39,
+   "dec_top": 1.078,
+   "dec_bot": 0.931,
+   "over_dec_top": 0.453
+  },
+  {
+   "name": "NNLS \u00b7 ridge .02 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.267,
+    "td": 0.062,
+    "sch": 0.193,
+    "h2h": 0.139,
+    "atd": 0.0,
+    "env": 0.101,
+    "form": 0.239
+   },
+   "cfg": {
+    "gamma": 1,
+    "cov": true,
+    "agree": true,
+    "ridge": 0.02
+   },
+   "n": 2470,
+   "rho": 0.0869,
+   "lift": 0.143,
+   "top3": 1.122,
+   "bot3": 0.979,
+   "over_top3": 0.468,
+   "over_bot3": 0.404,
+   "dec_top": 1.183,
+   "dec_bot": 0.894,
+   "over_dec_top": 0.466
+  },
+  {
+   "name": "NNLS \u00b7 ridge .02 \u00b7 gamma 1.5 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.267,
+    "td": 0.062,
+    "sch": 0.193,
+    "h2h": 0.139,
+    "atd": 0.0,
+    "env": 0.101,
+    "form": 0.239
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true,
+    "ridge": 0.02
+   },
+   "n": 2470,
+   "rho": 0.091,
+   "lift": 0.145,
+   "top3": 1.114,
+   "bot3": 0.97,
+   "over_top3": 0.467,
+   "over_bot3": 0.402,
+   "dec_top": 1.2,
+   "dec_bot": 0.903,
+   "over_dec_top": 0.457
+  },
+  {
+   "name": "NNLS \u00b7 log \u00b7 ridge .02 \u00b7 gamma 1.5 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.209,
+    "td": 0.048,
+    "sch": 0.17,
+    "h2h": 0.085,
+    "atd": 0.186,
+    "env": 0.098,
+    "form": 0.204
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true,
+    "target": "log",
+    "ridge": 0.02
+   },
+   "n": 2470,
+   "rho": 0.0877,
+   "lift": 0.085,
+   "top3": 1.088,
+   "bot3": 1.003,
+   "over_top3": 0.443,
+   "over_bot3": 0.39,
+   "dec_top": 1.133,
+   "dec_bot": 0.867,
+   "over_dec_top": 0.474
+  },
+  {
+   "name": "rho-max \u00b7 base \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.353,
+    "td": 0.0,
+    "sch": 0.118,
+    "h2h": 0.0,
+    "atd": 0.235,
+    "env": 0.059,
+    "form": 0.235
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0857,
+   "lift": 0.087,
+   "top3": 1.085,
+   "bot3": 0.998,
+   "over_top3": 0.449,
+   "over_bot3": 0.382,
+   "dec_top": 1.129,
+   "dec_bot": 0.942,
+   "over_dec_top": 0.474
+  },
+  {
+   "name": "rho-max \u00b7 gamma 1.5 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.333,
+    "td": 0.056,
+    "sch": 0.111,
+    "h2h": 0.0,
+    "atd": 0.167,
+    "env": 0.111,
+    "form": 0.222
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0917,
+   "lift": 0.076,
+   "top3": 1.083,
+   "bot3": 1.007,
+   "over_top3": 0.444,
+   "over_bot3": 0.392,
+   "dec_top": 1.141,
+   "dec_bot": 0.916,
+   "over_dec_top": 0.486
+  },
+  {
+   "name": "rho-max \u00b7 gamma 2 \u00b7 walk-forward",
+   "note": "weights refit before every test week from earlier weeks only",
+   "weights": {
+    "psi": 0.24,
+    "td": 0.12,
+    "sch": 0.08,
+    "h2h": 0.04,
+    "atd": 0.16,
+    "env": 0.12,
+    "form": 0.24
+   },
+   "cfg": {
+    "gamma": 2.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2470,
+   "rho": 0.0912,
+   "lift": 0.109,
+   "top3": 1.097,
+   "bot3": 0.988,
+   "over_top3": 0.456,
+   "over_bot3": 0.391,
+   "dec_top": 1.138,
+   "dec_bot": 0.918,
+   "over_dec_top": 0.518
+  },
+  {
+   "name": "NNLS \u00b7 gamma 1.5 \u00b7 forward-selected (psi+form+env) \u00b7 walk-forward",
+   "note": "greedy: add the signal that lifts out-of-sample rho most, stop under +0.002",
+   "weights": {
+    "psi": 0.565,
+    "form": 0.335,
+    "env": 0.1
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true,
+    "keys": [
+     "psi",
+     "form",
+     "env"
+    ]
+   },
+   "n": 2470,
+   "rho": 0.0998,
+   "lift": 0.182,
+   "top3": 1.136,
+   "bot3": 0.954,
+   "over_top3": 0.466,
+   "over_bot3": 0.394,
+   "dec_top": 1.17,
+   "dec_bot": 0.904,
+   "over_dec_top": 0.462
+  },
+  {
+   "name": "\u03a8 + FORM + ENV equal",
+   "note": "the three signals the ablation says carry, equal weights",
+   "weights": {
+    "psi": 0.333,
+    "form": 0.333,
+    "env": 0.333
+   },
+   "cfg": {
+    "gamma": 1.5,
+    "cov": true,
+    "agree": true
+   },
+   "n": 4102,
+   "rho": 0.0851,
+   "lift": 0.143,
+   "top3": 1.1,
+   "bot3": 0.957,
+   "over_top3": 0.462,
+   "over_bot3": 0.387,
+   "dec_top": 1.055,
+   "dec_bot": 0.871,
+   "over_dec_top": 0.438
+  },
+  {
+   "name": "NNLS per position \u00b7 walk-forward",
+   "note": "separate weights for QB / RB / WR / TE",
+   "weights": {
+    "RB": {
+     "psi": 0.022590778698479898,
+     "td": 0.07244532876291397,
+     "sch": 0.0,
+     "h2h": 0.33785898108085477,
+     "atd": 0.0,
+     "env": 0.20751455484447356,
+     "form": 0.3595903566132777
+    },
+    "WR": {
+     "psi": 0.41320408619260945,
+     "td": 0.0,
+     "sch": 0.3534240426412119,
+     "h2h": 0.0,
+     "atd": 0.020302137444749107,
+     "env": 0.0,
+     "form": 0.21306973372142954
+    },
+    "QB": {
+     "psi": 0.48590794027960643,
+     "td": 0.048246991635170544,
+     "sch": 0.1832311371369636,
+     "h2h": 0.0,
+     "atd": 0.0,
+     "env": 0.0,
+     "form": 0.2826139309482593
+    },
+    "TE": {
+     "psi": 0.20245586729561232,
+     "td": 0.0,
+     "sch": 0.19361887586104137,
+     "h2h": 0.18652668394398642,
+     "atd": 0.0,
+     "env": 0.31572355221953613,
+     "form": 0.10167502067982385
+    }
+   },
+   "cfg": {
+    "gamma": 1.0,
+    "cov": true,
+    "agree": true
+   },
+   "n": 2326,
+   "rho": 0.0806,
+   "lift": 0.134,
+   "top3": 1.112,
+   "bot3": 0.977,
+   "over_top3": 0.443,
+   "over_bot3": 0.393,
+   "dec_top": 1.16,
+   "dec_bot": 0.922,
+   "over_dec_top": 0.481
+  }
+ ],
+ "ablation": {
+  "psi": {
+   "rho_without": 0.0762,
+   "lift_without": 0.111
+  },
+  "td": {
+   "rho_without": 0.0872,
+   "lift_without": 0.139
+  },
+  "sch": {
+   "rho_without": 0.0906,
+   "lift_without": 0.159
+  },
+  "h2h": {
+   "rho_without": 0.0897,
+   "lift_without": 0.148
+  },
+  "atd": {
+   "rho_without": 0.087,
+   "lift_without": 0.148
+  },
+  "env": {
+   "rho_without": 0.0852,
+   "lift_without": 0.147
+  },
+  "form": {
+   "rho_without": 0.0727,
+   "lift_without": 0.115
+  }
+ },
+ "chosen": "NNLS \u00b7 gamma 1.5 \u00b7 forward-selected (psi+form+env) \u00b7 walk-forward",
+ "weights": {
+  "psi": 0.557,
+  "form": 0.34,
+  "env": 0.104
+ },
+ "weights_sd": {
+  "psi": 0.1,
+  "form": 0.094,
+  "env": 0.091
+ },
+ "forward": [
+  {
+   "add": "psi",
+   "rho": 0.075,
+   "gain": 0.075,
+   "kept": true
+  },
+  {
+   "add": "form",
+   "rho": 0.096,
+   "gain": 0.021,
+   "kept": true
+  },
+  {
+   "add": "env",
+   "rho": 0.0998,
+   "gain": 0.0038,
+   "kept": true
+  },
+  {
+   "add": "td",
+   "rho": 0.1003,
+   "gain": 0.0005,
+   "kept": false
+  }
+ ],
+ "holdout": {
+  "selected_on": 2025,
+  "signals": [
+   "form",
+   "psi",
+   "env"
+  ],
+  "tested_on": 2026,
+  "selected": {
+   "rho": 0.0859,
+   "lift": 0.228,
+   "dec_top": 1.201,
+   "n": 952
+  },
+  "all7": {
+   "rho": 0.0511,
+   "lift": 0.122,
+   "dec_top": 1.207,
+   "n": 952
+  },
+  "psi_only": {
+   "rho": 0.1078,
+   "lift": 0.241,
+   "dec_top": 1.276,
+   "n": 952
+  }
+ },
+ "cfg": {
+  "gamma": 1.5,
+  "cov": true,
+  "agree": true
+ },
+ "in_sample": {
+  "n": 4102,
+  "rho": 0.0836,
+  "lift": 0.163,
+  "top3": 1.12,
+  "bot3": 0.957,
+  "over_top3": 0.457,
+  "over_bot3": 0.393,
+  "dec_top": 1.102,
+  "dec_bot": 0.91,
+  "over_dec_top": 0.443
+ },
+ "chosen_oos": {
+  "rho": 0.0998,
+  "lift": 0.182,
+  "dec_top": 1.17,
+  "dec_bot": 0.904,
+  "over_dec_top": 0.462,
+  "n": 2470
+ },
+ "extra": {
+  "rho_vs_ppr": 0.0875,
+  "rho_vs_td": 0.0452,
+  "se_rho": 0.0156
+ },
+ "bands": [
+  {
+   "band": "0-35",
+   "n": 354,
+   "ratio": 0.934,
+   "over": 0.395,
+   "td": 0.215,
+   "ppr": 9.42
+  },
+  {
+   "band": "35-45",
+   "n": 494,
+   "ratio": 0.97,
+   "over": 0.393,
+   "td": 0.245,
+   "ppr": 10.44
+  },
+  {
+   "band": "45-55",
+   "n": 752,
+   "ratio": 1.017,
+   "over": 0.415,
+   "td": 0.257,
+   "ppr": 11.19
+  },
+  {
+   "band": "55-65",
+   "n": 519,
+   "ratio": 1.123,
+   "over": 0.468,
+   "td": 0.289,
+   "ppr": 12.09
+  },
+  {
+   "band": "65-75",
+   "n": 251,
+   "ratio": 1.183,
+   "over": 0.482,
+   "td": 0.287,
+   "ppr": 11.87
+  },
+  {
+   "band": "75-100",
+   "n": 100,
+   "ratio": 1.153,
+   "over": 0.43,
+   "td": 0.21,
+   "ppr": 10.51
+  }
+ ],
+ "by_pos": {
+  "QB": {
+   "n": 377,
+   "rho": 0.1029,
+   "lift": 0.183,
+   "top3": 1.187,
+   "bot3": 1.004,
+   "over_top3": 0.54,
+   "over_bot3": 0.468,
+   "dec_top": 1.15,
+   "dec_bot": 0.935,
+   "over_dec_top": 0.474
+  },
+  "RB": {
+   "n": 685,
+   "rho": 0.1105,
+   "lift": 0.15,
+   "top3": 1.144,
+   "bot3": 0.994,
+   "over_top3": 0.467,
+   "over_bot3": 0.371,
+   "dec_top": 1.178,
+   "dec_bot": 0.883,
+   "over_dec_top": 0.551
+  },
+  "WR": {
+   "n": 1038,
+   "rho": 0.1046,
+   "lift": 0.199,
+   "top3": 1.1,
+   "bot3": 0.901,
+   "over_top3": 0.431,
+   "over_bot3": 0.384,
+   "dec_top": 1.202,
+   "dec_bot": 0.874,
+   "over_dec_top": 0.433
+  },
+  "TE": {
+   "n": 370,
+   "rho": 0.0723,
+   "lift": 0.207,
+   "top3": 1.154,
+   "bot3": 0.947,
+   "over_top3": 0.468,
+   "over_bot3": 0.379,
+   "dec_top": 1.218,
+   "dec_bot": 1.003,
+   "over_dec_top": 0.405
+  }
+ },
+ "by_season": {
+  "2025": {
+   "n": 1518,
+   "rho": 0.1078,
+   "lift": 0.166,
+   "top3": 1.122,
+   "bot3": 0.956,
+   "over_top3": 0.464,
+   "over_bot3": 0.381,
+   "dec_top": 1.159,
+   "dec_bot": 0.861,
+   "over_dec_top": 0.461
+  },
+  "2026": {
+   "n": 952,
+   "rho": 0.0859,
+   "lift": 0.228,
+   "top3": 1.203,
+   "bot3": 0.975,
+   "over_top3": 0.481,
+   "over_bot3": 0.434,
+   "dec_top": 1.201,
+   "dec_bot": 0.913,
+   "over_dec_top": 0.448
+  }
+ },
+ "notes": [
+  "outcome = actual PPR / his pre-game baseline (this season 2x, last 8 of prior season 1x)",
+  "walk-forward: weights for a test week come only from earlier weeks; the chosen recipe is then refit on everything for the live tab",
+  "SCH here has no injury lift (not reconstructible for past weeks); the tab adds 0.6 x lift on top",
+  "signals.json ENV (EPA) is season-wide and leaks the future; ENV here is the closing implied total, available before kickoff",
+  "rho differences under one standard error (se_rho) are noise"
+ ]
+}
