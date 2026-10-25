@@ -5580,7 +5580,6 @@ function metaGrid(root='#meta',px='mt'){
     <input id="${px}Q" placeholder="search player..." size="15">
     <span class="note">every board at once. <b>META</b> folds every other column into one score, 0–100 (100 = the softest spot on every signal), weighted by each signal's measured lift this season (${Object.entries(META_W).map(([k,v])=>LBL[k].replace('META','')+' '+Math.round(100*v)+'%').join(' · ')}) &middot; <b>ENV</b> = his team's implied points from this week's line &middot; <b>FORM</b> = his opportunities over the last two games vs his season rate &middot; <b>TD</b> = touchdowns this week's opponent allows to his slot, rank of ${NT} (1 = the most) &middot; <b>ATD</b> = the anytime-TD model's chance he scores, shaded within his position &middot; <b>Ψ</b> = the opponent's mean rank across every stat of his slot &middot; <b>H2H</b> = his own PPR per game in past meetings with this opponent, ▲ / ▼ against his norm &middot; <b>SCH</b> = what that defense's style gives up to his slot vs league, plus its missing men &middot; the data-set select drives TD, Ψ and META; hover META for the breakdown &middot; the lens chips re-rank every column at once, a header click re-sorts one &middot; click a name for his card</span>
   </div>
-  <div class="mslate" id="${px}Slate"></div>
   <div class="mlead" id="${px}Lead" data-mg="1"></div>
   <div class="lgrid td5 wide full meta">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◉ all':posIcon(p,12)+' '+p} <span class="gl" id="${px}G${p}"></span> <span class="f" id="${px}N${p}"></span></h3><div id="${px}B${p}"></div></section>`).join('')}</div>`;
   const sort={};['ALL'].concat(TPOS).forEach(p=>sort[p]={k:'meta',a:false});
@@ -5737,7 +5736,7 @@ function metaGrid(root='#meta',px='mt'){
       ['avoid · META','r',top(null,'meta',true),x=>B(Math.round(x.meta),gradeStyle(eq(x.meta/100)))]].filter((c,i)=>HAS[['meta','env','td','atd','psi','h2h','sch','meta'][i]]);
     $$('Lead').innerHTML=cards.map(([t,tone,L,val])=>thSeq(`<div class="mlc ${tone}"><div class="mlh">${t}</div>${L.slice(0,3).map(x=>line(x,val(x))).join('')||'<div class="mini dim">nothing on the board</div>'}</div>`,[()=>({title:t,sub:`every player on the board, ranked · week ${typeof WK!=='undefined'?WK:G.week} · ${L.length} shown`,html:`<div class="mlc ${tone}" style="max-width:520px">${L.map(x=>line(x,val(x))).join('')||'<div class="mini dim">nothing on the board</div>'}</div>`})])).join('');
     tWire($$('Lead'))}
-  const cols=()=>{['ALL'].concat(TPOS).forEach(col);slate();lead()};
+  const cols=()=>{['ALL'].concat(TPOS).forEach(col);lead()};
   const all=()=>{build();if(!HAS[lens])$$('Lens').querySelector('button[data-l="meta"]').click();cols()};
   ['Src','QB','Se','Inj'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;
   $$('Slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
