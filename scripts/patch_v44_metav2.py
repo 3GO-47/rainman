@@ -75,7 +75,7 @@ function metaV2(root='#metav2',px='mv'){
     /* percentiles within position from this week's pool — a filter or a search never moves a score */
     const P={};TPOS.forEach(p=>{const Q=R.filter(x=>x.pool&&x.pos===p);P[p]={};MV_B.forEach(([k,,,lo])=>{P[p][k]=pct(Q.map(x=>x.raw[k]==null?null:(lo?-x.raw[k]:x.raw[k])))})});
     R.forEach(x=>{x.pc={};MV_B.forEach(([k,,,lo])=>{const v=x.raw[k];x.pc[k]=v==null?null:P[x.pos][k](lo?-v:v)})});
-    ROWS=R;HAS={};MV_B.forEach(([k])=>HAS[k]=R.some(x=>x.pc[k]!=null));
+    ROWS=R;window.MV_LAST=R;HAS={};MV_B.forEach(([k])=>HAS[k]=R.some(x=>x.pc[k]!=null));
     $$('B').querySelectorAll('button').forEach(b=>b.hidden=!HAS[b.dataset.b]);fold()}
   function fold(){const ks=MV_B.map(b=>b[0]).filter(k=>on.has(k)&&HAS[k]);
     ROWS.forEach(x=>{const v=ks.map(k=>x.pc[k]).filter(p=>p!=null);x.nb=v.length;x.t10=v.filter(p=>p>=.9).length;x.t25=v.filter(p=>p>=.75).length;x.low=v.length?Math.min(...v):null;

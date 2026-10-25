@@ -83,6 +83,7 @@ def markets_only(G, st):
     did = []
     if any(G[lg]['active'] for lg in G):
         if G['nfl']['active'] and step('injuries', pull_espn.injuries): step('build_injuries', run, ['scripts/build_injuries.py'], False); did.append('injuries')
+        if G['nfl']['active'] and G['nfl'].get('games_today'): step('live td', pull_espn.live_td); did.append('livetd')   # v46: today's scorers before the box scores land
         if os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read():
             if step('odds api', run, ['scripts/fetch_odds_api.py'], False) == 0: did.append('odds')      # run() returns the exit code: 0 = fresh prices
         if step('markets', pull_markets.main): did.append('exchanges')
@@ -90,7 +91,7 @@ def markets_only(G, st):
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb'); step('tracking', run, ['scripts/build_tracking.py'])
         if 'odds' in did:                                                                           # fresh book prices: re-price the bet board and the dashboard that shows it
             step('bets', run, ['scripts/build_bets.py'], False); step('clv', run, ['scripts/build_clv.py'], False)
-        if 'odds' in did or 'injuries' in did: step('td picks', run, ['scripts/build_td_picks.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False); step('dev', run, ['scripts/build_dev.py'], False)
+        if 'odds' in did or 'injuries' in did or 'livetd' in did: step('td picks', run, ['scripts/build_td_picks.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False); step('dev', run, ['scripts/build_dev.py'], False)
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
     if chg:

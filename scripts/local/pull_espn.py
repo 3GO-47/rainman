@@ -202,6 +202,34 @@ SLATE = [('nfl', 'football/nfl', ''), ('cfb', 'football/college-football', '&gro
          ('wnba', 'basketball/wnba', ''), ('mlb', 'baseball/mlb', ''), ('nhl', 'hockey/nhl', ''),
          ('cfl', 'football/cfl', ''), ('ncaaw', 'basketball/womens-college-basketball', '&groups=50'), ('ncaah', 'hockey/mens-college-hockey', '')] + [(s, f'soccer/{s}', '') for s in ['eng.1', 'usa.1', 'uefa.champions', 'esp.1', 'ger.1', 'ita.1', 'fra.1']]
 
+def live_td():
+    """Touchdowns scored so far in the current NFL week, from ESPN's scoreboard + per-game summary scoringPlays
+    -> data/processed/live_td.json {pulled, season, week, plays:[{game,q,clock,team,player,how}]}. Games in progress count; the
+    dashboard marks today's scorers before the box scores land (v46). Returns the play count, None on failure."""
+    import re
+    try: sb = get_json(f'{SITE}/football/nfl/scoreboard', pace=0.5)
+    except Exception as e: log(f'  live td: {str(e)[:80]}'); return None
+    wk = (sb.get('week') or {}).get('number'); season = ((sb.get('season') or {}).get('year')) or TODAY.year
+    plays = []
+    for ev in sb.get('events', []):
+        c = ev['competitions'][0]; st = c['status']['type']['state']
+        if st == 'pre': continue
+        home = next(t for t in c['competitors'] if t['homeAway'] == 'home')['team']['abbreviation']
+        away = next(t for t in c['competitors'] if t['homeAway'] == 'away')['team']['abbreviation']
+        try: sm = get_json(f"{SITE}/football/nfl/summary?event={ev['id']}", pace=0.6)
+        except Exception as e: log(f'  live td {away}@{home}: {str(e)[:60]}'); continue
+        for pl in sm.get('scoringPlays', []):
+            if (pl.get('scoringType') or {}).get('name') != 'touchdown' and 'TD' not in ((pl.get('type') or {}).get('abbreviation') or ''): continue
+            t = pl.get('text', ''); m = re.match(r'^(.+?) \d+ Yd (Rush|pass|Pass|Interception Return|Fumble Return|Kickoff Return|Punt Return|Blocked)', t, re.I)
+            how = 'rec' if m and 'pass' in m.group(2).lower() else 'rush' if m and 'rush' in m.group(2).lower() else 'ret' if m else '?'
+            plays.append({'game': f'{away}@{home}', 'q': (pl.get('period') or {}).get('number'), 'clock': (pl.get('clock') or {}).get('displayValue'),
+                          'team': (pl.get('team') or {}).get('abbreviation'), 'player': m.group(1) if m else t[:40], 'how': how})
+    out = {'pulled': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'season': int(season), 'week': wk, 'source': 'ESPN scoreboard + summary scoringPlays', 'plays': plays}
+    os.makedirs('data/processed', exist_ok=True)
+    json.dump(out, open('data/processed/live_td.json', 'w'), indent=1)
+    log(f'  live td: week {wk} · {len(plays)} touchdowns so far -> data/processed/live_td.json')
+    return len(plays)
+
 def injuries():
     """ESPN's injuries feed for all 32 teams (status, injury, return date, the beat note) -> data/raw/espn_injuries_<today>.txt
     I|team|player|pos|status|injury|return|date|fantasy|comment   Both sides of the ball; 'Active' rows (recently on a report, playing) are kept for the trail."""
