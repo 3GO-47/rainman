@@ -1,9 +1,219 @@
 {
- "pulled": "2026-10-25T19:53Z",
+ "pulled": "2026-10-25T23:21Z",
  "season": 2026,
  "week": 7,
- "source": "ESPN scoreboard + summary scoringPlays (Chrome)",
+ "source": "ESPN scoreboard + summary scoringPlays",
+ "games": {
+  "DEN@ARI": "in",
+  "GB@DET": "in",
+  "LAR@LV": "in",
+  "PIT@NO": "post",
+  "SF@ATL": "post",
+  "CLE@TEN": "post",
+  "IND@MIN": "post",
+  "MIA@NYJ": "post",
+  "TB@CAR": "post",
+  "CIN@BAL": "post",
+  "NYG@HOU": "post",
+  "KC@SEA": "pre",
+  "NE@CHI": "post",
+  "DAL@PHI": "pre"
+ },
+ "scores": {
+  "DEN@ARI": [
+   30,
+   16
+  ],
+  "GB@DET": [
+   17,
+   17
+  ],
+  "LAR@LV": [
+   35,
+   18
+  ],
+  "PIT@NO": [
+   16,
+   10
+  ],
+  "SF@ATL": [
+   20,
+   29
+  ],
+  "CLE@TEN": [
+   27,
+   24
+  ],
+  "IND@MIN": [
+   10,
+   16
+  ],
+  "MIA@NYJ": [
+   28,
+   25
+  ],
+  "TB@CAR": [
+   43,
+   13
+  ],
+  "CIN@BAL": [
+   35,
+   13
+  ],
+  "NYG@HOU": [
+   27,
+   21
+  ],
+  "KC@SEA": [
+   0,
+   0
+  ],
+  "NE@CHI": [
+   24,
+   30
+  ],
+  "DAL@PHI": [
+   0,
+   0
+  ]
+ },
  "plays": [
+  {
+   "game": "DEN@ARI",
+   "q": 2,
+   "clock": "3:43",
+   "team": "DEN",
+   "player": "Bo Nix",
+   "how": "rush"
+  },
+  {
+   "game": "DEN@ARI",
+   "q": 3,
+   "clock": "10:26",
+   "team": "DEN",
+   "player": "RJ Harvey",
+   "how": "rec"
+  },
+  {
+   "game": "DEN@ARI",
+   "q": 3,
+   "clock": "3:50",
+   "team": "ARI",
+   "player": "Trey McBride",
+   "how": "rec"
+  },
+  {
+   "game": "DEN@ARI",
+   "q": 3,
+   "clock": "0:00",
+   "team": "DEN",
+   "player": "J.K. Dobbins",
+   "how": "rush"
+  },
+  {
+   "game": "GB@DET",
+   "q": 1,
+   "clock": "7:00",
+   "team": "DET",
+   "player": "Jameson Williams",
+   "how": "rec"
+  },
+  {
+   "game": "GB@DET",
+   "q": 1,
+   "clock": "0:58",
+   "team": "GB",
+   "player": "Tucker Kraft",
+   "how": "rec"
+  },
+  {
+   "game": "GB@DET",
+   "q": 3,
+   "clock": "12:14",
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "how": "rec"
+  },
+  {
+   "game": "GB@DET",
+   "q": 3,
+   "clock": "6:33",
+   "team": "DET",
+   "player": "Jameson Williams",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 1,
+   "clock": "6:25",
+   "team": "LAR",
+   "player": "Davis Allen",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "10:01",
+   "team": "LAR",
+   "player": "Davis Allen",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "4:15",
+   "team": "LAR",
+   "player": "Puka Nacua",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "1:19",
+   "team": "LAR",
+   "player": "Kyren Williams",
+   "how": "rush"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "14:51",
+   "team": "LV",
+   "player": "Tre Tucker",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "13:12",
+   "team": "LV",
+   "player": "Ashton Jeanty",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "6:34",
+   "team": "LAR",
+   "player": "Blake Corum",
+   "how": "rush"
+  },
+  {
+   "game": "PIT@NO",
+   "q": 2,
+   "clock": "6:45",
+   "team": "PIT",
+   "player": "Darnell Washington",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@NO",
+   "q": 2,
+   "clock": "1:45",
+   "team": "NO",
+   "player": "Devaughn Vele",
+   "how": "rec"
+  },
   {
    "game": "SF@ATL",
    "q": 1,
@@ -93,6 +303,14 @@
    "how": "rush"
   },
   {
+   "game": "CLE@TEN",
+   "q": 4,
+   "clock": "0:58",
+   "team": "TEN",
+   "player": "Tony Pollard",
+   "how": "rush"
+  },
+  {
    "game": "IND@MIN",
    "q": 1,
    "clock": "9:13",
@@ -127,10 +345,10 @@
   {
    "game": "MIA@NYJ",
    "q": 1,
-   "clock": "0:58",
+   "clock": "1:02",
    "team": "MIA",
-   "player": "Ollie Gordon II",
-   "how": "rush"
+   "player": "Ollie Gordon II 1 Yd Run (Zane Gonzalez ",
+   "how": "?"
   },
   {
    "game": "MIA@NYJ",
@@ -301,20 +519,20 @@
    "how": "rush"
   },
   {
-   "game": "PIT@NO",
-   "q": 2,
-   "clock": "6:45",
-   "team": "PIT",
-   "player": "Darnell Washington",
+   "game": "NYG@HOU",
+   "q": 4,
+   "clock": "0:52",
+   "team": "HOU",
+   "player": "Xavier Hutchinson",
    "how": "rec"
   },
   {
-   "game": "PIT@NO",
-   "q": 2,
-   "clock": "1:45",
-   "team": "NO",
-   "player": "Devaughn Vele",
-   "how": "rec"
+   "game": "NYG@HOU",
+   "q": 5,
+   "clock": "7:25",
+   "team": "NYG",
+   "player": "Devin Singletary",
+   "how": "rush"
   },
   {
    "game": "NE@CHI",
@@ -364,59 +582,5 @@
    "player": "Eli Raridon",
    "how": "rec"
   }
- ],
- "games": {
-  "SF@ATL": "in",
-  "CLE@TEN": "in",
-  "IND@MIN": "post",
-  "MIA@NYJ": "in",
-  "TB@CAR": "post",
-  "CIN@BAL": "in",
-  "NYG@HOU": "in",
-  "PIT@NO": "post",
-  "DEN@ARI": "pre",
-  "GB@DET": "pre",
-  "LAR@LV": "pre",
-  "KC@SEA": "pre",
-  "NE@CHI": "post",
-  "DAL@PHI": "pre"
- },
- "scores": {
-  "SF@ATL": [
-   20,
-   26
-  ],
-  "CLE@TEN": [
-   24,
-   17
-  ],
-  "IND@MIN": [
-   10,
-   16
-  ],
-  "MIA@NYJ": [
-   28,
-   25
-  ],
-  "TB@CAR": [
-   43,
-   13
-  ],
-  "CIN@BAL": [
-   35,
-   13
-  ],
-  "NYG@HOU": [
-   21,
-   14
-  ],
-  "PIT@NO": [
-   16,
-   10
-  ],
-  "NE@CHI": [
-   24,
-   30
-  ]
- }
+ ]
 }
