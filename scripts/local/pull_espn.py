@@ -210,12 +210,15 @@ def live_td():
     try: sb = get_json(f'{SITE}/football/nfl/scoreboard', pace=0.5)
     except Exception as e: log(f'  live td: {str(e)[:80]}'); return None
     wk = (sb.get('week') or {}).get('number'); season = ((sb.get('season') or {}).get('year')) or TODAY.year
-    plays = []
+    plays = []; games = {}; scores = {}
     for ev in sb.get('events', []):
         c = ev['competitions'][0]; st = c['status']['type']['state']
-        if st == 'pre': continue
         home = next(t for t in c['competitors'] if t['homeAway'] == 'home')['team']['abbreviation']
         away = next(t for t in c['competitors'] if t['homeAway'] == 'away')['team']['abbreviation']
+        games[f'{away}@{home}'] = st   # pre / in / post — the dashboard shows 'live' instead of a miss while a game is on
+        try: scores[f'{away}@{home}'] = [int(next(t for t in c['competitors'] if t['homeAway'] == 'away')['score']), int(next(t for t in c['competitors'] if t['homeAway'] == 'home')['score'])]
+        except (KeyError, ValueError, TypeError, StopIteration): pass
+        if st == 'pre': continue
         try: sm = get_json(f"{SITE}/football/nfl/summary?event={ev['id']}", pace=0.6)
         except Exception as e: log(f'  live td {away}@{home}: {str(e)[:60]}'); continue
         for pl in sm.get('scoringPlays', []):
@@ -224,7 +227,7 @@ def live_td():
             how = 'rec' if m and 'pass' in m.group(2).lower() else 'rush' if m and 'rush' in m.group(2).lower() else 'ret' if m else '?'
             plays.append({'game': f'{away}@{home}', 'q': (pl.get('period') or {}).get('number'), 'clock': (pl.get('clock') or {}).get('displayValue'),
                           'team': (pl.get('team') or {}).get('abbreviation'), 'player': m.group(1) if m else t[:40], 'how': how})
-    out = {'pulled': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'season': int(season), 'week': wk, 'source': 'ESPN scoreboard + summary scoringPlays', 'plays': plays}
+    out = {'pulled': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%MZ'), 'season': int(season), 'week': wk, 'source': 'ESPN scoreboard + summary scoringPlays', 'games': games, 'scores': scores, 'plays': plays}
     os.makedirs('data/processed', exist_ok=True)
     json.dump(out, open('data/processed/live_td.json', 'w'), indent=1)
     log(f'  live td: week {wk} · {len(plays)} touchdowns so far -> data/processed/live_td.json')

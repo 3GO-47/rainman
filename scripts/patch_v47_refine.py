@@ -19,13 +19,13 @@ def rep(old, new, n=1):
 
 # (a) wkAhead: done falls back to live
 rep("    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.slot,raw,on,cs:on.length,score:on.reduce((s,k)=>s+Math.max(0,(TL[k.id]||1)-1),0),t:tdOf(u),done:done?{td:wkTD(done)}:null}))});",
-    "    const lv=done?null:(typeof liveTdOf==='function'?liveTdOf(u.player,u.team):null),gmk=done||lv!=null?null:(typeof LIVE_TD!=='undefined'&&LIVE_TD&&kickedOff(gameOf(u.team,W0)));\n"
-    "    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.slot,raw,on,cs:on.length,score:on.reduce((s,k)=>s+Math.max(0,(TL[k.id]||1)-1),0),t:tdOf(u),done:done?{td:wkTD(done)}:lv!=null?{td:lv,live:true}:gmk?{td:0,live:true,open:true}:null}))});")
+    "    const lv=done?null:(typeof liveRes==='function'?liveRes(u.player,u.team):null),gmk=done||lv!=null?null:(typeof liveOpen==='function'&&liveOpen(u.team));\n"
+    "    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.slot,raw,on,cs:on.length,score:on.reduce((s,k)=>s+Math.max(0,(TL[k.id]||1)-1),0),t:tdOf(u),done:done?{td:wkTD(done)}:lv!=null?{td:lv,live:true}:null,open:!!gmk}))});")
 # the live helpers must exist before wkAhead runs at BOOT: they are defined in the v46 block (before wkResults, which is before weeklies2) — wkAhead is called at render time, fine.
 
 # (b) TD Picks: live results on the live board
 rep("  if(w===T.week)return {m:'live',w,P:T.picks,g:T.games,d:T.dates};",
-    "  if(w===T.week){if(typeof LIVE_TD!=='undefined'&&LIVE_TD&&LIVE_TD.week===w)T.picks.forEach(x=>{const lv=liveTdOf(x.n,x.t);x.res=lv!=null?lv:(kickedOff(gameOf(x.t,w))?0:null);x.live=x.res!=null});return {m:'live',w,P:T.picks,g:T.games,d:T.dates}}")
+    "  if(w===T.week){if(typeof LIVE_TD!=='undefined'&&LIVE_TD&&LIVE_TD.week===w)T.picks.forEach(x=>{x.res=liveRes(x.n,x.t);x.live=x.res!=null;x.open=liveOpen(x.t)});return {m:'live',w,P:T.picks,g:T.games,d:T.dates}}")
 rep("    else $('#tpTiles').innerHTML=wkTile(`week ${T.week}`,String(T.games),`games · ${T.dates?T.dates[0].slice(5)+' to '+T.dates[1].slice(5):''}`)",
     "    else if(P.some(x=>x.res!=null)){const gr=P.filter(x=>x.res!=null),gk=gr.filter(x=>x.res>0).length,T10=gr.slice().sort((a,b)=>b.p-a.p).slice(0,10),k10=T10.filter(x=>x.res>0).length,LKg=lk.filter(x=>x.res!=null),lkk=LKg.filter(x=>x.res>0).length,open=P.filter(x=>x.res==null).length;\n"
     "      $('#tpTiles').innerHTML=wkTile(`week ${T.week} · in play`,`${gk}<span class=\"dim\"> / ${gr.length}</span>`,`listed players scored so far · ${pct(gk/gr.length)} · ${open} still to kick off`,gk/gr.length>=.3?'g':'')\n"

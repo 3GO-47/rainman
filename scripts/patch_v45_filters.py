@@ -39,7 +39,7 @@ rep("    <div class=\"panel\"><div id=\"wrTbl\" class=\"tscroll\"></div><p class
 rep("    const show=R.slice(0,st.lim);\n    $('#wrTbl').innerHTML=",
     "    $('#wrBy').hidden=st.view!=='cat';$('#wrTblP').hidden=st.view==='cat';\n"
     "    if(st.view==='cat'){const base=gr?sc/gr:null;const tp=x=>x.t&&x.t.p!=null?Math.round(100*+x.t.p)+'%':(x.tp&&x.tp.p!=null?Math.round(100*x.tp.p)+'%':'');\n"
-    "      const chip=x=>`<span class=\"wkpc ${x.res==null?'':x.res>0?'w':'l'}\">${pn(x.name,x.team,true)}<i>${x.raw?esc(x.raw):(x.l?esc(x.l[LOG.opp]):'')}${tp(x)?' · '+tp(x):''}${x.cs?' · '+x.cs+' sig':''}</i>${x.res==null?'':`<b>${x.res>0?'✓':'✗'}</b>`}</span>`;\n"
+    "      const chip=x=>`<span class=\"wkpc ${x.res==null?'':x.res>0?'w':'l'}\">${pn(x.name,x.team,true)}<i>${x.raw?esc(x.raw):(x.l?esc(x.l[LOG.opp]):'')}${tp(x)?' · '+tp(x):''}${x.cs?' · '+x.cs+' sig':''}</i>${x.res==null?(x.open?'<b class="dim" title="in play, no TD yet">·</b>':''):`<b>${x.res>0?'✓':'✗'}</b>`}</span>`;\n"
     "      const blocks=SG.filter(s=>!st.cats.size||st.cats.has(s.id)).map(s=>{const L=R.filter(x=>x.ids.has(s.id)).sort((a,b)=>(b.res??-1)-(a.res??-1)||b.cs-a.cs);if(!L.length)return '';const k=L.filter(x=>x.res>0).length,g=L.filter(x=>x.res!=null).length;\n"
     "        return `<div class=\"panel wrcat${s.kind==='neg'?' neg':''}\"><h3>${esc(s.lbl)} <span class=\"f\">${esc(s.long)} · ${L.length} player${L.length===1?'':'s'}${g?` · ${k} scored (${Math.round(100*k/g)}%${base!=null?' vs field '+Math.round(100*base)+'%':''})`:''}${s.kind==='neg'?' · fade':''}</span></h3><div class=\"wkpcs\">${L.map(chip).join('')}</div></div>`}).join('');\n"
     "      $('#wrBy').innerHTML=blocks||'<p class=\"note mini\">nothing matches</p>';tWire($('#wrBy'));logoize($('#wrBy'))}\n"

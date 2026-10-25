@@ -18,6 +18,14 @@ const LIVE_TD=(J.liveTd&&J.liveTd.week===J.week&&J.liveTd.season===(J.season||20
 const nmKey=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'').replace(/(jr|sr|ii|iii|iv)$/,'');
 function liveScorers(){if(!LIVE_TD)return [];const agg={};LIVE_TD.plays.forEach(pl=>{const k=nmKey(pl.player)+'|'+pl.team;(agg[k]=agg[k]||{player:pl.player,team:pl.team,game:pl.game,n:0,how:[],q:[]}).n++;agg[k].how.push(pl.how);agg[k].q.push(pl.q+' '+pl.clock)});return Object.values(agg)}
 const liveTdOf=(name,team)=>{if(!LIVE_TD)return null;const k=nmKey(name);const r=liveScorers().find(x=>nmKey(x.player)===k&&x.team===team)||liveScorers().find(x=>nmKey(x.player)===k);return r?r.n:null};
+/* game state at the last pull: pre / in / post (older files: inferred from kickoff) */
+const liveState=team=>{if(!LIVE_TD)return null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)return LIVE_TD.games[k]}const g=gameOf(team,J.week);return g?(kickedOff(g)?'in':'pre'):null};
+/* a player's live result: touchdowns if he has one, 0 once his game is final, null while it is on or before kickoff */
+const liveRes=(name,team)=>{const lv=liveTdOf(name,team);if(lv!=null)return lv;return liveState(team)==='post'?0:null};const liveOpen=team=>liveState(team)==='in';
+/* game state at the last pull: pre / in / post (older files: inferred from kickoff) */
+const liveState=team=>{if(!LIVE_TD)return null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)return LIVE_TD.games[k]}const g=gameOf(team,J.week);return g?(kickedOff(g)?'in':'pre'):null};
+/* a player's live result: touchdowns if he has one, 0 once his game is final, null while it is on or before kickoff */
+const liveRes=(name,team)=>{const lv=liveTdOf(name,team);if(lv!=null)return lv;return liveState(team)==='post'?0:null};const liveOpen=team=>liveState(team)==='in';
 /* rank of val among arr by key (1 = best); higher = better unless lo */
 const rankIn=(arr,val,key,lo)=>{const v=arr.map(key).filter(x=>x!=null);if(val==null||!v.length)return null;return [1+v.filter(x=>lo?x<val:x>val).length,v.length]};
 function scorerMap(){
@@ -51,14 +59,14 @@ function scorerPanel(){
       <td style="text-align:left"><span class="scalls">${bds.slice(0,4).map(chip).join('')}</span></td><td style="text-align:left"><span class="scalls">${sets.slice(0,3).map(chip).join('')}</span></td></tr>`}).join('');
   const hit=(r,f)=>R.filter(f).length;
   const sum=`${R.length} scorer${R.length===1?'':'s'} so far · ${hit(R,r=>r.best&&r.best.pct<=.1)} had a top-10% call somewhere · ${hit(R,r=>r.best&&r.best.pct<=.25)} a top-quarter call · ${hit(R,r=>!r.u)} not on a depth chart`;
-  return `<div class="panel" id="scPanel"><h3>who has scored — week ${G.week} <span class="f">${esc(sum)} · best call = the board or data set that had him ranked highest before kickoff · every rank in the hover · as of ${esc((LIVE_TD.pulled||'').replace('T',' '))}Z</span></h3>
+  return `<div class="panel" id="scPanel"><h3>who has scored — week ${G.week} <span class="f">${esc(sum)} · best call = the board or data set that had him ranked highest before kickoff · every rank in the hover · as of ${esc((LIVE_TD.pulled||'').replace('T',' '))}</span></h3>
     <div class="tscroll"><table class="fx sct"><thead><tr><th style="text-align:left">scorer</th><th>team</th><th>slot</th><th>opp</th><th>TDs</th><th>best call</th><th style="text-align:left">boards (best first)</th><th style="text-align:left">data sets (best first)</th></tr></thead><tbody>${rows}</tbody></table></div></div>`}
 '''
 rep("function wkResults(){const el=$('#wkres');if(!el)return;", core + "function wkResults(){const el=$('#wkres');if(!el)return;")
 # the panel sits above the category blocks on the slate-ahead scope; live TDs mark ✓ on ahead rows
 rep("    <div id=\"wrBy\"></div><div class=\"panel\" id=\"wrTblP\">", "    <div id=\"wrSc\"></div><div id=\"wrBy\"></div><div class=\"panel\" id=\"wrTblP\">")
 rep("    if(st.scope==='ahead'){const TR=wkTrust(x=>true,SG,'wres');R=wkAhead(u=>true,TR,G.week).map(x=>Object.assign(x,{w:G.week,ahead:true,se:LAST_SE,res:x.done?x.done.td:null,ppr:null}))}",
-    "    if(st.scope==='ahead'){const TR=wkTrust(x=>true,SG,'wres');R=wkAhead(u=>true,TR,G.week).map(x=>Object.assign(x,{w:G.week,ahead:true,se:LAST_SE,res:x.done?x.done.td:(liveTdOf(x.name,x.team)??(LIVE_TD&&kickedOff(gameOf(x.team,G.week))?0:null)),ppr:null}))}")
+    "    if(st.scope==='ahead'){const TR=wkTrust(x=>true,SG,'wres');R=wkAhead(u=>true,TR,G.week).map(x=>Object.assign(x,{w:G.week,ahead:true,se:LAST_SE,res:x.done?x.done.td:liveRes(x.name,x.team),open:!x.done&&liveOpen(x.team),ppr:null}))}")
 rep("    $('#wrBy').hidden=st.view!=='cat';$('#wrTblP').hidden=st.view==='cat';",
     "    $('#wrSc').innerHTML=st.scope==='ahead'?scorerPanel():'';tWire($('#wrSc'));sortableAll($('#wrSc'));\n    $('#wrBy').hidden=st.view!=='cat';$('#wrTblP').hidden=st.view==='cat';")
 # the week-ahead chips: a live scorer whose game is still on shows ✓ too (res from liveTdOf) — already via res. CSS:
