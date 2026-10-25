@@ -37,8 +37,7 @@ rep("  const LBL=Object.fromEntries(META_L.map(([k,l])=>[k,l])),DESC=new Set(['m
 # note text: add the new signals + weights
 rep("<b>META</b> folds the other five into one score, 0–100 (100 = the softest spot on every signal) &middot; <b>TD</b> = touchdowns this week's opponent allows to his slot, rank of ${NT} (1 = the most)",
     "<b>META</b> folds every other column into one score, 0–100 (100 = the softest spot on every signal), weighted by each signal's measured lift this season (${Object.entries(META_W).map(([k,v])=>LBL[k].replace('META','')+' '+Math.round(100*v)+'%').join(' · ')}) &middot; <b>ENV</b> = his team's implied points from this week's line &middot; <b>FORM</b> = his opportunities over the last two games vs his season rate &middot; <b>TD</b> = touchdowns this week's opponent allows to his slot, rank of ${NT} (1 = the most)")
-rep("  <div class=\"mlead\" id=\"${px}Lead\" data-mg=\"1\"></div>\n  <div class=\"lgrid td5 wide full meta\">",
-    "  <div class=\"mslate\" id=\"${px}Slate\"></div>\n  <div class=\"mlead\" id=\"${px}Lead\" data-mg=\"1\"></div>\n  <div class=\"lgrid td5 wide full meta\">")
+# (slate panel markup removed 2026-10-25 — Josh: too much space)
 rep("  const SIGS=['meta','td','atd','psi','h2h','sch'],SIGW={meta:9,td:8,atd:8,psi:7,h2h:11,sch:8},sigs=()=>SIGS.filter(k=>HAS[k]);",
     "  const SIGS=['meta','env','td','atd','psi','form','h2h','sch'],SIGW={meta:9,env:7,td:8,atd:8,psi:7,form:7,h2h:11,sch:8},sigs=()=>SIGS.filter(k=>HAS[k]);\n"
     "  const implied=(t,wk)=>{const g=((J.betting||{}).glh||[]).find(r=>r[0]===(J.season||2026)&&r[1]===wk&&(r[2]===t||r[3]===t));if(!g||g[7]==null)return null;const sp=g[6]==null?0:+g[6];return g[3]===t?+g[7]/2+sp/2:+g[7]/2-sp/2};");
@@ -107,7 +106,7 @@ rep("      ['best spots · META','g',top(null,'meta',false),x=>B(Math.round(x.me
 rep("      ['avoid · META','r',top(null,'meta',true),x=>B(Math.round(x.meta),gradeStyle(eq(x.meta/100)))]].filter((c,i)=>HAS[['meta','td','atd','psi','h2h','sch','meta'][i]]);",
     "      ['avoid · META','r',top(null,'meta',true),x=>B(Math.round(x.meta),gradeStyle(eq(x.meta/100)))]].filter((c,i)=>HAS[['meta','env','td','atd','psi','h2h','sch','meta'][i]]);")
 rep("  const cols=()=>{['ALL'].concat(TPOS).forEach(col);lead()};\n  const all=()=>{build();if(!HAS[lens])$$('Lens').querySelector('button[data-l=\"meta\"]').click();cols()};\n  ['Src','QB','Se','Inj'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;",
-    "  const cols=()=>{['ALL'].concat(TPOS).forEach(col);slate();lead()};\n  const all=()=>{build();if(!HAS[lens])$$('Lens').querySelector('button[data-l=\"meta\"]').click();cols()};\n  ['Src','QB','Se','Inj'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;")
+    "  const cols=()=>{['ALL'].concat(TPOS).forEach(col);lead()};\n  const all=()=>{build();if(!HAS[lens])$$('Lens').querySelector('button[data-l=\"meta\"]').click();cols()};\n  ['Src','QB','Se','Inj'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;")
 # CSS
 rep("/* v36 position letters */",
     "/* v41 META slate panel */.mslate{margin:0 0 10px}.mshd{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 6px;font-size:12px}.mshd label{margin-left:auto;cursor:pointer}.msgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:8px}\n"
