@@ -594,6 +594,7 @@ tr:hover td{background:var(--s2)}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:8px;margin-bottom:12px}
 .kpi{background:var(--panel);border:1px solid var(--edge);border-radius:4px;padding:8px 10px;min-width:0}.kpi[data-go]{cursor:pointer}
 /* v44 */.mvt{min-width:1180px}.mvt th,.mvt td{font-size:11px}
+/* v47 */th.nw{opacity:.55}.scb{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:center;margin:0 0 8px}.scb>.gl{margin-right:6px}
 /* v46 */.scall{display:inline-flex;gap:3px;align-items:baseline;border-radius:4px;padding:1px 6px;font:500 10.5px var(--mono);margin:1px 3px 1px 0;white-space:nowrap}.scall b{font-weight:700}.scall i{font-style:normal;opacity:.7;font-size:9.5px}.scalls{display:flex;flex-wrap:wrap}.sct td{white-space:nowrap}.sct td:nth-child(7),.sct td:nth-child(8){white-space:normal;min-width:260px}
 /* v45 */.wrcat{margin:0 0 8px}.wrcat h3{margin-bottom:4px}.wrcat.neg h3{opacity:.8}
 /* v43 results */.wrcats{display:flex;flex-direction:column;gap:3px;margin:0 0 8px}.wrg{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.wrg>.gl{min-width:64px}.wrg .chips button.neg{opacity:.75}.wrg .chips button.on{background:#e8b100;color:#000;border-color:#e8b100}.wrg .chips button.neg.on{background:#ff5252;border-color:#ff5252;color:#fff}
@@ -4606,7 +4607,7 @@ function firstTd(){const el=$('#firsttd');if(!el)return;const D=J.firstTd;if(!D)
   const CUR=String(Math.max(...D.seasons)),SL=['QB1','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2','D/ST'];
   const pct=v=>v==null?'—':(100*v).toFixed(v<.1?1:0)+'%',odds=v=>v==null?'—':(v>0?'+':'')+v;
   const clk=(q,c)=>q==null?'':`Q${q} ${c!=null?String(Math.floor((c%900)/60)).padStart(2,'0')+':'+String(c%60).padStart(2,'0'):''}`;
-  el.innerHTML=`<div class="wktiles" id="ftTiles" data-mg="1"></div><div id="ftMain"></div>
+  el.innerHTML=`<div class="wktiles" id="ftTiles" data-mg="1"></div><div id="ftLive"></div><div id="ftMain"></div>
     <div class="wk2b"><div class="panel"><h3 id="ftDh"></h3><div id="ftDef"></div></div><div class="panel"><h3 id="ftOh"></h3><div id="ftOff"></div></div></div>`;
   let sk='p_first',sa=false;
   function render(){const W=G.week,played=!!(D.results[CUR]||{})[String(W)],res=(D.results[CUR]||{})[String(W)]||[],tres=(D.tresults[CUR]||{})[String(W)]||[];
@@ -4622,6 +4623,9 @@ function firstTd(){const el=$('#firsttd');if(!el)return;const D=J.firstTd;if(!D)
       +wkTile('Kalshi priced',String(D.board.filter(b=>b.kalshi!=null).length),`of ${D.board.length} on the board · week ${D.week}`),[slotH,slotH,homeH,chkH,kalH]);
     const th=(k,l,t)=>`<th data-k="${k}" title="${esc(t||'')}" style="cursor:pointer">${l}${sk===k?(sa?' ▲':' ▼'):''}</th>`;
     const shade=(v,arr,lo)=>{const vs=arr.filter(x=>x!=null);if(v==null||vs.length<2)return `<span class="dim">—</span>`;const srt=vs.slice().sort((a,b)=>lo?a-b:b-a);return `<span class="badge" style="${gradeStyle(srt.indexOf(v)+1,srt.length)}">${pct(v)}</span>`};
+    const LF=typeof liveFirst==='function'&&!played?liveFirst().filter(p=>{const [a,h]=p.game.split('@');return inF(a)||inF(h)}):[];
+    $('#ftLive').innerHTML=LF.length?`<div class="panel"><h3>first scorers so far <span class="f">${LF.length} game${LF.length===1?'':'s'} with a touchdown · where the board had him · ✓ = the board's top pick for that game</span></h3><div class="wkpcs">${LF.map(p=>{const [a,h]=p.game.split('@');const gb=D.board.filter(b=>(b.team===a&&b.opp===h)||(b.team===h&&b.opp===a)).sort((x,y)=>y.p_first-x.p_first);const i=gb.findIndex(b=>nmKey(b.player)===nmKey(p.player)&&b.team===p.team);const top=gb[0]&&nmKey(gb[0].player)===nmKey(p.player);
+      return `<span class="wkpc ${top?'w':i<0?'l':''}" title="${esc(p.game)} · Q${p.q} ${esc(p.clock)} · ${p.how}${i>=0?' · board rank '+(i+1)+' of '+gb.length+' · '+(100*gb[i].p_first).toFixed(1)+'%':' · not on the board'}">${pn(p.player,p.team,true)}<i>${esc(p.game)} · ${i>=0?'#'+(i+1)+' of '+gb.length:'off board'}</i>${top?'<b>✓</b>':''}</span>`}).join('')}</div></div>`:'';
     if(played){
       const G=res.filter(r=>inF(r.team)||inF(r.vs)).map(r=>{const tf=tres.filter(x=>x.game===r.game);return Object.assign({},r,{other:tf.find(x=>x.team!==r.team)})});
       $('#ftMain').innerHTML=`<div class="panel"><h3>who scored first — week ${W} <span class="f">the game\'s first touchdown, then the other team\'s first · slot = his depth slot that week · click a name for his card</span></h3>
@@ -4687,6 +4691,7 @@ function scorerMap(){
     row.calls.forEach(c=>{c.pct=c.of>1?(c.rank-1)/(c.of-1):0});
     row.best=row.calls.slice().sort((a,b)=>a.pct-b.pct||a.rank-b.rank)[0]||null;
     return row})}
+function liveFirst(){if(!LIVE_TD)return [];const by={};LIVE_TD.plays.forEach(p=>{const k=p.game;const cur=by[k];const t=(p.q||9)*10000-(parseInt(String(p.clock).split(':')[0]||0)*60+parseInt(String(p.clock).split(':')[1]||0));if(!cur||t<cur.t)by[k]={t,p}});return Object.values(by).map(x=>x.p)}
 function scorerPanel(){
   const R=scorerMap();if(!R.length)return '';
   const chip=c=>`<span class="scall" title="${esc(c.tip)}" style="${gradeStyle(1+c.pct*(NT-1))}">${esc(c.k)} <b>#${c.rank}</b><i>/${c.of}</i></span>`;
@@ -4695,9 +4700,12 @@ function scorerPanel(){
       <td data-v="${r.best?r.best.pct:9}">${r.best?chip(r.best):'<span class="dim">not on a depth chart (D/ST · OL · deep bench)</span>'}</td>
       <td style="text-align:left"><span class="scalls">${bds.slice(0,4).map(chip).join('')}</span></td><td style="text-align:left"><span class="scalls">${sets.slice(0,3).map(chip).join('')}</span></td></tr>`}).join('');
   const hit=(r,f)=>R.filter(f).length;
+  const SC={};R.forEach(r=>r.calls.forEach(c=>{const o=SC[c.k]=SC[c.k]||{k:c.k,grp:c.grp,n:0,q:0,t:0};o.n++;if(c.pct<=.25)o.q++;if(c.pct<=.1)o.t++}));
+  const card=Object.values(SC).filter(o=>o.n>=5).sort((a,b)=>b.q/b.n-a.q/a.n||b.t-a.t);
+  const scorecard=card.length?`<div class="scb"><span class="gl">board scorecard</span>${card.map(o=>`<span class="scall" style="${gradeStyle(1+(1-Math.min(1,o.q/o.n/.5))*(NT-1))}" title="${esc(o.k)}: of the ${o.n} scorers it rated, ${o.q} were in its top quarter (${Math.round(100*o.q/o.n)}% · a coin gives 25%), ${o.t} in its top tenth">${esc(o.k)} <b>${Math.round(100*o.q/o.n)}%</b><i>${o.q}/${o.n}</i></span>`).join('')}</div>`:'';
   const sum=`${R.length} scorer${R.length===1?'':'s'} so far · ${hit(R,r=>r.best&&r.best.pct<=.1)} had a top-10% call somewhere · ${hit(R,r=>r.best&&r.best.pct<=.25)} a top-quarter call · ${hit(R,r=>!r.u)} not on a depth chart`;
   return `<div class="panel" id="scPanel"><h3>who has scored — week ${G.week} <span class="f">${esc(sum)} · best call = the board or data set that had him ranked highest before kickoff · every rank in the hover · as of ${esc((LIVE_TD.pulled||'').replace('T',' '))}Z</span></h3>
-    <div class="tscroll"><table class="fx sct"><thead><tr><th style="text-align:left">scorer</th><th>team</th><th>slot</th><th>opp</th><th>TDs</th><th>best call</th><th style="text-align:left">boards (best first)</th><th style="text-align:left">data sets (best first)</th></tr></thead><tbody>${rows}</tbody></table></div></div>`}
+    ${scorecard}<div class="tscroll"><table class="fx sct"><thead><tr><th style="text-align:left">scorer</th><th>team</th><th>slot</th><th>opp</th><th>TDs</th><th>best call</th><th style="text-align:left">boards (best first)</th><th style="text-align:left">data sets (best first)</th></tr></thead><tbody>${rows}</tbody></table></div></div>`}
 function wkResults(){const el=$('#wkres');if(!el)return;
   const SG=wkSigs(),BYID={};SG.forEach(s=>BYID[s.id]=s);
   const graded=wkFeat(LAST_SE).weeks.includes(G.week);
@@ -4739,7 +4747,8 @@ function wkResults(){const el=$('#wkres');if(!el)return;
     $('#wrBy').hidden=st.view!=='cat';$('#wrTblP').hidden=st.view==='cat';
     if(st.view==='cat'){const base=gr?sc/gr:null;const tp=x=>x.t&&x.t.p!=null?Math.round(100*+x.t.p)+'%':(x.tp&&x.tp.p!=null?Math.round(100*x.tp.p)+'%':'');
       const chip=x=>`<span class="wkpc ${x.res==null?'':x.res>0?'w':'l'}">${pn(x.name,x.team,true)}<i>${x.raw?esc(x.raw):(x.l?esc(x.l[LOG.opp]):'')}${tp(x)?' · '+tp(x):''}${x.cs?' · '+x.cs+' sig':''}</i>${x.res==null?'':`<b>${x.res>0?'✓':'✗'}</b>`}</span>`;
-      const blocks=SG.filter(s=>!st.cats.size||st.cats.has(s.id)).map(s=>{const L=R.filter(x=>x.ids.has(s.id)).sort((a,b)=>(b.res??-1)-(a.res??-1)||b.cs-a.cs);if(!L.length)return '';const k=L.filter(x=>x.res>0).length,g=L.filter(x=>x.res!=null).length;
+      const ordered=SG.filter(s=>!st.cats.size||st.cats.has(s.id)).map(s=>{const L=R.filter(x=>x.ids.has(s.id)),g=L.filter(x=>x.res!=null).length,k=L.filter(x=>x.res>0).length;return {s,hr:g>=3?k/g:-1,g}}).sort((a,b)=>(a.s.kind==='neg')-(b.s.kind==='neg')||b.hr-a.hr||b.g-a.g).map(o=>o.s);
+      const blocks=ordered.map(s=>{const L=R.filter(x=>x.ids.has(s.id)).sort((a,b)=>(b.res??-1)-(a.res??-1)||b.cs-a.cs);if(!L.length)return '';const k=L.filter(x=>x.res>0).length,g=L.filter(x=>x.res!=null).length;
         return `<div class="panel wrcat${s.kind==='neg'?' neg':''}"><h3>${esc(s.lbl)} <span class="f">${esc(s.long)} · ${L.length} player${L.length===1?'':'s'}${g?` · ${k} scored (${Math.round(100*k/g)}%${base!=null?' vs field '+Math.round(100*base)+'%':''})`:''}${s.kind==='neg'?' · fade':''}</span></h3><div class="wkpcs">${L.map(chip).join('')}</div></div>`}).join('');
       $('#wrBy').innerHTML=blocks||'<p class="note mini">nothing matches</p>';tWire($('#wrBy'));logoize($('#wrBy'))}
     const show=R.slice(0,st.lim);
@@ -5776,7 +5785,8 @@ function metaGrid(root='#meta',px='mt'){
     const R=ROWS.filter(x=>(p==='ALL'||x.pos===p)&&keep(x)).sort(cmp(st.k,st.a));
     $$('N'+p).textContent=R.length+(R.length===1?' player':' players');
     $$('G'+p).textContent=`ranked by ${LBL[st.k]||st.k} · ${setL()}`;
-    const th=(k,l,tip,cls)=>`<th class="${cls||''}" data-k="${k}" title="${esc(tip||'')}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    const nw=k=>SIGS.includes(k)&&k!=='meta'&&!(META_W[k]>0);   /* a column the backtest left without weight: shown for the read, dimmed */
+    const th=(k,l,tip,cls)=>`<th class="${cls||''}${nw(k)?' nw':''}" data-k="${k}" title="${esc((tip||'')+(nw(k)?' · no weight in META (the backtest found it adds nothing once Ψ is in) — shown for the read':''))}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
     const S=sigs(),wname=p==='ALL'?24:29,wpos=p==='ALL'?5:0,wopp=p==='ALL'?15:18,ws=S.reduce((a,k)=>a+SIGW[k],0),wk=k=>((100-wname-wpos-wopp)*SIGW[k]/ws).toFixed(2);
     const TH={meta:th('meta','META','every signal folded into one score · 0–100, 100 = softest on all of them · hover a cell for the breakdown','md gs'),
       env:th('env','ENV','his team\'s implied points from this week\'s spread and total · shaded among the week\'s starters','md'),
@@ -5933,11 +5943,11 @@ function metaV2(root='#metav2',px='mv'){
     const wname=14,wpos=5,wopp=8,wc=6,wt=4,wn=((100-wname-wpos-wopp-wc-2*wt)/Math.max(ks.length,1)).toFixed(2);
     $$('B'+p).innerHTML=`<table class="lgt mvt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%"><col style="width:${wc}%"><col style="width:${wt}%"><col style="width:${wt}%">${ks.map(()=>`<col style="width:${wn}%">`).join('')}</colgroup><thead>
       <tr class="hd">${th('player','Player')}${p==='ALL'?th('pos',''):''}${th('opp','Opp',"this week's opponent")}${th('cons','CONS','the boards folded · 0–100 · hover for every board','md gs')}${th('t10','T10','boards where he is in the top 10% of his position','md')}${th('t25','T25','boards where he is in the top quarter of his position','md')}${ks.map(k=>th(k,LBL[k],TIP[k]+' · percentile within his position','op')).join('')}</tr></thead><tbody>
-      ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
+      ${R.map(x=>{const lv=typeof liveTdOf==='function'?liveTdOf(x.u.player,x.u.team):null;return `<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}">${esc(pshort(x.u.player))}${lv?` <b style="color:var(--green)" title="${lv} TD so far">✓${lv>1?lv:''}</b>`:''}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
         ${p==='ALL'?`<td>${posIcon(x.pos,10,x.u.dslot||x.u.slot)}</td>`:''}<td>${x.opp?oppcell(x.oppRaw):'<span class="dim">bye</span>'}</td>
         ${x.cons==null?'<td class="md gs"><span class="dim">·</span></td>':`<td class="md gs" title="${esc(why(x))}"><span class="badge" style="${gradeStyle(eq(Math.max(0,Math.min(1,x.cons/100))))}">${Math.round(x.cons)}</span></td>`}
         <td class="md" title="top 10% on ${x.t10} of ${x.nb} boards"><b style="color:${x.t10>=4?'#00c853':x.t10>=2?'#8bc34a':'var(--dim)'}">${x.t10||''}</b></td><td class="md" title="top quarter on ${x.t25} of ${x.nb} boards">${x.t25||''}</td>
-        ${ks.map(k=>cell(k,x)).join('')}</tr>`).join('')||`<tr><td colspan="${ks.length+6}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
+        ${ks.map(k=>cell(k,x)).join('')}</tr>`}).join('')||`<tr><td colspan="${ks.length+6}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
     $$('B'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{const k=h.dataset.k;if(st.k===k)st.a=!st.a;else{st.k=k;st.a=k==='player'||k==='opp'||k==='pos'}col(p)});
     tWire($$('B'+p))}
   function lead(){const R=ROWS.filter(x=>keep(x)&&x.cons!=null);const B=(r,s)=>`<span class="badge" style="${s}">${r}</span>`;
@@ -6473,7 +6483,8 @@ function wkAhead(keepU,TR,W0){const S=LAST_SE;W0=W0||J.week;if(!W0)return [];con
   const out=[];UNIVERSE.forEach(u=>{if(!u.grp||!TPOS.includes(u.pos)||u.inj==='-1'||!keepU(u))return;const raw=(J.sched26[u.team]||[])[W0-1]||'';if(!raw||raw==='BYE')return;const opp=raw.replace('@','');
     const L=PLOGS[u.ln||u.player]||[],prev=L.filter(l=>l[LOG.season]<S||(l[LOG.season]===S&&l[LOG.week]<W0)),done=L.find(l=>l[LOG.season]===S&&l[LOG.week]===W0);
     const x=wkPre(prev,S,W0,u.team,opp,u.grp,raw[0]!=='@',cx),on=KS.filter(k=>k.f(x));
-    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.slot,raw,on,cs:on.length,score:on.reduce((s,k)=>s+Math.max(0,(TL[k.id]||1)-1),0),t:tdOf(u),done:done?{td:wkTD(done)}:null}))});
+    const lv=done?null:(typeof liveTdOf==='function'?liveTdOf(u.player,u.team):null),gmk=done||lv!=null?null:(typeof LIVE_TD!=='undefined'&&LIVE_TD&&kickedOff(gameOf(u.team,W0)));
+    out.push(Object.assign(x,{u,name:u.player,team:u.team,slot:u.dslot||u.slot,raw,on,cs:on.length,score:on.reduce((s,k)=>s+Math.max(0,(TL[k.id]||1)-1),0),t:tdOf(u),done:done?{td:wkTD(done)}:lv!=null?{td:lv,live:true}:gmk?{td:0,live:true,open:true}:null}))});
   return out.sort((a,b)=>b.score-a.score||b.cs-a.cs)}
 function weeklies(){
   const el=$('#weeklies');if(!el)return;
@@ -6750,7 +6761,7 @@ function tdWhyTxt(k,x,risk){const g=(J.tdpicks.grp||{})[x.b]||x.b,f1=v=>v==null?
 /* any week's board: the live picks for the week being picked, otherwise td_picks.json 'wk' — final week = walk-forward (graded),
    week importing = rated from the games before it (graded as it lands), week to come = early look */
 function tdBoard(w){const T=J.tdpicks;if(!T)return null;
-  if(w===T.week)return {m:'live',w,P:T.picks,g:T.games,d:T.dates};
+  if(w===T.week){if(typeof LIVE_TD!=='undefined'&&LIVE_TD&&LIVE_TD.week===w)T.picks.forEach(x=>{const lv=liveTdOf(x.n,x.t);x.res=lv!=null?lv:(kickedOff(gameOf(x.t,w))?0:null);x.live=x.res!=null});return {m:'live',w,P:T.picks,g:T.games,d:T.dates}}
   const E=(T.wk||{})[w];if(!E)return null;
   if(!E._P){const F=T.model.feats;E._P=E.r.map(r=>{const e=typeof r[0]==='number',B=e?T.base[r[0]]:null;
     const b=e?B[3]:r[12],p=(e?r[3]:r[5])/1000,st=e?B.slice(4):r[10],os=e?r[7]:r[11],wc=e?r[4]:r[7],rc=e?r[5]:r[8];
@@ -6808,6 +6819,12 @@ function tdPicks(){
         +(gr.length?wkTile('top 10',`${k10}<span class="dim"> / ${T10.length}</span>`,'of the ten highest rated scored',k10>=6?'g':k10<=3?'r':''):wkTile('top pick',top?esc(pshort(top.n)):'—',top?`${pct(top.p)} · ${top.h?'vs':'@'} ${top.o}`:'','g',true))
         +wkTile(gr.length?'graded':'rated 15%+',gr.length?`${gk}<span class="dim"> / ${gr.length}</span>`:String(P.length),gr.length?`listed players who scored · ${pct(gk/gr.length)}`:BD.m==='early'?'players in view':'graded as box scores import')
         +wkTile('live board',`wk ${T.week}`,'prices · locks at kickoff','',true)}
+    else if(P.some(x=>x.res!=null)){const gr=P.filter(x=>x.res!=null),gk=gr.filter(x=>x.res>0).length,T10=gr.slice().sort((a,b)=>b.p-a.p).slice(0,10),k10=T10.filter(x=>x.res>0).length,LKg=lk.filter(x=>x.res!=null),lkk=LKg.filter(x=>x.res>0).length,open=P.filter(x=>x.res==null).length;
+      $('#tpTiles').innerHTML=wkTile(`week ${T.week} · in play`,`${gk}<span class="dim"> / ${gr.length}</span>`,`listed players scored so far · ${pct(gk/gr.length)} · ${open} still to kick off`,gk/gr.length>=.3?'g':'')
+        +wkTile('top 10 so far',`${k10}<span class="dim"> / ${T10.length}</span>`,'of the ten highest rated who have played',k10>=6?'g':k10<=3&&T10.length>=8?'r':'')
+        +wkTile('locks',LKg.length?`${lkk}<span class="dim"> / ${LKg.length}</span>`:String(lk.length),LKg.length?'locks that have played, scored':(lk.slice(0,2).map(x=>esc(pshort(x.n))).join(' · ')||'none above 50%'),'g')
+        +wkTile('top 10 each week',BT.top10?pct(BT.top10[0]/BT.top10[1]):'—',`scored · ${BT.top10?BT.top10[0]+' of '+BT.top10[1]:''} blind picks`,'')
+        +wkTile('live record',rg?`${rw}-${rg-rw}`:'—',rg?`${pct(rw/rg)} of locked picks scored`:'locked picks, graded as they finish')}
     else $('#tpTiles').innerHTML=wkTile(`week ${T.week}`,String(T.games),`games · ${T.dates?T.dates[0].slice(5)+' to '+T.dates[1].slice(5):''}`)
       +wkTile('locks',String(lk.length),lk.slice(0,2).map(x=>esc(pshort(x.n))).join(' · ')||'none above 50%','g')
       +wkTile('top 10 each week',BT.top10?pct(BT.top10[0]/BT.top10[1]):'—',`scored · ${BT.top10?BT.top10[0]+' of '+BT.top10[1]:''} blind picks`,'g')
@@ -7037,6 +7054,7 @@ Object.assign(NOTES,{
 Object.assign(NOTES,{metaprop:['v23','new tab: META for player props — every posted prop line scored over / under on the defense\'s rank for that exact stat, the prop model, his last-10 hit rate, his average and his head-to-head; META\'s five columns, data sets, filters and leader cards']});
 Object.assign(NOTES,{tdpicks:['v26','follows the week picked up top like every other tab — the live board for the week being picked; a finished week shows every player who played, rated by the model refit on earlier weeks only and graded; the week importing is rated from the games before it and graded as box scores land; weeks to come get an early look (today\'s depth chart and form vs that opponent, implied totals estimated until lines post) · track-record bars jump to their week']});
 Object.assign(NOTES,{wkgrid:['v26','new tab: the Weeklies categories as one composite board — the most consistent categories across every recorded week as columns, every player on the week\'s slate as a row with his own record in each, CAT / REC / TD % and a square per category, a best-picks card, the TD Grid\'s five columns; follows the week, slate, game, team and position filters up top']});
+Object.assign(NOTES,{v47:['v47','live touchdowns reach every week-ahead view (Category Grid, Weeklies, TD Picks, META v2) \u00b7 First TD shows each game\'s first scorer so far against the board \u00b7 the scorers panel grades every board on today\'s scorers \u00b7 META v1 dims the columns that carry no weight']});
 Object.assign(NOTES,{v46:['v46','who has scored \u2014 the week\'s touchdowns land as they happen (ESPN, markets loop) and Results maps every scorer to where he was ranked highest before kickoff, across the data sets and the boards']});
 Object.assign(NOTES,{v45:['v45','the global bar (slate \u00b7 game \u00b7 team \u00b7 roster) now narrows the week\'s lists on Weeklies v1/v2 and Category Grid v1/v2 \u00b7 Results opens on the slate ahead with one block per category']});
 Object.assign(NOTES,{v44:['v44','META v2 on F2 Matchups: every board that ranks the week\'s players compiled into one CONSENSUS percentile per position, with how many boards put him in their top 10% \u2014 board chips, three fold rules, META v1 untouched']});
