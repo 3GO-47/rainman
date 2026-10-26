@@ -55,7 +55,7 @@ function metaV2(root='#metav2',px='mv'){
   let ROWS=[],HAS={};
   function build(){
     const wk=G.week,D=J.dvp.combined||J.dvp[Object.keys(J.dvp)[0]]||{};
-    const TP=((J.tdpicks||{}).week===wk?(J.tdpicks.picks||[]):[]),FT=((J.firstTd||{}).week===wk?(J.firstTd.board||[]):[]);
+    const BDW=typeof tdBoard==='function'?tdBoard(wk):null,TP=BDW&&BDW.P?BDW.P:[],FT=((J.firstTd||{}).week===wk?(J.firstTd.board||[]):[]);   /* the week's own TD board, graded or live */
     const M1={};(window.META_LAST||[]).forEach(x=>M1[x.u.player+'|'+x.u.team]=x);
     let WA={},TR=null;try{const SG=wkSigs();TR=wkTrust(x=>true,SG,'card38');const ok=new Set(TR.sig.filter(z=>z.kind==='pos'&&(z.tier==='trust'||z.tier==='lean')).map(z=>z.id));
       wkAhead(u=>true,TR,wk).forEach(x=>{WA[x.name+'|'+x.team]={score:x.score,cs:x.cs,cat:SG.filter(z=>ok.has(z.id)&&z.f(x)).length,on:x.on}})}catch(e){}
