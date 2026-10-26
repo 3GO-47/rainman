@@ -1,12 +1,11 @@
 {
- "pulled": "2026-10-25T23:21Z",
+ "pulled": "2026-10-26T05:21Z",
  "season": 2026,
  "week": 7,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "DEN@ARI": "in",
-  "GB@DET": "in",
-  "LAR@LV": "in",
+  "DAL@PHI": "pre",
+  "NE@CHI": "post",
   "PIT@NO": "post",
   "SF@ATL": "post",
   "CLE@TEN": "post",
@@ -15,22 +14,19 @@
   "TB@CAR": "post",
   "CIN@BAL": "post",
   "NYG@HOU": "post",
-  "KC@SEA": "pre",
-  "NE@CHI": "post",
-  "DAL@PHI": "pre"
+  "DEN@ARI": "post",
+  "GB@DET": "post",
+  "LAR@LV": "post",
+  "KC@SEA": "post"
  },
  "scores": {
-  "DEN@ARI": [
-   30,
-   16
+  "DAL@PHI": [
+   0,
+   0
   ],
-  "GB@DET": [
-   17,
-   17
-  ],
-  "LAR@LV": [
-   35,
-   18
+  "NE@CHI": [
+   24,
+   30
   ],
   "PIT@NO": [
    16,
@@ -64,139 +60,71 @@
    27,
    21
   ],
+  "DEN@ARI": [
+   30,
+   16
+  ],
+  "GB@DET": [
+   17,
+   20
+  ],
+  "LAR@LV": [
+   35,
+   21
+  ],
   "KC@SEA": [
-   0,
-   0
-  ],
-  "NE@CHI": [
-   24,
-   30
-  ],
-  "DAL@PHI": [
-   0,
-   0
+   3,
+   20
   ]
  },
  "plays": [
   {
-   "game": "DEN@ARI",
-   "q": 2,
-   "clock": "3:43",
-   "team": "DEN",
-   "player": "Bo Nix",
+   "game": "NE@CHI",
+   "q": 1,
+   "clock": "1:38",
+   "team": "CHI",
+   "player": "D'Andre Swift",
    "how": "rush"
   },
   {
-   "game": "DEN@ARI",
-   "q": 3,
-   "clock": "10:26",
-   "team": "DEN",
-   "player": "RJ Harvey",
+   "game": "NE@CHI",
+   "q": 2,
+   "clock": "11:33",
+   "team": "NE",
+   "player": "Drake Maye",
+   "how": "rush"
+  },
+  {
+   "game": "NE@CHI",
+   "q": 2,
+   "clock": "0:14",
+   "team": "CHI",
+   "player": "Luther Burden III",
    "how": "rec"
   },
   {
-   "game": "DEN@ARI",
-   "q": 3,
-   "clock": "3:50",
-   "team": "ARI",
-   "player": "Trey McBride",
-   "how": "rec"
-  },
-  {
-   "game": "DEN@ARI",
-   "q": 3,
+   "game": "NE@CHI",
+   "q": 2,
    "clock": "0:00",
-   "team": "DEN",
-   "player": "J.K. Dobbins",
-   "how": "rush"
-  },
-  {
-   "game": "GB@DET",
-   "q": 1,
-   "clock": "7:00",
-   "team": "DET",
-   "player": "Jameson Williams",
+   "team": "NE",
+   "player": "Rhamondre Stevenson",
    "how": "rec"
   },
   {
-   "game": "GB@DET",
-   "q": 1,
-   "clock": "0:58",
-   "team": "GB",
-   "player": "Tucker Kraft",
-   "how": "rec"
-  },
-  {
-   "game": "GB@DET",
+   "game": "NE@CHI",
    "q": 3,
-   "clock": "12:14",
-   "team": "GB",
-   "player": "Josh Jacobs",
+   "clock": "9:41",
+   "team": "CHI",
+   "player": "Colston Loveland",
    "how": "rec"
   },
   {
-   "game": "GB@DET",
+   "game": "NE@CHI",
    "q": 3,
-   "clock": "6:33",
-   "team": "DET",
-   "player": "Jameson Williams",
+   "clock": "3:46",
+   "team": "NE",
+   "player": "Eli Raridon",
    "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 1,
-   "clock": "6:25",
-   "team": "LAR",
-   "player": "Davis Allen",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 2,
-   "clock": "10:01",
-   "team": "LAR",
-   "player": "Davis Allen",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 2,
-   "clock": "4:15",
-   "team": "LAR",
-   "player": "Puka Nacua",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 2,
-   "clock": "1:19",
-   "team": "LAR",
-   "player": "Kyren Williams",
-   "how": "rush"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 4,
-   "clock": "14:51",
-   "team": "LV",
-   "player": "Tre Tucker",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 4,
-   "clock": "13:12",
-   "team": "LV",
-   "player": "Ashton Jeanty",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@LV",
-   "q": 4,
-   "clock": "6:34",
-   "team": "LAR",
-   "player": "Blake Corum",
-   "how": "rush"
   },
   {
    "game": "PIT@NO",
@@ -535,52 +463,140 @@
    "how": "rush"
   },
   {
-   "game": "NE@CHI",
-   "q": 1,
-   "clock": "1:38",
-   "team": "CHI",
-   "player": "D'Andre Swift",
+   "game": "DEN@ARI",
+   "q": 2,
+   "clock": "3:43",
+   "team": "DEN",
+   "player": "Bo Nix",
    "how": "rush"
   },
   {
-   "game": "NE@CHI",
-   "q": 2,
-   "clock": "11:33",
-   "team": "NE",
-   "player": "Drake Maye",
-   "how": "rush"
-  },
-  {
-   "game": "NE@CHI",
-   "q": 2,
-   "clock": "0:14",
-   "team": "CHI",
-   "player": "Luther Burden III",
+   "game": "DEN@ARI",
+   "q": 3,
+   "clock": "10:26",
+   "team": "DEN",
+   "player": "RJ Harvey",
    "how": "rec"
   },
   {
-   "game": "NE@CHI",
-   "q": 2,
+   "game": "DEN@ARI",
+   "q": 3,
+   "clock": "3:50",
+   "team": "ARI",
+   "player": "Trey McBride",
+   "how": "rec"
+  },
+  {
+   "game": "DEN@ARI",
+   "q": 3,
    "clock": "0:00",
-   "team": "NE",
-   "player": "Rhamondre Stevenson",
+   "team": "DEN",
+   "player": "J.K. Dobbins",
+   "how": "rush"
+  },
+  {
+   "game": "GB@DET",
+   "q": 1,
+   "clock": "7:00",
+   "team": "DET",
+   "player": "Jameson Williams",
    "how": "rec"
   },
   {
-   "game": "NE@CHI",
-   "q": 3,
-   "clock": "9:41",
-   "team": "CHI",
-   "player": "Colston Loveland",
+   "game": "GB@DET",
+   "q": 1,
+   "clock": "0:58",
+   "team": "GB",
+   "player": "Tucker Kraft",
    "how": "rec"
   },
   {
-   "game": "NE@CHI",
+   "game": "GB@DET",
    "q": 3,
-   "clock": "3:46",
-   "team": "NE",
-   "player": "Eli Raridon",
+   "clock": "12:14",
+   "team": "GB",
+   "player": "Josh Jacobs",
    "how": "rec"
+  },
+  {
+   "game": "GB@DET",
+   "q": 3,
+   "clock": "6:33",
+   "team": "DET",
+   "player": "Jameson Williams",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 1,
+   "clock": "6:25",
+   "team": "LAR",
+   "player": "Davis Allen",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "10:01",
+   "team": "LAR",
+   "player": "Davis Allen",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "4:15",
+   "team": "LAR",
+   "player": "Puka Nacua",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 2,
+   "clock": "1:19",
+   "team": "LAR",
+   "player": "Kyren Williams",
+   "how": "rush"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "14:51",
+   "team": "LV",
+   "player": "Tre Tucker",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "13:12",
+   "team": "LV",
+   "player": "Ashton Jeanty",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@LV",
+   "q": 4,
+   "clock": "6:34",
+   "team": "LAR",
+   "player": "Blake Corum",
+   "how": "rush"
+  },
+  {
+   "game": "KC@SEA",
+   "q": 2,
+   "clock": "1:44",
+   "team": "SEA",
+   "player": "Jaxon Smith-Njigba",
+   "how": "rec"
+  },
+  {
+   "game": "KC@SEA",
+   "q": 4,
+   "clock": "3:47",
+   "team": "SEA",
+   "player": "Emanuel Wilson",
+   "how": "rush"
   }
  ]
 }
