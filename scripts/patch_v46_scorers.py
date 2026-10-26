@@ -17,19 +17,21 @@ core = r'''
 const LIVE_TD=(J.liveTd&&J.liveTd.week===J.week&&J.liveTd.season===(J.season||2026))?J.liveTd:null;
 const nmKey=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'').replace(/(jr|sr|ii|iii|iv)$/,'');
 let LIVE_SC=null;
-function liveScorers(){if(!LIVE_TD)return [];if(LIVE_SC)return LIVE_SC;const agg={};LIVE_TD.plays.forEach(pl=>{const k=nmKey(pl.player)+'|'+pl.team;(agg[k]=agg[k]||{player:pl.player,team:pl.team,game:pl.game,n:0,how:[],q:[]}).n++;agg[k].how.push(pl.how);agg[k].q.push(pl.q+' '+pl.clock)});return LIVE_SC=Object.values(agg)}
+function liveScorers(){if(!liveOK())return [];if(LIVE_SC)return LIVE_SC;const agg={};LIVE_TD.plays.forEach(pl=>{const k=nmKey(pl.player)+'|'+pl.team;(agg[k]=agg[k]||{player:pl.player,team:pl.team,game:pl.game,n:0,how:[],q:[]}).n++;agg[k].how.push(pl.how);agg[k].q.push(pl.q+' '+pl.clock)});return LIVE_SC=Object.values(agg)}
+/* the live file describes ONE week: every helper answers only while the week on screen is that week */
+const liveOK=()=>!!LIVE_TD&&G.week===LIVE_TD.week;
 let LIVE_IX=null;
-const liveTdOf=(name,team)=>{if(!LIVE_TD)return null;if(!LIVE_IX){LIVE_IX={};liveScorers().forEach(x=>{const k=nmKey(x.player);LIVE_IX[k+'|'+x.team]=x;if(!LIVE_IX[k])LIVE_IX[k]=x})}const k=nmKey(name);const r=LIVE_IX[k+'|'+team]||LIVE_IX[k];return r?r.n:null};
+const liveTdOf=(name,team)=>{if(!liveOK())return null;if(!LIVE_IX){LIVE_IX={};liveScorers().forEach(x=>{const k=nmKey(x.player);LIVE_IX[k+'|'+x.team]=x;if(!LIVE_IX[k])LIVE_IX[k]=x})}const k=nmKey(name);const r=LIVE_IX[k+'|'+team]||LIVE_IX[k];return r?r.n:null};
 /* game state at the last pull: pre / in / post (older files: inferred from kickoff) */
 const LIVE_ST={};
-const liveState=team=>{if(!LIVE_TD)return null;if(team in LIVE_ST)return LIVE_ST[team];let v=null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)v=LIVE_TD.games[k]}if(v==null){const g=gameOf(team,J.week);v=g?(kickedOff(g)?'in':'pre'):null}return LIVE_ST[team]=v};
+const liveState=team=>{if(!liveOK())return null;if(team in LIVE_ST)return LIVE_ST[team];let v=null;if(LIVE_TD.games){const k=Object.keys(LIVE_TD.games).find(g=>g.split('@').includes(team));if(k)v=LIVE_TD.games[k]}if(v==null){const g=gameOf(team,J.week);v=g?(kickedOff(g)?'in':'pre'):null}return LIVE_ST[team]=v};
 /* a player's live result: touchdowns if he has one, 0 once his game is final, null while it is on or before kickoff */
 const liveRes=(name,team)=>{const lv=liveTdOf(name,team);if(lv!=null)return lv;return liveState(team)==='post'?0:null};const liveOpen=team=>liveState(team)==='in';
 /* rank of val among arr by key (1 = best); higher = better unless lo */
 const rankIn=(arr,val,key,lo)=>{const v=arr.map(key).filter(x=>x!=null);if(val==null||!v.length)return null;return [1+v.filter(x=>lo?x<val:x>val).length,v.length]};
 function scorerMap(){
   const wk=G.week,MV=window.MV_LAST||[],M1=window.META_LAST||[];
-  const TP=(J.tdpicks&&J.tdpicks.week===wk?J.tdpicks.picks:[])||[],FT=(J.firstTd&&J.firstTd.week===wk?J.firstTd.board:[])||[];
+  const BDW=typeof tdBoard==='function'?tdBoard(wk):null,TP=BDW&&BDW.P?BDW.P:[],FT=(J.firstTd&&J.firstTd.week===wk?J.firstTd.board:[])||[];
   let WA=[];try{const SG=wkSigs(),TR=wkTrust(x=>true,SG,'card38');WA=wkAhead(x=>true,TR,wk)}catch(e){}
   const srcs=Object.keys(J.dvp);
   return liveScorers().map(sc=>{

@@ -58,13 +58,13 @@ rep("  const hit=(r,f)=>R.filter(f).length;\n  const sum=",
     "  const hit=(r,f)=>R.filter(f).length;\n"
     "  const SC={};R.forEach(r=>r.calls.forEach(c=>{const o=SC[c.k]=SC[c.k]||{k:c.k,grp:c.grp,n:0,q:0,t:0};o.n++;if(c.pct<=.25)o.q++;if(c.pct<=.1)o.t++}));\n"
     "  const card=Object.values(SC).filter(o=>o.n>=5).sort((a,b)=>b.q/b.n-a.q/a.n||b.t-a.t);\n"
-    "  const scorecard=card.length?`<div class=\"scb\"><span class=\"gl\">board scorecard</span>${card.map(o=>`<span class=\"scall\" style=\"${gradeStyle(1+(1-Math.min(1,o.q/o.n/.5))*(NT-1))}\" title=\"${esc(o.k)}: of the ${o.n} scorers it rated, ${o.q} were in its top quarter (${Math.round(100*o.q/o.n)}% · a coin gives 25%), ${o.t} in its top tenth\">${esc(o.k)} <b>${Math.round(100*o.q/o.n)}%</b><i>${o.q}/${o.n}</i></span>`).join('')}</div>`:'';\n"
+    "  const scorecard=card.length?`<div class=\"bscb\"><span class=\"gl\">board scorecard</span>${card.map(o=>`<span class=\"scall\" style=\"${gradeStyle(1+(1-Math.min(1,o.q/o.n/.5))*(NT-1))}\" title=\"${esc(o.k)}: of the ${o.n} scorers it rated, ${o.q} were in its top quarter (${Math.round(100*o.q/o.n)}% · a coin gives 25%), ${o.t} in its top tenth\">${esc(o.k)} <b>${Math.round(100*o.q/o.n)}%</b><i>${o.q}/${o.n}</i></span>`).join('')}</div>`:'';\n"
     "  const sum=")
 rep("    <div class=\"tscroll\"><table class=\"fx sct\">", "    ${scorecard}<div class=\"tscroll\"><table class=\"fx sct\">")
 rep("      const blocks=SG.filter(s=>!st.cats.size||st.cats.has(s.id)).map(s=>{",
     "      const ordered=SG.filter(s=>!st.cats.size||st.cats.has(s.id)).map(s=>{const L=R.filter(x=>x.ids.has(s.id)),g=L.filter(x=>x.res!=null).length,k=L.filter(x=>x.res>0).length;return {s,hr:g>=3?k/g:-1,g}}).sort((a,b)=>(a.s.kind==='neg')-(b.s.kind==='neg')||b.hr-a.hr||b.g-a.g).map(o=>o.s);\n"
     "      const blocks=ordered.map(s=>{")
-rep("/* v46 */.scall{", "/* v47 */.scb{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:center;margin:0 0 8px}.scb>.gl{margin-right:6px}\n/* v46 */.scall{")
+rep("/* v46 */.scall{", "/* v47 */.bscb{display:flex;flex-wrap:wrap;gap:2px 4px;align-items:center;margin:0 0 8px}.bscb>.gl{margin-right:6px}\n/* v46 */.scall{")
 
 # (e) META v2 ✓ ; META v1 dim zero-weight headers
 rep("      ${R.map(x=>`<tr><td class=\"plink\" data-p=\"${esc(x.u.player)}\" title=\"${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}\">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class=\"inj0\">Q</span>':x.u.inj==='-1'?' <span class=\"injm1\">OUT</span>':''}</td>\n        ${p==='ALL'?`<td>${posIcon(x.pos,10,x.u.dslot||x.u.slot)}</td>`:''}<td>${x.opp?oppcell(x.oppRaw):'<span class=\"dim\">bye</span>'}</td>\n        ${x.cons==null?",
@@ -78,7 +78,7 @@ s = s[:i2] + seg + s[j2:]
 # META v1 headers: zero weight → dim + note
 rep("    $$('G'+p).textContent=`ranked by ${LBL[st.k]||st.k} · ${setL()}`;\n    const th=(k,l,tip,cls)=>`<th class=\"${cls||''}\" data-k=\"${k}\" title=\"${esc(tip||'')}\">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;\n    const S=sigs(),wname=p==='ALL'?24:29",
     "    $$('G'+p).textContent=`ranked by ${LBL[st.k]||st.k} · ${setL()}`;\n    const nw=k=>SIGS.includes(k)&&k!=='meta'&&!(META_W[k]>0);   /* a column the backtest left without weight: shown for the read, dimmed */\n    const th=(k,l,tip,cls)=>`<th class=\"${cls||''}${nw(k)?' nw':''}\" data-k=\"${k}\" title=\"${esc((tip||'')+(nw(k)?' · no weight in META (the backtest found it adds nothing once Ψ is in) — shown for the read':''))}\">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;\n    const S=sigs(),wname=p==='ALL'?24:29")
-rep("/* v47 */.scb{", "/* v47 */th.nw{opacity:.55}.scb{")
+rep("/* v47 */.bscb{", "/* v47 */th.nw{opacity:.55}.bscb{")
 s = s.replace("Object.assign(NOTES,{v46:", "Object.assign(NOTES,{v47:['v47','live touchdowns reach every week-ahead view (Category Grid, Weeklies, TD Picks, META v2) \\u00b7 First TD shows each game\\'s first scorer so far against the board \\u00b7 the scorers panel grades every board on today\\'s scorers \\u00b7 META v1 dims the columns that carry no weight']});\nObject.assign(NOTES,{v46:", 1)
 io.open(T, 'w', encoding='utf-8').write(s)
 print('v47 applied', len(s))
