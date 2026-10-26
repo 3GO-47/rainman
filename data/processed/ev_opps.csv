@@ -1,6 +1,6 @@
 league,event_id,kickoff,away,home,market,selection,point,source,player,stat,dec,american,fair,ev,kelly_quarter,sources,disp,exch,basis,model_p,ev_model,steam,conf,tier,liq,note,key
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Kaleb Johnson,anytime_td,23.0,+2200,0.1423,2.2726,0.0258,0,,0,market,,,,0,C,,,prop|anytime_td|Kaleb Johnson|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Kaleb Johnson,anytime_td,11.0,+1000,0.1423,0.5651,0.0141,0,,0,market,,,,0,C,,,prop|anytime_td|Kaleb Johnson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Kaleb Johnson,anytime_td,23.0,+2200,0.1407,2.2364,0.0254,0,,0,market,,,,0,C,,,prop|anytime_td|Kaleb Johnson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Kaleb Johnson,anytime_td,11.0,+1000,0.1407,0.5478,0.0137,0,,0,market,,,,0,C,,,prop|anytime_td|Kaleb Johnson|0.5
 cfb,401864531,2026-10-31T19:30Z,UTEP,NDSU,moneyline,UTEP,,ESPN,,,21.0,+2000,0.0536,0.125,0.0016,6,0.0058,1,market,,,0.0027,77,A,,,moneyline|
 cfb,401858501,2026-10-31T19:30Z,MINN,IU,moneyline,MINN,,ESPN,,,11.0,+1000,0.1021,0.123,0.0031,6,0.006,0,market,,,0.0193,76,A,,,moneyline|
 cfb,401858508,2026-10-31T20:15Z,NEV,UCLA,moneyline,NEV,,FD,,,13.8,+1280,0.0818,0.1289,0.0025,7,0.0123,1,market,,,-0.0,70,A,,,moneyline|
@@ -11,10 +11,12 @@ cfb,401856737,2026-10-31T23:30Z,MSST,TEX,moneyline,MSST,,MGM,,,10.5,+950,0.0986,
 cfb,401860924,2026-11-01T03Z,ORST,FRES,moneyline,FRES,,BR,,,3.05,+205,0.3326,0.0143,0.0017,7,0.0086,1,market,,,0.0222,92,A,,,moneyline|
 cfb,401859185,2026-10-31T16Z,ND,NAVY,moneyline,NAVY,,MGM,,,34.0,+3300,0.0305,0.0383,0.0003,6,0.0031,1,market,,,-0.0104,85,A,,,moneyline|
 cfb,401864531,2026-10-31T19:30Z,UTEP,NDSU,moneyline,UTEP,,KAL,,,18.7529,+1775,0.0546,0.0246,0.0003,6,0.0058,1,market,,,0.0027,87,A,2554,yes 0.04/0.05,moneyline|
+nfl,401873028,2026-11-01T18Z,IND,JAX,moneyline,IND,,BR,,,4.35,+335,0.2367,0.0295,0.0022,6,0.0093,1,market,,,-0.0017,82,A,,,moneyline|
 cfb,401866452,2026-10-31T16Z,BGSU,WMU,moneyline,BGSU,,FD,,,6.2,+520,0.1636,0.0141,0.0007,7,0.0081,1,market,,,0.0002,84,A,,,moneyline|
+cfb,401859185,2026-10-31T16Z,ND,NAVY,total,Under,54.5,KAL,,,2.0947,+109,0.5071,0.0623,0.0142,6,0.0237,1,market,,,0.006,71,A,442,no @ 0.46,total|54.5
 cfb,401869963,2026-10-29T23:30Z,TROY,JMU,moneyline,TROY,,MGM,,,11.5,+1050,0.088,0.0121,0.0003,7,0.0072,1,market,,,-0.0045,83,A,,,moneyline|
+nfl,401873032,2026-11-01T21:05Z,LAC,LAR,moneyline,LAC,,KAL,,,3.8005,+280,0.2689,0.0219,0.002,6,0.0136,1,market,,,0.0047,80,A,25595,yes 0.24/0.25,moneyline|
 cfb,401858279,2026-10-31T16Z,BC,DUKE,moneyline,BC,,BR,,,3.65,+265,0.2789,0.0178,0.0017,7,0.0099,1,market,,,-0.0029,81,A,,,moneyline|
-nfl,401873032,2026-11-01T21:05Z,LAC,LAR,moneyline,LAC,,BR,,,3.95,+295,0.2575,0.0173,0.0015,6,0.008,1,market,,,-0.0076,81,A,,,moneyline|
 cfb,401858282,2026-10-31T23:30Z,MIA,UNC,moneyline,UNC,,FD,,,6.7,+570,0.1554,0.0411,0.0018,7,0.0098,1,market,,,-0.017,75,A,,,moneyline|
 cfb,401860908,2026-11-01T02Z,TXST,BOIS,moneyline,TXST,,BR,,,5.0,+400,0.2065,0.0327,0.002,6,0.0066,0,market,,,-0.0009,77,A,,,moneyline|
 cfb,401860910,2026-10-31T19:30Z,CSU,USU,moneyline,CSU,,ESPN,,,3.1,+210,0.3264,0.0118,0.0014,7,0.0068,1,market,,,-0.0087,82,A,,,moneyline|
@@ -22,35 +24,26 @@ cfb,401858507,2026-10-31T16:30Z,MICH,RUTG,total,Over,47.5,KAL,,,2.0515,+105,0.50
 cfb,401858283,2026-10-31T19:15Z,STAN,LOU,total,Over,61.5,KAL,,,2.0102,+101,0.5065,0.0182,0.0045,6,0.0126,1,market,,,0.0004,80,A,13,yes 0.47/0.48,total|61.5
 cfb,401856847,2026-10-31T23Z,OKST,ISU,total,Over,57.5,KAL,,,2.0515,+105,0.494,0.0135,0.0032,5,0.0123,1,market,,,0.0027,81,A,39,yes 0.46/0.47,total|57.5
 cfb,401858281,2026-10-31T23:30Z,GT,PITT,total,Under,53.5,KAL,,,2.0515,+105,0.4996,0.0248,0.0059,6,0.0131,1,market,,,-0.0023,78,A,1994,no @ 0.47,total|53.5
-nfl,401873028,2026-11-01T18Z,IND,JAX,moneyline,IND,,FD,,,4.5,+350,0.2277,0.0245,0.0018,6,0.0089,1,market,,,-0.0129,78,A,,,moneyline|
 cfb,401864531,2026-10-31T19:30Z,UTEP,NDSU,total,Under,43.5,KAL,,,2.0515,+105,0.4968,0.0191,0.0045,5,0.0137,1,market,,,0.0013,79,A,2168,no @ 0.47,total|43.5
-cfb,401859185,2026-10-31T16Z,ND,NAVY,total,Under,54.5,KAL,,,2.0515,+105,0.5071,0.0404,0.0096,6,0.0219,1,market,,,0.006,73,A,442,no @ 0.47,total|54.5
 cfb,401860910,2026-10-31T19:30Z,CSU,USU,total,Over,63.5,KAL,,,2.0515,+105,0.4932,0.0119,0.0028,6,0.0113,1,market,,,-0.0027,80,A,910,yes 0.46/0.47,total|63.5
 cfb,401858504,2026-11-01T00Z,WASH,NEB,moneyline,WASH,,BR,,,3.95,+295,0.2569,0.0147,0.0012,6,0.0067,0,market,,,0.0025,78,A,,,moneyline|
 cfb,401869963,2026-10-29T23:30Z,TROY,JMU,total,Over,52.5,KAL,,,2.1398,+114,0.4876,0.0434,0.0095,5,0.0195,1,market,,,-0.0064,70,A,2,yes 0.43/0.45,total|52.5
 cfb,401858281,2026-10-31T23:30Z,GT,PITT,moneyline,GT,,BR,,,3.65,+265,0.2783,0.0157,0.0015,6,0.0076,0,market,,,-0.0029,75,A,,,moneyline|
 cfb,401856848,2026-10-31T19:45Z,UTAH,CIN,total,Under,57.5,KAL,,,2.0515,+105,0.4977,0.0211,0.005,4,0.0152,1,market,,,0.0025,70,A,1250,no @ 0.47,total|57.5
-nfl,401873033,2026-11-01T21:25Z,KC,DEN,total,Over,41.5,KAL,,,2.0102,+101,0.5101,0.0254,0.0063,4,0.0199,1,market,,,-0.0004,64,B,1806,yes 0.45/0.48,total|41.5
 cfb,401856844,2026-10-30T23:30Z,BAY,UCF,total,Under,47.5,KAL,,,2.0515,+105,0.4978,0.0213,0.0051,3,0.0159,1,market,,,0.0036,60,B,3216,no @ 0.47,total|47.5
-nfl,401873025,2026-11-01T18Z,ATL,TB,total,Under,44.5,KAL,,,2.187,+119,0.4837,0.0579,0.0122,3,0.0238,1,market,,,-0.0053,48,C,1151,no @ 0.44,total|44.5
-nfl,401873025,2026-11-01T18Z,ATL,TB,total,Over,44.5,DK,,,1.8696,-115,0.5477,0.024,0.0069,3,0.0238,1,market,,,0.0053,52,B,,,total|44.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Under,1.5,DK,Dak Prescott,pass_td,2.25,+125,0.4507,0.014,0.0028,3,0.0152,0,market,0.5204,0.171,,51,B,,,prop|pass_td|Dak Prescott|1.5
 cfb,401871071,2026-10-27T23Z,DEL,WKU,prop,Yes,0.5,FD,Da'Wain Lofton,anytime_td,4.8,+380,0.253,0.2146,0.0141,0,,0,market,,,0.0408,0,C,,,prop|anytime_td|Da'Wain Lofton|0.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Over,12.5,DK,Javonte Williams,rec_yds,1.9346,-107,0.496,-0.0404,0.0,3,0.0045,0,market,0.5823,0.1266,,62,B,,,prop|rec_yds|Javonte Williams|12.5
 cfb,401856843,2026-10-31T19:30Z,ASU,BYU,spread,ASU,14.5,KAL,,,2.0515,+105,0.5,0.0257,0.0061,2,0.0178,1,market,,,0.0038,44,C,3625,no @ 0.47,spread|14.5
-nfl,401873025,2026-11-01T18Z,ATL,TB,total,Over,45.5,FD,,,1.9615,-104,0.515,0.0102,0.0026,2,0.0153,1,market,,,0.0053,47,C,,,total|45.5
 cfb,401871071,2026-10-27T23Z,DEL,WKU,prop,Yes,0.5,FD,Kaderris Roberts,anytime_td,3.0,+200,0.399,0.197,0.0246,0,,0,market,,,0.0838,0,C,,,prop|anytime_td|Kaderris Roberts|0.5
 cfb,401856842,2026-10-31T16Z,ARIZ,TTU,total,Over,55.5,KAL,,,2.0515,+105,0.4926,0.0105,0.0025,2,0.0166,1,market,,,0.0071,46,C,340,yes 0.45/0.47,total|55.5
+cfb,401856845,2026-10-31T19:30Z,KU,TCU,spread,KU,4.5,KAL,,,2.0515,+105,0.4926,0.0105,0.0025,2,0.014,1,market,,,-0.0011,46,C,51,no @ 0.47,spread|4.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Under,7.5,FAN,CeeDee Lamb,receptions,1.6667,-150,0.5642,-0.0596,0.0,3,0.0032,0,market,0.6459,0.0766,,63,B,,,prop|receptions|CeeDee Lamb|7.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Under,7.5,DK,CeeDee Lamb,receptions,1.6711,-149,0.5605,-0.0634,0.0,3,0.0032,0,market,0.6459,0.0794,,63,B,,,prop|receptions|CeeDee Lamb|7.5
-nfl,401873025,2026-11-01T18Z,ATL,TB,total,Under,45.5,KAL,,,1.9705,-103,0.515,0.0148,0.0038,2,0.0153,1,market,,,-0.0053,43,C,6416,no @ 0.49,total|45.5
 cfb,401856843,2026-10-31T19:30Z,ASU,BYU,spread,BYU,-14.5,FAN,,,1.9091,-110,0.535,0.0214,0.0059,2,0.0178,1,market,,,-0.0038,41,C,,,spread|14.5
-nfl,401873033,2026-11-01T21:25Z,KC,DEN,total,Over,42.5,KAL,,,2.1398,+114,0.4978,0.0652,0.0143,2,0.0346,1,market,,,-0.0004,30,C,1473,yes 0.41/0.45,total|42.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Over,12.5,BR,Javonte Williams,rec_yds,1.8929,-112,0.4947,-0.0635,0.0,3,0.0045,0,market,0.5823,0.1023,,62,B,,,prop|rec_yds|Javonte Williams|12.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Under,7.5,FD,CeeDee Lamb,receptions,1.6579,-152,0.5612,-0.0695,0.0,3,0.0032,0,market,0.6459,0.0709,,63,B,,,prop|receptions|CeeDee Lamb|7.5
-nfl,401873024,2026-11-01T18Z,ARI,DAL,total,Over,52.5,BR,,,1.885,-113,0.545,0.0273,0.0077,2,0.0202,1,market,,,-0.004,38,C,,,total|52.5
 nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Over,12.5,FD,Javonte Williams,rec_yds,1.8772,-114,0.4907,-0.0788,0.0,3,0.0045,0,market,0.5823,0.0932,,62,B,,,prop|rec_yds|Javonte Williams|12.5
-nfl,401873033,2026-11-01T21:25Z,KC,DEN,total,Under,42.5,MGM,,,1.9091,-110,0.57,0.0882,0.0243,2,0.0346,1,market,,,0.0004,20,C,,,total|42.5
 cfb,401871071,2026-10-27T23Z,DEL,WKU,prop,Yes,0.5,DK,Moussa Barry,anytime_td,6.0,+500,0.1944,0.1666,0.0083,0,,0,market,,,-0.0635,0,C,,,prop|anytime_td|Moussa Barry|0.5
 cfb,401858284,2026-10-31T19:45Z,UVA,WAKE,spread,UVA,13.5,FD,,,2.0,+100,0.5053,0.0106,0.0027,2,0.0144,0,market,,,0.0017,38,C,,,spread|13.5
 nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Under,4.5,DK,Matthew Golden,receptions,2.26,+126,0.4415,-0.0023,0.0,2,0.0119,0,market,0.619,0.399,,40,C,,,prop|receptions|Matthew Golden|4.5
@@ -124,14 +117,15 @@ nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Under,263.5,BR,Dak Prescott,pass_yd
 nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Over,2.5,FD,Josh Jacobs,receptions,1.9259,-108,0.462,-0.1102,0.0,2,0.0119,0,market,0.5359,0.0321,,40,C,,,prop|receptions|Josh Jacobs|2.5
 cfb,401871071,2026-10-27T23Z,DEL,WKU,prop,Yes,0.5,DK,Sean Wilson,anytime_td,2.3,+130,0.4469,0.0279,0.0054,0,,0,market,,,-0.0614,5,C,,,prop|anytime_td|Sean Wilson|0.5
 nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Under,4.5,FD,Matthew Golden,receptions,2.12,+112,0.4177,-0.1145,0.0,2,0.0119,0,market,0.619,0.3123,,40,C,,,prop|receptions|Matthew Golden|4.5
+cfb,401871057,2026-10-29T00Z,JXST,NMSU,prop,Yes,0.5,FD,Myles Libman,anytime_td,8.5,+750,0.1201,0.0211,0.0007,0,,0,market,,,-0.031,5,C,,,prop|anytime_td|Myles Libman|0.5
 nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Over,4.5,DK,Christian Watson,receptions,1.9434,-106,0.4542,-0.1173,0.0,2,0.0156,0,market,0.5617,0.0916,,36,C,,,prop|receptions|Christian Watson|4.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Bryce Young,anytime_td,7.5,+650,0.1075,-0.1936,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FD,Bryce Young,anytime_td,7.5,+650,0.1075,-0.1936,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Bryce Young,anytime_td,7.5,+650,0.1075,-0.1936,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
-nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,DK,Jake Ferguson,anytime_td,3.8,+280,0.2104,-0.2006,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,BR,Jake Ferguson,anytime_td,3.8,+280,0.2104,-0.2006,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,MGM,Jake Ferguson,anytime_td,3.8,+280,0.2104,-0.2006,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,FD,Jake Ferguson,anytime_td,3.7,+270,0.2104,-0.2217,0.0,0,,0,market,0.3118,0.1537,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Christian Watson,anytime_td,2.35,+135,0.3268,-0.2321,0.0,0,,0,market,0.5504,0.2934,,15,C,,,prop|anytime_td|Christian Watson|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FD,Christian Watson,anytime_td,2.35,+135,0.3268,-0.2321,0.0,0,,0,market,0.5504,0.2934,,15,C,,,prop|anytime_td|Christian Watson|0.5
-nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Christian Watson,anytime_td,2.3,+130,0.3268,-0.2485,0.0,0,,0,market,0.5504,0.2659,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Bryce Young,anytime_td,7.5,+650,0.1086,-0.1856,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FD,Bryce Young,anytime_td,7.5,+650,0.1086,-0.1856,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Bryce Young,anytime_td,7.5,+650,0.1086,-0.1856,0.0,0,,0,market,0.1647,0.2353,,15,C,,,prop|anytime_td|Bryce Young|0.5
+nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,DK,Jake Ferguson,anytime_td,3.8,+280,0.2122,-0.1935,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
+nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,BR,Jake Ferguson,anytime_td,3.8,+280,0.2122,-0.1935,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
+nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,MGM,Jake Ferguson,anytime_td,3.8,+280,0.2122,-0.1935,0.0,0,,0,market,0.3118,0.1848,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
+nfl,401873009,2026-10-27T00:15Z,DAL,PHI,prop,Yes,0.5,FD,Jake Ferguson,anytime_td,3.7,+270,0.2122,-0.2147,0.0,0,,0,market,0.3118,0.1537,,15,C,,,prop|anytime_td|Jake Ferguson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,DK,Christian Watson,anytime_td,2.35,+135,0.3231,-0.2406,0.0,0,,0,market,0.5504,0.2934,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FD,Christian Watson,anytime_td,2.35,+135,0.3231,-0.2406,0.0,0,,0,market,0.5504,0.2934,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873023,2026-10-30T00:15Z,CAR,GB,prop,Yes,0.5,FAN,Christian Watson,anytime_td,2.3,+130,0.3231,-0.2568,0.0,0,,0,market,0.5504,0.2659,,15,C,,,prop|anytime_td|Christian Watson|0.5
