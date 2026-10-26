@@ -123,9 +123,19 @@ def load_slate(C):
         if not line.startswith('G|'): continue
         p = line.rstrip('\n').split('|')
         if p[1] != C['slate_key'] or p[22] == '1': continue      # preseason rows are ignored
-        games.append(dict(eid=p[2], date=p[3], status=p[4], away=p[6], away_name=p[7], away_rec=p[8], away_logo=p[9], home=p[12], home_name=p[13], home_rec=p[14], home_logo=p[15],
+        games.append(dict(eid=p[2], date=p[3], et=et_date(p[3]), status=p[4], away=p[6], away_name=p[7], away_rec=p[8], away_logo=p[9], home=p[12], home_name=p[13], home_rec=p[14], home_logo=p[15],
                           venue=p[17], tv=p[18], odds=p[19], ou=p[20], neutral=p[23] == '1', note=p[25] if len(p) > 25 else ''))
     return games
+
+def et_date(iso):
+    """the slate's kickoffs are UTC ('2026-10-27T02Z' is a 10 PM ET tip on the 26th); the schedule parquet is local — match on the ET date.
+    Before this every late game was a 'late add' with a different day and the slate showed it twice (2026-10-26, 43 duplicates)."""
+    try:
+        from zoneinfo import ZoneInfo
+        t = pd.Timestamp(iso.replace('Z', '+00:00'))
+        return t.tz_convert(ZoneInfo('America/New_York')).strftime('%Y-%m-%d')
+    except Exception:
+        return str(iso)[:10]
 
 def load_schedule(lg, C):
     rows = []
@@ -234,6 +244,92 @@ def picks(lg, C, games, S):
     allp.to_csv(path, index=False)
     return allp, len(new)
 
+def norm_name(x):
+    import unicodedata
+    x = unicodedata.normalize('NFKD', str(x)).encode('ascii', 'ignore').decode().lower()
+    x = re.sub(r"\b(jr|sr|ii|iii|iv|v)\b\.?", '', x); return re.sub(r'[^a-z]', '', x)
+
+def amer_prob(p):
+    p = float(p); return 100 / (p + 100) if p > 0 else -p / (-p + 100)
+def amer_dec(p):
+    p = float(p); return 1 + p / 100 if p > 0 else 1 + 100 / -p
+
+def props_model(lg, C, PJ, games):
+    """Every posted player prop on the slate (data/raw/odds_api/props_current.csv, league = lg) against the projection:
+    consensus line (the books' modal line), the model's P(over) from the projection and its band (q10..q90 -> sd), the market's
+    de-vigged P(over) from the consensus prices, the lean, the edge, the best price on that side and its EV. One row per
+    player x market. Names are matched on a normalised key within the slate's teams."""
+    f = 'data/raw/odds_api/props_current.csv'
+    if not os.path.exists(f) or PJ is None or not len(PJ): return pd.DataFrame()
+    pr = pd.read_csv(f); pr = pr[pr.league == lg]
+    if not len(pr): return pd.DataFrame()
+    from statistics import NormalDist
+    nd = NormalDist()
+    PJ = PJ.copy(); PJ['key'] = PJ.player.map(norm_name)
+    byk = {}
+    for r in PJ.itertuples(): byk.setdefault((r.key, r.market), []).append(r)
+    rows = []
+    pr['key'] = pr.player.map(norm_name)
+    for (pl, mk, home, away), g in pr.groupby(['player', 'market', 'home', 'away']):
+        k = norm_name(pl); cands = byk.get((k, mk), [])
+        cands = [c for c in cands if c.team in (home, away)] or cands
+        if not cands: continue
+        c = cands[0]
+        g = g[g.line.notna()]
+        if not len(g): continue
+        line = float(g.line.mode().iloc[0]); at = g[g.line == line]
+        ov = at[at.side == 'Over']; un = at[at.side == 'Under']
+        if not len(ov) and not len(un): continue
+        imp_o = ov.price.map(amer_prob).mean() if len(ov) else None; imp_u = un.price.map(amer_prob).mean() if len(un) else None
+        if imp_o is not None and imp_u is not None: p_imp = imp_o / (imp_o + imp_u)
+        elif imp_o is not None: p_imp = imp_o - 0.025
+        else: p_imp = 1 - (imp_u - 0.025)
+        sd = max((c.q90 - c.q10) / 2.563, 0.25 * max(c.proj, 0.5), 0.5)
+        p_over = 1 - nd.cdf((line - c.proj) / sd)
+        side = 'Over' if p_over >= p_imp else 'Under'
+        p_side = p_over if side == 'Over' else 1 - p_over; p_mkt = p_imp if side == 'Over' else 1 - p_imp
+        best = (ov if side == 'Over' else un)
+        bp = best.sort_values('price', ascending=False).iloc[0] if len(best) else None
+        ev = (p_side * amer_dec(bp.price) - 1) if bp is not None else None
+        rows.append(dict(player=c.player, pid=int(c.pid), team=c.team, opp=c.opp, date=et_date(str(c.date)), tip=c.date, slot=c.slot, market=mk, line=line, proj=c.proj, sd=round(sd, 2), base=c.base, opp_rank=c.opp_rank,
+                         p_over=round(p_over, 3), p_imp=round(p_imp, 3), side=side, edge=round(p_side - p_mkt, 3), price=int(bp.price) if bp is not None else None,
+                         book=bp.book if bp is not None else None, ev=round(100 * ev, 1) if ev is not None else None, n_books=int(at.book.nunique()), updated=str(g.updated.max())[:16]))
+    return pd.DataFrame(rows)
+
+def prop_picks(lg, C, PR, L, allp):
+    """freeze a PROP position once per player x market x date when the lean clears the bar (edge >= 5 points, both sides priced);
+    grade from the box score of that date. Lives in the same ledger as the game plays."""
+    EDGE = 0.05
+    keys = set(zip(allp.type.astype(str), allp.ref.astype(str))) if len(allp) else set(); new = []
+    for r in (PR.itertuples() if len(PR) else []):
+        if r.n_books < 2 or r.edge < EDGE or r.price is None: continue
+        ref = f'{r.pid}|{r.market}|{r.date[:10]}'
+        if ('PROP', ref) in keys: continue
+        keys.add(('PROP', ref))
+        new.append(dict(type='PROP', date=str(r.date)[:10], frozen_on=str(TODAY.date()), ref=ref, game=f'{r.team}@{r.opp}' if False else f'{r.team} v {r.opp}', side=f'{r.side} {r.line:g}', line=r.line,
+                        model=r.proj, market_ref=r.p_imp, edge=r.edge, result='', actual='', player=r.player, market=r.market, price=int(r.price), book=r.book, pid=str(int(r.pid))))
+    allp = pd.concat([x for x in [allp, pd.DataFrame(new)] if len(x)], ignore_index=True) if new else allp
+    for c in ('player', 'market', 'price', 'book', 'pid'):
+        if c not in allp.columns: allp[c] = ''
+    # grade PROP rows from the logs
+    if len(allp):
+        keys_stat = {k for k, *_ in C['stats']}
+        LL = L.copy(); LL['pid'] = pd.to_numeric(LL.pid, errors='coerce').fillna(-1).astype(int).astype(str)
+        for i, r in allp.iterrows():
+            if r.type != 'PROP' or (isinstance(r.result, str) and r.result in ('W', 'L', 'P')): continue
+            mk = r.market; d = str(r.date)[:10]
+            try: pid = str(int(float(r.pid)))
+            except (TypeError, ValueError): continue
+            rows = LL[(LL.pid == pid) & (LL.date == d)]
+            if not len(rows): continue
+            x = rows.iloc[0]
+            val = {'pra': x.pts + x.reb + x.ast, 'pr': x.pts + x.reb, 'pa': x.pts + x.ast, 'ra': x.reb + x.ast}.get(mk, x[mk] if mk in LL.columns else None)
+            if val is None or val != val: continue
+            line = float(r.line); over = str(r.side).startswith('Over')
+            res = 'P' if val == line else ('W' if (val > line) == over else 'L')
+            allp.at[i, 'result'] = res; allp.at[i, 'actual'] = float(val)
+    return allp, len(new)
+
 def projections(P, dvp, C, upcoming, cur):
     """per player on the slate × market: base (season / prior / last-10 blend) × trust-shrunk opponent ratio, with a band."""
     D = dvp['combined']; keys = C['markets']; rows = []
@@ -266,7 +362,7 @@ def build(lg):
     # upcoming games: the slate (lines) merged with the schedule for the next 14 days
     horizon = (TODAY + pd.Timedelta(days=14)).strftime('%Y-%m-%d')
     up = S[(~S.done) & (S.date >= (TODAY - pd.Timedelta(days=1)).strftime('%Y-%m-%d')) & (S.date <= horizon)]
-    by = {(g['away'], g['home'], g['date'][:10]): g for g in slate}
+    by = {(g['away'], g['home'], g['et']): g for g in slate}
     games = []
     for r in up.itertuples():
         g = by.get((r.away, r.home, r.date), {})
@@ -274,7 +370,7 @@ def build(lg):
                           away_rec=g.get('away_rec', ''), home_rec=g.get('home_rec', ''), neutral=g.get('neutral', False), note=g.get('note', ''), stype=r.stype))
     seen = {(g['away'], g['home'], g['day']) for g in games}
     for g in slate:                                   # slate games the schedule parquet doesn't carry yet (late adds; preseason is filtered out of the slate)
-        d = g['date'][:10]
+        d = g['et']
         if (g['away'], g['home'], d) in seen or d < str(TODAY.date()): continue
         games.append(dict(eid=g['eid'], date=g['date'], day=d, away=g['away'], home=g['home'], venue=g['venue'], tv=g['tv'], odds=g['odds'], ou=g['ou'], away_rec=g['away_rec'], home_rec=g['home_rec'],
                           neutral=g['neutral'], note=g['note'], stype='reg'))
@@ -282,6 +378,9 @@ def build(lg):
     games = game_model(games, R, C)
     PK, n_new = picks(lg, C, games, S)
     PJ = projections(P, dvp, C, games, cur)
+    PR = props_model(lg, C, PJ, games)
+    PK, n_pp = prop_picks(lg, C, PR, L, PK); PK.to_csv(f'{out}/picks.csv', index=False)
+    PR.to_csv(f'{out}/props.csv', index=False)
     # teams (logo / color / name) from the box scores + slate
     teams = {}
     for r in L.drop_duplicates('team').itertuples():
@@ -316,7 +415,8 @@ def build(lg):
     J = dict(league=lg, label=C['label'], sport=C['sport'], logo=C['logo'], built=str(pd.Timestamp.now())[:16], seasons=sorted(int(x) for x in L.season.unique()), cur=int(cur), prior=int(prior) if prior else None,
              slots=C['slots'], stats=[dict(k=k, label=l, dec=d) for k, l, d, _ in C['stats']], markets=C['markets'], logCols=cols, logs=logs_arr,
              dvp=dvp, teams=teams, ratings=R, games=games, players=[{k: nz(v) for k, v in r.items()} for r in P.to_dict('records')],
-             proj=[{k: nz(v) for k, v in r.items()} for r in PJ.to_dict('records')], picks=[{k: nz(v) for k, v in r.items()} for r in PK.to_dict('records')],
+             proj=[{k: nz(v) for k, v in r.items()} for r in PJ.to_dict('records')], picks=[{k: nz(v) for k, v in r.items()} for r in PK.fillna('').to_dict('records')],
+             props=[{k: nz(v) for k, v in r.items()} for r in (PR.to_dict('records') if len(PR) else [])],
              slateDate=(sorted(glob.glob('data/raw/slate_all_*.txt'))[-1][-14:-4] if glob.glob('data/raw/slate_all_*.txt') else ''), rotation=C['rotation'])
     tpl = open('scripts/sport_template.html', encoding='utf-8').read()
     _i = tpl.index('<style>') + 7; _j = tpl.index('</style>')
@@ -329,6 +429,7 @@ def build(lg):
                       + '.brand .rmask{vertical-align:-5px;margin-right:3px}.right .rmsw{margin-left:8px}' + _blocks + _tc)
     html = tpl.replace('__DATA__', json.dumps(J, separators=(',', ':'), default=lambda o: None if (isinstance(o, float) and math.isnan(o)) else (o.item() if hasattr(o, 'item') else str(o))))
     open(f'dashboard/{lg}.html', 'w', encoding='utf-8').write(html)
+    print(f"  props: {len(PR)} player-markets priced · {n_pp} new PROP positions · ledger {len(PK)}")
     print(f"{lg}: {len(L):,} log rows ({', '.join(str(s) for s in J['seasons'])}) · {len(P)} players · {len(games)} games in the next 14 days ({sum(1 for g in games if g.get('odds'))} with lines) · {len(PJ)} projections · picks {len(PK)} (+{n_new}) · dashboard/{lg}.html {os.path.getsize(f'dashboard/{lg}.html') // 1024} KB")
 
 if __name__ == '__main__':

@@ -40,11 +40,14 @@ MAIN = {'player_pass_yds': 'pass_yds', 'player_pass_tds': 'pass_td', 'player_pas
 ALT = {'player_pass_yds_alternate': 'pass_yds', 'player_pass_tds_alternate': 'pass_td', 'player_rush_yds_alternate': 'rush_yds', 'player_reception_yds_alternate': 'rec_yds',
        'player_receptions_alternate': 'receptions', 'player_rush_attempts_alternate': 'rush_att'}
 # ---- the plan: which leagues, which markets, no alternates (Josh, 2026-10-08: CFB never; NFL main lines only to start)
+NBA_MAIN = {'player_points': 'pts', 'player_rebounds': 'reb', 'player_assists': 'ast', 'player_threes': 'tpm', 'player_points_rebounds_assists': 'pra',
+            'player_points_rebounds': 'pr', 'player_points_assists': 'pa', 'player_rebounds_assists': 'ra', 'player_blocks': 'blk', 'player_steals': 'stl'}
 PLAN = {'nfl': dict(lines=True, props=MAIN, alts=False),
+        'nba': dict(lines=True, props=NBA_MAIN, alts=False),   # Josh, 2026-10-26: NBA gets the full model — main props only, same three-pull policy
         'cfb': dict(lines=True, props={k: v for k, v in MAIN.items() if k in ('player_pass_yds', 'player_pass_tds', 'player_rush_yds', 'player_reception_yds', 'player_receptions', 'player_anytime_td')}, alts=False)}
 # ---- the policy (Josh, 2026-10-14: two to three pulls per line, never for lines that do not exist yet)
 POLICY = dict(
-    OPEN_FROM_H={'nfl': 6 * 24, 'cfb': 4 * 24},   # earliest probe for a game's props: NFL books post main props Mon/Tue for Sunday
+    OPEN_FROM_H={'nfl': 6 * 24, 'cfb': 4 * 24, 'nba': 30},   # NBA books post the night's props the morning of (sometimes the evening before)   # earliest probe for a game's props: NFL books post main props Mon/Tue for Sunday
     PROBE_GAP_H=12,                                # an unopened / partial game is probed again this many hours later (empty = free)
     OPEN_MIN_MKTS=3,                               # fewer unique markets than this is a partial posting — keep it, keep probing
     MOVE=dict(spread=1.0, total=1.5, ml=0.04),     # sensor thresholds vs the numbers at our last paid pull (points, points, win prob)

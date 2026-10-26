@@ -91,6 +91,7 @@ def markets_only(G, st):
         if did and step('arb', run, ['scripts/build_arb.py']) is not None: did.append('arb'); step('tracking', run, ['scripts/build_tracking.py'])
         if 'odds' in did:                                                                           # fresh book prices: re-price the bet board and the dashboard that shows it
             step('bets', run, ['scripts/build_bets.py'], False); step('clv', run, ['scripts/build_clv.py'], False)
+        if 'odds' in did: step('nba build', run, ['scripts/sports/build.py', 'nba'], False)   # NBA props just landed: re-price the props board, freeze PROP positions
         if 'odds' in did or 'injuries' in did or 'livetd' in did: step('td picks', run, ['scripts/build_td_picks.py'], False); step('dashboard', run, ['scripts/build_dashboard.py'], False); step('dev', run, ['scripts/build_dev.py'], False)
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
