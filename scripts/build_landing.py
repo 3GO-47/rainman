@@ -153,25 +153,32 @@ def model_records():
         t = (r.get('type') or '').upper()
         return e / 100 if t == 'PROP' else abs(e) / 14 if t in ('ATS', 'TOTAL') else e
     def tally(rows, lg):
+        # The ledgers freeze the model's lean on EVERY posted line for calibration and closing-line tracking; only rows the
+        # model actually played count as the record. The NFL ledger flags them (bet = 1); the sport ledgers freeze only
+        # plays, so every graded row there is one. The every-line tally is kept as a calibration figure, never as bets.
+        flagged = any(r.get('bet') not in (None, '') for r in rows)
+        is_play = (lambda r: str(r.get('bet') or '') in ('1', 'True', 'true')) if flagged else (lambda r: (edge_val(r) or 0) >= PLAY_MIN or edge_val(r) is None)
         by = {}; seq = []; u = 0.0; w = l = p_ = pend = 0
-        pw = pl = pp = 0; pu = 0.0
+        aw = al = ap = 0; au = 0.0; apend = 0
         rows = sorted(rows, key=lambda r: (r.get('frozen_on') or '', r.get('date') or '', str(r.get('week') or '').zfill(2)))
         for r in rows:
             t = (r.get('type') or '').upper() or 'ALL'
             if t == 'DFS': continue
-            b = by.setdefault(t, dict(W=0, L=0, P=0, pending=0, u=0.0))
             res = (r.get('result') or '').upper()
+            if res in ('W', 'L', 'P'):
+                aw += res == 'W'; al += res == 'L'; ap += res == 'P'; au += units(r)
+            else: apend += 1
+            if not is_play(r): continue
+            b = by.setdefault(t, dict(W=0, L=0, P=0, pending=0, u=0.0))
             if res in ('W', 'L', 'P'):
                 b[res] += 1; seq.append(res); b['u'] += units(r); u += units(r)
                 w += res == 'W'; l += res == 'L'; p_ += res == 'P'
-                ev = edge_val(r)
-                if ev is not None and ev >= PLAY_MIN:
-                    pw += res == 'W'; pl += res == 'L'; pp += res == 'P'; pu += units(r)
             else: b['pending'] += 1; pend += 1
         for b in by.values(): b['u'] = round(b['u'], 2)
-        if by: out[lg] = dict(by=by, seq=seq[-80:], W=w, L=l, P=p_, pending=pend, u=round(u, 2),
+        if by or aw + al: out[lg] = dict(by=by, seq=seq[-80:], W=w, L=l, P=p_, pending=pend, u=round(u, 2),
                               hit=round(w / (w + l), 4) if w + l else None, roi=round(u / (w + l + p_), 4) if w + l + p_ else None,
-                              plays=dict(W=pw, L=pl, P=pp, u=round(pu, 2), hit=round(pw / (pw + pl), 4) if pw + pl else None, min=PLAY_MIN))
+                              plays=dict(W=w, L=l, P=p_, u=round(u, 2), hit=round(w / (w + l), 4) if w + l else None, min=PLAY_MIN, flagged=flagged),
+                              every=dict(W=aw, L=al, P=ap, u=round(au, 2), pending=apend, hit=round(aw / (aw + al), 4) if aw + al else None))
     f = 'data/processed/picks_all.csv'
     if os.path.exists(f): tally(list(csv.DictReader(open(f, encoding='utf-8'))), 'nfl')
     for lg in ('nba', 'nhl', 'wnba'):
@@ -448,8 +455,8 @@ def page(games, pulled):
         tone = 'g' if r['u'] > 0 else 'rd' if r['u'] < 0 else 'dim'
         wl = '%d-%d%s' % (r['W'], r['L'], '-%d' % r['P'] if r['P'] else '')
         roi = '' if r['roi'] is None else '%s%.1f%%' % ('+' if r['roi'] >= 0 else '', 100 * r['roi'])
-        pr = r['plays']; pwl_ = '%d-%d%s' % (pr['W'], pr['L'], '-%d' % pr['P'] if pr['P'] else '') if pr['W'] + pr['L'] + pr['P'] else '&mdash;'
-        ptn = 'g' if pr['u'] > 0 else 'rd' if pr['u'] < 0 else 'dim'
+        pr = r['every']; pwl_ = ('%d-%d%s <small class="dim">%s</small>' % (pr['W'], pr['L'], '-%d' % pr['P'] if pr['P'] else '', '' if pr['hit'] is None else '%.1f%%' % (100 * pr['hit']))) if pr['W'] + pr['L'] + pr['P'] else '&mdash;'
+        ptn = 'dim'
         rows += ('<tr class="lg" data-go="%s"><td><span class="lgn"><img src="%s" alt="" onerror="this.style.display=\'none\'">%s</span></td>'
                  '<td class="r mono dim">%d</td><td class="r mono dim">%d</td><td class="mono">%s</td><td>%s</td>'
                  '<td class="r mono %s">%s%.2f</td><td class="r mono %s">%s</td><td class="mono %s">%s</td><td>%s</td></tr>'
@@ -471,16 +478,18 @@ def page(games, pulled):
     pdec = PL['W'] + PL['L']; phit = PL['W'] / pdec if pdec else None
     pwl = '%d-%d%s' % (PL['W'], PL['L'], '-%d' % PL['P'] if PL['P'] else '')
     ptone = 'g' if PL['u'] > 0 else 'r' if PL['u'] < 0 else ''
-    kp = ('<div><span>record &middot; every line</span><b>%s</b><small>%d graded &middot; %d live</small></div>'
-          '<div><span>plays &middot; edge &ge; 6%%</span><b class="%s">%s</b><small>%s &middot; %s%.2f u &middot; the model\'s actual picks</small></div>'
+    EV = dict(W=sum(r['every']['W'] for r in REC.values()), L=sum(r['every']['L'] for r in REC.values()), P=sum(r['every']['P'] for r in REC.values()), pend=sum(r['every']['pending'] for r in REC.values()))
+    evdec = EV['W'] + EV['L']; evhit = EV['W'] / evdec if evdec else None
+    kp = ('<div><span>the card &middot; plays</span><b>%s</b><small>%d graded &middot; %d live &middot; what the models actually bet</small></div>'
+          '<div><span>calibration &middot; every line</span><b class="dim">%s</b><small>%s &middot; the lean on every posted line, not bets</small></div>'
           '<div><span>units</span><b class="%s">%s%.2f</b><small>%s</small></div>'
           '<div><span>hit rate</span><b class="%s">%s</b><small>break-even 52.4%% at &minus;110</small></div>'
           '<div><span>game model &middot; backtest</span><b>%s</b><small>%s</small></div>'
           '<div><span>slate</span><b>%d</b><small>games in the window &middot; pulled %s</small></div>'
-          % (twl, graded, tot['pend'], ptone, pwl, ('&mdash;' if phit is None else '%.1f%% hit' % (100 * phit)), '+' if PL['u'] >= 0 else '', PL['u'],
+          % (twl, graded, tot['pend'], ('&mdash;' if evhit is None else '%.1f%% of %d' % (100 * evhit, evdec + EV['P'])), '%d live' % EV['pend'],
              utone, '+' if tot['u'] >= 0 else '', tot['u'], per, htone, htxt, bts, btsub, len(games), pulled))
     table_html = ('<div class="tw"><table><thead><tr><th>league</th><th class="r">graded</th><th class="r">live</th><th>record</th>'
-                  '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th>plays &ge; 6%</th><th>last 24</th></tr></thead><tbody>'
+                  '<th>hit rate vs break-even</th><th class="r">units</th><th class="r">per play</th><th title="the lean on every posted line - calibration, not bets">every line</th><th>last 24</th></tr></thead><tbody>'
                   + rows + '</tbody></table></div>') if rows else '<p class="note">No graded positions on file yet.</p>'
     nsport = len([c for c in CATS if sum(cnt.get(k, 0) for k, l, g, p, s_, i in LEAGUES if g == c[0])])
     built = datetime.now().strftime('%Y-%m-%d %H:%M')
@@ -523,7 +532,7 @@ def page(games, pulled):
 <p class="sub">Matchup intelligence, one dashboard per sport.</p></div></div>
 <h2>sports <span>{nsport} with games in the window · pick a sport, then a league</span></h2>
 <div class="grid">{tiles}</div>
-<h2>model performance <span>every position the models froze, graded against the line it was frozen at · one unit risked per position</span></h2>
+<h2>model performance <span>the plays the models actually made, graded against the line they were frozen at · one unit risked per play · the lean on every other posted line is tracked separately as calibration</span></h2>
 <div class="perf">{kp}</div>
 {table_html}
 <p class="note">A win at −110 returns 0.909 and a loss costs 1, so 52.4% is break-even; the tick on each bar is that line. Records separate skill from variance somewhere past 300 positions — read these as a running tally, not a verdict. The NFL model's full breakdown, calibration and changelog live on <a href="rainman.html#v=pkhome" style="color:var(--acc)">its Model tab</a>.</p>
