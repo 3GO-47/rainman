@@ -284,14 +284,35 @@ def props_model(lg, C, PJ, games):
         if imp_o is not None and imp_u is not None: p_imp = imp_o / (imp_o + imp_u)
         elif imp_o is not None: p_imp = imp_o - 0.025
         else: p_imp = 1 - (imp_u - 0.025)
-        sd = max((c.q90 - c.q10) / 2.563, 0.25 * max(c.proj, 0.5), 0.5)
-        p_over = 1 - nd.cdf((line - c.proj) / sd)
+        # the market is the prior. Roles change between seasons and the books price the new role before three box scores can,
+        # so the model's own number only earns weight with this season's games (w = gp/(gp+10): 3 games -> .23, 20 -> .67).
+        # The prior is the market's implied MEAN (not the line): the line plus the shift the juice implies, so a 0.5 blocks
+        # line priced -200 on the over is a 1.1-block prior, not a 0.5 one. Low lines (< 4) are count markets -> Poisson.
+        import math
+        gp = float(c.gp or 0); w = gp / (gp + 10)
+        sd0 = max((c.q90 - c.q10) / 2.563, 0.25 * max(c.proj, 0.5), 0.5)
+        pois = line < 4
+        def p_over_of(mu):
+            if pois:
+                lam = max(mu, 0.05); k = int(math.floor(line))
+                return 1 - sum(math.exp(-lam) * lam ** i / math.factorial(i) for i in range(k + 1))
+            return 1 - nd.cdf((line - mu) / sd0)
+        lo, hi = 0.0, max(line * 4, 6.0)                   # invert P(over)=p_imp for the market's mean
+        for _ in range(40):
+            mid = (lo + hi) / 2
+            if p_over_of(mid) < p_imp: lo = mid
+            else: hi = mid
+        mkt_mu = (lo + hi) / 2
+        tilt = mkt_mu * (1 + (float(c.mx or 1) - 1) * 0.5)
+        proj = round(w * c.proj + (1 - w) * tilt, 2)
+        sd = round(sd0, 2)
+        p_over = p_over_of(proj)
         side = 'Over' if p_over >= p_imp else 'Under'
         p_side = p_over if side == 'Over' else 1 - p_over; p_mkt = p_imp if side == 'Over' else 1 - p_imp
         best = (ov if side == 'Over' else un)
         bp = best.sort_values('price', ascending=False).iloc[0] if len(best) else None
         ev = (p_side * amer_dec(bp.price) - 1) if bp is not None else None
-        rows.append(dict(player=c.player, pid=int(c.pid), team=c.team, opp=c.opp, date=et_date(str(c.date)), tip=c.date, slot=c.slot, market=mk, line=line, proj=c.proj, sd=round(sd, 2), base=c.base, opp_rank=c.opp_rank,
+        rows.append(dict(player=c.player, pid=int(c.pid), team=c.team, opp=c.opp, date=et_date(str(c.date)), tip=c.date, slot=c.slot, market=mk, line=line, proj=proj, raw=c.proj, gp=int(c.gp or 0), gp_prior=int(c.gp_prior or 0), w=round(w, 2), mkt_mu=round(mkt_mu, 2), sd=sd, base=c.base, opp_rank=c.opp_rank,
                          p_over=round(p_over, 3), p_imp=round(p_imp, 3), side=side, edge=round(p_side - p_mkt, 3), price=int(bp.price) if bp is not None else None,
                          book=bp.book if bp is not None else None, ev=round(100 * ev, 1) if ev is not None else None, n_books=int(at.book.nunique()), updated=str(g.updated.max())[:16]))
     return pd.DataFrame(rows)
@@ -302,7 +323,7 @@ def prop_picks(lg, C, PR, L, allp):
     EDGE = 0.05
     keys = set(zip(allp.type.astype(str), allp.ref.astype(str))) if len(allp) else set(); new = []
     for r in (PR.itertuples() if len(PR) else []):
-        if r.n_books < 2 or r.edge < EDGE or r.price is None: continue
+        if r.n_books < 2 or r.edge < EDGE or r.price is None or r.gp + r.gp_prior < 8: continue
         ref = f'{r.pid}|{r.market}|{r.date[:10]}'
         if ('PROP', ref) in keys: continue
         keys.add(('PROP', ref))
