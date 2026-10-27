@@ -861,3 +861,9 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - props_model now: prior = the market's implied mean (line + the shift the juice implies; Poisson inversion for lines < 4, bell curve above), tilted by half the matchup multiplier; the model's own number earns weight w = gp/(gp+10) on this season's games only. Count markets (line < 4) price with Poisson. Freeze bar adds gp+gp_prior ≥ 8. Columns added: raw, gp, gp_prior, w, mkt_mu.
 - Dropped the 458 open PROP positions frozen under the old model (never graded); 33 frozen under the new one for 10-27/10-28. Edges now ≤ 10 pts, overs/unders balanced.
 - Props table shows gp (this+last) and the raw model number on hover; Best Picks prop edges require 8+ games.
+
+## n108 · 2026-10-27 · NBA v3: H2H tab, Matchups and Players overhauled (scripts/patch_sport_v3_h2h.py)
+- Matchups → H2H: per game the last meetings (scores summed from the box scores, home record, avg total vs tonight's O/U) and every rotation player's games vs the opponent across the loaded seasons: avg vs, Δ to season, O-U record over the posted line. Filters: day, lines only, min games.
+- Matchups cards: "plays in this game" strip (spread/total edge ≥2/2.5 + prop edges ≥3 pts that clear the sample bar), last-meetings line, every posted line under each name with the model's lean ▲/▼ and edge, "lines only" toggle.
+- Matchup Lab: one market at a time (chips) — se · pr · L5 (trend) · L10 · vs opp · opp rk · proj (market-shrunk when a line exists) · line · lean · hit L5/L10/season/vs opp; lines-only and starters toggles; sorted by edge.
+- Player card: posted lines with hit rates (L5/L10/this season/last/vs opp), sparkline of the last 15 vs the line, splits (home/away/starter/bench/vs opp).
