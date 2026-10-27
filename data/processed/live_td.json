@@ -1,10 +1,10 @@
 {
- "pulled": "2026-10-26T23:21Z",
+ "pulled": "2026-10-27T00:46Z",
  "season": 2026,
  "week": 7,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "DAL@PHI": "pre",
+  "DAL@PHI": "in",
   "NE@CHI": "post",
   "PIT@NO": "post",
   "SF@ATL": "post",
@@ -21,8 +21,8 @@
  },
  "scores": {
   "DAL@PHI": [
-   0,
-   0
+   10,
+   7
   ],
   "NE@CHI": [
    24,
@@ -78,6 +78,22 @@
   ]
  },
  "plays": [
+  {
+   "game": "DAL@PHI",
+   "q": 1,
+   "clock": "10:25",
+   "team": "PHI",
+   "player": "Saquon Barkley",
+   "how": "rush"
+  },
+  {
+   "game": "DAL@PHI",
+   "q": 1,
+   "clock": "5:32",
+   "team": "DAL",
+   "player": "CeeDee Lamb",
+   "how": "rec"
+  },
   {
    "game": "NE@CHI",
    "q": 1,
