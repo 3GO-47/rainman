@@ -2597,14 +2597,14 @@ TOTAL,6,2026-10-13,2026_06_BUF_LV,,BUF@LV,,total,UNDER 53.5,53.5,46.4,53.5,DK,-7
 TOTAL,6,2026-10-13,2026_06_CAR_PHI,,CAR@PHI,,total,OVER 41.5,41.5,45.8,41.5,DK,4.3,L,39.0,,,1,
 TOTAL,6,2026-10-13,2026_06_CHI_ATL,,CHI@ATL,,total,UNDER 49.5,49.5,45.1,49.5,DK,-4.4,L,54.0,,,1,
 TOTAL,6,2026-10-13,2026_06_PIT_TB,,PIT@TB,,total,OVER 40.5,40.5,43.8,40.5,DK,3.3,W,45.0,,,1,
-ATS,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,spread,PHI +4.5,-4.5,3.9,-4.5,DK,8.4,,,"model spread vs market, home perspective",,1,
+ATS,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,spread,PHI +4.5,-4.5,3.9,-4.5,DK,8.4,L,-17.0,"model spread vs market, home perspective",,1,
 ATS,7,2026-10-20,2026_07_KC_SEA,,KC@SEA,,spread,SEA -3,3.0,6.6,3.0,DK,3.6,W,17.0,"model spread vs market, home perspective",,1,
 ATS,7,2026-10-20,2026_07_MIA_NYJ,,MIA@NYJ,,spread,MIA +4.5,4.5,-1.6,4.5,DK,-6.1,W,-3.0,"model spread vs market, home perspective",,1,
 ATS,7,2026-10-20,2026_07_NE_CHI,,NE@CHI,,spread,NE +3,3.0,-1.3,3.0,DK,-4.3,L,6.0,"model spread vs market, home perspective",,1,
 ATS,7,2026-10-20,2026_07_NYG_HOU,,NYG@HOU,,spread,NYG +10,10.0,6.1,10.0,DK,-3.9,W,-6.0,"model spread vs market, home perspective",,1,
 ML,7,2026-10-20,2026_07_CIN_BAL,,CIN@BAL,,moneyline,CIN,,0.476,0.39,Kalshi,0.086,W,35-13,"win probability, model vs exchange",,1,
 ML,7,2026-10-25,2026_07_CLE_TEN,,CLE@TEN,,moneyline,CLE,,0.565,0.405,Kalshi,0.16,W,27-24,"win probability, model vs exchange",,1,
-ML,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,moneyline,PHI,,0.614,0.43,Kalshi,0.184,,,"win probability, model vs exchange",,1,
+ML,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,moneyline,PHI,,0.614,0.43,Kalshi,0.184,L,38-21,"win probability, model vs exchange",,1,
 ML,7,2026-10-25,2026_07_IND_MIN,,IND@MIN,,moneyline,MIN,,0.711,0.565,Kalshi,0.146,W,10-16,"win probability, model vs exchange",,1,
 ML,7,2026-10-20,2026_07_KC_SEA,,KC@SEA,,moneyline,SEA,,0.688,0.54,Kalshi,0.148,W,3-20,"win probability, model vs exchange",,1,
 ML,7,2026-10-24,2026_07_LA_LV,,LAR@LV,,moneyline,LAR,,0.708,0.605,Kalshi,0.103,W,35-21,"win probability, model vs exchange",,1,
@@ -2747,6 +2747,10 @@ PROP,7,2026-10-25,Braelon Allen|rush_yds|59.5,Braelon Allen,NYJ,MIA,rush_yds,Und
 PROP,7,2026-10-25,Brandin Cooks|rec_yds|14.5,Brandin Cooks,SF,@ATL,rec_yds,Over,14.5,0.566,0.559,Kalshi,1.1,L,13.0,at its posted price,-127.0,,edge under 6%
 PROP,7,2026-10-24,Brandin Cooks|rec_yds|24.5,Brandin Cooks,SF,@ATL,rec_yds,Under,24.5,0.53,0.531,Kalshi,-0.2,W,13.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-24,Brandin Cooks|receptions|1.5,Brandin Cooks,SF,@ATL,receptions,Under,1.5,0.42,0.4,Kalshi,5.0,W,1.0,at its posted price,150.0,,edge under 6%
+PROP,7,2026-10-26,Brevyn Spann-Ford|rec_yds|11.5,Brevyn Spann-Ford,DAL,@PHI,rec_yds,Under,11.5,0.51,0.5,betmgm,2.1,W,11.0,at its posted price,100,,edge under 6%
+PROP,7,2026-10-26,Brevyn Spann-Ford|rec_yds|12.5,Brevyn Spann-Ford,DAL,@PHI,rec_yds,Under,12.5,0.529,0.524,betrivers,1.0,W,11.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-26,Brevyn Spann-Ford|rec_yds|13.5,Brevyn Spann-Ford,DAL,@PHI,rec_yds,Under,13.5,0.547,0.528,draftkings,3.5,W,11.0,at its posted price,-112,,edge under 6%
+PROP,7,2026-10-26,Brevyn Spann-Ford|receptions|1.5,Brevyn Spann-Ford,DAL,@PHI,receptions,Under,1.5,0.576,0.574,betmgm,0.3,L,2.0,at its posted price,-135,,edge under 6%
 PROP,7,2026-10-21,Brian Robinson Jr.|rush_yds|25.5,Brian Robinson Jr.,ATL,SF,rush_yds,Under,25.5,0.495,0.512,fanatics,-3.3,P,DNP,at its posted price,-105.0,,edge under 6%
 PROP,7,2026-10-21,Brian Robinson Jr.|rush_yds|26.5,Brian Robinson Jr.,ATL,SF,rush_yds,Under,26.5,0.509,0.524,betmgm,-2.8,P,DNP,at its posted price,-110.0,,edge under 6%
 PROP,7,2026-10-21,Brian Robinson Jr.|rush_yds|27.5,Brian Robinson Jr.,ATL,SF,rush_yds,Under,27.5,0.525,0.526,draftkings,-0.3,P,DNP,at its posted price,-111.0,,edge under 6%
@@ -2849,9 +2853,12 @@ PROP,7,2026-10-23,Carnell Tate|rec_yds|52.5,Carnell Tate,TEN,CLE,rec_yds,Under,5
 PROP,7,2026-10-23,Carnell Tate|rec_yds|53.5,Carnell Tate,TEN,CLE,rec_yds,Under,53.5,0.506,0.535,betmgm,-5.5,L,69.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-25,Carnell Tate|rec_yds|59.5,Carnell Tate,TEN,CLE,rec_yds,Under,59.5,0.526,0.519,Kalshi,1.2,L,69.0,at its posted price,-108.0,,edge under 6%
 PROP,7,2026-10-23,Carnell Tate|receptions|4.5,Carnell Tate,TEN,CLE,receptions,Over,4.5,0.483,0.512,betmgm,-5.8,W,5.0,at its posted price,-105.0,,edge under 6%
-PROP,7,2026-10-21,CeeDee Lamb|rec_yds|81.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,81.5,0.526,0.528,draftkings,-0.4,,,at its posted price,-112.0,,edge under 6%
-PROP,7,2026-10-21,CeeDee Lamb|rec_yds|82.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,82.5,0.531,0.539,betrivers,-1.4,,,at its posted price,-117.0,,edge under 6%
-PROP,7,2026-10-21,CeeDee Lamb|receptions|7.5,CeeDee Lamb,DAL,@PHI,receptions,Under,7.5,0.561,0.598,betrivers,7.0,,,at its posted price,-149.0,1,
+PROP,7,2026-10-26,CeeDee Lamb|rec_yds|79.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,79.5,0.52,0.524,draftkings,-0.8,W,74.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-26,CeeDee Lamb|rec_yds|80.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,80.5,0.519,0.524,betmgm,-0.8,W,74.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-21,CeeDee Lamb|rec_yds|81.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,81.5,0.526,0.528,draftkings,-0.4,W,74.0,at its posted price,-112.0,,edge under 6%
+PROP,7,2026-10-21,CeeDee Lamb|rec_yds|82.5,CeeDee Lamb,DAL,@PHI,rec_yds,Under,82.5,0.531,0.539,betrivers,-1.4,W,74.0,at its posted price,-117.0,,edge under 6%
+PROP,7,2026-10-26,CeeDee Lamb|receptions|6.5,CeeDee Lamb,DAL,@PHI,receptions,Under,6.5,0.503,0.5,betmgm,0.7,W,5.0,at its posted price,100,,edge under 6%
+PROP,7,2026-10-21,CeeDee Lamb|receptions|7.5,CeeDee Lamb,DAL,@PHI,receptions,Under,7.5,0.561,0.598,betrivers,7.0,W,5.0,at its posted price,-149.0,,game already has 3
 PROP,7,2026-10-25,Chase Brown|rec_yds|14.5,Chase Brown,CIN,@BAL,rec_yds,Over,14.5,0.546,0.82,Kalshi,-33.4,W,19.0,at its posted price,-456.0,,edge under 6%
 PROP,7,2026-10-22,Chase Brown|rec_yds|19.5,Chase Brown,CIN,@BAL,rec_yds,Under,19.5,0.502,0.533,fanduel,-5.8,W,19.0,at its posted price,-114.0,,edge under 6%
 PROP,7,2026-10-22,Chase Brown|rec_yds|20.5,Chase Brown,CIN,@BAL,rec_yds,Under,20.5,0.504,0.522,draftkings,-3.4,W,19.0,at its posted price,-109.0,,edge under 6%
@@ -2955,22 +2962,41 @@ PROP,7,2026-10-20,DK Metcalf|rec_yds|53.5,DK Metcalf,PIT,@NO,rec_yds,Over,53.5,0
 PROP,7,2026-10-20,DK Metcalf|rec_yds|55.5,DK Metcalf,PIT,@NO,rec_yds,Over,55.5,0.496,0.524,draftkings,-5.3,W,56.0,at its posted price,-110.0,,edge under 6%
 PROP,7,2026-10-25,DK Metcalf|rec_yds|59.5,DK Metcalf,PIT,@NO,rec_yds,Under,59.5,0.505,0.51,Kalshi,-1.0,W,56.0,at its posted price,-104.0,,edge under 6%
 PROP,7,2026-10-20,DK Metcalf|receptions|4.5,DK Metcalf,PIT,@NO,receptions,Over,4.5,0.542,0.574,draftkings,-5.7,L,2.0,at its posted price,-135.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|completions|24.5,Dak Prescott,DAL,@PHI,completions,Under,24.5,0.523,0.567,betrivers,-0.2,,,at its posted price,-131.0,,edge under 6%
-PROP,7,2026-10-24,Dak Prescott|interceptions|0.5,Dak Prescott,DAL,@PHI,interceptions,Under,0.5,0.464,0.45,Kalshi,2.9,,,at its posted price,122.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|pass_att|36.5,Dak Prescott,DAL,@PHI,pass_att,Under,36.5,0.5,0.522,draftkings,-4.2,,,at its posted price,-109.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,@PHI,pass_td,Under,1.5,0.48,0.488,betrivers,-1.6,,,at its posted price,105.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,@PHI,pass_yds,Under,263.5,0.548,0.533,betrivers,2.9,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|pass_yds|265.5,Dak Prescott,DAL,@PHI,pass_yds,Under,265.5,0.554,0.528,draftkings,4.8,,,at its posted price,-112.0,,edge under 6%
-PROP,7,2026-10-21,Dak Prescott|pass_yds|268.5,Dak Prescott,DAL,@PHI,pass_yds,Under,268.5,0.557,0.533,fanduel,4.6,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-24,Dak Prescott|rush_yds|9.5,Dak Prescott,DAL,@PHI,rush_yds,Under,9.5,0.55,0.519,Kalshi,5.9,,,at its posted price,-108.0,,edge under 6%
-PROP,7,2026-10-21,Dallas Goedert|rec_yds|40.5,Dallas Goedert,PHI,DAL,rec_yds,Under,40.5,0.547,0.535,betrivers,2.2,,,at its posted price,-115.0,,edge under 6%
-PROP,7,2026-10-21,Dallas Goedert|rec_yds|42.5,Dallas Goedert,PHI,DAL,rec_yds,Under,42.5,0.554,0.524,draftkings,5.8,,,at its posted price,-110.0,,edge under 6%
-PROP,7,2026-10-21,Dallas Goedert|receptions|4.5,Dallas Goedert,PHI,DAL,receptions,Under,4.5,0.547,0.469,betrivers,4.4,,,at its posted price,113.0,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|completions|23.5,Dak Prescott,DAL,@PHI,completions,Under,23.5,0.505,0.519,betrivers,-3.6,W,15.0,at its posted price,-108,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|completions|24.5,Dak Prescott,DAL,@PHI,completions,Under,24.5,0.523,0.567,betrivers,-0.2,W,15.0,at its posted price,-131.0,,edge under 6%
+PROP,7,2026-10-24,Dak Prescott|interceptions|0.5,Dak Prescott,DAL,@PHI,interceptions,Under,0.5,0.464,0.45,Kalshi,2.9,W,0.0,at its posted price,122.0,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_att|35.5,Dak Prescott,DAL,@PHI,pass_att,Under,35.5,0.487,0.507,draftkings,-4.1,W,27.0,at its posted price,-103,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_att|35.5,Dak Prescott,DAL,@PHI,pass_att,Over,35.5,0.484,0.512,espnbet,-5.5,L,27.0,at its posted price,-105,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|pass_att|36.5,Dak Prescott,DAL,@PHI,pass_att,Under,36.5,0.5,0.522,draftkings,-4.2,W,27.0,at its posted price,-109.0,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_att|37.5,Dak Prescott,DAL,@PHI,pass_att,Under,37.5,0.549,0.539,Kalshi,1.9,W,27.0,at its posted price,-117,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|pass_td|1.5,Dak Prescott,DAL,@PHI,pass_td,Under,1.5,0.48,0.488,betrivers,-1.6,L,3.0,at its posted price,105.0,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_yds|259.5,Dak Prescott,DAL,@PHI,pass_yds,Under,259.5,0.52,0.512,espnbet,1.4,W,212.0,at its posted price,-105,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_yds|260.5,Dak Prescott,DAL,@PHI,pass_yds,Under,260.5,0.537,0.535,fanatics,0.4,W,212.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_yds|261.5,Dak Prescott,DAL,@PHI,pass_yds,Under,261.5,0.54,0.535,betmgm,0.9,W,212.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_yds|262.5,Dak Prescott,DAL,@PHI,pass_yds,Under,262.5,0.538,0.526,draftkings,2.3,W,212.0,at its posted price,-111,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|pass_yds|263.5,Dak Prescott,DAL,@PHI,pass_yds,Under,263.5,0.548,0.533,betrivers,2.9,W,212.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|pass_yds|265.5,Dak Prescott,DAL,@PHI,pass_yds,Under,265.5,0.554,0.528,draftkings,4.8,W,212.0,at its posted price,-112.0,,edge under 6%
+PROP,7,2026-10-21,Dak Prescott|pass_yds|268.5,Dak Prescott,DAL,@PHI,pass_yds,Under,268.5,0.557,0.533,fanduel,4.6,W,212.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-26,Dak Prescott|pass_yds|274.5,Dak Prescott,DAL,@PHI,pass_yds,Under,274.5,0.575,0.531,Kalshi,8.3,W,212.0,at its posted price,-113,1,
+PROP,7,2026-10-26,Dak Prescott|rush_yds|10.5,Dak Prescott,DAL,@PHI,rush_yds,Under,10.5,0.564,0.545,draftkings,3.4,W,8.0,at its posted price,-120,,edge under 6%
+PROP,7,2026-10-24,Dak Prescott|rush_yds|9.5,Dak Prescott,DAL,@PHI,rush_yds,Under,9.5,0.55,0.519,Kalshi,5.9,W,8.0,at its posted price,-108.0,,edge under 6%
+PROP,7,2026-10-21,Dallas Goedert|rec_yds|40.5,Dallas Goedert,PHI,DAL,rec_yds,Under,40.5,0.547,0.535,betrivers,2.2,L,48.0,at its posted price,-115.0,,edge under 6%
+PROP,7,2026-10-21,Dallas Goedert|rec_yds|42.5,Dallas Goedert,PHI,DAL,rec_yds,Under,42.5,0.554,0.524,draftkings,5.8,L,48.0,at its posted price,-110.0,,edge under 6%
+PROP,7,2026-10-26,Dallas Goedert|rec_yds|48.5,Dallas Goedert,PHI,DAL,rec_yds,Under,48.5,0.576,0.533,betrivers,8.1,W,48.0,at its posted price,-114,,not his best edge
+PROP,7,2026-10-26,Dallas Goedert|rec_yds|49.5,Dallas Goedert,PHI,DAL,rec_yds,Under,49.5,0.598,0.556,espnbet,7.7,W,48.0,at its posted price,-125,,not his best edge
+PROP,7,2026-10-26,Dallas Goedert|rec_yds|50.5,Dallas Goedert,PHI,DAL,rec_yds,Under,50.5,0.588,0.535,betmgm,10.0,W,48.0,at its posted price,-115,1,
+PROP,7,2026-10-21,Dallas Goedert|receptions|4.5,Dallas Goedert,PHI,DAL,receptions,Under,4.5,0.547,0.469,betrivers,4.4,L,5.0,at its posted price,113.0,,edge under 6%
+PROP,7,2026-10-26,Dallas Goedert|receptions|5.5,Dallas Goedert,PHI,DAL,receptions,Under,5.5,0.642,0.608,betmgm,5.6,W,5.0,at its posted price,-155,,edge under 6%
 PROP,7,2026-10-24,Dalton Schultz|rec_yds|24.5,Dalton Schultz,HOU,NYG,rec_yds,Over,24.5,0.59,0.539,Kalshi,9.4,W,45.0,at its posted price,-117.0,,not his best edge
 PROP,7,2026-10-25,Dalton Schultz|rec_yds|39.5,Dalton Schultz,HOU,NYG,rec_yds,Under,39.5,0.493,0.481,Kalshi,2.5,L,45.0,at its posted price,108.0,,edge under 6%
 PROP,7,2026-10-24,Dalton Schultz|receptions|2.5,Dalton Schultz,HOU,NYG,receptions,Over,2.5,0.634,0.609,Kalshi,4.0,W,5.0,at its posted price,-156.0,,edge under 6%
 PROP,7,2026-10-24,Dalton Schultz|receptions|3.5,Dalton Schultz,HOU,NYG,receptions,Over,3.5,0.461,0.41,Kalshi,12.6,W,5.0,at its posted price,144.0,1,
 PROP,7,2026-10-25,Dalton Schultz|receptions|4.5,Dalton Schultz,HOU,NYG,receptions,Under,4.5,0.521,0.5,Kalshi,4.2,L,5.0,at its posted price,100.0,,edge under 6%
+PROP,7,2026-10-26,Dameon Pierce|rec_yds|0.5,Dameon Pierce,PHI,DAL,rec_yds,Over,0.5,0.515,0.545,betmgm,-5.6,W,1.0,at its posted price,-120,,edge under 6%
+PROP,7,2026-10-26,Dameon Pierce|rec_yds|1.5,Dameon Pierce,PHI,DAL,rec_yds,Over,1.5,0.497,0.519,draftkings,-4.3,L,1.0,at its posted price,-108,,edge under 6%
+PROP,7,2026-10-26,Dameon Pierce|rush_att|5.5,Dameon Pierce,PHI,DAL,rush_att,Under,5.5,0.49,0.519,draftkings,-5.6,L,14.0,at its posted price,-108,,edge under 6%
+PROP,7,2026-10-26,Dameon Pierce|rush_yds|18.5,Dameon Pierce,PHI,DAL,rush_yds,Under,18.5,0.501,0.524,betmgm,-4.3,L,47.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-26,Dameon Pierce|rush_yds|19.5,Dameon Pierce,PHI,DAL,rush_yds,Under,19.5,0.521,0.548,betrivers,-4.8,L,47.0,at its posted price,-121,,edge under 6%
 PROP,7,2026-10-20,Daniel Jones|completions|19.5,Daniel Jones,IND,@MIN,completions,Under,19.5,0.543,0.531,betrivers,3.7,W,13.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-24,Daniel Jones|interceptions|0.5,Daniel Jones,IND,@MIN,interceptions,Under,0.5,0.473,0.469,Kalshi,0.7,L,1.0,at its posted price,113.0,,edge under 6%
 PROP,7,2026-10-25,Daniel Jones|pass_att|28.5,Daniel Jones,IND,@MIN,pass_att,Under,28.5,0.376,0.391,Kalshi,-3.9,W,22.0,at its posted price,156.0,,edge under 6%
@@ -2981,8 +3007,11 @@ PROP,7,2026-10-20,Daniel Jones|pass_yds|198.5,Daniel Jones,IND,@MIN,pass_yds,Und
 PROP,7,2026-10-20,Daniel Jones|pass_yds|199.5,Daniel Jones,IND,@MIN,pass_yds,Under,199.5,0.533,0.524,espnbet,1.8,W,108.0,at its posted price,-110.0,,edge under 6%
 PROP,7,2026-10-25,Daniel Jones|rush_yds|4.5,Daniel Jones,IND,@MIN,rush_yds,Under,4.5,0.494,0.55,Kalshi,-10.2,L,13.0,at its posted price,-122.0,,edge under 6%
 PROP,7,2026-10-24,Daniel Jones|rush_yds|9.5,Daniel Jones,IND,@MIN,rush_yds,Under,9.5,0.625,0.609,Kalshi,2.5,L,13.0,at its posted price,-156.0,,edge under 6%
-PROP,7,2026-10-25,Darius Cooper|rec_yds|39.5,Darius Cooper,PHI,DAL,rec_yds,Over,39.5,0.502,0.51,Kalshi,-1.5,,,at its posted price,-104.0,,edge under 6%
-PROP,7,2026-10-25,Darius Cooper|receptions|3.5,Darius Cooper,PHI,DAL,receptions,Over,3.5,0.449,0.45,Kalshi,-0.3,,,at its posted price,122.0,,edge under 6%
+PROP,7,2026-10-26,Darius Cooper|rec_yds|37.5,Darius Cooper,PHI,DAL,rec_yds,Over,37.5,0.508,0.535,betmgm,-5.0,L,17.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Darius Cooper|rec_yds|38.5,Darius Cooper,PHI,DAL,rec_yds,Over,38.5,0.511,0.533,draftkings,-4.0,L,17.0,at its posted price,-114,,edge under 6%
+PROP,7,2026-10-25,Darius Cooper|rec_yds|39.5,Darius Cooper,PHI,DAL,rec_yds,Over,39.5,0.502,0.51,Kalshi,-1.5,L,17.0,at its posted price,-104.0,,edge under 6%
+PROP,7,2026-10-26,Darius Cooper|rec_yds|40.5,Darius Cooper,PHI,DAL,rec_yds,Over,40.5,0.501,0.531,betrivers,-5.6,L,17.0,at its posted price,-113,,edge under 6%
+PROP,7,2026-10-25,Darius Cooper|receptions|3.5,Darius Cooper,PHI,DAL,receptions,Over,3.5,0.449,0.45,Kalshi,-0.3,L,1.0,at its posted price,122.0,,edge under 6%
 PROP,7,2026-10-25,Darnell Mooney|rec_yds|14.5,Darnell Mooney,NYG,@HOU,rec_yds,Under,14.5,0.498,0.5,Kalshi,-0.3,W,4.0,at its posted price,100.0,,edge under 6%
 PROP,7,2026-10-24,Darnell Mooney|rec_yds|19.5,Darnell Mooney,NYG,@HOU,rec_yds,Under,19.5,0.561,0.531,Kalshi,5.7,W,4.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-24,Darnell Mooney|receptions|1.5,Darnell Mooney,NYG,@HOU,receptions,Over,1.5,0.446,0.441,Kalshi,1.2,L,1.0,at its posted price,127.0,,edge under 6%
@@ -3005,7 +3034,7 @@ PROP,7,2026-10-25,Davis Allen|receptions|0.5,Davis Allen,LAR,@LV,receptions,Over
 PROP,7,2026-10-20,DeMario Douglas|rec_yds|27.5,DeMario Douglas,NE,@CHI,rec_yds,Over,27.5,0.541,0.526,draftkings,2.8,L,23.0,at its posted price,-111.0,,edge under 6%
 PROP,7,2026-10-20,DeMario Douglas|rec_yds|28.5,DeMario Douglas,NE,@CHI,rec_yds,Over,28.5,0.545,0.541,betrivers,0.7,L,23.0,at its posted price,-118.0,,edge under 6%
 PROP,7,2026-10-20,DeMario Douglas|receptions|2.5,DeMario Douglas,NE,@CHI,receptions,Over,2.5,0.564,0.611,betrivers,-7.7,W,3.0,at its posted price,-157.0,,edge under 6%
-PROP,7,2026-10-24,DeVonta Smith|rec_yds|39.5,DeVonta Smith,PHI,DAL,rec_yds,Over,39.5,0.554,0.97,Kalshi,-42.9,,,at its posted price,-3233.0,,edge under 6%
+PROP,7,2026-10-24,DeVonta Smith|rec_yds|39.5,DeVonta Smith,PHI,DAL,rec_yds,Over,39.5,0.554,0.97,Kalshi,-42.9,P,DNP,at its posted price,-3233.0,,edge under 6%
 PROP,7,2026-10-23,Denzel Boston|rec_yds|49.5,Denzel Boston,CLE,@TEN,rec_yds,Under,49.5,0.497,0.539,betrivers,-7.9,W,27.0,at its posted price,-117.0,,edge under 6%
 PROP,7,2026-10-23,Denzel Boston|rec_yds|51.5,Denzel Boston,CLE,@TEN,rec_yds,Under,51.5,0.505,0.531,draftkings,-4.8,W,27.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-23,Denzel Boston|rec_yds|53.5,Denzel Boston,CLE,@TEN,rec_yds,Under,53.5,0.506,0.535,betmgm,-5.4,W,27.0,at its posted price,-115.0,,edge under 6%
@@ -3081,6 +3110,8 @@ PROP,7,2026-10-21,Elijah Higgins|rec_yds|17.5,Elijah Higgins,ARI,DEN,rec_yds,Und
 PROP,7,2026-10-21,Elijah Higgins|receptions|1.5,Elijah Higgins,ARI,DEN,receptions,Under,1.5,0.408,0.422,draftkings,-3.3,L,3.0,at its posted price,137.0,,edge under 6%
 PROP,7,2026-10-25,Elijah Higgins|receptions|1.5,Elijah Higgins,ARI,DEN,receptions,Over,1.5,0.523,0.535,betmgm,-2.3,W,3.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-21,Elijah Higgins|receptions|2.5,Elijah Higgins,ARI,DEN,receptions,Under,2.5,0.623,0.643,fanduel,-3.1,L,3.0,at its posted price,-180.0,,edge under 6%
+PROP,7,2026-10-26,Elijah Moore|rec_yds|9.5,Elijah Moore,PHI,DAL,rec_yds,Under,9.5,0.504,0.526,betmgm,-4.2,L,16.0,at its posted price,-111,,edge under 6%
+PROP,7,2026-10-26,Elijah Moore|receptions|1.5,Elijah Moore,PHI,DAL,receptions,Under,1.5,0.568,0.583,betmgm,-2.6,L,2.0,at its posted price,-140,,edge under 6%
 PROP,7,2026-10-25,Emanuel Wilson|rec_yds|6.5,Emanuel Wilson,SEA,KC,rec_yds,Over,6.5,0.512,0.545,betmgm,-6.2,W,15.0,at its posted price,-120.0,,edge under 6%
 PROP,7,2026-10-25,Emanuel Wilson|rec_yds|7.5,Emanuel Wilson,SEA,KC,rec_yds,Over,7.5,0.472,0.488,espnbet,-3.3,W,15.0,at its posted price,105.0,,edge under 6%
 PROP,7,2026-10-24,Emanuel Wilson|rec_yds|9.5,Emanuel Wilson,SEA,KC,rec_yds,Over,9.5,0.439,0.441,Kalshi,-0.3,W,15.0,at its posted price,127.0,,edge under 6%
@@ -3137,9 +3168,13 @@ PROP,7,2026-10-21,George Kittle|rec_yds|68.5,George Kittle,SF,@ATL,rec_yds,Under
 PROP,7,2026-10-25,George Kittle|rec_yds|69.5,George Kittle,SF,@ATL,rec_yds,Under,69.5,0.568,0.5,Kalshi,13.6,L,88.0,at its posted price,100.0,1,
 PROP,7,2026-10-25,George Kittle|receptions|4.5,George Kittle,SF,@ATL,receptions,Under,4.5,0.561,0.75,Kalshi,-25.2,L,8.0,at its posted price,-300.0,,edge under 6%
 PROP,7,2026-10-21,George Kittle|receptions|5.5,George Kittle,SF,@ATL,receptions,Under,5.5,0.568,0.533,betrivers,8.4,L,8.0,at its posted price,-114.0,,not his best edge
-PROP,7,2026-10-21,George Pickens|rec_yds|61.5,George Pickens,DAL,@PHI,rec_yds,Under,61.5,0.504,0.526,draftkings,-4.2,,,at its posted price,-111.0,,edge under 6%
-PROP,7,2026-10-21,George Pickens|rec_yds|62.5,George Pickens,DAL,@PHI,rec_yds,Under,62.5,0.509,0.535,betrivers,-4.9,,,at its posted price,-115.0,,edge under 6%
-PROP,7,2026-10-21,George Pickens|receptions|4.5,George Pickens,DAL,@PHI,receptions,Under,4.5,0.509,0.478,betrivers,-2.9,,,at its posted price,109.0,,edge under 6%
+PROP,7,2026-10-21,George Pickens|rec_yds|61.5,George Pickens,DAL,@PHI,rec_yds,Under,61.5,0.504,0.526,draftkings,-4.2,W,57.0,at its posted price,-111.0,,edge under 6%
+PROP,7,2026-10-21,George Pickens|rec_yds|62.5,George Pickens,DAL,@PHI,rec_yds,Under,62.5,0.509,0.535,betrivers,-4.9,W,57.0,at its posted price,-115.0,,edge under 6%
+PROP,7,2026-10-26,George Pickens|rec_yds|63.5,George Pickens,DAL,@PHI,rec_yds,Under,63.5,0.518,0.533,draftkings,-2.7,W,57.0,at its posted price,-114,,edge under 6%
+PROP,7,2026-10-26,George Pickens|rec_yds|64.5,George Pickens,DAL,@PHI,rec_yds,Under,64.5,0.526,0.545,betmgm,-3.6,W,57.0,at its posted price,-120,,edge under 6%
+PROP,7,2026-10-26,George Pickens|rec_yds|65.5,George Pickens,DAL,@PHI,rec_yds,Under,65.5,0.526,0.541,betrivers,-2.9,W,57.0,at its posted price,-118,,edge under 6%
+PROP,7,2026-10-21,George Pickens|receptions|4.5,George Pickens,DAL,@PHI,receptions,Under,4.5,0.509,0.478,betrivers,-2.9,W,4.0,at its posted price,109.0,,edge under 6%
+PROP,7,2026-10-26,George Pickens|receptions|5.5,George Pickens,DAL,@PHI,receptions,Under,5.5,0.618,0.636,betmgm,-2.8,W,4.0,at its posted price,-175,,edge under 6%
 PROP,7,2026-10-20,Germie Bernard|rec_yds|52.5,Germie Bernard,PIT,@NO,rec_yds,Under,52.5,0.523,0.533,fanduel,-1.8,W,27.0,at its posted price,-114.0,,edge under 6%
 PROP,7,2026-10-20,Germie Bernard|rec_yds|53.5,Germie Bernard,PIT,@NO,rec_yds,Under,53.5,0.524,0.526,draftkings,-0.4,W,27.0,at its posted price,-111.0,,edge under 6%
 PROP,7,2026-10-25,Germie Bernard|rec_yds|54.5,Germie Bernard,PIT,@NO,rec_yds,Under,54.5,0.518,0.49,Kalshi,5.7,W,27.0,at its posted price,104.0,,edge under 6%
@@ -3164,6 +3199,8 @@ PROP,7,2026-10-23,Harold Fannin Jr.|receptions|3.5,Harold Fannin Jr.,CLE,@TEN,re
 PROP,7,2026-10-23,Harold Fannin Jr.|receptions|3.5,Harold Fannin Jr.,CLE,@TEN,receptions,Over,3.5,0.5,0.459,betrivers,9.0,W,6.0,at its posted price,118.0,,model under 50%
 PROP,7,2026-10-22,Haynes King|rush_yds|79.5,Haynes King,CAR,TB,rush_yds,Over,79.5,0.51,0.545,espnbet,-6.5,P,DNP,at its posted price,-120.0,,edge under 6%
 PROP,7,2026-10-23,Haynes King|rush_yds|84.5,Haynes King,CAR,TB,rush_yds,Over,84.5,0.5,0.535,espnbet,-6.5,P,DNP,at its posted price,-115.0,,edge under 6%
+PROP,7,2026-10-26,Hollywood Brown|rec_yds|9.5,Hollywood Brown,PHI,DAL,rec_yds,Over,9.5,0.535,0.574,betmgm,-6.9,P,DNP,at its posted price,-135,,edge under 6%
+PROP,7,2026-10-26,Hollywood Brown|receptions|1.5,Hollywood Brown,PHI,DAL,receptions,Under,1.5,0.641,0.688,betmgm,-6.7,P,DNP,at its posted price,-220,,edge under 6%
 PROP,7,2026-10-20,Hunter Henry|rec_yds|31.5,Hunter Henry,NE,@CHI,rec_yds,Over,31.5,0.525,0.526,draftkings,-0.3,W,71.0,at its posted price,-111.0,,edge under 6%
 PROP,7,2026-10-20,Hunter Henry|rec_yds|32.5,Hunter Henry,NE,@CHI,rec_yds,Over,32.5,0.522,0.541,betrivers,-3.5,W,71.0,at its posted price,-118.0,,edge under 6%
 PROP,7,2026-10-20,Hunter Henry|rec_yds|33.5,Hunter Henry,NE,@CHI,rec_yds,Over,33.5,0.512,0.533,fanduel,-3.9,W,71.0,at its posted price,-114.0,,edge under 6%
@@ -3237,10 +3274,12 @@ PROP,7,2026-10-20,Jahmyr Gibbs|rush_yds|93.5,Jahmyr Gibbs,DET,GB,rush_yds,Under,
 PROP,7,2026-10-20,Jahmyr Gibbs|rush_yds|94.5,Jahmyr Gibbs,DET,GB,rush_yds,Under,94.5,0.546,0.556,espnbet,-1.7,L,116.0,at its posted price,-125.0,,edge under 6%
 PROP,7,2026-10-25,Jahmyr Gibbs|rush_yds|95.5,Jahmyr Gibbs,DET,GB,rush_yds,Under,95.5,0.536,0.535,betmgm,0.3,L,116.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-25,Jahmyr Gibbs|rush_yds|99.5,Jahmyr Gibbs,DET,GB,rush_yds,Under,99.5,0.568,0.55,Kalshi,3.4,L,116.0,at its posted price,-122.0,,edge under 6%
-PROP,7,2026-10-21,Jake Ferguson|rec_yds|18.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,18.5,0.513,0.535,draftkings,-4.1,,,at its posted price,-115.0,,edge under 6%
-PROP,7,2026-10-21,Jake Ferguson|rec_yds|19.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,19.5,0.505,0.533,fanduel,-5.2,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-21,Jake Ferguson|rec_yds|20.5,Jake Ferguson,DAL,@PHI,rec_yds,Under,20.5,0.501,0.533,betrivers,-5.9,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-21,Jake Ferguson|receptions|2.5,Jake Ferguson,DAL,@PHI,receptions,Over,2.5,0.547,0.539,betrivers,1.4,,,at its posted price,-117.0,,edge under 6%
+PROP,7,2026-10-26,Jake Ferguson|rec_yds|14.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,14.5,0.573,0.583,espnbet,-1.8,L,0.0,at its posted price,-140,,edge under 6%
+PROP,7,2026-10-26,Jake Ferguson|rec_yds|17.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,17.5,0.525,0.539,draftkings,-2.6,L,0.0,at its posted price,-117,,edge under 6%
+PROP,7,2026-10-21,Jake Ferguson|rec_yds|18.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,18.5,0.513,0.535,draftkings,-4.1,L,0.0,at its posted price,-115.0,,edge under 6%
+PROP,7,2026-10-21,Jake Ferguson|rec_yds|19.5,Jake Ferguson,DAL,@PHI,rec_yds,Over,19.5,0.505,0.533,fanduel,-5.2,L,0.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-21,Jake Ferguson|rec_yds|20.5,Jake Ferguson,DAL,@PHI,rec_yds,Under,20.5,0.501,0.533,betrivers,-5.9,W,0.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-21,Jake Ferguson|receptions|2.5,Jake Ferguson,DAL,@PHI,receptions,Over,2.5,0.547,0.539,betrivers,1.4,L,0.0,at its posted price,-117.0,,edge under 6%
 PROP,7,2026-10-25,Jalen Brooks|rec_yds|14.5,Jalen Brooks,ARI,DEN,rec_yds,Over,14.5,0.51,0.55,betrivers,-7.2,W,35.0,at its posted price,-122.0,,edge under 6%
 PROP,7,2026-10-25,Jalen Brooks|rec_yds|15.5,Jalen Brooks,ARI,DEN,rec_yds,Over,15.5,0.512,0.539,draftkings,-5.0,W,35.0,at its posted price,-117.0,,edge under 6%
 PROP,7,2026-10-25,Jalen Brooks|rec_yds|16.5,Jalen Brooks,ARI,DEN,rec_yds,Over,16.5,0.501,0.535,betmgm,-6.4,W,35.0,at its posted price,-115.0,,edge under 6%
@@ -3282,14 +3321,20 @@ PROP,7,2026-10-25,Jared Goff|rush_yds|0.5,Jared Goff,DET,GB,rush_yds,Over,0.5,0.
 PROP,7,2026-10-24,Jared Goff|rush_yds|9.5,Jared Goff,DET,GB,rush_yds,Over,9.5,0.216,0.19,Kalshi,13.6,L,-1.0,at its posted price,426.0,,price outside -200..+200
 PROP,7,2026-10-24,Jauan Jennings|rec_yds|9.5,Jauan Jennings,MIN,IND,rec_yds,Over,9.5,0.486,0.45,Kalshi,7.8,W,34.0,at its posted price,122.0,1,
 PROP,7,2026-10-24,Jauan Jennings|receptions|1.5,Jauan Jennings,MIN,IND,receptions,Over,1.5,0.386,0.321,Kalshi,20.3,W,2.0,at its posted price,212.0,,price outside -200..+200
-PROP,7,2026-10-21,Javonte Williams|rec_yds|10.5,Javonte Williams,DAL,@PHI,rec_yds,Under,10.5,0.459,0.488,fanatics,-5.9,,,at its posted price,105.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|rec_yds|12.5,Javonte Williams,DAL,@PHI,rec_yds,Under,12.5,0.514,0.545,betrivers,-5.8,,,at its posted price,-120.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|receptions|2.5,Javonte Williams,DAL,@PHI,receptions,Under,2.5,0.516,0.5,betrivers,-1.6,,,EV at -110 vs posted line,,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|receptions|2.5,Javonte Williams,DAL,@PHI,receptions,Over,2.5,0.443,0.463,draftkings,-4.2,,,at its posted price,116.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|rush_att|16.5,Javonte Williams,DAL,@PHI,rush_att,Under,16.5,0.536,0.51,draftkings,5.1,,,at its posted price,-104.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|rush_yds|65.5,Javonte Williams,DAL,@PHI,rush_yds,Under,65.5,0.52,0.512,fanatics,1.5,,,at its posted price,-105.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|rush_yds|66.5,Javonte Williams,DAL,@PHI,rush_yds,Under,66.5,0.533,0.533,fanduel,0.0,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-21,Javonte Williams|rush_yds|67.5,Javonte Williams,DAL,@PHI,rush_yds,Under,67.5,0.54,0.541,betrivers,-0.3,,,at its posted price,-118.0,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rec_yds|10.5,Javonte Williams,DAL,@PHI,rec_yds,Under,10.5,0.459,0.488,fanatics,-5.9,W,0.0,at its posted price,105.0,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rec_yds|11.5,Javonte Williams,DAL,@PHI,rec_yds,Over,11.5,0.512,0.545,betmgm,-6.2,L,0.0,at its posted price,-120,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rec_yds|12.5,Javonte Williams,DAL,@PHI,rec_yds,Under,12.5,0.514,0.545,betrivers,-5.8,W,0.0,at its posted price,-120.0,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rec_yds|14.5,Javonte Williams,DAL,@PHI,rec_yds,Under,14.5,0.567,0.58,Kalshi,-2.2,W,0.0,at its posted price,-138,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|receptions|2.5,Javonte Williams,DAL,@PHI,receptions,Under,2.5,0.516,0.5,betrivers,-1.6,W,0.0,EV at -110 vs posted line,,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|receptions|2.5,Javonte Williams,DAL,@PHI,receptions,Over,2.5,0.443,0.463,draftkings,-4.2,L,0.0,at its posted price,116.0,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rush_att|16.5,Javonte Williams,DAL,@PHI,rush_att,Under,16.5,0.536,0.51,draftkings,5.1,L,25.0,at its posted price,-104.0,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rush_yds|59.5,Javonte Williams,DAL,@PHI,rush_yds,Under,59.5,0.477,0.45,Kalshi,5.9,L,155.0,at its posted price,122,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rush_yds|62.5,Javonte Williams,DAL,@PHI,rush_yds,Under,62.5,0.523,0.535,betrivers,-2.3,L,155.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rush_yds|63.5,Javonte Williams,DAL,@PHI,rush_yds,Under,63.5,0.526,0.535,betmgm,-1.7,L,155.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Javonte Williams|rush_yds|64.5,Javonte Williams,DAL,@PHI,rush_yds,Under,64.5,0.528,0.526,draftkings,0.4,L,155.0,at its posted price,-111,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rush_yds|65.5,Javonte Williams,DAL,@PHI,rush_yds,Under,65.5,0.52,0.512,fanatics,1.5,L,155.0,at its posted price,-105.0,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rush_yds|66.5,Javonte Williams,DAL,@PHI,rush_yds,Under,66.5,0.533,0.533,fanduel,0.0,L,155.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-21,Javonte Williams|rush_yds|67.5,Javonte Williams,DAL,@PHI,rush_yds,Under,67.5,0.54,0.541,betrivers,-0.3,L,155.0,at its posted price,-118.0,,edge under 6%
 PROP,7,2026-10-26,Jaxon Smith-Njigba|rec_yds|89.5,Jaxon Smith-Njigba,SEA,KC,rec_yds,Under,89.5,0.503,0.481,Kalshi,4.6,L,150.0,at its posted price,108.0,,edge under 6%
 PROP,7,2026-10-25,Jaxon Smith-Njigba|rec_yds|91.5,Jaxon Smith-Njigba,SEA,KC,rec_yds,Under,91.5,0.526,0.531,fanduel,-0.9,L,150.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-20,Jaxon Smith-Njigba|rec_yds|92.5,Jaxon Smith-Njigba,SEA,KC,rec_yds,Under,92.5,0.526,0.533,fanduel,-1.3,L,150.0,at its posted price,-114.0,,edge under 6%
@@ -3545,8 +3590,10 @@ PROP,7,2026-10-24,Laquon Treadwell|receptions|1.5,Laquon Treadwell,IND,@MIN,rece
 PROP,7,2026-10-20,Luther Burden III|rec_yds|57.5,Luther Burden III,CHI,NE,rec_yds,Over,57.5,0.501,0.535,betrivers,-6.3,W,130.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-20,Luther Burden III|receptions|4.5,Luther Burden III,CHI,NE,receptions,Under,4.5,0.5,0.519,betrivers,-4.5,W,4.0,at its posted price,-108.0,,edge under 6%
 PROP,7,2026-10-20,Luther Burden III|receptions|4.5,Luther Burden III,CHI,NE,receptions,Over,4.5,0.528,0.565,fanduel,-6.6,L,4.0,at its posted price,-130.0,,edge under 6%
-PROP,7,2026-10-25,Makai Lemon|rec_yds|39.5,Makai Lemon,PHI,DAL,rec_yds,Under,39.5,0.604,0.539,Kalshi,12.0,,,at its posted price,-117.0,1,
-PROP,7,2026-10-25,Makai Lemon|receptions|4.5,Makai Lemon,PHI,DAL,receptions,Under,4.5,0.639,0.571,Kalshi,12.0,,,at its posted price,-133.0,,not his best edge
+PROP,7,2026-10-26,Makai Lemon|rec_yds|38.5,Makai Lemon,PHI,DAL,rec_yds,Under,38.5,0.59,0.545,betrivers,8.2,L,67.0,at its posted price,-120,,not his best edge
+PROP,7,2026-10-25,Makai Lemon|rec_yds|39.5,Makai Lemon,PHI,DAL,rec_yds,Under,39.5,0.604,0.539,Kalshi,12.0,L,67.0,at its posted price,-117.0,,not his best edge
+PROP,7,2026-10-26,Makai Lemon|receptions|3.5,Makai Lemon,PHI,DAL,receptions,Under,3.5,0.495,0.417,fanduel,18.7,L,7.0,at its posted price,140,1,
+PROP,7,2026-10-25,Makai Lemon|receptions|4.5,Makai Lemon,PHI,DAL,receptions,Under,4.5,0.639,0.571,Kalshi,12.0,L,7.0,at its posted price,-133.0,,not his best edge
 PROP,7,2026-10-24,Malachi Fields|rec_yds|19.5,Malachi Fields,NYG,@HOU,rec_yds,Over,19.5,0.505,0.5,Kalshi,1.0,W,83.0,at its posted price,100.0,,edge under 6%
 PROP,7,2026-10-24,Malachi Fields|receptions|1.5,Malachi Fields,NYG,@HOU,receptions,Over,1.5,0.571,0.559,Kalshi,2.0,W,4.0,at its posted price,-127.0,,edge under 6%
 PROP,7,2026-10-24,Malik Nabers|rec_yds|69.5,Malik Nabers,NYG,@HOU,rec_yds,Under,69.5,0.533,0.51,Kalshi,4.5,L,111.0,at its posted price,-104.0,,edge under 6%
@@ -3767,9 +3814,12 @@ PROP,7,2026-10-20,Rome Odunze|rec_yds|44.5,Rome Odunze,CHI,NE,rec_yds,Over,44.5,
 PROP,7,2026-10-20,Rome Odunze|rec_yds|45.5,Rome Odunze,CHI,NE,rec_yds,Under,45.5,0.502,0.533,fanduel,-5.9,L,69.0,at its posted price,-114.0,,edge under 6%
 PROP,7,2026-10-20,Rome Odunze|rec_yds|46.5,Rome Odunze,CHI,NE,rec_yds,Under,46.5,0.51,0.539,betrivers,-5.5,L,69.0,at its posted price,-117.0,,edge under 6%
 PROP,7,2026-10-20,Rome Odunze|receptions|3.5,Rome Odunze,CHI,NE,receptions,Under,3.5,0.533,0.588,betrivers,1.7,L,4.0,at its posted price,-143.0,,edge under 6%
-PROP,7,2026-10-21,Ryan Flournoy|rec_yds|32.5,Ryan Flournoy,DAL,@PHI,rec_yds,Over,32.5,0.503,0.531,draftkings,-5.2,,,at its posted price,-113.0,,edge under 6%
-PROP,7,2026-10-21,Ryan Flournoy|rec_yds|33.5,Ryan Flournoy,DAL,@PHI,rec_yds,Under,33.5,0.508,0.541,betrivers,-6.1,,,at its posted price,-118.0,,edge under 6%
-PROP,7,2026-10-21,Ryan Flournoy|receptions|3.5,Ryan Flournoy,DAL,@PHI,receptions,Under,3.5,0.54,0.563,betrivers,3.1,,,at its posted price,-129.0,,edge under 6%
+PROP,7,2026-10-26,Ryan Flournoy|rec_yds|29.5,Ryan Flournoy,DAL,@PHI,rec_yds,Under,29.5,0.45,0.469,Kalshi,-4.1,L,70.0,at its posted price,113,,edge under 6%
+PROP,7,2026-10-21,Ryan Flournoy|rec_yds|32.5,Ryan Flournoy,DAL,@PHI,rec_yds,Over,32.5,0.503,0.531,draftkings,-5.2,W,70.0,at its posted price,-113.0,,edge under 6%
+PROP,7,2026-10-21,Ryan Flournoy|rec_yds|33.5,Ryan Flournoy,DAL,@PHI,rec_yds,Under,33.5,0.508,0.541,betrivers,-6.1,L,70.0,at its posted price,-118.0,,edge under 6%
+PROP,7,2026-10-26,Ryan Flournoy|rec_yds|34.5,Ryan Flournoy,DAL,@PHI,rec_yds,Under,34.5,0.499,0.512,espnbet,-2.6,L,70.0,at its posted price,-105,,edge under 6%
+PROP,7,2026-10-26,Ryan Flournoy|rec_yds|35.5,Ryan Flournoy,DAL,@PHI,rec_yds,Under,35.5,0.522,0.541,betrivers,-3.5,L,70.0,at its posted price,-118,,edge under 6%
+PROP,7,2026-10-21,Ryan Flournoy|receptions|3.5,Ryan Flournoy,DAL,@PHI,receptions,Under,3.5,0.54,0.563,betrivers,3.1,L,4.0,at its posted price,-129.0,,edge under 6%
 PROP,7,2026-10-24,Sam Darnold|completions|19.5,Sam Darnold,SEA,KC,completions,Under,19.5,0.497,0.49,Kalshi,1.3,L,20.0,at its posted price,104.0,,edge under 6%
 PROP,7,2026-10-25,Sam Darnold|completions|20.5,Sam Darnold,SEA,KC,completions,Under,20.5,0.555,0.574,betmgm,-3.3,W,20.0,at its posted price,-135.0,,edge under 6%
 PROP,7,2026-10-24,Sam Darnold|interceptions|0.5,Sam Darnold,SEA,KC,interceptions,Under,0.5,0.483,0.481,Kalshi,0.5,L,1.0,at its posted price,108.0,,edge under 6%
@@ -3803,6 +3853,12 @@ PROP,7,2026-10-22,Samaje Perine|rush_yds|21.5,Samaje Perine,CIN,@BAL,rush_yds,Ov
 PROP,7,2026-10-22,Samaje Perine|rush_yds|22.5,Samaje Perine,CIN,@BAL,rush_yds,Under,22.5,0.505,0.535,betrivers,-5.5,W,16.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-25,Samaje Perine|rush_yds|24.5,Samaje Perine,CIN,@BAL,rush_yds,Under,24.5,0.539,0.531,Kalshi,1.6,W,16.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-25,Samaje Perine|rush_yds|29.5,Samaje Perine,CIN,@BAL,rush_yds,Under,29.5,0.586,0.55,Kalshi,6.6,W,16.0,at its posted price,-122.0,,not his best edge
+PROP,7,2026-10-26,Saquon Barkley|rec_yds|13.5,Saquon Barkley,PHI,DAL,rec_yds,Under,13.5,0.547,0.524,betmgm,4.5,W,9.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-26,Saquon Barkley|receptions|2.5,Saquon Barkley,PHI,DAL,receptions,Under,2.5,0.595,0.556,betmgm,7.0,W,2.0,at its posted price,-125,,game already has 3
+PROP,7,2026-10-26,Saquon Barkley|rush_att|15.5,Saquon Barkley,PHI,DAL,rush_att,Under,15.5,0.556,0.556,betmgm,0.0,W,7.0,at its posted price,-125,,edge under 6%
+PROP,7,2026-10-26,Saquon Barkley|rush_yds|63.5,Saquon Barkley,PHI,DAL,rush_yds,Under,63.5,0.533,0.535,betmgm,-0.4,W,62.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Saquon Barkley|rush_yds|64.5,Saquon Barkley,PHI,DAL,rush_yds,Under,64.5,0.536,0.541,betrivers,-0.9,W,62.0,at its posted price,-118,,edge under 6%
+PROP,7,2026-10-26,Saquon Barkley|rush_yds|65.5,Saquon Barkley,PHI,DAL,rush_yds,Under,65.5,0.535,0.526,draftkings,1.7,W,62.0,at its posted price,-111,,edge under 6%
 PROP,7,2026-10-20,Savion Williams|rec_yds|19.5,Savion Williams,GB,@DET,rec_yds,Over,19.5,0.504,0.535,betrivers,-5.8,W,47.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-25,Savion Williams|rec_yds|21.5,Savion Williams,GB,@DET,rec_yds,Under,21.5,0.468,0.5,betmgm,-6.3,L,47.0,at its posted price,100.0,,edge under 6%
 PROP,7,2026-10-26,Savion Williams|rec_yds|21.5,Savion Williams,GB,@DET,rec_yds,Over,21.5,0.501,0.528,draftkings,-5.3,W,47.0,at its posted price,-112.0,,edge under 6%
@@ -3818,17 +3874,26 @@ PROP,7,2026-10-24,Sione Vaki|rush_yds|9.5,Sione Vaki,DET,GB,rush_yds,Under,9.5,0
 PROP,7,2026-10-24,T.J. Hockenson|rec_yds|39.5,T.J. Hockenson,MIN,IND,rec_yds,Under,39.5,0.564,0.571,Kalshi,-1.2,W,35.0,at its posted price,-133.0,,edge under 6%
 PROP,7,2026-10-25,T.J. Hockenson|receptions|3.5,T.J. Hockenson,MIN,IND,receptions,Under,3.5,0.445,0.461,Kalshi,-3.4,L,4.0,at its posted price,117.0,,edge under 6%
 PROP,7,2026-10-24,T.J. Hockenson|receptions|4.5,T.J. Hockenson,MIN,IND,receptions,Under,4.5,0.592,0.571,Kalshi,3.7,W,4.0,at its posted price,-133.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|completions|20.5,Tanner McKee,PHI,DAL,completions,Under,20.5,0.493,0.5,betrivers,-5.9,,,EV at -110 vs posted line,,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|completions|20.5,Tanner McKee,PHI,DAL,completions,Over,20.5,0.49,0.51,draftkings,-3.9,,,at its posted price,-104.0,,edge under 6%
-PROP,7,2026-10-24,Tanner McKee|interceptions|0.5,Tanner McKee,PHI,DAL,interceptions,Under,0.5,0.424,0.42,Kalshi,0.9,,,at its posted price,138.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_att|34.5,Tanner McKee,PHI,DAL,pass_att,Under,34.5,0.494,0.524,draftkings,-5.7,,,at its posted price,-110.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_att|34.5,Tanner McKee,PHI,DAL,pass_att,Over,34.5,0.491,0.524,fanatics,-6.2,,,at its posted price,-110.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_td|1.5,Tanner McKee,PHI,DAL,pass_td,Under,1.5,0.608,0.645,betrivers,-5.9,,,at its posted price,-182.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_yds|209.5,Tanner McKee,PHI,DAL,pass_yds,Over,209.5,0.503,0.535,betrivers,-6.0,,,at its posted price,-115.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_yds|210.5,Tanner McKee,PHI,DAL,pass_yds,Over,210.5,0.494,0.524,fanatics,-5.7,,,at its posted price,-110.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_yds|211.5,Tanner McKee,PHI,DAL,pass_yds,Over,211.5,0.503,0.533,fanduel,-5.6,,,at its posted price,-114.0,,edge under 6%
-PROP,7,2026-10-21,Tanner McKee|pass_yds|215.5,Tanner McKee,PHI,DAL,pass_yds,Over,215.5,0.502,0.531,draftkings,-5.3,,,at its posted price,-113.0,,edge under 6%
-PROP,7,2026-10-24,Tanner McKee|rush_yds|9.5,Tanner McKee,PHI,DAL,rush_yds,Under,9.5,0.603,0.6,Kalshi,0.4,,,at its posted price,-150.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|completions|20.5,Tanner McKee,PHI,DAL,completions,Under,20.5,0.493,0.5,betrivers,-5.9,L,23.0,EV at -110 vs posted line,,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|completions|20.5,Tanner McKee,PHI,DAL,completions,Over,20.5,0.49,0.51,draftkings,-3.9,W,23.0,at its posted price,-104.0,,edge under 6%
+PROP,7,2026-10-24,Tanner McKee|interceptions|0.5,Tanner McKee,PHI,DAL,interceptions,Under,0.5,0.424,0.42,Kalshi,0.9,L,1.0,at its posted price,138.0,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|pass_att|33.5,Tanner McKee,PHI,DAL,pass_att,Over,33.5,0.494,0.526,betmgm,-6.1,W,35.0,at its posted price,-111,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_att|34.5,Tanner McKee,PHI,DAL,pass_att,Under,34.5,0.494,0.524,draftkings,-5.7,L,35.0,at its posted price,-110.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_att|34.5,Tanner McKee,PHI,DAL,pass_att,Over,34.5,0.491,0.524,fanatics,-6.2,W,35.0,at its posted price,-110.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_td|1.5,Tanner McKee,PHI,DAL,pass_td,Under,1.5,0.608,0.645,betrivers,-5.9,W,1.0,at its posted price,-182.0,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|pass_yds|198.5,Tanner McKee,PHI,DAL,pass_yds,Over,198.5,0.507,0.535,betrivers,-5.3,W,211.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|pass_yds|199.5,Tanner McKee,PHI,DAL,pass_yds,Over,199.5,0.48,0.481,Kalshi,-0.1,W,211.0,at its posted price,108,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|pass_yds|203.5,Tanner McKee,PHI,DAL,pass_yds,Over,203.5,0.486,0.512,betmgm,-5.2,W,211.0,at its posted price,-105,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|pass_yds|204.5,Tanner McKee,PHI,DAL,pass_yds,Over,204.5,0.495,0.524,espnbet,-5.5,W,211.0,at its posted price,-110,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_yds|209.5,Tanner McKee,PHI,DAL,pass_yds,Over,209.5,0.503,0.535,betrivers,-6.0,W,211.0,at its posted price,-115.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_yds|210.5,Tanner McKee,PHI,DAL,pass_yds,Over,210.5,0.494,0.524,fanatics,-5.7,W,211.0,at its posted price,-110.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_yds|211.5,Tanner McKee,PHI,DAL,pass_yds,Over,211.5,0.503,0.533,fanduel,-5.6,L,211.0,at its posted price,-114.0,,edge under 6%
+PROP,7,2026-10-21,Tanner McKee|pass_yds|215.5,Tanner McKee,PHI,DAL,pass_yds,Over,215.5,0.502,0.531,draftkings,-5.3,L,211.0,at its posted price,-113.0,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|rush_yds|3.5,Tanner McKee,PHI,DAL,rush_yds,Over,3.5,0.512,0.537,draftkings,-4.7,L,1.0,at its posted price,-116,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|rush_yds|4.5,Tanner McKee,PHI,DAL,rush_yds,Under,4.5,0.512,0.548,betrivers,-6.6,W,1.0,at its posted price,-121,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|rush_yds|5.5,Tanner McKee,PHI,DAL,rush_yds,Under,5.5,0.523,0.556,fanatics,-5.8,W,1.0,at its posted price,-125,,edge under 6%
+PROP,7,2026-10-26,Tanner McKee|rush_yds|6.5,Tanner McKee,PHI,DAL,rush_yds,Over,6.5,0.42,0.444,espnbet,-5.5,L,1.0,at its posted price,125,,edge under 6%
+PROP,7,2026-10-24,Tanner McKee|rush_yds|9.5,Tanner McKee,PHI,DAL,rush_yds,Under,9.5,0.603,0.6,Kalshi,0.4,W,1.0,at its posted price,-150.0,,edge under 6%
 PROP,7,2026-10-25,Ted Hurst III|rec_yds|24.5,Ted Hurst III,TB,@CAR,rec_yds,Over,24.5,0.532,0.59,Kalshi,-9.9,L,0.0,at its posted price,-144.0,,edge under 6%
 PROP,7,2026-10-24,Ted Hurst III|rec_yds|39.5,Ted Hurst III,TB,@CAR,rec_yds,Over,39.5,0.457,0.481,Kalshi,-4.9,L,0.0,at its posted price,108.0,,edge under 6%
 PROP,7,2026-10-24,Ted Hurst III|receptions|2.5,Ted Hurst III,TB,@CAR,receptions,Over,2.5,0.579,0.59,Kalshi,-1.9,L,0.0,at its posted price,-144.0,,edge under 6%
@@ -3937,6 +4002,8 @@ PROP,7,2026-10-24,Tyler Allgeier|rush_yds|29.5,Tyler Allgeier,ARI,DEN,rush_yds,O
 PROP,7,2026-10-25,Tyler Allgeier|rush_yds|31.5,Tyler Allgeier,ARI,DEN,rush_yds,Over,31.5,0.526,0.526,betmgm,0.1,L,19.0,at its posted price,-111.0,,edge under 6%
 PROP,7,2026-10-25,Tyler Allgeier|rush_yds|32.5,Tyler Allgeier,ARI,DEN,rush_yds,Over,32.5,0.53,0.531,fanduel,-0.1,L,19.0,at its posted price,-113.0,,edge under 6%
 PROP,7,2026-10-25,Tyler Allgeier|rush_yds|34.5,Tyler Allgeier,ARI,DEN,rush_yds,Over,34.5,0.526,0.554,betrivers,-5.0,L,19.0,at its posted price,-124.0,,edge under 6%
+PROP,7,2026-10-26,Tyler Goodson|rush_yds|13.5,Tyler Goodson,DAL,@PHI,rush_yds,Under,13.5,0.543,0.535,betmgm,1.6,L,38.0,at its posted price,-115,,edge under 6%
+PROP,7,2026-10-26,Tyler Goodson|rush_yds|15.5,Tyler Goodson,DAL,@PHI,rush_yds,Under,15.5,0.581,0.574,espnbet,1.2,L,38.0,at its posted price,-135,,edge under 6%
 PROP,7,2026-10-25,Tyler Higbee|rec_yds|36.5,Tyler Higbee,LAR,@LV,rec_yds,Over,36.5,0.516,0.535,betmgm,-3.6,L,14.0,at its posted price,-115.0,,edge under 6%
 PROP,7,2026-10-21,Tyler Higbee|rec_yds|37.5,Tyler Higbee,LAR,@LV,rec_yds,Over,37.5,0.508,0.522,draftkings,-2.6,L,14.0,at its posted price,-109.0,,edge under 6%
 PROP,7,2026-10-25,Tyler Higbee|rec_yds|38.5,Tyler Higbee,LAR,@LV,rec_yds,Over,38.5,0.505,0.531,fanduel,-4.8,L,14.0,at its posted price,-113.0,,edge under 6%
@@ -4019,8 +4086,109 @@ TD,7,2026-10-24,Tony Pollard|td,Tony Pollard,TEN,CLE,anytime_td,NO,0.5,0.264,0.3
 TD,7,2026-10-24,Tre Tucker|td,Tre Tucker,LV,LAR,anytime_td,YES,0.5,0.339,0.215,Kalshi,0.124,W,1,bid 0.21 ask 0.22,,1,
 TD,7,2026-10-25,Zay Flowers|td,Zay Flowers,BAL,CIN,anytime_td,NO,0.5,0.334,0.995,Kalshi,0.661,L,1,bid 0.99 ask 1.0,,1,
 TOTAL,7,2026-10-20,2026_07_CLE_TEN,,CLE@TEN,,total,OVER 37.5,37.5,42.2,37.5,DK,4.7,W,51.0,,,1,
-TOTAL,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,total,OVER 44.5,44.5,49.1,44.5,DK,4.6,,,,,1,
+TOTAL,7,2026-10-20,2026_07_DAL_PHI,,DAL@PHI,,total,OVER 44.5,44.5,49.1,44.5,DK,4.6,W,59.0,,,1,
 TOTAL,7,2026-10-20,2026_07_GB_DET,,GB@DET,,total,UNDER 53.5,53.5,49.5,53.5,DK,-4.0,W,37.0,,,1,
 TOTAL,7,2026-10-20,2026_07_LA_LV,,LAR@LV,,total,UNDER 48.5,48.5,45.4,48.5,DK,-3.1,L,56.0,,,1,
 TOTAL,7,2026-10-20,2026_07_MIA_NYJ,,MIA@NYJ,,total,OVER 38.5,38.5,45.4,38.5,DK,6.9,W,53.0,,,1,
 TOTAL,7,2026-10-20,2026_07_NE_CHI,,NE@CHI,,total,UNDER 50.5,50.5,44.9,50.5,DK,-5.6,L,54.0,,,1,
+ATS,8,2026-10-27,2026_08_BAL_BUF,,BAL@BUF,,spread,BUF -3.5,3.5,7.3,3.5,DK,3.8,,,"model spread vs market, home perspective",,1,
+ATS,8,2026-10-27,2026_08_IND_JAX,,IND@JAX,,spread,JAX -7.5,7.5,12.6,7.5,DK,5.1,,,"model spread vs market, home perspective",,1,
+ATS,8,2026-10-27,2026_08_KC_DEN,,KC@DEN,,spread,DEN +1.5,-1.5,2.5,-1.5,DK,4.0,,,"model spread vs market, home perspective",,1,
+ATS,8,2026-10-27,2026_08_PHI_WAS,,PHI@WAS,,spread,PHI +4.5,4.5,0.2,4.5,DK,-4.3,,,"model spread vs market, home perspective",,1,
+ML,8,2026-10-27,2026_08_ARI_DAL,,ARI@DAL,,moneyline,ARI,,0.358,0.285,Kalshi,0.073,,,"win probability, model vs exchange",,1,
+ML,8,2026-10-27,2026_08_IND_JAX,,IND@JAX,,moneyline,JAX,,0.825,0.735,Kalshi,0.09,,,"win probability, model vs exchange",,1,
+ML,8,2026-10-27,2026_08_KC_DEN,,KC@DEN,,moneyline,DEN,,0.573,0.465,Kalshi,0.108,,,"win probability, model vs exchange",,1,
+ML,8,2026-10-27,2026_08_LAC_LA,,LAC@LAR,,moneyline,LAC,,0.358,0.28,Kalshi,0.078,,,"win probability, model vs exchange",,1,
+ML,8,2026-10-27,2026_08_MIN_DET,,MIN@DET,,moneyline,MIN,,0.488,0.425,Kalshi,0.063,,,"win probability, model vs exchange",,1,
+ML,8,2026-10-27,2026_08_PHI_WAS,,PHI@WAS,,moneyline,PHI,,0.494,0.345,Kalshi,0.149,,,"win probability, model vs exchange",,1,
+PROP,8,2026-10-27,Amon-Ra St. Brown|rec_yds|78.5,Amon-Ra St. Brown,DET,MIN,rec_yds,Under,78.5,0.516,0.528,draftkings,-2.4,,,at its posted price,-112,,edge under 6%
+PROP,8,2026-10-27,Amon-Ra St. Brown|rec_yds|79.5,Amon-Ra St. Brown,DET,MIN,rec_yds,Under,79.5,0.532,0.556,espnbet,-4.2,,,at its posted price,-125,,edge under 6%
+PROP,8,2026-10-27,Amon-Ra St. Brown|receptions|6.5,Amon-Ra St. Brown,DET,MIN,receptions,Under,6.5,0.498,0.49,draftkings,1.7,,,at its posted price,104,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|completions|21.5,Bryce Young,CAR,@GB,completions,Under,21.5,0.537,0.531,draftkings,1.2,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|pass_att|35.5,Bryce Young,CAR,@GB,pass_att,Under,35.5,0.53,0.517,draftkings,2.6,,,at its posted price,-107,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|pass_td|1.5,Bryce Young,CAR,@GB,pass_td,Over,1.5,0.466,0.49,draftkings,-4.9,,,at its posted price,104,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|pass_yds|248.5,Bryce Young,CAR,@GB,pass_yds,Under,248.5,0.525,0.526,draftkings,-0.2,,,at its posted price,-111,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|pass_yds|250.5,Bryce Young,CAR,@GB,pass_yds,Under,250.5,0.533,0.533,fanduel,0.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Bryce Young|rush_yds|10.5,Bryce Young,CAR,@GB,rush_yds,Under,10.5,0.565,0.531,draftkings,6.6,,,at its posted price,-113,1,
+PROP,8,2026-10-27,Bryce Young|rush_yds|9.5,Bryce Young,CAR,@GB,rush_yds,Under,9.5,0.557,0.533,fanduel,4.6,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Christian Watson|rec_yds|66.5,Christian Watson,GB,CAR,rec_yds,Over,66.5,0.514,0.533,fanduel,-3.4,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Christian Watson|rec_yds|67.5,Christian Watson,GB,CAR,rec_yds,Over,67.5,0.51,0.526,draftkings,-3.1,,,at its posted price,-111,,edge under 6%
+PROP,8,2026-10-27,Christian Watson|receptions|4.5,Christian Watson,GB,CAR,receptions,Under,4.5,0.515,0.545,draftkings,-5.6,,,at its posted price,-120,,edge under 6%
+PROP,8,2026-10-27,Christian Watson|receptions|4.5,Christian Watson,GB,CAR,receptions,Over,4.5,0.465,0.485,fanduel,-4.2,,,at its posted price,106,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|rec_yds|13.5,Chuba Hubbard,CAR,@GB,rec_yds,Under,13.5,0.507,0.526,draftkings,-3.6,,,at its posted price,-111,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|receptions|2.5,Chuba Hubbard,CAR,@GB,receptions,Under,2.5,0.592,0.625,draftkings,-5.3,,,at its posted price,-167,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|receptions|2.5,Chuba Hubbard,CAR,@GB,receptions,Over,2.5,0.402,0.427,fanduel,-6.0,,,at its posted price,134,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|rush_att|15.5,Chuba Hubbard,CAR,@GB,rush_att,Over,15.5,0.502,0.531,draftkings,-5.3,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|rush_yds|69.5,Chuba Hubbard,CAR,@GB,rush_yds,Under,69.5,0.532,0.533,draftkings,-0.1,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Chuba Hubbard|rush_yds|70.5,Chuba Hubbard,CAR,@GB,rush_yds,Under,70.5,0.533,0.533,fanduel,0.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Darren Waller|rec_yds|18.5,Darren Waller,CAR,@GB,rec_yds,Under,18.5,0.504,0.519,draftkings,-3.0,,,at its posted price,-108,,edge under 6%
+PROP,8,2026-10-27,Darren Waller|receptions|2.5,Darren Waller,CAR,@GB,receptions,Under,2.5,0.606,0.593,draftkings,2.2,,,at its posted price,-146,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rec_yds|33.5,Jahmyr Gibbs,DET,MIN,rec_yds,Under,33.5,0.51,0.5,espnbet,1.9,,,at its posted price,100,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rec_yds|35.5,Jahmyr Gibbs,DET,MIN,rec_yds,Under,35.5,0.537,0.524,draftkings,2.5,,,at its posted price,-110,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rec_yds|36.5,Jahmyr Gibbs,DET,MIN,rec_yds,Under,36.5,0.547,0.533,fanduel,2.6,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|receptions|4.5,Jahmyr Gibbs,DET,MIN,receptions,Under,4.5,0.554,0.548,draftkings,1.2,,,at its posted price,-121,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rush_att|22.5,Jahmyr Gibbs,DET,MIN,rush_att,Under,22.5,0.534,0.519,draftkings,2.8,,,at its posted price,-108,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rush_yds|84.5,Jahmyr Gibbs,DET,MIN,rush_yds,Under,84.5,0.518,0.533,draftkings,-2.7,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jahmyr Gibbs|rush_yds|86.5,Jahmyr Gibbs,DET,MIN,rush_yds,Under,86.5,0.523,0.533,fanduel,-1.9,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jalen Coker|rec_yds|62.5,Jalen Coker,CAR,@GB,rec_yds,Under,62.5,0.571,0.533,fanduel,7.2,,,at its posted price,-114,,not his best edge
+PROP,8,2026-10-27,Jalen Coker|rec_yds|63.5,Jalen Coker,CAR,@GB,rec_yds,Under,63.5,0.577,0.533,draftkings,8.4,,,at its posted price,-114,,not his best edge
+PROP,8,2026-10-27,Jalen Coker|receptions|4.5,Jalen Coker,CAR,@GB,receptions,Under,4.5,0.505,0.455,fanduel,11.1,,,at its posted price,120,1,
+PROP,8,2026-10-27,Jalen Coker|receptions|5.5,Jalen Coker,CAR,@GB,receptions,Under,5.5,0.653,0.612,draftkings,6.7,,,at its posted price,-158,,not his best edge
+PROP,8,2026-10-27,Jameson Williams|rec_yds|49.5,Jameson Williams,DET,MIN,rec_yds,Over,49.5,0.505,0.535,espnbet,-5.5,,,at its posted price,-115,,edge under 6%
+PROP,8,2026-10-27,Jameson Williams|rec_yds|50.5,Jameson Williams,DET,MIN,rec_yds,Over,50.5,0.502,0.528,draftkings,-5.0,,,at its posted price,-112,,edge under 6%
+PROP,8,2026-10-27,Jameson Williams|rec_yds|51.5,Jameson Williams,DET,MIN,rec_yds,Under,51.5,0.502,0.533,fanduel,-5.8,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jameson Williams|receptions|3.5,Jameson Williams,DET,MIN,receptions,Over,3.5,0.466,0.483,draftkings,-3.6,,,at its posted price,107,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|completions|22.5,Jared Goff,DET,MIN,completions,Under,22.5,0.539,0.512,draftkings,5.3,,,at its posted price,-105,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|pass_att|34.5,Jared Goff,DET,MIN,pass_att,Under,34.5,0.556,0.539,draftkings,3.1,,,at its posted price,-117,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|pass_td|1.5,Jared Goff,DET,MIN,pass_td,Under,1.5,0.463,0.481,draftkings,-3.7,,,at its posted price,108,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|pass_yds|265.5,Jared Goff,DET,MIN,pass_yds,Under,265.5,0.561,0.531,draftkings,5.7,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|pass_yds|266.5,Jared Goff,DET,MIN,pass_yds,Under,266.5,0.576,0.556,espnbet,3.7,,,at its posted price,-125,,edge under 6%
+PROP,8,2026-10-27,Jared Goff|pass_yds|270.5,Jared Goff,DET,MIN,pass_yds,Under,270.5,0.571,0.533,fanduel,7.2,,,at its posted price,-114,1,
+PROP,8,2026-10-27,Jordan Addison|rec_yds|37.5,Jordan Addison,MIN,@DET,rec_yds,Under,37.5,0.533,0.533,fanduel,0.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jordan Addison|rec_yds|39.5,Jordan Addison,MIN,@DET,rec_yds,Under,39.5,0.539,0.522,draftkings,3.4,,,at its posted price,-109,,edge under 6%
+PROP,8,2026-10-27,Jordan Addison|receptions|3.5,Jordan Addison,MIN,@DET,receptions,Under,3.5,0.614,0.595,draftkings,3.2,,,at its posted price,-147,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|completions|21.5,Jordan Love,GB,CAR,completions,Under,21.5,0.523,0.526,draftkings,-0.5,,,at its posted price,-111,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|pass_att|35.5,Jordan Love,GB,CAR,pass_att,Under,35.5,0.538,0.539,draftkings,-0.2,,,at its posted price,-117,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|pass_td|1.5,Jordan Love,GB,CAR,pass_td,Under,1.5,0.448,0.452,draftkings,-1.1,,,at its posted price,121,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|pass_yds|258.5,Jordan Love,GB,CAR,pass_yds,Under,258.5,0.54,0.533,fanduel,1.3,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|pass_yds|261.5,Jordan Love,GB,CAR,pass_yds,Under,261.5,0.545,0.531,draftkings,2.7,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|rush_yds|4.5,Jordan Love,GB,CAR,rush_yds,Under,4.5,0.509,0.517,draftkings,-1.6,,,at its posted price,-107,,edge under 6%
+PROP,8,2026-10-27,Jordan Love|rush_yds|5.5,Jordan Love,GB,CAR,rush_yds,Under,5.5,0.533,0.533,fanduel,0.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|rec_yds|14.5,Josh Jacobs,GB,CAR,rec_yds,Over,14.5,0.514,0.533,fanduel,-3.6,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|rec_yds|15.5,Josh Jacobs,GB,CAR,rec_yds,Over,15.5,0.506,0.526,draftkings,-3.8,,,at its posted price,-111,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|receptions|2.5,Josh Jacobs,GB,CAR,receptions,Under,2.5,0.54,0.571,draftkings,-5.4,,,at its posted price,-133,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|rush_att|14.5,Josh Jacobs,GB,CAR,rush_att,Under,14.5,0.513,0.535,draftkings,-4.0,,,at its posted price,-115,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|rush_yds|57.5,Josh Jacobs,GB,CAR,rush_yds,Under,57.5,0.502,0.524,draftkings,-4.2,,,at its posted price,-110,,edge under 6%
+PROP,8,2026-10-27,Josh Jacobs|rush_yds|58.5,Josh Jacobs,GB,CAR,rush_yds,Under,58.5,0.508,0.533,fanduel,-4.7,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Justin Jefferson|rec_yds|74.5,Justin Jefferson,MIN,@DET,rec_yds,Under,74.5,0.565,0.524,draftkings,7.8,,,at its posted price,-110,1,
+PROP,8,2026-10-27,Justin Jefferson|receptions|5.5,Justin Jefferson,MIN,@DET,receptions,Under,5.5,0.53,0.515,draftkings,3.1,,,at its posted price,-106,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|completions|19.5,Kyler Murray,MIN,@DET,completions,Over,19.5,0.511,0.485,draftkings,5.3,,,at its posted price,106,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|pass_att|30.5,Kyler Murray,MIN,@DET,pass_att,Over,30.5,0.509,0.533,draftkings,-4.4,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|pass_td|1.5,Kyler Murray,MIN,@DET,pass_td,Under,1.5,0.584,0.592,draftkings,-1.4,,,at its posted price,-145,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|pass_yds|214.5,Kyler Murray,MIN,@DET,pass_yds,Over,214.5,0.51,0.535,espnbet,-4.7,,,at its posted price,-115,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|pass_yds|215.5,Kyler Murray,MIN,@DET,pass_yds,Over,215.5,0.509,0.531,draftkings,-4.0,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Kyler Murray|pass_yds|216.5,Kyler Murray,MIN,@DET,pass_yds,Over,216.5,0.508,0.533,fanduel,-4.7,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,MarShawn Lloyd|rush_att|6.5,MarShawn Lloyd,GB,CAR,rush_att,Under,6.5,0.532,0.552,draftkings,-3.6,,,at its posted price,-123,,edge under 6%
+PROP,8,2026-10-27,MarShawn Lloyd|rush_yds|18.5,MarShawn Lloyd,GB,CAR,rush_yds,Under,18.5,0.546,0.528,draftkings,3.4,,,at its posted price,-112,,edge under 6%
+PROP,8,2026-10-27,MarShawn Lloyd|rush_yds|19.5,MarShawn Lloyd,GB,CAR,rush_yds,Under,19.5,0.548,0.533,fanduel,3.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Matthew Golden|rec_yds|62.5,Matthew Golden,GB,CAR,rec_yds,Under,62.5,0.525,0.524,draftkings,0.3,,,at its posted price,-110,,edge under 6%
+PROP,8,2026-10-27,Matthew Golden|rec_yds|64.5,Matthew Golden,GB,CAR,rec_yds,Under,64.5,0.531,0.533,fanduel,-0.3,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Matthew Golden|receptions|4.5,Matthew Golden,GB,CAR,receptions,Under,4.5,0.504,0.442,draftkings,13.8,,,at its posted price,126,1,
+PROP,8,2026-10-27,Sam LaPorta|rec_yds|49.5,Sam LaPorta,DET,MIN,rec_yds,Under,49.5,0.516,0.5,espnbet,3.3,,,at its posted price,100,,edge under 6%
+PROP,8,2026-10-27,Sam LaPorta|rec_yds|51.5,Sam LaPorta,DET,MIN,rec_yds,Under,51.5,0.543,0.533,fanduel,2.0,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Sam LaPorta|rec_yds|53.5,Sam LaPorta,DET,MIN,rec_yds,Under,53.5,0.555,0.531,draftkings,4.6,,,at its posted price,-113,,edge under 6%
+PROP,8,2026-10-27,Sam LaPorta|receptions|4.5,Sam LaPorta,DET,MIN,receptions,Under,4.5,0.537,0.507,draftkings,5.8,,,at its posted price,-103,,edge under 6%
+PROP,8,2026-10-27,Savion Williams|rec_yds|21.5,Savion Williams,GB,CAR,rec_yds,Over,21.5,0.505,0.528,draftkings,-4.5,,,at its posted price,-112,,edge under 6%
+PROP,8,2026-10-27,Savion Williams|receptions|2.5,Savion Williams,GB,CAR,receptions,Under,2.5,0.548,0.561,draftkings,-2.3,,,at its posted price,-128,,edge under 6%
+PROP,8,2026-10-27,T.J. Hockenson|rec_yds|36.5,T.J. Hockenson,MIN,@DET,rec_yds,Under,36.5,0.512,0.524,espnbet,-2.2,,,at its posted price,-110,,edge under 6%
+PROP,8,2026-10-27,T.J. Hockenson|rec_yds|37.5,T.J. Hockenson,MIN,@DET,rec_yds,Under,37.5,0.529,0.533,draftkings,-0.7,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,T.J. Hockenson|receptions|4.5,T.J. Hockenson,MIN,@DET,receptions,Under,4.5,0.569,0.578,draftkings,-1.6,,,at its posted price,-137,,edge under 6%
+PROP,8,2026-10-27,Tetairoa McMillan|rec_yds|72.5,Tetairoa McMillan,CAR,@GB,rec_yds,Under,72.5,0.536,0.528,draftkings,1.5,,,at its posted price,-112,,edge under 6%
+PROP,8,2026-10-27,Tetairoa McMillan|rec_yds|73.5,Tetairoa McMillan,CAR,@GB,rec_yds,Under,73.5,0.54,0.533,fanduel,1.3,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Tetairoa McMillan|receptions|5.5,Tetairoa McMillan,CAR,@GB,receptions,Under,5.5,0.568,0.582,draftkings,-2.3,,,at its posted price,-139,,edge under 6%
+PROP,8,2026-10-27,Tucker Kraft|rec_yds|41.5,Tucker Kraft,GB,CAR,rec_yds,Under,41.5,0.512,0.533,fanduel,-3.9,,,at its posted price,-114,,edge under 6%
+PROP,8,2026-10-27,Tucker Kraft|rec_yds|43.5,Tucker Kraft,GB,CAR,rec_yds,Under,43.5,0.515,0.522,draftkings,-1.3,,,at its posted price,-109,,edge under 6%
+PROP,8,2026-10-27,Tucker Kraft|receptions|4.5,Tucker Kraft,GB,CAR,receptions,Under,4.5,0.568,0.559,draftkings,1.5,,,at its posted price,-127,,edge under 6%
+TOTAL,8,2026-10-27,2026_08_ARI_DAL,,ARI@DAL,,total,UNDER 54.5,54.5,51.3,54.5,DK,-3.2,,,,,1,
+TOTAL,8,2026-10-27,2026_08_ATL_TB,,ATL@TB,,total,UNDER 46.5,46.5,42.5,46.5,DK,-4.0,,,,,1,
+TOTAL,8,2026-10-27,2026_08_PHI_WAS,,PHI@WAS,,total,OVER 40.5,40.5,46.4,40.5,DK,5.9,,,,,1,
