@@ -273,6 +273,19 @@ def ncaa_lines(matchups):
     print(f"ncaa lines: {len(out) - 1} players with a book line · anytime TD {sum(1 for v in out.values() if isinstance(v, dict) and v['td'])} · props {sum(1 for v in out.values() if isinstance(v, dict) and v['pr'])} · as of {out['__asof__']}Z")
     return out
 
+def numer_payload():
+    """[season, week, gameday, away, home, away_score, home_score, away_qb, home_qb] for every game in game_model.csv."""
+    f = 'data/processed/game_model.csv'
+    if not os.path.exists(f): return None
+    out = []
+    for r in csv.DictReader(open(f, encoding='utf-8')):
+        def sc(v):
+            try: return int(float(v)) if v not in ('', 'nan') else None
+            except ValueError: return None
+        out.append([int(r['season']), int(r['week']), r['gameday'], r['away_team'], r['home_team'], sc(r['away_score']), sc(r['home_score']),
+                    r.get('away_qb_name') or '', r.get('home_qb_name') or ''])
+    return {'games': out}
+
 def league_config():
     """Per-league UI config embedded as J.league. NFL keeps the template's built-in team map / slates; NCAA injects its own."""
     if LEAGUE == 'nfl':
@@ -471,6 +484,7 @@ def main():
     data['liveTd'] = json.load(open(lt)) if LEAGUE == 'nfl' and os.path.exists(lt) else None   # v46: touchdowns so far this week (ESPN, markets loop)
     data['metaBT'] = json.load(open(os.path.join(REPO, 'data/processed/meta_backtest.json'))) if LEAGUE == 'nfl' and os.path.exists(os.path.join(REPO, 'data/processed/meta_backtest.json')) else None   # v42: META weights + audit
     data['cfbLines'] = ncaa_lines(data['matchups']) if LEAGUE == 'ncaa' else None   # v40: which CFB players have a book line (prop / anytime TD)
+    data['numer'] = numer_payload() if LEAGUE == 'nfl' else None   # v51: every game with its date, score and starting QBs, for the numerology backtest
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}
     data['league'] = league_config()

@@ -893,3 +893,11 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Insights = tempo & trend edges (helps / hurts), who has the field and who doesn't per slot (target / avoid with Ψ bars), hot & cold, defensive movers, best prop edges.
 - F5 Board = the Picks Board: KPI strip, type chips, best-per-player / every-line, play cards (green) and lean cards (amber → the brand engine maps #e8b100 to --k5) with model vs market, edge bar, cohort chips (this type at this edge band, graded; the market's own record), then game model vs the market, then the full ledger.
 - Black/navy clubs (BKN, SA) read as slate grey on the dark theme (vividHex) instead of invisible.
+
+## n113 · 2026-10-29 · F6 TEST → Numerology (patch_v51_numerology.py; build_dashboard numer_payload)
+- Decoder: any names / words / phrases (comma separated) in eight ciphers — English Ordinal, Full Reduction, Reverse Ordinal, Reverse Reduction, Sumerian, Jewish/Latin, Satanic, Reduction KV — with a letter strip for the selected cipher; green when a value equals one of the selected game's date numbers.
+- Date numbers for a game day: m+d+yy, m+d+y+y+y+y, m+d+20+yy, m+d, every digit, day of year, days left, m+d+yyyy, the week.
+- Connections for a chosen game: abbreviation · city · nickname · full name · starting QB (from game_model) for both sides × ciphers; green = date hit, violet = mirror (both sides carry it).
+- This week's starters decoded (QB · RB1-2 · WR1-3 · TE1) against their own game's date numbers, sorted by hits.
+- Backtest on every logged game with a score (649, 2024-26): rule "the side with more date-number hits wins" (ties = no pick) → 257-225 (53.3%) vs the home side's 52.9% — by cipher 43.9%–71.4% on small n, by name variant 51–58%. Touchdown test: scorers vs non-scorers by whether the name carries a date hit, per cipher — lifts ×0.19–×2.61 on tiny hit rates (0–7%), ×1.02 for Full Reduction on the only meaningful sample. In plain terms: nothing beats the home-side baseline past noise.
+- J.numer = [season, week, gameday, away, home, away_score, home_score, away_qb, home_qb] for every game in game_model.csv (NFL only).
