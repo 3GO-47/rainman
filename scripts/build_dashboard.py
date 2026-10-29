@@ -274,17 +274,29 @@ def ncaa_lines(matchups):
     return out
 
 def numer_payload():
-    """[season, week, gameday, away, home, away_score, home_score, away_qb, home_qb] for every game in game_model.csv."""
-    f = 'data/processed/game_model.csv'
+    """Every game 2024- from nflverse games.csv with everything a decode can hang on: date, weekday, kickoff, teams, scores, the
+    closing spread and total, the stadium (name, city, state), roof, referee, starting QBs, head coaches, rest days; plus the
+    coordinators per team-season (coaching.csv). The numerology tab's association engine runs on this."""
+    f = 'data/raw/nflverse/games.csv'
     if not os.path.exists(f): return None
+    ven = {}
+    if os.path.exists('data/raw/nfl_venues.csv'):
+        for r in csv.DictReader(open('data/raw/nfl_venues.csv', encoding='utf-8')): ven[r['stadium']] = (r['city'], r['state'])
+    def num(v, f=float):
+        try: return f(v) if v not in ('', 'nan', 'NA', None) else None
+        except ValueError: return None
     out = []
     for r in csv.DictReader(open(f, encoding='utf-8')):
-        def sc(v):
-            try: return int(float(v)) if v not in ('', 'nan') else None
-            except ValueError: return None
-        out.append([int(r['season']), int(r['week']), r['gameday'], r['away_team'], r['home_team'], sc(r['away_score']), sc(r['home_score']),
-                    r.get('away_qb_name') or '', r.get('home_qb_name') or ''])
-    return {'games': out}
+        if int(r['season']) < 2024 or r['game_type'] not in ('REG', 'WC', 'DIV', 'CON', 'SB'): continue
+        st = r.get('stadium') or ''; vc = ven.get(st, ('', ''))
+        out.append([int(r['season']), int(r['week']), r['gameday'], r['weekday'], r['gametime'], r['away_team'], r['home_team'],
+                    num(r['away_score'], lambda x: int(float(x))), num(r['home_score'], lambda x: int(float(x))), num(r['spread_line']), num(r['total_line']),
+                    st, vc[0], vc[1], r.get('roof') or '', r.get('referee') or '', r.get('away_qb_name') or '', r.get('home_qb_name') or '',
+                    r.get('away_coach') or '', r.get('home_coach') or '', num(r['away_rest'], int), num(r['home_rest'], int), num(r['div_game'], int), r['game_type']])
+    co = {}
+    if os.path.exists('data/processed/coaching.csv'):
+        for r in csv.DictReader(open('data/processed/coaching.csv', encoding='utf-8')): co[r['team'] + '|' + r['season']] = [r['hc'], r['oc'], r['dc']]
+    return {'games': out, 'coaching': co}
 
 def league_config():
     """Per-league UI config embedded as J.league. NFL keeps the template's built-in team map / slates; NCAA injects its own."""
