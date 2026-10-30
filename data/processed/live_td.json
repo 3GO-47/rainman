@@ -1,10 +1,10 @@
 {
- "pulled": "2026-10-29T23:21Z",
+ "pulled": "2026-10-30T00:46Z",
  "season": 2026,
  "week": 8,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "CAR@GB": "pre",
+  "CAR@GB": "in",
   "BAL@BUF": "pre",
   "TEN@CIN": "pre",
   "ARI@DAL": "pre",
@@ -21,8 +21,8 @@
  },
  "scores": {
   "CAR@GB": [
-   0,
-   0
+   3,
+   6
   ],
   "BAL@BUF": [
    0,
@@ -77,5 +77,14 @@
    0
   ]
  },
- "plays": []
+ "plays": [
+  {
+   "game": "CAR@GB",
+   "q": 1,
+   "clock": "5:08",
+   "team": "GB",
+   "player": "Tucker Kraft",
+   "how": "rec"
+  }
+ ]
 }
