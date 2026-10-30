@@ -910,3 +910,8 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Decode sheet per game: every match with that association's record (winner / cover / over), mirrors, the lean = Σ (hit − .5) × min(1, n/60) over matched non-proxy associations with ≥ minN games.
 - Walk-forward: associations fit on prior seasons only → 2025: 90-74 (54.9%, home base 53.5%), strong 57-39; 2026: 48-46 (51.1%), strong 41-40. Leaderboard shows expected-by-chance counts past |z| 2 and 3.
 - rainman.html is 10.64 MB now — over the browser-upload bridge limit; committed locally, the markets loop's push carries it.
+
+## n115 · 2026-10-30 · F6 TEST → Numerology Takeaways (patch_v53_numtake.py)
+- The conclusions tab: KPI strip (this season's lean on winners / strong calls / ATS, graded as games land with associations fit on prior seasons; last week; last season out of sample), a written verdict, this week's call on every game (lean side, strength, the associations that pushed it with their records, "fade" when a losing association on the other side is what pushed), the strong plays written out, what has held up (55%+ overall, never under 50% in any season with 10+ games, 4+ clubs) vs what to ignore (≤42%, and the proxies named), last week reviewed, the players (2+ hits).
+- Engine: per-season splits (t.by) added to numAssoc. nflverse LA → LAR in numer_payload.
+- Week 7 reviewed: the lean went 8-2 (walk-forward fit). Season: 46-42 winners (52.3%, home side 49.1%), 42-43 ATS. 2025 out of sample 90-74.

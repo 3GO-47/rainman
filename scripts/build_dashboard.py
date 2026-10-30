@@ -289,7 +289,8 @@ def numer_payload():
     for r in csv.DictReader(open(f, encoding='utf-8')):
         if int(r['season']) < 2024 or r['game_type'] not in ('REG', 'WC', 'DIV', 'CON', 'SB'): continue
         st = r.get('stadium') or ''; vc = ven.get(st, ('', ''))
-        out.append([int(r['season']), int(r['week']), r['gameday'], r['weekday'], r['gametime'], r['away_team'], r['home_team'],
+        fix = {'LA': 'LAR', 'WSH': 'WAS', 'JAC': 'JAX'}
+        out.append([int(r['season']), int(r['week']), r['gameday'], r['weekday'], r['gametime'], fix.get(r['away_team'], r['away_team']), fix.get(r['home_team'], r['home_team']),
                     num(r['away_score'], lambda x: int(float(x))), num(r['home_score'], lambda x: int(float(x))), num(r['spread_line']), num(r['total_line']),
                     st, vc[0], vc[1], r.get('roof') or '', r.get('referee') or '', r.get('away_qb_name') or '', r.get('home_qb_name') or '',
                     r.get('away_coach') or '', r.get('home_coach') or '', num(r['away_rest'], int), num(r['home_rest'], int), num(r['div_game'], int), r['game_type']])
