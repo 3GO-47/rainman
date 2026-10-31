@@ -930,3 +930,10 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n118 · 2026-10-31 · page weight: columnized payloads (build_dashboard columnize + template rehydrate)
 - Every list-of-dicts payload with 200+ rows is written once-keys/columns ({__cols, rows}) and rehydrated into objects on load, one line after `const J = __DATA__` — no consumer changes. rainman.html 11.5 MB → 8.4 MB, back under the 10 MB browser-upload cap; all 40 tabs render with zero console errors. (The NCAA build shares the code.)
 - TD Usage + Numerology Takeaways uploaded directly instead of waiting for the loop.
+
+## n119 · 2026-10-31 · v56: META all-in composite + red zone everywhere
+- META (F2): one 0–100 score folding Ψ .15 · RZ .16 · ATD .12 · ENV .10 · TD .09 · SCH .08 · FORM .07 · H2H .07 · MKT .06 · SNP .05 · 1st .05 (percentiles within position among the week's slot owners; split signals / missing data shade toward 50; Q pulls 15% toward 50). Backtest Ψ/FORM/ENV recipe kept as the second mode. Layout: position tabs + one wide table (five squeezed columns gone). New RZ/SNP/MKT/1st columns, lead cards, reasons.
+- META v2: RZ (red-zone score) and SNP boards join the fold; META row = all-in score.
+- Red zone wired into: Player Board + TD Board (xTD, RZ%, GL+EZ columns, sortable, shaded within position), Player Explorer (columns + chip on the card), projections (rzX ±12% multiplier, shown in the tip → Overview edge board, PROJ columns), Insights (red-zone panel: engines, share, rising/fading, softest/stingiest end zones). Legacy #board (hidden view) also carries xTD/RZ%.
+- Matching: nflverse name normalised + team, name-only fallback; 247/256 RB/WR/TE slot owners matched (misses = moved/injured bodies with no touches in the window).
+- scripts/patch_v56_meta.py (rerunnable, guarded). Proofed rainman.html + ncaa.html: 39 tabs each, 0 errors, 0 overflow at 2000px. NCAA has no rz layer → columns hide, chip/panel skip.

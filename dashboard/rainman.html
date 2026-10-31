@@ -1215,6 +1215,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
  #devFrame{height:calc(100vh - 150px)!important}
 }
 
+/* v56 */ .rzc{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;margin-left:4px;white-space:nowrap} .mtone{max-height:72vh;overflow:auto} .mtone table.lgt{width:100%} .mtone th.nw,.mtone td.nw{opacity:.55}
 </style><script>(function(){try{var t=localStorage.getItem('rm-theme')||'dark';document.documentElement.dataset.theme=['dark','light','rain'].indexOf(t)<0?'dark':t}catch(e){document.documentElement.dataset.theme='dark'}})();</script><link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlJBSU5NQU4iPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgcng9IjE0IiBmaWxsPSIjMmI2YmZmIi8+PHN2ZyB4PSI3IiB5PSI3IiBjbGFzcz0iIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IktlbGx5IGNvdW50aW5nIj48cGF0aCBkPSJNMzIgNCBDMzIgNCAxNC41IDI2LjUgMTQuNSAzOSBhMTcuNSAxNy41IDAgMSAwIDM1IDAgQzQ5LjUgMjYuNSAzMiA0IDMyIDQgWiIgZmlsbD0iI2ZmZmZmZiIvPjxyZWN0IHg9IjIwLjQiIHk9IjM2LjIiIHdpZHRoPSIyMy4yIiBoZWlnaHQ9IjguOCIgcng9IjQuNCIgZmlsbD0iIzJiNmJmZiIvPjxwYXRoIGQ9Ik0yNS42IDQ4LjYgcTYuNCA1LjYgMTIuOCAwIiBzdHJva2U9IiMyYjZiZmYiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIGZpbGw9Im5vbmUiLz48ZyB0cmFuc2Zvcm09InJvdGF0ZSgxNCA1MCA1MCkiPjxyZWN0IHg9IjQwLjUiIHk9IjQwLjUiIHdpZHRoPSIxOSIgaGVpZ2h0PSIxOSIgcng9IjMuNCIgZmlsbD0iI2ZmZmZmZiIvPjx0ZXh0IHg9IjUwIiB5PSI1My40IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMmI2YmZmIiBmb250LWZhbWlseT0iI2U2ZTZlOCIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9IjcwMCI+KzE8L3RleHQ+PC9nPjwvc3ZnPjwvc3ZnPg==">
 </head><body>
 <div id="legacyNav" hidden><nav>
@@ -1509,7 +1510,7 @@ const SECTIONS=[
    {id:'tdbx',label:'TD Board',desc:'the Player Board built on touchdowns only: what the opponent allows per game to his slot in TDs with its rank, his own TDs per game, and the anytime-TD model',c:'players',sub:'tdbx'},
    {id:'lab',label:'Player Board',desc:'every starter this week: his own averages (season · 2024-26) beside what the opponent allows to his slot, DvP ranks — filter and sort any column',c:'players',sub:'lab'},
    {id:'h2hp',label:'H2H Board',desc:'the Player Board with the opponent block replaced by what every starter has actually done against this week\'s opponent — his own per-game averages in every prior meeting we have logs for, four columns by position',c:'players',sub:'h2hp'},
-   {id:'meta',label:'META',desc:'every board at once: the TD Board, Player Grid, H2H Grid, Scheme and the anytime-TD model folded into one score per starter, in the TD Grid\'s five columns \u2014 every position together, then QB, RB, WR and TE \u2014 with the week\'s best spot on each signal across the top',c:'test',sub:'meta'},
+   {id:'meta',label:'META',desc:'every signal, one score: the opponent\'s field (Ψ, TD allowed, scheme + missing men), his red-zone usage, the anytime-TD and first-TD models, implied points, form, H2H, snaps and the market folded into one 0\u2013100 per starter with declared weights \u2014 one table with position tabs, the week\'s best spot on each signal across the top',c:'test',sub:'meta'},
    {id:'metav2',nfl:true,label:'META v2',desc:'the boards compiled: every board that ranks this week\'s players (TD Grid, Player Board, H2H, TD Picks, First TD, Weeklies, categories, META, ENV, FORM, scheme, market) as a percentile within his position, folded into one CONSENSUS score with how many boards put him in their top 10% \u2014 the players high everywhere rise',c:'test',sub:'metav2'},
    {id:'metaprop',nfl:true,label:'METAPROP',desc:'META for player props: every posted prop line with the defense-vs-position rank for that exact stat, the prop model, his hit rate over the line, his average and his head-to-head folded into one over / under score — META\'s five columns, data sets and filters',c:'test',sub:'metaprop'}]},
  {id:'players',fk:'F3',label:'Players',items:[
@@ -1576,8 +1577,8 @@ const INTRO={
  numer:{what:'Gematria, tested instead of trusted. Every game carries numbers (its date eleven ways, the week, the kickoff, the spread, the total, the rest days) and names (both cities, nicknames, full names, QBs, head coaches, coordinators, the matchup phrase, the stadium and its city and state, the referee, the weekday, the month). The engine decodes every name in eight ciphers, finds every place a name lands on a number, and grades every such association on every game since 2024 \u2014 winner, cover, over \u2014 then folds a game\'s matches into a lean and walks that lean forward season by season.',how:['English Ordinal a=1\u2026z=26 \u00b7 Full Reduction 1\u20139 \u00b7 Reverse = z=1 \u00b7 Sumerian = ordinal \u00d7 6 \u00b7 Jewish/Latin \u00b7 Satanic = ordinal + 35 \u00b7 KV = reduction keeping 11 and 22','z = standard deviations from a coin; with thousands of associations tested, a few past |z| 2 are expected by chance \u2014 the leaderboard says how many, the walk-forward table is the honest grade','a decode sheet shows every match the chosen game carries with that association\'s own record \u00b7 a mirror = a value both sides carry']},
  bestpicks:{what:'The week\'s plays in one place.',how:['the card = every frozen pick (game plays, props, anytime TDs): model vs market at freeze, edge, result as it lands','anytime TD = the TD Picks board\'s best; agree = the other boards that also have him high (First TD, Weeklies, META v2) — two or more agreeing is the strongest spot on the page','matchup plays = the backtested META recipe (expected to beat his own baseline); avoid = bottom-band META with a cold TD model · the week picker and the global bar apply']},
  wkres:{what:'What the categories say — and whether they were right.',how:['top: this week\'s players ranked by the RELIABLE categories they carry (each weighted by how far above the field it hits this season) — the names at the top are the ones the categories agree on; ✓ / ✗ land as games finish','then every category ranked: verdict (trust / lean / noise / fade), season hit rate and × the field, weeks beaten, who carries it this week and how many scored — click a row for everyone, a chip to filter the page','click categories to filter — any of / all of — or click a chip in a row; season chips, the week picked up top (or every graded week, or the slate ahead), scored / blanked, slot set, minimum signal count, search','every column sorts; the global bar (pos · team · roster) applies']},
- metav2:{what:'The boards compiled.',how:['every board that ranks this week\'s players, side by side, each cell the board\'s own number shaded by where he sits among his position (hover for the percentile): TD Grid, Player Board Ψ, H2H, TD Picks, First TD, Weeklies, categories, META, ENV, FORM, scheme, market edge · position tabs and lens chips re-rank the table','CONS folds them (mean · top-10 count · geometric) and shrinks toward 50 when few boards have him · T10 / T25 = how many boards put him in their top 10% / top quarter — the players high everywhere rise, one loud board cannot carry a man alone','board chips drop a board from the fold; hover a CONS cell for every board, a board cell for the raw number']},
- meta:{what:'Every board at once.',how:['META = one score, 0–100 — 100 = the softest spot; its recipe is what the walk-forward backtest picked (Ψ 56% · FORM 34% · ENV 10% — the other columns are reads, not weights) · hover a META cell for the breakdown, the backtest chip for the audit','ENV = his team\'s implied points from the line · FORM = his opportunities over the last two games vs his season rate','TD and Ψ = the opponent\'s rank of 32, 1 = allows the most · ATD = the model\'s chance he scores · H2H = his own PPR vs this opponent, ▲ / ▼ vs his norm · SCH = the defense\'s style edge for his slot','lens chips re-rank every column at once; the data-set select (2024 · 2025 · 2026 · combined · adjusted · μ) drives TD, Ψ and META']},
+ metav2:{what:'The boards compiled.',how:['every board that ranks this week\'s players, side by side, each cell the board\'s own number shaded by where he sits among his position (hover for the percentile): TD Grid, Player Board Ψ, H2H, TD Picks, First TD, Weeklies, categories, META (all-in), red zone, snaps, ENV, FORM, scheme, market edge · position tabs and lens chips re-rank the table','CONS folds them (mean · top-10 count · geometric) and shrinks toward 50 when few boards have him · T10 / T25 = how many boards put him in their top 10% / top quarter — the players high everywhere rise, one loud board cannot carry a man alone','board chips drop a board from the fold; hover a CONS cell for every board, a board cell for the raw number']},
+ meta:{what:'Every signal, one score.',how:['META = one score, 0–100 (100 = the softest spot) folding EVERY signal the dash gathers for him: Ψ · red zone · the anytime-TD model · implied points · TD allowed · scheme + missing men · form · H2H · the market · snaps · first-TD chance — declared weights (Ψ 15 · RZ 16 · ATD 12 · ENV 10 · TD 9 · SCH 8 · FORM 7 · H2H 7 · MKT 6 · SNP 5 · 1st 5), each a percentile within his position; the backtest\'s Ψ/FORM/ENV recipe is the second mode · hover a META cell for the breakdown','ENV = his team\'s implied points from the line · FORM = his opportunities over the last two games vs his season rate','TD and Ψ = the opponent\'s rank of 32, 1 = allows the most · ATD = the model\'s chance he scores · RZ = his red-zone usage (xTD a game shown; share, goal-line + end-zone looks and the opponent\'s red-zone TD rate in the shade) · H2H = his own PPR vs this opponent, ▲ / ▼ vs his norm · SCH = the defense\'s style edge for his slot · MKT = EV vs the best anytime-TD price · SNP = snap share · 1st = first-TD chance','position tabs pick the table; lens chips re-rank it; the data-set select (2024 · 2025 · 2026 · combined · adjusted · μ) drives TD, Ψ and META']},
  matrix:{what:'All 32 defenses against every position slot in one heatmap. Click a cell for that defense\'s per-stat ranks and raw averages.',how:['green = allows the most to that slot (best matchup), red = the least','toggle current season, prior seasons or the combined blend']},
  lab:{what:'Every starter this week in one sortable list: his own per-game averages (this season, and cumulative 2024–26) beside what his opponent allows to his slot, with the opponent\'s rank in every stat.',how:['rank 1 of 32 = the defense allows the most to that slot (best matchup)','▲ / ▼ next to an average = the opponent allows more / less than the player averages','every column sorts; position, depth, injury, college, slate, game and team filters narrow the list']},
  overview:{what:'The week at a glance: the slate with lines, the standings, who leads the league, and every defense ranked by how much it gives up to each position.',how:['green = good for the offense / fantasy player, red = bad','rank 1 of 32 = that defense allows the MOST to that slot','μ = average rank across the slots','click a game tile to open its matchup, a defense to open its detail']},
@@ -1910,7 +1911,7 @@ function lab(){const labLive=new Set(TD_SLOTS);
       const avgS=stats.map(c=>avgOf(Lc,c)),avgC=stats.map(c=>avgOf(L,c));
       const uMap=a=>{const o=UCOLS.map(()=>null);stats.forEach((c,i)=>{const k=ucol(c);if(k>=0)o[k]=a[i]});return o};
       return {...u,college:csort(u.player),oppRaw,opp,statset:stats,heads:LABDEF[u.pos].heads,avgS,avgC,gpS:Lc.length,gpC:L.length,uS:uMap(avgS),uC:uMap(avgC),kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
-        snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,pr,proj:pr?pr.p:null,
+        rz:rzOf(u),snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,sch:(e=>e?e.idx:null)(opp?schemeEdge(opp,u.grp):null),cv:opp?conv(u.player,u.team,opp,u.grp,wk):null,pr,proj:pr?pr.p:null,
         ranks:stats.map(c=>d?d.stats[c].rank:null),
         raws:stats.map(c=>d?d.stats[c].avg:null),
         uR:(()=>{const a=UCOLS.map(()=>null);stats.forEach((c,i)=>{const k=ucol(c);if(k>=0&&d)a[k]=d.stats[c].rank});return a})(),
@@ -1937,6 +1938,7 @@ function lab(){const labLive=new Set(TD_SLOTS);
       else if(sortK.startsWith('x')){const i=+sortK.slice(1),k=AV==='S'?'uS':'uC';x=a[k][i]==null?(sortA?1e9:-1):a[k][i];y=b[k][i]==null?(sortA?1e9:-1):b[k][i]}
       else if(sortK==='gp'){const k=AV==='S'?'gpS':'gpC';x=a[k];y=b[k]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
+      else if(/^rz[xsg]$/.test(sortK)){x=rzSort(a,sortK);y=rzSort(b,sortK)}
       else if(sortK==='snp'||sortK==='tsh'||sortK==='sch'||sortK==='proj'){x=a[sortK]==null?-1:a[sortK];y=b[sortK]==null?-1:b[sortK]}
       else if(sortK==='cv'){x=a.cv?-a.cv.s:99;y=b.cv?-b.cv.s:99}
       else {x=a[sortK]||'';y=b[sortK]||''}
@@ -1944,14 +1946,14 @@ function lab(){const labLive=new Set(TD_SLOTS);
     const common=`<th data-k="player">Player</th><th data-k="team">Tm</th>${IS_NFL?'<th data-k="college" title="final college · logo, conference badge; tint = tier (gold power-4 · teal G5 · slate FCS · magenta small school)">College</th>':''}${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
       <th data-k="opp">Opp</th><th data-k="kick">Kick</th>
       ${IS_NFL?`<th data-k="snp" title="season-to-date offensive snap share (${USG._se}) · arrow = last game vs season">snp%</th><th data-k="tsh" title="season-to-date share of team targets (${USG._se})">tgt%</th>`:''}`;
-    const tail=`<th class="md" data-k="psi" title="mean of the opponent's ranks across this slot's stats · 1 = softest">&Psi;</th><th class="md" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th class="md" data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th><th class="md" data-k="proj" title="projected PPR (Big Board model)">PROJ</th>`;
+    const tail=`<th class="md" data-k="psi" title="mean of the opponent's ranks across this slot's stats · 1 = softest">&Psi;</th><th class="md" data-k="cv" title="Ψ+ conviction 0-100: DvP Ψ shrunk by defense trust + scheme edge + game environment + role">&Psi;+</th><th class="md" data-k="sch" title="scheme edge: what the opponent's scheme family concedes to this slot vs league (2024-25 charting)">sch</th><th class="md" data-k="proj" title="projected PPR (Big Board model)">PROJ</th>${RZ_TH}`;
     const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<td class="plink" data-p="${u.player}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td>${IS_NFL?`<td>${ccell(u.player)}</td>`:''}${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10,u.dslot||u.slot)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}${trendGlyph(u)}</td>
       <td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
       ${IS_NFL?`<td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.ln||u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td>`:''}`};
-    const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${convBadge(u.cv)}</td><td class="md">${u.opp?edgeChip(u.opp,u.grp):'—'}</td><td class="md" title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>`;
+    const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${convBadge(u.cv)}</td><td class="md">${u.opp?edgeChip(u.opp,u.grp):'—'}</td><td class="md" title="${u.pr?esc(u.pr.tip):''}">${u.pr?`<b>${u.pr.p.toFixed(1)}</b> <span class="mini">${u.pr.floor.toFixed(0)}-${u.pr.ceil.toFixed(0)}</span>`:'—'}</td>${rzCells(u)}`;
     const oppCell=(v,r,c)=>v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(decOf(c))}</span>${badge(r)}`;
-    const nCommon=(single?8:9)-(IS_NFL?0:3);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${n}" class="op">opponent allows/game to position · rank of ${NT} · ${src}</th><th colspan="${k}" class="pa">player average/game · <b>${AV==='S'?spanS:spanC}</b> <span>· small = ${AV==='S'?spanC:spanS}</span></th><th colspan="4" class="md">model</th></tr>`;
+    const nCommon=(single?8:9)-(IS_NFL?0:3);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${n}" class="op">opponent allows/game to position · rank of ${NT} · ${src}</th><th colspan="${k}" class="pa">player average/game · <b>${AV==='S'?spanS:spanC}</b> <span>· small = ${AV==='S'?spanC:spanS}</span></th><th colspan="${4+(RZ?3:0)}" class="md">model · red zone</th></tr>`;
     let html;
     if(single){
       const heads=LABDEF[single].heads;
@@ -2025,7 +2027,7 @@ function tdLab(){const tdxLive=new Set(TD_SLOTS);
       const ranks=cols.map(c=>d&&d.stats[c]?d.stats[c].rank:null),raws=cols.map(c=>d&&d.stats[c]?d.stats[c].avg:null);
       const psiV=ranks.some(r=>r!=null)?mean(ranks.filter(r=>r!=null)):null;const t=tdOf(u);
       return {...u,college:csort(u.player),oppRaw,opp,cols,avgS,avgC,ranks,raws,gpS:Lc.length,gpC:L.length,psi:psiV,kick:gm?slateChip(gm[GM.slate]):'<span class="dim">—</span>',kickord:gm?SLATE_ORDER.indexOf(gm[GM.slate]):99,
-        snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,atd:t&&t.p_model!=null?+t.p_model:null,fair:t&&t.fair!=null?+t.fair:null,price:t&&t.price!=null?+t.price:null,ev:t&&t.ev!=null?+t.ev:null,book:t&&t.book?t.book:'',
+        rz:rzOf(u),snp:ug.snp==null?null:ug.snp,tsh:ug.tsh==null?null:ug.tsh,atd:t&&t.p_model!=null?+t.p_model:null,fair:t&&t.fair!=null?+t.fair:null,price:t&&t.price!=null?+t.price:null,ev:t&&t.ev!=null?+t.ev:null,book:t&&t.book?t.book:'',
         uR:[0,1,2].map(k=>{const i=cols.findIndex((c,i2)=>ucol(u.pos,i2)===k);return i>=0?ranks[i]:null}),uV:[0,1,2].map(k=>{const i=cols.findIndex((c,i2)=>ucol(u.pos,i2)===k);return i>=0?raws[i]:null}),
         uS:[0,1,2].map(k=>{const i=cols.findIndex((c,i2)=>ucol(u.pos,i2)===k);return i>=0?avgS[i]:null}),uC:[0,1,2].map(k=>{const i=cols.findIndex((c,i2)=>ucol(u.pos,i2)===k);return i>=0?avgC[i]:null})}})}
   function render(){
@@ -2040,6 +2042,7 @@ function tdLab(){const tdxLive=new Set(TD_SLOTS);
       else if(sortK.startsWith('x')){const i=+sortK.slice(1),k=AV==='S'?'uS':'uC';x=a[k][i]==null?miss:a[k][i];y=b[k][i]==null?miss:b[k][i]}
       else if(sortK==='gp'){const k=AV==='S'?'gpS':'gpC';x=a[k];y=b[k]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
+      else if(/^rz[xsg]$/.test(sortK)){x=rzSort(a,sortK);y=rzSort(b,sortK)}
       else if(['snp','tsh','atd','fair','price','ev'].includes(sortK)){x=a[sortK]==null?miss:a[sortK];y=b[sortK]==null?miss:b[sortK]}
       else{x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
@@ -2048,13 +2051,13 @@ function tdLab(){const tdxLive=new Set(TD_SLOTS);
     const rowCommon=u=>{const inj=u.inj==='0'?' <span class="inj0">Q</span>':u.inj==='-1'?' <span class="injm1">OUT</span>':'';
       return `<td class="plink" data-p="${esc(u.player)}">${esc(u.player)}${inj}</td><td>${tcell(u.team)}</td>${IS_NFL?`<td>${ccell(u.player)}</td>`:''}${single?'':`<td style="color:${POSC[u.pos]}">${posIcon(u.pos,10,u.dslot||u.slot)} ${u.pos}</td>`}<td>${slotchip(u.dslot)}${trendGlyph(u)}</td><td>${oppcell(u.oppRaw)}</td><td>${u.kick}</td>
       ${IS_NFL?`<td class="mini">${u.snp==null?'—':(100*u.snp).toFixed(0)+'%'}${usageArrow(u.ln||u.player)}</td><td class="mini">${u.tsh==null?'—':(100*u.tsh).toFixed(0)+'%'}</td>`:''}`};
-    const tail=`<th class="md" data-k="psi" title="mean of the opponent's TD ranks for this slot · 1 = softest end zone">&Psi;</th><th class="md" data-k="atd" title="model chance he scores a touchdown this week">ATD</th><th class="md" data-k="fair" title="the American price that chance is worth">fair</th><th class="md" data-k="price" title="best posted anytime-TD price — book, or the exchange YES ask (Polymarket / Kalshi); hover a price for its source">price</th><th class="md" data-k="ev" title="model edge on the posted price, in %">EV</th>`;
-    const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${u.atd==null?'<span class="dim">—</span>':`<b>${(100*u.atd).toFixed(0)}%</b>`}</td><td class="md">${u.fair==null?'<span class="dim">—</span>':mlTxt(u.fair)}</td><td class="md" title="${esc(u.book||'')}">${u.price==null?'<span class="dim">—</span>':`${mlTxt(u.price)} <span class="mini">${/polymarket/i.test(u.book||'')?'Poly':/kalshi/i.test(u.book||'')?'Kal':esc((u.book||'').slice(0,4))}</span>`}</td><td class="md">${u.ev==null?'<span class="dim">—</span>':`<span class="${u.ev>0?'rise':u.ev<0?'fall':''}">${u.ev>0?'+':''}${u.ev.toFixed(1)}%</span>`}</td>`;
+    const tail=`<th class="md" data-k="psi" title="mean of the opponent's TD ranks for this slot · 1 = softest end zone">&Psi;</th><th class="md" data-k="atd" title="model chance he scores a touchdown this week">ATD</th><th class="md" data-k="fair" title="the American price that chance is worth">fair</th><th class="md" data-k="price" title="best posted anytime-TD price — book, or the exchange YES ask (Polymarket / Kalshi); hover a price for its source">price</th><th class="md" data-k="ev" title="model edge on the posted price, in %">EV</th>${RZ_TH}`;
+    const rowTail=u=>`<td class="md">${psi(u.psi)}</td><td class="md">${u.atd==null?'<span class="dim">—</span>':`<b>${(100*u.atd).toFixed(0)}%</b>`}</td><td class="md">${u.fair==null?'<span class="dim">—</span>':mlTxt(u.fair)}</td><td class="md" title="${esc(u.book||'')}">${u.price==null?'<span class="dim">—</span>':`${mlTxt(u.price)} <span class="mini">${/polymarket/i.test(u.book||'')?'Poly':/kalshi/i.test(u.book||'')?'Kal':esc((u.book||'').slice(0,4))}</span>`}</td><td class="md">${u.ev==null?'<span class="dim">—</span>':`<span class="${u.ev>0?'rise':u.ev<0?'fall':''}">${u.ev>0?'+':''}${u.ev.toFixed(1)}%</span>`}</td>${rzCells(u)}`;
     const oppCell=(v,r)=>v==null?'<span class="dim">·</span>':`<span class="ov">${(+v).toFixed(2)}</span>${badge(r)}`;
     const avgCell=(sv,cv,o)=>{const big=AV==='S'?sv:cv,sm=AV==='S'?cv:sv;if(big==null&&sm==null)return '<span class="dim">—</span>';const f=v=>v==null?'—':(+v).toFixed(2);
       const ar=o!=null&&big!=null?(o>big+1e-9?'<i class="pa-up" title="opponent allows more than he scores">▲</i>':o<big-1e-9?'<i class="pa-dn" title="opponent allows less than he scores">▼</i>':''):'';return `<b>${f(big)}</b>${ar}<span class="mini"> ${f(sm)}</span>`};
     const gpCell=u=>`<span class="mini"><b>${AV==='S'?u.gpS:u.gpC}</b> · ${AV==='S'?u.gpC:u.gpS}</span>`;
-    const nCommon=(single?8:9)-(IS_NFL?0:3);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${n}" class="op">opp allows/game · TD · rank of ${NT}</th><th colspan="${k}" class="pa">player avg/game · TD · <b>${AV==='S'?spanS:spanC}</b> <span>· sm = ${AV==='S'?spanC:spanS}</span></th><th colspan="5" class="md">ATD model</th></tr>`;
+    const nCommon=(single?8:9)-(IS_NFL?0:3);const grpRow=(n,k)=>`<tr class="grp"><th colspan="${nCommon}" class="g0">player</th><th colspan="${n}" class="op">opp allows/game · TD · rank of ${NT}</th><th colspan="${k}" class="pa">player avg/game · TD · <b>${AV==='S'?spanS:spanC}</b> <span>· sm = ${AV==='S'?spanC:spanS}</span></th><th colspan="${5+(RZ?3:0)}" class="md">ATD model · red zone</th></tr>`;
     let html;
     if(single){const fs=TDX_COLS[single];
       html=`<table class="lab2"><thead>${grpRow(fs.length,fs.length+1)}<tr>${common}
@@ -2606,8 +2609,8 @@ function player(){
       return {u,gp:Lc.length,ppr:Lc.length?mean(Lc.map(l=>l[LOG.fppr])):null,l5:L5.length?mean(L5.map(l=>l[LOG.fppr])):null,snp:g.snp,tsh:g.tsh,o:oppFor(u.team,wk)}}).filter(r=>r.gp||r.l5!=null);
     const tbl=p=>{const R=rows.filter(r=>r.u.pos===p).sort((a,b)=>(b.ppr??-1)-(a.ppr??-1));if(!R.length)return '';
       return `<div class="panel"><h3 style="color:${POSC[p]}">${posIcon(p,12)} ${p} <span class="f">starters · PPR points per game this season · L5 = last five games · click a name to open him</span></h3>
-        <table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>wk ${wk}</th><th>GP</th><th>PPR/g</th><th>L5</th><th>snap%</th><th>tgt%</th><th title="this week's opponent's field for his slot (combined DvP Ψ, 1 = softest)">opp Ψ</th><th>form</th></tr></thead><tbody>
-        ${R.map(r=>`<tr><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${r.gp}</td><td><b>${r.ppr==null?'—':r.ppr.toFixed(1)}</b></td><td>${r.l5==null?'—':r.l5.toFixed(1)}</td><td class="mini">${r.snp!=null?(100*r.snp).toFixed(0)+'%':''}</td><td class="mini">${r.tsh!=null&&p!=='QB'?(100*r.tsh).toFixed(0)+'%':''}</td><td>${(()=>{const o=String(r.o||'').replace('@','');const d=J.dvp.combined&&J.dvp.combined[o];const v=d&&d.comps?d.comps[r.u.slot==='QB1'?'QB':r.u.slot]:null;return v==null?'<span class="dim">—</span>':psi(v)})()}</td><td>${sparkWave((PLOGS[r.u.ln||r.u.player]||[]).slice(-8).map(l=>l[LOG.fppr]),POSC[p],70,16)}</td></tr>`).join('')}</tbody></table></div>`};
+        <table><thead><tr><th>player</th><th>tm</th><th>slot</th><th>wk ${wk}</th><th>GP</th><th>PPR/g</th><th>L5</th><th>snap%</th><th>tgt%</th><th title="red zone: expected touchdowns a game, his team's last 5 games">xTD</th><th title="red zone: his share of his team's red-zone plays, last 5 games">RZ%</th><th title="this week's opponent's field for his slot (combined DvP Ψ, 1 = softest)">opp Ψ</th><th>form</th></tr></thead><tbody>
+        ${R.map(r=>`<tr><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.slot)}</td><td>${oppcell(r.o)}</td><td class="mini">${r.gp}</td><td><b>${r.ppr==null?'—':r.ppr.toFixed(1)}</b></td><td>${r.l5==null?'—':r.l5.toFixed(1)}</td><td class="mini">${r.snp!=null?(100*r.snp).toFixed(0)+'%':''}</td><td class="mini">${r.tsh!=null&&p!=='QB'?(100*r.tsh).toFixed(0)+'%':''}</td>${(z=>z?`<td title="${esc(rzTip(z,r.u))}"><span class="badge" style="${rzShade(r.u,'xtdg',z.xtdg)}">${z.xtdg.toFixed(2)}</span></td><td class="mini">${z.rz_opp_share==null?'—':Math.round(100*z.rz_opp_share)+'%'}</td>`:'<td class="dim">·</td><td class="dim">·</td>')(rzOf(r.u))}<td>${(()=>{const o=String(r.o||'').replace('@','');const d=J.dvp.combined&&J.dvp.combined[o];const v=d&&d.comps?d.comps[r.u.slot==='QB1'?'QB':r.u.slot]:null;return v==null?'<span class="dim">—</span>':psi(v)})()}</td><td>${sparkWave((PLOGS[r.u.ln||r.u.player]||[]).slice(-8).map(l=>l[LOG.fppr]),POSC[p],70,16)}</td></tr>`).join('')}</tbody></table></div>`};
     $('#pOut').innerHTML=`<p class="note">type a name above or click any player anywhere on the site</p><div class="grid2">${['QB','RB'].map(tbl).join('')}</div><div class="grid2">${['WR','TE'].map(tbl).join('')}</div>`;
     sortableAll($('#pOut'));logoize($('#pOut'))};
   $('#pIn').onchange=()=>{
@@ -2622,7 +2625,7 @@ function player(){
     const mu=mean(ppr),sd=stdev(ppr);
     const sch=(J.sched26[dc.team]||[]).map((o,i)=>({wk:i+1,o})).filter(x=>x.o!=='BYE'&&x.wk>=G.week).slice(0,4);
     $('#pOut').innerHTML=`<div class="grid3">
-      <div class="panel"><h3>${tlogo(dc.team,22)} ${esc(n)} <span class="f">${dc.team} · ${dc.slot||'?'} · μ ${mu.toFixed(1)} ppr · σ ${sd.toFixed(1)}</span></h3>
+      <div class="panel"><h3>${tlogo(dc.team,22)} ${esc(n)} <span class="f">${dc.team} · ${dc.slot||'?'} · μ ${mu.toFixed(1)} ppr · σ ${sd.toFixed(1)}</span></h3>${(uu=>uu&&rzOf(uu)?`<p class="mini" style="margin:0 0 4px">${rzChip(uu)} <span class="dim">red zone · his team's last ${RZ.window} games · hover</span></p>`:'')(UNIVERSE.find(u=>u.player===n))}
         <canvas id="pC1" class="chart"></canvas></div>
       <div class="panel"><h3>usage worldline <span class="f">targets + carries</span></h3>
         <canvas id="pC2" class="chart"></canvas></div>
@@ -2654,8 +2657,25 @@ function player(){
   RR.push(()=>{if($('#pIn').value)$('#pIn').onchange()});
 }
 /* ---------- Insights: visual, one screen per question ---------- */
+/* v56: red-zone takeaways — who the goal-line work runs through, whose red-zone role is growing, and the end zones that give */
+function rzInsights(){const el=$('#inRZ');if(!el)return;if(!RZ){el.innerHTML='';return}const wk=G.week;
+  const S=UNIVERSE.filter(u=>['RB','WR','TE','QB'].includes(u.pos)&&TD_SLOTS.includes(u.dslot||u.slot)&&u.inj!=='-1'&&inU(u)).map(u=>{const l5=rzOf(u,'l5'),se=rzOf(u,'season');if(!l5)return null;const oppRaw=(J.sched26[u.team]||[])[wk-1]||'',opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
+    return {u,l5,se,opp,oppRaw,d:se&&se.games>=4?l5.xtdg-se.xtd/Math.max(1,se.games):null,def:opp?rzTeam('def','season',opp):null}}).filter(Boolean);
+  const nm=x=>`<span class="plink" data-p="${esc(x.u.player)}">${esc(pshort(x.u.player))}</span> <span class="mini">${tcell(x.u.team)}${x.opp?' '+oppcell(x.oppRaw):' <span class="dim">bye</span>'}</span>`;
+  const row=(x,v)=>`<div class="mlr">${posIcon(x.u.pos,10,x.u.dslot||x.u.slot)} ${nm(x)}${v}</div>`;
+  const B=(x,m,v,t)=>`<span class="badge" title="${esc(rzTip(x.l5,x.u))}" style="${rzShade(x.u,m,v)}">${t}</span>`;
+  const top=(f,k,n=6)=>S.filter(f).sort(k).slice(0,n);
+  const cards=[
+    ['goal-line engines · xTD a game','g',top(x=>x.l5.games>=2,(a,b)=>b.l5.xtdg-a.l5.xtdg),x=>B(x,'xtdg',x.l5.xtdg,x.l5.xtdg.toFixed(2))],
+    ['red-zone share · who the trips run through','',top(x=>x.l5.rz_opp_share!=null&&x.l5.games>=2,(a,b)=>b.l5.rz_opp_share-a.l5.rz_opp_share),x=>B(x,'rz_opp_share',x.l5.rz_opp_share,Math.round(100*x.l5.rz_opp_share)+'%')],
+    ['rising · last 5 vs season','',top(x=>x.d!=null&&x.d>0,(a,b)=>b.d-a.d),x=>`<b class="rise">+${x.d.toFixed(2)}</b><span class="mini"> xTD/g</span>`],
+    ['fading · last 5 vs season','r',top(x=>x.d!=null&&x.d<0,(a,b)=>a.d-b.d),x=>`<b class="fall">${x.d.toFixed(2)}</b><span class="mini"> xTD/g</span>`],
+    ['softest end zones this week · opponent\'s RZ TD rate allowed','g',top(x=>x.def&&x.def.td_rate!=null&&x.l5.xtdg>=.25,(a,b)=>b.def.td_rate-a.def.td_rate||b.l5.xtdg-a.l5.xtdg),x=>`<b style="color:${gradeColor(1+(1-(rzDefPct(x.def.td_rate)||0))*(NT-1))}">${Math.round(100*x.def.td_rate)}%</b><span class="mini"> ${x.opp} · ${x.l5.xtdg.toFixed(2)} xTD</span>`],
+    ['stingiest end zones this week','r',top(x=>x.def&&x.def.td_rate!=null&&x.l5.xtdg>=.25,(a,b)=>a.def.td_rate-b.def.td_rate||b.l5.xtdg-a.l5.xtdg),x=>`<b style="color:${gradeColor(1+(1-(rzDefPct(x.def.td_rate)||0))*(NT-1))}">${Math.round(100*x.def.td_rate)}%</b><span class="mini"> ${x.opp} · ${x.l5.xtdg.toFixed(2)} xTD</span>`]];
+  el.innerHTML=`<div class="panel"><h3>red zone <span class="f">this week's slot owners · their team's last ${RZ.window} games · nflverse play-by-play · click a name for his card</span></h3><div class="mlead" data-mg="1">${cards.map(([t,tone,L,val])=>`<div class="mlc ${tone}"><div class="mlh">${t}</div>${L.map(x=>row(x,val(x))).join('')||'<div class="mini dim">nothing on the board</div>'}</div>`).join('')}</div></div>`;
+  tWire(el)}
 function insights(){
-  $('#insights').innerHTML=`<div id="inSm"></div><div id="inRest"></div>`;
+  $('#insights').innerHTML=`<div id="inSm"></div><div id="inRZ"></div><div id="inRest"></div>`;
   const ROLES=['QB','RB1','RB2','WR1','WR2','WR3','WR4+','TE1','TE2'];
   function smRender(){const wk=G.week,D=J.dvp.combined,se=TREND_SE;
     // 1) best / worst matchup per role — bar chart (bar = how soft the field is, 32 − Ψ; label = starter · opponent)
@@ -2686,7 +2706,7 @@ function insights(){
     const sked=`<div class="panel"><h3>rest-of-season schedule — ${sl0} <span class="f">every offense's remaining opponents colored by what they allow to the ${sl0} slot (green = soft) · sorted easiest → hardest · ${chips}</span></h3>
       <table class="heat skh"><thead><tr><th>off</th><th>μ</th>${weeks.map(w=>`<th>w${w}</th>`).join('')}</tr></thead><tbody>${rowsS.map(r=>`<tr><td style="text-align:left">${tcell(r.t)}</td><td><b>${r.avg.toFixed(1)}</b></td>${r.cells.map(c=>c.v==null?`<td class="dim">${c.o==='BYE'?'bye':''}</td>`:`<td title="wk ${c.w} ${c.o}: Ψ ${c.v.toFixed(1)}"><span class="c" style="background:${gradeBg(c.v)}">${c.o.replace('@','@')}</span></td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
     $('#inRest').innerHTML=`<div class="grid2 hgl"><div class="panel"><h3>defense extremes by slot <span class="f">for each slot: the defense that gives up the most of the slot's primary stat and the one that gives up the least, on a shared scale around the league average (tick) · second-most / second-least as small logos</span></h3><div class="dumbs">${ext}</div></div>${volH}</div>${typeof loreBlock==='function'?loreBlock(wk):''}`;
-    logoize($('#insights'));sortableAll($('#insights'))}
+    rzInsights();logoize($('#insights'));sortableAll($('#insights'))}
   RR.push(smRender);
 }
 /* ---------- Spacetime Grid: 32 offenses x 18 weeks of 2026/27 ---------- */
@@ -3873,14 +3893,14 @@ function projection(u,wk){wk=wk||G.week;const key=u.player+'|'+u.team+'|'+wk+'|'
   const e=schemeEdge(def,grp);comp.idx=e?e.idx:null;const sR=schemeX(comp.idx);
   const g=gameOf(u.team,wk);let envP=null;if(g){const x=envAll(wk).find(y=>y.g===g);if(x)envP=x.e.scoreP}comp.envP=envP;const eR=envX(envP);
   let roleD=null;const ug=USG[u.ln||u.player];if(ug&&grp!=='QB'){const last=[...(PLOGS[u.ln||u.player]||[])].reverse().find(l=>l[LOG.season]===USG._se&&l[LOG.snp]!=null);if(last)roleD=last[LOG.snp]-ug.snp}comp.roleD=roleD;const rR=roleX(roleD);
-  const p=applyW(comp,MODEL);
+  const p0=applyW(comp,MODEL),zR=rzX(u,grp),p=p0*zR;   /* v56: red-zone usage, ±12% */
   // range: the player's own p25 / p75 game scaled to the projection (needs 4+ games; else ±35%)
   const hist=[...l25.map(l=>l[LOG.fppr]),...l26.map(l=>l[LOG.fppr]),...l26.map(l=>l[LOG.fppr])].sort((a,b)=>a-b);
   const qt=q=>hist[Math.min(hist.length-1,Math.floor(q*hist.length))];const scale=own>0?p/own:1;
   const floor=hist.length>=4?Math.max(0,qt(.25)*scale):p*.65,ceil=hist.length>=4?qt(.8)*scale:p*1.35;
   const psiV=d.comps[grp],c=conv(u.player,u.team,def,grp,wk);
-  const r={p,base,own,n:sw,mR,rawR,sR,eR,rR,floor,ceil,def,o,g,psiV,c,t,prior,env:envP,edge:e,
-    tip:`baseline ${base.toFixed(1)} (own ${own.toFixed(1)} over ${l26.length} '26 + ${l25.length} '25 games, shrunk to slot mean ${prior.toFixed(1)}) × matchup ${mR.toFixed(2)} (${def} allows ${(rawR*100).toFixed(0)}% of league to ${grp}s — 2024-25 blended with ${ins.n} wk of 2026${t?', trust '+t.s:''}, ${u.pos} weight ${MM.matchW}) × scheme ${sR.toFixed(2)} × env ${eR.toFixed(2)} × role ${rR.toFixed(2)}`};
+  const r={p,base,own,n:sw,mR,rawR,sR,eR,rR,zR,floor,ceil,def,o,g,psiV,c,t,prior,env:envP,edge:e,
+    tip:`baseline ${base.toFixed(1)} (own ${own.toFixed(1)} over ${l26.length} '26 + ${l25.length} '25 games, shrunk to slot mean ${prior.toFixed(1)}) × matchup ${mR.toFixed(2)} (${def} allows ${(rawR*100).toFixed(0)}% of league to ${grp}s — 2024-25 blended with ${ins.n} wk of 2026${t?', trust '+t.s:''}, ${u.pos} weight ${MM.matchW}) × scheme ${sR.toFixed(2)} × env ${eR.toFixed(2)} × role ${rR.toFixed(2)} × red zone ${zR.toFixed(2)}`};
   PCACHE[key]=r;return r}
 const fmtX=(v,d=2)=>{const c=v>1.04?'#00c853':v<0.96?'#ff5252':'var(--dim)';return `<span style="color:${c}">${v.toFixed(d)}&times;</span>`};
 const rangeBar=(r,mx)=>{const w=220,x=v=>clamp(v/mx,0,1)*w;return `<svg width="${w}" height="14" style="vertical-align:middle"><line x1="${x(r.floor)}" x2="${x(r.ceil)}" y1="7" y2="7" stroke="#2a3542" stroke-width="6"/><line x1="${x(r.floor)}" x2="${x(r.ceil)}" y1="7" y2="7" stroke="${gradeColor(1+(1-clamp(r.p/mx,0,1))*31)}" stroke-width="3" opacity=".85"/><circle cx="${x(r.p)}" cy="7" r="4" fill="#fff"/><circle cx="${x(r.base)}" cy="7" r="2.5" fill="#000" stroke="#aaa"/></svg>`};
@@ -4810,6 +4830,23 @@ function numerology(){const el=$('#numer');if(!el)return;const wk=G.week;const g
 /* ---------------- v55: TD USAGE — the red-zone layer as cards ---------------- */
 const RZ=J.rz||null;const RZC=RZ?Object.fromEntries(RZ.pcols.map((c,i)=>[c,i])):{};const RZT=RZ?Object.fromEntries(RZ.tcols.map((c,i)=>[c,i])):{};
 const rzTeam=(side,scope,team)=>{if(!RZ)return null;const r=RZ.teams.find(x=>x[RZT.side]===side&&x[RZT.scope]===scope&&x[RZT.team]===team);return r?Object.fromEntries(RZ.tcols.map((c,i)=>[c,r[i]])):null};
+/* v56 */ /* red zone everywhere: one lookup by name+team (nflverse names normalised), percentiles within this week's slot owners at his position, cells and chips the boards share */
+const rzNorm=s=>String(s||'').toLowerCase().replace(/\b(jr|sr|ii|iii|iv|v)\b\.?/g,'').replace(/[^a-z]/g,'');
+const RZP=(()=>{const o={l5:{},season:{}};if(!RZ)return o;RZ.players.forEach(r=>{const p=Object.fromEntries(RZ.pcols.map((c,i)=>[c,r[i]]));const k=o[p.scope];if(!k)return;const g=Math.max(1,p.games||0);p.xtdg=p.xtd/g;p.glez=(p.gl_rush+p.ez_tgt)/g;p.rzg=p.rz_opp/g;const n=rzNorm(p.player);k[n+'|'+p.team]=p;if(!k[n])k[n]=p});return o})();
+function rzOf(u,scope='l5'){const k=RZP[scope];if(!k||!u)return null;const n=rzNorm(u.ln||u.player);return k[n+'|'+u.team]||k[n]||null}
+const RZPCT={};function rzPct(pos,m,v,scope='l5'){if(v==null)return null;const key=pos+'|'+scope;if(!RZPCT[key]){const Q=UNIVERSE.filter(u=>u.pos===pos&&TD_SLOTS.includes(u.dslot||u.slot)&&u.inj!=='-1').map(u=>rzOf(u,scope)).filter(Boolean);RZPCT[key]={};['xtdg','rz_opp_share','glez','snap_pct','rzg'].forEach(c=>RZPCT[key][c]=Q.map(p=>p[c]).filter(x=>x!=null).sort((a,b)=>a-b))}return pctRank(RZPCT[key][m]||[],v)}
+const rzDefPct=(()=>{let arr=null;return v=>{if(v==null)return null;if(!arr)arr=RZ?RZ.teams.filter(x=>x[RZT.side]==='def'&&x[RZT.scope]==='season').map(x=>x[RZT.td_rate]).filter(x=>x!=null).sort((a,b)=>a-b):[];return pctRank(arr,v)}})();
+/* 0–1 red-zone score: xTD/g .35 · RZ opportunity share .25 · goal-line carries + end-zone targets a game .20 · the opponent's red-zone TD rate allowed .20 */
+function rzScore(u,opp,scope='l5'){const p=rzOf(u,scope);if(!p)return null;const a=rzPct(u.pos,'xtdg',p.xtdg,scope);if(a==null)return null;const b=rzPct(u.pos,'rz_opp_share',p.rz_opp_share,scope),g=rzPct(u.pos,'glez',p.glez,scope);let sc=.35*a+.25*(b??a)+.2*(g??a),w=.8;const d=opp?rzTeam('def','season',opp):null;const dd=d?rzDefPct(d.td_rate):null;if(dd!=null){sc+=.2*dd;w+=.2}return sc/w}
+/* projection multiplier: his expected-TD rate a game vs his position, ±12% (QBs and sub-2-game samples untouched) */
+const rzX=(u,grp)=>{if(grp==='QB'||!RZ||!u)return 1;const p=rzOf(u);if(!p||p.games<2)return 1;const q=rzPct(u.pos,'xtdg',p.xtdg);return q==null?1:1+Math.max(-.12,Math.min(.12,.12*(2*q-1)))};
+const rzTip=(p,u)=>`red zone · his team's last ${RZ?RZ.window:5} games: ${p.xtd} expected TD over ${p.games} g (${p.xtdg.toFixed(2)}/g · scored ${p.td}) · ${p.rz_opp} of his team's ${p.team_rz} red-zone plays (${p.rz_opp_share==null?'—':Math.round(100*p.rz_opp_share)+'%'}) · ${p.gl_rush} goal-line carries + ${p.ez_tgt} end-zone targets · ${p.rz_tgt} RZ targets · ${p.rz_rush} RZ carries${p.snap_pct!=null?' · snaps '+Math.round(100*p.snap_pct)+'%':''} · shaded within ${u.pos}s`;
+const rzShade=(u,m,v)=>{const q=rzPct(u.pos,m,v);return q==null?'':gradeStyle(1+(1-q)*(NT-1))};
+function rzCells(u){if(!RZ)return '';const p=rzOf(u);if(!p)return '<td class="md"><span class="dim">·</span></td>'.repeat(3);const t=esc(rzTip(p,u));
+  return `<td class="md" title="${t}"><span class="badge" style="${rzShade(u,'xtdg',p.xtdg)}">${p.xtdg.toFixed(2)}</span></td><td class="md" title="${t}"><span class="badge" style="${rzShade(u,'rz_opp_share',p.rz_opp_share)}">${p.rz_opp_share==null?'—':Math.round(100*p.rz_opp_share)+'%'}</span></td><td class="md" title="${t}"><span class="badge" style="${rzShade(u,'glez',p.glez)}">${p.glez.toFixed(1)}</span></td>`}
+const RZ_TH=`<th class="md" data-k="rzx" title="red zone: expected touchdowns a game from where his carries and targets come (league TD rate by yard line) · his team's last 5 games · shaded within his position">xTD</th><th class="md" data-k="rzs" title="red zone: his share of his team's red-zone pass + run plays · last 5 games">RZ%</th><th class="md" data-k="rzg" title="red zone: goal-line carries (5 in) + end-zone targets a game · last 5 games">GL+EZ</th>`;
+const rzSort=(u,k)=>{const p=u.rz||rzOf(u);if(!p)return -1;return k==='rzx'?p.xtdg:k==='rzs'?(p.rz_opp_share??-1):p.glez};
+function rzChip(u){if(!RZ||!u)return '';const p=rzOf(u);if(!p)return '';return `<span class="rzc" title="${esc(rzTip(p,u))}" style="${rzShade(u,'xtdg',p.xtdg)}">RZ ${p.xtdg.toFixed(2)} xTD · ${p.rz_opp_share==null?'—':Math.round(100*p.rz_opp_share)+'%'} share · ${p.gl_rush+p.ez_tgt} GL+EZ${p.snap_pct!=null?' · snp '+Math.round(100*p.snap_pct)+'%':''}</span>`}
 const pctRank=(arr,v)=>{if(v==null||!arr.length)return null;const n=arr.filter(x=>x<v).length,e=arr.filter(x=>x===v).length;return (n+e/2)/arr.length};
 function tdUsage(){const el=$('#tdusage');if(!el)return;if(!RZ){el.innerHTML='<div class="panel"><p class="note">no red-zone layer on file — run scripts/build_redzone.py (needs the nflverse pbp cache)</p></div>';return}
   const st=G.tdu||(G.tdu={scope:'l5',view:'cards',pos:'',min:1});const wk=G.week;
@@ -5384,7 +5421,7 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
       byX.slice(0,n).forEach((q,i)=>out+=lab(q,i,'start',PADL+2));byX.slice(-n).reverse().forEach((q,i)=>out+=lab(q,i,'end',W-PADR-2))});
     el.innerHTML=out+'</svg>';
     el.querySelectorAll('[data-p]').forEach(n=>n.onclick=()=>playerPop(n.dataset.p))}
-  function render(){let R=rows();const V={pts:r=>r.pts,player:r=>r.u.player,team:r=>r.u.team,td:r=>r.lam??-1,match:r=>r.match??99,yds:r=>r.yds};COLS.forEach(([k])=>V[k]=r=>r.pj[k]?r.pj[k].proj:-1);
+  function render(){let R=rows();const V={pts:r=>r.pts,player:r=>r.u.player,team:r=>r.u.team,td:r=>r.lam??-1,match:r=>r.match??99,yds:r=>r.yds,rzx:r=>rzSort(r.u,'rzx'),rzs:r=>rzSort(r.u,'rzs')};COLS.forEach(([k])=>V[k]=r=>r.pj[k]?r.pj[k].proj:-1);
     R.sort((a,b)=>{const x=(V[sortK]||V.pts)(a),y=(V[sortK]||V.pts)(b);return (x<y?-1:x>y?1:0)*(sortA?1:-1)||(b.yds-a.yds)});lastRows=R;
     // map y = his projected yards as a percentile within his position (so QBs don't push everyone else to the floor)
     ['QB','RB','WR','TE'].forEach(p=>{const g=R.filter(r=>r.u.pos===p).sort((a,b)=>a.yds-b.yds);g.forEach((r,i)=>r.ypct=g.length>1?i/(g.length-1):.5)});
@@ -5399,9 +5436,9 @@ function board(){const POS=['ALL','QB','RB','WR','TE'];
       const key=r=>{const ks=Object.keys(r.rk).filter(k=>r.pj[k]).sort((a,b)=>r.rk[a].rank-r.rk[b].rank);const k=ks[0];return k?`${(MKT_BY[k]||{label:k}).label} <b>${fmt(r.pj[k].proj,/td|pass_td/.test(k)?1:0)}</b> <span class="hc" style="${gradeStyle(r.rk[k].rank)}">${r.rk[k].rank}</span>`:''};
       return `<div class="quad"><div class="qh" style="color:${POSC[p]}">${posIcon(p,13)} ${p} <span class="mini">best matchups · usage-qualified</span></div>${Q.map((r,i)=>`<div class="qrow"><span class="mini">${i+1}</span><span class="qn">${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}<i>${oppcell(r.o)} · ${r.snp!=null?(100*r.snp).toFixed(0)+'% snp':''}${r.tsh!=null&&p!=='QB'?' · '+(100*r.tsh).toFixed(0)+'% tgt':''}</i></span><span class="qm"><span class="hc big" style="${gradeStyle(r.match)}">${r.match.toFixed(1)}</span></span><span class="qk">${key(r)}</span><span class="qp"><b>${r.pts.toFixed(1)}</b><i>${IS_NFL?'DK':'proj'}</i></span></div>`).join('')}</div>`};
     $('#bbQuad').innerHTML=`<div class="quads">${['QB','RB','WR','TE'].filter(p=>pos==='ALL'||pos===p).map(quad).join('')}</div>`;
-    $('#bbTbl').innerHTML=`<details class="panel bbfull"${pos!=='ALL'?' open':''}><summary class="mini">full board · ${R.length} players · every market with the opponent's rank and the projection band · expand</summary><table class="mkt"><thead><tr><th>#</th>${th('player','player')}<th>tm</th><th>slot</th><th>opp</th><th>kick</th>${th('match','MATCH','mean of the opponent\'s ranks across his markets · 1 = softest')}${COLS.map(([k,l])=>th(k,l)).join('')}${th('td','TD λ','expected rush + receiving touchdowns')}${th('yds','yds','projected total yards')}${th('pts',IS_NFL?'DK':'proj','DraftKings Classic points implied by these projections')}</tr></thead><tbody>
+    $('#bbTbl').innerHTML=`<details class="panel bbfull"${pos!=='ALL'?' open':''}><summary class="mini">full board · ${R.length} players · every market with the opponent's rank and the projection band · expand</summary><table class="mkt"><thead><tr><th>#</th>${th('player','player')}<th>tm</th><th>slot</th><th>opp</th><th>kick</th>${th('match','MATCH','mean of the opponent\'s ranks across his markets · 1 = softest')}${COLS.map(([k,l])=>th(k,l)).join('')}${th('td','TD λ','expected rush + receiving touchdowns')}${RZ?th('rzx','xTD','red zone: expected touchdowns a game from where his touches come · last 5 games')+th('rzs','RZ%','his share of his team\'s red-zone plays · last 5 games'):''}${th('yds','yds','projected total yards')}${th('pts',IS_NFL?'DK':'proj','DraftKings Classic points implied by these projections')}</tr></thead><tbody>
       ${R.map((r,i)=>`<tr><td class="mini">${i+1}</td><td>${pn(r.u.player,r.u.team)}${r.u.inj==='0'?' <span class="inj0">Q</span>':''}${trendGlyph(r.u)}</td><td>${tcell(r.u.team)}</td><td>${slotchip(r.u.dslot||r.u.slot)}</td><td>${oppcell(r.o)}</td><td>${(g=>g?slateChip(g[GM.slate]):'')(gameOf(r.u.team,G.week))}</td><td>${r.match==null?'<span class="dim">·</span>':`<span class="hc big" style="${gradeStyle(r.match)}">${r.match.toFixed(1)}</span>`}</td>
-        ${COLS.map(([k,l,d])=>cell(r,k,d)).join('')}<td>${r.lam==null?'<span class="dim">·</span>':`<b>${r.lam.toFixed(2)}</b>${r.rk.td?` <span class="hc" style="${gradeStyle(r.rk.td.rank)}">${r.rk.td.rank}</span>`:''}`}</td><td><b>${r.yds.toFixed(0)}</b></td><td class="mini">${r.pts.toFixed(1)}</td></tr>`).join('')}</tbody></table>
+        ${COLS.map(([k,l,d])=>cell(r,k,d)).join('')}<td>${r.lam==null?'<span class="dim">·</span>':`<b>${r.lam.toFixed(2)}</b>${r.rk.td?` <span class="hc" style="${gradeStyle(r.rk.td.rank)}">${r.rk.td.rank}</span>`:''}`}</td>${RZ?(z=>z?`<td title="${esc(rzTip(z,r.u))}"><span class="hc" style="${rzShade(r.u,'xtdg',z.xtdg)}">${z.xtdg.toFixed(2)}</span></td><td class="mini">${z.rz_opp_share==null?'—':Math.round(100*z.rz_opp_share)+'%'}</td>`:'<td class="dim">·</td><td class="dim">·</td>')(rzOf(r.u)):''}<td><b>${r.yds.toFixed(0)}</b></td><td class="mini">${r.pts.toFixed(1)}</td></tr>`).join('')}</tbody></table>
       <p class="note">${R.length} players · wk ${G.week} · sorted by ${sortK}${sortA?' ascending':' descending'} · markets without a projection for a role show · · every number is reproducible from data/game_logs + the processed tables (scripts/build_prop_model.py)</p></details>`;
     $('#bbTbl').querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(sortK===k)sortA=!sortA;else{sortK=k;sortA=['player','team','match'].includes(k)}render()});logoize($('#bbTbl'))}
   $('#bbCsv').onclick=()=>{const hdr=['player','team','slot','opp',...COLS.map(c=>c[0]),'td_lambda','dk_pts'];const csv=[hdr.join(',')].concat(lastRows.map(r=>[r.u.player,r.u.team,r.u.slot,r.o,...COLS.map(([k])=>r.pj[k]?r.pj[k].proj:''),r.lam??'',r.pts.toFixed(2)].map(v=>/[",]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':v).join(','))).join('\n');
@@ -5763,6 +5800,7 @@ function splits(){const spLive=new Set(TD_SLOTS);
       else if(sortK==='gp'){x=a.gp;y=b.gp}
       else if(sortK[0]==='s'&&sortK.length>1&&a.sp[sortK.slice(1)]){const k=sortK.slice(1);x=a.sp[k].v==null?miss:a.sp[k].v;y=b.sp[k].v==null?miss:b.sp[k].v}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
+      else if(/^rz[xsg]$/.test(sortK)){x=rzSort(a,sortK);y=rzSort(b,sortK)}
       else if(sortK==='now'){x=a.mlab||'zz';y=b.mlab||'zz'}
       else{x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
@@ -5844,6 +5882,7 @@ function h2hLab(){const h2hLive=new Set(TD_SLOTS);
       else if(sortK==='gp'){const k=AV==='S'?'gpS':'gpC';x=a[k];y=b[k]}
       else if(sortK==='n'||sortK==='lastord'){x=a[sortK];y=b[sortK]}
       else if(sortK==='kick'){x=a.kickord;y=b.kickord}
+      else if(/^rz[xsg]$/.test(sortK)){x=rzSort(a,sortK);y=rzSort(b,sortK)}
       else{x=a[sortK]||'';y=b[sortK]||''}
       return (x<y?-1:x>y?1:0)*(sortA?1:-1)});
     const common=`<th data-k="player">Player</th><th data-k="team">Tm</th>${IS_NFL?'<th data-k="college" title="final college · logo, conference badge; tint = tier (gold power-4 · teal G5 · slate FCS · magenta small school)">College</th>':''}${single?'':'<th data-k="pos">Pos</th>'}<th data-k="slot">Slot</th>
@@ -5969,12 +6008,14 @@ function metaWeights(){const o=(J.signals||{}).overall||{};const L=k=>o[k]&&o[k]
   if(w.psi==null||w.td==null)return Object.assign({},META_W0,{env:.15,form:.05});
   Object.keys(w).forEach(k=>{if(w[k]==null)delete w[k]});const t=Object.values(w).reduce((a,b)=>a+b,0);Object.keys(w).forEach(k=>w[k]=+(w[k]/t).toFixed(3));return w}
 /* v42: the backtest decides — weights, bend (gamma) and shrink switches come from meta_backtest.json when it is embedded */
-const MBT=J.metaBT||null;const META_W=MBT&&MBT.weights?MBT.weights:metaWeights();const META_CFG=Object.assign({gamma:1,cov:true,agree:true},MBT&&MBT.cfg||{});
+const MBT=J.metaBT||null;const META_W=MBT&&MBT.weights?MBT.weights:metaWeights();
+/* v56: the all-in recipe — every signal the dash gathers, declared weights (sum 1); the backtest recipe stays as a second mode */
+const META_ALL={psi:.15,rz:.16,atd:.12,env:.10,td:.09,sch:.08,form:.07,h2h:.07,mkt:.06,snp:.05,ftd:.05};let META_USE=META_ALL;const META_CFG=Object.assign({gamma:1,cov:true,agree:true},MBT&&MBT.cfg||{});
 const mbend=c=>{if(c==null||META_CFG.gamma===1)return c;const d=c-.5;return .5+Math.sign(d)*Math.pow(Math.abs(2*d),META_CFG.gamma)/2};
 const etKick=g=>{if(!g||!g[GM.date]||!g[GM.time])return null;const m=/(\d+):(\d+) (AM|PM)/.exec(g[GM.time]);if(!m)return null;
   const h=+m[1]%12+(m[3]==='PM'?12:0);const off=g[GM.date]>='2026-11-01'&&g[GM.date]<'2027-03-08'?'-05:00':'-04:00';return new Date(`${g[GM.date]}T${String(h).padStart(2,'0')}:${m[2]}:00${off}`)};
 const kickedOff=g=>{const k=etKick(g);return !!k&&k.getTime()<=Date.now()};
-const META_L=[['meta','META','everything together · 0–100, 100 = the softest spot on every signal'],['env','ENV','his team\'s implied points this week from the spread and total · the strongest measured signal'],['form','FORM','his opportunities over the last two games vs his season rate'],['td','TD','touchdowns the opponent allows to his slot · rank, 1 = the most'],['atd','ATD','the anytime-TD model\'s chance he scores'],['psi','Ψ','the softest field across every stat of his slot · 1 = softest'],['h2h','H2H','his own PPR in prior meetings with this opponent vs his norm'],['sch','SCH','the opponent\'s defensive style for his slot, plus its missing men']];
+const META_L=[['meta','META','everything together · 0–100, 100 = the softest spot on every signal'],['env','ENV','his team\'s implied points this week from the spread and total · the strongest measured signal'],['form','FORM','his opportunities over the last two games vs his season rate'],['td','TD','touchdowns the opponent allows to his slot · rank, 1 = the most'],['atd','ATD','the anytime-TD model\'s chance he scores'],['psi','Ψ','the softest field across every stat of his slot · 1 = softest'],['h2h','H2H','his own PPR in prior meetings with this opponent vs his norm'],['sch','SCH','the opponent\'s defensive style for his slot, plus its missing men'],['rz','RZ','red-zone usage: expected TDs a game from where his touches come, his share of his team\'s red-zone plays, goal-line carries + end-zone targets, and the opponent\'s red-zone TD rate allowed · percentile within his position'],['snp','SNP','offensive snap share, season to date'],['mkt','MKT','the anytime-TD market: the model\'s edge over the best posted price, EV %'],['ftd','1st','the First-TD model\'s chance he scores the game\'s first touchdown']];
 function metaBtPane(){const B=MBT;if(!B)return null;const f=(v,d=3)=>v==null?null:{v:+v,h:(+v).toFixed(d)};const pc=v=>v==null?null:{v:+v,h:Math.round(100*v)+'%'};
   const W=B.weights||{},SD=B.weights_sd||{};const lbl={psi:'Ψ',td:'TD',sch:'SCH',h2h:'H2H',atd:'ATD',env:'ENV',form:'FORM'};
   const sec=[];
@@ -5996,7 +6037,7 @@ function metaBtPane(){const B=MBT;if(!B)return null;const f=(v,d=3)=>v==null?nul
   return {title:'META backtest',sub:`built ${B.built} · outcome = actual PPR / his pre-game baseline`,sections:sec}}
 function metaGrid(root='#meta',px='mt'){
   const srcs=Object.keys(J.dvp),$$=k=>$('#'+px+k),live=new Set(TD_SLOTS);
-  const LBL=Object.fromEntries(META_L.map(([k,l])=>[k,l])),DESC=new Set(['meta','atd','h2h','sch','env','form']);
+  const LBL=Object.fromEntries(META_L.map(([k,l])=>[k,l])),DESC=new Set(['meta','atd','h2h','sch','env','form','rz','snp','mkt','ftd']);
   let lens='meta';
   $(root).innerHTML=`<div class="controls">
     <span class="chips" id="${px}Lens" title="what every column is ranked by — META folds all of them together; click any column header to re-sort just that column">${META_L.map(([k,l,t])=>`<button data-l="${k}" class="${k==='meta'?'on':''}" title="${esc(t)}">${l}</button>`).join('')}</span>
@@ -6005,12 +6046,14 @@ function metaGrid(root='#meta',px='mt'){
     <select id="${px}Src" title="which data set the TD and Ψ ranks read — and with them META">${srcs.map(s=>`<option value="${s}" ${s==='combined'?'selected':''}>${s}</option>`).join('')}<option value="mu">μ every set</option></select>
     <select id="${px}QB" title="a QB's slot has two TD-allowed stats; pick which one his TD column reads"><option value="rush" selected>QB: rushing / receiving TD</option><option value="pass">QB: passing TD</option><option value="both">QB: mean of both</option></select>
     <select id="${px}Se" title="which seasons of head-to-head history count"><option value="">H2H: all seasons (${ALL_SE[0]}–${String(ALL_SE[ALL_SE.length-1]).slice(2)})</option>${ALL_SE.slice().reverse().map(s=>`<option value="${s}">H2H: ${s} only</option>`).join('')}</select>
+    <select id="${px}Mode" title="which recipe folds the columns into META"><option value="all" selected>META: all-in — every signal</option><option value="bt">META: backtest recipe — Ψ · FORM · ENV</option></select>
     <select id="${px}Inj"><option value="x" selected>hide OUT</option><option value="">incl. OUT</option></select>
     <input id="${px}Q" placeholder="search player..." size="15">${MBT?` <span class="btnlk" data-th="${thReg(metaBtPane)}" title="how the META recipe was chosen and how it grades out of sample">backtest</span>`:''}
-    <span class="note">every board at once. <b>META</b> = one score, 0–100 (100 = the softest spot). ${MBT?`Its recipe is the walk-forward backtest's pick: ${Object.entries(META_W).filter(([k,v])=>v>0).map(([k,v])=>LBL[k]+' '+Math.round(100*v)+'%').join(' · ')} — the other columns stay for the read but carry no weight (none adds to Ψ out of sample). Over ${MBT.rows} starter-games it ranks production vs the player's own baseline at rho ${MBT.chosen_oos.rho} (v40's hand weights: ${(MBT.variants.find(v=>v.name.startsWith('v40'))||{}).rho}); its top tenth produced ${Math.round(100*(MBT.chosen_oos.dec_top-1))}% over baseline, its bottom tenth ${Math.round(100*(MBT.chosen_oos.dec_bot-1))}%.`:`weighted by each signal's measured lift this season (${Object.entries(META_W).map(([k,v])=>LBL[k].replace('META','')+' '+Math.round(100*v)+'%').join(' · ')})`} &middot; <b>ENV</b> = his team's implied points from this week's line &middot; <b>FORM</b> = his opportunities over the last two games vs his season rate &middot; <b>TD</b> = touchdowns this week's opponent allows to his slot, rank of ${NT} (1 = the most) &middot; <b>ATD</b> = the anytime-TD model's chance he scores, shaded within his position &middot; <b>Ψ</b> = the opponent's mean rank across every stat of his slot &middot; <b>H2H</b> = his own PPR per game in past meetings with this opponent, ▲ / ▼ against his norm &middot; <b>SCH</b> = what that defense's style gives up to his slot vs league, plus its missing men &middot; the data-set select drives TD, Ψ and META; hover META for the breakdown &middot; the lens chips re-rank every column at once, a header click re-sorts one &middot; click a name for his card</span>
+    <span class="note"><b>META</b> = one score, 0–100 (100 = the softest spot), folding <b>every</b> signal the dash gathers for the player: <b>Ψ</b> the opponent's field for his slot · <b>RZ</b> his red-zone usage (xTD a game, share of his team's red-zone plays, goal-line + end-zone looks, the opponent's red-zone TD rate) · <b>ATD</b> the anytime-TD model · <b>ENV</b> his team's implied points · <b>TD</b> touchdowns the opponent allows his slot · <b>SCH</b> scheme edge + the opponent's missing men · <b>FORM</b> his last two games vs his season · <b>H2H</b> his history against them · <b>MKT</b> the market's edge · <b>SNP</b> snap share · <b>1st</b> first-TD chance. Recipe: ${Object.entries(META_ALL).map(([k,v])=>LBL[k]+' '+Math.round(100*v)+'%').join(' · ')} — each signal becomes a percentile within his position among this week's slot owners, the score is shaded toward 50 when signals split or data is missing, and a questionable tag pulls it 15% toward 50. ${MBT?`The walk-forward backtest's own recipe (Ψ ${Math.round(100*(META_W.psi||0))}% · FORM ${Math.round(100*(META_W.form||0))}% · ENV ${Math.round(100*(META_W.env||0))}%, rho ${MBT.chosen_oos.rho} out of sample) is the second mode in the select.`:''} Hover any META cell for the full breakdown · lens chips re-rank the table · a header click re-sorts one column · click a name for his card</span>
   </div>
   <div class="mlead" id="${px}Lead" data-mg="1"></div>
-  <div class="lgrid td5 wide full meta">${['ALL'].concat(TPOS).map(p=>`<section class="lgcol"><h3>${p==='ALL'?'◉ all':posIcon(p,12)+' '+p} <span class="gl" id="${px}G${p}"></span> <span class="f" id="${px}N${p}"></span></h3><div id="${px}B${p}"></div></section>`).join('')}</div>`;
+  <div class="controls"><span class="chips" id="${px}Pos" title="which position the table shows"><button data-p="ALL" class="on">◉ all</button>${TPOS.map(p=>`<button data-p="${p}">${posIcon(p,11)} ${p}</button>`).join('')}</span></div>
+  <div class="panel"><h3 id="${px}H">◉ all <span class="gl" id="${px}GALL"></span> <span class="f" id="${px}NALL"></span></h3><div id="${px}BALL" class="mtone"></div></div>`;
   const sort={};['ALL'].concat(TPOS).forEach(p=>sort[p]={k:'meta',a:false});
   const avg=a=>{const g=a.filter(v=>v!=null);return g.length?g.reduce((s,v)=>s+v,0)/g.length:null};
   /* mid-rank percentile of v in a pool: share below + half the ties */
@@ -6023,11 +6066,11 @@ function metaGrid(root='#meta',px='mt'){
   const tdCols=(grp,pos)=>{const st=LABDEF[pos].stats(grp).filter(c=>/TD/.test(c));if(st.length<2)return st;
     const m=$$('QB').value,pass=st.find(c=>c==='P TD'),rush=st.find(c=>c!=='P TD');return m==='pass'?[pass]:m==='both'?st:[rush]};
   let ROWS=[],HAS={meta:1,td:1,atd:1,psi:1,h2h:1,sch:1};
-  const SIGS=['meta','env','td','atd','psi','form','h2h','sch'],SIGW={meta:9,env:7,td:8,atd:8,psi:7,form:7,h2h:11,sch:8},sigs=()=>SIGS.filter(k=>HAS[k]);
+  const SIGS=['meta','psi','rz','atd','env','td','sch','form','h2h','mkt','snp','ftd'],SIGW={meta:8,psi:6,rz:8,atd:7,env:7,td:6,sch:7,form:7,h2h:10,mkt:7,snp:6,ftd:6},sigs=()=>SIGS.filter(k=>HAS[k]);let posTab='ALL';
   const implied=(t,wk)=>{const g=((J.betting||{}).glh||[]).find(r=>r[0]===(J.season||2026)&&r[1]===wk&&(r[2]===t||r[3]===t));if(!g||g[7]==null)return null;const sp=g[6]==null?0:+g[6];return g[3]===t?+g[7]/2+sp/2:+g[7]/2-sp/2};
   function build(){
     const wk=G.week,v=$$('Src').value,S=v==='mu'?srcs:[v],se=$$('Se').value;
-    const T=((J.betting||{}).td||[]).filter(r=>+r.week===wk);
+    const T=((J.betting||{}).td||[]).filter(r=>+r.week===wk);META_USE=$$('Mode').value==='bt'?META_W:META_ALL;const FT=(J.firstTd&&J.firstTd.week===wk?J.firstTd.board:[])||[];
     const tdOf=u=>T.find(r=>r.player===u.player&&r.team===u.team)||T.find(r=>r.player===u.player);
     const R=UNIVERSE.filter(u=>TPOS.includes(u.pos)&&u.grp).map(u=>{
       const oppRaw=(J.sched26[u.team]||[])[wk-1]||'',opp=oppRaw&&oppRaw!=='BYE'?oppRaw.replace('@',''):'';
@@ -6042,36 +6085,42 @@ function metaGrid(root='#meta',px='mt'){
       const hp=mf(vs,l=>l[LOG.fppr]),hb=mf(all,l=>l[LOG.fppr]);
       const hd=hp!=null&&hb!=null&&hb>0?hp/hb-1:null;
       let e=null,lift=0;if(opp){try{e=schemeEdge(opp,u.grp)}catch(_){}try{lift=(injLift(opp)[u.grp]||{}).pct||0}catch(_){}}
-      const t=tdOf(u),atd=t&&t.p_model!=null&&t.p_model!==''?+t.p_model:null;
+      const t=tdOf(u),atd=t&&t.p_model!=null&&t.p_model!==''?+t.p_model:null;const rzp=rzOf(u),ft=FT.find(r=>r.player===u.player&&r.team===u.team)||FT.find(r=>r.player===u.player),snpv=(USG[u.ln||u.player]||{}).snp;
       const env=opp?implied(u.team,wk):null,form=u.l2!=null&&u.se>=4&&u.gp>=2?u.l2/u.se-1:null,gm=opp?gameOf(u.team,wk):null;   /* FORM needs 4+ opportunities a game: a 2-to-3 bump is not form */
       return {u,pos,oppRaw,opp,env,form,gm,td:avg(tdBy),psi:avg(psiBy),S,n:vs.length,hp,hb,hd,hS:hp==null||hb==null?null:(hp-hb)*Math.min(vs.length,3)/3,
         gpAll:all.length,last:vs.length?vs[vs.length-1]:null,e,lift,sch:e?(e.idx-100)+lift*.6:null,atd,t,
+        rzp,rzs:opp?rzScore(u,opp):null,snp:snpv==null?null:+snpv,mkt:t&&t.ev!=null&&t.ev!==''&&t.price!=null?+t.ev:null,ftd:ft&&ft.p_first!=null?+ft.p_first:null,
         pool:TD_SLOTS.includes(u.dslot||u.slot)}});
     /* percentiles come from this week's slot owners only, so a filter or a search never moves a score */
     const P=R.filter(x=>x.pool&&x.opp),pH=pct(P.map(x=>x.hS)),pS=pct(P.map(x=>x.sch)),pE=pct(P.map(x=>x.env)),pA={},pF={};
     TPOS.forEach(p=>{pA[p]=pct(P.filter(x=>x.pos===p).map(x=>x.atd));pF[p]=pct(P.filter(x=>x.pos===p).map(x=>x.form))});
-    const W=Object.values(META_W).reduce((a,b)=>a+b,0);
-    R.forEach(x=>{const c={psi:x.psi==null?null:clamp((NT-x.psi)/(NT-1)),td:x.td==null?null:clamp((NT-x.td)/(NT-1)),h2h:pH(x.hS),sch:pS(x.sch),atd:pA[x.pos](x.atd),env:pE(x.env),form:pF[x.pos](x.form)};
-      let s=0,w=0,soft=0,hard=0,n=0;Object.entries(META_W).forEach(([k,wt])=>{if(wt>0&&c[k]!=null){const v=mbend(c[k]);s+=wt*v;w+=wt;n++;if(v>=.65)soft++;else if(v<=.35)hard++}});
+    const pR={},pN={},pM={},pFt={};TPOS.forEach(p=>{const Q=P.filter(x=>x.pos===p);pR[p]=pct(Q.map(x=>x.rzs));pN[p]=pct(Q.map(x=>x.snp));pM[p]=pct(Q.map(x=>x.mkt));pFt[p]=pct(Q.map(x=>x.ftd))});
+    const W=Object.values(META_USE).reduce((a,b)=>a+b,0);
+    R.forEach(x=>{const c={rz:pR[x.pos](x.rzs),snp:pN[x.pos](x.snp),mkt:pM[x.pos](x.mkt),ftd:pFt[x.pos](x.ftd),psi:x.psi==null?null:clamp((NT-x.psi)/(NT-1)),td:x.td==null?null:clamp((NT-x.td)/(NT-1)),h2h:pH(x.hS),sch:pS(x.sch),atd:pA[x.pos](x.atd),env:pE(x.env),form:pF[x.pos](x.form)};
+      let s=0,w=0,soft=0,hard=0,n=0;Object.entries(META_USE).forEach(([k,wt])=>{if(wt>0&&c[k]!=null){const v=mbend(c[k]);s+=wt*v;w+=wt;n++;if(v>=.65)soft++;else if(v<=.35)hard++}});
       /* consensus: when the signals split (soft AND hard leans at once) the score is shaded toward 50 — a spot every signal agrees on keeps its full distance */
       const agree=n?1-Math.min(soft,hard)/n:1;x.c=c;x.cov=w/W;x.soft=soft;x.hard=hard;x.nsig=n;x.agree=agree;
-      x.meta=w&&x.opp?50+(100*s/w-50)*(META_CFG.cov?(.6+.4*w/W):1)*(META_CFG.agree?(.75+.25*agree):1):null});
-    ROWS=R;window.META_LAST=R;HAS={meta:1,td:R.some(x=>x.td!=null),atd:R.some(x=>x.atd!=null),psi:R.some(x=>x.psi!=null),h2h:R.some(x=>x.hp!=null),sch:R.some(x=>x.sch!=null),env:R.some(x=>x.env!=null),form:R.some(x=>x.form!=null)};
+      x.meta=w&&x.opp?50+(100*s/w-50)*(META_CFG.cov?(.6+.4*w/W):1)*(META_CFG.agree?(.75+.25*agree):1):null;if(x.meta!=null&&x.u.inj==='0')x.meta=50+(x.meta-50)*.85});
+    ROWS=R;window.META_LAST=R;HAS={meta:1,td:R.some(x=>x.td!=null),atd:R.some(x=>x.atd!=null),psi:R.some(x=>x.psi!=null),h2h:R.some(x=>x.hp!=null),sch:R.some(x=>x.sch!=null),env:R.some(x=>x.env!=null),form:R.some(x=>x.form!=null),rz:R.some(x=>x.rzs!=null),snp:R.some(x=>x.snp!=null),mkt:R.some(x=>x.mkt!=null),ftd:R.some(x=>x.ftd!=null)};
     $$('Lens').querySelectorAll('button').forEach(b=>b.hidden=!HAS[b.dataset.l])}
   const keep=x=>{const q=$$('Q').value.toLowerCase();return inU(x.u)&&(!live.size||live.has(x.u.dslot||x.u.slot))&&($$('Inj').value!=='x'||x.u.inj!=='-1')&&(!q||x.u.player.toLowerCase().includes(q))};
-  const sv=(x,k)=>k==='meta'?x.meta:k==='env'?x.env:k==='form'?x.form:k==='td'?x.td:k==='atd'?x.atd:k==='psi'?x.psi:k==='h2h'?x.hS:k==='sch'?x.sch:k==='player'?x.u.player:k==='opp'?(x.opp||null):k==='pos'?TPOS.indexOf(x.pos):null;
+  const sv=(x,k)=>k==='meta'?x.meta:k==='env'?x.env:k==='form'?x.form:k==='td'?x.td:k==='atd'?x.atd:k==='psi'?x.psi:k==='h2h'?x.hS:k==='sch'?x.sch:k==='rz'?x.rzs:k==='snp'?x.snp:k==='mkt'?x.mkt:k==='ftd'?x.ftd:k==='player'?x.u.player:k==='opp'?(x.opp||null):k==='pos'?TPOS.indexOf(x.pos):null;
   const cmp=(k,asc)=>(a,b)=>{const x=sv(a,k),y=sv(b,k);
     if(x==null||y==null){if(x==null&&y==null)return (b.meta??-1)-(a.meta??-1);return x==null?1:-1}
     return (x<y?-1:x>y?1:0)*(asc?1:-1)||(k==='td'?(b.atd??-1)-(a.atd??-1):0)||(b.meta??-1)-(a.meta??-1)};
   const f1=v=>v==null?'—':(+v).toFixed(1);
   const why=x=>[`META ${x.meta==null?'—':Math.round(x.meta)} of 100 · ${Math.round(100*x.cov)}% of the weight has data · ${x.soft} of ${x.nsig} signals lean soft, ${x.hard} lean hard${x.agree<1?' (split — shaded toward 50)':''}`,
-    `ENV ${x.env==null?'no line':x.env.toFixed(1)+' implied pts'} → ${x.c.env==null?'—':Math.round(100*x.c.env)} (weight ${META_W.env||0})`,
-    `FORM ${x.form==null?'—':(x.form>=0?'+':'')+Math.round(100*x.form)+'% opps last 2 vs season'} → ${x.c.form==null?'—':Math.round(100*x.c.form)} (weight ${META_W.form||0})`,
-    `Ψ ${f1(x.psi)} of ${NT} → ${x.c.psi==null?'—':Math.round(100*x.c.psi)} (weight ${META_W.psi})`,
-    `TD rank ${f1(x.td)} of ${NT} → ${x.c.td==null?'—':Math.round(100*x.c.td)} (weight ${META_W.td})`,
-    `scheme ${x.sch==null?'—':(x.sch>=0?'+':'')+x.sch.toFixed(1)} → ${x.c.sch==null?'—':Math.round(100*x.c.sch)} (weight ${META_W.sch})`,
-    `H2H ${x.hp==null?'no prior meeting':x.hp.toFixed(1)+' PPR vs his '+(x.hb==null?'—':x.hb.toFixed(1))+' norm over '+x.n+' game'+(x.n===1?'':'s')+' ('+(x.hS>=0?'+':'')+x.hS.toFixed(1)+' after the small-sample discount)'} → ${x.c.h2h==null?'—':Math.round(100*x.c.h2h)} (weight ${META_W.h2h})`,
-    `ATD ${x.atd==null?'no model':Math.round(100*x.atd)+'%'} → ${x.c.atd==null?'—':Math.round(100*x.c.atd)} (weight ${META_W.atd})`].join('\n');
+    `ENV ${x.env==null?'no line':x.env.toFixed(1)+' implied pts'} → ${x.c.env==null?'—':Math.round(100*x.c.env)} (weight ${META_USE.env||0})`,
+    `FORM ${x.form==null?'—':(x.form>=0?'+':'')+Math.round(100*x.form)+'% opps last 2 vs season'} → ${x.c.form==null?'—':Math.round(100*x.c.form)} (weight ${META_USE.form||0})`,
+    `Ψ ${f1(x.psi)} of ${NT} → ${x.c.psi==null?'—':Math.round(100*x.c.psi)} (weight ${META_USE.psi||0})`,
+    `TD rank ${f1(x.td)} of ${NT} → ${x.c.td==null?'—':Math.round(100*x.c.td)} (weight ${META_USE.td||0})`,
+    `scheme ${x.sch==null?'—':(x.sch>=0?'+':'')+x.sch.toFixed(1)} → ${x.c.sch==null?'—':Math.round(100*x.c.sch)} (weight ${META_USE.sch||0})`,
+    `H2H ${x.hp==null?'no prior meeting':x.hp.toFixed(1)+' PPR vs his '+(x.hb==null?'—':x.hb.toFixed(1))+' norm over '+x.n+' game'+(x.n===1?'':'s')+' ('+(x.hS>=0?'+':'')+x.hS.toFixed(1)+' after the small-sample discount)'} → ${x.c.h2h==null?'—':Math.round(100*x.c.h2h)} (weight ${META_USE.h2h||0})`,
+    `ATD ${x.atd==null?'no model':Math.round(100*x.atd)+'%'} → ${x.c.atd==null?'—':Math.round(100*x.c.atd)} (weight ${META_USE.atd||0})`,
+    `RZ ${x.rzp?x.rzp.xtdg.toFixed(2)+' xTD/g · '+(x.rzp.rz_opp_share==null?'—':Math.round(100*x.rzp.rz_opp_share)+'%')+' of team RZ plays · '+(x.rzp.gl_rush+x.rzp.ez_tgt)+' GL+EZ looks'+(x.opp&&rzTeam('def','season',x.opp)&&rzTeam('def','season',x.opp).td_rate!=null?' · '+x.opp+' allows a TD on '+Math.round(100*rzTeam('def','season',x.opp).td_rate)+'% of RZ trips':''):'no red-zone data'} → ${x.c.rz==null?'—':Math.round(100*x.c.rz)} (weight ${META_USE.rz||0})`,
+    `SNP ${x.snp==null?'—':Math.round(100*x.snp)+'% of snaps'} → ${x.c.snp==null?'—':Math.round(100*x.c.snp)} (weight ${META_USE.snp||0})`,
+    `MKT ${x.mkt==null?'no price':'EV '+(x.mkt>=0?'+':'')+x.mkt.toFixed(1)+'% vs best ATD price'} → ${x.c.mkt==null?'—':Math.round(100*x.c.mkt)} (weight ${META_USE.mkt||0})`,
+    `1st ${x.ftd==null?'—':(100*x.ftd).toFixed(1)+'% to score first'} → ${x.c.ftd==null?'—':Math.round(100*x.c.ftd)} (weight ${META_USE.ftd||0})`+(x.u.inj==='0'?'\nquestionable: pulled 15% toward 50':'')].join('\n');
   const setL=()=>{const v=$$('Src').value;return v==='mu'?'μ every set':v};
   const schC=v=>v>=6?'#00c853':v>=2?'#8bc34a':v<=-6?'#ff5252':v<=-2?'#ff8a65':'var(--dim)';
   const cells=x=>{
@@ -6092,15 +6141,20 @@ function metaGrid(root='#meta',px='mt'){
       :`<td class="md" title="${esc(`${x.u.team} implied ${x.env.toFixed(1)} points this week${x.gm&&x.gm[GM.time]?' · '+x.gm[GM.day]+' '+x.gm[GM.time]+' ET':''} · shaded among this week's starters`)}"><span class="badge" style="${x.c.env==null?'':gradeStyle(eq(x.c.env))}">${x.env.toFixed(1)}</span></td>`;
     const form=x.form==null?'<td class="md"><span class="dim">·</span></td>'
       :`<td class="md" style="color:${x.form>=.15?'#00c853':x.form<=-.15?'#ff5252':'var(--dim)'}" title="${esc(`${x.u.l2} opportunities per game over his last two vs ${x.u.se} on the season (${x.u.gp} gp) · shaded within ${x.pos}s`)}">${x.form>=0?'+':''}${Math.round(100*x.form)}%</td>`;
-    const o={meta,env,td,atd,psi,form,h2h,sch};return sigs().map(k=>o[k]).join('')};
+    const pb=(k,v,txt,tip)=>v==null?'<td class="md"><span class="dim">·</span></td>':`<td class="md" title="${esc(tip)}"><span class="badge" style="${x.c[k]==null?'':gradeStyle(eq(x.c[k]))}">${txt}</span></td>`;
+    const rz=pb('rz',x.rzs,x.rzp?x.rzp.xtdg.toFixed(2):'·',x.rzp?rzTip(x.rzp,x.u)+(x.opp&&rzTeam('def','season',x.opp)&&rzTeam('def','season',x.opp).td_rate!=null?` · ${x.opp} allows a TD on ${Math.round(100*rzTeam('def','season',x.opp).td_rate)}% of red-zone trips`:'')+' · score '+Math.round(100*(x.c.rz||0)):'');
+    const snp=pb('snp',x.snp,x.snp==null?'·':Math.round(100*x.snp)+'%',`${Math.round(100*(x.snp||0))}% of his team's offensive snaps · shaded within ${x.pos}s`);
+    const mkt=pb('mkt',x.mkt,x.mkt==null?'·':(x.mkt>=0?'+':'')+x.mkt.toFixed(0)+'%',`anytime-TD market: EV ${(x.mkt||0)>=0?'+':''}${(x.mkt||0).toFixed(1)}% vs the best posted price${x.t&&x.t.price!=null?' '+mlTxt(+x.t.price)+(x.t.book?' ('+x.t.book+')':''):''} · shaded within ${x.pos}s`);
+    const ftd=pb('ftd',x.ftd,x.ftd==null?'·':(100*x.ftd).toFixed(1)+'%',`First-TD model: ${(100*(x.ftd||0)).toFixed(1)}% to score the game's first touchdown · shaded within ${x.pos}s`);
+    const o={meta,env,td,atd,psi,form,h2h,sch,rz,snp,mkt,ftd};return sigs().map(k=>o[k]).join('')};
   function col(p){
     const st=sort[p];
     const R=ROWS.filter(x=>(p==='ALL'||x.pos===p)&&keep(x)).sort(cmp(st.k,st.a));
-    $$('N'+p).textContent=R.length+(R.length===1?' player':' players');
-    $$('G'+p).textContent=`ranked by ${LBL[st.k]||st.k} · ${setL()}`;
-    const nw=k=>SIGS.includes(k)&&k!=='meta'&&!(META_W[k]>0);   /* a column the backtest left without weight: shown for the read, dimmed */
-    const th=(k,l,tip,cls)=>`<th class="${cls||''}${nw(k)?' nw':''}" data-k="${k}" title="${esc((tip||'')+(nw(k)?' · no weight in META (the backtest found it adds nothing once Ψ is in) — shown for the read':''))}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
-    const S=sigs(),wname=p==='ALL'?24:29,wpos=p==='ALL'?5:0,wopp=p==='ALL'?15:18,ws=S.reduce((a,k)=>a+SIGW[k],0),wk=k=>((100-wname-wpos-wopp)*SIGW[k]/ws).toFixed(2);
+    $$('NALL').textContent=R.length+(R.length===1?' player':' players');
+    $$('GALL').textContent=`ranked by ${LBL[st.k]||st.k} · ${setL()} · ${$$('Mode').value==='bt'?'backtest recipe':'all-in recipe'}`;$$('H').firstChild.textContent=(p==='ALL'?'◉ all':p)+' ';
+    const nw=k=>SIGS.includes(k)&&k!=='meta'&&!(META_USE[k]>0);   /* a column the backtest left without weight: shown for the read, dimmed */
+    const th=(k,l,tip,cls)=>`<th class="${cls||''}${nw(k)?' nw':''}" data-k="${k}" title="${esc((tip||'')+(nw(k)?' · no weight in this META recipe — shown for the read':''))}">${l}${st.k===k?(st.a?' ▲':' ▼'):''}</th>`;
+    const S=sigs(),wname=13,wpos=p==='ALL'?4:0,wopp=8,ws=S.reduce((a,k)=>a+SIGW[k],0),wk=k=>((100-wname-wpos-wopp)*SIGW[k]/ws).toFixed(2);
     const TH={meta:th('meta','META','every signal folded into one score · 0–100, 100 = softest on all of them · hover a cell for the breakdown','md gs'),
       env:th('env','ENV','his team\'s implied points from this week\'s spread and total · shaded among the week\'s starters','md'),
       form:th('form','FORM','opportunities per game over his last two vs his season rate · ▲ workload rising','md'),
@@ -6108,17 +6162,19 @@ function metaGrid(root='#meta',px='mt'){
       atd:th('atd','ATD','anytime-TD model: % chance he scores · shaded within his position','op'),
       psi:th('psi','Ψ','mean of the opponent\'s ranks across every stat of his slot · 1 = softest','op'),
       h2h:th('h2h','H2H','his own PPR per game in past meetings with this opponent · ▲ 10%+ above his norm, ▼ 10%+ below · sorts on points above his norm, discounted under three meetings','md'),
-      sch:th('sch','SCH','what the opponent\'s defensive style gives up to his slot vs league, % · plus 0.6 × the lift from its missing men','md')};
-    $$('B'+p).innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${S.map(k=>`<col style="width:${wk(k)}%">`).join('')}</colgroup><thead>
+      sch:th('sch','SCH','what the opponent\'s defensive style gives up to his slot vs league, % · plus 0.6 × the lift from its missing men','md'),
+      rz:th('rz','RZ','red-zone usage: xTD a game (shown) · share of his team\'s red-zone plays · goal-line + end-zone looks · the opponent\'s red-zone TD rate allowed · shaded by the blended percentile within his position','md'),
+      snp:th('snp','SNP','offensive snap share, season to date · shaded within his position','md'),mkt:th('mkt','MKT','anytime-TD market: model EV vs the best posted price · shaded within his position','md'),
+      ftd:th('ftd','1st','First-TD model: chance he scores the game\'s first touchdown · shaded within his position','md')};
+    $$('BALL').innerHTML=`<table class="lgt"><colgroup><col style="width:${wname}%">${p==='ALL'?`<col style="width:${wpos}%">`:''}<col style="width:${wopp}%">${S.map(k=>`<col style="width:${wk(k)}%">`).join('')}</colgroup><thead>
       <tr class="hd">${th('player','Player')}${p==='ALL'?th('pos',''):''}${th('opp','Opp',"this week's opponent")}
       ${S.map(k=>TH[k]).join('')}</tr></thead><tbody>
       ${R.map(x=>`<tr><td class="plink" data-p="${esc(x.u.player)}" title="${esc(x.u.player)} · ${esc(x.u.dslot||x.u.slot)} · ${esc(x.u.team)}${x.meta==null?'':' · META '+Math.round(x.meta)}">${esc(pshort(x.u.player))}${x.u.inj==='0'?' <span class="inj0">Q</span>':x.u.inj==='-1'?' <span class="injm1">OUT</span>':''}</td>
         ${p==='ALL'?`<td>${posIcon(x.pos,10,x.u?(x.u.dslot||x.u.slot):x.slot)}</td>`:''}<td>${x.opp?oppcell(x.oppRaw):'<span class="dim">bye</span>'}</td>${cells(x)}</tr>`).join('')
         ||`<tr><td colspan="${S.length+(p==='ALL'?3:2)}" class="dim">nothing matches</td></tr>`}</tbody></table>`;
-    $$('B'+p).querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{const k=h.dataset.k;
+    $$('BALL').querySelectorAll('th[data-k]').forEach(h=>h.onclick=()=>{const k=h.dataset.k;
       if(st.k===k)st.a=!st.a;else{st.k=k;st.a=!DESC.has(k)}col(p)});
-    tWire($$('B'+p));
-    const sec=$$('B'+p).closest('.lgcol'),h=sec&&sec.querySelector('h3');if(h)sec.style.setProperty('--h3h',h.offsetHeight+'px');
+    tWire($$('BALL'));
   }
   /* v41: this week's slate — the best spots by kickoff window, games already kicked off hidden by default */
   let hideStarted=true;
@@ -6126,9 +6182,9 @@ function metaGrid(root='#meta',px='mt'){
     if(c.env!=null&&c.env>=.65)r.push(['ENV',x.env.toFixed(1)+' imp',c.env]);if(c.td!=null&&c.td>=.65)r.push(['TD',`rk ${Math.round(x.td)}`,c.td]);
     if(c.psi!=null&&c.psi>=.65)r.push(['Ψ',`${Math.round(x.psi)}`,c.psi]);if(c.atd!=null&&c.atd>=.65)r.push(['ATD',Math.round(100*x.atd)+'%',c.atd]);
     if(c.form!=null&&c.form>=.65)r.push(['FORM',(x.form>=0?'+':'')+Math.round(100*x.form)+'%',c.form]);if(c.sch!=null&&c.sch>=.65)r.push(['SCH',(x.sch>=0?'+':'')+Math.round(x.sch),c.sch]);
-    if(c.h2h!=null&&c.h2h>=.65&&x.n>0)r.push(['H2H',x.hp.toFixed(1)+' ppr',c.h2h]);
+    if(c.h2h!=null&&c.h2h>=.65&&x.n>0)r.push(['H2H',x.hp.toFixed(1)+' ppr',c.h2h]);if(c.rz!=null&&c.rz>=.65&&x.rzp)r.push(['RZ',x.rzp.xtdg.toFixed(2)+' xTD',c.rz]);if(c.mkt!=null&&c.mkt>=.65)r.push(['MKT','EV '+(x.mkt>=0?'+':'')+x.mkt.toFixed(0)+'%',c.mkt]);
     return r.sort((a,b)=>b[2]-a[2]).slice(0,3)};
-  const against=x=>{const r=[];const c=x.c;[['ENV',c.env,x.env==null?'':x.env.toFixed(1)+' imp'],['TD',c.td,x.td==null?'':'rk '+Math.round(x.td)],['Ψ',c.psi,x.psi==null?'':Math.round(x.psi)],['ATD',c.atd,x.atd==null?'':Math.round(100*x.atd)+'%'],['FORM',c.form,x.form==null?'':(x.form>=0?'+':'')+Math.round(100*x.form)+'%'],['SCH',c.sch,x.sch==null?'':(x.sch>=0?'+':'')+Math.round(x.sch)]].forEach(([l,v,t])=>{if(v!=null&&v<=.35)r.push([l,t,v])});return r.sort((a,b)=>a[2]-b[2]).slice(0,3)};
+  const against=x=>{const r=[];const c=x.c;[['ENV',c.env,x.env==null?'':x.env.toFixed(1)+' imp'],['TD',c.td,x.td==null?'':'rk '+Math.round(x.td)],['Ψ',c.psi,x.psi==null?'':Math.round(x.psi)],['ATD',c.atd,x.atd==null?'':Math.round(100*x.atd)+'%'],['FORM',c.form,x.form==null?'':(x.form>=0?'+':'')+Math.round(100*x.form)+'%'],['SCH',c.sch,x.sch==null?'':(x.sch>=0?'+':'')+Math.round(x.sch)],['RZ',c.rz,x.rzp?x.rzp.xtdg.toFixed(2)+' xTD':''],['SNP',c.snp,x.snp==null?'':Math.round(100*x.snp)+'%']].forEach(([l,v,t])=>{if(v!=null&&v<=.35)r.push([l,t,v])});return r.sort((a,b)=>a[2]-b[2]).slice(0,3)};
   function slate(){
     const wk=G.week,R=ROWS.filter(x=>keep(x)&&x.meta!=null&&x.opp&&x.cov>=.5&&x.u.inj!=='-1');
     const gs=GAMES(wk).filter(g=>(!ACT||ACT.has(g[GM.vis])||ACT.has(g[GM.home]))&&(!G.slates.size||G.slates.has(g[GM.slate])));
@@ -6163,18 +6219,21 @@ function metaGrid(root='#meta',px='mt'){
       ['softest field · Ψ','',top(null,'psi',true),x=>`<span class="psi" style="color:${gradeColor(x.psi)}">${Math.round(x.psi)}</span>`],
       ['head to head','',top(x=>x.n>0,'h2h',false),x=>`<span class="mv"><b class="${x.hd>=.1?'rise':x.hd<=-.1?'fall':''}">${x.hp.toFixed(1)}</b><span class="mini"> ${x.n}g</span></span>`],
       ['scheme edge','',top(null,'sch',false),x=>`<b style="color:${schC(x.sch)}">${x.sch>=0?'+':''}${Math.round(x.sch)}</b>`],
-      ['avoid · META','r',top(null,'meta',true),x=>B(Math.round(x.meta),gradeStyle(eq(x.meta/100)))]].filter((c,i)=>HAS[['meta','env','td','atd','psi','h2h','sch','meta'][i]]);
+      ['red zone · RZ','',top(x=>!!x.rzp,'rz',false),x=>B(x.rzp.xtdg.toFixed(2)+' xTD',x.c.rz==null?'':gradeStyle(eq(x.c.rz)))],
+      ['market edge · MKT','',top(null,'mkt',false),x=>B('EV '+(x.mkt>=0?'+':'')+x.mkt.toFixed(0)+'%',x.c.mkt==null?'':gradeStyle(eq(x.c.mkt)))],
+      ['avoid · META','r',top(null,'meta',true),x=>B(Math.round(x.meta),gradeStyle(eq(x.meta/100)))]].filter((c,i)=>HAS[['meta','env','td','atd','psi','h2h','sch','rz','mkt','meta'][i]]);
     $$('Lead').innerHTML=cards.map(([t,tone,L,val])=>thSeq(`<div class="mlc ${tone}"><div class="mlh">${t}</div>${L.slice(0,3).map(x=>line(x,val(x))).join('')||'<div class="mini dim">nothing on the board</div>'}</div>`,[()=>({title:t,sub:`every player on the board, ranked · week ${typeof WK!=='undefined'?WK:G.week} · ${L.length} shown`,html:`<div class="mlc ${tone}" style="max-width:520px">${L.map(x=>line(x,val(x))).join('')||'<div class="mini dim">nothing on the board</div>'}</div>`})])).join('');
     tWire($$('Lead'))}
-  const cols=()=>{['ALL'].concat(TPOS).forEach(col);lead()};
+  const cols=()=>{col(posTab);lead()};
   const all=()=>{build();if(!HAS[lens])$$('Lens').querySelector('button[data-l="meta"]').click();cols()};
-  ['Src','QB','Se','Inj'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;
+  ['Src','QB','Se','Inj','Mode'].forEach(i=>$$(i).onchange=all);$$('Q').oninput=cols;
   $$('Slots').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=b.dataset.s;
     if(!v)live.clear();else live.has(v)?live.delete(v):live.add(v);
     $$('Slots').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.s?live.has(x.dataset.s):live.size===0));cols()});
   $$('Lens').querySelectorAll('button').forEach(b=>b.onclick=()=>{lens=b.dataset.l;
     $$('Lens').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
-    Object.keys(sort).forEach(p=>sort[p]={k:lens,a:!DESC.has(lens)});['ALL'].concat(TPOS).forEach(col)});
+    Object.keys(sort).forEach(p=>sort[p]={k:lens,a:!DESC.has(lens)});cols()});
+  $$('Pos').querySelectorAll('button').forEach(b=>b.onclick=()=>{posTab=b.dataset.p;$$('Pos').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));col(posTab)});
   all();RR.push(all);
 }
 
@@ -6189,7 +6248,9 @@ const MV_B=[
   ['ftd','1st','First TD: the model\'s chance he scores the game\'s first touchdown',false],
   ['wk','WKL','Weeklies: his lift-weighted score across the eight core signals he carries into the game',false],
   ['cat','CAT','Category Grid: how many reliable (trust / lean) categories he carries in',false],
-  ['meta','META','META v1: Ψ + FORM + ENV, the backtested recipe',false],
+  ['meta','META','META: the all-in composite — every signal the dash gathers, declared weights',false],
+  ['rz','RZ','TD Usage: red-zone score — xTD a game, share of his team\'s red-zone plays, goal-line + end-zone looks, the opponent\'s red-zone TD rate allowed',false],
+  ['snp','SNP','offensive snap share, season to date',false],
   ['env','ENV','his team\'s implied points from the line',false],
   ['form','FORM','opportunities over his last two games vs his season rate',false],
   ['sch','SCH','scheme edge: what the opponent\'s defensive style gives his slot vs league, plus its missing men',false],
@@ -6232,7 +6293,7 @@ function metaV2(root='#metav2',px='mv'){
       const m1=M1[u.player+'|'+u.team],wa=WA[u.player+'|'+u.team];
       let e=null,lift=0;if(opp){try{e=schemeEdge(opp,u.grp)}catch(_){}try{lift=(injLift(opp)[u.grp]||{}).pct||0}catch(_){}}
       const raw={td,psi,h2h,tdp:tp&&tp.p!=null?+tp.p:null,ftd:ft&&ft.p_first!=null?+ft.p_first:null,wk:wa?wa.score:null,cat:wa?wa.cat:null,meta:m1&&m1.meta!=null?m1.meta:null,
-        env:m1&&m1.env!=null?m1.env:null,form:m1&&m1.form!=null?m1.form:null,sch:e?(e.idx-100)+lift*.6:null,mkt:tp&&tp.ev!=null&&tp.price!=null?+tp.ev:null};
+        env:m1&&m1.env!=null?m1.env:null,form:m1&&m1.form!=null?m1.form:null,rz:m1&&m1.rzs!=null?m1.rzs:null,snp:m1&&m1.snp!=null?m1.snp:null,sch:e?(e.idx-100)+lift*.6:null,mkt:tp&&tp.ev!=null&&tp.price!=null?+tp.ev:null};
       return {u,pos:u.pos,oppRaw,opp,raw,tp,ft,wa,n:vs.length,hp,pool:TD_SLOTS.includes(u.dslot||u.slot)&&!!opp&&u.inj!=='-1'}});
     /* percentiles within position from this week's pool — a filter or a search never moves a score */
     const P={};TPOS.forEach(p=>{const Q=R.filter(x=>x.pool&&x.pos===p);P[p]={};MV_B.forEach(([k,,,lo])=>{P[p][k]=pct(Q.map(x=>x.raw[k]==null?null:(lo?-x.raw[k]:x.raw[k])))})});
@@ -6246,14 +6307,14 @@ function metaV2(root='#metav2',px='mv'){
       x.cons=method==='top'?100*(x.t10+.5*(x.t25-x.t10))/Math.max(ks.length,1)+mean*.01:50+(100*(method==='geo'?geo:mean)-50)*(.5+.5*cov)})}
   const keep=x=>{const q=$$('Q').value.toLowerCase();return inU(x.u)&&(!live.size||live.has(x.u.dslot||x.u.slot))&&($$('Inj').value!=='x'||x.u.inj!=='-1')&&(!q||x.u.player.toLowerCase().includes(q))};
   const LBL=Object.fromEntries(MV_B.map(b=>[b[0],b[1]])),TIP=Object.fromEntries(MV_B.map(b=>[b[0],b[2]]));
-  const rawTxt=(k,x)=>{const v=x.raw[k];if(v==null)return '—';switch(k){case 'td':case 'psi':return `rank ${Math.round(v)} of ${NT}`;case 'h2h':return `${(x.hp||0).toFixed(1)} PPR vs them over ${x.n} game${x.n===1?'':'s'} (${v>=0?'+':''}${v.toFixed(1)} vs his norm, discounted)`;
+  const rawTxt=(k,x)=>{const v=x.raw[k];if(v==null)return '—';switch(k){case 'rz':return `red-zone score ${Math.round(100*v)} of 100`;case 'snp':return `${Math.round(100*v)}% of his team's offensive snaps`;case 'td':case 'psi':return `rank ${Math.round(v)} of ${NT}`;case 'h2h':return `${(x.hp||0).toFixed(1)} PPR vs them over ${x.n} game${x.n===1?'':'s'} (${v>=0?'+':''}${v.toFixed(1)} vs his norm, discounted)`;
     case 'tdp':return `${Math.round(100*v)}% to score${x.tp&&x.tp.price!=null?' · best '+mlTxt(+x.tp.price)+(x.tp.book?' ('+x.tp.book+')':''):''}`;case 'ftd':return `${(100*v).toFixed(1)}% first TD${x.ft&&x.ft.fair!=null?' · fair '+mlTxt(+x.ft.fair):''}`;
     case 'wk':return `${v.toFixed(2)} lift score · ${x.wa.cs} of 8 core signals${x.wa.on&&x.wa.on.length?' · '+x.wa.on.map(z=>z.lbl).join(', '):''}`;case 'cat':return `${v} reliable categor${v===1?'y':'ies'}`;case 'meta':return `META ${Math.round(v)}`;
     case 'env':return `${v.toFixed(1)} implied points`;case 'form':return `${v>=0?'+':''}${Math.round(100*v)}% opps last 2 vs season`;case 'sch':return `${v>=0?'+':''}${v.toFixed(0)}% vs league`;case 'mkt':return `EV ${v>=0?'+':''}${(+v).toFixed(1)}% at ${mlTxt(+x.tp.price)}`;default:return String(v)}};
   const why=x=>[`CONSENSUS ${x.cons==null?'—':Math.round(x.cons)} · ${x.nb} board${x.nb===1?'':'s'} · top 10% on ${x.t10}, top quarter on ${x.t25}${x.low!=null?' · weakest board '+Math.round(100*x.low):''}`].concat(MV_B.filter(b=>on.has(b[0])&&HAS[b[0]]).map(([k,l])=>`${l}: ${x.pc[k]==null?'—':Math.round(100*x.pc[k])} · ${rawTxt(k,x)}`)).join('\n');
   const sv=(x,k)=>k==='cons'?x.cons:k==='t10'?x.t10:k==='t25'?x.t25:k==='nb'?x.nb:k==='player'?x.u.player:k==='opp'?(x.opp||null):k==='pos'?TPOS.indexOf(x.pos):x.pc[k];
   const cmp=(k,asc)=>(a,b)=>{const x=sv(a,k),y=sv(b,k);if(x==null||y==null){if(x==null&&y==null)return (b.cons??-1)-(a.cons??-1);return x==null?1:-1}return (x<y?-1:x>y?1:0)*(asc?1:-1)||(b.cons??-1)-(a.cons??-1)};
-  const rawNum=(k,x)=>{const v=x.raw[k];if(v==null)return '';switch(k){case 'td':case 'psi':return String(Math.round(v));case 'h2h':return (v>=0?'+':'')+v.toFixed(1);case 'tdp':return Math.round(100*v)+'%';case 'ftd':return (100*v).toFixed(1)+'%';case 'wk':return v.toFixed(2);case 'cat':return String(v);case 'meta':return String(Math.round(v));case 'env':return v.toFixed(1);case 'form':return (v>=0?'+':'')+Math.round(100*v)+'%';case 'sch':return (v>=0?'+':'')+Math.round(v);case 'mkt':return (v>=0?'+':'')+(+v).toFixed(0)+'%';default:return String(v)}};
+  const rawNum=(k,x)=>{const v=x.raw[k];if(v==null)return '';switch(k){case 'td':case 'psi':return String(Math.round(v));case 'h2h':return (v>=0?'+':'')+v.toFixed(1);case 'tdp':return Math.round(100*v)+'%';case 'ftd':return (100*v).toFixed(1)+'%';case 'wk':return v.toFixed(2);case 'cat':return String(v);case 'meta':return String(Math.round(v));case 'env':return v.toFixed(1);case 'form':return (v>=0?'+':'')+Math.round(100*v)+'%';case 'sch':return (v>=0?'+':'')+Math.round(v);case 'mkt':return (v>=0?'+':'')+(+v).toFixed(0)+'%';case 'rz':return String(Math.round(100*v));case 'snp':return Math.round(100*v)+'%';default:return String(v)}};
   const cell=(k,x)=>{const p=x.pc[k];return p==null?'<td class="op"><span class="dim">·</span></td>':`<td class="op" data-v="${p}" title="${esc(LBL[k]+': '+rawTxt(k,x)+' · '+Math.round(100*p)+'th percentile of '+x.pos+'s')}"><span class="badge" style="${gradeStyle(eq(p))}">${rawNum(k,x)}</span></td>`};
   function col(p){const st=sort[p],ks=MV_B.map(b=>b[0]).filter(k=>on.has(k)&&HAS[k]);
     const R=ROWS.filter(x=>(posTab==='ALL'||x.pos===posTab)&&keep(x)).sort(cmp(st.k,st.a));
@@ -7354,7 +7415,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-Object.assign(NOTES,{
+Object.assign(NOTES,{v56:['META rebuilt: one all-in score folding Ψ, red-zone usage, the anytime-TD model, implied points, TD allowed, scheme, form, H2H, the market, snaps and first-TD chance — declared weights, the backtest recipe kept as a second mode; one wide table with position tabs instead of five squeezed columns','META v2: red-zone and snap-share boards join the fold','Red zone everywhere: Player Board, TD Board, Matchup Board, Player Explorer, projections (±12% multiplier) and Insights all read the nflverse red-zone layer'],
  lab:['v18','the TD Grid\'s slot chips replace the depth dropdown — click QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2 on or off, ALL for every body on the chart; hide OUT and search unchanged'],
  tdbx:['v18','slot chips (QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2, ALL for everyone) replace the depth dropdown, the same filter as the TD Grid'],
  labgridp:['v18','now carries the TD Grid\'s player filter: slot chips in place of the depth dropdown, hide OUT, search'],
