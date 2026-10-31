@@ -273,6 +273,18 @@ def ncaa_lines(matchups):
     print(f"ncaa lines: {len(out) - 1} players with a book line · anytime TD {sum(1 for v in out.values() if isinstance(v, dict) and v['td'])} · props {sum(1 for v in out.values() if isinstance(v, dict) and v['pr'])} · as of {out['__asof__']}Z")
     return out
 
+def rz_payload():
+    """build_redzone.py outputs for the current season: players (both windows) and teams (offense + defense, both windows)."""
+    f, g = 'data/processed/redzone_players.csv', 'data/processed/redzone_teams.csv'
+    if not (os.path.exists(f) and os.path.exists(g)): return None
+    P = pd.read_csv(f); T = pd.read_csv(g); cur = int(P.season.max())
+    P = P[P.season == cur]; T = T[T.season == cur]
+    def f2(v): return None if v != v else (int(v) if float(v).is_integer() and abs(v) < 1e6 and not isinstance(v, float) else round(float(v), 3))
+    pc = ['scope', 'team', 'player', 'pfr', 'pos', 'games', 'team_games', 'rz_rush', 'gl_rush', 'rz_tgt', 'ez_tgt', 'rush', 'tgt', 'rz_opp', 'team_rz', 'rz_opp_share', 'snap_pct', 'xtd', 'td', 'rz_td']
+    tc = ['side', 'scope', 'team', 'games', 'rz_plays', 'pass_pct', 'run_pct', 'proe', 'trips', 'td_trips', 'td_rate', 'rz_td', 'xtd', 'td']
+    rows = lambda D, cols: [[(None if r[c] != r[c] else (r[c] if isinstance(r[c], str) else (int(r[c]) if float(r[c]).is_integer() and c not in ('rz_opp_share', 'snap_pct', 'xtd', 'pass_pct', 'run_pct', 'proe', 'td_rate') else round(float(r[c]), 3)))) for c in cols] for _, r in D.iterrows()]
+    return {'season': cur, 'pcols': pc, 'players': rows(P, pc), 'tcols': tc, 'teams': rows(T, tc), 'window': 5}
+
 def numer_payload():
     """Every game 2024- from nflverse games.csv with everything a decode can hang on: date, weekday, kickoff, teams, scores, the
     closing spread and total, the stadium (name, city, state), roof, referee, starting QBs, head coaches, rest days; plus the
@@ -497,6 +509,7 @@ def main():
     data['liveTd'] = json.load(open(lt)) if LEAGUE == 'nfl' and os.path.exists(lt) else None   # v46: touchdowns so far this week (ESPN, markets loop)
     data['metaBT'] = json.load(open(os.path.join(REPO, 'data/processed/meta_backtest.json'))) if LEAGUE == 'nfl' and os.path.exists(os.path.join(REPO, 'data/processed/meta_backtest.json')) else None   # v42: META weights + audit
     data['cfbLines'] = ncaa_lines(data['matchups']) if LEAGUE == 'ncaa' else None   # v40: which CFB players have a book line (prop / anytime TD)
+    data['rz'] = rz_payload() if LEAGUE == 'nfl' else None   # v55: red-zone usage layer (build_redzone.py)
     data['numer'] = numer_payload() if LEAGUE == 'nfl' else None   # v51: every game with its date, score and starting QBs, for the numerology backtest
     data['div'] = {'AFC East': ['BUF', 'MIA', 'NE', 'NYJ'], 'AFC North': ['BAL', 'CIN', 'CLE', 'PIT'], 'AFC South': ['HOU', 'IND', 'JAX', 'TEN'], 'AFC West': ['DEN', 'KC', 'LV', 'LAC'],
                    'NFC East': ['DAL', 'NYG', 'PHI', 'WAS'], 'NFC North': ['CHI', 'DET', 'GB', 'MIN'], 'NFC South': ['ATL', 'CAR', 'NO', 'TB'], 'NFC West': ['ARI', 'LAR', 'SF', 'SEA']}

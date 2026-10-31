@@ -52,6 +52,8 @@ def main():
     # build_advanced.py itself is offline and is skipped only if the cache is missing.
     if glob.glob('data/raw/nflverse/pbp_slim_*.parquet'):
         run(['scripts/build_advanced.py'])
+        try: run(['scripts/build_redzone.py'])            # v55: red-zone usage layer from the same pbp
+        except (Exception, SystemExit) as e: print('  build_redzone skipped:', e)
     else:
         print('!! data/raw/nflverse/ missing — run scripts/fetch_nflverse.py first; Intel tab will be stale')
     # game model + frozen picks ledger (needs data/processed/game_lines.csv from scripts/fetch_games.py — cloud) and
