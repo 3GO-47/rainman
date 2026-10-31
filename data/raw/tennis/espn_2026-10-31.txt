@@ -39,9 +39,9 @@ M|atp|185201|Erste Bank Open|10-2026|Quarterfinal|2026-10-30T12:40Z|STATUS_FINAL
 M|atp|185202|Erste Bank Open|10-2026|Quarterfinal|2026-10-30T14:35Z|STATUS_FINAL|Vienna, Austria|Centre Court|2964|Tommy Paul|usa|3782|Carlos Alcaraz|esp|Carlos Alcaraz|4.0-6.0 6.0-7.0
 M|atp|185199|Erste Bank Open|10-2026|Quarterfinal|2026-10-30T16:50Z|STATUS_FINAL|Vienna, Austria|Centre Court|2375|Alexander Zverev|ger|8621|Arthur Fery|gbr|Alexander Zverev|6.0-0.0 6.0-2.0
 M|atp|185200|Erste Bank Open|10-2026|Quarterfinal|2026-10-30T19:15Z|STATUS_FINAL|Vienna, Austria|Centre Court|2622|Matteo Berrettini|ita|2651|Alex de Minaur|aus|Alex de Minaur|6.0-7.0 2.0-6.0
-M|atp|185204|Erste Bank Open|10-2026|Semifinal|2026-10-31T14:10Z|STATUS_IN_PROGRESS|Vienna, Austria|Centre Court|2383|Daniil Medvedev|rus|3782|Carlos Alcaraz|esp||4.0-6.0 6.0-6.0
-M|atp|185203|Erste Bank Open|10-2026|Semifinal|2026-10-31T15:50Z|STATUS_SCHEDULED|Vienna, Austria|Centre Court|2375|Alexander Zverev|ger|2651|Alex de Minaur|aus||
-M|atp|185205|Erste Bank Open|10-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Vienna, Austria||-3|TBD||-4|TBD|||
+M|atp|185204|Erste Bank Open|10-2026|Semifinal|2026-10-31T14:10Z|STATUS_FINAL|Vienna, Austria|Centre Court|2383|Daniil Medvedev|rus|3782|Carlos Alcaraz|esp|Carlos Alcaraz|4.0-6.0 6.0-7.0
+M|atp|185203|Erste Bank Open|10-2026|Semifinal|2026-10-31T16:10Z|STATUS_IN_PROGRESS|Vienna, Austria|Centre Court|2375|Alexander Zverev|ger|2651|Alex de Minaur|aus||4.0-6.0 3.0-0.0
+M|atp|185205|Erste Bank Open|10-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Vienna, Austria||-3|TBD||3782|Carlos Alcaraz|esp||
 M|atp|187216|Swiss Indoors Basel|23-2026|Qualifying 1st Round|2026-10-24T09Z|STATUS_FINAL|Basel, Switzerland|Center Court|1993|Marcos Giron|usa|3322|Yannick Hanfmann|ger|Yannick Hanfmann|2.0-6.0 7.0-5.0 4.0-6.0
 M|atp|187219|Swiss Indoors Basel|23-2026|Qualifying 1st Round|2026-10-24T09Z|STATUS_FINAL|Basel, Switzerland|IWB Court 1|2874|Miomir Kecmanovic|ser|3716|Rinky Hijikata|aus|Rinky Hijikata|6.0-7.0 3.0-6.0
 M|atp|187215|Swiss Indoors Basel|23-2026|Qualifying 1st Round|2026-10-24T10:30Z|STATUS_FINAL|Basel, Switzerland|Center Court|10219|Jaime Faria|por|10212|Mika Brunold|sui|Mika Brunold|6.0-7.0 6.0-7.0
@@ -83,7 +83,7 @@ M|atp|185154|Swiss Indoors Basel|23-2026|Quarterfinal|2026-10-30T15:35Z|STATUS_R
 M|atp|185155|Swiss Indoors Basel|23-2026|Quarterfinal|2026-10-30T17:05Z|STATUS_FINAL|Basel, Switzerland|Center Court|3752|Jerome Kym|sui|3754|Jiri Lehecka|cze|Jiri Lehecka|4.0-6.0 2.0-6.0
 M|atp|185156|Swiss Indoors Basel|23-2026|Quarterfinal|2026-10-30T18:50Z|STATUS_FINAL|Basel, Switzerland|Center Court|2337|Jan-Lennard Struff|ger|4115|Nuno Borges|por|Jan-Lennard Struff|6.0-2.0 6.0-3.0
 M|atp|185158|Swiss Indoors Basel|23-2026|Semifinal|2026-10-31T14:10Z|STATUS_FINAL|Basel, Switzerland|Center Court|9376|Valentin Vacherot|mon|2946|Taylor Fritz|usa|Valentin Vacherot|7.0-6.0 6.0-3.0
-M|atp|185157|Swiss Indoors Basel|23-2026|Semifinal|2026-10-31T16Z|STATUS_SCHEDULED|Basel, Switzerland|Center Court|3754|Jiri Lehecka|cze|2337|Jan-Lennard Struff|ger||
+M|atp|185157|Swiss Indoors Basel|23-2026|Semifinal|2026-10-31T16:05Z|STATUS_IN_PROGRESS|Basel, Switzerland|Center Court|3754|Jiri Lehecka|cze|2337|Jan-Lennard Struff|ger||3.0-6.0 5.0-5.0
 M|atp|185159|Swiss Indoors Basel|23-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Basel, Switzerland||-3|TBD||9376|Valentin Vacherot|mon||
 M|atp|187334|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T10:05Z|STATUS_FINAL|Paris, France|Court 1|1590|Pablo Carreno Busta|esp|10153|Mattia Bellucci|ita|Mattia Bellucci|1.0-6.0 6.0-7.0
 M|atp|187338|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T10:05Z|STATUS_FINAL|Paris, France|Court 2|4010|Thiago Agustin Tirante|arg|3953|Zachary Svajda|usa|Thiago Agustin Tirante|3.0-6.0 6.0-1.0 6.0-4.0
@@ -94,18 +94,18 @@ M|atp|187347|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T11:55Z|
 M|atp|187340|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T12:15Z|STATUS_FINAL|Paris, France|Court 2|4008|Juan Manuel Cerundolo|arg|3849|Aleksandar Kovacevic|usa|Juan Manuel Cerundolo|7.0-6.0 6.0-3.0
 M|atp|187341|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T13:20Z|STATUS_FINAL|Paris, France|Court Central|3319|Tallon Griekspoor|ned|2355|Benjamin Bonzi|fra|Benjamin Bonzi|3.0-6.0 7.0-6.0 3.0-6.0
 M|atp|187346|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T13:40Z|STATUS_FINAL|Paris, France|Court 1|16102|Felix Balshaw|fra|3322|Yannick Hanfmann|ger|Yannick Hanfmann|6.0-7.0 3.0-6.0
-M|atp|187335|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T13:45Z|STATUS_IN_PROGRESS|Paris, France|Court 3|3340|Sebastian Baez|arg|1842|Damir Dzumhur|bih||7.0-6.0 5.0-3.0
-M|atp|187336|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T14Z|STATUS_IN_PROGRESS|Paris, France|Court 2|3052|Lorenzo Sonego|ita|2709|Jaume Munar|esp||6.0-7.0 3.0-2.0
-M|atp|187343|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T15:25Z|STATUS_IN_PROGRESS|Paris, France|Court 1|4115|Nuno Borges|por|1266|Adrian Mannarino|fra||1.0-2.0
-M|atp|187344|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T15:50Z|STATUS_SCHEDULED|Paris, France|Court 3|2635|Alex Molcan|svk|3203|Daniel Altmaier|ger||
-M|atp|187337|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T16Z|STATUS_SCHEDULED|Paris, France|Court 2|11396|Adolfo Daniel Vallejo|par|1287|Grigor Dimitrov|bul||
-M|atp|187348|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||4008|Juan Manuel Cerundolo|arg|2874|Miomir Kecmanovic|ser||
-M|atp|187349|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||4010|Thiago Agustin Tirante|arg|10153|Mattia Bellucci|ita||
-M|atp|187350|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||-3|TBD||3322|Yannick Hanfmann|ger||
-M|atp|187351|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||-3|TBD||3811|Tomas Machac|cze||
-M|atp|187352|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||-3|TBD||-4|TBD|||
-M|atp|187353|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||-3|TBD||-4|TBD|||
-M|atp|187354|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T04Z|STATUS_SCHEDULED|Paris, France||3716|Rinky Hijikata|aus|3809|Vit Kopriva|cze||
+M|atp|187335|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T13:45Z|STATUS_FINAL|Paris, France|Court 3|3340|Sebastian Baez|arg|1842|Damir Dzumhur|bih|Sebastian Baez|7.0-6.0 7.0-5.0
+M|atp|187336|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T14Z|STATUS_FINAL|Paris, France|Court 2|3052|Lorenzo Sonego|ita|2709|Jaume Munar|esp|Lorenzo Sonego|6.0-7.0 6.0-3.0 6.0-4.0
+M|atp|187343|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T15:25Z|STATUS_IN_PROGRESS|Paris, France|Court 1|4115|Nuno Borges|por|1266|Adrian Mannarino|fra||4.0-6.0 6.0-1.0 4.0-5.0
+M|atp|187344|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T16:10Z|STATUS_IN_PROGRESS|Paris, France|Court 3|2635|Alex Molcan|svk|3203|Daniel Altmaier|ger||6.0-4.0 4.0-5.0
+M|atp|187337|Rolex Paris Masters|13-2026|Qualifying 1st Round|2026-10-31T17:15Z|STATUS_IN_PROGRESS|Paris, France|Court 2|11396|Adolfo Daniel Vallejo|par|1287|Grigor Dimitrov|bul||1.0-1.0
+M|atp|187349|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T10Z|STATUS_SCHEDULED|Paris, France|Court Central|4010|Thiago Agustin Tirante|arg|10153|Mattia Bellucci|ita||
+M|atp|187354|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T10Z|STATUS_SCHEDULED|Paris, France|Court 1|3716|Rinky Hijikata|aus|3809|Vit Kopriva|cze||
+M|atp|187348|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T11Z|STATUS_SCHEDULED|Paris, France|Court 2|4008|Juan Manuel Cerundolo|arg|2874|Miomir Kecmanovic|ser||
+M|atp|187350|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T11:30Z|STATUS_SCHEDULED|Paris, France|Court Central|2355|Benjamin Bonzi|fra|3322|Yannick Hanfmann|ger||
+M|atp|187351|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T11:30Z|STATUS_SCHEDULED|Paris, France|Court 1|3340|Sebastian Baez|arg|3811|Tomas Machac|cze||
+M|atp|187353|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T12:30Z|STATUS_SCHEDULED|Paris, France|Court 2|-3|TBD||3052|Lorenzo Sonego|ita||
+M|atp|187352|Rolex Paris Masters|13-2026|Qualifying Final|2026-11-01T13Z|STATUS_SCHEDULED|Paris, France|Court 1|-3|TBD||-4|TBD|||
 M|atp|186444|Rolex Paris Masters|13-2026|Round 1|2026-11-02T05Z|STATUS_SCHEDULED|Paris, France||10239|Daniel Merida|esp|11757|Alexander Blockx|bel||
 M|atp|186445|Rolex Paris Masters|13-2026|Round 1|2026-11-02T05Z|STATUS_SCHEDULED|Paris, France||2964|Tommy Paul|usa|3659|Holger Rune|den||
 M|atp|186446|Rolex Paris Masters|13-2026|Round 1|2026-11-02T05Z|STATUS_SCHEDULED|Paris, France||3511|Arthur Rinderknech|fra|3700|Francisco Cerundolo|arg||
@@ -288,8 +288,8 @@ M|wta|185778|Curitiba Open|1080-2026|Quarterfinal|2026-10-30T16:25Z|STATUS_FINAL
 M|wta|185776|Curitiba Open|1080-2026|Quarterfinal|2026-10-30T18:50Z|STATUS_RETIRED|Curitiba, Brazil|Quadra Central|7815|Francesca Jones|gbr|17009|Nauhany Vitoria Leme Da Silva|bra|Nauhany Vitoria Leme Da Silva|5.0-7.0
 M|wta|185777|Curitiba Open|1080-2026|Quarterfinal|2026-10-30T20:20Z|STATUS_FINAL|Curitiba, Brazil|Quadra Central|5161|Alice Tubello|fra|5746|Jazmin Ortenzi|arg|Alice Tubello|2.0-6.0 6.0-2.0 6.0-3.0
 M|wta|185780|Curitiba Open|1080-2026|Semifinal|2026-10-31T14:05Z|STATUS_FINAL|Curitiba, Brazil|Quadra Central|5749|Julia Riera|arg|2599|Julia Grabher|aut|Julia Grabher|3.0-6.0 3.0-6.0
-M|wta|185779|Curitiba Open|1080-2026|Semifinal|2026-10-31T15:45Z|STATUS_SCHEDULED|Curitiba, Brazil|Quadra Central|17009|Nauhany Vitoria Leme Da Silva|bra|5161|Alice Tubello|fra||
-M|wta|185781|Curitiba Open|1080-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Curitiba, Brazil||-3|TBD||2599|Julia Grabher|aut||
+M|wta|185779|Curitiba Open|1080-2026|Semifinal|2026-10-31T15:50Z|STATUS_FINAL|Curitiba, Brazil|Quadra Central|17009|Nauhany Vitoria Leme Da Silva|bra|5161|Alice Tubello|fra|Alice Tubello|0.0-6.0 1.0-6.0
+M|wta|185781|Curitiba Open|1080-2026|Final|2026-11-01T14Z|STATUS_SCHEDULED|Curitiba, Brazil|Quadra Central|5161|Alice Tubello|fra|2599|Julia Grabher|aut||
 M|wta|187272|Valle D'Aosta Ladies Open|1081-2026|Qualifying 1st Round|2026-10-25T11:05Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|3285|Tayisiya Morderger|ger|15354|Alja Senica|slo|Alja Senica|6.0-7.0 6.0-0.0 6.0-7.0
 M|wta|187266|Valle D'Aosta Ladies Open|1081-2026|Qualifying 1st Round|2026-10-25T14:10Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|19252|Finja Matuella|ita|18271|Gaia Maduzzi|ita|Gaia Maduzzi|1.0-6.0 1.0-6.0
 M|wta|187269|Valle D'Aosta Ladies Open|1081-2026|Qualifying 1st Round|2026-10-25T15:15Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|4366|Yana Morderger|ger|16995|Enola Chiesa|ita|Enola Chiesa|5.0-7.0 2.0-6.0
@@ -327,8 +327,8 @@ M|wta|185857|Valle D'Aosta Ladies Open|1081-2026|Quarterfinal|2026-10-30T13:05Z|
 M|wta|185852|Valle D'Aosta Ladies Open|1081-2026|Quarterfinal|2026-10-30T14:30Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|2902|Anna Blinkova|fra|6419|Martyna Kubka|pol|Anna Blinkova|6.0-3.0 6.0-2.0
 M|wta|185856|Valle D'Aosta Ladies Open|1081-2026|Quarterfinal|2026-10-30T15:10Z|STATUS_FINAL|Courmayeur, Italy|Grandstand|6061|Elsa Jacquemot|fra|9442|Elizara Yaneva|bul|Elsa Jacquemot|5.0-7.0 7.0-6.0 6.0-1.0
 M|wta|185853|Valle D'Aosta Ladies Open|1081-2026|Semifinal|2026-10-31T13:30Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|2902|Anna Blinkova|fra|7849|Noma Noha Akugue|ger|Noma Noha Akugue|4.0-6.0 3.0-6.0
-M|wta|185854|Valle D'Aosta Ladies Open|1081-2026|Semifinal|2026-10-31T15:15Z|STATUS_IN_PROGRESS|Courmayeur, Italy|Centre Court|6061|Elsa Jacquemot|fra|6570|Alina Charaeva|arm||2.0-5.0
-M|wta|185865|Valle D'Aosta Ladies Open|1081-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Courmayeur, Italy||7849|Noma Noha Akugue|ger|-4|TBD|||
+M|wta|185854|Valle D'Aosta Ladies Open|1081-2026|Semifinal|2026-10-31T15:15Z|STATUS_FINAL|Courmayeur, Italy|Centre Court|6061|Elsa Jacquemot|fra|6570|Alina Charaeva|arm|Alina Charaeva|2.0-6.0 6.0-4.0 1.0-6.0
+M|wta|185865|Valle D'Aosta Ladies Open|1081-2026|Final|2026-11-01T04Z|STATUS_SCHEDULED|Courmayeur, Italy||7849|Noma Noha Akugue|ger|6570|Alina Charaeva|arm||
 M|wta|187284|Queretaro Open|1034-2026|Qualifying 1st Round|2026-10-26T15:35Z|STATUS_FINAL|Santiago de Querétaro, Mexico|Estadio Mexcovery|17423|Carmen Andreea Herea|rom|17000|Abril Cardenas Olivares|mex|Carmen Andreea Herea|6.0-2.0 6.0-3.0
 M|wta|187287|Queretaro Open|1034-2026|Qualifying 1st Round|2026-10-26T15:35Z|STATUS_FINAL|Santiago de Querétaro, Mexico|Court 2|2396|Victoria Rodriguez|mex|2670|Maria Herazo Gonzalez|col|Victoria Rodriguez|6.0-7.0 6.0-1.0 6.0-4.0
 M|wta|187285|Queretaro Open|1034-2026|Qualifying 1st Round|2026-10-26T15:40Z|STATUS_FINAL|Santiago de Querétaro, Mexico|Court 3|10236|Maria Camila Torres Murcia|col|12395|Maria Fernanda Navarro Oliva|mex|Maria Fernanda Navarro Oliva|7.0-6.0 2.0-6.0 1.0-6.0
@@ -460,7 +460,7 @@ M|wta|186593|Chennai Open|889-2026|Semifinal|2026-11-07T05Z|STATUS_SCHEDULED|Che
 M|wta|186598|Chennai Open|889-2026|Final|2026-11-08T05Z|STATUS_SCHEDULED|Chennai, India||-3|TBD||-4|TBD|||
 M|wta|187355|Angola Ladies Open|1082-2026|Qualifying 1st Round|2026-11-01T10Z|STATUS_SCHEDULED|Luanda, Angola|Lwena Court|19307|Prathyusha Rachapudi|ind|4152|Ashmitha Easwaramurthi|ind||
 M|wta|187357|Angola Ladies Open|1082-2026|Qualifying 1st Round|2026-11-01T11:30Z|STATUS_SCHEDULED|Luanda, Angola|Lwena Court|19305|Abigayel Vosloo|rsa|17699|Saumya Vig|ind||
-M|wta|187363|Angola Ladies Open|1082-2026|Qualifying Final|2026-11-01T13Z|STATUS_SCHEDULED|Luanda, Angola|Lwena Court|19304|Darja Suvirdjonkova|ser|19306|Emma VAN POPPEL|ned||
+M|wta|187363|Angola Ladies Open|1082-2026|Qualifying Final|2026-11-01T13Z|STATUS_SCHEDULED|Luanda, Angola|Lwena Court|19304|Darja Suvirdjonkova|ser|19306|Emma Van Poppel|ned||
 M|wta|186661|Angola Ladies Open|1082-2026|Round 1|2026-11-02T05Z|STATUS_SCHEDULED|Luanda, Angola||-3|TBD||-4|TBD|||
 M|wta|187366|Angola Ladies Open|1082-2026|Qualifying Final|2026-11-02T05Z|STATUS_SCHEDULED|Luanda, Angola||4224|Ana Sofia Sanchez|mex|-4|TBD|||
 M|wta|187365|Angola Ladies Open|1082-2026|Qualifying Final|2026-11-02T05Z|STATUS_SCHEDULED|Luanda, Angola||18677|Franziska Sziedat|ger|14237|Madhurima Sawant|ind||
