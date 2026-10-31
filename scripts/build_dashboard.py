@@ -520,6 +520,26 @@ def main():
         if isinstance(o, np.integer): return int(o)
         if isinstance(o, np.floating): return float(o)
         raise TypeError(type(o))
+    # v56: columnize the big list-of-dict payloads (the same rows, keys written once) — the template rehydrates them on load,
+    # so every consumer still sees objects. Keeps the page under the 10 MB browser-upload cap.
+    def columnize(d):
+        paths = []
+        def do(container, key, path):
+            v = container[key]
+            if isinstance(v, list) and len(v) >= 200 and v and isinstance(v[0], dict):
+                cols = []
+                for r in v:
+                    for c in r.keys():
+                        if c not in cols: cols.append(c)
+                container[key] = {'__cols': cols, 'rows': [[r.get(c) for c in cols] for r in v]}
+                paths.append(path)
+        for k in list(d.keys()):
+            if isinstance(d[k], list): do(d, k, k)
+            elif isinstance(d[k], dict):
+                for k2 in list(d[k].keys()):
+                    if k2 != '__cols' and isinstance(d[k][k2], list): do(d[k], k2, k + '.' + k2)
+        d['__columnized'] = paths
+    columnize(data)
     payload = json.dumps(data, separators=(',', ':'), default=np_default)
     template = open(os.path.join(REPO, 'scripts/dashboard_template.html'), encoding='utf-8').read()
     _i = template.index('<style>') + 7; _j = template.index('</style>')

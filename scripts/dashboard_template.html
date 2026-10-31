@@ -1236,6 +1236,7 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 </div>
 <script>
 const J = __DATA__;
+(J.__columnized||[]).forEach(path=>{const [a,b]=path.split('.');const box=b?J[a]:J;const key=b||a;const v=box&&box[key];if(v&&v.__cols){const C=v.__cols;box[key]=v.rows.map(r=>{const o={};for(let i=0;i<C.length;i++)o[C[i]]=r[i];return o})}});   /* v56: rehydrate the columnized payloads */
 const LG=J.league||{code:'nfl'};const NWK=LG.weeks||18;const IS_NFL=LG.code!=='ncaa';const NT=LG.nTeams||32,MID=(NT+1)/2,HALF=(NT-1)/2,RS=NT/32;
 /* ---------- helpers ---------- */
 const $=q=>document.querySelector(q);

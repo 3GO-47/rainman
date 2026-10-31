@@ -926,3 +926,7 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - J.rz embedded (current season, both windows). TD Usage tab: cards in the reference layout (team · name · #rank · pos · opp · games · score ring; Expected / Actual (dots) / TDs vs Exp; RZ Rush · GL Rush · RZ Tgt · EZ Tgt · Snaps ring; team inside the 20 PROE + pass/run; opponent defense PROE + TD-rate chip; RZ share · RZ TDs · trips) or the sortable table; last-5 / season; pos chips; the global bar applies. Score = percentile blend (xTD/g .35 · RZ share .20 · GL+EZ per game .20 · opp RZ TD rate .15 · team RZ trips/g .10); bye weeks sink.
 - Cross-checked against the reference: Javonte 25/16, Walker 24/17/5/1, Gibbs 28/11/7/1, Henry 25/16, Wilson 13 RZ tgt — identical counts; xTD differs by model (ours 6.73 vs 6.25 for Javonte).
 - Class collision: the NFL CSS already had .tdc (TD board cards) — the new cards are .tuc / tu-*.
+
+## n118 · 2026-10-31 · page weight: columnized payloads (build_dashboard columnize + template rehydrate)
+- Every list-of-dicts payload with 200+ rows is written once-keys/columns ({__cols, rows}) and rehydrated into objects on load, one line after `const J = __DATA__` — no consumer changes. rainman.html 11.5 MB → 8.4 MB, back under the 10 MB browser-upload cap; all 40 tabs render with zero console errors. (The NCAA build shares the code.)
+- TD Usage + Numerology Takeaways uploaded directly instead of waiting for the loop.
