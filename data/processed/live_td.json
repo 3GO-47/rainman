@@ -1,17 +1,17 @@
 {
- "pulled": "2026-11-01T16:37Z",
+ "pulled": "2026-11-01T19:16Z",
  "season": 2026,
  "week": 8,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "BAL@BUF": "pre",
-  "TEN@CIN": "pre",
-  "ARI@DAL": "pre",
-  "MIN@DET": "pre",
-  "LV@NYJ": "pre",
-  "CLE@PIT": "pre",
-  "ATL@TB": "pre",
-  "IND@JAX": "pre",
+  "BAL@BUF": "in",
+  "TEN@CIN": "in",
+  "ARI@DAL": "in",
+  "MIN@DET": "in",
+  "LV@NYJ": "in",
+  "CLE@PIT": "in",
+  "ATL@TB": "in",
+  "IND@JAX": "in",
   "LAC@LAR": "pre",
   "KC@DEN": "pre",
   "NE@MIA": "pre",
@@ -21,36 +21,36 @@
  },
  "scores": {
   "BAL@BUF": [
-   0,
-   0
+   7,
+   13
   ],
   "TEN@CIN": [
-   0,
-   0
+   13,
+   7
   ],
   "ARI@DAL": [
-   0,
-   0
+   3,
+   14
   ],
   "MIN@DET": [
-   0,
-   0
+   7,
+   3
   ],
   "LV@NYJ": [
-   0,
-   0
+   14,
+   20
   ],
   "CLE@PIT": [
-   0,
-   0
+   3,
+   13
   ],
   "ATL@TB": [
    0,
-   0
+   9
   ],
   "IND@JAX": [
    0,
-   0
+   14
   ],
   "LAC@LAR": [
    0,
@@ -78,6 +78,118 @@
   ]
  },
  "plays": [
+  {
+   "game": "BAL@BUF",
+   "q": 1,
+   "clock": "10:10",
+   "team": "BUF",
+   "player": "Josh Allen",
+   "how": "rush"
+  },
+  {
+   "game": "BAL@BUF",
+   "q": 1,
+   "clock": "3:18",
+   "team": "BAL",
+   "player": "Derrick Henry",
+   "how": "rush"
+  },
+  {
+   "game": "TEN@CIN",
+   "q": 1,
+   "clock": "7:55",
+   "team": "TEN",
+   "player": "Tony Pollard",
+   "how": "rush"
+  },
+  {
+   "game": "TEN@CIN",
+   "q": 2,
+   "clock": "13:20",
+   "team": "CIN",
+   "player": "Ja'Marr Chase",
+   "how": "rec"
+  },
+  {
+   "game": "ARI@DAL",
+   "q": 1,
+   "clock": "2:33",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rush"
+  },
+  {
+   "game": "ARI@DAL",
+   "q": 2,
+   "clock": "5:16",
+   "team": "DAL",
+   "player": "Ryan Flournoy",
+   "how": "rec"
+  },
+  {
+   "game": "MIN@DET",
+   "q": 2,
+   "clock": "14:25",
+   "team": "MIN",
+   "player": "Justin Jefferson",
+   "how": "rec"
+  },
+  {
+   "game": "LV@NYJ",
+   "q": 1,
+   "clock": "7:23",
+   "team": "LV",
+   "player": "Brock Bowers",
+   "how": "rec"
+  },
+  {
+   "game": "LV@NYJ",
+   "q": 2,
+   "clock": "10:56",
+   "team": "NYJ",
+   "player": "Isaiah Williams",
+   "how": "rec"
+  },
+  {
+   "game": "LV@NYJ",
+   "q": 2,
+   "clock": "10:44",
+   "team": "LV",
+   "player": "Dylan Laube",
+   "how": "ret"
+  },
+  {
+   "game": "LV@NYJ",
+   "q": 2,
+   "clock": "6:18",
+   "team": "NYJ",
+   "player": "Adonai Mitchell",
+   "how": "rec"
+  },
+  {
+   "game": "CLE@PIT",
+   "q": 1,
+   "clock": "7:57",
+   "team": "PIT",
+   "player": "Rico Dowdle",
+   "how": "rush"
+  },
+  {
+   "game": "IND@JAX",
+   "q": 1,
+   "clock": "5:30",
+   "team": "JAX",
+   "player": "Brian Thomas Jr.",
+   "how": "rec"
+  },
+  {
+   "game": "IND@JAX",
+   "q": 2,
+   "clock": "7:14",
+   "team": "JAX",
+   "player": "Nate Boerkircher",
+   "how": "rec"
+  },
   {
    "game": "CAR@GB",
    "q": 1,
