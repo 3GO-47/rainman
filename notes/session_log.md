@@ -937,3 +937,7 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Red zone wired into: Player Board + TD Board (xTD, RZ%, GL+EZ columns, sortable, shaded within position), Player Explorer (columns + chip on the card), projections (rzX ±12% multiplier, shown in the tip → Overview edge board, PROJ columns), Insights (red-zone panel: engines, share, rising/fading, softest/stingiest end zones). Legacy #board (hidden view) also carries xTD/RZ%.
 - Matching: nflverse name normalised + team, name-only fallback; 247/256 RB/WR/TE slot owners matched (misses = moved/injured bodies with no touches in the window).
 - scripts/patch_v56_meta.py (rerunnable, guarded). Proofed rainman.html + ncaa.html: 39 tabs each, 0 errors, 0 overflow at 2000px. NCAA has no rz layer → columns hide, chip/panel skip.
+
+## n120 · 2026-11-01 · v57: META / META v2 back to one composite column, split by position
+- Josh's rule, repeated: ONE composite column, the rest separated by position. META and META v2 are the five-section layout again (all · QB · RB · WR · TE), each row player · opp · META (or CONS). Every signal stays inside the composite and the hover breakdown; signal columns, position tabs and lens chips removed. The all-in weights from v56 are unchanged.
+- scripts/patch_v57_meta_cols.py on top of v56. Proofed: 39 tabs, 0 errors, 0 overflow at 2000px.
