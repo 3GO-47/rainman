@@ -1,10 +1,9 @@
 {
- "pulled": "2026-10-30T00:46Z",
+ "pulled": "2026-11-01T05:21Z",
  "season": 2026,
  "week": 8,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "CAR@GB": "in",
   "BAL@BUF": "pre",
   "TEN@CIN": "pre",
   "ARI@DAL": "pre",
@@ -17,13 +16,10 @@
   "KC@DEN": "pre",
   "NE@MIA": "pre",
   "PHI@WSH": "pre",
+  "CAR@GB": "post",
   "CHI@SEA": "pre"
  },
  "scores": {
-  "CAR@GB": [
-   3,
-   6
-  ],
   "BAL@BUF": [
    0,
    0
@@ -72,6 +68,10 @@
    0,
    0
   ],
+  "CAR@GB": [
+   19,
+   27
+  ],
   "CHI@SEA": [
    0,
    0
@@ -84,6 +84,46 @@
    "clock": "5:08",
    "team": "GB",
    "player": "Tucker Kraft",
+   "how": "rec"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 2,
+   "clock": "14:57",
+   "team": "CAR",
+   "player": "Chuba Hubbard",
+   "how": "rush"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 2,
+   "clock": "6:33",
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "how": "rush"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 2,
+   "clock": "1:46",
+   "team": "GB",
+   "player": "Matthew Golden",
+   "how": "rec"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 3,
+   "clock": "7:30",
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "how": "rec"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 4,
+   "clock": "5:37",
+   "team": "CAR",
+   "player": "Jalen Coker",
    "how": "rec"
   }
  ]
