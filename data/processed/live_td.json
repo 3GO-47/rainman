@@ -1,10 +1,9 @@
 {
- "pulled": "2026-11-01T23:21Z",
+ "pulled": "2026-11-02T00:06Z",
  "season": 2026,
  "week": 8,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "LAC@LAR": "in",
   "KC@DEN": "in",
   "NE@MIA": "in",
   "BAL@BUF": "post",
@@ -15,21 +14,18 @@
   "CLE@PIT": "post",
   "ATL@TB": "post",
   "IND@JAX": "post",
+  "LAC@LAR": "post",
   "PHI@WSH": "pre",
   "CAR@GB": "post",
   "CHI@SEA": "pre"
  },
  "scores": {
-  "LAC@LAR": [
-   9,
-   24
-  ],
   "KC@DEN": [
-   17,
+   24,
    13
   ],
   "NE@MIA": [
-   10,
+   24,
    13
   ],
   "BAL@BUF": [
@@ -64,6 +60,10 @@
    7,
    42
   ],
+  "LAC@LAR": [
+   9,
+   24
+  ],
   "PHI@WSH": [
    0,
    0
@@ -78,30 +78,6 @@
   ]
  },
  "plays": [
-  {
-   "game": "LAC@LAR",
-   "q": 2,
-   "clock": "0:19",
-   "team": "LAR",
-   "player": "Kyren Williams",
-   "how": "rush"
-  },
-  {
-   "game": "LAC@LAR",
-   "q": 3,
-   "clock": "10:42",
-   "team": "LAR",
-   "player": "Blake Corum",
-   "how": "rush"
-  },
-  {
-   "game": "LAC@LAR",
-   "q": 3,
-   "clock": "3:41",
-   "team": "LAR",
-   "player": "Puka Nacua",
-   "how": "rec"
-  },
   {
    "game": "KC@DEN",
    "q": 1,
@@ -127,6 +103,14 @@
    "how": "rec"
   },
   {
+   "game": "KC@DEN",
+   "q": 3,
+   "clock": "1:38",
+   "team": "KC",
+   "player": "Noah Gray",
+   "how": "rec"
+  },
+  {
    "game": "NE@MIA",
    "q": 2,
    "clock": "0:08",
@@ -140,6 +124,22 @@
    "clock": "9:23",
    "team": "NE",
    "player": "Kyle Williams",
+   "how": "rec"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 3,
+   "clock": "0:59",
+   "team": "NE",
+   "player": "Drake Maye",
+   "how": "rush"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 4,
+   "clock": "12:39",
+   "team": "NE",
+   "player": "DeMario Douglas",
    "how": "rec"
   },
   {
@@ -500,6 +500,30 @@
    "clock": "0:00",
    "team": "JAX",
    "player": "Bhayshul Tuten",
+   "how": "rec"
+  },
+  {
+   "game": "LAC@LAR",
+   "q": 2,
+   "clock": "0:19",
+   "team": "LAR",
+   "player": "Kyren Williams",
+   "how": "rush"
+  },
+  {
+   "game": "LAC@LAR",
+   "q": 3,
+   "clock": "10:42",
+   "team": "LAR",
+   "player": "Blake Corum",
+   "how": "rush"
+  },
+  {
+   "game": "LAC@LAR",
+   "q": 3,
+   "clock": "3:41",
+   "team": "LAR",
+   "player": "Puka Nacua",
    "how": "rec"
   },
   {
