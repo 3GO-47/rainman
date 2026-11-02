@@ -1,11 +1,11 @@
 {
- "pulled": "2026-11-02T00:06Z",
+ "pulled": "2026-11-02T05:21Z",
  "season": 2026,
  "week": 8,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "KC@DEN": "in",
-  "NE@MIA": "in",
+  "CHI@SEA": "pre",
+  "CAR@GB": "post",
   "BAL@BUF": "post",
   "TEN@CIN": "post",
   "ARI@DAL": "post",
@@ -15,18 +15,18 @@
   "ATL@TB": "post",
   "IND@JAX": "post",
   "LAC@LAR": "post",
-  "PHI@WSH": "pre",
-  "CAR@GB": "post",
-  "CHI@SEA": "pre"
+  "KC@DEN": "post",
+  "NE@MIA": "post",
+  "PHI@WSH": "post"
  },
  "scores": {
-  "KC@DEN": [
-   24,
-   13
+  "CHI@SEA": [
+   0,
+   0
   ],
-  "NE@MIA": [
-   24,
-   13
+  "CAR@GB": [
+   19,
+   27
   ],
   "BAL@BUF": [
    10,
@@ -64,82 +64,66 @@
    9,
    24
   ],
+  "KC@DEN": [
+   24,
+   28
+  ],
+  "NE@MIA": [
+   24,
+   19
+  ],
   "PHI@WSH": [
-   0,
-   0
-  ],
-  "CAR@GB": [
-   19,
+   10,
    27
-  ],
-  "CHI@SEA": [
-   0,
-   0
   ]
  },
  "plays": [
   {
-   "game": "KC@DEN",
+   "game": "CAR@GB",
    "q": 1,
-   "clock": "6:04",
-   "team": "KC",
-   "player": "Rashee Rice",
+   "clock": "5:08",
+   "team": "GB",
+   "player": "Tucker Kraft",
    "how": "rec"
   },
   {
-   "game": "KC@DEN",
+   "game": "CAR@GB",
    "q": 2,
-   "clock": "7:40",
-   "team": "KC",
-   "player": "Emmett Johnson",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 2,
-   "clock": "1:15",
-   "team": "DEN",
-   "player": "Jaylen Waddle",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 3,
-   "clock": "1:38",
-   "team": "KC",
-   "player": "Noah Gray",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 2,
-   "clock": "0:08",
-   "team": "MIA",
-   "player": "Malik Washington",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 3,
-   "clock": "9:23",
-   "team": "NE",
-   "player": "Kyle Williams",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 3,
-   "clock": "0:59",
-   "team": "NE",
-   "player": "Drake Maye",
+   "clock": "14:57",
+   "team": "CAR",
+   "player": "Chuba Hubbard",
    "how": "rush"
   },
   {
-   "game": "NE@MIA",
+   "game": "CAR@GB",
+   "q": 2,
+   "clock": "6:33",
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "how": "rush"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 2,
+   "clock": "1:46",
+   "team": "GB",
+   "player": "Matthew Golden",
+   "how": "rec"
+  },
+  {
+   "game": "CAR@GB",
+   "q": 3,
+   "clock": "7:30",
+   "team": "GB",
+   "player": "Josh Jacobs",
+   "how": "rec"
+  },
+  {
+   "game": "CAR@GB",
    "q": 4,
-   "clock": "12:39",
-   "team": "NE",
-   "player": "DeMario Douglas",
+   "clock": "5:37",
+   "team": "CAR",
+   "player": "Jalen Coker",
    "how": "rec"
   },
   {
@@ -527,52 +511,116 @@
    "how": "rec"
   },
   {
-   "game": "CAR@GB",
+   "game": "KC@DEN",
    "q": 1,
-   "clock": "5:08",
-   "team": "GB",
-   "player": "Tucker Kraft",
+   "clock": "6:04",
+   "team": "KC",
+   "player": "Rashee Rice",
    "how": "rec"
   },
   {
-   "game": "CAR@GB",
+   "game": "KC@DEN",
    "q": 2,
-   "clock": "14:57",
-   "team": "CAR",
-   "player": "Chuba Hubbard",
-   "how": "rush"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 2,
-   "clock": "6:33",
-   "team": "GB",
-   "player": "Josh Jacobs",
-   "how": "rush"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 2,
-   "clock": "1:46",
-   "team": "GB",
-   "player": "Matthew Golden",
+   "clock": "7:40",
+   "team": "KC",
+   "player": "Emmett Johnson",
    "how": "rec"
   },
   {
-   "game": "CAR@GB",
+   "game": "KC@DEN",
+   "q": 2,
+   "clock": "1:15",
+   "team": "DEN",
+   "player": "Jaylen Waddle",
+   "how": "rec"
+  },
+  {
+   "game": "KC@DEN",
    "q": 3,
-   "clock": "7:30",
-   "team": "GB",
-   "player": "Josh Jacobs",
+   "clock": "1:38",
+   "team": "KC",
+   "player": "Noah Gray",
    "how": "rec"
   },
   {
-   "game": "CAR@GB",
+   "game": "KC@DEN",
    "q": 4,
-   "clock": "5:37",
-   "team": "CAR",
-   "player": "Jalen Coker",
+   "clock": "8:55",
+   "team": "DEN",
+   "player": "Nate Adkins",
    "how": "rec"
+  },
+  {
+   "game": "KC@DEN",
+   "q": 4,
+   "clock": "1:56",
+   "team": "DEN",
+   "player": "Jonah Coleman",
+   "how": "rush"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 2,
+   "clock": "0:08",
+   "team": "MIA",
+   "player": "Malik Washington",
+   "how": "rec"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 3,
+   "clock": "9:23",
+   "team": "NE",
+   "player": "Kyle Williams",
+   "how": "rec"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 3,
+   "clock": "0:59",
+   "team": "NE",
+   "player": "Drake Maye",
+   "how": "rush"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 4,
+   "clock": "12:39",
+   "team": "NE",
+   "player": "DeMario Douglas",
+   "how": "rec"
+  },
+  {
+   "game": "NE@MIA",
+   "q": 4,
+   "clock": "2:04",
+   "team": "MIA",
+   "player": "Kevin Coleman Jr.",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@WSH",
+   "q": 1,
+   "clock": "4:27",
+   "team": "PHI",
+   "player": "Saquon Barkley",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@WSH",
+   "q": 2,
+   "clock": "4:56",
+   "team": "WSH",
+   "player": "Stefon Diggs",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@WSH",
+   "q": 4,
+   "clock": "1:52",
+   "team": "WSH",
+   "player": "Rachaad White",
+   "how": "rush"
   }
  ]
 }

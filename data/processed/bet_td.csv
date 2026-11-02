@@ -1,29 +1,29 @@
 week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,game_x,team_implied
 8,Javonte Williams,DAL,ARI,RB1,1.18,0.693,0.693,-225,,,,0.35,1.0,1.375,30.8
 8,Jahmyr Gibbs,DET,MIN,RB1,1.06,0.653,0.653,-188,,,,0.35,1.0,1.106,24.8
-8,Derrick Henry,BAL,@BUF,RB1,0.96,0.618,0.618,-161,,,,0.35,1.0,1.151,25.8
+8,Derrick Henry,BAL,@BUF,RB1,0.96,0.618,0.549,-161,draftkings,-115.0,2.6,0.35,1.0,1.151,25.8
 8,Josh Jacobs,GB,CAR,RB1,0.94,0.611,0.611,-157,,,,0.35,1.0,1.14,25.5
 8,Josh Allen,BUF,BAL,QB1,0.84,0.57,0.57,-132,,,,0.35,1.0,1.285,28.8
 8,Kyren Williams,LAR,LAC,RB1,0.83,0.565,0.565,-130,,,,0.35,1.0,1.162,26.0
-8,Bhayshul Tuten,JAX,IND,RB1,0.8,0.551,0.551,-123,,,,0.35,1.0,1.241,27.8
+8,Bhayshul Tuten,JAX,IND,RB1,0.8,0.551,0.469,-123,draftkings,125.0,5.6,0.35,1.0,1.241,27.8
 8,Ja'Marr Chase,CIN,TEN,WR1,0.8,0.55,0.55,-122,,,,0.35,1.0,1.319,29.5
 8,James Cook III,BUF,BAL,RB1,0.79,0.546,0.546,-120,,,,0.0,1.0,1.285,28.8
 8,Christian Watson,GB,CAR,WR1,0.75,0.528,0.528,-112,,,,0.315,1.0,1.14,25.5
-8,Jaxon Smith-Njigba,SEA,CHI,WR1,0.74,0.523,0.494,-110,Polymarket,-100.0,-1.2,0.35,1.0,1.106,24.8
+8,Jaxon Smith-Njigba,SEA,CHI,WR1,0.74,0.523,0.5,-110,Polymarket,-104.0,-1.9,0.35,1.0,1.106,24.8
 8,CeeDee Lamb,DAL,ARI,WR1,0.74,0.522,0.522,-109,,,,0.35,1.0,1.375,30.8
-8,D'Andre Swift,CHI,@SEA,RB1,0.73,0.516,0.511,-107,Polymarket,-113.0,-3.7,0.35,1.0,0.972,21.8
+8,D'Andre Swift,CHI,@SEA,RB1,0.73,0.516,0.492,-107,Polymarket,-100.0,-1.7,0.35,1.0,0.972,21.8
 8,Kenneth Walker III,KC,@DEN,RB1,0.72,0.513,0.513,-105,,,,0.35,1.0,0.961,21.5
 8,Chuba Hubbard,CAR,@GB,RB1,0.71,0.51,0.51,-104,,,,0.35,1.0,0.983,22.0
-8,Zach Charbonnet,SEA,CHI,RB1,0.7,0.503,0.4,-101,Polymarket,144.0,-2.4,0.07,1.0,1.106,24.8
+8,Zach Charbonnet,SEA,CHI,RB1,0.7,0.503,0.417,-101,Polymarket,133.0,-2.8,0.07,1.0,1.106,24.8
 8,Chase Brown,CIN,TEN,RB1,0.68,0.495,0.495,102,,,,0.35,1.0,1.319,29.5
-8,Rhamondre Stevenson,NE,@MIA,RB1,0.68,0.494,0.304,102,Polymarket,376.0,44.6,0.35,1.0,1.084,24.2
+8,Rhamondre Stevenson,NE,@MIA,RB1,0.68,0.494,0.494,102,,,,0.35,1.0,1.084,24.2
 8,Jonathan Taylor,IND,@JAX,RB1,0.68,0.491,0.491,104,,,,0.35,1.0,0.793,17.8
 8,Bucky Irving,TB,ATL,RB1,0.64,0.473,0.473,111,,,,0.35,1.0,1.006,22.5
 8,Puka Nacua,LAR,LAC,WR1,0.64,0.472,0.472,112,,,,0.35,1.0,1.162,26.0
 8,Mike Gesicki,CIN,TEN,TE1,0.63,0.468,0.468,114,,,,0.35,1.0,1.319,29.5
-8,Parker Washington,JAX,IND,WR1,0.63,0.467,0.467,114,,,,0.35,1.0,1.241,27.8
+8,Parker Washington,JAX,IND,WR1,0.63,0.467,0.446,114,draftkings,120.0,-1.9,0.35,1.0,1.241,27.8
 8,Bijan Robinson,ATL,@TB,RB1,0.61,0.458,0.458,118,,,,0.35,1.0,0.939,21.0
-8,Rachaad White,WAS,PHI,RB1,0.6,0.45,0.414,122,Polymarket,138.0,-1.5,0.245,1.0,1.039,23.2
+8,Rachaad White,WAS,PHI,RB1,0.6,0.45,0.45,122,,,,0.245,1.0,1.039,23.2
 8,Amon-Ra St. Brown,DET,MIN,WR1,0.58,0.443,0.443,126,,,,0.35,1.0,1.106,24.8
 8,Ashton Jeanty,LV,@NYJ,RB1,0.58,0.442,0.442,126,,,,0.35,1.0,1.006,22.5
 8,Tee Higgins,CIN,TEN,WR2,0.57,0.436,0.436,129,,,,0.35,1.0,1.319,29.5
@@ -31,12 +31,12 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Breece Hall,NYJ,LV,RB1,0.54,0.419,0.419,139,,,,0.35,1.0,1.073,24.0
 8,DJ Moore,BUF,BAL,WR1,0.54,0.416,0.416,141,,,,0.0,1.0,1.285,28.8
 8,Jordan Mason,MIN,@DET,RB1,0.53,0.412,0.412,143,,,,0.158,1.0,0.972,21.8
-8,Zay Flowers,BAL,@BUF,WR1,0.52,0.408,0.408,145,,,,0.35,1.0,1.151,25.8
+8,Zay Flowers,BAL,@BUF,WR1,0.52,0.408,0.291,145,fanduel,320.0,22.2,0.35,1.0,1.151,25.8
 8,Jameson Williams,DET,MIN,WR2,0.52,0.406,0.406,147,,,,0.35,1.0,1.106,24.8
-8,Stefon Diggs,WAS,PHI,WR1,0.52,0.404,0.339,147,betrivers,215.0,6.8,0.35,1.0,1.039,23.2
+8,Stefon Diggs,WAS,PHI,WR1,0.52,0.404,0.404,147,,,,0.35,1.0,1.039,23.2
 8,Omarion Hampton,LAC,@LAR,RB1,0.5,0.392,0.392,155,,,,0.35,1.0,0.872,19.5
-8,J.K. Dobbins,DEN,KC,RB1,0.49,0.387,0.16,158,Polymarket,2400.0,300.7,0.35,1.0,0.894,20.0
-8,Ollie Gordon II,MIA,NE,RB1,0.47,0.377,0.182,165,Polymarket,426.0,-4.3,0.0,1.0,0.771,17.2
+8,J.K. Dobbins,DEN,KC,RB1,0.49,0.387,0.387,158,,,,0.35,1.0,0.894,20.0
+8,Ollie Gordon II,MIA,NE,RB1,0.47,0.377,0.377,165,,,,0.0,1.0,0.771,17.2
 8,Trey McBride,ARI,@DAL,TE1,0.47,0.377,0.377,165,,,,0.35,1.0,1.062,23.8
 8,Jaylen Warren,PIT,CLE,RB1,0.46,0.368,0.368,172,,,,0.35,1.0,0.939,21.0
 8,Quinshon Judkins,CLE,@PIT,RB1,0.46,0.367,0.367,173,,,,0.35,1.0,0.782,17.5
@@ -50,11 +50,11 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Rashee Rice,KC,@DEN,WR1,0.41,0.339,0.339,195,,,,0.254,1.0,0.961,21.5
 8,Tony Pollard,TEN,@CIN,RB1,0.41,0.338,0.338,196,,,,0.35,1.0,0.715,16.0
 8,Sam LaPorta,DET,MIN,TE1,0.41,0.333,0.333,200,,,,0.35,1.0,1.106,24.8
-8,Saquon Barkley,PHI,@WAS,RB1,0.39,0.326,0.338,207,Polymarket,178.0,-6.1,0.35,1.0,0.771,17.2
+8,Saquon Barkley,PHI,@WAS,RB1,0.39,0.326,0.326,207,,,,0.35,1.0,0.771,17.2
 8,DK Metcalf,PIT,CLE,WR1,0.39,0.325,0.325,208,,,,0.0,1.0,0.939,21.0
 8,Michael Wilson,ARI,@DAL,WR1,0.38,0.319,0.319,214,,,,0.35,1.0,1.062,23.8
 8,Blake Corum,LAR,LAC,RB2,0.38,0.319,0.319,214,,,,0.35,1.0,1.162,26.0
-8,A.J. Brown,NE,@MIA,WR1,0.38,0.317,0.136,216,Polymarket,2400.0,239.5,0.35,1.0,1.084,24.2
+8,A.J. Brown,NE,@MIA,WR1,0.38,0.317,0.317,216,,,,0.35,1.0,1.084,24.2
 8,Tez Johnson,TB,ATL,WR1,0.38,0.313,0.313,219,,,,0.149,1.0,1.006,22.5
 8,Justin Jefferson,MIN,@DET,WR1,0.37,0.31,0.31,222,,,,0.35,1.0,0.972,21.8
 8,Ladd McConkey,LAC,@LAR,WR1,0.37,0.307,0.307,225,,,,0.175,1.0,0.872,19.5
@@ -64,86 +64,86 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Samaje Perine,CIN,TEN,RB2,0.35,0.295,0.295,239,,,,0.35,1.0,1.319,29.5
 8,Jalen Coker,CAR,@GB,WR2,0.35,0.294,0.294,240,,,,0.35,1.0,0.983,22.0
 8,Teagan Quitoriano,ARI,@DAL,TE3,0.34,0.291,0.291,244,,,,0.061,1.0,1.062,23.8
-8,Hunter Henry,NE,@MIA,TE1,0.34,0.288,0.207,247,Polymarket,488.0,21.6,0.35,1.0,1.084,24.2
-8,Darius Cooper,PHI,@WAS,WR1,0.34,0.288,0.173,248,fanduel,500.0,3.8,0.105,1.0,0.771,17.2
+8,Hunter Henry,NE,@MIA,TE1,0.34,0.288,0.288,247,,,,0.35,1.0,1.084,24.2
+8,Darius Cooper,PHI,@WAS,WR1,0.34,0.288,0.288,248,,,,0.105,1.0,0.771,17.2
 8,Matthew Golden,GB,CAR,WR2,0.34,0.287,0.287,249,,,,0.324,1.0,1.14,25.5
-8,Colston Loveland,CHI,@SEA,TE1,0.34,0.285,0.288,250,fanduel,230.0,-4.8,0.35,1.0,0.972,21.8
+8,Colston Loveland,CHI,@SEA,TE1,0.34,0.285,0.287,250,Polymarket,233.0,-4.5,0.35,1.0,0.972,21.8
 8,Sean Tucker,TB,ATL,RB3,0.34,0.285,0.285,250,,,,0.35,1.0,1.006,22.5
 8,Drake London,ATL,@TB,WR1,0.33,0.284,0.284,252,,,,0.35,1.0,0.939,21.0
-8,Caleb Douglas,MIA,NE,WR2,0.33,0.282,0.199,255,Polymarket,426.0,4.4,0.166,1.0,0.771,17.2
+8,Caleb Douglas,MIA,NE,WR2,0.33,0.282,0.282,255,,,,0.166,1.0,0.771,17.2
 8,Irv Charles,SEA,CHI,WR2,0.31,0.27,0.068,271,fanatics,1300.0,-4.3,0.0,1.0,1.106,24.8
 8,Khalil Shakir,BUF,BAL,WR2,0.31,0.268,0.268,273,,,,0.219,1.0,1.285,28.8
-8,Jakobi Meyers,JAX,IND,WR2,0.31,0.267,0.267,275,,,,0.324,1.0,1.241,27.8
-8,Jayden Daniels,WAS,PHI,QB1,0.31,0.267,0.274,274,Polymarket,245.0,-5.4,0.315,1.0,1.039,23.2
+8,Jakobi Meyers,JAX,IND,WR2,0.31,0.267,0.252,275,draftkings,290.0,-1.6,0.324,1.0,1.241,27.8
+8,Jayden Daniels,WAS,PHI,QB1,0.31,0.267,0.267,274,,,,0.315,1.0,1.039,23.2
 8,Dalton Kincaid,BUF,BAL,TE1,0.31,0.264,0.264,280,,,,0.35,1.0,1.285,28.8
 8,Omar Cooper Jr.,NYJ,LV,WR2,0.3,0.263,0.263,281,,,,0.0,1.0,1.073,24.0
-8,Brenton Strange,JAX,IND,TE1,0.3,0.259,0.259,286,,,,0.35,1.0,1.241,27.8
+8,Brenton Strange,JAX,IND,TE1,0.3,0.259,0.285,286,fanduel,220.0,-8.8,0.35,1.0,1.241,27.8
 8,Keon Coleman,BUF,BAL,WR3,0.3,0.257,0.257,289,,,,0.28,1.0,1.285,28.8
-8,Rome Odunze,CHI,@SEA,WR1,0.29,0.254,0.267,294,draftkings,250.0,-6.6,0.332,1.0,0.972,21.8
+8,Rome Odunze,CHI,@SEA,WR1,0.29,0.254,0.263,294,Polymarket,257.0,-6.0,0.332,1.0,0.972,21.8
 8,Jahan Dotson,ATL,@TB,WR2,0.29,0.251,0.251,299,,,,0.35,1.0,0.939,21.0
 8,Tyler Higbee,LAR,LAC,TE1,0.29,0.251,0.251,298,,,,0.35,1.0,1.162,26.0
-8,Konata Mumpfield,LAR,LAC,WR2,0.29,0.249,0.182,302,Polymarket,525.0,13.5,0.297,1.0,1.162,26.0
+8,Konata Mumpfield,LAR,LAC,WR2,0.29,0.249,0.249,302,,,,0.297,1.0,1.162,26.0
 8,Chris Godwin Jr.,TB,ATL,WR2,0.29,0.248,0.248,303,,,,0.0,1.0,1.006,22.5
-8,Dallas Goedert,PHI,@WAS,TE1,0.28,0.245,0.256,308,betrivers,265.0,-6.5,0.35,1.0,0.771,17.2
+8,Dallas Goedert,PHI,@WAS,TE1,0.28,0.245,0.245,308,,,,0.35,1.0,0.771,17.2
 8,Tommy Tremble,CAR,@GB,TE1,0.28,0.244,0.244,309,,,,0.227,1.0,0.983,22.0
-8,Malik Willis,MIA,NE,QB1,0.28,0.242,0.203,313,Polymarket,426.0,6.8,0.35,1.0,0.771,17.2
+8,Malik Willis,MIA,NE,QB1,0.28,0.242,0.242,313,,,,0.35,1.0,0.771,17.2
 8,Luther Burden III,CHI,@SEA,WR2,0.28,0.241,0.281,314,fanduel,240.0,-4.3,0.0,1.0,0.972,21.8
 8,Darnell Washington,PIT,CLE,TE1,0.27,0.24,0.24,316,,,,0.149,1.0,0.939,21.0
 8,Colby Parkinson,LAR,LAC,TE2,0.27,0.24,0.24,316,,,,0.35,1.0,1.162,26.0
 8,Tyler Warren,IND,@JAX,TE1,0.27,0.24,0.24,316,,,,0.35,1.0,0.793,17.8
 8,T.J. Hockenson,MIN,@DET,TE1,0.27,0.24,0.24,317,,,,0.35,1.0,0.972,21.8
 8,Jaylen Waddle,DEN,KC,WR1,0.27,0.239,0.239,319,,,,0.35,1.0,0.894,20.0
-8,Mark Andrews,BAL,@BUF,TE1,0.27,0.238,0.238,320,,,,0.35,1.0,1.151,25.8
-8,Trevor Lawrence,JAX,IND,QB1,0.27,0.237,0.237,322,,,,0.35,1.0,1.241,27.8
+8,Mark Andrews,BAL,@BUF,TE1,0.27,0.238,0.192,320,fanduel,470.0,9.7,0.35,1.0,1.151,25.8
+8,Trevor Lawrence,JAX,IND,QB1,0.27,0.237,0.215,322,fanduel,370.0,1.2,0.35,1.0,1.241,27.8
 8,Drake Maye,NE,@MIA,QB1,0.27,0.236,0.236,324,,,,0.35,1.0,1.084,24.2
 8,Jordan Addison,MIN,@DET,WR2,0.27,0.236,0.236,324,,,,0.35,1.0,0.972,21.8
 8,Ryan Flournoy,DAL,ARI,WR3,0.27,0.233,0.233,329,,,,0.35,1.0,1.375,30.8
 8,AJ Barner,SEA,CHI,TE1,0.27,0.233,0.262,330,draftkings,245.0,-9.7,0.35,1.0,1.106,24.8
-8,Travis Kelce,KC,@DEN,TE1,0.26,0.231,0.218,333,Polymarket,355.0,-1.0,0.35,1.0,0.961,21.5
+8,Travis Kelce,KC,@DEN,TE1,0.26,0.231,0.231,333,,,,0.35,1.0,0.961,21.5
 8,Cody White,LV,@NYJ,WR4+,0.26,0.229,0.229,336,,,,0.245,1.0,1.006,22.5
 8,Kyle Pitts Sr.,ATL,@TB,TE1,0.26,0.229,0.229,337,,,,0.0,1.0,0.939,21.0
 8,Davis Allen,LAR,LAC,TE3,0.26,0.228,0.228,338,,,,0.35,1.0,1.162,26.0
 8,Germie Bernard,PIT,CLE,WR2,0.25,0.224,0.224,347,,,,0.28,1.0,0.939,21.0
 8,Tyler Allgeier,ARI,@DAL,RB2,0.25,0.221,0.221,353,,,,0.35,1.0,1.062,23.8
 8,Josh Downs,IND,@JAX,WR1,0.24,0.215,0.215,365,,,,0.254,1.0,0.793,17.8
-8,Emanuel Wilson,SEA,CHI,RB2,0.24,0.214,0.205,367,Polymarket,376.0,-2.3,0.315,1.0,1.106,24.8
-8,Xavier Worthy,KC,@DEN,WR2,0.24,0.213,0.198,369,Polymarket,400.0,-0.9,0.315,1.0,0.961,21.5
-8,Rashod Bateman,BAL,@BUF,WR2,0.24,0.213,0.213,369,,,,0.35,1.0,1.151,25.8
+8,Emanuel Wilson,SEA,CHI,RB2,0.24,0.214,0.225,367,Polymarket,317.0,-6.3,0.315,1.0,1.106,24.8
+8,Xavier Worthy,KC,@DEN,WR2,0.24,0.213,0.213,369,,,,0.315,1.0,0.961,21.5
+8,Rashod Bateman,BAL,@BUF,WR2,0.24,0.213,0.144,369,fanduel,800.0,29.4,0.35,1.0,1.151,25.8
 8,Calvin Ridley,TEN,@CIN,WR1,0.24,0.212,0.212,371,,,,0.149,1.0,0.715,16.0
 8,Keenan Allen,IND,@JAX,WR2,0.24,0.212,0.212,372,,,,0.201,1.0,0.793,17.8
-8,Antonio Williams,WAS,PHI,WR2,0.24,0.212,0.217,371,fanduel,340.0,-4.7,0.175,1.0,1.039,23.2
+8,Antonio Williams,WAS,PHI,WR2,0.24,0.212,0.212,371,,,,0.175,1.0,1.039,23.2
 8,Eli Raridon,NE,@MIA,TE2,0.23,0.203,0.203,392,,,,0.35,1.0,1.084,24.2
-8,Josh Cameron,JAX,IND,WR3,0.23,0.203,0.203,393,,,,0.052,1.0,1.241,27.8
+8,Josh Cameron,JAX,IND,WR3,0.23,0.203,0.168,393,draftkings,475.0,-3.2,0.052,1.0,1.241,27.8
 8,Quentin Johnston,LAC,@LAR,WR2,0.23,0.203,0.203,392,,,,0.175,1.0,0.872,19.5
-8,Bo Nix,DEN,KC,QB1,0.23,0.202,0.195,395,Polymarket,400.0,-2.5,0.35,1.0,0.894,20.0
+8,Bo Nix,DEN,KC,QB1,0.23,0.202,0.202,395,,,,0.35,1.0,0.894,20.0
 8,Dawson Knox,BUF,BAL,TE2,0.22,0.199,0.199,402,,,,0.35,1.0,1.285,28.8
 8,Braelon Allen,NYJ,LV,RB2,0.22,0.198,0.198,406,,,,0.262,1.0,1.073,24.0
-8,Courtland Sutton,DEN,KC,WR2,0.22,0.198,0.113,405,Polymarket,1329.0,61.2,0.35,1.0,0.894,20.0
+8,Courtland Sutton,DEN,KC,WR2,0.22,0.198,0.198,405,,,,0.35,1.0,0.894,20.0
 8,Dylan Laube,LV,@NYJ,RB3,0.22,0.197,0.197,409,,,,0.166,1.0,1.006,22.5
 8,TreVeyon Henderson,NE,@MIA,RB2,0.22,0.197,0.197,408,,,,0.35,1.0,1.084,24.2
-8,Hollywood Brown,PHI,@WAS,WR2,0.22,0.197,0.105,408,Polymarket,809.0,-4.3,0.0,1.0,0.771,17.2
-8,Charlie Kolar,LAC,@LAR,TE1,0.22,0.195,0.156,414,Polymarket,525.0,-2.3,0.079,1.0,0.872,19.5
+8,Hollywood Brown,PHI,@WAS,WR2,0.22,0.197,0.197,408,,,,0.0,1.0,0.771,17.2
+8,Charlie Kolar,LAC,@LAR,TE1,0.22,0.195,0.195,414,,,,0.079,1.0,0.872,19.5
 8,Caleb Williams,CHI,@SEA,QB1,0.22,0.195,0.172,413,draftkings,500.0,3.1,0.35,1.0,0.972,21.8
 8,Harold Fannin Jr.,CLE,@PIT,TE1,0.22,0.195,0.195,414,,,,0.0,1.0,0.782,17.5
 8,Joe Burrow,CIN,TEN,QB1,0.21,0.193,0.193,418,,,,0.35,1.0,1.319,29.5
 8,Lamar Jackson,BAL,@BUF,QB1,0.21,0.193,0.193,418,,,,0.35,1.0,1.151,25.8
-8,Chris Rodriguez Jr.,JAX,IND,RB2,0.21,0.191,0.191,425,,,,0.0,1.0,1.241,27.8
-8,LeQuint Allen Jr.,JAX,IND,RB3,0.21,0.191,0.191,425,,,,0.0,1.0,1.241,27.8
+8,Chris Rodriguez Jr.,JAX,IND,RB2,0.21,0.191,0.262,425,draftkings,265.0,-4.3,0.0,1.0,1.241,27.8
+8,LeQuint Allen Jr.,JAX,IND,RB3,0.21,0.191,0.053,425,draftkings,1700.0,-4.3,0.0,1.0,1.241,27.8
 8,Malik Washington,MIA,NE,WR1,0.21,0.189,0.189,430,,,,0.35,1.0,0.771,17.2
-8,Roschon Johnson,CHI,@SEA,RB2,0.21,0.188,0.198,431,Polymarket,376.0,-5.8,0.245,1.0,0.972,21.8
-8,Jonah Coleman,DEN,KC,RB2,0.21,0.187,0.2,434,Polymarket,376.0,-4.8,0.07,1.0,0.894,20.0
-8,Travis Hunter,JAX,IND,WR4+,0.21,0.187,0.187,434,,,,0.184,1.0,1.241,27.8
-8,Nate Boerkircher,JAX,IND,TE2,0.21,0.186,0.186,438,,,,0.28,1.0,1.241,27.8
+8,Roschon Johnson,CHI,@SEA,RB2,0.21,0.188,0.191,431,Polymarket,400.0,-4.7,0.245,1.0,0.972,21.8
+8,Jonah Coleman,DEN,KC,RB2,0.21,0.187,0.187,434,,,,0.07,1.0,0.894,20.0
+8,Travis Hunter,JAX,IND,WR4+,0.21,0.187,0.146,434,draftkings,600.0,2.2,0.184,1.0,1.241,27.8
+8,Nate Boerkircher,JAX,IND,TE2,0.21,0.186,0.158,438,fanduel,550.0,2.7,0.28,1.0,1.241,27.8
 8,Pat Freiermuth,PIT,CLE,TE2,0.2,0.184,0.184,443,,,,0.254,1.0,0.939,21.0
-8,Matthew Hibner,BAL,@BUF,TE2,0.2,0.182,0.182,449,,,,0.149,1.0,1.151,25.8
+8,Matthew Hibner,BAL,@BUF,TE2,0.2,0.182,0.078,449,draftkings,1500.0,24.8,0.149,1.0,1.151,25.8
 8,Dean Connors,LAR,LAC,RB3,0.2,0.18,0.18,456,,,,0.0,1.0,1.162,26.0
-8,Chig Okonkwo,WAS,PHI,TE1,0.2,0.18,0.206,455,Polymarket,335.0,-10.4,0.35,1.0,1.039,23.2
+8,Chig Okonkwo,WAS,PHI,TE1,0.2,0.18,0.18,455,,,,0.35,1.0,1.039,23.2
 8,Ty Johnson,BUF,BAL,RB2,0.2,0.179,0.179,459,,,,0.341,1.0,1.285,28.8
 8,Wan'Dale Robinson,TEN,@CIN,WR2,0.2,0.178,0.178,462,,,,0.193,1.0,0.715,16.0
 8,Anthony Tyus III,CAR,@GB,RB3,0.2,0.177,0.177,464,,,,0.017,1.0,0.983,22.0
 8,Pierre Strong Jr.,GB,CAR,RB3,0.19,0.177,0.177,466,,,,0.0,1.0,1.14,25.5
 8,Jalen Nailor,LV,@NYJ,WR2,0.19,0.174,0.174,476,,,,0.35,1.0,1.006,22.5
-8,Ameer Abdullah,JAX,IND,RB4,0.19,0.174,0.174,476,,,,0.087,1.0,1.241,27.8
+8,Ameer Abdullah,JAX,IND,RB4,0.19,0.174,0.043,476,fanduel,3000.0,34.4,0.087,1.0,1.241,27.8
 8,Hayden Rucci,LAC,@LAR,TE3,0.19,0.173,0.173,477,,,,0.061,1.0,0.872,19.5
 8,Robert Henry Jr.,SEA,CHI,RB4,0.19,0.172,0.172,482,,,,0.0,1.0,1.106,24.8
 8,Jacob Saylors,DET,MIN,RB3,0.19,0.17,0.17,489,,,,0.009,1.0,1.106,24.8
@@ -154,11 +154,11 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Darren Waller,CAR,@GB,TE2,0.18,0.165,0.165,506,,,,0.158,1.0,0.983,22.0
 8,Kene Nwangwu,NYJ,LV,RB4,0.18,0.164,0.164,510,,,,0.009,1.0,1.073,24.0
 8,Michael Penix Jr.,ATL,@TB,QB1,0.18,0.163,0.163,514,,,,0.0,1.0,0.939,21.0
-8,Patrick Mahomes,KC,@DEN,QB1,0.18,0.163,0.175,512,Polymarket,426.0,-7.7,0.35,1.0,0.961,21.5
+8,Patrick Mahomes,KC,@DEN,QB1,0.18,0.163,0.163,512,,,,0.35,1.0,0.961,21.5
 8,Tahj Brooks,CIN,TEN,RB3,0.18,0.162,0.162,519,,,,0.149,1.0,1.319,29.5
-8,George Holani,SEA,CHI,RB3,0.18,0.161,0.124,523,Polymarket,740.0,4.3,0.219,1.0,1.106,24.8
+8,George Holani,SEA,CHI,RB3,0.18,0.161,0.132,523,Polymarket,675.0,2.0,0.219,1.0,1.106,24.8
 8,Jack Bech,LV,@NYJ,WR3,0.18,0.161,0.161,522,,,,0.193,1.0,1.006,22.5
-8,Treylon Burks,WAS,PHI,WR3,0.17,0.16,0.154,527,Polymarket,525.0,-3.7,0.149,1.0,1.039,23.2
+8,Treylon Burks,WAS,PHI,WR3,0.17,0.16,0.16,527,,,,0.149,1.0,1.039,23.2
 8,Jackson Hawes,BUF,BAL,TE3,0.17,0.159,0.159,528,,,,0.193,1.0,1.285,28.8
 8,Isaiah Davis,NYJ,LV,RB3,0.17,0.159,0.159,528,,,,0.158,1.0,1.073,24.0
 8,Ryan Miller,NE,@MIA,WR4+,0.17,0.159,0.159,531,,,,0.14,1.0,1.084,24.2
@@ -166,13 +166,13 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Greg Dortch,BUF,BAL,WR4+,0.17,0.158,0.158,534,,,,0.061,1.0,1.285,28.8
 8,Kenny Gainwell,TB,ATL,RB2,0.17,0.158,0.158,535,,,,0.0,1.0,1.006,22.5
 8,Evan Hull,ARI,@DAL,RB4,0.17,0.158,0.158,535,,,,0.026,1.0,1.062,23.8
-8,Efton Chism III,NE,@MIA,WR3,0.17,0.155,0.182,544,Polymarket,426.0,-4.3,0.0,1.0,1.084,24.2
-8,Rasheen Ali,BAL,@BUF,RB3,0.17,0.154,0.154,551,,,,0.219,1.0,1.151,25.8
+8,Efton Chism III,NE,@MIA,WR3,0.17,0.155,0.155,544,,,,0.0,1.0,1.084,24.2
+8,Rasheen Ali,BAL,@BUF,RB3,0.17,0.154,0.052,551,draftkings,4000.0,112.6,0.219,1.0,1.151,25.8
 8,Jack Endries,CIN,TEN,TE4,0.17,0.153,0.153,551,,,,0.0,1.0,1.319,29.5
 8,Aaron Jones Sr.,MIN,@DET,RB2,0.17,0.153,0.153,555,,,,0.0,1.0,0.972,21.8
 8,Eric Saubert,SEA,CHI,TE2,0.17,0.153,0.087,553,betmgm,1450.0,35.3,0.28,1.0,1.106,24.8
 8,KC Concepcion,CLE,@PIT,WR2,0.17,0.152,0.152,556,,,,0.184,1.0,0.782,17.5
-8,Ja'Kobi Lane,BAL,@BUF,WR3,0.16,0.152,0.152,559,,,,0.044,1.0,1.151,25.8
+8,Ja'Kobi Lane,BAL,@BUF,WR3,0.16,0.152,0.129,559,draftkings,650.0,-3.5,0.044,1.0,1.151,25.8
 8,Jaydn Ott,KC,@DEN,RB3,0.16,0.151,0.151,562,,,,0.0,1.0,0.961,21.5
 8,Kaleb Johnson,GB,CAR,RB4,0.16,0.151,0.151,564,,,,0.096,1.0,1.14,25.5
 8,Kyle Williams,NE,@MIA,WR4+,0.16,0.15,0.15,565,,,,0.35,1.0,1.084,24.2
@@ -190,23 +190,23 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Kendrick Bourne,ARI,@DAL,WR2,0.16,0.147,0.147,579,,,,0.35,1.0,1.062,23.8
 8,Ian Thomas,LV,@NYJ,TE3,0.16,0.147,0.147,582,,,,0.254,1.0,1.006,22.5
 8,Ted Hurst III,TB,ATL,WR3,0.16,0.145,0.145,590,,,,0.0,1.0,1.006,22.5
-8,Tanner Koziol,JAX,IND,TE3,0.16,0.145,0.145,589,,,,0.0,1.0,1.241,27.8
-8,Quintin Morris,JAX,IND,TE4,0.16,0.145,0.145,587,,,,0.052,1.0,1.241,27.8
-8,Cooper Kupp,SEA,CHI,WR3,0.16,0.144,0.187,594,Polymarket,355.0,-14.9,0.35,1.0,1.106,24.8
+8,Tanner Koziol,JAX,IND,TE3,0.16,0.145,0.037,589,draftkings,2500.0,-4.3,0.0,1.0,1.241,27.8
+8,Quintin Morris,JAX,IND,TE4,0.16,0.145,0.043,587,fanatics,2500.0,10.5,0.052,1.0,1.241,27.8
+8,Cooper Kupp,SEA,CHI,WR3,0.16,0.144,0.202,594,betmgm,310.0,-17.1,0.35,1.0,1.106,24.8
 8,Bryce Young,CAR,@GB,QB1,0.16,0.144,0.144,594,,,,0.35,1.0,0.983,22.0
 8,Tyler Goodson,DAL,ARI,RB2,0.16,0.144,0.144,592,,,,0.289,1.0,1.375,30.8
 8,Dohnte Meyers,CIN,TEN,WR3,0.16,0.144,0.144,596,,,,0.166,1.0,1.319,29.5
 8,Cam Grandy,CIN,TEN,TE3,0.16,0.144,0.144,593,,,,0.035,1.0,1.319,29.5
 8,Jaleel McLaughlin,CLE,@PIT,RB3,0.16,0.144,0.144,593,,,,0.227,1.0,0.782,17.5
 8,Jahdae Walker,CHI,@SEA,WR4+,0.16,0.144,0.05,593,betmgm,2500.0,29.9,0.122,1.0,0.972,21.8
-8,Evan Engram,DEN,KC,TE1,0.15,0.143,0.131,599,Polymarket,669.0,0.7,0.35,1.0,0.894,20.0
+8,Evan Engram,DEN,KC,TE1,0.15,0.143,0.143,599,,,,0.35,1.0,0.894,20.0
 8,Audric Estime,CLE,@PIT,RB4,0.15,0.143,0.143,598,,,,0.044,1.0,0.782,17.5
 8,Cade Otton,TB,ATL,TE1,0.15,0.143,0.143,601,,,,0.35,1.0,1.006,22.5
 8,Mike Washington Jr.,LV,@NYJ,RB2,0.15,0.142,0.142,603,,,,0.35,1.0,1.006,22.5
 8,Jacoby Brissett,ARI,@DAL,QB1,0.15,0.142,0.142,602,,,,0.35,1.0,1.062,23.8
 8,Lew Nichols,PIT,CLE,RB4,0.15,0.141,0.141,610,,,,0.026,1.0,0.939,21.0
-8,Josh Cuevas,BAL,@BUF,TE3,0.15,0.141,0.141,607,,,,0.105,1.0,1.151,25.8
-8,Cody Schrader,DEN,KC,RB3,0.15,0.141,0.478,611,Polymarket,-100.0,-4.3,0.0,1.0,0.894,20.0
+8,Josh Cuevas,BAL,@BUF,TE3,0.15,0.141,0.052,607,fanatics,2200.0,19.8,0.105,1.0,1.151,25.8
+8,Cody Schrader,DEN,KC,RB3,0.15,0.141,0.141,611,,,,0.0,1.0,0.894,20.0
 8,Demond Claiborne,MIN,@DET,RB4,0.15,0.139,0.139,617,,,,0.052,1.0,0.972,21.8
 8,AJ Dillon,CAR,@GB,RB4,0.15,0.139,0.139,622,,,,0.061,1.0,0.983,22.0
 8,Adonai Mitchell,NYJ,LV,WR3,0.15,0.138,0.138,624,,,,0.122,1.0,1.073,24.0
@@ -214,7 +214,7 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Max Klare,LAR,LAC,TE4,0.15,0.137,0.137,632,,,,0.0,1.0,1.162,26.0
 8,Jauan Jennings,MIN,@DET,WR3,0.15,0.137,0.137,632,,,,0.254,1.0,0.972,21.8
 8,Nick Muse,ATL,@TB,TE4,0.15,0.136,0.136,634,,,,0.017,1.0,0.939,21.0
-8,Nick Vannett,BAL,@BUF,TE4,0.15,0.136,0.136,633,,,,0.009,1.0,1.151,25.8
+8,Nick Vannett,BAL,@BUF,TE4,0.15,0.136,0.032,633,fanduel,3000.0,-1.4,0.009,1.0,1.151,25.8
 8,Cam Ward,TEN,@CIN,QB1,0.15,0.136,0.136,637,,,,0.35,1.0,0.715,16.0
 8,Daniel Jones,IND,@JAX,QB1,0.15,0.135,0.135,641,,,,0.35,1.0,0.793,17.8
 8,Deshaun Watson,CLE,@PIT,QB1,0.15,0.135,0.135,639,,,,0.35,1.0,0.782,17.5
@@ -225,7 +225,7 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Zavier Scott,CHI,@SEA,RB3,0.14,0.133,0.133,654,,,,0.096,1.0,0.972,21.8
 8,Andrew Beck,NYJ,LV,TE5,0.14,0.131,0.131,666,,,,0.044,1.0,1.073,24.0
 8,Jonnu Smith,GB,CAR,TE4,0.14,0.13,0.13,668,,,,0.122,1.0,1.14,25.5
-8,Austin Ekeler,WAS,PHI,RB2,0.14,0.13,0.121,667,fanduel,700.0,-3.0,0.158,1.0,1.039,23.2
+8,Austin Ekeler,WAS,PHI,RB2,0.14,0.13,0.13,667,,,,0.158,1.0,1.039,23.2
 8,Jordan Whittington,LAR,LAC,WR3,0.14,0.13,0.13,670,,,,0.158,1.0,1.162,26.0
 8,Jackson Meeks,DET,MIN,TE4,0.14,0.128,0.128,684,,,,0.009,1.0,1.106,24.8
 8,Tanner Arkin,NE,@MIA,TE4,0.14,0.128,0.128,681,,,,0.0,1.0,1.084,24.2
@@ -237,9 +237,9 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Savion Williams,GB,CAR,WR3,0.13,0.126,0.126,696,,,,0.193,1.0,1.14,25.5
 8,Kyler Murray,MIN,@DET,QB1,0.13,0.124,0.124,703,,,,0.315,1.0,0.972,21.8
 8,Isaac TeSlaa,DET,MIN,WR3,0.13,0.123,0.123,714,,,,0.35,1.0,1.106,24.8
-8,Justice Hill,BAL,@BUF,RB2,0.13,0.123,0.123,716,,,,0.35,1.0,1.151,25.8
-8,Jeremy McNichols,WAS,PHI,RB3,0.13,0.123,0.168,713,betrivers,420.0,-12.6,0.262,1.0,1.039,23.2
-8,Jaydon Blue,PHI,@WAS,RB2,0.13,0.122,0.085,720,betmgm,1050.0,-2.4,0.044,1.0,0.771,17.2
+8,Justice Hill,BAL,@BUF,RB2,0.13,0.123,0.165,716,fanduel,410.0,-15.9,0.35,1.0,1.151,25.8
+8,Jeremy McNichols,WAS,PHI,RB3,0.13,0.123,0.123,713,,,,0.262,1.0,1.039,23.2
+8,Jaydon Blue,PHI,@WAS,RB2,0.13,0.122,0.122,720,,,,0.044,1.0,0.771,17.2
 8,DJ Giddens,IND,@JAX,RB3,0.13,0.122,0.122,716,,,,0.017,1.0,0.793,17.8
 8,Tyler Conklin,DET,MIN,TE3,0.13,0.122,0.122,722,,,,0.061,1.0,1.106,24.8
 8,Jeremy Ruckert,NYJ,LV,TE3,0.13,0.122,0.122,721,,,,0.14,1.0,1.073,24.0
@@ -247,7 +247,7 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Camden Brown,DAL,ARI,WR4+,0.13,0.12,0.12,733,,,,0.0,1.0,1.375,30.8
 8,Travis Homer,PIT,CLE,RB3,0.13,0.12,0.12,731,,,,0.131,1.0,0.939,21.0
 8,Ko Kieft,TB,ATL,TE3,0.13,0.119,0.119,738,,,,0.0,1.0,1.006,22.5
-8,Greg Dulcich,MIA,NE,TE1,0.13,0.119,0.16,737,Polymarket,426.0,-15.8,0.35,1.0,0.771,17.2
+8,Greg Dulcich,MIA,NE,TE1,0.13,0.119,0.119,737,,,,0.35,1.0,0.771,17.2
 8,Rico Dowdle,PIT,CLE,RB2,0.13,0.119,0.119,738,,,,0.324,1.0,0.939,21.0
 8,Elijah Higgins,ARI,@DAL,TE2,0.13,0.118,0.118,749,,,,0.35,1.0,1.062,23.8
 8,Ja'Tavion Sanders,CAR,@GB,TE5,0.13,0.118,0.118,747,,,,0.035,1.0,0.983,22.0
@@ -259,79 +259,79 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Feleipe Franks,CAR,@GB,TE4,0.12,0.115,0.115,767,,,,0.009,1.0,0.983,22.0
 8,Trevor Etienne,CAR,@GB,RB2,0.12,0.115,0.115,771,,,,0.193,1.0,0.983,22.0
 8,Jared Wiley,KC,@DEN,TE4,0.12,0.114,0.114,781,,,,0.0,1.0,0.961,21.5
-8,Devontez Walker,BAL,@BUF,WR4+,0.12,0.114,0.114,780,,,,0.28,1.0,1.151,25.8
+8,Devontez Walker,BAL,@BUF,WR4+,0.12,0.114,0.062,780,fanatics,2200.0,42.1,0.28,1.0,1.151,25.8
 8,Brycen Tremayne,CAR,@GB,WR3,0.12,0.114,0.114,776,,,,0.14,1.0,0.983,22.0
-8,John Bates,WAS,PHI,TE3,0.12,0.114,0.041,775,draftkings,2800.0,18.4,0.096,1.0,1.039,23.2
-8,Colson Yankoff,WAS,PHI,TE4,0.12,0.113,0.035,786,draftkings,3000.0,9.0,0.052,1.0,1.039,23.2
+8,John Bates,WAS,PHI,TE3,0.12,0.114,0.114,775,,,,0.096,1.0,1.039,23.2
+8,Colson Yankoff,WAS,PHI,TE4,0.12,0.113,0.113,786,,,,0.052,1.0,1.039,23.2
 8,Joshua Palmer,BUF,BAL,WR4+,0.12,0.113,0.113,787,,,,0.0,1.0,1.285,28.8
 8,Dylan Sampson,CLE,@PIT,RB2,0.12,0.113,0.113,787,,,,0.193,1.0,0.782,17.5
 8,Jalen Royals,KC,@DEN,WR3,0.12,0.113,0.113,789,,,,0.227,1.0,0.961,21.5
 8,Gunnar Helm,TEN,@CIN,TE1,0.12,0.113,0.113,784,,,,0.35,1.0,0.715,16.0
 8,Keaton Mitchell,LAC,@LAR,RB2,0.12,0.112,0.112,793,,,,0.341,1.0,0.872,19.5
 8,Austin Hooper,ATL,@TB,TE3,0.12,0.112,0.112,796,,,,0.175,1.0,0.939,21.0
-8,Troy Franklin,DEN,KC,WR3,0.12,0.11,0.165,809,Polymarket,426.0,-13.2,0.236,1.0,0.894,20.0
+8,Troy Franklin,DEN,KC,WR3,0.12,0.11,0.11,809,,,,0.236,1.0,0.894,20.0
 8,Jelani Woods,NYJ,LV,TE4,0.12,0.11,0.11,813,,,,0.087,1.0,1.073,24.0
-8,Brian Thomas Jr.,JAX,IND,WR4+,0.12,0.109,0.109,817,,,,0.0,1.0,1.241,27.8
-8,CJ Williams,JAX,IND,WR4+,0.12,0.109,0.109,817,,,,0.0,1.0,1.241,27.8
+8,Brian Thomas Jr.,JAX,IND,WR4+,0.12,0.109,0.174,817,draftkings,450.0,-4.3,0.0,1.0,1.241,27.8
+8,CJ Williams,JAX,IND,WR4+,0.12,0.109,0.042,817,fanatics,2200.0,-4.3,0.0,1.0,1.241,27.8
 8,Brock Wright,DET,MIN,TE2,0.11,0.108,0.108,829,,,,0.28,1.0,1.106,24.8
 8,Sione Vaki,DET,MIN,RB2,0.11,0.108,0.108,825,,,,0.341,1.0,1.106,24.8
 8,Dallen Bentley,DEN,KC,TE4,0.11,0.107,0.107,836,,,,0.0,1.0,0.894,20.0
 8,Julius Chestnut,TEN,@CIN,RB2,0.11,0.107,0.107,835,,,,0.044,1.0,0.715,16.0
-8,Elijah Mitchell,PHI,@WAS,RB3,0.11,0.107,0.174,837,fanduel,430.0,-7.7,0.087,1.0,0.771,17.2
-8,Luke McCaffrey,WAS,PHI,WR4+,0.11,0.106,0.038,842,fanduel,3300.0,30.5,0.131,1.0,1.039,23.2
+8,Elijah Mitchell,PHI,@WAS,RB3,0.11,0.107,0.107,837,,,,0.087,1.0,0.771,17.2
+8,Luke McCaffrey,WAS,PHI,WR4+,0.11,0.106,0.106,842,,,,0.131,1.0,1.039,23.2
 8,Michael Carter,TEN,@CIN,RB4,0.11,0.105,0.105,850,,,,0.07,1.0,0.715,16.0
 8,Oronde Gadsden,LAC,@LAR,TE2,0.11,0.104,0.104,859,,,,0.0,1.0,0.872,19.5
 8,Kirk Cousins,LV,@NYJ,QB1,0.11,0.104,0.104,860,,,,0.35,1.0,1.006,22.5
 8,Justin Herbert,LAC,@LAR,QB1,0.11,0.103,0.103,870,,,,0.35,1.0,0.872,19.5
-8,Tanner McKee,PHI,@WAS,QB1,0.11,0.103,0.079,874,betrivers,1200.0,2.6,0.184,1.0,0.771,17.2
+8,Tanner McKee,PHI,@WAS,QB1,0.11,0.103,0.103,874,,,,0.184,1.0,0.771,17.2
 8,Ben Yurosek,MIN,@DET,TE3,0.11,0.103,0.103,874,,,,0.07,1.0,0.972,21.8
 8,CJ Daniels,LAR,LAC,WR4+,0.11,0.103,0.103,875,,,,0.0,1.0,1.162,26.0
 8,Olamide Zaccheaus,ATL,@TB,WR3,0.11,0.103,0.103,875,,,,0.332,1.0,0.939,21.0
 8,DeeJay Dallas,MIN,@DET,RB3,0.11,0.102,0.102,879,,,,0.306,1.0,0.972,21.8
-8,Ben Sinnott,WAS,PHI,TE2,0.11,0.102,0.047,878,draftkings,2500.0,22.5,0.158,1.0,1.039,23.2
+8,Ben Sinnott,WAS,PHI,TE2,0.11,0.102,0.102,878,,,,0.158,1.0,1.039,23.2
 8,Tim Patrick,NYJ,LV,WR4+,0.11,0.101,0.101,886,,,,0.236,1.0,1.073,24.0
 8,Robert Tonyan,PIT,CLE,TE3,0.11,0.1,0.1,898,,,,0.061,1.0,0.939,21.0
-8,Elijah Sarratt,BAL,@BUF,WR4+,0.1,0.099,0.099,909,,,,0.017,1.0,1.151,25.8
+8,Elijah Sarratt,BAL,@BUF,WR4+,0.1,0.099,0.028,909,fanduel,3500.0,0.3,0.017,1.0,1.151,25.8
 8,Skyler Bell,BUF,BAL,WR4+,0.1,0.098,0.098,918,,,,0.079,1.0,1.285,28.8
 8,Brevyn Spann-Ford,DAL,ARI,TE2,0.1,0.098,0.098,920,,,,0.35,1.0,1.375,30.8
 8,Colbie Young,CIN,TEN,WR4+,0.1,0.098,0.098,920,,,,0.096,1.0,1.319,29.5
 8,Payne Durham,TB,ATL,TE2,0.1,0.098,0.098,924,,,,0.184,1.0,1.006,22.5
 8,Isaiah Williams,NYJ,LV,WR4+,0.1,0.098,0.098,922,,,,0.131,1.0,1.073,24.0
 8,Jake Briningstool,KC,@DEN,TE3,0.1,0.098,0.098,925,,,,0.096,1.0,0.961,21.5
-8,Jaylen Wright,MIA,NE,RB2,0.1,0.098,0.159,916,Polymarket,400.0,-20.6,0.35,1.0,0.771,17.2
+8,Jaylen Wright,MIA,NE,RB2,0.1,0.098,0.098,916,,,,0.35,1.0,0.771,17.2
 8,Alex Bachman,LAR,LAC,WR4+,0.1,0.097,0.097,934,,,,0.035,1.0,1.162,26.0
 8,Coleman Owen,GB,CAR,WR4+,0.1,0.097,0.097,929,,,,0.017,1.0,1.14,25.5
 8,DeAndre Carter,DET,MIN,WR4+,0.1,0.097,0.097,929,,,,0.0,1.0,1.106,24.8
 8,Tay Martin,DET,MIN,WR4+,0.1,0.097,0.097,935,,,,0.017,1.0,1.106,24.8
 8,Nicholas Singleton,TEN,@CIN,RB3,0.1,0.097,0.097,934,,,,0.105,1.0,0.715,16.0
 8,Kaytron Allen,MIA,NE,RB3,0.1,0.097,0.097,927,,,,0.149,1.0,0.771,17.2
-8,Corey Kiner,NE,@MIA,RB3,0.1,0.097,0.158,936,Polymarket,400.0,-20.9,0.35,1.0,1.084,24.2
-8,Grant Calcaterra,PHI,@WAS,TE4,0.1,0.096,0.026,944,fanatics,4000.0,6.1,0.035,1.0,0.771,17.2
+8,Corey Kiner,NE,@MIA,RB3,0.1,0.097,0.097,936,,,,0.35,1.0,1.084,24.2
+8,Grant Calcaterra,PHI,@WAS,TE4,0.1,0.096,0.096,944,,,,0.035,1.0,0.771,17.2
 8,Sam Roush,CHI,@SEA,TE2,0.1,0.096,0.1,942,draftkings,850.0,-4.8,0.114,1.0,0.972,21.8
-8,Sam Darnold,SEA,CHI,QB1,0.1,0.095,0.108,957,Polymarket,733.0,-10.2,0.35,1.0,1.106,24.8
+8,Sam Darnold,SEA,CHI,QB1,0.1,0.095,0.114,957,Polymarket,669.0,-12.3,0.35,1.0,1.106,24.8
 8,Drew Ogletree,IND,@JAX,TE4,0.1,0.095,0.095,948,,,,0.0,1.0,0.793,17.8
 8,Malik McClain,NYJ,LV,WR4+,0.1,0.095,0.095,952,,,,0.0,1.0,1.073,24.0
 8,Emmett Johnson,KC,@DEN,RB2,0.1,0.095,0.095,958,,,,0.341,1.0,0.961,21.5
 8,Simi Fehoko,ARI,@DAL,WR4+,0.1,0.094,0.094,967,,,,0.0,1.0,1.062,23.8
 8,Carsen Ryan,CLE,@PIT,TE3,0.1,0.094,0.094,963,,,,0.0,1.0,0.782,17.5
 8,Matthew Stafford,LAR,LAC,QB1,0.1,0.094,0.094,963,,,,0.35,1.0,1.162,26.0
-8,Makai Lemon,PHI,@WAS,WR3,0.1,0.093,0.181,975,betrivers,350.0,-18.4,0.262,1.0,0.771,17.2
+8,Makai Lemon,PHI,@WAS,WR3,0.1,0.093,0.093,975,,,,0.262,1.0,0.771,17.2
 8,Justin Joly,MIA,NE,TE4,0.1,0.093,0.093,978,,,,0.0,1.0,0.771,17.2
 8,J. Michael Sturdivant,GB,CAR,WR4+,0.1,0.093,0.093,978,,,,0.044,1.0,1.14,25.5
 8,David Sills V,TB,ATL,WR4+,0.1,0.092,0.092,985,,,,0.061,1.0,1.006,22.5
 8,Geno Smith,NYJ,LV,QB1,0.1,0.092,0.092,986,,,,0.35,1.0,1.073,24.0
 8,Pharaoh Brown,IND,@JAX,TE5,0.1,0.091,0.091,995,,,,0.026,1.0,0.793,17.8
 8,Seydou Traore,MIA,NE,TE3,0.09,0.09,0.09,1014,,,,0.017,1.0,0.771,17.2
-8,Eli Stowers,PHI,@WAS,TE3,0.09,0.09,0.039,1014,Polymarket,2400.0,-2.1,0.017,1.0,0.771,17.2
+8,Eli Stowers,PHI,@WAS,TE3,0.09,0.09,0.09,1014,,,,0.017,1.0,0.771,17.2
 8,Aaron Rodgers,PIT,CLE,QB1,0.09,0.09,0.09,1014,,,,0.35,1.0,0.939,21.0
-8,Van Jefferson,WAS,PHI,WR4+,0.09,0.089,0.035,1022,fanatics,3000.0,9.9,0.079,1.0,1.039,23.2
+8,Van Jefferson,WAS,PHI,WR4+,0.09,0.089,0.089,1022,,,,0.079,1.0,1.039,23.2
 8,Dont'e Thornton Jr.,LV,@NYJ,WR4+,0.09,0.089,0.089,1019,,,,0.0,1.0,1.006,22.5
 8,Will Mallory,IND,@JAX,TE2,0.09,0.088,0.088,1035,,,,0.044,1.0,0.793,17.8
 8,David Martin-Robinson,TEN,@CIN,TE3,0.09,0.088,0.088,1036,,,,0.052,1.0,0.715,16.0
 8,Tutu Atwell,LAR,LAC,WR4+,0.09,0.088,0.088,1034,,,,0.175,1.0,1.162,26.0
 8,KeAndre Lambert-Smith,LAC,@LAR,WR4+,0.09,0.088,0.088,1030,,,,0.105,1.0,0.872,19.5
 8,John Metchie III,CAR,@GB,WR4+,0.09,0.087,0.087,1043,,,,0.0,1.0,0.983,22.0
-8,LaJohntay Wester,BAL,@BUF,WR4+,0.09,0.087,0.087,1055,,,,0.096,1.0,1.151,25.8
+8,LaJohntay Wester,BAL,@BUF,WR4+,0.09,0.087,0.032,1055,fanduel,3500.0,16.5,0.096,1.0,1.151,25.8
 8,Gavin Bartholomew,MIN,@DET,TE2,0.09,0.086,0.086,1063,,,,0.193,1.0,0.972,21.8
 8,Kameron Johnson,TB,ATL,WR4+,0.09,0.086,0.086,1061,,,,0.114,1.0,1.006,22.5
 8,Devin Duvernay,ARI,@DAL,WR4+,0.09,0.085,0.085,1082,,,,0.061,1.0,1.062,23.8
@@ -342,12 +342,12 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Charlie Woerner,ATL,@TB,TE2,0.09,0.082,0.082,1118,,,,0.201,1.0,0.939,21.0
 8,Myles Price,MIN,@DET,WR4+,0.08,0.081,0.081,1142,,,,0.044,1.0,0.972,21.8
 8,Brandon Smith,PIT,CLE,WR4+,0.08,0.081,0.081,1135,,,,0.017,1.0,0.939,21.0
-8,Marvin Mims Jr.,DEN,KC,WR4+,0.08,0.08,0.182,1152,Polymarket,426.0,-4.3,0.0,1.0,0.894,20.0
-8,Andrew Armstrong,KC,@DEN,WR4+,0.08,0.08,0.178,1144,Polymarket,426.0,-6.2,0.035,1.0,0.961,21.5
+8,Marvin Mims Jr.,DEN,KC,WR4+,0.08,0.08,0.08,1152,,,,0.0,1.0,0.894,20.0
+8,Andrew Armstrong,KC,@DEN,WR4+,0.08,0.08,0.08,1144,,,,0.035,1.0,0.961,21.5
 8,Elic Ayomanor,TEN,@CIN,WR3,0.08,0.08,0.08,1158,,,,0.35,1.0,0.715,16.0
-8,Chris Bell,MIA,NE,WR3,0.08,0.079,0.157,1167,Polymarket,426.0,-17.6,0.245,1.0,0.771,17.2
+8,Chris Bell,MIA,NE,WR3,0.08,0.079,0.079,1167,,,,0.245,1.0,0.771,17.2
 8,Jerry Jeudy,CLE,@PIT,WR3,0.08,0.078,0.078,1177,,,,0.341,1.0,0.782,17.5
-8,Adam Trautman,DEN,KC,TE2,0.08,0.077,0.141,1202,Polymarket,456.0,-21.5,0.324,1.0,0.894,20.0
+8,Adam Trautman,DEN,KC,TE2,0.08,0.077,0.077,1202,,,,0.324,1.0,0.894,20.0
 8,Dareke Young,LV,@NYJ,WR4+,0.08,0.076,0.076,1219,,,,0.096,1.0,1.006,22.5
 8,Laquon Treadwell,IND,@JAX,WR3,0.08,0.076,0.076,1211,,,,0.289,1.0,0.793,17.8
 8,Jonathan Mingo,DAL,ARI,WR4+,0.08,0.074,0.074,1257,,,,0.35,1.0,1.375,30.8
@@ -356,26 +356,26 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Mitchell Evans,CAR,@GB,TE3,0.08,0.074,0.074,1253,,,,0.35,1.0,0.983,22.0
 8,Bo Melton,GB,CAR,WR4+,0.08,0.073,0.073,1272,,,,0.35,1.0,1.14,25.5
 8,Theo Wease Jr.,LAC,@LAR,WR4+,0.08,0.073,0.073,1268,,,,0.096,1.0,0.872,19.5
-8,Will Kacmarek,MIA,NE,TE2,0.07,0.071,0.155,1304,Polymarket,456.0,-13.6,0.166,1.0,0.771,17.2
-8,Kevin Coleman Jr.,MIA,NE,WR4+,0.07,0.069,0.182,1343,Polymarket,426.0,-4.3,0.0,1.0,0.771,17.2
+8,Will Kacmarek,MIA,NE,TE2,0.07,0.071,0.071,1304,,,,0.166,1.0,0.771,17.2
+8,Kevin Coleman Jr.,MIA,NE,WR4+,0.07,0.069,0.069,1343,,,,0.0,1.0,0.771,17.2
 8,David Moore,CAR,@GB,WR4+,0.07,0.068,0.068,1371,,,,0.219,1.0,0.983,22.0
-8,Dyami Brown,WAS,PHI,WR4+,0.07,0.067,0.103,1399,fanduel,700.0,-17.6,0.315,1.0,1.039,23.2
+8,Dyami Brown,WAS,PHI,WR4+,0.07,0.067,0.067,1399,,,,0.315,1.0,1.039,23.2
 8,Noah Gray,KC,@DEN,TE2,0.07,0.067,0.067,1390,,,,0.35,1.0,0.961,21.5
 8,Malik Benson,LV,@NYJ,WR4+,0.07,0.066,0.066,1413,,,,0.193,1.0,1.006,22.5
 8,Tylan Wallace,CLE,@PIT,WR4+,0.07,0.066,0.066,1427,,,,0.122,1.0,0.782,17.5
 8,Jalen Tolbert,MIA,NE,WR4+,0.07,0.065,0.065,1446,,,,0.193,1.0,0.771,17.2
-8,Zavion Thomas,CHI,@SEA,WR4+,0.07,0.065,0.077,1436,fanatics,1100.0,-7.5,0.184,1.0,0.972,21.8
+8,Zavion Thomas,CHI,@SEA,WR4+,0.07,0.065,0.074,1436,Polymarket,1150.0,-6.9,0.184,1.0,0.972,21.8
 8,Xavier Restrepo,TEN,@CIN,WR4+,0.06,0.062,0.062,1508,,,,0.017,1.0,0.715,16.0
 8,Tyler Huntley,BAL,@BUF,QB2,0.06,0.062,0.062,1516,,,,0.158,1.0,1.151,25.8
-8,Johnny Mundt,PHI,@WAS,TE2,0.06,0.062,0.044,1510,draftkings,2500.0,15.3,0.297,1.0,0.771,17.2
-8,Lil'Jordan Humphrey,DEN,KC,WR4+,0.06,0.06,0.145,1556,Polymarket,456.0,-19.5,0.245,1.0,0.894,20.0
+8,Johnny Mundt,PHI,@WAS,TE2,0.06,0.062,0.062,1510,,,,0.297,1.0,0.771,17.2
+8,Lil'Jordan Humphrey,DEN,KC,WR4+,0.06,0.06,0.06,1556,,,,0.245,1.0,0.894,20.0
 8,Daniel Bellinger,TEN,@CIN,TE2,0.06,0.059,0.059,1581,,,,0.35,1.0,0.715,16.0
 8,Case Keenum,CHI,@SEA,QB3,0.06,0.059,0.059,1598,,,,0.026,1.0,0.972,21.8
-8,Cyrus Allen,KC,@DEN,WR4+,0.06,0.059,0.152,1584,Polymarket,426.0,-20.1,0.245,1.0,0.961,21.5
+8,Cyrus Allen,KC,@DEN,WR4+,0.06,0.059,0.059,1584,,,,0.245,1.0,0.961,21.5
 8,Ashton Dulin,IND,@JAX,WR4+,0.06,0.057,0.057,1664,,,,0.149,1.0,0.793,17.8
 8,Tai Felton,MIN,@DET,WR4+,0.06,0.057,0.057,1661,,,,0.289,1.0,0.972,21.8
 8,Jared Wayne,MIA,NE,WR4+,0.06,0.057,0.057,1648,,,,0.114,1.0,0.771,17.2
-8,Elijah Moore,PHI,@WAS,WR4+,0.06,0.057,0.045,1661,fanatics,2200.0,2.7,0.201,1.0,0.771,17.2
+8,Elijah Moore,PHI,@WAS,WR4+,0.06,0.057,0.057,1661,,,,0.201,1.0,0.771,17.2
 8,Derius Davis,LAC,@LAR,WR4+,0.06,0.056,0.056,1692,,,,0.297,1.0,0.872,19.5
 8,Sam Howell,DAL,ARI,QB2,0.06,0.055,0.055,1732,,,,0.0,1.0,1.375,30.8
 8,Zachariah Branch,ATL,@TB,WR4+,0.05,0.053,0.053,1776,,,,0.315,1.0,0.939,21.0
@@ -389,7 +389,7 @@ week,player,team,opp,slot,lam,p_model,p,fair,book,price,ev,w_model,matchup_x,gam
 8,Stetson Bennett IV,LAR,LAC,QB2,0.05,0.047,0.047,2046,,,,0.0,1.0,1.162,26.0
 8,Quinn Ewers,JAX,IND,QB2,0.05,0.047,0.047,2010,,,,0.026,1.0,1.241,27.8
 8,Joshua Dobbs,DET,MIN,QB2,0.05,0.046,0.046,2083,,,,0.061,1.0,1.106,24.8
-8,Joe Fagnano,BAL,@BUF,QB3,0.05,0.046,0.046,2069,,,,0.0,1.0,1.151,25.8
+8,Joe Fagnano,BAL,@BUF,QB3,0.05,0.046,0.087,2069,fanduel,1000.0,-4.3,0.0,1.0,1.151,25.8
 8,Riley Leonard,IND,@JAX,QB3,0.05,0.045,0.045,2127,,,,0.026,1.0,0.793,17.8
 8,Deion Burks,IND,@JAX,WR4+,0.05,0.045,0.045,2098,,,,0.306,1.0,0.793,17.8
 8,Tyrod Taylor,GB,CAR,QB2,0.05,0.045,0.045,2127,,,,0.105,1.0,1.14,25.5
