@@ -941,3 +941,6 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n120 · 2026-11-01 · v57: META / META v2 back to one composite column, split by position
 - Josh's rule, repeated: ONE composite column, the rest separated by position. META and META v2 are the five-section layout again (all · QB · RB · WR · TE), each row player · opp · META (or CONS). Every signal stays inside the composite and the hover breakdown; signal columns, position tabs and lens chips removed. The all-in weights from v56 are unchanged.
 - scripts/patch_v57_meta_cols.py on top of v56. Proofed: 39 tabs, 0 errors, 0 overflow at 2000px.
+
+## n121 · 2026-11-01 · v58: META / META v2 headers no longer float
+- Section titles and column headers static (scroll with the table) on META and META v2 — the sticky offset was what broke the header strip on his screen. scripts/patch_v58_static_heads.py.

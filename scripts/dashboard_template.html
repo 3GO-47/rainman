@@ -1182,6 +1182,8 @@ details.gvd[open]>summary{border-bottom:1px solid var(--edge);color:var(--accent
 
 /* v56 */ .rzc{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;margin-left:4px;white-space:nowrap} .mtone{max-height:72vh;overflow:auto} .mtone table.lgt{width:100%} .mtone th.nw,.mtone td.nw{opacity:.55}
 /* v57 */ .meta .lgt td.md.gs .badge{min-width:30px;font-size:12px}
+/* v58 */ #meta .lgrid .lgcol>h3,#metav2 .lgrid .lgcol>h3{position:static!important}
+#meta .lgrid table.lgt tr.hd th,#metav2 .lgrid table.lgt tr.hd th,#meta .lgrid table.lgt thead th,#metav2 .lgrid table.lgt thead th{position:static!important;box-shadow:none!important;top:auto!important}
 </style>__BRAND_BOOT__
 </head><body>
 <div id="legacyNav" hidden><nav>
@@ -7375,7 +7377,7 @@ function gameView(){
   fill();RR.push(fill);
 }
 
-Object.assign(NOTES,{v57:['META and META v2: one composite column (META / CONS), every position together then QB, RB, WR, TE — every signal lives inside the composite and its hover breakdown; signal columns, position tabs and lens chips removed'],v56:['META rebuilt: one all-in score folding Ψ, red-zone usage, the anytime-TD model, implied points, TD allowed, scheme, form, H2H, the market, snaps and first-TD chance — declared weights, the backtest recipe kept as a second mode; one wide table with position tabs instead of five squeezed columns','META v2: red-zone and snap-share boards join the fold','Red zone everywhere: Player Board, TD Board, Matchup Board, Player Explorer, projections (±12% multiplier) and Insights all read the nflverse red-zone layer'],
+Object.assign(NOTES,{v58:['META and META v2: section titles and column headers no longer float — they scroll with the table'],v57:['META and META v2: one composite column (META / CONS), every position together then QB, RB, WR, TE — every signal lives inside the composite and its hover breakdown; signal columns, position tabs and lens chips removed'],v56:['META rebuilt: one all-in score folding Ψ, red-zone usage, the anytime-TD model, implied points, TD allowed, scheme, form, H2H, the market, snaps and first-TD chance — declared weights, the backtest recipe kept as a second mode; one wide table with position tabs instead of five squeezed columns','META v2: red-zone and snap-share boards join the fold','Red zone everywhere: Player Board, TD Board, Matchup Board, Player Explorer, projections (±12% multiplier) and Insights all read the nflverse red-zone layer'],
  lab:['v18','the TD Grid\'s slot chips replace the depth dropdown — click QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2 on or off, ALL for every body on the chart; hide OUT and search unchanged'],
  tdbx:['v18','slot chips (QB1 · RB1 · RB2 · WR1–WR4 · TE1 · TE2, ALL for everyone) replace the depth dropdown, the same filter as the TD Grid'],
  labgridp:['v18','now carries the TD Grid\'s player filter: slot chips in place of the depth dropdown, hide OUT, search'],
