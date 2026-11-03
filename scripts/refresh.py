@@ -99,6 +99,13 @@ def main():
     except (Exception, SystemExit) as e: print('  build_tracking skipped:', e)
     try: run(['scripts/build_dev.py'])
     except (Exception, SystemExit) as e: print('  build_dev skipped:', e)
+    # Simulations (Layer 0): parameters from the fresh pbp / usage / depth chart, the coming week × 10,000, the backtest for any
+    # week not yet graded (cached per week), then the page
+    try:
+        run(['scripts/build_simulations.py', '--n', '10000'])
+        run(['scripts/build_simulations.py', '--backtest', '--bt-n', '4000'])
+        run(['scripts/build_simulations_page.py'])
+    except (Exception, SystemExit) as e: print('  simulations skipped:', e)
     # other sports (NBA / NHL / WNBA): sportsdataverse parquets from GitHub, then the generic Layer-1 builder
     if '--no-sports' not in sys.argv:
         r = subprocess.run([sys.executable, 'scripts/sports/fetch_sdv.py'])

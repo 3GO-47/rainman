@@ -525,7 +525,7 @@ def page(games, pulled):
  .trk{{min-width:26px;line-height:22px}}
 }}
 </style>{brand.THEME_BOOT}</head><body>
-<div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a><a class="acc" href="tracking.html" style="color:#ffd600">★ Tracking</a>{brand.theme_switch_html()}</span></div>
+<div id="hdr"><span class="brand">{brand.mascot("counting", 22, "rmask hdr")}RAINMAN</span><span class="hl"><a class="acc" href="arb.html">Arb Engine</a><a class="acc" href="social.html">Social</a><a class="acc" href="tracking.html" style="color:#ffd600">★ Tracking</a><a class="acc" href="simulations.html">Simulations</a>{brand.theme_switch_html()}</span></div>
 <main>
 
 <div class="hero">{brand.mascot("counting", 82, "rmask", anim=True)}<span class="kel">{brand.kelly("counting", 50, "rmask")}</span><div><h1>RAINMAN</h1>
