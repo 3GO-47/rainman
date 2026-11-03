@@ -1,42 +1,61 @@
 league,event_id,kickoff,away,home,market,selection,point,source,player,stat,dec,american,fair,ev,kelly_quarter,sources,disp,exch,basis,model_p,ev_model,steam,conf,tier,liq,note,key
-nfl,401873047,2026-11-08T21:25Z,LV,SF,moneyline,LV,,FD,,,5.5,+450,0.194,0.0672,0.0037,7,0.0077,1,market,,,0.0119,89,A,,,moneyline|
-cfb,401862821,2026-11-07T21Z,RICE,UNT,moneyline,RICE,,KAL,,,7.8498,+685,0.141,0.1065,0.0039,6,0.0117,1,market,,,0.0152,76,A,1510,yes 0.11/0.12,moneyline|
-cfb,401856738,2026-11-07T17:45Z,ARK,AUB,moneyline,ARK,,KAL,,,4.5124,+351,0.2252,0.016,0.0011,6,0.0089,1,market,,,0.0296,93,A,3914,yes 0.20/0.21,moneyline|
-cfb,401860911,2026-11-07T23Z,BOIS,CSU,moneyline,CSU,,FAN,,,7.5,+650,0.1378,0.0334,0.0013,5,0.0063,0,market,,,0.0229,87,A,,,moneyline|
-cfb,401858511,2026-11-08T00:30Z,MSU,MICH,moneyline,MSU,,BR,,,5.75,+475,0.18,0.0348,0.0018,6,0.0084,1,market,,,0.0018,84,A,,,moneyline|
-nfl,401873045,2026-11-08T18Z,NYJ,KC,moneyline,NYJ,,FD,,,5.1,+410,0.2012,0.0259,0.0016,7,0.0097,1,market,,,0.008,86,A,,,moneyline|
-cfb,401866457,2026-11-05T00Z,TOL,SAC,moneyline,SAC,,MGM,,,16.5,+1550,0.0672,0.1092,0.0018,4,0.0039,0,market,,,0.0085,65,B,,,moneyline|
-nfl,401873048,2026-11-08T21:25Z,ARI,SEA,total,Over,43.5,KAL,,,2.0947,+109,0.5056,0.0591,0.0135,7,0.0201,1,market,,,0.0081,75,A,3642,yes 0.44/0.46,total|43.5
-cfb,401866453,2026-11-04T00Z,OHIO,AKR,moneyline,AKR,,BR,,,6.1,+510,0.1741,0.0622,0.003,6,0.0081,1,market,,,-0.0527,74,A,,,moneyline|
-cfb,401862819,2026-11-07T20:30Z,CLT,UAB,moneyline,CLT,,BR,,,4.4,+340,0.2386,0.0497,0.0037,5,0.01,0,market,,,0.0055,76,A,,,moneyline|
-cfb,401858517,2026-11-07T21:15Z,RUTG,WIS,moneyline,RUTG,,ESPN,,,8.0,+700,0.1298,0.0382,0.0014,6,0.0074,1,market,,,-0.0181,77,A,,,moneyline|
-cfb,401858289,2026-11-07T17Z,FSU,BC,moneyline,BC,,ESPN,,,3.4,+240,0.3058,0.0396,0.0041,6,0.0092,1,market,,,-0.0181,76,A,,,moneyline|
-cfb,401870795,2026-11-08T01Z,LIB,NMSU,moneyline,NMSU,,KAL,,,7.2507,+625,0.1421,0.0305,0.0012,6,0.0104,1,market,,,-0.0579,72,A,2079,yes 0.12/0.13,moneyline|
-nba,401909930,2026-11-05T01:30Z,MIN,HOU,total,Over,224.5,KAL,,,2.2881,+129,0.4908,0.1231,0.0239,3,0.0389,1,market,,,,34,C,4789,yes 0.40/0.42,total|224.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Daniel Swinney,anytime_td,11.0,+1000,0.1141,0.2555,0.0064,0,,0,market,,,,0,C,,,prop|anytime_td|Daniel Swinney|0.5
-cfb,401858510,2026-11-07T01Z,NEB,ILL,total,Under,49.5,KAL,,,2.0515,+105,0.4924,0.0102,0.0024,3,0.0135,1,market,,,-0.0004,60,B,535,no @ 0.47,total|49.5
-cfb,401858510,2026-11-07T01Z,NEB,ILL,prop,Yes,0.5,FD,Javari Barnett,anytime_td,9.5,+850,0.1298,0.2331,0.0069,0,,0,market,,,,0,C,,,prop|anytime_td|Javari Barnett|0.5
-nba,401909930,2026-11-05T01:30Z,MIN,HOU,total,Under,224.5,FD,,,1.8772,-114,0.5579,0.0472,0.0135,3,0.0389,1,market,,,,44,C,,,total|224.5
-nba,401909930,2026-11-05T01:30Z,MIN,HOU,total,Under,224.5,BR,,,1.8696,-115,0.5575,0.0422,0.0121,3,0.0389,1,market,,,,44,C,,,total|224.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,DK,Braylon Isom,anytime_td,7.5,+650,0.195,0.4628,0.0178,0,,0,market,,,0.1,0,C,,,prop|anytime_td|Braylon Isom|0.5
+nfl,401873042,2026-11-08T18Z,DET,MIA,moneyline,MIA,,DK,,,3.95,+295,0.2589,0.0225,0.0019,7,0.007,1,market,,,0.0344,95,A,,,moneyline|
+nfl,401873047,2026-11-08T21:25Z,LV,SF,moneyline,LV,,DK,,,5.25,+425,0.1953,0.0255,0.0015,7,0.0056,1,market,,,0.0146,92,A,,,moneyline|
+cfb,401866457,2026-11-05T00Z,TOL,SAC,moneyline,SAC,,MGM,,,16.5,+1550,0.0665,0.0967,0.0016,5,0.0035,0,market,,,0.0083,74,A,,,moneyline|
+nba,401909930,2026-11-05T01:30Z,MIN,HOU,moneyline,MIN,,BR,,,3.6,+260,0.2811,0.0121,0.0012,7,0.0066,1,market,,,0.0268,95,A,,,moneyline|
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,FD,Scoop Smith,anytime_td,9.0,+800,0.1544,0.39,0.0122,0,,0,market,,,0.0353,0,C,,,prop|anytime_td|Scoop Smith|0.5
+nfl,401873045,2026-11-08T18Z,NYJ,KC,moneyline,NYJ,,FD,,,5.3,+430,0.1978,0.0481,0.0028,7,0.0102,1,market,,,0.0031,83,A,,,moneyline|
+cfb,401858511,2026-11-08T00:30Z,MSU,MICH,moneyline,MSU,,BR,,,5.75,+475,0.1797,0.0334,0.0018,7,0.0077,1,market,,,0.0016,85,A,,,moneyline|
+cfb,401862819,2026-11-07T20:30Z,CLT,UAB,moneyline,CLT,,BR,,,4.4,+340,0.2508,0.1037,0.0076,6,0.0139,0,market,,,0.0164,67,B,,,moneyline|
+nfl,401873045,2026-11-08T18Z,NYJ,KC,moneyline,NYJ,,ESPN,,,5.25,+425,0.1978,0.0387,0.0023,7,0.0102,1,market,,,0.0031,83,A,,,moneyline|
+cfb,401870795,2026-11-08T01Z,LIB,NMSU,moneyline,NMSU,,FD,,,8.2,+720,0.1372,0.125,0.0043,7,0.0135,1,market,,,-0.0618,59,B,,,moneyline|
+cfb,401860911,2026-11-07T23Z,BOIS,CSU,moneyline,CSU,,FAN,,,7.5,+650,0.1354,0.0158,0.0006,6,0.0065,0,market,,,0.0213,86,A,,,moneyline|
+nba,401909934,2026-11-05T03Z,LAL,SAC,moneyline,SAC,,FAN,,,5.6,+460,0.1849,0.0356,0.0019,7,0.0112,1,market,,,,81,A,,,moneyline|
+cfb,401860911,2026-11-07T23Z,BOIS,CSU,moneyline,CSU,,MGM,,,7.5,+650,0.1353,0.0149,0.0006,6,0.0065,0,market,,,0.0213,86,A,,,moneyline|
+cfb,401862820,2026-11-07T20:30Z,TEM,NAVY,moneyline,TEM,,ESPN,,,3.6,+260,0.2819,0.0147,0.0014,7,0.0088,1,market,,,0.0069,86,A,,,moneyline|
+cfb,401856854,2026-11-07T18Z,OKST,KSU,moneyline,KSU,,ESPN,,,2.9,+190,0.3571,0.0355,0.0047,7,0.0137,1,market,,,-0.0053,76,A,,,moneyline|
+cfb,401856851,2026-11-07T20:30Z,CIN,HOU,moneyline,CIN,,BR,,,4.6,+360,0.2199,0.0114,0.0008,7,0.0074,1,market,,,-0.0061,82,A,,,moneyline|
+cfb,401858289,2026-11-07T17Z,FSU,BC,moneyline,BC,,ESPN,,,3.25,+225,0.3125,0.0155,0.0017,7,0.0095,1,market,,,-0.0078,79,A,,,moneyline|
+nba,401909923,2026-11-05T00Z,ATL,WSH,moneyline,WSH,,KAL,,,2.2881,+129,0.4672,0.0689,0.0134,7,0.0275,1,market,,,,64,B,1163,yes 0.39/0.42,moneyline|
+cfb,401870795,2026-11-08T01Z,LIB,NMSU,moneyline,NMSU,,MGM,,,7.5,+650,0.1354,0.0156,0.0006,7,0.0135,1,market,,,-0.0618,69,B,,,moneyline|
+nba,401909922,2026-11-05T00Z,PHI,DET,prop,Under,0.5,MGM,LeBron James,tpm,2.6,+160,0.3983,0.0357,0.0056,4,0.0172,0,market,,,,59,B,,,prop|tpm|LeBron James|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Daniel Swinney,anytime_td,11.0,+1000,0.1142,0.256,0.0064,0,,0,market,,,,0,C,,,prop|anytime_td|Daniel Swinney|0.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,FD,Lazaro Rogers,anytime_td,8.5,+750,0.1473,0.2519,0.0084,0,,0,market,,,,0,C,,,prop|anytime_td|Lazaro Rogers|0.5
+nba,401909922,2026-11-05T00Z,PHI,DET,prop,Over,2.5,BR,Duncan Robinson,reb,2.32,+132,0.439,0.0184,0.0035,4,0.0199,0,market,,,,56,B,,,prop|reb|Duncan Robinson|2.5
+nba,401909922,2026-11-05T00Z,PHI,DET,prop,Under,1.5,MGM,VJ Edgecombe,tpm,1.8,-125,0.563,0.0134,0.0042,4,0.0203,0,market,,,,56,B,,,prop|tpm|VJ Edgecombe|1.5
+cfb,401858510,2026-11-07T01Z,NEB,ILL,prop,Yes,0.5,FD,Javari Barnett,anytime_td,9.5,+850,0.1298,0.2335,0.0069,0,,0,market,,,,0,C,,,prop|anytime_td|Javari Barnett|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,FD,Jonah Burton,anytime_td,5.2,+420,0.235,0.2223,0.0132,0,,0,market,,,,0,C,,,prop|anytime_td|Jonah Burton|0.5
+cfb,401856744,2026-11-07T20Z,TA&M,SC,prop,Yes,0.5,FD,Aaron Gregory,anytime_td,8.5,+750,0.1433,0.2183,0.0073,0,,0,market,,,,0,C,,,prop|anytime_td|Aaron Gregory|0.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,21.5,DK,Josh Jacobs,rec_yds,1.9346,-107,0.4985,-0.0356,0.0,3,0.0044,0,market,0.5521,0.0681,,62,B,,,prop|rec_yds|Josh Jacobs|21.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,67.5,DK,Matthew Golden,rec_yds,1.8929,-112,0.5015,-0.0507,0.0,3,0.0014,0,market,0.6611,0.2514,,65,B,,,prop|rec_yds|Matthew Golden|67.5
+cfb,401856856,2026-11-08T02:30Z,WVU,TTU,total,Over,65.5,KAL,,,2.0515,+105,0.4957,0.0168,0.004,2,0.0156,1,market,,,0.0085,48,C,109,yes 0.46/0.47,total|65.5
+cfb,401856742,2026-11-07T21:15Z,VAN,MSST,total,Under,47.5,KAL,,,2.0947,+109,0.4926,0.0318,0.0073,2,0.0191,1,market,,,0.0071,44,C,5125,no @ 0.46,total|47.5
+nba,401909930,2026-11-05T01:30Z,MIN,HOU,prop,Over,4.5,BR,LaMelo Ball,reb,2.3,+130,0.4443,0.0218,0.0042,3,0.0202,0,market,,,,46,C,,,prop|reb|LaMelo Ball|4.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,4.5,FD,Jordan Love,rush_yds,2.0,+100,0.4825,-0.035,0.0,3,0.0063,0,market,0.6679,0.3357,,60,B,,,prop|rush_yds|Jordan Love|4.5
-nba,401909923,2026-11-05T00Z,ATL,WSH,moneyline,ATL,,KAL,,,1.7627,-131,0.62,0.0929,0.0304,1,,1,market,,,,28,C,5661,yes 0.54/0.55,moneyline|
+nba,401909930,2026-11-05T01:30Z,MIN,HOU,prop,Under,5.5,MGM,Alperen Sengun,ast,2.1,+110,0.4934,0.0362,0.0082,3,0.0242,0,market,,,,42,C,,,prop|ast|Alperen Sengun|5.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,67.5,FD,Matthew Golden,rec_yds,1.8772,-114,0.5015,-0.0586,0.0,3,0.0014,0,market,0.6611,0.2411,,65,B,,,prop|rec_yds|Matthew Golden|67.5
-cfb,401856742,2026-11-07T21:15Z,VAN,MSST,total,Under,47.5,KAL,,,2.0515,+105,0.4936,0.0126,0.003,2,0.0171,1,market,,,0.0081,46,C,5125,no @ 0.47,total|47.5
+nba,401909922,2026-11-05T00Z,PHI,DET,prop,Over,10.5,BR,Ausar Thompson,pts,1.9615,-104,0.5184,0.0168,0.0044,3,0.0216,0,market,,,,44,C,,,prop|pts|Ausar Thompson|10.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,1.5,FD,Drake Maye,pass_td,1.8475,-118,0.5173,-0.0443,0.0,3,0.0066,0,market,0.5891,0.0884,,59,B,,,prop|pass_td|Drake Maye|1.5
-nba,401909922,2026-11-05T00Z,PHI,DET,total,Over,217.5,ESPN,,,1.8696,-115,0.545,0.0189,0.0054,2,0.0174,1,market,,,,43,C,,,total|217.5
-nba,401909930,2026-11-05T01:30Z,MIN,HOU,total,Under,222.5,DK,,,1.9091,-110,0.555,0.0596,0.0164,2,0.028,1,market,,,,32,C,,,total|222.5
+cfb,401866456,2026-11-05T00:30Z,CMU,EMU,total,Under,43.5,KAL,,,2.0515,+105,0.5,0.0257,0.0061,2,0.0204,1,market,,,0.0029,41,C,0,no @ 0.47,total|43.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Zachariah Branch,anytime_td,10.0,+900,0.1129,0.129,0.0036,0,,0,market,0.0617,-0.383,0.0333,15,C,,,prop|anytime_td|Zachariah Branch|0.5
+nba,401909923,2026-11-05T00Z,ATL,WSH,total,Under,234.5,BR,,,1.8929,-112,0.535,0.0127,0.0036,2,0.0162,1,market,,,,44,C,,,total|234.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,67.5,BR,Matthew Golden,rec_yds,1.8547,-117,0.5,-0.0726,0.0,3,0.0014,0,market,0.6611,0.2262,,65,B,,,prop|rec_yds|Matthew Golden|67.5
+nba,401909929,2026-11-05T01Z,CLE,OKC,total,Under,228.5,BR,,,1.8929,-112,0.535,0.0127,0.0036,2,0.0162,1,market,,,-0.0011,43,C,,,total|228.5
+nba,401909930,2026-11-05T01:30Z,MIN,HOU,prop,Over,8.5,MGM,Rudy Gobert,pts,1.9091,-110,0.5322,0.0161,0.0044,2,0.0096,0,market,,,,42,C,,,prop|pts|Rudy Gobert|8.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,1.5,DK,Drake Maye,pass_td,1.8403,-119,0.5141,-0.054,0.0,3,0.0066,0,market,0.5891,0.0841,,59,B,,,prop|pass_td|Drake Maye|1.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,4.5,DK,Jordan Love,rush_yds,1.9709,-103,0.4767,-0.0605,0.0,3,0.0063,0,market,0.6679,0.3163,,60,B,,,prop|rush_yds|Jordan Love|4.5
-cfb,401869936,2026-11-07T20Z,ULM,ARST,total,Over,52.5,BR,,,1.9259,-108,0.525,0.0111,0.003,2,0.0165,1,market,,,-0.0028,42,C,,,total|52.5
+cfb,401856856,2026-11-08T02:30Z,WVU,TTU,total,Under,65.5,FD,,,1.8929,-112,0.535,0.0127,0.0036,2,0.0156,1,market,,,-0.0085,41,C,,,total|65.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,21.5,BR,Josh Jacobs,rec_yds,1.8772,-114,0.4947,-0.0713,0.0,3,0.0044,0,market,0.5521,0.0364,,62,B,,,prop|rec_yds|Josh Jacobs|21.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,DK,Trevor Lawrence,pass_td,1.7874,-127,0.548,-0.0205,0.0,3,0.0109,0,market,0.6407,0.1451,-0.0158,49,C,,,prop|pass_td|Trevor Lawrence|1.5
+cfb,401866456,2026-11-05T00:30Z,CMU,EMU,total,Over,43.5,BR,,,1.8929,-112,0.54,0.0222,0.0062,2,0.0204,1,market,,,-0.0029,38,C,,,total|43.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,21.5,FD,Josh Jacobs,rec_yds,1.8772,-114,0.4932,-0.0742,0.0,3,0.0044,0,market,0.5521,0.0364,,62,B,,,prop|rec_yds|Josh Jacobs|21.5
-cfb,401856742,2026-11-07T21:15Z,VAN,MSST,total,Over,47.5,BR,,,1.8772,-114,0.54,0.0137,0.0039,2,0.0171,1,market,,,-0.0081,40,C,,,total|47.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Zachariah Branch,anytime_td,10.0,+900,0.1113,0.1128,0.0031,0,,0,market,0.0617,-0.383,0.0333,15,C,,,prop|anytime_td|Zachariah Branch|0.5
+cfb,401856742,2026-11-07T21:15Z,VAN,MSST,total,Over,47.5,BR,,,1.8696,-115,0.545,0.0189,0.0054,2,0.0191,1,market,,,-0.0071,38,C,,,total|47.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,FD,Maleek Huggins,anytime_td,4.5,+350,0.2378,0.0703,0.005,0,,0,market,,,0.0363,25,C,,,prop|anytime_td|Maleek Huggins|0.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,FD,Christian Ross,anytime_td,8.0,+700,0.1462,0.1694,0.006,0,,0,market,,,0.0257,0,C,,,prop|anytime_td|Christian Ross|0.5
+cfb,401856744,2026-11-07T20Z,TA&M,SC,prop,Yes,0.5,DK,Brady Hunt,anytime_td,5.25,+425,0.2185,0.1474,0.0087,0,,0,market,,,,5,C,,,prop|anytime_td|Brady Hunt|0.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,1.5,DK,Darren Waller,receptions,2.36,+136,0.4365,0.0302,0.0056,2,0.0182,0,market,0.4154,-0.0196,,34,C,,,prop|receptions|Darren Waller|1.5
+nba,401909923,2026-11-05T00Z,ATL,WSH,prop,Over,2.5,FD,C.J. McCollum,tpm,2.44,+144,0.422,0.0296,0.0051,2,0.0194,0,market,,,,33,C,,,prop|tpm|C.J. McCollum|2.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,2.5,FD,Joe Burrow,pass_td,2.58,+158,0.387,-0.0015,0.0,2,0.0124,0,market,0.5217,0.3461,,40,C,,,prop|pass_td|Joe Burrow|2.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,3.5,BR,Jakobi Meyers,receptions,2.28,+128,0.429,-0.0218,0.0,2,0.004,0,market,0.5082,0.1586,-0.0072,45,C,,,prop|receptions|Jakobi Meyers|3.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,1.5,DK,Michael Penix Jr.,pass_td,2.22,+122,0.4621,0.0258,0.0053,2,0.0188,0,market,,,,33,C,,,prop|pass_td|Michael Penix Jr.|1.5
@@ -47,13 +66,18 @@ nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Over,18.5,DK,Evan Engram,rec_yds,1.917
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,19.5,DK,Chase Brown,rec_yds,1.9009,-111,0.5,-0.0495,0.0,2,0.001,0,market,0.6241,0.1864,,51,B,,,prop|rec_yds|Chase Brown|19.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,66.5,DK,Tetairoa McMillan,rec_yds,1.9009,-111,0.5,-0.0495,0.0,2,0.001,0,market,0.5503,0.0462,,51,B,,,prop|rec_yds|Tetairoa McMillan|66.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,1.5,FD,Josh Cameron,receptions,2.02,+102,0.4761,-0.0382,0.0,2,0.007,0,market,0.5624,0.1361,0.007,48,C,,,prop|receptions|Josh Cameron|1.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,BR,Braylon Isom,anytime_td,5.4,+440,0.195,0.0532,0.003,0,,0,market,,,0.1,25,C,,,prop|anytime_td|Braylon Isom|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,John Alan Richter,anytime_td,3.15,+215,0.3657,0.152,0.0177,0,,0,market,,,,0,C,,,prop|anytime_td|John Alan Richter|0.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Over,1.5,FD,Troy Franklin,receptions,2.48,+148,0.3967,-0.0161,0.0,2,0.0099,0,market,0.585,0.4508,,42,C,,,prop|receptions|Troy Franklin|1.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,John Alan Richter,anytime_td,3.15,+215,0.3656,0.1516,0.0176,0,,0,market,,,,0,C,,,prop|anytime_td|John Alan Richter|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,FD,Preston Douglas,anytime_td,4.3,+330,0.2678,0.1514,0.0115,0,,0,market,,,,0,C,,,prop|anytime_td|Preston Douglas|0.5
+nba,401909929,2026-11-05T01Z,CLE,OKC,prop,Over,3.5,BR,Evan Mobley,ast,2.23,+123,0.4677,0.043,0.0087,2,0.0251,0,market,,,,27,C,,,prop|ast|Evan Mobley|3.5
+nba,401909922,2026-11-05T00Z,PHI,DET,prop,Under,5.5,ESPN,John Collins,reb,2.2,+120,0.4613,0.0148,0.0031,2,0.0182,0,market,,,,34,C,,,prop|reb|John Collins|5.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,4.5,DK,Tucker Kraft,receptions,1.9174,-109,0.5,-0.0413,0.0,2,0.0042,0,market,0.5621,0.0778,,48,C,,,prop|receptions|Tucker Kraft|4.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,2.5,DK,Mike Gesicki,receptions,1.9174,-109,0.5,-0.0413,0.0,2,0.0042,0,market,0.624,0.1964,,48,C,,,prop|receptions|Mike Gesicki|2.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,4.5,DK,Jalen Coker,receptions,1.9009,-111,0.5,-0.0495,0.0,2,0.0021,0,market,0.6678,0.2693,,50,B,,,prop|receptions|Jalen Coker|4.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,DK,Travis Hunter,receptions,2.84,+184,0.3317,-0.0579,0.0,2,0.0008,0,market,0.476,0.3517,0.0008,52,B,,,prop|receptions|Travis Hunter|1.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,3.5,DK,Chase Brown,receptions,1.8772,-114,0.5164,-0.0306,0.0,2,0.0072,0,market,0.6192,0.1623,,45,C,,,prop|receptions|Chase Brown|3.5
+nba,401909930,2026-11-05T01:30Z,MIN,HOU,prop,Over,11.5,FD,Rudy Gobert,reb,2.14,+114,0.4754,0.0174,0.0038,2,0.0194,0,market,,,,33,C,,,prop|reb|Rudy Gobert|11.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,FD,Travis Hunter,receptions,2.82,+182,0.3334,-0.0599,0.0,2,0.0008,0,market,0.476,0.3422,0.0008,52,B,,,prop|receptions|Travis Hunter|1.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,3.5,DK,Courtland Sutton,receptions,1.8475,-118,0.5281,-0.0243,0.0,2,0.0089,0,market,0.6268,0.158,,43,C,,,prop|receptions|Courtland Sutton|3.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,43.5,FD,Josh Jacobs,rush_yds,1.8772,-114,0.5,-0.0614,0.0,2,0.0,0,market,0.614,0.1525,,52,B,,,prop|rush_yds|Josh Jacobs|43.5
@@ -61,8 +85,10 @@ nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Under,78.5,FD,Drake London,rec_yds,
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Over,6.5,FD,Bryce Young,rush_yds,1.8772,-114,0.5042,-0.0535,0.0,2,0.0021,0,market,0.6493,0.2189,,50,B,,,prop|rush_yds|Bryce Young|6.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,1.5,BR,Drake Maye,pass_td,1.7874,-127,0.5093,-0.0897,0.0,3,0.0066,0,market,0.5891,0.053,,59,B,,,prop|pass_td|Drake Maye|1.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Under,5.5,DK,Tee Higgins,receptions,1.7246,-138,0.567,-0.0221,0.0,2,0.0096,0,market,0.5983,0.0318,,42,C,,,prop|receptions|Tee Higgins|5.5
+nba,401909925,2026-11-05T00:30Z,CHA,BKN,prop,Over,3.5,FAN,Brandon Miller,tpm,2.05,+105,0.5,0.025,0.006,2,0.0223,0,market,,,,30,C,,,prop|tpm|Brandon Miller|3.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,7.5,DK,Nate Boerkircher,rec_yds,1.9259,-108,0.5,-0.0371,0.0,2,0.0047,0,market,0.6608,0.2726,-0.0047,45,C,,,prop|rec_yds|Nate Boerkircher|7.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Over,43.5,BR,Josh Jacobs,rush_yds,1.8696,-115,0.5,-0.0652,0.0,2,0.0,0,market,0.614,0.1479,,52,B,,,prop|rush_yds|Josh Jacobs|43.5
+nba,401909925,2026-11-05T00:30Z,CHA,BKN,prop,Under,3.5,FD,Brandon Miller,tpm,1.8772,-114,0.5446,0.0223,0.0064,2,0.0223,0,market,,,,30,C,,,prop|tpm|Brandon Miller|3.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,3.5,DK,Josh Jacobs,receptions,1.9709,-103,0.4759,-0.062,0.0,2,0.0012,0,market,0.6126,0.2074,,51,B,,,prop|receptions|Josh Jacobs|3.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,3.5,FD,Josh Jacobs,receptions,1.9615,-104,0.4782,-0.062,0.0,2,0.0012,0,market,0.6126,0.2016,,51,B,,,prop|receptions|Josh Jacobs|3.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,3.5,DK,Jakobi Meyers,receptions,2.22,+122,0.433,-0.0388,0.0,2,0.004,0,market,0.5082,0.1282,-0.0072,45,C,,,prop|receptions|Jakobi Meyers|3.5
@@ -72,39 +98,54 @@ nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,19.5,FD,Chase Brown,rec_yds,1.
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,66.5,FD,Tetairoa McMillan,rec_yds,1.8772,-114,0.4979,-0.0653,0.0,2,0.001,0,market,0.5503,0.0331,,51,B,,,prop|rec_yds|Tetairoa McMillan|66.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Under,78.5,DK,Drake London,rec_yds,1.8772,-114,0.5,-0.0614,0.0,2,0.0021,0,market,0.5516,0.0356,,50,B,,,prop|rec_yds|Drake London|78.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Over,6.5,DK,Bryce Young,rush_yds,1.8772,-114,0.5,-0.0614,0.0,2,0.0021,0,market,0.6493,0.2189,,50,B,,,prop|rush_yds|Bryce Young|6.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Bryson Hammer,anytime_td,3.7,+270,0.2913,0.0777,0.0072,0,,0,market,,,,15,C,,,prop|anytime_td|Bryson Hammer|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Bryson Hammer,anytime_td,3.7,+270,0.2914,0.0781,0.0072,0,,0,market,,,,15,C,,,prop|anytime_td|Bryson Hammer|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,17.5,DK,Justice Hill,rush_yds,1.9009,-111,0.495,-0.0591,0.0,2,0.0015,0,market,0.552,0.0493,-0.0037,49,C,,,prop|rush_yds|Justice Hill|17.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,0.5,DK,Nate Boerkircher,receptions,1.4695,-213,0.6562,-0.0358,0.0,2,0.0065,0,market,0.7447,0.0943,-0.0064,43,C,,,prop|receptions|Nate Boerkircher|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,DK,Rashod Bateman,receptions,1.8772,-114,0.5281,-0.0086,0.0,2,0.013,0,market,0.6789,0.2744,-0.0084,36,C,,,prop|receptions|Rashod Bateman|1.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,DK,Jaivon Solomon,anytime_td,5.75,+475,0.187,0.075,0.0039,0,,0,market,,,,15,C,,,prop|anytime_td|Jaivon Solomon|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,17.5,BR,Justice Hill,rush_yds,1.885,-113,0.4979,-0.0614,0.0,2,0.0015,0,market,0.552,0.0406,-0.0037,49,C,,,prop|rush_yds|Justice Hill|17.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,7.5,BR,Derrick Henry,rec_yds,1.885,-113,0.5042,-0.0496,0.0,2,0.0046,0,market,0.6069,0.1441,-0.0031,46,C,,,prop|rec_yds|Derrick Henry|7.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,BR,Trevor Lawrence,pass_td,1.7299,-137,0.5415,-0.0633,0.0,3,0.0109,0,market,0.6407,0.1083,-0.0158,49,C,,,prop|pass_td|Trevor Lawrence|1.5
+nba,401909929,2026-11-05T01Z,CLE,OKC,prop,Under,3.5,FD,Evan Mobley,ast,1.7576,-132,0.5825,0.0237,0.0078,2,0.0251,0,market,,,,27,C,,,prop|ast|Evan Mobley|3.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,4.5,FD,Jalen Coker,receptions,1.8772,-114,0.4959,-0.0692,0.0,2,0.0021,0,market,0.6678,0.2535,,50,B,,,prop|receptions|Jalen Coker|4.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,2.5,DK,Mark Andrews,receptions,1.7937,-126,0.5585,0.0019,0.0006,2,0.0163,0,market,0.6647,0.1923,-0.0085,32,C,,,prop|receptions|Mark Andrews|2.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Matt Coleman,anytime_td,4.8,+380,0.2222,0.0666,0.0044,0,,0,market,,,,15,C,,,prop|anytime_td|Matt Coleman|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,FD,Jared Richardson,anytime_td,4.2,+320,0.2542,0.0676,0.0053,0,,0,market,,,,15,C,,,prop|anytime_td|Jared Richardson|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Matt Coleman,anytime_td,4.8,+380,0.2223,0.067,0.0044,0,,0,market,,,,15,C,,,prop|anytime_td|Matt Coleman|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Jackson Sharman,anytime_td,8.5,+750,0.1298,0.1029,0.0034,0,,0,market,,,,5,C,,,prop|anytime_td|Jackson Sharman|0.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Over,18.5,FD,Evan Engram,rec_yds,1.8772,-114,0.4937,-0.0733,0.0,2,0.0032,0,market,0.6419,0.205,,49,C,,,prop|rec_yds|Evan Engram|18.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Jackson Sharman,anytime_td,8.5,+750,0.1297,0.1025,0.0034,0,,0,market,,,,5,C,,,prop|anytime_td|Jackson Sharman|0.5
+cfb,401856740,2026-11-07T20:30Z,ALA,LSU,prop,Yes,0.5,FD,Kaleb Edwards,anytime_td,7.5,+650,0.1414,0.0608,0.0023,0,,0,market,,,,15,C,,,prop|anytime_td|Kaleb Edwards|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,16.5,BR,Rashod Bateman,rec_yds,1.8333,-120,0.5,-0.0834,0.0,2,0.004,0,market,0.6654,0.2198,0.0064,51,B,,,prop|rec_yds|Rashod Bateman|16.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Sam Lee,anytime_td,5.3,+430,0.1995,0.0574,0.0033,0,,0,market,,,,15,C,,,prop|anytime_td|Sam Lee|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,DK,Walker Eget,anytime_td,5.25,+425,0.2016,0.0587,0.0035,0,,0,market,,,,15,C,,,prop|anytime_td|Walker Eget|0.5
+cfb,401856744,2026-11-07T20Z,TA&M,SC,prop,Yes,0.5,FD,Donovan Murph,anytime_td,5.7,+470,0.1927,0.0983,0.0052,0,,0,market,,,,5,C,,,prop|anytime_td|Donovan Murph|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,FD,Sam Lee,anytime_td,5.3,+430,0.1996,0.0577,0.0034,0,,0,market,,,,15,C,,,prop|anytime_td|Sam Lee|0.5
 nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Under,4.5,FD,Tucker Kraft,receptions,1.8772,-114,0.4917,-0.0771,0.0,2,0.0042,0,market,0.5621,0.0552,,48,C,,,prop|receptions|Tucker Kraft|4.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,2.5,FD,Mike Gesicki,receptions,1.8772,-114,0.4917,-0.0771,0.0,2,0.0042,0,market,0.624,0.1713,,48,C,,,prop|receptions|Mike Gesicki|2.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,7.5,DK,Derrick Henry,rec_yds,1.8772,-114,0.495,-0.0709,0.0,2,0.0046,0,market,0.6069,0.1394,-0.0031,46,C,,,prop|rec_yds|Derrick Henry|7.5
+cfb,401856744,2026-11-07T20Z,TA&M,SC,prop,Yes,0.5,FD,Rueben Owens II,anytime_td,4.5,+350,0.2426,0.0917,0.0065,0,,0,market,,,,5,C,,,prop|anytime_td|Rueben Owens II|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,2.5,DK,Justice Hill,receptions,1.6803,-147,0.567,-0.0473,0.0,2,0.0028,0,market,0.6305,0.0594,-0.0251,39,C,,,prop|receptions|Justice Hill|2.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,FD,Keenan Jackson,anytime_td,2.95,+195,0.3687,0.0877,0.0112,0,,0,market,,,,5,C,,,prop|anytime_td|Keenan Jackson|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,1.5,DK,Josh Cameron,receptions,1.9804,-102,0.4621,-0.0849,0.0,2,0.007,0,market,0.5624,0.1138,0.007,48,C,,,prop|receptions|Josh Cameron|1.5
-cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Daryl Barnett Jr.,anytime_td,3.8,+280,0.2852,0.0836,0.0075,0,,0,market,,,,5,C,,,prop|anytime_td|Daryl Barnett Jr.|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,DK,Davion Gause,anytime_td,2.5,+150,0.4341,0.0852,0.0142,0,,0,market,,,,5,C,,,prop|anytime_td|Davion Gause|0.5
+cfb,401866457,2026-11-05T00Z,TOL,SAC,prop,Yes,0.5,DK,Daryl Barnett Jr.,anytime_td,3.8,+280,0.2853,0.084,0.0075,0,,0,market,,,,5,C,,,prop|anytime_td|Daryl Barnett Jr.|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,DK,Jeremiah Hasley,anytime_td,2.55,+155,0.4088,0.0426,0.0069,0,,0,market,,,,15,C,,,prop|anytime_td|Jeremiah Hasley|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,7.5,FD,Nate Boerkircher,rec_yds,1.8772,-114,0.4906,-0.0791,0.0,2,0.0047,0,market,0.6608,0.2404,-0.0047,45,C,,,prop|rec_yds|Nate Boerkircher|7.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,FD,Nate Sheppard,anytime_td,1.2222,-450,0.8503,0.0392,0.0441,0,,0,market,,,,15,C,,,prop|anytime_td|Nate Sheppard|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,3.5,FD,Jakobi Meyers,receptions,2.16,+116,0.425,-0.0819,0.0,2,0.004,0,market,0.5082,0.0977,-0.0072,45,C,,,prop|receptions|Jakobi Meyers|3.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,2.5,BR,Mark Andrews,receptions,1.7874,-127,0.5422,-0.0308,0.0,2,0.0163,0,market,0.6647,0.1881,-0.0085,32,C,,,prop|receptions|Mark Andrews|2.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,FD,Trevor Lawrence,pass_td,1.6849,-146,0.5346,-0.0992,0.0,3,0.0109,0,market,0.6407,0.0794,-0.0158,49,C,,,prop|pass_td|Trevor Lawrence|1.5
-cfb,401856849,2026-11-07T17Z,BYU,UTAH,prop,Yes,0.5,FD,Ricky Johnson,anytime_td,5.9,+490,0.1752,0.0337,0.0017,0,,0,market,,,,15,C,,,prop|anytime_td|Ricky Johnson|0.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,3.5,FD,Chase Brown,receptions,1.8197,-122,0.5021,-0.0864,0.0,2,0.0072,0,market,0.6192,0.1267,,45,C,,,prop|receptions|Chase Brown|3.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,0.5,FD,Nate Boerkircher,receptions,1.4255,-235,0.6433,-0.083,0.0,2,0.0065,0,market,0.7447,0.0615,-0.0064,43,C,,,prop|receptions|Nate Boerkircher|0.5
+cfb,401858514,2026-11-07T20:30Z,ORE,OSU,prop,Yes,0.5,FD,Nate Roberts,anytime_td,7.0,+600,0.147,0.029,0.0012,0,,0,market,,,,15,C,,,prop|anytime_td|Nate Roberts|0.5
+cfb,401856849,2026-11-07T17Z,BYU,UTAH,prop,Yes,0.5,FD,Ricky Johnson,anytime_td,5.9,+490,0.1736,0.0245,0.0013,0,,0,market,,,,15,C,,,prop|anytime_td|Ricky Johnson|0.5
+cfb,401866454,2026-11-04T01Z,BUFF,M-OH,prop,Yes,0.5,FD,Brendan Loftus,anytime_td,9.5,+850,0.1078,0.0244,0.0007,0,,0,market,,,-0.0006,15,C,,,prop|anytime_td|Brendan Loftus|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,2.5,FD,Justice Hill,receptions,1.6494,-154,0.5613,-0.0742,0.0,2,0.0028,0,market,0.6305,0.04,-0.0251,39,C,,,prop|receptions|Justice Hill|2.5
-cfb,401856849,2026-11-07T17Z,BYU,UTAH,prop,Yes,0.5,FD,Daniel Bray,anytime_td,4.0,+300,0.2552,0.0207,0.0017,0,,0,market,,,,15,C,,,prop|anytime_td|Daniel Bray|0.5
-cfb,401858510,2026-11-07T01Z,NEB,ILL,prop,Yes,0.5,FD,Ty Robinson,anytime_td,7.0,+600,0.1458,0.0205,0.0009,0,,0,market,,,,15,C,,,prop|anytime_td|Ty Robinson|0.5
+cfb,401858286,2026-11-07T17:30Z,DUKE,NCSU,prop,Yes,0.5,DK,Victor Snow,anytime_td,5.25,+425,0.1945,0.0212,0.0012,0,,0,market,,,,15,C,,,prop|anytime_td|Victor Snow|0.5
+cfb,401858510,2026-11-07T01Z,NEB,ILL,prop,Yes,0.5,FD,Ty Robinson,anytime_td,7.0,+600,0.1458,0.0209,0.0009,0,,0,market,,,,15,C,,,prop|anytime_td|Ty Robinson|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,14.5,DK,Rashod Bateman,rec_yds,1.8696,-115,0.5052,-0.0554,0.0,1,,0,market,0.6932,0.2959,0.0064,33,C,,,prop|rec_yds|Rashod Bateman|14.5
+cfb,401856740,2026-11-07T20:30Z,ALA,LSU,prop,Yes,0.5,MGM,Trey'Dez Green,anytime_td,3.0,+200,0.3388,0.0164,0.002,0,,0,market,,,,15,C,,,prop|anytime_td|Trey'Dez Green|0.5
 nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Under,3.5,FD,Courtland Sutton,receptions,1.7692,-130,0.5104,-0.097,0.0,2,0.0089,0,market,0.6268,0.109,,43,C,,,prop|receptions|Courtland Sutton|3.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,8.5,DK,Travis Hunter,rec_yds,1.8547,-117,0.5106,-0.0531,0.0,1,,0,market,0.709,0.3149,0.0053,32,C,,,prop|rec_yds|Travis Hunter|8.5
+cfb,401856849,2026-11-07T17Z,BYU,UTAH,prop,Yes,0.5,FD,Daniel Bray,anytime_td,4.0,+300,0.2529,0.0116,0.001,0,,0,market,,,,15,C,,,prop|anytime_td|Daniel Bray|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Under,31.5,DK,Trevor Lawrence,pass_att,1.9346,-107,0.4875,-0.0569,0.0,1,,0,market,0.5699,0.1026,0.0042,32,C,,,prop|pass_att|Trevor Lawrence|31.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,38.5,DK,Jakobi Meyers,rec_yds,1.8772,-114,0.5042,-0.0535,0.0,1,,0,market,0.6637,0.246,0.0013,31,C,,,prop|rec_yds|Jakobi Meyers|38.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,17.5,DK,Mark Andrews,rec_yds,1.9091,-110,0.4958,-0.0535,0.0,1,,0,market,0.6192,0.1822,0.0033,31,C,,,prop|rec_yds|Mark Andrews|17.5
@@ -178,85 +219,82 @@ nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Over,2.5,DK,Joe Burrow,pass_td,2.44
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,4.5,FD,Zay Flowers,receptions,2.2,+120,0.4248,-0.0654,0.0,1,,0,market,0.5998,0.3196,-0.0078,27,C,,,prop|receptions|Zay Flowers|4.5
 nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Under,5.5,FD,Drake London,receptions,1.9804,-102,0.4449,-0.1189,0.0,2,0.0135,0,market,0.6127,0.2135,,39,C,,,prop|receptions|Drake London|5.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,1.5,FD,Rashod Bateman,receptions,1.7692,-130,0.5021,-0.1117,0.0,2,0.013,0,market,0.6789,0.2011,-0.0084,36,C,,,prop|receptions|Rashod Bateman|1.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Mike Gesicki,anytime_td,3.6,+260,0.2541,-0.0851,0.0,0,,0,market,0.4739,0.706,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Mike Gesicki,anytime_td,3.6,+260,0.2576,-0.0728,0.0,0,,0,market,0.4739,0.706,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,2.5,FD,Mark Andrews,receptions,1.6757,-148,0.5259,-0.1187,0.0,2,0.0163,0,market,0.6647,0.1139,-0.0085,32,C,,,prop|receptions|Mark Andrews|2.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Jahan Dotson,anytime_td,4.5,+350,0.202,-0.0912,0.0,0,,0,market,0.269,0.2105,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
 nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Over,3.5,BR,Zay Flowers,receptions,1.5988,-167,0.557,-0.1095,0.0,1,,0,market,0.7255,0.1599,-0.0078,27,C,,,prop|receptions|Zay Flowers|3.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Jahan Dotson,anytime_td,4.5,+350,0.1991,-0.1042,0.0,0,,0,market,0.269,0.2105,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Rashod Bateman,anytime_td,9.0,+800,0.1026,-0.0769,0.0,0,,0,market,0.1283,0.1547,0.0074,18,C,,,prop|anytime_td|Rashod Bateman|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Rashod Bateman,anytime_td,9.0,+800,0.1026,-0.0769,0.0,0,,0,market,0.1283,0.1547,0.0074,18,C,,,prop|anytime_td|Rashod Bateman|0.5
-nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,FAN,Noah Gray,anytime_td,6.75,+575,0.1359,-0.083,0.0,0,,0,market,0.1594,0.0759,0.0,15,C,,,prop|anytime_td|Noah Gray|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Zay Flowers,anytime_td,4.6,+360,0.198,-0.0892,0.0,0,,0,market,0.2626,0.208,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
-nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,DK,Rashee Rice,anytime_td,2.3,+130,0.3989,-0.0826,0.0,0,,0,market,0.4544,0.0451,-0.0048,13,C,,,prop|anytime_td|Rashee Rice|0.5
-nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,FAN,Rashee Rice,anytime_td,2.3,+130,0.3989,-0.0826,0.0,0,,0,market,0.4544,0.0451,-0.0048,13,C,,,prop|anytime_td|Rashee Rice|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Joe Burrow,anytime_td,7.0,+600,0.1241,-0.131,0.0,0,,0,market,0.2443,0.7101,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
-nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,FAN,Malachi Fields,anytime_td,5.2,+420,0.1703,-0.1144,0.0,0,,0,market,0.2081,0.0821,0.0105,19,C,,,prop|anytime_td|Malachi Fields|0.5
-nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,FAN,Jameson Williams,anytime_td,2.5,+150,0.3633,-0.0917,0.0,0,,0,market,0.4785,0.1963,-0.0041,13,C,,,prop|anytime_td|Jameson Williams|0.5
-nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,DK,Isaiah Likely,anytime_td,3.2,+220,0.2767,-0.1144,0.0,0,,0,market,0.3465,0.1088,0.0024,16,C,,,prop|anytime_td|Isaiah Likely|0.5
-nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,FAN,Isaiah Likely,anytime_td,3.2,+220,0.2767,-0.1144,0.0,0,,0,market,0.3465,0.1088,0.0024,16,C,,,prop|anytime_td|Isaiah Likely|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Rashod Bateman,anytime_td,8.5,+750,0.1026,-0.1281,0.0,0,,0,market,0.1283,0.0905,0.0074,18,C,,,prop|anytime_td|Rashod Bateman|0.5
-nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,DK,Jameson Williams,anytime_td,2.45,+145,0.3633,-0.1099,0.0,0,,0,market,0.4785,0.1723,-0.0041,13,C,,,prop|anytime_td|Jameson Williams|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Joe Burrow,anytime_td,6.75,+575,0.1241,-0.162,0.0,0,,0,market,0.2443,0.649,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Jahan Dotson,anytime_td,4.2,+320,0.1991,-0.1639,0.0,0,,0,market,0.269,0.1298,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Zay Flowers,anytime_td,4.4,+340,0.198,-0.1288,0.0,0,,0,market,0.2626,0.1554,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
-nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,DK,Malik Willis,anytime_td,4.0,+300,0.2221,-0.1116,0.0,0,,0,market,0.2749,0.0996,-0.0101,11,C,,,prop|anytime_td|Malik Willis|0.5
-nfl,401873050,2026-11-09T01:20Z,TB,CHI,prop,Yes,0.5,FAN,Caleb Williams,anytime_td,5.2,+420,0.1605,-0.1652,0.0,0,,0,market,0.2151,0.1185,0.0229,24,C,,,prop|anytime_td|Caleb Williams|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Jahan Dotson,anytime_td,4.1,+310,0.1991,-0.1838,0.0,0,,0,market,0.269,0.1029,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Tee Higgins,anytime_td,2.15,+115,0.3976,-0.1453,0.0,0,,0,market,0.4947,0.0636,-0.0028,14,C,,,prop|anytime_td|Tee Higgins|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Mike Gesicki,anytime_td,3.2,+220,0.2541,-0.1868,0.0,0,,0,market,0.4739,0.5165,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Mike Gesicki,anytime_td,3.2,+220,0.2541,-0.1868,0.0,0,,0,market,0.4739,0.5165,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Joe Burrow,anytime_td,6.5,+550,0.1241,-0.1931,0.0,0,,0,market,0.2443,0.5879,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Joe Burrow,anytime_td,6.5,+550,0.1241,-0.1931,0.0,0,,0,market,0.2443,0.5879,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
-nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Deebo Samuel,anytime_td,3.2,+220,0.2567,-0.1786,0.0,0,,0,market,0.378,0.2096,0.014,21,C,,,prop|anytime_td|Deebo Samuel|0.5
-nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,FAN,Malik Willis,anytime_td,3.85,+285,0.2221,-0.1449,0.0,0,,0,market,0.2749,0.0584,-0.0101,11,C,,,prop|anytime_td|Malik Willis|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Jahan Dotson,anytime_td,4.0,+300,0.1991,-0.2038,0.0,0,,0,market,0.269,0.076,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Zay Flowers,anytime_td,4.2,+320,0.198,-0.1684,0.0,0,,0,market,0.2626,0.1029,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
-nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,FAN,Bo Nix,anytime_td,5.5,+450,0.157,-0.1364,0.0,0,,0,market,0.2155,0.1852,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Tee Higgins,anytime_td,2.1,+110,0.3976,-0.1651,0.0,0,,0,market,0.4947,0.0389,-0.0028,14,C,,,prop|anytime_td|Tee Higgins|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Mike Gesicki,anytime_td,3.1,+210,0.2541,-0.2122,0.0,0,,0,market,0.4739,0.4691,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Trevor Lawrence,anytime_td,5.25,+425,0.1571,-0.175,0.0,0,,0,market,0.2066,0.0847,-0.0022,14,C,,,prop|anytime_td|Trevor Lawrence|0.5
-nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,DK,Devaughn Vele,anytime_td,3.65,+265,0.2249,-0.1791,0.0,0,,0,market,0.2922,0.0665,0.0,15,C,,,prop|anytime_td|Devaughn Vele|0.5
-nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,FD,Bo Nix,anytime_td,5.4,+440,0.157,-0.1521,0.0,0,,0,market,0.2155,0.1637,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Nate Boerkircher,anytime_td,6.0,+500,0.1301,-0.2194,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Nate Boerkircher,anytime_td,6.0,+500,0.1301,-0.2194,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Nate Boerkircher,anytime_td,6.0,+500,0.1301,-0.2194,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
-nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Mike Evans,anytime_td,2.55,+155,0.3221,-0.1785,0.0,0,,0,market,0.4588,0.1699,-0.0078,12,C,,,prop|anytime_td|Mike Evans|0.5
-nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Brock Purdy,anytime_td,5.5,+450,0.1493,-0.1787,0.0,0,,0,market,0.2369,0.303,-0.0105,11,C,,,prop|anytime_td|Brock Purdy|0.5
-nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Juwan Johnson,anytime_td,4.3,+330,0.1869,-0.1962,0.0,0,,0,market,0.2497,0.0737,0.0,15,C,,,prop|anytime_td|Juwan Johnson|0.5
-nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Noah Fant,anytime_td,6.25,+525,0.1286,-0.1964,0.0,0,,0,market,0.2155,0.3469,0.0,15,C,,,prop|anytime_td|Noah Fant|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Ja'Marr Chase,anytime_td,1.9091,-110,0.4396,-0.1607,0.0,0,,0,market,0.5449,0.0403,-0.0353,5,C,,,prop|anytime_td|Ja'Marr Chase|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Travis Hunter,anytime_td,7.75,+675,0.1038,-0.1959,0.0,0,,0,market,0.1564,0.2121,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
-nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Ja'Marr Chase,anytime_td,1.9009,-111,0.4396,-0.1643,0.0,0,,0,market,0.5449,0.0358,-0.0353,5,C,,,prop|anytime_td|Ja'Marr Chase|0.5
-nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,DK,Stefon Diggs,anytime_td,3.0,+200,0.2674,-0.1979,0.0,0,,0,market,0.3961,0.1883,-0.0086,12,C,,,prop|anytime_td|Stefon Diggs|0.5
-nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,FAN,Stefon Diggs,anytime_td,3.0,+200,0.2674,-0.1979,0.0,0,,0,market,0.3961,0.1883,-0.0086,12,C,,,prop|anytime_td|Stefon Diggs|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,BR,Bhayshul Tuten,anytime_td,2.04,+104,0.3674,-0.2505,0.0,0,,0,market,0.5784,0.1799,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
-nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Tyler Shough,anytime_td,5.5,+450,0.1461,-0.1964,0.0,0,,0,market,0.2298,0.2639,-0.0105,11,C,,,prop|anytime_td|Tyler Shough|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Nate Boerkircher,anytime_td,5.75,+475,0.1301,-0.252,0.0,0,,0,market,0.1915,0.1011,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
-nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,FAN,Davis Allen,anytime_td,5.5,+450,0.1413,-0.223,0.0,0,,0,market,0.2284,0.2562,0.0,15,C,,,prop|anytime_td|Davis Allen|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Bhayshul Tuten,anytime_td,2.0,+100,0.3674,-0.2652,0.0,0,,0,market,0.5784,0.1568,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Bhayshul Tuten,anytime_td,2.0,+100,0.3674,-0.2652,0.0,0,,0,market,0.5784,0.1568,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Travis Hunter,anytime_td,7.5,+650,0.1038,-0.2219,0.0,0,,0,market,0.1564,0.173,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Travis Hunter,anytime_td,7.5,+650,0.1038,-0.2219,0.0,0,,0,market,0.1564,0.173,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,Christian Watson,anytime_td,2.7,+170,0.2849,-0.2309,0.0,0,,0,market,0.4768,0.2874,,15,C,,,prop|anytime_td|Christian Watson|0.5
-nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Ryan Flournoy,anytime_td,4.3,+330,0.1811,-0.2212,0.0,0,,0,market,0.2743,0.1795,-0.0113,10,C,,,prop|anytime_td|Ryan Flournoy|0.5
-nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Tre Tucker,anytime_td,4.3,+330,0.1759,-0.2434,0.0,0,,0,market,0.3202,0.3769,0.0,15,C,,,prop|anytime_td|Tre Tucker|0.5
-nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Jalen Nailor,anytime_td,7.5,+650,0.1008,-0.2438,0.0,0,,0,market,0.2128,0.596,0.0,15,C,,,prop|anytime_td|Jalen Nailor|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,Christian Watson,anytime_td,2.65,+165,0.2849,-0.2451,0.0,0,,0,market,0.4768,0.2635,,15,C,,,prop|anytime_td|Christian Watson|0.5
-nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Jake Ferguson,anytime_td,3.7,+270,0.2105,-0.2213,0.0,0,,0,market,0.3401,0.2584,-0.0154,9,C,,,prop|anytime_td|Jake Ferguson|0.5
-nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,DK,Bo Nix,anytime_td,5.0,+400,0.157,-0.2149,0.0,0,,0,market,0.2155,0.0775,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,BR,Josh Cameron,anytime_td,7.0,+600,0.1117,-0.2182,0.0,0,,0,market,0.1815,0.2705,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Bhayshul Tuten,anytime_td,1.9091,-110,0.3674,-0.2986,0.0,0,,0,market,0.5784,0.1042,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,Christian Watson,anytime_td,2.6,+160,0.2849,-0.2594,0.0,0,,0,market,0.4768,0.2397,,15,C,,,prop|anytime_td|Christian Watson|0.5
-nfl,401873050,2026-11-09T01:20Z,TB,CHI,prop,Yes,0.5,FAN,D'Andre Swift,anytime_td,1.6061,-165,0.4766,-0.2345,0.0,0,,0,market,0.6493,0.0428,-0.0221,6,C,,,prop|anytime_td|D'Andre Swift|0.5
-nfl,401873046,2026-11-08T21:05Z,HOU,LAC,prop,Yes,0.5,FAN,Omarion Hampton,anytime_td,3.5,+250,0.2067,-0.2767,0.0,0,,0,market,0.3448,0.2068,0.0,15,C,,,prop|anytime_td|Omarion Hampton|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Travis Hunter,anytime_td,7.0,+600,0.1038,-0.2737,0.0,0,,0,market,0.1564,0.0948,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Josh Cameron,anytime_td,6.75,+575,0.1117,-0.2461,0.0,0,,0,market,0.1815,0.2251,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Josh Cameron,anytime_td,6.5,+550,0.1117,-0.274,0.0,0,,0,market,0.1815,0.1797,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Josh Cameron,anytime_td,6.5,+550,0.1117,-0.274,0.0,0,,0,market,0.1815,0.1797,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,Drake Maye,anytime_td,4.1,+310,0.1639,-0.3279,0.0,0,,0,market,0.2773,0.1369,,15,C,,,prop|anytime_td|Drake Maye|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,DeMario Douglas,anytime_td,2.95,+195,0.227,-0.3302,0.0,0,,0,market,0.3658,0.0791,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
-nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Josh Downs,anytime_td,3.85,+285,0.1683,-0.3519,0.0,0,,0,market,0.2801,0.0784,0.0097,19,C,,,prop|anytime_td|Josh Downs|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,DeMario Douglas,anytime_td,2.9,+190,0.227,-0.3416,0.0,0,,0,market,0.3658,0.0608,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,Drake Maye,anytime_td,4.0,+300,0.1639,-0.3443,0.0,0,,0,market,0.2773,0.1092,,15,C,,,prop|anytime_td|Drake Maye|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,Drake Maye,anytime_td,3.95,+295,0.1639,-0.3525,0.0,0,,0,market,0.2773,0.0953,,15,C,,,prop|anytime_td|Drake Maye|0.5
-nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,DeMario Douglas,anytime_td,2.85,+185,0.227,-0.353,0.0,0,,0,market,0.3658,0.0425,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
-nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Josh Cameron,anytime_td,6.0,+500,0.1117,-0.3299,0.0,0,,0,market,0.1815,0.089,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
+nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,FAN,Noah Gray,anytime_td,6.75,+575,0.1364,-0.079,0.0,0,,0,market,0.1594,0.0759,0.0,15,C,,,prop|anytime_td|Noah Gray|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Joe Burrow,anytime_td,7.0,+600,0.1258,-0.1193,0.0,0,,0,market,0.2443,0.7101,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
+nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,DK,Rashee Rice,anytime_td,2.3,+130,0.4006,-0.0786,0.0,0,,0,market,0.4544,0.0451,-0.0048,13,C,,,prop|anytime_td|Rashee Rice|0.5
+nfl,401873045,2026-11-08T18Z,NYJ,KC,prop,Yes,0.5,FAN,Rashee Rice,anytime_td,2.3,+130,0.4006,-0.0786,0.0,0,,0,market,0.4544,0.0451,-0.0048,13,C,,,prop|anytime_td|Rashee Rice|0.5
+nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,FAN,Jameson Williams,anytime_td,2.5,+150,0.3649,-0.0877,0.0,0,,0,market,0.4785,0.1963,-0.0041,13,C,,,prop|anytime_td|Jameson Williams|0.5
+nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,FAN,Malachi Fields,anytime_td,5.2,+420,0.1691,-0.1208,0.0,0,,0,market,0.2081,0.0821,0.0105,19,C,,,prop|anytime_td|Malachi Fields|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Joe Burrow,anytime_td,6.75,+575,0.1258,-0.1507,0.0,0,,0,market,0.2443,0.649,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Jahan Dotson,anytime_td,4.2,+320,0.202,-0.1517,0.0,0,,0,market,0.269,0.1298,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
+nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,DK,Jameson Williams,anytime_td,2.45,+145,0.3649,-0.106,0.0,0,,0,market,0.4785,0.1723,-0.0041,13,C,,,prop|anytime_td|Jameson Williams|0.5
+nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,DK,Isaiah Likely,anytime_td,3.2,+220,0.2748,-0.1208,0.0,0,,0,market,0.3465,0.1088,0.0024,16,C,,,prop|anytime_td|Isaiah Likely|0.5
+nfl,401873044,2026-11-08T18Z,NYG,PHI,prop,Yes,0.5,FAN,Isaiah Likely,anytime_td,3.2,+220,0.2748,-0.1208,0.0,0,,0,market,0.3465,0.1088,0.0024,16,C,,,prop|anytime_td|Isaiah Likely|0.5
+nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,DK,Malik Willis,anytime_td,4.0,+300,0.2231,-0.1077,0.0,0,,0,market,0.2749,0.0996,-0.0101,11,C,,,prop|anytime_td|Malik Willis|0.5
+nfl,401873050,2026-11-09T01:20Z,TB,CHI,prop,Yes,0.5,FAN,Caleb Williams,anytime_td,5.2,+420,0.1612,-0.1616,0.0,0,,0,market,0.2151,0.1185,0.0229,24,C,,,prop|anytime_td|Caleb Williams|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Jahan Dotson,anytime_td,4.1,+310,0.202,-0.1719,0.0,0,,0,market,0.269,0.1029,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
+nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Deebo Samuel,anytime_td,3.2,+220,0.262,-0.1615,0.0,0,,0,market,0.378,0.2096,0.014,21,C,,,prop|anytime_td|Deebo Samuel|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Tee Higgins,anytime_td,2.15,+115,0.4029,-0.1337,0.0,0,,0,market,0.4947,0.0636,-0.0028,14,C,,,prop|anytime_td|Tee Higgins|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Mike Gesicki,anytime_td,3.2,+220,0.2576,-0.1758,0.0,0,,0,market,0.4739,0.5165,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Mike Gesicki,anytime_td,3.2,+220,0.2576,-0.1758,0.0,0,,0,market,0.4739,0.5165,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Joe Burrow,anytime_td,6.5,+550,0.1258,-0.1822,0.0,0,,0,market,0.2443,0.5879,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FD,Joe Burrow,anytime_td,6.5,+550,0.1258,-0.1822,0.0,0,,0,market,0.2443,0.5879,0.0321,25,C,,,prop|anytime_td|Joe Burrow|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Zay Flowers,anytime_td,4.6,+360,0.1838,-0.1546,0.0,0,,0,market,0.2626,0.208,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Jahan Dotson,anytime_td,4.0,+300,0.202,-0.1921,0.0,0,,0,market,0.269,0.076,0.0719,25,C,,,prop|anytime_td|Jahan Dotson|0.5
+nfl,401873042,2026-11-08T18Z,DET,MIA,prop,Yes,0.5,FAN,Malik Willis,anytime_td,3.85,+285,0.2231,-0.1412,0.0,0,,0,market,0.2749,0.0584,-0.0101,11,C,,,prop|anytime_td|Malik Willis|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,DK,Tee Higgins,anytime_td,2.1,+110,0.4029,-0.1539,0.0,0,,0,market,0.4947,0.0389,-0.0028,14,C,,,prop|anytime_td|Tee Higgins|0.5
+nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,FAN,Bo Nix,anytime_td,5.5,+450,0.1577,-0.1327,0.0,0,,0,market,0.2155,0.1852,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Mike Gesicki,anytime_td,3.1,+210,0.2576,-0.2016,0.0,0,,0,market,0.4739,0.4691,0.0226,24,C,,,prop|anytime_td|Mike Gesicki|0.5
+nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Mike Evans,anytime_td,2.55,+155,0.3288,-0.1614,0.0,0,,0,market,0.4588,0.1699,-0.0078,12,C,,,prop|anytime_td|Mike Evans|0.5
+nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Brock Purdy,anytime_td,5.5,+450,0.1524,-0.1616,0.0,0,,0,market,0.2369,0.303,-0.0105,11,C,,,prop|anytime_td|Brock Purdy|0.5
+nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,FD,Bo Nix,anytime_td,5.4,+440,0.1577,-0.1485,0.0,0,,0,market,0.2155,0.1637,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Zay Flowers,anytime_td,4.4,+340,0.1838,-0.1913,0.0,0,,0,market,0.2626,0.1554,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,FAN,Ja'Marr Chase,anytime_td,1.9091,-110,0.4455,-0.1494,0.0,0,,0,market,0.5449,0.0403,-0.0353,5,C,,,prop|anytime_td|Ja'Marr Chase|0.5
+nfl,401873038,2026-11-08T14:30Z,CIN,ATL,prop,Yes,0.5,MGM,Ja'Marr Chase,anytime_td,1.9009,-111,0.4455,-0.1531,0.0,0,,0,market,0.5449,0.0358,-0.0353,5,C,,,prop|anytime_td|Ja'Marr Chase|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Trevor Lawrence,anytime_td,5.25,+425,0.1533,-0.1953,0.0,0,,0,market,0.2066,0.0847,-0.0022,14,C,,,prop|anytime_td|Trevor Lawrence|0.5
+nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,DK,Devaughn Vele,anytime_td,3.65,+265,0.2185,-0.2024,0.0,0,,0,market,0.2922,0.0665,0.0,15,C,,,prop|anytime_td|Devaughn Vele|0.5
+nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,DK,Stefon Diggs,anytime_td,3.0,+200,0.2685,-0.1944,0.0,0,,0,market,0.3961,0.1883,-0.0086,12,C,,,prop|anytime_td|Stefon Diggs|0.5
+nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,FAN,Stefon Diggs,anytime_td,3.0,+200,0.2685,-0.1944,0.0,0,,0,market,0.3961,0.1883,-0.0086,12,C,,,prop|anytime_td|Stefon Diggs|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Nate Boerkircher,anytime_td,6.0,+500,0.1269,-0.2387,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Nate Boerkircher,anytime_td,6.0,+500,0.1269,-0.2387,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Nate Boerkircher,anytime_td,6.0,+500,0.1269,-0.2387,0.0,0,,0,market,0.1915,0.149,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
+nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Juwan Johnson,anytime_td,4.3,+330,0.1816,-0.2191,0.0,0,,0,market,0.2497,0.0737,0.0,15,C,,,prop|anytime_td|Juwan Johnson|0.5
+nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Noah Fant,anytime_td,6.25,+525,0.1249,-0.2192,0.0,0,,0,market,0.2155,0.3469,0.0,15,C,,,prop|anytime_td|Noah Fant|0.5
+nfl,401873043,2026-11-08T18Z,LAR,WSH,prop,Yes,0.5,FAN,Davis Allen,anytime_td,5.5,+450,0.1419,-0.2196,0.0,0,,0,market,0.2284,0.2562,0.0,15,C,,,prop|anytime_td|Davis Allen|0.5
+nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Tre Tucker,anytime_td,4.3,+330,0.1809,-0.2221,0.0,0,,0,market,0.3202,0.3769,0.0,15,C,,,prop|anytime_td|Tre Tucker|0.5
+nfl,401873047,2026-11-08T21:25Z,LV,SF,prop,Yes,0.5,FAN,Jalen Nailor,anytime_td,7.5,+650,0.1037,-0.2224,0.0,0,,0,market,0.2128,0.596,0.0,15,C,,,prop|anytime_td|Jalen Nailor|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Travis Hunter,anytime_td,7.75,+675,0.1012,-0.2157,0.0,0,,0,market,0.1564,0.2121,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Zay Flowers,anytime_td,4.2,+320,0.1838,-0.2281,0.0,0,,0,market,0.2626,0.1029,0.0027,16,C,,,prop|anytime_td|Zay Flowers|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,BR,Bhayshul Tuten,anytime_td,2.04,+104,0.3584,-0.2689,0.0,0,,0,market,0.5784,0.1799,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
+nfl,401873039,2026-11-08T18Z,CLE,NO,prop,Yes,0.5,FAN,Tyler Shough,anytime_td,5.5,+450,0.142,-0.2193,0.0,0,,0,market,0.2298,0.2639,-0.0105,11,C,,,prop|anytime_td|Tyler Shough|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,Christian Watson,anytime_td,2.7,+170,0.2829,-0.2363,0.0,0,,0,market,0.4768,0.2874,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Ryan Flournoy,anytime_td,4.3,+330,0.1819,-0.2179,0.0,0,,0,market,0.2743,0.1795,-0.0113,10,C,,,prop|anytime_td|Ryan Flournoy|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Nate Boerkircher,anytime_td,5.75,+475,0.1269,-0.2704,0.0,0,,0,market,0.1915,0.1011,0.0202,23,C,,,prop|anytime_td|Nate Boerkircher|0.5
+nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Jake Ferguson,anytime_td,3.7,+270,0.2114,-0.2179,0.0,0,,0,market,0.3401,0.2584,-0.0154,9,C,,,prop|anytime_td|Jake Ferguson|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Bhayshul Tuten,anytime_td,2.0,+100,0.3584,-0.2833,0.0,0,,0,market,0.5784,0.1568,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Bhayshul Tuten,anytime_td,2.0,+100,0.3584,-0.2833,0.0,0,,0,market,0.5784,0.1568,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
+nfl,401873041,2026-11-08T18Z,DEN,CAR,prop,Yes,0.5,DK,Bo Nix,anytime_td,5.0,+400,0.1577,-0.2115,0.0,0,,0,market,0.2155,0.0775,-0.0193,7,C,,,prop|anytime_td|Bo Nix|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Travis Hunter,anytime_td,7.5,+650,0.1012,-0.241,0.0,0,,0,market,0.1564,0.173,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Travis Hunter,anytime_td,7.5,+650,0.1012,-0.241,0.0,0,,0,market,0.1564,0.173,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,Christian Watson,anytime_td,2.65,+165,0.2829,-0.2504,0.0,0,,0,market,0.4768,0.2635,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,Christian Watson,anytime_td,2.6,+160,0.2829,-0.2646,0.0,0,,0,market,0.4768,0.2397,,15,C,,,prop|anytime_td|Christian Watson|0.5
+nfl,401873050,2026-11-09T01:20Z,TB,CHI,prop,Yes,0.5,FAN,D'Andre Swift,anytime_td,1.6061,-165,0.4787,-0.2312,0.0,0,,0,market,0.6493,0.0428,-0.0221,6,C,,,prop|anytime_td|D'Andre Swift|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Bhayshul Tuten,anytime_td,1.9091,-110,0.3584,-0.3158,0.0,0,,0,market,0.5784,0.1042,0.0557,25,C,,,prop|anytime_td|Bhayshul Tuten|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,BR,Josh Cameron,anytime_td,7.0,+600,0.1089,-0.2374,0.0,0,,0,market,0.1815,0.2705,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
+nfl,401873046,2026-11-08T21:05Z,HOU,LAC,prop,Yes,0.5,FAN,Omarion Hampton,anytime_td,3.5,+250,0.2047,-0.2835,0.0,0,,0,market,0.3448,0.2068,0.0,15,C,,,prop|anytime_td|Omarion Hampton|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Travis Hunter,anytime_td,7.0,+600,0.1012,-0.2916,0.0,0,,0,market,0.1564,0.0948,-0.0061,13,C,,,prop|anytime_td|Travis Hunter|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FAN,Josh Cameron,anytime_td,6.75,+575,0.1089,-0.2647,0.0,0,,0,market,0.1815,0.2251,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,Drake Maye,anytime_td,4.1,+310,0.1663,-0.3181,0.0,0,,0,market,0.2773,0.1369,,15,C,,,prop|anytime_td|Drake Maye|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,DeMario Douglas,anytime_td,2.95,+195,0.2303,-0.3205,0.0,0,,0,market,0.3658,0.0791,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,DK,Josh Cameron,anytime_td,6.5,+550,0.1089,-0.2919,0.0,0,,0,market,0.1815,0.1797,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,FD,Josh Cameron,anytime_td,6.5,+550,0.1089,-0.2919,0.0,0,,0,market,0.1815,0.1797,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,DeMario Douglas,anytime_td,2.9,+190,0.2303,-0.332,0.0,0,,0,market,0.3658,0.0608,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
+nfl,401873040,2026-11-08T18Z,DAL,IND,prop,Yes,0.5,FAN,Josh Downs,anytime_td,3.85,+285,0.1691,-0.3491,0.0,0,,0,market,0.2801,0.0784,0.0097,19,C,,,prop|anytime_td|Josh Downs|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FAN,Drake Maye,anytime_td,4.0,+300,0.1663,-0.3347,0.0,0,,0,market,0.2773,0.1092,,15,C,,,prop|anytime_td|Drake Maye|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,DK,Drake Maye,anytime_td,3.95,+295,0.1663,-0.343,0.0,0,,0,market,0.2773,0.0953,,15,C,,,prop|anytime_td|Drake Maye|0.5
+nfl,401873049,2026-11-08T21:25Z,GB,NE,prop,Yes,0.5,FD,DeMario Douglas,anytime_td,2.85,+185,0.2303,-0.3435,0.0,0,,0,market,0.3658,0.0425,,15,C,,,prop|anytime_td|DeMario Douglas|0.5
+nfl,401873037,2026-11-06T01:15Z,JAX,BAL,prop,Yes,0.5,MGM,Josh Cameron,anytime_td,6.0,+500,0.1089,-0.3464,0.0,0,,0,market,0.1815,0.089,-0.0246,5,C,,,prop|anytime_td|Josh Cameron|0.5
