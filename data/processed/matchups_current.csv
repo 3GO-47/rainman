@@ -2,10 +2,10 @@ player,mk_name,team,pos,slot,slot_group,injury,owner,week,opponent,composite,sta
 Gardner Minshew II,Gardner Minshew II,ARI,QB,QB1,QB,1,,9,@SEA,27.8,QB PY=32;QB RY=20;QB P+R=32;P TD=28;QB TD=27
 Carson Beck,Carson Beck,ARI,QB,QB2,QB,1,,9,@SEA,27.8,QB PY=32;QB RY=20;QB P+R=32;P TD=28;QB TD=27
 Jacoby Brissett,Jacoby Brissett,ARI,QB,QB3,QB,1,,9,@SEA,27.8,QB PY=32;QB RY=20;QB P+R=32;P TD=28;QB TD=27
-Jeremiyah Love,Jeremiyah Love,ARI,RB,RB1,RB1,1,,9,@SEA,22.4,RB1 RY=30;RB1 Recep=10;RB1 RecY=20;RB R+R=26;RB1 TD=26
-Tyler Allgeier,Tyler Allgeier,ARI,RB,RB2,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
-Bam Knight,Bam Knight,ARI,RB,RB3,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
-Evan Hull,Evan Hull,ARI,RB,RB4,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
+Tyler Allgeier,Tyler Allgeier,ARI,RB,RB1,RB1,1,,9,@SEA,22.4,RB1 RY=30;RB1 Recep=10;RB1 RecY=20;RB R+R=26;RB1 TD=26
+Bam Knight,Bam Knight,ARI,RB,RB2,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
+Evan Hull,Evan Hull,ARI,RB,RB3,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
+Jeremiyah Love,Jeremiyah Love,ARI,RB,RB4,RB2,1,,9,@SEA,11.2,RB2+ RY=13;RB2 Recep=2;RB2 RecY=6;RB R+R=26;RB2 TD=9
 James Conner,James Conner,ARI,RB,RB5,,-1,,9,@SEA,,
 Trey Benson,Trey Benson,ARI,RB,RB6,,-1,,9,@SEA,,
 Trey McBride,Trey McBride,ARI,TE,TE1,TE1,1,,9,@SEA,15.67,TE1 Recep=3;TE1 RecY=15;TE1 TD=29
@@ -16,9 +16,10 @@ Hunter Long,Hunter Long,ARI,TE,TE5,,-1,,9,@SEA,,
 Michael Wilson,Michael Wilson,ARI,WR,WR1,WR1,1,,9,@SEA,24.5,WR1 Recep=24;WR1 RecY=31;WR1 TD=18.5
 Reggie Virgil,Reggie Virgil,ARI,WR,WR2,WR2,1,,9,@SEA,27.0,WR2 Recep=26;WR2 RecY=25;WR2 TD=30
 Simi Fehoko,Simi Fehoko,ARI,WR,WR3,WR3,1,,9,@SEA,30.83,WR3 Recep=30;WR3 RecY=31;WR3 TD=31.5
+Harrison Wallace III,Harrison Wallace III,ARI,WR,WR4+,WR4+,1,,9,@SEA,7.0,WR4+ Recep=3;WR4+ RecY=16;WR4+ TD=2
+Jalen Brooks,Jalen Brooks,ARI,WR,WR4+,WR4+,-1,,9,@SEA,7.0,WR4+ Recep=3;WR4+ RecY=16;WR4+ TD=2
 Devin Duvernay,Devin Duvernay,ARI,WR,WR4+,WR4+,1,,9,@SEA,7.0,WR4+ Recep=3;WR4+ RecY=16;WR4+ TD=2
 Kendrick Bourne,Kendrick Bourne,ARI,WR,WR4+,WR4+,1,,9,@SEA,7.0,WR4+ Recep=3;WR4+ RecY=16;WR4+ TD=2
-Jalen Brooks,Jalen Brooks,ARI,WR,WR4+,WR4+,-1,,9,@SEA,7.0,WR4+ Recep=3;WR4+ RecY=16;WR4+ TD=2
 Michael Penix Jr.,Michael Penix Jr.,ATL,QB,QB1,QB,1,,9,CIN,8.1,QB PY=4;QB RY=2;QB P+R=2;P TD=19;QB TD=13.5
 Tua Tagovailoa,Tua Tagovailoa,ATL,QB,QB2,QB,1,,9,CIN,8.1,QB PY=4;QB RY=2;QB P+R=2;P TD=19;QB TD=13.5
 Andy Dalton,Andy Dalton,ATL,QB,QB3,QB,1,,9,CIN,8.1,QB PY=4;QB RY=2;QB P+R=2;P TD=19;QB TD=13.5
@@ -102,10 +103,9 @@ Zavier Scott,Zavier Scott,CHI,RB,RB4,RB2,1,,9,TB,23.0,RB2+ RY=30;RB2 Recep=18;RB
 Brittain Brown,Brittain Brown,CHI,RB,RB5,,-1,,9,TB,,
 Colston Loveland,Colston Loveland,CHI,TE,TE1,TE1,1,,9,TB,12.33,TE1 Recep=16;TE1 RecY=13;TE1 TD=8
 Sam Roush,Sam Roush,CHI,TE,TE2,TE2,1,,9,TB,8.67,TE2 Recep=7;TE2 RecY=6;TE2 TD=13
-Stephen Carlson,Stephen Carlson,CHI,TE,TE3,TE2,1,,9,TB,8.67,TE2 Recep=7;TE2 RecY=6;TE2 TD=13
-Hayden Large,Hayden Large,CHI,TE,TE4,TE2,-1,,9,TB,8.67,TE2 Recep=7;TE2 RecY=6;TE2 TD=13
-Cole Kmet,Cole Kmet,CHI,TE,TE5,,-1,,9,TB,,
-Nikola Kalinic,Nikola Kalinic,CHI,TE,TE6,,-1,,9,TB,,
+Hayden Large,Hayden Large,CHI,TE,TE3,TE2,-1,,9,TB,8.67,TE2 Recep=7;TE2 RecY=6;TE2 TD=13
+Cole Kmet,Cole Kmet,CHI,TE,TE4,TE2,-1,,9,TB,8.67,TE2 Recep=7;TE2 RecY=6;TE2 TD=13
+Nikola Kalinic,Nikola Kalinic,CHI,TE,TE5,,-1,,9,TB,,
 Rome Odunze,Rome Odunze,CHI,WR,WR1,WR1,1,,9,TB,31.17,WR1 Recep=32;WR1 RecY=32;WR1 TD=29.5
 Luther Burden III,Luther Burden III,CHI,WR,WR2,WR2,1,,9,TB,2.0,WR2 Recep=1;WR2 RecY=2;WR2 TD=3
 Kalif Raymond,Kalif Raymond,CHI,WR,WR3,WR3,1,,9,TB,17.17,WR3 Recep=7.5;WR3 RecY=17;WR3 TD=27
@@ -139,7 +139,8 @@ Raheim Sanders,Raheim Sanders,CLE,RB,RB4,RB2,-1,,9,@NO,9.6,RB2+ RY=11;RB2 Recep=
 Michael Burton,Michael Burton,CLE,RB,FB1,RB2,1,,9,@NO,9.6,RB2+ RY=11;RB2 Recep=20;RB2 RecY=14;RB R+R=2;RB2 TD=1
 Harold Fannin Jr.,Harold Fannin Jr.,CLE,TE,TE1,TE1,1,,9,@NO,9.67,TE1 Recep=5;TE1 RecY=4;TE1 TD=20
 Blake Whiteheart,Blake Whiteheart,CLE,TE,TE2,TE2,1,,9,@NO,16.67,TE2 Recep=19.5;TE2 RecY=20;TE2 TD=10.5
-Joe Royer,Joe Royer,CLE,TE,TE3,TE2,-1,,9,@NO,16.67,TE2 Recep=19.5;TE2 RecY=20;TE2 TD=10.5
+Carsen Ryan,Carsen Ryan,CLE,TE,TE3,TE2,1,,9,@NO,16.67,TE2 Recep=19.5;TE2 RecY=20;TE2 TD=10.5
+Joe Royer,Joe Royer,CLE,TE,TE4,TE2,-1,,9,@NO,16.67,TE2 Recep=19.5;TE2 RecY=20;TE2 TD=10.5
 Denzel Boston,Denzel Boston,CLE,WR,WR1,WR1,1,,9,@NO,8.0,WR1 Recep=11;WR1 RecY=8;WR1 TD=5
 KC Concepcion,KC Concepcion,CLE,WR,WR2,WR2,1,,9,@NO,29.0,WR2 Recep=31;WR2 RecY=28;WR2 TD=28
 Jerry Jeudy,Jerry Jeudy,CLE,WR,WR3,WR3,1,,9,@NO,26.0,WR3 Recep=27;WR3 RecY=30;WR3 TD=21
@@ -333,9 +334,8 @@ Puka Nacua,Puka Nacua,LAR,WR,WR1,WR1,1,,9,@WAS,5.33,WR1 Recep=6;WR1 RecY=4;WR1 T
 Konata Mumpfield,Konata Mumpfield,LAR,WR,WR2,WR2,1,,9,@WAS,19.33,WR2 Recep=22;WR2 RecY=23;WR2 TD=13
 Tutu Atwell,Tutu Atwell,LAR,WR,WR3,WR3,1,,9,@WAS,15.0,WR3 Recep=3;WR3 RecY=23;WR3 TD=19
 Jordan Whittington,Jordan Whittington,LAR,WR,WR4+,WR4+,1,,9,@WAS,24.83,WR4+ Recep=28;WR4+ RecY=18;WR4+ TD=28.5
-Davante Adams,Davante Adams,LAR,WR,WR4+,WR4+,-1,,9,@WAS,24.83,WR4+ Recep=28;WR4+ RecY=18;WR4+ TD=28.5
 CJ Daniels,CJ Daniels,LAR,WR,WR4+,WR4+,1,,9,@WAS,24.83,WR4+ Recep=28;WR4+ RecY=18;WR4+ TD=28.5
-Alex Bachman,Alex Bachman,LAR,WR,WR4+,WR4+,1,,9,@WAS,24.83,WR4+ Recep=28;WR4+ RecY=18;WR4+ TD=28.5
+Davante Adams,Davante Adams,LAR,WR,WR4+,WR4+,-1,,9,@WAS,24.83,WR4+ Recep=28;WR4+ RecY=18;WR4+ TD=28.5
 Kirk Cousins,Kirk Cousins,LV,QB,QB1,QB,1,,9,@SF,23.2,QB PY=22;QB RY=32;QB P+R=27;P TD=15;QB TD=20
 Fernando Mendoza,Fernando Mendoza,LV,QB,QB2,QB,1,,9,@SF,23.2,QB PY=22;QB RY=32;QB P+R=27;P TD=15;QB TD=20
 Aidan O'Connell,Aidan O'Connell,LV,QB,QB3,QB,1,,9,@SF,23.2,QB PY=22;QB RY=32;QB P+R=27;P TD=15;QB TD=20
@@ -415,8 +415,9 @@ Zach Wilson,Zach Wilson,NO,QB,QB3,QB,1,,9,CLE,27.4,QB PY=28;QB RY=27;QB P+R=29;P
 Alvin Kamara,Alvin Kamara,NO,RB,RB1,RB1,1,,9,CLE,19.3,RB1 RY=3;RB1 Recep=30;RB1 RecY=30;RB R+R=20;RB1 TD=13.5
 Kendre Miller,Kendre Miller,NO,RB,RB2,RB2,1,,9,CLE,26.1,RB2+ RY=26;RB2 Recep=25;RB2 RecY=31;RB R+R=20;RB2 TD=28.5
 CJ Donaldson,CJ Donaldson,NO,RB,RB3,RB2,1,,9,CLE,26.1,RB2+ RY=26;RB2 Recep=25;RB2 RecY=31;RB R+R=20;RB2 TD=28.5
-Travis Etienne Jr.,Travis Etienne Jr.,NO,RB,RB4,RB2,1,,9,CLE,26.1,RB2+ RY=26;RB2 Recep=25;RB2 RecY=31;RB R+R=20;RB2 TD=28.5
-Ty Chandler,Ty Chandler,NO,RB,RB5,,1,,9,CLE,,
+Audric Estime,Audric Estime,NO,RB,RB4,RB2,1,,9,CLE,26.1,RB2+ RY=26;RB2 Recep=25;RB2 RecY=31;RB R+R=20;RB2 TD=28.5
+Travis Etienne Jr.,Travis Etienne Jr.,NO,RB,RB5,,1,,9,CLE,,
+Ty Chandler,Ty Chandler,NO,RB,RB6,,1,,9,CLE,,
 Juwan Johnson,Juwan Johnson,NO,TE,TE1,TE1,1,,9,CLE,26.0,TE1 Recep=31;TE1 RecY=31;TE1 TD=16
 Noah Fant,Noah Fant,NO,TE,TE2,TE2,1,,9,CLE,3.17,TE2 Recep=2;TE2 RecY=2;TE2 TD=5.5
 Oscar Delp,Oscar Delp,NO,TE,TE3,TE2,1,,9,CLE,3.17,TE2 Recep=2;TE2 RecY=2;TE2 TD=5.5
@@ -514,8 +515,8 @@ Drew Lock,Drew Lock,SEA,QB,QB2,QB,1,,9,ARI,10.6,QB PY=14;QB RY=16;QB P+R=13;P TD
 Jalen Milroe,Jalen Milroe,SEA,QB,QB3,QB,1,,9,ARI,10.6,QB PY=14;QB RY=16;QB P+R=13;P TD=5;QB TD=5
 Zach Charbonnet,Zach Charbonnet,SEA,RB,RB1,RB1,1,,9,ARI,11.8,RB1 RY=11;RB1 Recep=16;RB1 RecY=10;RB R+R=6;RB1 TD=16
 Jadarian Price,Jadarian Price,SEA,RB,RB2,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
-Emanuel Wilson,Emanuel Wilson,SEA,RB,RB3,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
-George Holani,George Holani,SEA,RB,RB4,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
+George Holani,George Holani,SEA,RB,RB3,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
+Emanuel Wilson,Emanuel Wilson,SEA,RB,RB4,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
 Velus Jones Jr.,Velus Jones Jr.,SEA,RB,RB5,,1,,9,ARI,,
 Brady Russell,Brady Russell,SEA,RB,FB1,RB2,1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
 Robbie Ouzts,Robbie Ouzts,SEA,RB,FB2,RB2,-1,,9,ARI,13.2,RB2+ RY=7;RB2 Recep=28;RB2 RecY=17;RB R+R=6;RB2 TD=8
@@ -527,9 +528,8 @@ Jaxon Smith-Njigba,Jaxon Smith-Njigba,SEA,WR,WR1,WR1,1,,9,ARI,6.67,WR1 Recep=10;
 Rashid Shaheed,Rashid Shaheed,SEA,WR,WR2,WR2,1,,9,ARI,16.67,WR2 Recep=27;WR2 RecY=16;WR2 TD=7
 Cooper Kupp,Cooper Kupp,SEA,WR,WR3,WR3,1,,9,ARI,22.67,WR3 Recep=28;WR3 RecY=27;WR3 TD=13
 Tory Horton,Tory Horton,SEA,WR,WR4+,WR4+,1,,9,ARI,26.17,WR4+ Recep=27;WR4+ RecY=20;WR4+ TD=31.5
-Jake Bobo,Jake Bobo,SEA,WR,WR4+,WR4+,-1,,9,ARI,26.17,WR4+ Recep=27;WR4+ RecY=20;WR4+ TD=31.5
-Montorie Foster Jr.,Montorie Foster Jr.,SEA,WR,WR4+,WR4+,1,,9,ARI,26.17,WR4+ Recep=27;WR4+ RecY=20;WR4+ TD=31.5
 Irv Charles,Irv Charles,SEA,WR,WR4+,WR4+,1,,9,ARI,26.17,WR4+ Recep=27;WR4+ RecY=20;WR4+ TD=31.5
+Jake Bobo,Jake Bobo,SEA,WR,WR4+,WR4+,-1,,9,ARI,26.17,WR4+ Recep=27;WR4+ RecY=20;WR4+ TD=31.5
 Brock Purdy,Brock Purdy,SF,QB,QB1,QB,1,,9,LV,13.1,QB PY=11;QB RY=24;QB P+R=15;P TD=4;QB TD=11.5
 Mac Jones,Mac Jones,SF,QB,QB2,QB,1,,9,LV,13.1,QB PY=11;QB RY=24;QB P+R=15;P TD=4;QB TD=11.5
 Kurtis Rourke,Kurtis Rourke,SF,QB,QB3,QB,1,,9,LV,13.1,QB PY=11;QB RY=24;QB P+R=15;P TD=4;QB TD=11.5
@@ -590,8 +590,9 @@ Marcus Mariota,Marcus Mariota,WAS,QB,QB2,QB,1,,9,LAR,17.6,QB PY=26;QB RY=4;QB P+
 Athan Kaliakmanis,Athan Kaliakmanis,WAS,QB,QB3,QB,1,,9,LAR,17.6,QB PY=26;QB RY=4;QB P+R=22;P TD=20;QB TD=16
 Rachaad White,Rachaad White,WAS,RB,RB1,RB1,1,,9,LAR,18.2,RB1 RY=26;RB1 Recep=8;RB1 RecY=11;RB R+R=15;RB1 TD=31
 Austin Ekeler,Austin Ekeler,WAS,RB,RB2,RB2,1,,9,LAR,12.9,RB2+ RY=12;RB2 Recep=7;RB2 RecY=2;RB R+R=15;RB2 TD=28.5
-Jeremy McNichols,Jeremy McNichols,WAS,RB,RB3,RB2,1,,9,LAR,12.9,RB2+ RY=12;RB2 Recep=7;RB2 RecY=2;RB R+R=15;RB2 TD=28.5
-Jacory Croskey-Merritt,Jacory Croskey-Merritt,WAS,RB,RB4,RB2,-1,,9,LAR,12.9,RB2+ RY=12;RB2 Recep=7;RB2 RecY=2;RB R+R=15;RB2 TD=28.5
+Robert Henry Jr.,Robert Henry Jr.,WAS,RB,RB3,RB2,1,,9,LAR,12.9,RB2+ RY=12;RB2 Recep=7;RB2 RecY=2;RB R+R=15;RB2 TD=28.5
+Jeremy McNichols,Jeremy McNichols,WAS,RB,RB4,RB2,1,,9,LAR,12.9,RB2+ RY=12;RB2 Recep=7;RB2 RecY=2;RB R+R=15;RB2 TD=28.5
+Jacory Croskey-Merritt,Jacory Croskey-Merritt,WAS,RB,RB5,,-1,,9,LAR,,
 Chig Okonkwo,Chig Okonkwo,WAS,TE,TE1,TE1,1,,9,LAR,19.0,TE1 Recep=9;TE1 RecY=18;TE1 TD=30
 Ben Sinnott,Ben Sinnott,WAS,TE,TE2,TE2,1,,9,LAR,19.83,TE2 Recep=19.5;TE2 RecY=23;TE2 TD=17
 John Bates,John Bates,WAS,TE,TE3,TE2,1,,9,LAR,19.83,TE2 Recep=19.5;TE2 RecY=23;TE2 TD=17
