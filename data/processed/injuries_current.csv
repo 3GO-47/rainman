@@ -156,9 +156,10 @@ CHI,Kalif Raymond,WR,OFF,WR3,1,Active,0.0,,,2026-11-03,,,Raymond finished Monday
 CHI,Jordan McFadden,G,OL/ST,,,Active,0.0,,,2026-11-03,,,,espn
 CIN,Cashius Howell,DE,DEF,EDGE3,3,Injured Reserve,1.0,Wrist,2026-12-06,2026-11-04,,IR,Howell (wrist) was placed on injured reserve by the Bengals on Tuesday.,espn
 CIN,Erick All Jr.,TE,OFF,TE5,5,Injured Reserve,1.0,Knee - ACL,2027-02-15,2026-10-28,,IR,"Bengals head coach Zac Taylor confirmed Wednesday that All has been diagnosed with a torn ACL in his right knee and will require season-ending surgery, Jay Morr",espn
-CIN,Andrei Iosivas,WR,OFF,WR4+,2,Injured Reserve,1.0,Thumb,2026-11-08,2026-10-30,,IR,"Iosivas (thumb) is making good progress in his rehab, Mike Petraglia of CLNSCincy.com reports.",espn
-CIN,DJ Turner II,CB,DEF,CB1,1,Questionable,0.4,Ankle,2026-11-08,2026-11-03,,QUESTIONABLE,"Turner (ankle) is considered day-to-day, NFL reporter Jordan Schultz reported Monday.",espn
+CIN,Andrei Iosivas,WR,OFF,WR4+,2,Injured Reserve,1.0,Thumb,2026-11-15,2026-10-30,,IR,"Iosivas (thumb) is making good progress in his rehab, Mike Petraglia of CLNSCincy.com reports.",espn
+CIN,DJ Turner II,CB,DEF,CB1,1,Questionable,0.4,Heel,2026-11-08,2026-11-03,,QUESTIONABLE,"Turner (ankle) is considered day-to-day, NFL reporter Jordan Schultz reported Monday.",espn
 CIN,Cedric Johnson,DE,DEF,EDGE2,2,Questionable,0.4,Ankle,2026-11-08,2026-11-01,,QUESTIONABLE,Johnson (ankle) has been ruled out for the rest of Sunday's game against the Falcons.,espn
+CIN,Jordan Battle,S,DEF,S1,1,Questionable,0.4,Hamstring,2026-11-08,2026-11-04,,QUESTIONABLE,questionable,espn
 CIN,Kyle Dugger,S,DEF,S2,2,Questionable,0.4,Quadriceps,2026-11-08,2026-11-03,,QUESTIONABLE,questionable,espn
 CIN,Evan McPherson,PK,,,,Active,0.0,,,2026-11-03,,,McPherson made all five extra-point attempts in Sunday's 43-36 win over the Titans.,espn
 CIN,Landon Robinson,DT,DEF,DT3,3,Active,0.0,,,2026-11-02,,,,espn
@@ -166,7 +167,6 @@ CIN,Boye Mafe,DE,DEF,EDGE1,1,Active,0.0,,,2026-10-28,,,"Mafe finished Sunday's 3
 CIN,Barrett Carter,LB,DEF,LB1,1,Active,0.0,,,2026-10-28,,,Carter recorded nine tackles (three solo) and a pass defense during Sunday's 35-13 win over the Ravens.,espn
 CIN,Demetrius Knight Jr.,LB,DEF,LB1,1,Active,0.0,,,2026-10-28,,,Knight totaled eight tackles (two solo) and an interception during the Bengals' win over the Ravens on Sunday.,espn
 CIN,Joe Giles-Harris,LB,DEF,LB2,2,Active,0.0,,,2026-11-01,,,,espn
-CIN,Jordan Battle,S,DEF,S1,1,Active,0.0,,,2026-10-30,,,,espn
 CIN,Bryan Cook,S,DEF,S1,1,Active,0.0,,,2026-10-28,,,"Cook recorded nine tackles (six solo), including 0.5 sacks, during the Bengals' 35-13 win over the Ravens on Sunday.",espn
 CIN,Joe Burrow,QB,OFF,QB1,1,Active,0.0,,,2026-11-01,,,Burrow completed 38 of 48 passes for 462 yards with five touchdowns and three interceptions and added three carries for 10 yards and another score in the Bengal,espn
 CIN,Chase Brown,RB,OFF,RB1,1,Active,0.0,,,2026-11-01,,,Brown rushed 12 times for 55 yards and brought in eight of nine targets for 46 yards in the Bengals' 43-36 overtime win over the Titans on Sunday. He also lost ,espn
@@ -360,7 +360,7 @@ JAX,Travon Walker,DE,DEF,EDGE1,1,Questionable,0.4,Ribs,2026-11-05,2026-11-04,LP,
 JAX,Branson Combs,LB,DEF,LB2,2,Questionable,0.4,Shoulder,2026-11-05,2026-11-03,LP,QUESTIONABLE,questionable,espn
 JAX,Jarrian Jones,CB,DEF,NB2,2,Questionable,0.4,Ankle,2026-11-05,2026-11-03,LP,QUESTIONABLE,questionable,espn
 JAX,Antonio Johnson,S,DEF,S1,1,Questionable,0.4,Ankle,2026-11-05,2026-11-03,LP,QUESTIONABLE,questionable,espn
-JAX,Bhayshul Tuten,RB,OFF,RB1,1,Questionable,0.4,Ankle,2026-11-05,2026-11-03,DNP,QUESTIONABLE,The Jaguars listed Tuten (ankle/foot) as a non-participant in Tuesday's practice.,espn
+JAX,Bhayshul Tuten,RB,OFF,RB1,1,Questionable,0.4,Ankle,2026-11-05,2026-11-04,DNP,QUESTIONABLE,"Jaguars head coach Liam Coen said Wednesday that Tuten (ankle/foot) is feeling better, but the running back's status for Thursday's contest versus the Ravens is",espn
 JAX,Chris Rodriguez Jr.,RB,OFF,RB2,2,Questionable,0.4,Hand,2026-11-05,2026-11-03,LP,QUESTIONABLE,Rodriguez (hand) was listed as a limited participant in Tuesday's practice.,espn
 JAX,Jakobi Meyers,WR,OFF,WR2,1,Questionable,0.4,Hamstring,2026-11-05,2026-11-03,LP,QUESTIONABLE,Meyers (hamstring/ankle) was listed as a limited participant in Tuesday's practice.,espn
 JAX,Ezra Cleveland,G,OL/ST,,,Questionable,0.4,Knee,2026-11-05,2026-11-01,LP,QUESTIONABLE,questionable,espn
@@ -555,7 +555,7 @@ NE,Marcus Bryant,OT,OL/ST,,,Active,0.0,,,2026-11-04,,,Bryant (ankle) was activat
 NE,Ben Brown,C,OL/ST,,,Active,0.0,,,2026-10-31,,,"Brown (knee) does not have an injury designation for Sunday's game against the Dolphins, David Furones of the South Florida Sun Sentinel reports.",espn
 NE,Morgan Moses,OT,OL/ST,,,Active,0.0,,,2026-10-30,,,,espn
 NO,Travis Etienne Jr.,RB,OFF,RB5,5,Injured Reserve,1.0,Hamstring,2026-11-08,2026-11-02,,IR,"Head coach Kellen Moore said that Etienne (hamstring) will be evaluated Monday before the Saints make a determination whether he practices this week, Ross Jacks",espn
-NO,Jordyn Tyson,WR,OFF,WR4+,2,Injured Reserve,1.0,Hamstring,2026-11-08,2026-11-02,,IR-R,"Saints head coach Kellen Moore said that the Saints will decide by Wednesday whether to open Tyson's (hamstring) 21-day practice window this week, Nick Underhil",espn
+NO,Jordyn Tyson,WR,OFF,WR4+,2,Injured Reserve,1.0,Hamstring,2026-11-08,2026-11-04,,IR-R,"Tyson (hamstring) is slated to resume practicing with the Saints on Wednesday, Nick Underhill of NewOrleans.Football reports.",espn
 NO,Nathan Shepherd,DT,DEF,DT1,1,Questionable,0.4,Illness,2026-11-08,2026-10-27,,QUESTIONABLE,questionable,espn
 NO,Justin Reid,S,DEF,S1,1,Questionable,0.4,Concussion,2026-11-08,2026-10-25,,QUESTIONABLE,Reid (concussion) has been ruled out for the remainder of Sunday's game against the Steelers in Paris.,espn
 NO,CJ Donaldson,RB,OFF,RB3,3,Questionable,0.4,Shoulder,2026-11-08,2026-10-25,,QUESTIONABLE,Donaldson (shoulder) is questionable to return to Sunday's game against the Steelers in Paris.,espn
@@ -780,9 +780,9 @@ TEN,Chimere Dike,WR,OFF,WR4+,2,Active,0.0,,,2026-11-02,,,Dike caught five of six
 TEN,Brandon Crenshaw-Dickson,OT,OL/ST,,,Active,0.0,,,2026-11-02,,,,espn
 TEN,Thomas Morstead,P,OL/ST,,,Active,0.0,,,2026-11-01,,,"The Titans elevated Morstead from the practice squad to the active roster Saturday, Jim Wyatt of the team's official site reports.",espn
 WAS,Daron Payne,DT,DEF,DT2,2,Injured Reserve,1.0,Foot,2027-02-15,2026-11-04,,IR,"Payne (foot) was placed on injured reserve by the Commanders on Tuesday, Tashan Reed of The Washington Post reports.",espn
-WAS,Javon Kinlaw,DT,DEF,EDGE2,2,Injured Reserve,1.0,Knee,2026-12-06,2026-11-04,,IR,Kinlaw (knee) was placed on injured reserve by the Commanders on Tuesday.,espn
+WAS,Javon Kinlaw,DT,DEF,EDGE2,2,Injured Reserve,1.0,Knee - MCL,2027-02-15,2026-11-04,,IR,"Kinlaw underwent season-ending surgery Tuesday to repair his MCL, Nicki Jhabvala of The Athletic reports.",espn
 WAS,Jer'Zhan Newton,DT,DEF,EDGE3,3,Injured Reserve,1.0,Pectoral,2026-11-08,2026-11-01,,IR-R,Newton (pectoral) has been ruled out for Sunday's game against the Eagles.,espn
-WAS,Jeremy McNichols,RB,OFF,RB4,4,Injured Reserve,1.0,Foot,2026-12-06,2026-11-03,,IR,The Commanders placed McNichols (foot) on injured reserve Tuesday.,espn
+WAS,Jeremy McNichols,RB,OFF,RB4,4,Injured Reserve,1.0,Foot,2027-02-15,2026-11-03,,IR,The Commanders placed McNichols (foot) on injured reserve Tuesday.,espn
 WAS,Terry McLaurin,WR,OFF,WR4+,3,Injured Reserve,1.0,Knee,2027-02-15,2026-10-30,,IR,"McLaurin (knee) underwent surgery Friday to repair the torn patellar tendon in his left knee, Nicki Jhabvala of The Athletic reports.",espn
 WAS,Jaylin Lane,WR,OFF,WR4+,3,Injured Reserve,1.0,Ankle,2027-02-15,2026-10-22,,IR,"Lane underwent surgery Oct. 9 to repair his fractured and dislocated ankle, and he is expected to be cleared for activities before OTAs, Tashan Reed of The Wash",espn
 WAS,Laremy Tunsil,OT,OL/ST,,,Injured Reserve,1.0,Triceps,2026-12-20,2026-10-29,,IR,"Tunsil (triceps) could potentially return late in the season, Nicki Jhabvala of The Athletic reports.",espn
