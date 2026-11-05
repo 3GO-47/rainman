@@ -32,6 +32,8 @@ def _clean(o):
     return o
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 NV = 'data/raw/nflverse'; SEASON = 2026
+import json as _json
+CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0)   # 2026-11-05 grid on wk 4-8: qb_adj and prior_w 3 cut margin error 9.28 -> 9.14; opponent-adjusted EPA (ridge) made it worse (9.71 at lam 60, 9.24 at 300) and stays off; CFG.update(_json.loads(os.environ.get('SIM_CFG', '{}')))   # backtest grid overrides
 FIX = {'LA': 'LAR', 'WSH': 'WAS', 'JAC': 'JAX'}
 POSW = {'QB': 1, 'RB': 1, 'WR': 1, 'TE': 1}
 Q = np.linspace(0, 1, 101)
@@ -141,6 +143,30 @@ def league(P, week=None):
                      'hurry': round(float(gap[ok & hurry & ~stop].median()), 1), 'hurry_incomplete': round(float(gap[ok & hurry & stop].median()), 1)}
     return L, S
 
+
+def opp_adjust(X, lam=60.0):
+    """Ridge: EPA/play = offense effect + defense effect (+ home), per play type. Returns {team: (off_pass, off_rush, def_pass, def_rush)}
+    as deviations from the league mean — a team's EPA with the schedule it actually faced taken out."""
+    out = {}
+    for kind, m in (('pass', X['pass'] == 1), ('rush', (X.rush == 1) & (X.qb_scramble != 1))):
+        D = X[m & X.epa.notna()]
+        if len(D) < 500: continue
+        teams = sorted(set(D.posteam) | set(D.defteam)); idx = {t: i for i, t in enumerate(teams)}; n = len(teams)
+        A = np.zeros((len(D), 2 * n + 1)); A[np.arange(len(D)), D.posteam.map(idx).values] = 1; A[np.arange(len(D)), n + D.defteam.map(idx).values] = 1
+        A[:, 2 * n] = np.where(D.posteam.values == D.game_id.str.split('_').str[3].values, 1, -1) if 'game_id' in D else 0   # home flag from the game id
+        y = D.epa.values - D.epa.mean()
+        beta = np.linalg.solve(A.T @ A + lam * np.eye(A.shape[1]), A.T @ y)
+        for t in teams: out.setdefault(t, {})[f'off_{kind}'] = float(beta[idx[t]]); out[t][f'def_{kind}'] = float(beta[n + idx[t]])
+    return out
+
+def qb_epa_table(S, n0=150, repl=-0.08):
+    """EPA per dropback by passer (gsis id), shrunk toward replacement level; and each team-season's usual passer"""
+    db = S[(S['pass'] == 1) & S.passer_id.notna()]
+    g = db.groupby('passer_id').epa.agg(['sum', 'count']); q = ((g['sum'] + n0 * repl) / (g['count'] + n0)).to_dict(); n = g['count'].to_dict()
+    usual = db.groupby(['season', 'posteam']).passer_id.agg(lambda s: s.value_counts().index[0]).to_dict()
+    return q, n, usual
+
+STARTERS = {}
 def team_profiles(P, S, week):
     off = pd.read_csv('data/processed/team_off_tendencies.csv'); de = pd.read_csv('data/processed/team_def_tendencies.csv')
     co = pd.read_csv('data/processed/coaching.csv'); tags = pd.read_csv('data/processed/scheme_tags.csv'); eff = pd.read_csv('data/processed/scheme_slot_effects.csv')
@@ -171,12 +197,17 @@ def team_profiles(P, S, week):
         if len(T) < 8: return 1.0
         return float((T.go.sum() + 2 * T.exp.mean() * 4) / (T.exp.sum() + 2 * T.exp.mean() * 4))
     pace_l = off[off.season < SEASON].sec_per_play.mean()
+    ADJ = {s: opp_adjust(S[S.season == s], CFG['lam']) for s in (SEASON - 1, SEASON)} if CFG['opp_adj'] else {}
+    lg_pass, lg_rush = float(S[S['pass'] == 1].epa.mean()), float(S[(S.rush == 1) & (S.qb_scramble != 1)].epa.mean())
+    QE, QN, QUSUAL = qb_epa_table(S)
+    INJ = pd.read_csv('data/processed/injuries_current.csv') if CFG['def_inj'] and os.path.exists('data/processed/injuries_current.csv') else None
     teams = sorted(set(off[off.season == SEASON].team))
     out = {}
+    RM = pd.concat([pd.read_parquet(f'{NV}/roster_{s}.parquet')[['gsis_id', 'full_name']] for s in (SEASON - 1, SEASON)]).dropna().drop_duplicates('gsis_id'); RM['n'] = RM.full_name.map(norm); N2G = {r.n: r.gsis_id for r in RM.itertuples()}
     co26 = co[co.season == SEASON].set_index('team'); tag26 = tags[(tags.season == SEASON)].set_index(['team', 'side'])
     def row(df, season, team): r = df[(df.season == season) & (df.team == team)]; return r.iloc[0].to_dict() if len(r) else None
     def blend(cur_d, pri_d, g, keys):
-        w = g / (g + 5.0) if g else 0.0; o = {}
+        w = g / (g + CFG['prior_w']) if g else 0.0; o = {}
         for k in keys:
             a = cur_d.get(k) if cur_d else None; b = pri_d.get(k) if pri_d else None
             a = None if a is None or (isinstance(a, float) and np.isnan(a)) else float(a); b = None if b is None or (isinstance(b, float) and np.isnan(b)) else float(b)
@@ -195,11 +226,35 @@ def team_profiles(P, S, week):
         g = int(cur[cur.posteam == t].game_id.nunique())
         o_cur, o_pri = row(off, SEASON, t), row(off, SEASON - 1, oc_from); d_cur, d_pri = row(de, SEASON, t), row(de, SEASON - 1, dc_from)
         O, w = blend(o_cur, o_pri, g, OK); D, _ = blend(d_cur, d_pri, g, DK)
+        # opponent-adjusted EPA replaces the raw season EPA when the ridge has the season (current unit this year, the coordinator's prior unit last year)
+        if ADJ:
+            a_cur, a_pri = ADJ.get(SEASON, {}).get(t), ADJ.get(SEASON - 1, {}).get(oc_from); d_curA, d_priA = ADJ.get(SEASON, {}).get(t), ADJ.get(SEASON - 1, {}).get(dc_from)
+            ww = g / (g + CFG['prior_w']) if g else 0.0
+            def bl(c, pr, k): c = None if c is None else c.get(k); pr = None if pr is None else pr.get(k); return None if c is None and pr is None else (pr if c is None else c if pr is None else ww * c + (1 - ww) * pr)
+            op, orr = bl(a_cur, a_pri, 'off_pass'), bl(a_cur, a_pri, 'off_rush'); dp, dr = bl(d_curA, d_priA, 'def_pass'), bl(d_curA, d_priA, 'def_rush')
+            if op is not None: O['pass_epa_raw'] = O.get('pass_epa'); O['pass_epa'] = round(lg_pass + op, 4)
+            if orr is not None: O['rush_epa_raw'] = O.get('rush_epa'); O['rush_epa'] = round(lg_rush + orr, 4)
+            if dp is not None: D['pass_epa_allowed_raw'] = D.get('pass_epa_allowed'); D['pass_epa_allowed'] = round(lg_pass + dp, 4)
+            if dr is not None: D['rush_epa_allowed_raw'] = D.get('rush_epa_allowed'); D['rush_epa_allowed'] = round(lg_rush + dr, 4)
+        # defensive starters ruled out: a missing first-string DB loosens the pass defense, a missing front-seven starter the run defense
+        if INJ is not None:
+            Z = INJ[(INJ.team.replace(FIX) == t) & (INJ.side == 'DEF') & (INJ.depth == 1) & INJ.status.isin(['Out', 'Injured Reserve', 'Doubtful', 'PUP', 'Suspended'])]
+            db_out = int(Z.pos.isin(['CB', 'S', 'DB', 'FS', 'SS', 'NB']).sum()); f7_out = int(len(Z) - db_out)
+            if db_out or f7_out:
+                D['pass_epa_allowed'] = round((D.get('pass_epa_allowed') or lg_pass) + .012 * db_out + .004 * f7_out, 4); D['rush_epa_allowed'] = round((D.get('rush_epa_allowed') or lg_rush) + .008 * f7_out, 4)
+                D['def_out'] = [f"{r.player} ({r.role})" for r in Z.itertuples()]
         RO, _ = blend(rates(cur, t, 'off'), rates(prior, oc_from, 'off'), g, RK); RD, _ = blend(rates(cur, t, 'def'), rates(prior, dc_from, 'def'), g, RK)
         fam = tag26.loc[(t, 'DEF')].primary_tag if (t, 'DEF') in tag26.index else None
         slot_idx = {r.grp: round(float(r['index']) / 100, 3) for _, r in eff[eff.family == fam].iterrows()} if fam else {}
         rz_o = rzt[(rzt.season == SEASON) & (rzt.side == 'off') & (rzt.scope == 'season') & (rzt.team == t)]; rz_d = rzt[(rzt.season == SEASON) & (rzt.side == 'def') & (rzt.scope == 'season') & (rzt.team == t)]
         ag = aggr(F[F.season == SEASON], t); ag_p = aggr(F[F.season == SEASON - 1], oc_from); agg = round((g / (g + 5)) * ag + (5 / (g + 5)) * ag_p, 3)
+        # QB attached to the passing game: the named starter's EPA per dropback (shrunk) vs the passer this unit has mostly used
+        if CFG['qb_adj']:
+            st_name = STARTERS.get(t); usual = QUSUAL.get((SEASON, t)) or QUSUAL.get((SEASON - 1, oc_from))
+            sid = N2G.get(norm(st_name)) if st_name else None
+            if sid and usual and sid != usual:
+                delta = QE.get(sid, -0.08) - QE.get(usual, 0.0)
+                O['qb_delta'] = round(float(delta), 4); O['pass_epa'] = round((O.get('pass_epa') or lg_pass) + float(np.clip(delta, -.2, .15)), 4); O['qb_swap'] = f"{st_name} for the usual passer · {QN.get(sid, 0)} dropbacks on file"
         out[t] = dict(games=g, weight_current=w,
             off=dict(hc=c.hc if c is not None else None, oc=c.oc if c is not None else None, oc_prior_unit=oc_from, oc_new=bool(c.oc_changed == 1) if c is not None else False, **O, **{f'pbp_{k}': v for k, v in RO.items()},
                      pace_factor=round((O['sec_per_play'] or pace_l) / pace_l, 3), fourth_aggr=agg),
@@ -312,11 +367,13 @@ def main():
     elif (last >= today).any(): week = int(last[last >= today].index.min())   # the first week with a game still to be played
     else: week = int(cur.week.max()) + 1
     P = load_pbp(week); L, S = league(P, week)
-    T = team_profiles(P, S, week); GM = games(week)
+    GM = games(week)
     st = {}
     for x in GM:
         if x.get('away_qb'): st[x['away']] = x['away_qb']
         if x.get('home_qb'): st[x['home']] = x['home_qb']
+    STARTERS.update(st)
+    T = team_profiles(P, S, week)
     PL, pm = players(S, week, [x['date'] for x in GM], st)
     L['home_edge'] = home_edge(); L['rows'] = int(len(P)); L['pos_means'] = {k: {kk: round(float(vv), 4) for kk, vv in v.items()} for k, v in pm.items()}
     out = dict(built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), season=SEASON, week=week, pbp_through=f'{SEASON} wk {int(P[P.season == SEASON].week.max()) if (P.season == SEASON).any() else 0}', league=L, teams=T, players=PL, games=GM)

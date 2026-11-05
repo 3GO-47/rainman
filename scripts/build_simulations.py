@@ -21,9 +21,10 @@ os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 sys.path.insert(0, 'scripts')
 from sim_engine import simulate
 
-def params(week=None, out='data/processed/sim_params.json'):
+def params(week=None, out='data/processed/sim_params.json', env_extra=None):
     cmd = [sys.executable, 'scripts/build_sim_params.py', '--out', out] + (['--week', str(week)] if week else [])
-    r = subprocess.run(cmd, capture_output=True, text=True)
+    env = dict(os.environ); env.update(env_extra or {})
+    r = subprocess.run(cmd, capture_output=True, text=True, env=env)
     if r.returncode: raise SystemExit(r.stderr[-2000:])
     return json.load(open(out))
 
@@ -58,14 +59,16 @@ def backtest(n, only=None):
     """only = list of weeks to (re)run; each week's rows are cached in data/processed/sim_bt_parts/w{W}.json so the run can be split"""
     import pandas as pd
     g = pd.read_csv('data/raw/nflverse/games.csv'); cur = g[(g.season == 2026) & (g.game_type == 'REG') & g.home_score.notna()]
-    weeks = sorted(int(w) for w in cur.week.unique()); rows = []; os.makedirs('data/processed/sim_bt_parts', exist_ok=True)
+    # the backtest never sees today's injury report (it has no history) — def_inj is forced off; a config grid gets its own parts folder
+    cfg = json.loads(os.environ.get('SIM_CFG', '{}')); cfg['def_inj'] = 0; tag = '' if not os.environ.get('SIM_CFG') else '_' + '_'.join(f'{k}{v}' for k, v in sorted(cfg.items()))
+    pdir = f'data/processed/sim_bt_parts{tag}'; weeks = sorted(int(w) for w in cur.week.unique()); rows = []; os.makedirs(pdir, exist_ok=True)
     for w in weeks:
-        part = f'data/processed/sim_bt_parts/w{w}.json'
+        part = f'{pdir}/w{w}.json'
         if (only and w not in only) or (not only and os.path.exists(part)):
             if os.path.exists(part): rows += json.load(open(part))
             continue
         wrows = []
-        PR = params(w, out='data/processed/_sim_params_bt.json')
+        PR = params(w, out=f'data/processed/_sim_params_bt{tag}.json', env_extra={'SIM_CFG': json.dumps(cfg)})
         played = [x for x in PR['games'] if x.get('home_score') is not None]
         if not played: continue
         calibrate(PR, n=1500, rounds=2)
@@ -99,7 +102,8 @@ def backtest(n, only=None):
     summ = dict(games=len(R), weeks=weeks, n=n, by_week=by_week, settled=settled, mae_margin=m('err_margin'), mae_total=m('err_total'), mkt_mae_margin=m('mkt_err_margin'), mkt_mae_total=m('mkt_err_total'),
                 su=m('su'), ats=m('ats'), ou=m('ou'), bias_margin=round(float(np.mean([x['sim_margin'] - x['margin'] for x in R])), 2), bias_total=round(float(np.mean([x['sim_total'] - x['total'] for x in R])), 2),
                 calibration=cal)
-    print(json.dumps(summ, indent=1))
+    print(json.dumps({k: v for k, v in summ.items() if k not in ('calibration', 'by_week')}))
+    if os.environ.get('SIM_CFG'): print('GRID', os.environ['SIM_CFG'], json.dumps(summ['settled'])); return dict(summary=summ, rows=R, grid=True)
     return dict(summary=summ, rows=R)
 
 def main():
@@ -107,7 +111,9 @@ def main():
     if a.backtest:
         only = None
         if a.bt_weeks: only = [w for part in a.bt_weeks.split(',') for w in (range(int(part.split('-')[0]), int(part.split('-')[-1]) + 1))]
-        bt = backtest(a.bt_n, only); bt['built'] = time.strftime('%Y-%m-%d %H:%M'); json.dump(_clean(bt), open('data/processed/sim_backtest.json', 'w'), separators=(',', ':')); return
+        bt = backtest(a.bt_n, only); bt['built'] = time.strftime('%Y-%m-%d %H:%M')
+        if not bt.get('grid'): json.dump(_clean(bt), open('data/processed/sim_backtest.json', 'w'), separators=(',', ':'))
+        return
     PR = params(a.week)
     if not a.no_calib:
         cb = calibrate(PR); json.dump(_clean(PR), open('data/processed/sim_params.json', 'w'), separators=(',', ':')); print('  calibration', cb)
