@@ -1,674 +1,86 @@
 {
- "pulled": "2026-11-03T05:21Z",
+ "pulled": "2026-11-05T14:29Z",
  "season": 2026,
- "week": 8,
+ "week": 9,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "CAR@GB": "post",
-  "BAL@BUF": "post",
-  "TEN@CIN": "post",
-  "ARI@DAL": "post",
-  "MIN@DET": "post",
-  "LV@NYJ": "post",
-  "CLE@PIT": "post",
-  "ATL@TB": "post",
-  "IND@JAX": "post",
-  "LAC@LAR": "post",
-  "KC@DEN": "post",
-  "NE@MIA": "post",
-  "PHI@WSH": "post",
-  "CHI@SEA": "post"
+  "JAX@BAL": "pre",
+  "CIN@ATL": "pre",
+  "DAL@IND": "pre",
+  "NYJ@KC": "pre",
+  "DET@MIA": "pre",
+  "CLE@NO": "pre",
+  "NYG@PHI": "pre",
+  "LAR@WSH": "pre",
+  "DEN@CAR": "pre",
+  "HOU@LAC": "pre",
+  "GB@NE": "pre",
+  "LV@SF": "pre",
+  "ARI@SEA": "pre",
+  "TB@CHI": "pre",
+  "BUF@MIN": "pre"
  },
  "scores": {
-  "CAR@GB": [
-   19,
-   27
-  ],
-  "BAL@BUF": [
-   10,
-   36
-  ],
-  "TEN@CIN": [
-   36,
-   43
-  ],
-  "ARI@DAL": [
-   33,
-   30
-  ],
-  "MIN@DET": [
-   15,
-   19
-  ],
-  "LV@NYJ": [
-   38,
-   33
-  ],
-  "CLE@PIT": [
-   6,
-   27
-  ],
-  "ATL@TB": [
+  "JAX@BAL": [
    0,
-   16
+   0
   ],
-  "IND@JAX": [
-   7,
-   42
+  "CIN@ATL": [
+   0,
+   0
   ],
-  "LAC@LAR": [
-   9,
-   24
+  "DAL@IND": [
+   0,
+   0
   ],
-  "KC@DEN": [
-   24,
-   28
+  "NYJ@KC": [
+   0,
+   0
   ],
-  "NE@MIA": [
-   24,
-   19
+  "DET@MIA": [
+   0,
+   0
   ],
-  "PHI@WSH": [
-   10,
-   27
+  "CLE@NO": [
+   0,
+   0
   ],
-  "CHI@SEA": [
-   34,
-   17
+  "NYG@PHI": [
+   0,
+   0
+  ],
+  "LAR@WSH": [
+   0,
+   0
+  ],
+  "DEN@CAR": [
+   0,
+   0
+  ],
+  "HOU@LAC": [
+   0,
+   0
+  ],
+  "GB@NE": [
+   0,
+   0
+  ],
+  "LV@SF": [
+   0,
+   0
+  ],
+  "ARI@SEA": [
+   0,
+   0
+  ],
+  "TB@CHI": [
+   0,
+   0
+  ],
+  "BUF@MIN": [
+   0,
+   0
   ]
  },
- "plays": [
-  {
-   "game": "CAR@GB",
-   "q": 1,
-   "clock": "5:08",
-   "team": "GB",
-   "player": "Tucker Kraft",
-   "how": "rec"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 2,
-   "clock": "14:57",
-   "team": "CAR",
-   "player": "Chuba Hubbard",
-   "how": "rush"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 2,
-   "clock": "6:33",
-   "team": "GB",
-   "player": "Josh Jacobs",
-   "how": "rush"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 2,
-   "clock": "1:46",
-   "team": "GB",
-   "player": "Matthew Golden",
-   "how": "rec"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 3,
-   "clock": "7:30",
-   "team": "GB",
-   "player": "Josh Jacobs",
-   "how": "rec"
-  },
-  {
-   "game": "CAR@GB",
-   "q": 4,
-   "clock": "5:37",
-   "team": "CAR",
-   "player": "Jalen Coker",
-   "how": "rec"
-  },
-  {
-   "game": "BAL@BUF",
-   "q": 1,
-   "clock": "10:10",
-   "team": "BUF",
-   "player": "Josh Allen",
-   "how": "rush"
-  },
-  {
-   "game": "BAL@BUF",
-   "q": 1,
-   "clock": "3:18",
-   "team": "BAL",
-   "player": "Derrick Henry",
-   "how": "rush"
-  },
-  {
-   "game": "BAL@BUF",
-   "q": 3,
-   "clock": "8:59",
-   "team": "BUF",
-   "player": "James Cook III",
-   "how": "rush"
-  },
-  {
-   "game": "BAL@BUF",
-   "q": 4,
-   "clock": "12:18",
-   "team": "BUF",
-   "player": "DJ Moore",
-   "how": "rec"
-  },
-  {
-   "game": "BAL@BUF",
-   "q": 4,
-   "clock": "5:58",
-   "team": "BUF",
-   "player": "Dalton Kincaid",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 1,
-   "clock": "7:55",
-   "team": "TEN",
-   "player": "Tony Pollard",
-   "how": "rush"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 2,
-   "clock": "13:20",
-   "team": "CIN",
-   "player": "Ja'Marr Chase",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 2,
-   "clock": "0:20",
-   "team": "CIN",
-   "player": "Jack Endries",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 3,
-   "clock": "12:25",
-   "team": "CIN",
-   "player": "Tee Higgins",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 3,
-   "clock": "7:47",
-   "team": "TEN",
-   "player": "Tony Pollard",
-   "how": "rush"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 4,
-   "clock": "11:29",
-   "team": "TEN",
-   "player": "Chimere Dike",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 4,
-   "clock": "7:13",
-   "team": "CIN",
-   "player": "Mike Gesicki",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 4,
-   "clock": "3:46",
-   "team": "TEN",
-   "player": "Wan'Dale Robinson",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 4,
-   "clock": "1:17",
-   "team": "CIN",
-   "player": "Tee Higgins",
-   "how": "rec"
-  },
-  {
-   "game": "TEN@CIN",
-   "q": 5,
-   "clock": "7:00",
-   "team": "CIN",
-   "player": "Joe Burrow",
-   "how": "rush"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 1,
-   "clock": "2:33",
-   "team": "DAL",
-   "player": "James Mitchell 0 Yd Fumble Recovery (Bra",
-   "how": "?"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 2,
-   "clock": "5:16",
-   "team": "DAL",
-   "player": "Ryan Flournoy",
-   "how": "rec"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 3,
-   "clock": "0:57",
-   "team": "ARI",
-   "player": "Tyler Allgeier",
-   "how": "rush"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 4,
-   "clock": "14:20",
-   "team": "DAL",
-   "player": "Dak Prescott",
-   "how": "rush"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 4,
-   "clock": "10:47",
-   "team": "ARI",
-   "player": "Tyler Allgeier",
-   "how": "rec"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 4,
-   "clock": "2:11",
-   "team": "ARI",
-   "player": "Trey McBride",
-   "how": "rec"
-  },
-  {
-   "game": "ARI@DAL",
-   "q": 4,
-   "clock": "0:06",
-   "team": "ARI",
-   "player": "Michael Wilson",
-   "how": "rec"
-  },
-  {
-   "game": "MIN@DET",
-   "q": 2,
-   "clock": "14:25",
-   "team": "MIN",
-   "player": "Justin Jefferson",
-   "how": "rec"
-  },
-  {
-   "game": "MIN@DET",
-   "q": 3,
-   "clock": "4:40",
-   "team": "DET",
-   "player": "Jahmyr Gibbs",
-   "how": "rush"
-  },
-  {
-   "game": "MIN@DET",
-   "q": 4,
-   "clock": "8:44",
-   "team": "MIN",
-   "player": "T.J. Hockenson",
-   "how": "rec"
-  },
-  {
-   "game": "MIN@DET",
-   "q": 4,
-   "clock": "4:35",
-   "team": "DET",
-   "player": "Jameson Williams",
-   "how": "rec"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 1,
-   "clock": "7:23",
-   "team": "LV",
-   "player": "Brock Bowers",
-   "how": "rec"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 2,
-   "clock": "10:56",
-   "team": "NYJ",
-   "player": "Isaiah Williams",
-   "how": "rec"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 2,
-   "clock": "10:44",
-   "team": "LV",
-   "player": "Dylan Laube",
-   "how": "ret"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 2,
-   "clock": "6:18",
-   "team": "NYJ",
-   "player": "Adonai Mitchell",
-   "how": "rec"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 3,
-   "clock": "9:59",
-   "team": "LV",
-   "player": "Brock Bowers",
-   "how": "rec"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 3,
-   "clock": "8:20",
-   "team": "NYJ",
-   "player": "Braelon Allen",
-   "how": "rush"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 3,
-   "clock": "4:14",
-   "team": "LV",
-   "player": "Kirk Cousins",
-   "how": "rush"
-  },
-  {
-   "game": "LV@NYJ",
-   "q": 4,
-   "clock": "11:33",
-   "team": "LV",
-   "player": "Jalen Nailor",
-   "how": "rec"
-  },
-  {
-   "game": "CLE@PIT",
-   "q": 1,
-   "clock": "7:57",
-   "team": "PIT",
-   "player": "Rico Dowdle",
-   "how": "rush"
-  },
-  {
-   "game": "CLE@PIT",
-   "q": 2,
-   "clock": "0:01",
-   "team": "PIT",
-   "player": "Pat Freiermuth",
-   "how": "rush"
-  },
-  {
-   "game": "CLE@PIT",
-   "q": 3,
-   "clock": "9:39",
-   "team": "PIT",
-   "player": "Jaylen Warren",
-   "how": "rush"
-  },
-  {
-   "game": "ATL@TB",
-   "q": 3,
-   "clock": "3:47",
-   "team": "TB",
-   "player": "Bucky Irving",
-   "how": "rush"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 1,
-   "clock": "5:30",
-   "team": "JAX",
-   "player": "Brian Thomas Jr.",
-   "how": "rec"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 2,
-   "clock": "7:14",
-   "team": "JAX",
-   "player": "Nate Boerkircher",
-   "how": "rec"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 2,
-   "clock": "1:51",
-   "team": "JAX",
-   "player": "Bhayshul Tuten",
-   "how": "rush"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 2,
-   "clock": "0:10",
-   "team": "JAX",
-   "player": "Rayuan Lane III",
-   "how": "ret"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 3,
-   "clock": "9:08",
-   "team": "JAX",
-   "player": "Chris Rodriguez Jr.",
-   "how": "rush"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 3,
-   "clock": "3:59",
-   "team": "IND",
-   "player": "Josh Downs",
-   "how": "rec"
-  },
-  {
-   "game": "IND@JAX",
-   "q": 3,
-   "clock": "0:00",
-   "team": "JAX",
-   "player": "Bhayshul Tuten",
-   "how": "rec"
-  },
-  {
-   "game": "LAC@LAR",
-   "q": 2,
-   "clock": "0:19",
-   "team": "LAR",
-   "player": "Kyren Williams",
-   "how": "rush"
-  },
-  {
-   "game": "LAC@LAR",
-   "q": 3,
-   "clock": "10:42",
-   "team": "LAR",
-   "player": "Blake Corum",
-   "how": "rush"
-  },
-  {
-   "game": "LAC@LAR",
-   "q": 3,
-   "clock": "3:41",
-   "team": "LAR",
-   "player": "Puka Nacua",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 1,
-   "clock": "6:04",
-   "team": "KC",
-   "player": "Rashee Rice",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 2,
-   "clock": "7:40",
-   "team": "KC",
-   "player": "Emmett Johnson",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 2,
-   "clock": "1:15",
-   "team": "DEN",
-   "player": "Jaylen Waddle",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 3,
-   "clock": "1:38",
-   "team": "KC",
-   "player": "Noah Gray",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 4,
-   "clock": "8:55",
-   "team": "DEN",
-   "player": "Nate Adkins",
-   "how": "rec"
-  },
-  {
-   "game": "KC@DEN",
-   "q": 4,
-   "clock": "1:56",
-   "team": "DEN",
-   "player": "Jonah Coleman",
-   "how": "rush"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 2,
-   "clock": "0:08",
-   "team": "MIA",
-   "player": "Malik Washington",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 3,
-   "clock": "9:23",
-   "team": "NE",
-   "player": "Kyle Williams",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 3,
-   "clock": "0:59",
-   "team": "NE",
-   "player": "Drake Maye",
-   "how": "rush"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 4,
-   "clock": "12:39",
-   "team": "NE",
-   "player": "DeMario Douglas",
-   "how": "rec"
-  },
-  {
-   "game": "NE@MIA",
-   "q": 4,
-   "clock": "2:04",
-   "team": "MIA",
-   "player": "Kevin Coleman Jr.",
-   "how": "rec"
-  },
-  {
-   "game": "PHI@WSH",
-   "q": 1,
-   "clock": "4:27",
-   "team": "PHI",
-   "player": "Saquon Barkley",
-   "how": "rush"
-  },
-  {
-   "game": "PHI@WSH",
-   "q": 2,
-   "clock": "4:56",
-   "team": "WSH",
-   "player": "Stefon Diggs",
-   "how": "rec"
-  },
-  {
-   "game": "PHI@WSH",
-   "q": 4,
-   "clock": "1:52",
-   "team": "WSH",
-   "player": "Rachaad White",
-   "how": "rush"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 1,
-   "clock": "5:25",
-   "team": "CHI",
-   "player": "Luther Burden III",
-   "how": "rec"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 2,
-   "clock": "0:30",
-   "team": "SEA",
-   "player": "Jaxon Smith-Njigba",
-   "how": "rec"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 3,
-   "clock": "5:38",
-   "team": "CHI",
-   "player": "D'Andre Swift",
-   "how": "rush"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 4,
-   "clock": "11:46",
-   "team": "SEA",
-   "player": "Cooper Kupp",
-   "how": "rec"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 4,
-   "clock": "8:28",
-   "team": "CHI",
-   "player": "D'Andre Swift",
-   "how": "rush"
-  },
-  {
-   "game": "CHI@SEA",
-   "q": 4,
-   "clock": "4:41",
-   "team": "CHI",
-   "player": "D'Andre Swift",
-   "how": "rush"
-  }
- ]
+ "plays": []
 }
