@@ -33,7 +33,9 @@ def _clean(o):
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 NV = 'data/raw/nflverse'; SEASON = 2026
 import json as _json
-CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0)   # 2026-11-05 grid on wk 4-8: qb_adj and prior_w 3 cut margin error 9.28 -> 9.14; opponent-adjusted EPA (ridge) made it worse (9.71 at lam 60, 9.24 at 300) and stays off; CFG.update(_json.loads(os.environ.get('SIM_CFG', '{}')))   # backtest grid overrides
+CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0, epa_src='tend', decay=1.0, kp=1.0, kr=1.1, rest=0)
+# 2026-11-05 grid on wk 4-8: qb_adj and prior_w 3 cut margin error 9.28 -> 9.14; opponent-adjusted EPA (ridge) made it worse (9.71 at lam 60, 9.24 at 300) and stays off
+CFG.update(_json.loads(os.environ.get('SIM_CFG', '{}')))   # backtest grid overrides
 FIX = {'LA': 'LAR', 'WSH': 'WAS', 'JAC': 'JAX'}
 POSW = {'QB': 1, 'RB': 1, 'WR': 1, 'TE': 1}
 Q = np.linspace(0, 1, 101)
@@ -184,6 +186,8 @@ def team_profiles(P, S, week):
                     ypa=att.yards_gained.mean() if len(att) else np.nan, ypc=ru.yards_gained.mean() if len(ru) else np.nan,
                     expl_pass=(cm.yards_gained >= 20).mean() if len(cm) else np.nan, expl_rush=(ru.yards_gained >= 12).mean() if len(ru) else np.nan,
                     pass_epa=db.epa.mean() if len(db) else np.nan, rush_epa=ru.epa.mean() if len(ru) else np.nan, success=T.success.mean() if len(T) else np.nan,
+                    pass_epa_w=float(np.average(db.epa.fillna(0), weights=CFG['decay'] ** (db.week.max() - db.week))) if len(db) else np.nan,
+                    rush_epa_w=float(np.average(ru.epa.fillna(0), weights=CFG['decay'] ** (ru.week.max() - ru.week))) if len(ru) else np.nan,
                     plays_g=len(T) / n if n else np.nan, pass_rate=T['pass'].mean() if len(T) else np.nan,
                     neutral_pass=T[(T.score_differential.abs() <= 7) & (T.game_seconds_remaining > 600) & (T.down <= 2)]['pass'].mean() if len(T) else np.nan,
                     proe=T.pass_oe.mean() if len(T) and T.pass_oe.notna().any() else np.nan,
@@ -217,7 +221,7 @@ def team_profiles(P, S, week):
           'epa_play', 'success_rate', 'pass_epa', 'rush_epa', 'explosive_rate', 'rz_pass_rate', 'rb_tgt_share', 'te_tgt_share', 'wr_tgt_share', 'no_huddle_rate', 'shotgun_rate', 'p11', 'p12']
     DK = ['blitz_rate', 'pressure_rate', 'sack_rate', 'int_rate', 'man_rate', 'zone_rate', 'two_high', 'single_high', 'avg_box', 'light_box_rate', 'nickel_rate', 'base_rate',
           'epa_play_allowed', 'pass_epa_allowed', 'rush_epa_allowed', 'success_allowed', 'explosive_allowed', 'adot_faced']
-    RK = ['comp', 'int_rate', 'sack_rate', 'scramble', 'fum', 'ypa', 'ypc', 'expl_pass', 'expl_rush', 'pass_epa', 'rush_epa', 'success', 'plays_g', 'pass_rate', 'neutral_pass', 'proe', 'rz_pass']
+    RK = ['comp', 'int_rate', 'sack_rate', 'scramble', 'fum', 'ypa', 'ypc', 'expl_pass', 'expl_rush', 'pass_epa', 'rush_epa', 'pass_epa_w', 'rush_epa_w', 'success', 'plays_g', 'pass_rate', 'neutral_pass', 'proe', 'rz_pass']
     for t in teams:
         c = co26.loc[t] if t in co26.index else None
         oc_from = c.oc_from if c is not None and isinstance(c.oc_from, str) and re.fullmatch(r'[A-Z]{2,3}', c.oc_from) else t
@@ -225,7 +229,13 @@ def team_profiles(P, S, week):
         oc_from, dc_from = FIX.get(oc_from, oc_from), FIX.get(dc_from, dc_from)
         g = int(cur[cur.posteam == t].game_id.nunique())
         o_cur, o_pri = row(off, SEASON, t), row(off, SEASON - 1, oc_from); d_cur, d_pri = row(de, SEASON, t), row(de, SEASON - 1, dc_from)
+        RO, _ = blend(rates(cur, t, 'off'), rates(prior, oc_from, 'off'), g, RK); RD, _ = blend(rates(cur, t, 'def'), rates(prior, dc_from, 'def'), g, RK)
         O, w = blend(o_cur, o_pri, g, OK); D, _ = blend(d_cur, d_pri, g, DK)
+        if CFG['epa_src'] == 'pbp':   # EPA from the play-by-play (recency-weighted within the season) instead of the tendencies file
+            for k, src in (('pass_epa', 'pass_epa_w'), ('rush_epa', 'rush_epa_w')):
+                if RO.get(src) is not None: O[k + '_tend'] = O.get(k); O[k] = round(RO[src], 4)
+            for k, src in (('pass_epa_allowed', 'pass_epa_w'), ('rush_epa_allowed', 'rush_epa_w')):
+                if RD.get(src) is not None: D[k + '_tend'] = D.get(k); D[k] = round(RD[src], 4)
         # opponent-adjusted EPA replaces the raw season EPA when the ridge has the season (current unit this year, the coordinator's prior unit last year)
         if ADJ:
             a_cur, a_pri = ADJ.get(SEASON, {}).get(t), ADJ.get(SEASON - 1, {}).get(oc_from); d_curA, d_priA = ADJ.get(SEASON, {}).get(t), ADJ.get(SEASON - 1, {}).get(dc_from)
@@ -243,7 +253,6 @@ def team_profiles(P, S, week):
             if db_out or f7_out:
                 D['pass_epa_allowed'] = round((D.get('pass_epa_allowed') or lg_pass) + .012 * db_out + .004 * f7_out, 4); D['rush_epa_allowed'] = round((D.get('rush_epa_allowed') or lg_rush) + .008 * f7_out, 4)
                 D['def_out'] = [f"{r.player} ({r.role})" for r in Z.itertuples()]
-        RO, _ = blend(rates(cur, t, 'off'), rates(prior, oc_from, 'off'), g, RK); RD, _ = blend(rates(cur, t, 'def'), rates(prior, dc_from, 'def'), g, RK)
         fam = tag26.loc[(t, 'DEF')].primary_tag if (t, 'DEF') in tag26.index else None
         slot_idx = {r.grp: round(float(r['index']) / 100, 3) for _, r in eff[eff.family == fam].iterrows()} if fam else {}
         rz_o = rzt[(rzt.season == SEASON) & (rzt.side == 'off') & (rzt.scope == 'season') & (rzt.team == t)]; rz_d = rzt[(rzt.season == SEASON) & (rzt.side == 'def') & (rzt.scope == 'season') & (rzt.team == t)]
@@ -376,7 +385,7 @@ def main():
     T = team_profiles(P, S, week)
     PL, pm = players(S, week, [x['date'] for x in GM], st)
     L['home_edge'] = home_edge(); L['rows'] = int(len(P)); L['pos_means'] = {k: {kk: round(float(vv), 4) for kk, vv in v.items()} for k, v in pm.items()}
-    out = dict(built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), season=SEASON, week=week, pbp_through=f'{SEASON} wk {int(P[P.season == SEASON].week.max()) if (P.season == SEASON).any() else 0}', league=L, teams=T, players=PL, games=GM)
+    out = dict(built=pd.Timestamp.now().strftime('%Y-%m-%d %H:%M'), season=SEASON, week=week, pbp_through=f'{SEASON} wk {int(P[P.season == SEASON].week.max()) if (P.season == SEASON).any() else 0}', league=L, teams=T, players=PL, games=GM, cfg=CFG)
     os.makedirs(os.path.dirname(a.out), exist_ok=True); json.dump(_clean(out), open(a.out, 'w'), separators=(',', ':'))
     print(f'{a.out}: season {SEASON} week {week} · {len(GM)} games · {len(T)} teams · {sum(len(v["players"]) for v in PL.values())} players · pbp rows {len(P)} · home edge {L["home_edge"]}')
 

@@ -61,7 +61,7 @@ class Team:
         self.pass_shift = _logit(np.clip(L['pass_rate'] + g(O, 'proe', 0) / 100, .3, .8)) - _logit(L['pass_rate'])
         self.rz_pass = g(O, 'rz_pass_rate', .55)
         # EPA/play is points per play vs average: a +0.14 passing offense is worth ~+8 points over a game, which is a lot more than 9% of its yards
-        KP, KR = 1.0, 1.1
+        cfg = PR.get('cfg') or {}; KP, KR = cfg.get('kp', 1.0), cfg.get('kr', 1.1)
         self.mp = float(np.clip(1 + KP * (g(O, 'pass_epa', lgp) - lgp) + KP * (g(D, 'pass_epa_allowed', lgp) - lgp), .6, 1.5))
         self.mr = float(np.clip(1 + KR * (g(O, 'rush_epa', lgr) - lgr) + KR * (g(D, 'rush_epa_allowed', lgr) - lgr), .6, 1.5))
         home_mult = 1 + (L['home_edge'] / 2) * .013 * (1 if home else -1)   # ≈ the league home edge in points, split across both offenses (calibrated: 1% of yards ≈ 0.75 pts)
@@ -105,6 +105,9 @@ def simulate(PR, game, n=10000, seed=7):
     PP, Y, C, F4, YSCR, YSACK, PUNT, KO = _tables(L); TAILP, TAILR = _tail(L); RZP, RZR = np.array(L['rz_td']['pass']), np.array(L['rz_td']['rush'])
     CB = PR.get('calib') or {}; c_pass, c_yard, c_td = CB.get('pass_logit', 0.0), CB.get('yard_scale', 1.0), CB.get('td_mult', 1.0)   # league-level calibration (build_simulations.py --calibrate)
     A, H = game['away'], game['home']; TM = [Team(PR, A, H, False), Team(PR, H, A, True)]
+    if (PR.get('cfg') or {}).get('rest'):   # short week / off a bye: a small yardage shade, tested on the backtest
+        for tm, rk in ((TM[0], 'away_rest'), (TM[1], 'home_rest')):
+            rd = game.get(rk) or 7; m = .985 if rd <= 5 else 1.015 if rd >= 10 else 1.0; tm.mp *= m; tm.mr *= m
     N = n; sc = np.zeros((2, N)); poss = rng.integers(0, 2, N); recv2 = 1 - poss   # the team that kicks off first receives the second half
     clock = np.full(N, 3600.0); yl = KO[rng.integers(0, 101, N)].astype(float); down = np.ones(N, int); togo = np.full(N, 10.0)
     done = np.zeros(N, bool); ot = np.zeros(N, bool); ot_first = np.full(N, -1); ot_possd = np.zeros((2, N), bool); half2 = np.zeros(N, bool)

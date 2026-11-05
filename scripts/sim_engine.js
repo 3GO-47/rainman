@@ -13,7 +13,7 @@ function tables(L){
   return PP}
 function Team(PR,team,opp,home){
   const L=PR.league,T=PR.teams[team],D=PR.teams[opp].de,O=T.off,g=(d,k,df)=>d[k]==null?df:d[k];const lgp=L.pass_epa,lgr=L.rush_epa;
-  const KP=1.0,KR=1.1;this.name=team;this.home=home;
+  const cfg=PR.cfg||{},KP=cfg.kp!=null?cfg.kp:1.0,KR=cfg.kr!=null?cfg.kr:1.1;this.name=team;this.home=home;
   this.pass_shift=logit(clip(L.pass_rate+g(O,'proe',0)/100,.3,.8))-logit(L.pass_rate);this.rz_pass=g(O,'rz_pass_rate',.55);
   this.mp=clip(1+KP*(g(O,'pass_epa',lgp)-lgp)+KP*(g(D,'pass_epa_allowed',lgp)-lgp),.6,1.5);this.mr=clip(1+KR*(g(O,'rush_epa',lgr)-lgr)+KR*(g(D,'rush_epa_allowed',lgr)-lgr),.6,1.5);
   const hm=1+(L.home_edge/2)*.013*(home?1:-1);this.mp*=hm;this.mr*=hm;
@@ -44,6 +44,7 @@ function simulate(PR,game,n,seed,onProgress){
   const TAILP=Math.round(100-100*L.explosive_pass),TAILR=Math.round(100-100*L.explosive_rush),RZP=L.rz_td.pass,RZR=L.rz_td.rush;
   const Y=(k,z,dn)=>L.yards[`${k}|${ZONES[z]}|${dn?'late':'early'}`],YSCR=L.yards.scramble,YSACK=L.yards.sack,PUNT=L.punt_net,KO=L.ko_start,C=(z,dn)=>L.comp[`${ZONES[z]}|${dn?'late':'early'}`],F4=(tg,z)=>L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]!=null?L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]:.05;
   const TM=[new Team(PR,game.away,game.home,false),new Team(PR,game.home,game.away,true)];
+  if((PR.cfg||{}).rest){[[TM[0],'away_rest'],[TM[1],'home_rest']].forEach(([tm,rk])=>{const rd=game[rk]||7,m=rd<=5?.985:rd>=10?1.015:1;tm.mp*=m;tm.mr*=m})}
   const qi=n=>Math.floor(R()*n),pq=a=>a[qi(101)];
   const box=TM.map(t=>({tgt:t.R.map(()=>[]),rec:t.R.map(()=>[]),recyd:t.R.map(()=>[]),rectd:t.R.map(()=>[]),car:t.U.map(()=>[]),ruyd:t.U.map(()=>[]),rutd:t.U.map(()=>[]),
     att:[],cmp:[],pyd:[],ptd:[],int:[],sk:[],qbru:[],qbryd:[],qbrtd:[],plays:[],yds:[],to:[],drives:[],rzt:[],fga:[],fgm:[],punts:[],top:[],third:[],thirdc:[],fd:[],downs:[],go4:[],otd:[]}));
