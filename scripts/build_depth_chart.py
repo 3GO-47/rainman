@@ -17,6 +17,7 @@ opps per game), gp (games with a log this season), log_name (the game-log spelli
 dashboard can join his averages — "Kenny Gainwell" -> "Kenneth Gainwell").
 """
 import sys, csv, json, re, unicodedata
+import os
 import pandas as pd
 
 TEAM_NORM = {'WSH': 'WAS'}
@@ -77,6 +78,36 @@ def main(raw, date):
         rows.append({'player': name, 'team': team, 'pos_row': pos, 'espn_depth': int(d), 'injury': inj, 'tag': tag})
     # de-dup (ESPN pages repeat WR rows)
     seen = set(); rows = [r for r in rows if not ((r['team'], r['pos_row'], r['player']) in seen or seen.add((r['team'], r['pos_row'], r['player'])))]
+    # v57 (2026-11-05): the chart's own tags lag (the nflverse mirror carries none) — overlay the injury report the site already keeps:
+    # Out / IR / PUP / NFI / Suspended / Doubtful -> -1, Questionable -> 0 (never upgrades a -1); and seat the named starter at QB1
+    inj_path = 'data/processed/injuries_current.csv'
+    if os.path.exists(inj_path):
+        I = pd.read_csv(inj_path); I = I[I.side.eq('OFF')] if 'side' in I.columns else I
+        st = {(TEAM_NORM.get(r.team, r.team), norm_name(str(r.player))): str(r.status) for r in I.itertuples()}
+        HARD = {'Out', 'Injured Reserve', 'IR', 'PUP', 'Physically Unable to Perform', 'NFI', 'Suspended', 'Doubtful', 'Reserve/Injured'}
+        n_h = n_q = 0
+        for r in rows:
+            s = st.get((r['team'], norm_name(r['player'])))
+            if not s: continue
+            if s in HARD and r['injury'] != -1: r['injury'] = -1; r['note'] = f'injury report: {s}'; n_h += 1
+            elif s == 'Questionable' and r['injury'] == 1: r['injury'] = 0; n_q += 1
+        print(f'  injury report overlay: {n_h} ruled out, {n_q} questionable')
+    gpath = 'data/raw/nflverse/games.csv'
+    if os.path.exists(gpath):
+        G = pd.read_csv(gpath); G = G[(G.season == G.season.max()) & (G.game_type == 'REG')]
+        last = G.groupby('week').gameday.max(); wk = int(last[last >= date].index.min()) if (last >= date).any() else int(G.week.max())
+        W = G[G.week == wk]; starters = {}
+        for r in W.itertuples():
+            if isinstance(r.away_qb_name, str): starters[TEAM_NORM.get(r.away_team, r.away_team)] = r.away_qb_name
+            if isinstance(r.home_qb_name, str): starters[TEAM_NORM.get(r.home_team, r.home_team)] = r.home_qb_name
+        FIX = {'LA': 'LAR', 'WSH': 'WAS', 'JAC': 'JAX'}; starters = {FIX.get(k, k): v for k, v in starters.items()}
+        n_s = 0
+        for tm, nm in starters.items():
+            qbs = sorted([r for r in rows if r['team'] == tm and r['pos_row'] == 'QB'], key=lambda r: r['espn_depth'])
+            hit = next((r for r in qbs if norm_name(r['player']) == norm_name(nm)), None)
+            if hit and qbs and qbs[0] is not hit and hit['injury'] != -1:
+                hit['espn_depth'] = qbs[0]['espn_depth'] - 1; hit['note'] = f'named starter (wk {wk})'; n_s += 1
+        print(f'  named starters seated at QB1: {n_s}')
 
     per, names, all_names, last2 = load_usage()
     for r in rows:
