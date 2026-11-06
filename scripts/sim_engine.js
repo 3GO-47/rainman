@@ -16,7 +16,8 @@ function Team(PR,team,opp,home){
   const cfg=PR.cfg||{},KP=cfg.kp!=null?cfg.kp:1.0,KR=cfg.kr!=null?cfg.kr:1.1;this.name=team;this.home=home;
   this.pass_shift=logit(clip(L.pass_rate+g(O,'proe',0)/100,.3,.8))-logit(L.pass_rate);this.rz_pass=g(O,'rz_pass_rate',.55);
   this.mp=clip(1+KP*(g(O,'pass_epa',lgp)-lgp)+KP*(g(D,'pass_epa_allowed',lgp)-lgp),.6,1.5);this.mr=clip(1+KR*(g(O,'rush_epa',lgr)-lgr)+KR*(g(D,'rush_epa_allowed',lgr)-lgr),.6,1.5);
-  const hm=1+(L.home_edge/2)*.013*(home?1:-1);this.mp*=hm;this.mr*=hm;
+  let edge=L.home_edge;if(cfg.home_team&&L.home_edges){const e=L.home_edges[home?team:opp];if(e!=null)edge=e}
+  const hm=1+(edge/2)*.013*(home?1:-1);this.mp*=hm;this.mr*=hm;
   this.def_comp=g(D,'pbp_comp',L.comp_rate);this.def_int=g(D,'pbp_int_rate',L.int_rate);this.def_sack=g(D,'pbp_sack_rate',L.sack_rate);
   this.exp_pass=L.explosive_pass*Math.pow(g(O,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,.6)*Math.pow(g(D,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,.6);
   this.exp_rush=L.explosive_rush*Math.pow(g(O,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,.6)*Math.pow(g(D,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,.6);
@@ -34,6 +35,8 @@ function Team(PR,team,opp,home){
   let rz=this.R.map((p,i)=>p.rz_share!=null?p.rz_share:w[i]);s=rz.reduce((a,b)=>a+b,0);rz=s?rz.map(x=>x/s):w;
   const cum=a=>{let c=0;return a.map(x=>c+=x)};this.w=w;this.tw=cum(w);this.tw_rz=cum(w.map((x,i)=>.5*x+.5*rz[i]));
   this.catch_adj=this.R.map(p=>.8*(p.catch-pm[p.pos].catch));this.ypt_r=this.R.map(p=>Math.pow(clip(p.ypt/pm[p.pos].ypt,.7,1.4),.5));
+  const MZ=L.mz||{};if(cfg.mz&&MZ.receivers){let m=D.man_rate;m=m==null?(MZ.man_share||.4):+m;this.ypt_r=this.ypt_r.map((v,i)=>{const z=MZ.receivers[this.R[i].gsis||''];return z?v*Math.pow(clip(m*z.man+(1-m)*z.zone,.8,1.25),.7):v});
+    const sy=Math.max(...MZ.seasons);const oz=MZ.offenses[sy+'|'+(O.oc_prior_unit||team)]||MZ.offenses[sy+'|'+team];if(oz)this.mp*=clip(1+KP*(m*oz.man+(1-m)*oz.zone),.9,1.1);this.man_rate=m}
   this.U=P.filter(p=>p.rush_w>0);let rw=this.U.map(p=>p.pos==='QB'?Math.max(0,p.rush_w-this.scramble*36/26):p.rush_w);s=rw.reduce((a,b)=>a+b,0);rw=rw.map(x=>x/s);
   let gl=this.U.map(p=>p.gl_rush||0);s=gl.reduce((a,b)=>a+b,0);gl=s?gl.map(x=>x/s):rw;
   this.rw=cum(rw);this.rw_gl=cum(rw.map((x,i)=>.5*x+.5*gl[i]));this.ypc_r=this.U.map(p=>Math.pow(clip(p.ypc/pm[p.pos].ypc,.75,1.3),.5));
@@ -44,6 +47,8 @@ function simulate(PR,game,n,seed,onProgress){
   const TAILP=Math.round(100-100*L.explosive_pass),TAILR=Math.round(100-100*L.explosive_rush),RZP=L.rz_td.pass,RZR=L.rz_td.rush;
   const Y=(k,z,dn)=>L.yards[`${k}|${ZONES[z]}|${dn?'late':'early'}`],YSCR=L.yards.scramble,YSACK=L.yards.sack,PUNT=L.punt_net,KO=L.ko_start,C=(z,dn)=>L.comp[`${ZONES[z]}|${dn?'late':'early'}`],F4=(tg,z)=>L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]!=null?L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]:.05;
   const TM=[new Team(PR,game.away,game.home,false),new Team(PR,game.home,game.away,true)];
+  if((PR.cfg||{}).dome&&/^(dome|closed)$/.test(String(game.roof||'')))TM.forEach(tm=>tm.mp*=1.02);
+  const PACE2=(PR.cfg||{}).pace2&&L.snap_gap_state?L.snap_gap_state:null;
   if((PR.cfg||{}).rest){[[TM[0],'away_rest'],[TM[1],'home_rest']].forEach(([tm,rk])=>{const rd=game[rk]||7,m=rd<=5?.985:rd>=10?1.015:1;tm.mp*=m;tm.mr*=m})}
   const qi=n=>Math.floor(R()*n),pq=a=>a[qi(101)];
   const box=TM.map(t=>({tgt:t.R.map(()=>[]),rec:t.R.map(()=>[]),recyd:t.R.map(()=>[]),rectd:t.R.map(()=>[]),car:t.U.map(()=>[]),ruyd:t.U.map(()=>[]),rutd:t.U.map(()=>[]),
@@ -88,7 +93,7 @@ function simulate(PR,game,n,seed,onProgress){
       td=normal&&yards>=yl&&!turnover;if(td)Bo.otd++;
       if(tdRet)sc[d]+=7;
       if(td){const sa=sd+6,two=sa===-2||sa===-5;sc[o]+=6+(two?(R()<.48?2:0):(R()<.94?1:0))}
-      let gap=incomplete?L.snap_gap.incomplete:L.snap_gap.run_or_complete;const hurry=(sd<0&&clock<240)||(clock>1800&&clock<1920);
+      let gap=incomplete?L.snap_gap.incomplete:(PACE2?(PACE2[SDS[sdb(sd)]+'|'+(clock<=1800?1:0)]||L.snap_gap.run_or_complete):L.snap_gap.run_or_complete);const hurry=(sd<0&&clock<240)||(clock>1800&&clock<1920);
       if(hurry)gap=incomplete?L.snap_gap.hurry_incomplete:L.snap_gap.hurry;gap*=T.pace;if(fgt||punt)gap=6;if(td||turnover||tdRet)gap=incomplete?5:12;if(kneel)gap=clock+1;
       Bo.top+=gap;const before=clock;clock=Math.max(0,clock-gap);
       const kick=td||tdRet||fgMade;let newPoss=false,newYl=0;

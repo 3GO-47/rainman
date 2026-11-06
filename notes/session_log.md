@@ -975,3 +975,10 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Engines read cfg (kp, kr, rest) from the params payload — Python and JS. Full backtest at the adopted engine (n=4000): wk 4+ margin MAE 9.00 vs market 9.02, total 10.62 vs 10.36, SU 62%, ATS 49%, O/U 62%.
 - Page: "model log" table — every change with before/after and verdict; rest + how-changes-get-in paragraphs. Week 9 re-simulated.
 - Next candidates: recency-weighted tendencies (needs build_advanced to emit decayed EPA), man/zone receiving split from FTN charting, dome/wind, per-team home edge, drive-level pace by score state.
+
+## n127 · 2026-11-06 · Simulations v3 — honest backtest + the whole candidate list
+- LEAK FOUND: the season-to-date inputs (EPA pass/rush, PROE, neutral pass, pace, RZ pass rate, RZ team conversion, player RZ shares) came from whole-season files (team_*_tendencies, redzone_*), so backtests of weeks 4–8 saw weeks 5–8. Every current-season input now comes from the pbp as of the week (rates() + rz_rate() + per-player RZ from pbp via roster gsis); the tendencies file only feeds the prior-season unit and display fields. Earlier "9.00 vs 9.02" withdrawn; honest base 9.82 / 10.92.
+- New signals: man/zone (participation charting 2024–25: receiver ypt vs man/zone shrunk n0=30, offense pass EPA vs each shrunk n0=60; applied against D.man_rate), pace by score state × half (league mean gaps), dome (+2% pass yds), per-stadium home edge (2024–25, n0=16), EPA shrink epa_n0 (plays of league prior), recency decay on season inputs.
+- Honest grid (wk 4–8, 73 g, n=1500, margin/total MAE): kp .5/.6 9.31/10.89 · +n0 300 9.24/10.98 · +mz 9.18/10.95 · +pace2 9.21/11.08 (rejected) · +home_team 9.05/10.98 · +dome+rest 9.04/10.99 · +decay .9 8.99/10.94 · +prior 3 8.91/10.96 (adopted).
+- Full backtest (n=4000, adopted): wk 4+ margin 9.03 vs market 9.02 · total 11.06 vs 10.36 · SU 60% · ATS 43% · O/U 49%. Totals are the open problem: sim total ~ actual r=.23 vs market .38.
+- Page: model log rewritten with the re-baseline and every verdict; methodology (as-of-week inputs, man/zone, venue). Week 9 re-simulated (JAX@BAL 25.8–18.9).

@@ -64,7 +64,9 @@ class Team:
         cfg = PR.get('cfg') or {}; KP, KR = cfg.get('kp', 1.0), cfg.get('kr', 1.1)
         self.mp = float(np.clip(1 + KP * (g(O, 'pass_epa', lgp) - lgp) + KP * (g(D, 'pass_epa_allowed', lgp) - lgp), .6, 1.5))
         self.mr = float(np.clip(1 + KR * (g(O, 'rush_epa', lgr) - lgr) + KR * (g(D, 'rush_epa_allowed', lgr) - lgr), .6, 1.5))
-        home_mult = 1 + (L['home_edge'] / 2) * .013 * (1 if home else -1)   # ≈ the league home edge in points, split across both offenses (calibrated: 1% of yards ≈ 0.75 pts)
+        edge = L['home_edge']
+        if cfg.get('home_team') and L.get('home_edges'): edge = L['home_edges'].get(team if home else opp, edge)   # that stadium's own edge, shrunk toward the league
+        home_mult = 1 + (edge / 2) * .013 * (1 if home else -1)   # ≈ the home edge in points, split across both offenses (calibrated: 1% of yards ≈ 0.75 pts)
         self.mp *= home_mult; self.mr *= home_mult
         self.def_comp = g(D, 'pbp_comp', L['comp_rate']); self.def_int = g(D, 'pbp_int_rate', L['int_rate']); self.def_sack = g(D, 'pbp_sack_rate', L['sack_rate'])
         self.exp_pass = L['explosive_pass'] * (g(O, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** .6 * (g(D, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** .6
@@ -88,6 +90,14 @@ class Team:
         rz = np.array([p['rz_share'] if p.get('rz_share') is not None else w[i] for i, p in enumerate(R)]); rz = rz / rz.sum() if rz.sum() else w
         self.R = R; self.tw = np.cumsum(w); self.tw_rz = np.cumsum(.5 * w + .5 * rz)
         self.catch_adj = np.array([.8 * (p['catch'] - pm[p['pos']]['catch']) for p in R]); self.ypt_r = np.array([np.clip(p['ypt'] / pm[p['pos']]['ypt'], .7, 1.4) ** .5 for p in R])
+        # man / zone: the defense's man rate against what each receiver, and the offense as a whole, has done against man vs zone
+        MZ = L.get('mz') or {}
+        if cfg.get('mz') and MZ:
+            m = D.get('man_rate'); m = MZ.get('man_share', .4) if m is None else float(m)
+            rr = np.array([(lambda z: np.clip(m * z['man'] + (1 - m) * z['zone'], .8, 1.25) ** .7 if z else 1.0)(MZ['receivers'].get(p.get('gsis') or '')) for p in R]); self.ypt_r = self.ypt_r * rr
+            oz = MZ['offenses'].get(f"{max(MZ['seasons'])}|{O.get('oc_prior_unit') or team}") or MZ['offenses'].get(f"{max(MZ['seasons'])}|{team}")
+            if oz: self.mp *= float(np.clip(1 + KP * (m * oz['man'] + (1 - m) * oz['zone']), .9, 1.1))
+            self.man_rate = m
         # rushers: share (QB designed runs included), goal-line share from red-zone data
         # a QB's carry share in the usage file counts his scrambles; the sim draws scrambles on dropbacks, so only designed runs stay here
         U = [p for p in P if p['rush_w'] > 0]
@@ -103,8 +113,13 @@ class Team:
 def simulate(PR, game, n=10000, seed=7):
     L = PR['league']; rng = np.random.default_rng(seed)
     PP, Y, C, F4, YSCR, YSACK, PUNT, KO = _tables(L); TAILP, TAILR = _tail(L); RZP, RZR = np.array(L['rz_td']['pass']), np.array(L['rz_td']['rush'])
+    PACE2 = None
+    if (PR.get('cfg') or {}).get('pace2') and L.get('snap_gap_state'):
+        PACE2 = np.array([[L['snap_gap_state'].get(f'{s}|{h}', L['snap_gap']['run_or_complete']) for h in (0, 1)] for s in ('T2', 'T1', 'E', 'L1', 'L2')])
     CB = PR.get('calib') or {}; c_pass, c_yard, c_td = CB.get('pass_logit', 0.0), CB.get('yard_scale', 1.0), CB.get('td_mult', 1.0)   # league-level calibration (build_simulations.py --calibrate)
     A, H = game['away'], game['home']; TM = [Team(PR, A, H, False), Team(PR, H, A, True)]
+    if (PR.get('cfg') or {}).get('dome') and str(game.get('roof') or '') in ('dome', 'closed'):
+        for tm in TM: tm.mp *= 1.02
     if (PR.get('cfg') or {}).get('rest'):   # short week / off a bye: a small yardage shade, tested on the backtest
         for tm, rk in ((TM[0], 'away_rest'), (TM[1], 'home_rest')):
             rd = game.get(rk) or 7; m = .985 if rd <= 5 else 1.015 if rd >= 10 else 1.0; tm.mp *= m; tm.mr *= m
@@ -237,7 +252,9 @@ def simulate(PR, game, n=10000, seed=7):
             xp = np.where(two, rng.random(len(tsims)) < .48, rng.random(len(tsims)) < .94)
             sc[to_, tsims] += 6 + np.where(two, 2, 1) * xp
         # clock
-        gap = np.where(incomplete, L['snap_gap']['incomplete'], L['snap_gap']['run_or_complete'])
+        if PACE2 is not None: base_gap = PACE2[sdb, (clock[ix] <= 1800).astype(int)]
+        else: base_gap = L['snap_gap']['run_or_complete']
+        gap = np.where(incomplete, L['snap_gap']['incomplete'], base_gap)
         hurry = ((sd < 0) & (clock[ix] < 240)) | ((clock[ix] > 1800) & (clock[ix] < 1920))
         gap = np.where(hurry, np.where(incomplete, L['snap_gap']['hurry_incomplete'], L['snap_gap']['hurry']), gap) * pace[o]
         gap = np.where(fgt | punt, 6.0, gap); gap = np.where(td | turnover | td_ret, np.where(incomplete, 5, 12), gap)
