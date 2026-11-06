@@ -968,3 +968,10 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Grid on weeks 4–8 (73 games, n=1500): baseline 9.28 margin MAE · opp_adj 9.71 (lam 60) / 9.24 (lam 300, with qb) — rejected · qb_adj 9.21 · qb_adj + prior_w 3 → 9.14 · prior_w 2 → 9.12. Adopted prior_w 3 + qb_adj (+def_inj live). build_simulations.py: grid runs keep their own parts folders, never overwrite sim_backtest.json.
 - Full backtest rerun (121 games, n=4000): settled wk 4+ margin MAE 9.06 vs market 9.02 (was 9.29), total 10.58 vs 10.36, SU 62%, ATS 51%, O/U 58%. Page: "what it used" shows the QB change and defensive starters out; methodology documents what was tested and rejected.
 - Week 9 re-simulated (JAX@BAL 29.1–17.3 with Fagnano priced as a backup; CIN@ATL 25.7–19.1).
+
+## n126 · 2026-11-05/06 · Simulations v2.1 — second grid pass
+- Bug: the CFG env override had been commented out by an earlier sed (grid runs before it were valid; the two "decay" runs were not) — fixed, reran.
+- Grid (wk 4–8, 73 games, n=1500, margin MAE / total MAE): EPA from raw pbp instead of the tendencies file 10.03 / 10.77 (rejected; the tendencies file is the better source); kp 1.3 / kr 1.4 → 9.27 / 10.53 (rejected); kp .8 / kr .9 → 9.03 / 10.58 (kept); + rest shade (short week −1.5% yards, bye +1.5%) → 9.00 / 10.57 (kept); kp .65 → 8.96 / 10.67 (not taken: buys margin with totals).
+- Engines read cfg (kp, kr, rest) from the params payload — Python and JS. Full backtest at the adopted engine (n=4000): wk 4+ margin MAE 9.00 vs market 9.02, total 10.62 vs 10.36, SU 62%, ATS 49%, O/U 62%.
+- Page: "model log" table — every change with before/after and verdict; rest + how-changes-get-in paragraphs. Week 9 re-simulated.
+- Next candidates: recency-weighted tendencies (needs build_advanced to emit decayed EPA), man/zone receiving split from FTN charting, dome/wind, per-team home edge, drive-level pace by score state.

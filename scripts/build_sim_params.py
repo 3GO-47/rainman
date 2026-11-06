@@ -33,8 +33,8 @@ def _clean(o):
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 NV = 'data/raw/nflverse'; SEASON = 2026
 import json as _json
-CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0, epa_src='tend', decay=1.0, kp=1.0, kr=1.1, rest=0)
-# 2026-11-05 grid on wk 4-8: qb_adj and prior_w 3 cut margin error 9.28 -> 9.14; opponent-adjusted EPA (ridge) made it worse (9.71 at lam 60, 9.24 at 300) and stays off
+CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0, epa_src='tend', decay=1.0, kp=0.8, kr=0.9, rest=1)
+# 2026-11-05 grid on wk 4-8 (73 games, n=1500, margin MAE): baseline 9.28 · qb_adj 9.21 · + prior_w 3 → 9.14 · + kp .8 / kr .9 → 9.03 · + rest shade → 9.00 (adopted). Rejected: opponent-adjusted EPA ridge (9.71 / 9.24), EPA from raw pbp instead of the tendencies file (10.03), kp 1.3 (9.27); kp .65 (8.96) trades totals (10.67) for margin and was not taken
 CFG.update(_json.loads(os.environ.get('SIM_CFG', '{}')))   # backtest grid overrides
 FIX = {'LA': 'LAR', 'WSH': 'WAS', 'JAC': 'JAX'}
 POSW = {'QB': 1, 'RB': 1, 'WR': 1, 'TE': 1}
