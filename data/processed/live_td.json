@@ -1,10 +1,10 @@
 {
- "pulled": "2026-11-05T23:46Z",
+ "pulled": "2026-11-06T05:21Z",
  "season": 2026,
  "week": 9,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "JAX@BAL": "pre",
+  "JAX@BAL": "post",
   "CIN@ATL": "pre",
   "DAL@IND": "pre",
   "NYJ@KC": "pre",
@@ -22,8 +22,8 @@
  },
  "scores": {
   "JAX@BAL": [
-   0,
-   0
+   33,
+   10
   ],
   "CIN@ATL": [
    0,
@@ -82,5 +82,38 @@
    0
   ]
  },
- "plays": []
+ "plays": [
+  {
+   "game": "JAX@BAL",
+   "q": 1,
+   "clock": "11:20",
+   "team": "JAX",
+   "player": "Bhayshul Tuten",
+   "how": "rush"
+  },
+  {
+   "game": "JAX@BAL",
+   "q": 2,
+   "clock": "0:58",
+   "team": "JAX",
+   "player": "Parker Washington",
+   "how": "rec"
+  },
+  {
+   "game": "JAX@BAL",
+   "q": 4,
+   "clock": "7:26",
+   "team": "JAX",
+   "player": "Chris Rodriguez Jr.",
+   "how": "rush"
+  },
+  {
+   "game": "JAX@BAL",
+   "q": 4,
+   "clock": "7:15",
+   "team": "BAL",
+   "player": "Justice Hill",
+   "how": "rush"
+  }
+ ]
 }
