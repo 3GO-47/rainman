@@ -76,6 +76,8 @@ def main(raw, date):
         if tag == 'Q': inj = 0
         elif tag in OUT_TAGS: inj = -1
         rows.append({'player': name, 'team': team, 'pos_row': pos, 'espn_depth': int(d), 'injury': inj, 'tag': tag})
+    # v59: a row with no name (nflverse mirror gaps) is nobody — drop it before it becomes a 'nan' player downstream
+    rows = [r for r in rows if str(r.get('player', '')).strip().lower() not in ('', 'nan', 'none')]
     # de-dup (ESPN pages repeat WR rows)
     seen = set(); rows = [r for r in rows if not ((r['team'], r['pos_row'], r['player']) in seen or seen.add((r['team'], r['pos_row'], r['player'])))]
     # v57 (2026-11-05): the chart's own tags lag (the nflverse mirror carries none) — overlay the injury report the site already keeps:

@@ -982,3 +982,9 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Honest grid (wk 4–8, 73 g, n=1500, margin/total MAE): kp .5/.6 9.31/10.89 · +n0 300 9.24/10.98 · +mz 9.18/10.95 · +pace2 9.21/11.08 (rejected) · +home_team 9.05/10.98 · +dome+rest 9.04/10.99 · +decay .9 8.99/10.94 · +prior 3 8.91/10.96 (adopted).
 - Full backtest (n=4000, adopted): wk 4+ margin 9.03 vs market 9.02 · total 11.06 vs 10.36 · SU 60% · ATS 43% · O/U 49%. Totals are the open problem: sim total ~ actual r=.23 vs market .38.
 - Page: model log rewritten with the re-baseline and every verdict; methodology (as-of-week inputs, man/zone, venue). Week 9 re-simulated (JAX@BAL 25.8–18.9).
+
+## n128 — 2026-11-07 (Sat) — v59 refine pass + H2H conditional formatting
+- Automated audit (Playwright, every tab × every page at 1440): console errors, overflow, empty tables, sticky headers, NaN/placeholder text.
+- Fixed: H2H Board + H2H Grid conditional formatting on every statistic (vs-cells vs own average, sample-weighted; average block by rank within position; PPR / Δ PPR tinted) + College column dropped from the H2H Board so the edge block fits at 1440; static section titles + column headers on every lgrid/lgt layout (TD Grid, Lab Grid, H2H Grid, METAPROP, lineups) like META since v58; projection band negative-width SVG rect clamped; "NAN" injury chips (nflverse report_status NaN → 'nan' string) fixed in build_injuries.py; "nan" player row (NYG TE3 from the nflverse depth mirror) dropped in build_depth_chart.py — it had reached the First TD board, Depth Charts and sim params.
+- Not changed: plain-table sticky column headers (standard since v1); frozen first column in Lab/H2H/Splits/ΔDepth; Tracking page empty state (local watchlist by design).
+- Rebuilt: depth chart 11-07, injuries, matchups, td_picks, first_td, rainman.html, sim week + simulations page. Uploaded via Chrome; local merge.

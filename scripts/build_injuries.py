@@ -62,7 +62,7 @@ def main():
             for r in cur.itertuples():
                 t = TEAM_FIX.get(r.team, r.team); k = (t, key(r.full_name))
                 pr = prac.get(str(r.practice_status), '')
-                st = str(r.report_status) if r.report_status and str(r.report_status) != 'None' else ''
+                st = str(r.report_status) if r.report_status and str(r.report_status) not in ('None', 'nan', '') else ''   # v59: a NaN status is no status
                 if k in rows:
                     rows[k]['practice'] = pr; rows[k]['nfl_status'] = st; rows[k]['nfl_week'] = wk
                     if not rows[k]['injury'] and r.report_primary_injury: rows[k]['injury'] = str(r.report_primary_injury)
