@@ -22,6 +22,17 @@ DOW = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][WD]
 
 GIT_ENV = dict(os.environ, GIT_TERMINAL_PROMPT='0', GCM_INTERACTIVE='never')   # never hang on a credential prompt in a scheduled run
 
+def clear_stale_locks():
+    """A Claude session working on the mount cannot delete files, so its git commands leave .git/HEAD.lock (and index.lock) behind;
+    every later commit here then fails with 'File exists' and the loop silently stops publishing (this is what happened 11-07 → 11-08).
+    Anything older than ten minutes is nobody's live lock: remove it."""
+    import time
+    for n in ('HEAD.lock', 'index.lock', 'maintenance.lock', 'config.lock'):
+        q = os.path.join('.git', n)
+        try:
+            if os.path.exists(q) and time.time() - os.path.getmtime(q) > 600: os.remove(q); log(f'  removed stale .git/{n}')
+        except Exception as e: log(f'  could not remove .git/{n}: {e}')
+
 def git(*args, check=False):
     r = subprocess.run(['git'] + list(args), capture_output=True, text=True, env=GIT_ENV)
     if check and r.returncode: raise RuntimeError(r.stderr.strip()[:200])
@@ -96,13 +107,15 @@ def markets_only(G, st):
         if did: step('social', run, ['scripts/build_social.py']); step('landing', run, ['scripts/build_landing.py'])
     git('add', '-A'); chg = git('status', '--porcelain').stdout.strip()
     if chg:
-        git('commit', '-q', '-m', f'markets {datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}: ' + (', '.join(did) or 'state') + f' · {len(chg.splitlines())} files')
+        rc = git('commit', '-q', '-m', f'markets {datetime.datetime.now().strftime("%Y-%m-%d %H:%M")}: ' + (', '.join(did) or 'state') + f' · {len(chg.splitlines())} files')
+        if rc.returncode: log(f'  commit FAILED: {(rc.stderr or "").strip().splitlines()[-1][:160] if (rc.stderr or "").strip() else rc.returncode}')
         if '--no-push' not in sys.argv:
-            r = git('push', '-q', 'origin', 'HEAD:main'); log('pushed' if r.returncode == 0 else 'push skipped (no credential helper); commit kept locally')
+            r = git('push', '-q', 'origin', 'HEAD:main'); log('pushed' if r.returncode == 0 else f'push skipped ({(r.stderr or "").strip().splitlines()[-1][:120] if (r.stderr or "").strip() else "no credential helper"}); commit kept locally')
     log(f'=== markets run done: {", ".join(did) or "nothing due"}')
     if '--wait' not in sys.argv and os.path.exists('.env') and 'ODDS_API_KEY=' in open('.env').read(): plant_sleeper()
 
 def main():
+    clear_stale_locks()
     st = state(); did = []
     log(f'=== local loop {TODAY_S} ({DOW}){" FORCE" if FORCE else ""}')
     step('slate', pull_espn.slate)
@@ -172,7 +185,8 @@ def main():
     chg = git('status', '--porcelain').stdout.strip()
     if chg:
         msg = f'local loop {TODAY_S} ({DOW}): ' + (', '.join(did) or 'slate') + f' · {len(chg.splitlines())} files'
-        git('commit', '-q', '-m', msg)
+        rc = git('commit', '-q', '-m', msg)
+        if rc.returncode: log(f'  commit FAILED: {(rc.stderr or "").strip().splitlines()[-1][:160] if (rc.stderr or "").strip() else rc.returncode}')
         pushed = False
         if '--no-push' not in sys.argv:
             r = git('push', '-q', 'origin', 'HEAD:main')
