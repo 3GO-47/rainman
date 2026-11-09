@@ -33,7 +33,11 @@ def _clean(o):
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 NV = 'data/raw/nflverse'; SEASON = 2026
 import json as _json
-CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0, epa_src='pbp', decay=0.9, kp=0.5, kr=0.6, rest=1, mz=1, pace2=0, dome=1, home_team=1, epa_n0=300)
+CFG = dict(prior_w=3.0, opp_adj=0, qb_adj=1, def_inj=1, lam=60.0, epa_src='pbp', decay=0.9, kp=0.5, kr=0.6, rest=1, mz=1, pace2=0, dome=1, home_team=1, epa_n0=300,
+           # v4 (11-08): explosive-rate exponent 0.6 → 0.3 (totals 10.86 → 10.76) · snap-weighted, slot-shrunk usage shares (player MAE 4.51 → 4.40) ·
+           # usage volatility: each simulated game draws its own target / carry shares, lognormal σ 0.5 (player 10–90 coverage .78 → .83, z-σ 1.16 → 1.06) ·
+           # penalties at the league rate (first downs 15 → 18 a game, punts 4.1 → 3.7, the structure the six-scalar calibration needs)
+           ex_k=0.3, share_mode=1, share_k=1.5, share_sd=0.5, pen=1)
 # 2026-11-06 honest grid (current-season inputs from the pbp AS OF the week — the tendencies file is whole-season and let the earlier backtest see
 # the future; those earlier numbers (9.0) were contaminated). wk 4-8, 73 games, n=1500, margin MAE / total MAE:
 #   base (pbp as-of, prior 5, qb_adj, kp 1.0) 9.82 / 10.92 · prior 3: 9.87 · prior 8: 9.85 · kp .7/.8: 9.50 · kp .5/.6: 9.31 · epa_n0 300: 9.46 · 800: 9.35
@@ -177,7 +181,7 @@ def qb_epa_table(S, n0=150, repl=-0.08):
     usual = db.groupby(['season', 'posteam']).passer_id.agg(lambda s: s.value_counts().index[0]).to_dict()
     return q, n, usual
 
-STARTERS = {}
+STARTERS = {}; QE_G = {}; QN_G = {}
 def team_profiles(P, S, week):
     off = pd.read_csv('data/processed/team_off_tendencies.csv'); de = pd.read_csv('data/processed/team_def_tendencies.csv')
     co = pd.read_csv('data/processed/coaching.csv'); tags = pd.read_csv('data/processed/scheme_tags.csv'); eff = pd.read_csv('data/processed/scheme_slot_effects.csv')
@@ -221,7 +225,7 @@ def team_profiles(P, S, week):
         trips = Z.groupby(['game_id', 'fixed_drive']).touchdown.max(); return (float(trips.mean()), int(len(trips)))
     ADJ = {s: opp_adjust(S[S.season == s], CFG['lam']) for s in (SEASON - 1, SEASON)} if CFG['opp_adj'] else {}
     lg_pass, lg_rush = float(S[S['pass'] == 1].epa.mean()), float(S[(S.rush == 1) & (S.qb_scramble != 1)].epa.mean())
-    QE, QN, QUSUAL = qb_epa_table(S)
+    QE, QN, QUSUAL = qb_epa_table(S); globals()['QE_G'] = QE; globals()['QN_G'] = QN
     INJ = pd.read_csv('data/processed/injuries_current.csv') if CFG['def_inj'] and os.path.exists('data/processed/injuries_current.csv') else None
     teams = sorted(set(off[off.season == SEASON].team))
     out = {}
@@ -289,6 +293,7 @@ def team_profiles(P, S, week):
         if CFG['qb_adj']:
             st_name = STARTERS.get(t); usual = QUSUAL.get((SEASON, t)) or QUSUAL.get((SEASON - 1, oc_from))
             sid = N2G.get(norm(st_name)) if st_name else None
+            O['qb_epa_in_unit'] = round(float(QE.get(sid, -0.08) if (sid and usual and sid != usual) else QE.get(usual, 0.0) if usual else 0.0), 4)   # the passer the unit's pass_epa now reflects
             if sid and usual and sid != usual:
                 delta = QE.get(sid, -0.08) - QE.get(usual, 0.0)
                 O['qb_delta'] = round(float(delta), 4); O['pass_epa'] = round((O.get('pass_epa') or lg_pass) + float(np.clip(delta, -.2, .15)), 4); O['qb_swap'] = f"{st_name} for the usual passer · {QN.get(sid, 0)} dropbacks on file"
@@ -334,8 +339,21 @@ def players(S, week, game_dates, starters=None):
             ln = r['log_name'] if 'log_name' in r.index and isinstance(r['log_name'], str) and r['log_name'] else r.player; n = norm(ln); slot = str(r.slot); pos = r.pos_row
             ug = Ut[(Ut.player.map(norm) == n) & (Ut.season == SEASON) & (Ut.week.isin(lastw))]
             if len(ug) < 2: ug2 = Ut[(Ut.player.map(norm) == n)].sort_values(['season', 'week']).tail(6); ug = ug2 if len(ug2) else ug
-            tsh = float(ug.target_share.mean()) if len(ug) and ug.target_share.notna().any() else DEF_T.get(slot, .03)
-            rsh = float(ug.rush_share.mean()) if len(ug) and ug.rush_share.notna().any() else DEF_R.get(slot, .01)
+            if CFG.get('share_mode'):
+                # v4: a game he left early counts for the share of it he played (snap share), and the share is shrunk toward the slot's
+                # norm with share_k games of prior — a 2-carry injury exit no longer halves a starter's workload
+                wg = ug.snap_pct.fillna(.5).clip(.15, 1.0).values if len(ug) else []
+                def wmean(col, dflt):
+                    v = ug[col].values if len(ug) else []
+                    ok = [(x, w) for x, w in zip(v, wg) if x == x]
+                    if not ok: return dflt, 0.0
+                    sw = sum(w for _, w in ok); m = sum(x * w for x, w in ok) / sw
+                    k = CFG.get('share_k', 1.5); return (m * sw + dflt * k) / (sw + k), sw
+                tsh, _ = wmean('target_share', DEF_T.get(slot, .03)); rsh, neff = wmean('rush_share', DEF_R.get(slot, .01))
+                if pos == 'QB' and slot != 'QB1': rsh = 0.0   # only the man under center carries the ball
+            else:
+                tsh = float(ug.target_share.mean()) if len(ug) and ug.target_share.notna().any() else DEF_T.get(slot, .03)
+                rsh = float(ug.rush_share.mean()) if len(ug) and ug.rush_share.notna().any() else DEF_R.get(slot, .01)
             gp_u = int(len(ug))
             L = G[(G.n == n)]; Lc = L[L.season == SEASON]; Lp = L[L.season == SEASON - 1]
             def eff(num, den, mean, n0):
@@ -351,7 +369,7 @@ def players(S, week, game_dates, starters=None):
             if pos == 'QB':
                 comp, natt = eff('cmp', 'pass_att', M['comp'], 120); ypa, _ = eff('pass_yds', 'pass_att', M['ypa'], 120); ir, _ = eff('int', 'pass_att', M['int'], 200)
                 # sack / scramble from the play-by-play by name (roster gsis -> name)
-                d.update(comp=comp, ypa=ypa, int_rate=ir, att_seen=natt)
+                d.update(comp=comp, ypa=ypa, int_rate=ir, att_seen=natt, epa=round(float(QE_G.get(gid, -0.08)), 4) if gid else -0.08, dropbacks=int(QN_G.get(gid, 0)) if gid else 0)
             rows.append(d)
         # renormalise shares among the men on the chart (an injured starter's share flows to the rest)
         ts = sum(x['tgt_share'] for x in rows if x['pos'] != 'QB') or 1; rs = sum(x['rush_share'] for x in rows) or 1

@@ -58,22 +58,22 @@ class Team:
         L = PR['league']; T = PR['teams'][team]; D = PR['teams'][opp]['de']; O = T['off']; self.name = team; self.home = home
         g = lambda d, k, dflt: dflt if d.get(k) is None else d[k]
         lgp, lgr = L['pass_epa'], L['rush_epa']
-        self.pass_shift = _logit(np.clip(L['pass_rate'] + g(O, 'proe', 0) / 100, .3, .8)) - _logit(L['pass_rate'])
+        self.pass_shift = (_logit(np.clip(L['pass_rate'] + g(O, 'proe', 0) / 100, .3, .8)) - _logit(L['pass_rate'])) * (PR.get('cfg') or {}).get('proe_k', 1.0)
         self.rz_pass = g(O, 'rz_pass_rate', .55)
         # EPA/play is points per play vs average: a +0.14 passing offense is worth ~+8 points over a game, which is a lot more than 9% of its yards
-        cfg = PR.get('cfg') or {}; KP, KR = cfg.get('kp', 1.0), cfg.get('kr', 1.1)
-        self.mp = float(np.clip(1 + KP * (g(O, 'pass_epa', lgp) - lgp) + KP * (g(D, 'pass_epa_allowed', lgp) - lgp), .6, 1.5))
-        self.mr = float(np.clip(1 + KR * (g(O, 'rush_epa', lgr) - lgr) + KR * (g(D, 'rush_epa_allowed', lgr) - lgr), .6, 1.5))
+        cfg = PR.get('cfg') or {}; KP, KR = cfg.get('kp', 1.0), cfg.get('kr', 1.1); KD = cfg.get('kd_mult', 1.0); EXK = cfg.get('ex_k', .6); RZPR = cfg.get('rz_prior', 30)
+        self.mp = float(np.clip(1 + KP * (g(O, 'pass_epa', lgp) - lgp) + KP * KD * (g(D, 'pass_epa_allowed', lgp) - lgp), .6, 1.5))
+        self.mr = float(np.clip(1 + KR * (g(O, 'rush_epa', lgr) - lgr) + KR * KD * (g(D, 'rush_epa_allowed', lgr) - lgr), .6, 1.5))
         edge = L['home_edge']
         if cfg.get('home_team') and L.get('home_edges'): edge = L['home_edges'].get(team if home else opp, edge)   # that stadium's own edge, shrunk toward the league
         home_mult = 1 + (edge / 2) * .013 * (1 if home else -1)   # ≈ the home edge in points, split across both offenses (calibrated: 1% of yards ≈ 0.75 pts)
         self.mp *= home_mult; self.mr *= home_mult
         self.def_comp = g(D, 'pbp_comp', L['comp_rate']); self.def_int = g(D, 'pbp_int_rate', L['int_rate']); self.def_sack = g(D, 'pbp_sack_rate', L['sack_rate'])
-        self.exp_pass = L['explosive_pass'] * (g(O, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** .6 * (g(D, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** .6
-        self.exp_rush = L['explosive_rush'] * (g(O, 'pbp_expl_rush', L['explosive_rush']) / L['explosive_rush']) ** .6 * (g(D, 'pbp_expl_rush', L['explosive_rush']) / L['explosive_rush']) ** .6
-        self.pace = g(O, "pace_factor", 1.0); self.aggr = g(O, "fourth_aggr", 1.0) ** .5
+        self.exp_pass = L['explosive_pass'] * (g(O, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** EXK * (g(D, 'pbp_expl_pass', L['explosive_pass']) / L['explosive_pass']) ** EXK
+        self.exp_rush = L['explosive_rush'] * (g(O, 'pbp_expl_rush', L['explosive_rush']) / L['explosive_rush']) ** EXK * (g(D, 'pbp_expl_rush', L['explosive_rush']) / L['explosive_rush']) ** EXK
+        self.pace = g(O, "pace_factor", 1.0) ** cfg.get('pace_k', 1.0); self.aggr = g(O, "fourth_aggr", 1.0) ** .5
         rzl = np.mean([v['rz']['off_td_rate'] for v in PR['teams'].values() if v['rz'].get('off_td_rate') is not None] or [.58])
-        shr = lambda rz, k, nk: (g(rz, k, rzl) * g(rz, nk, 0) + rzl * 30) / (g(rz, nk, 0) + 30)   # red-zone rates shrunk toward league with 30 trips of prior
+        shr = lambda rz, k, nk: (g(rz, k, rzl) * g(rz, nk, 0) + rzl * RZPR) / (g(rz, nk, 0) + RZPR)   # red-zone rates shrunk toward league with 30 trips of prior
         self.rzf = float(np.clip(((shr(T['rz'], 'off_td_rate', 'off_trips') / rzl) ** .5) * ((shr(PR['teams'][opp]['rz'], 'def_td_rate', 'def_trips') / rzl) ** .5), .85, 1.18))
         slot_idx = D.get('slot_idx') or {}
         P = PR['players'][team]['players']; pm = L['pos_means']
@@ -88,7 +88,7 @@ class Team:
         R = [p for p in P if p['pos'] != 'QB' and p['tgt_w'] > 0]
         w = np.array([p['tgt_w'] * slot_idx.get(GRP.get(p['slot'], 'WR4+'), 1.0) for p in R]); w = w / w.sum() if w.sum() else w
         rz = np.array([p['rz_share'] if p.get('rz_share') is not None else w[i] for i, p in enumerate(R)]); rz = rz / rz.sum() if rz.sum() else w
-        self.R = R; self.tw = np.cumsum(w); self.tw_rz = np.cumsum(.5 * w + .5 * rz)
+        self.R = R; self.tw = np.cumsum(w); self.tw_rz = np.cumsum(.5 * w + .5 * rz); self.w_raw = w; self.rz_raw = rz
         self.catch_adj = np.array([.8 * (p['catch'] - pm[p['pos']]['catch']) for p in R]); self.ypt_r = np.array([np.clip(p['ypt'] / pm[p['pos']]['ypt'], .7, 1.4) ** .5 for p in R])
         # man / zone: the defense's man rate against what each receiver, and the offense as a whole, has done against man vs zone
         MZ = L.get('mz') or {}
@@ -106,7 +106,7 @@ class Team:
             if p['pos'] == 'QB': rw[i] = max(0.0, rw[i] - self.scramble * 36 / 26)   # ≈ 36 dropbacks and 26 rushes a game
         rw = rw / rw.sum()
         gl = np.array([p.get('gl_rush') or 0 for p in U], float); gl = (gl / gl.sum()) if gl.sum() else rw
-        self.U = U; self.rw = np.cumsum(rw); self.rw_gl = np.cumsum(.5 * rw + .5 * gl)
+        self.U = U; self.rw = np.cumsum(rw); self.rw_gl = np.cumsum(.5 * rw + .5 * gl); self.rw_raw = rw; self.gl_raw = gl
         self.ypc_r = np.array([np.clip(p['ypc'] / pm[p['pos']]['ypc'], .75, 1.3) ** .5 for p in U])
         self.qb_ypc = float(np.clip(q.get('ypc', 4.5) / 4.5, .7, 1.4)) ** .5
 
@@ -116,14 +116,31 @@ def simulate(PR, game, n=10000, seed=7):
     PACE2 = None
     if (PR.get('cfg') or {}).get('pace2') and L.get('snap_gap_state'):
         PACE2 = np.array([[L['snap_gap_state'].get(f'{s}|{h}', L['snap_gap']['run_or_complete']) for h in (0, 1)] for s in ('T2', 'T1', 'E', 'L1', 'L2')])
+    PEN = (PR.get('cfg') or {}).get('pen', 0); PD, PO = L.get('pen_def', .05), L.get('pen_off', .05)   # v4: accepted penalties per offensive snap (defensive / offensive), league averages when the tables lack them
     CB = PR.get('calib') or {}; c_pass, c_yard, c_td = CB.get('pass_logit', 0.0), CB.get('yard_scale', 1.0), CB.get('td_mult', 1.0)   # league-level calibration (build_simulations.py --calibrate)
+    c_py, c_ry, c_pace = CB.get('pass_scale', 1.0), CB.get('rush_scale', 1.0), CB.get('pace_scale', 1.0)   # v4: passing and rushing yards scaled apart, and the clock, so plays / pass yards / rush yards per game all sit on the league's numbers
     A, H = game['away'], game['home']; TM = [Team(PR, A, H, False), Team(PR, H, A, True)]
     if (PR.get('cfg') or {}).get('dome') and str(game.get('roof') or '') in ('dome', 'closed'):
         for tm in TM: tm.mp *= 1.02
     if (PR.get('cfg') or {}).get('rest'):   # short week / off a bye: a small yardage shade, tested on the backtest
         for tm, rk in ((TM[0], 'away_rest'), (TM[1], 'home_rest')):
             rd = game.get(rk) or 7; m = .985 if rd <= 5 else 1.015 if rd >= 10 else 1.0; tm.mp *= m; tm.mr *= m
-    N = n; sc = np.zeros((2, N)); poss = rng.integers(0, 2, N); recv2 = 1 - poss   # the team that kicks off first receives the second half
+    N = n
+    # v4: usage volatility — a player's share of targets / carries is not the same every week (week-to-week CV ≈ 0.35 for regulars);
+    # each simulated game draws its own shares around the season weights (lognormal, mean-preserving), so player bands carry it
+    SSD = float((PR.get('cfg') or {}).get('share_sd', 0) or 0); CUM = []
+    for t in TM:
+        if SSD > 0:
+            def disp(w):
+                m = np.exp(SSD * rng.standard_normal((len(w), N)) - SSD * SSD / 2) * w[:, None]; return m / np.maximum(m.sum(0, keepdims=True), 1e-9)
+            wt = disp(t.w_raw) if len(t.R) else np.zeros((0, N)); rzm = .5 * wt + .5 * (disp(t.rz_raw) if len(t.R) else wt)
+            ru = disp(t.rw_raw) if len(t.U) else np.zeros((0, N)); glm = .5 * ru + .5 * (disp(t.gl_raw) if len(t.U) else ru)
+            CUM.append(dict(tw=np.cumsum(wt, 0), tw_rz=np.cumsum(rzm, 0), rw=np.cumsum(ru, 0), rw_gl=np.cumsum(glm, 0)))
+        else: CUM.append(None)
+    def pick(cum_vec, cum_mat, uu, sims):
+        if cum_mat is None: return np.searchsorted(cum_vec, uu)
+        return (cum_mat[:, sims] < uu[None, :]).sum(0)
+    sc = np.zeros((2, N)); poss = rng.integers(0, 2, N); recv2 = 1 - poss   # the team that kicks off first receives the second half
     clock = np.full(N, 3600.0); yl = KO[rng.integers(0, 101, N)].astype(float); down = np.ones(N, int); togo = np.full(N, 10.0)
     done = np.zeros(N, bool); ot = np.zeros(N, bool); ot_first = np.full(N, -1); ot_possd = np.zeros((2, N), bool); half2 = np.zeros(N, bool)
     # box score accumulators
@@ -136,7 +153,7 @@ def simulate(PR, game, n=10000, seed=7):
     for o in (0, 1): box[o]['drives'] += (poss == o)
     in_rz = np.zeros(N, bool)
     pace = np.array([t.pace for t in TM]); aggr = np.array([t.aggr for t in TM]); pshift = np.array([t.pass_shift for t in TM]) + c_pass; rzp = np.array([t.rz_pass for t in TM])
-    mp = np.array([t.mp for t in TM]) * c_yard; mr = np.array([t.mr for t in TM]) * c_yard; rzf = np.array([t.rzf for t in TM]) * c_td; cshift = np.array([t.comp_shift for t in TM])
+    mp = np.array([t.mp for t in TM]) * c_yard * c_py; mr = np.array([t.mr for t in TM]) * c_yard * c_ry; rzf = np.array([t.rzf for t in TM]) * c_td; cshift = np.array([t.comp_shift for t in TM])
     irate = np.array([t.int_rate for t in TM]); srate = np.array([t.sack_rate for t in TM]); scr = np.array([t.scramble for t in TM]); ep = np.array([t.exp_pass for t in TM]); er = np.array([t.exp_rush for t in TM]); qbypc = np.array([t.qb_ypc for t in TM])
 
     def change(idx, new_yl, kick=False):
@@ -170,6 +187,11 @@ def simulate(PR, game, n=10000, seed=7):
         last = ((clock[ix] <= 40) & (clock[ix] > 0) & ~half2[ix] & (dist <= 58)) | ((clock[ix] <= 40) & half2[ix] & (dist <= 58) & (sd >= -3) & (sd <= 0))
         fgt = fgt | (last & ~is4 & ~go); punt = punt & ~last
         normal = ~fgt & ~punt & ~kneel
+        # penalties: a flag instead of a snap — defensive (yards, usually an automatic first down) or offensive (yards back, replay the down)
+        if PEN:
+            u2 = rng.random(len(ix)); dpen = normal & (u2 < PD); open_ = normal & ~dpen & (u2 < PD + PO); pen = dpen | open_; normal = normal & ~pen
+        else:
+            dpen = open_ = pen = np.zeros(len(ix), bool)
         # play call
         p = PP[np.clip(down[ix], 1, 4), tgb, z, sdb, tb]
         p = _sig(_logit(p) + pshift[o]); p = np.where(z == 3, .5 * p + .5 * rzp[o], p)
@@ -195,7 +217,7 @@ def simulate(PR, game, n=10000, seed=7):
                 if len(kt):
                     B['att'][st] += 1
                     uu = rng.random(len(kt)); inrz = z[kt] == 3
-                    tgt = np.where(inrz, np.searchsorted(T.tw_rz, uu), np.searchsorted(T.tw, uu)); tgt = np.clip(tgt, 0, len(T.R) - 1)
+                    CM = CUM[side]; tgt = np.where(inrz, pick(T.tw_rz, CM and CM['tw_rz'], uu, st), pick(T.tw, CM and CM['tw'], uu, st)); tgt = np.clip(tgt, 0, len(T.R) - 1)
                     np.add.at(B['tgt'], (tgt, st), 1)
                     cp = np.clip(C[z[kt], dn[kt]] + cshift[side] + T.catch_adj[tgt], .25, .9)
                     v = rng.random(len(kt)); picked = v < irate[side]; comp = (~picked) & (v < irate[side] + cp)
@@ -219,7 +241,7 @@ def simulate(PR, game, n=10000, seed=7):
             if len(k):
                 B['plays'][sims] += 1
                 uu = rng.random(len(k)); gl = yl[sims] <= 5
-                ru = np.where(gl, np.searchsorted(T.rw_gl, uu), np.searchsorted(T.rw, uu)); ru = np.clip(ru, 0, len(T.U) - 1)
+                CM = CUM[side]; ru = np.where(gl, pick(T.rw_gl, CM and CM['rw_gl'], uu, sims), pick(T.rw, CM and CM['rw'], uu, sims)); ru = np.clip(ru, 0, len(T.U) - 1)
                 np.add.at(B['car'], (ru, sims), 1)
                 tail = rng.random(len(k)) < er[side]; qi = np.where(tail, rng.integers(TAILR, 101, len(k)), rng.integers(0, TAILR, len(k)))
                 yv = np.round(Y[1, z[k], dn[k], qi] * mr[side] * T.ypc_r[ru])
@@ -256,9 +278,20 @@ def simulate(PR, game, n=10000, seed=7):
         else: base_gap = L['snap_gap']['run_or_complete']
         gap = np.where(incomplete, L['snap_gap']['incomplete'], base_gap)
         hurry = ((sd < 0) & (clock[ix] < 240)) | ((clock[ix] > 1800) & (clock[ix] < 1920))
-        gap = np.where(hurry, np.where(incomplete, L['snap_gap']['hurry_incomplete'], L['snap_gap']['hurry']), gap) * pace[o]
+        gap = np.where(hurry, np.where(incomplete, L['snap_gap']['hurry_incomplete'], L['snap_gap']['hurry']), gap) * pace[o] * c_pace
         gap = np.where(fgt | punt, 6.0, gap); gap = np.where(td | turnover | td_ret, np.where(incomplete, 5, 12), gap)
-        gap = np.where(kneel, clock[ix] + 1, gap)
+        gap = np.where(kneel, clock[ix] + 1, gap); gap = np.where(pen, 5.0, gap)
+        if pen.any():
+            kd = np.where(dpen)[0]; ko_ = np.where(open_)[0]
+            if len(kd):
+                yp = np.array([5, 10, 15, 25])[np.searchsorted(np.cumsum([.45, .25, .2, .1]), rng.random(len(kd)))]; sims_ = ix[kd]
+                yp = np.minimum(yp, yl[sims_] - 1); auto = rng.random(len(kd)) < .7
+                yl[sims_] = yl[sims_] - yp; tg_ = togo[sims_] - yp; first_ = auto | (tg_ <= 0)
+                down[sims_] = np.where(first_, 1, down[sims_]); togo[sims_] = np.where(first_, np.minimum(10, yl[sims_]), tg_)
+                for side in (0, 1): box[side]['fd'][sims_[first_ & (o[kd] == side)]] += 1
+            if len(ko_):
+                yp = np.where(rng.random(len(ko_)) < .6, 5, 10); sims_ = ix[ko_]
+                yl[sims_] = np.minimum(99, yl[sims_] + yp); togo[sims_] = togo[sims_] + yp
         for side in (0, 1): box[side]['top'][ix[o == side]] += gap[o == side]
         before = clock[ix].copy(); clock[ix] = np.maximum(0, clock[ix] - gap)
         # scoring / turnover / downs → new possession (field goals were decided and scored above)
@@ -324,6 +357,23 @@ def simulate(PR, game, n=10000, seed=7):
             done[o_ix[end]] = True
     return _summary(game, TM, sc, box, N, ot)
 
+# v4: distribution summaries — exact quantiles + a compact histogram (for P(over line) on any number) per stat and per fantasy format
+QS = (5, 10, 25, 50, 75, 90, 95)
+def _q(x):
+    q = np.percentile(x, QS); return dict(mean=round(float(x.mean()), 2), sd=round(float(x.std()), 2), **{f'p{k}': round(float(v), 1) for k, v in zip(QS, q)})
+def _hist(x, step, hi):
+    """counts of round(x/step) from 0 to hi/step (last bin = everything above); step 1 for counts, 5 for yards, 10 for passing yards"""
+    b = np.clip(np.floor(np.asarray(x) / step + 1e-9).astype(int), 0, int(hi // step)); c = np.bincount(b, minlength=int(hi // step) + 1); return dict(step=step, counts=c.tolist())
+def _fan(rec, recyd, rectd, ruyd, rutd, pyd=None, ptd=None, pint=None):
+    ppr = rec + .1 * (recyd + ruyd) + 6 * (rectd + rutd)
+    if pyd is not None: ppr = ppr + .04 * pyd + 4 * ptd - 2 * pint
+    return ppr
+def _fanblock(ppr, rec):
+    m = ppr.mean(); d = dict(ppr=_q(ppr), half=_q(ppr - .5 * rec), std=_q(ppr - rec),
+                             boom=round(float((ppr >= max(1.5 * m, m + 6)).mean()), 3), bust=round(float((ppr <= .5 * m).mean()), 3), p20=round(float((ppr >= 20).mean()), 3), p10=round(float((ppr >= 10).mean()), 3),
+                             hist=_hist(ppr, 1, 50))
+    d['range'] = round(d['ppr']['p90'] - d['ppr']['p10'], 1); d['cv'] = round(float(ppr.std() / m), 3) if m > 0 else None; return d
+
 def _summary(game, TM, sc, box, N, ot):
     A, H = TM[0].name, TM[1].name; sa, sh = sc[0], sc[1]; margin = sh - sa; total = sa + sh
     pairs = {}
@@ -346,13 +396,19 @@ def _summary(game, TM, sc, box, N, ot):
                 tgt=float(tg.mean()), rec=float(rc.mean()), rec_yds=float(yd.mean()), rec_yds_med=float(np.median(yd)), rec_yds_p25=float(np.percentile(yd, 25)), rec_yds_p75=float(np.percentile(yd, 75)), rec_td=float(td_.mean()),
                 car=None if car is None else float(car.mean()), rush_yds=None if car is None else float(ruyd.mean()), rush_yds_med=None if car is None else float(np.median(ruyd)), rush_yds_p25=None if car is None else float(np.percentile(ruyd, 25)), rush_yds_p75=None if car is None else float(np.percentile(ruyd, 75)), rush_td=None if car is None else float(rutd.mean()),
                 p_td=float(((td_ + (rutd if car is not None else 0)) >= 1).mean()), p_100=float(((yd + (ruyd if car is not None else 0)) >= 100).mean()),
-                share=round(float(T.tw[i] - (T.tw[i - 1] if i else 0)), 3)))
+                p_2td=float(((td_ + (rutd if car is not None else 0)) >= 2).mean()),
+                share=round(float(T.tw[i] - (T.tw[i - 1] if i else 0)), 3),
+                dist=dict(tgt=_q(tg), rec=_q(rc), rec_yds=_q(yd), **({'car': _q(car), 'rush_yds': _q(ruyd), 'rr_yds': _q(yd + ruyd)} if car is not None else {})),
+                hist=dict(rec=_hist(rc, 1, 15), rec_yds=_hist(yd, 5, 200), **({'car': _hist(car, 1, 35), 'rush_yds': _hist(ruyd, 5, 200), 'rr_yds': _hist(yd + ruyd, 5, 250)} if car is not None else {})),
+                fan=_fanblock(_fan(rc, yd, td_, ruyd if car is not None else 0, rutd if car is not None else 0), rc)))
         for j, q in enumerate(T.U):
             if q['pos'] == 'QB' or any(x['name'] == q['name'] for x in pl): continue
             car, ruyd, rutd = B['car'][j], B['ruyd'][j], B['rutd'][j]
             pl.append(dict(name=q['name'], pos=q['pos'], slot=q['slot'], inj=q['inj'], tgt=0, rec=0, rec_yds=0, rec_yds_med=0, rec_yds_p25=0, rec_yds_p75=0, rec_td=0,
                 car=float(car.mean()), rush_yds=float(ruyd.mean()), rush_yds_med=float(np.median(ruyd)), rush_yds_p25=float(np.percentile(ruyd, 25)), rush_yds_p75=float(np.percentile(ruyd, 75)), rush_td=float(rutd.mean()),
-                p_td=float((rutd >= 1).mean()), p_100=float((ruyd >= 100).mean()), share=0))
+                p_td=float((rutd >= 1).mean()), p_100=float((ruyd >= 100).mean()), p_2td=float((rutd >= 2).mean()), share=0,
+                dist=dict(car=_q(car), rush_yds=_q(ruyd), rr_yds=_q(ruyd)), hist=dict(car=_hist(car, 1, 35), rush_yds=_hist(ruyd, 5, 200), rr_yds=_hist(ruyd, 5, 250)),
+                fan=_fanblock(_fan(np.zeros(N), np.zeros(N), np.zeros(N), ruyd, rutd), np.zeros(N))))
         q = T.qb
         qb = dict(name=q['name'], att=float(B['att'].mean()), cmp=float(B['cmp'].mean()), pass_yds=float(B['pyd'].mean()), pass_yds_med=float(np.median(B['pyd'])), pass_yds_p25=float(np.percentile(B['pyd'], 25)), pass_yds_p75=float(np.percentile(B['pyd'], 75)),
                   pass_td=float(B['ptd'].mean()), int=float(B['int'].mean()), sacks=float(B['sk'].mean()), car=float(B['qbru'].mean()), rush_yds=float(B['qbryd'].mean()), rush_td=float(B['qbrtd'].mean()),
@@ -360,10 +416,20 @@ def _summary(game, TM, sc, box, N, ot):
         # designed QB runs are in the rusher list too: fold them into the QB line
         j = next((k for k, u in enumerate(T.U) if u['pos'] == 'QB'), None)
         if j is not None: qb['car'] += float(B['car'][j].mean()); qb['rush_yds'] += float(B['ruyd'][j].mean()); qb['rush_td'] += float(B['rutd'][j].mean())
+        qry = B['qbryd'] + (B['ruyd'][j] if j is not None else 0); qrt = B['qbrtd'] + (B['rutd'][j] if j is not None else 0); qrc = B['qbru'] + (B['car'][j] if j is not None else 0)
+        qb['pos'] = 'QB'; qb['slot'] = 'QB1'; qb['inj'] = q.get('inj', '1')
+        qb['dist'] = dict(att=_q(B['att']), cmp=_q(B['cmp']), pass_yds=_q(B['pyd']), pass_td=_q(B['ptd']), int=_q(B['int']), car=_q(qrc), rush_yds=_q(qry))
+        qb['hist'] = dict(att=_hist(B['att'], 1, 60), cmp=_hist(B['cmp'], 1, 45), pass_yds=_hist(B['pyd'], 10, 500), pass_td=_hist(B['ptd'], 1, 7), int=_hist(B['int'], 1, 5), rush_yds=_hist(qry, 5, 150), car=_hist(qrc, 1, 20))
+        qb['fan'] = _fanblock(_fan(np.zeros(N), np.zeros(N), np.zeros(N), qry, qrt, B['pyd'], B['ptd'], B['int']), np.zeros(N))
+        qb['p_td'] = float((qrt >= 1).mean()); qb['p_3td'] = float((B['ptd'] >= 3).mean())
         team = dict(plays=float(B['plays'].mean()), pass_att=float(B['att'].mean()), rush_att=float(sum(B['car'][k].mean() for k in range(len(T.U))) + B['qbru'].mean()), yds=float(B['yds'].mean()),
                     to=float(B['to'].mean()), drives=float(B['drives'].mean()), rz_trips=float(B['rzt'].mean()), fga=float(B['fga'].mean()), fgm=float(B['fgm'].mean()), punts=float(B['punts'].mean()),
                     top=float(B['top'].mean()), third=float(B['third'].mean()), downs=float(B['downs'].mean()), go4=float(B['go4'].mean()), otd=float(B['otd'].mean()), ltd=float(B['ltd'].mean()), third_conv=float((B['thirdc'].sum() / max(1, B['third'].sum()))), first_downs=float(B['fd'].mean()),
-                    pts=float(sc[side].mean()), pts_med=float(np.median(sc[side])), pts_p10=float(np.percentile(sc[side], 10)), pts_p90=float(np.percentile(sc[side], 90)))
+                    pass_yds=float(B['pyd'].mean()), rush_yds=float(sum(B['ruyd'][k].mean() for k in range(len(T.U))) + B['qbryd'].mean()), pass_td=float(B['ptd'].mean()), rush_td=float(sum(B['rutd'][k].mean() for k in range(len(T.U))) + B['qbrtd'].mean()),
+                    pts=float(sc[side].mean()), pts_med=float(np.median(sc[side])), pts_p10=float(np.percentile(sc[side], 10)), pts_p90=float(np.percentile(sc[side], 90)),
+                    pts_p25=float(np.percentile(sc[side], 25)), pts_p75=float(np.percentile(sc[side], 75)), pts_sd=float(sc[side].std()),
+                    p20=float((sc[side] >= 20).mean()), p24=float((sc[side] >= 24).mean()), p28=float((sc[side] >= 28).mean()), p30=float((sc[side] >= 30).mean()), p_shutout=float((sc[side] == 0).mean()),
+                    plays_sd=float(B['plays'].std()), yds_sd=float(B['yds'].std()), to_dist=_hist(B['to'], 1, 6))
         return dict(team=T.name, qb=qb, players=sorted(pl, key=lambda x: -(x['tgt'] + (x['car'] or 0))), team_stats=team)
     out = dict(game_id=game['game_id'], week=game['week'], away=A, home=H, date=game['date'], time=game['time'], n=N, spread=spread, total=tot, roof=game.get('roof'),
                away_qb=TM[0].qb['name'], home_qb=TM[1].qb['name'],
@@ -372,6 +438,9 @@ def _summary(game, TM, sc, box, N, ot):
                likely=[dict(away=int(a), home=int(h), p=c / N) for (a, h), c in top], headline=dict(away=int(head[0][0]), home=int(head[0][1]), p=head[1] / N),
                p_home_cover=None, p_push=None, p_over=None if tot is None else float((total > tot).mean()), p_total_push=None if tot is None else float((total == tot).mean()),
                margin_dist=dist(margin, -45, 45), total_dist=dist(total, 10, 90),
+               margin_q={f'p{k}': float(v) for k, v in zip(QS, np.percentile(margin, QS))}, total_q={f'p{k}': float(v) for k, v in zip(QS, np.percentile(total, QS))},
+               p_one_score=float((np.abs(margin) <= 8).mean()), p_blowout=float((np.abs(margin) >= 17).mean()), p_both20=float(((sa >= 20) & (sh >= 20)).mean()),
+               p_home_lead_ht=None,
                box=[team_box(0, TM[0], box[0]), team_box(1, TM[1], box[1])],
                actual=None if game.get('home_score') is None else dict(away=game['away_score'], home=game['home_score']))
     # nflverse spread_line = the home team's expected margin (positive = home favourite): the home side covers when margin > spread_line

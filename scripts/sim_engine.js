@@ -13,17 +13,17 @@ function tables(L){
   return PP}
 function Team(PR,team,opp,home){
   const L=PR.league,T=PR.teams[team],D=PR.teams[opp].de,O=T.off,g=(d,k,df)=>d[k]==null?df:d[k];const lgp=L.pass_epa,lgr=L.rush_epa;
-  const cfg=PR.cfg||{},KP=cfg.kp!=null?cfg.kp:1.0,KR=cfg.kr!=null?cfg.kr:1.1;this.name=team;this.home=home;
-  this.pass_shift=logit(clip(L.pass_rate+g(O,'proe',0)/100,.3,.8))-logit(L.pass_rate);this.rz_pass=g(O,'rz_pass_rate',.55);
-  this.mp=clip(1+KP*(g(O,'pass_epa',lgp)-lgp)+KP*(g(D,'pass_epa_allowed',lgp)-lgp),.6,1.5);this.mr=clip(1+KR*(g(O,'rush_epa',lgr)-lgr)+KR*(g(D,'rush_epa_allowed',lgr)-lgr),.6,1.5);
+  const cfg=PR.cfg||{},KP=cfg.kp!=null?cfg.kp:1.0,KR=cfg.kr!=null?cfg.kr:1.1,KD=cfg.kd_mult!=null?cfg.kd_mult:1,EXK=cfg.ex_k!=null?cfg.ex_k:.6,RZPR=cfg.rz_prior!=null?cfg.rz_prior:30,PRK=cfg.proe_k!=null?cfg.proe_k:1,PK=cfg.pace_k!=null?cfg.pace_k:1;this.name=team;this.home=home;
+  this.pass_shift=(logit(clip(L.pass_rate+g(O,'proe',0)/100,.3,.8))-logit(L.pass_rate))*PRK;this.rz_pass=g(O,'rz_pass_rate',.55);
+  this.mp=clip(1+KP*(g(O,'pass_epa',lgp)-lgp)+KP*KD*(g(D,'pass_epa_allowed',lgp)-lgp),.6,1.5);this.mr=clip(1+KR*(g(O,'rush_epa',lgr)-lgr)+KR*KD*(g(D,'rush_epa_allowed',lgr)-lgr),.6,1.5);
   let edge=L.home_edge;if(cfg.home_team&&L.home_edges){const e=L.home_edges[home?team:opp];if(e!=null)edge=e}
   const hm=1+(edge/2)*.013*(home?1:-1);this.mp*=hm;this.mr*=hm;
   this.def_comp=g(D,'pbp_comp',L.comp_rate);this.def_int=g(D,'pbp_int_rate',L.int_rate);this.def_sack=g(D,'pbp_sack_rate',L.sack_rate);
-  this.exp_pass=L.explosive_pass*Math.pow(g(O,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,.6)*Math.pow(g(D,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,.6);
-  this.exp_rush=L.explosive_rush*Math.pow(g(O,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,.6)*Math.pow(g(D,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,.6);
-  this.pace=g(O,'pace_factor',1);this.aggr=Math.pow(g(O,'fourth_aggr',1),.5);
+  this.exp_pass=L.explosive_pass*Math.pow(g(O,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,EXK)*Math.pow(g(D,'pbp_expl_pass',L.explosive_pass)/L.explosive_pass,EXK);
+  this.exp_rush=L.explosive_rush*Math.pow(g(O,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,EXK)*Math.pow(g(D,'pbp_expl_rush',L.explosive_rush)/L.explosive_rush,EXK);
+  this.pace=Math.pow(g(O,'pace_factor',1),PK);this.aggr=Math.pow(g(O,'fourth_aggr',1),.5);
   const rates=Object.values(PR.teams).map(v=>v.rz.off_td_rate).filter(v=>v!=null);const rzl=rates.length?rates.reduce((a,b)=>a+b,0)/rates.length:.58;
-  const shr=(rz,k,nk)=>(g(rz,k,rzl)*g(rz,nk,0)+rzl*30)/(g(rz,nk,0)+30);
+  const shr=(rz,k,nk)=>(g(rz,k,rzl)*g(rz,nk,0)+rzl*RZPR)/(g(rz,nk,0)+RZPR);
   this.rzf=clip(Math.pow(shr(T.rz,'off_td_rate','off_trips')/rzl,.5)*Math.pow(shr(PR.teams[opp].rz,'def_td_rate','def_trips')/rzl,.5),.85,1.18);
   const slot_idx=D.slot_idx||{},P=PR.players[team].players,pm=L.pos_means;
   const qbs=P.filter(p=>p.pos==='QB');this.qb=qbs[0]||{name:'QB',comp:L.comp_rate,ypa:pm.QB.ypa,int_rate:L.int_rate,sack_rate:L.sack_rate,scramble:L.scramble_rate,ypc:4.5};const q=this.qb;
@@ -33,28 +33,31 @@ function Team(PR,team,opp,home){
   this.scramble=g(q,'scramble',L.scramble_rate);this.mp*=Math.pow(clip(g(q,'ypa',pm.QB.ypa)/pm.QB.ypa,.8,1.2),.5);
   this.R=P.filter(p=>p.pos!=='QB'&&p.tgt_w>0);let w=this.R.map(p=>p.tgt_w*(slot_idx[GRP[p.slot]||'WR4+']||1));let s=w.reduce((a,b)=>a+b,0);w=w.map(x=>s?x/s:x);
   let rz=this.R.map((p,i)=>p.rz_share!=null?p.rz_share:w[i]);s=rz.reduce((a,b)=>a+b,0);rz=s?rz.map(x=>x/s):w;
-  const cum=a=>{let c=0;return a.map(x=>c+=x)};this.w=w;this.tw=cum(w);this.tw_rz=cum(w.map((x,i)=>.5*x+.5*rz[i]));
+  const cum=a=>{let c=0;return a.map(x=>c+=x)};this.w=w;this.rz_raw=rz;this.tw=cum(w);this.tw_rz=cum(w.map((x,i)=>.5*x+.5*rz[i]));
   this.catch_adj=this.R.map(p=>.8*(p.catch-pm[p.pos].catch));this.ypt_r=this.R.map(p=>Math.pow(clip(p.ypt/pm[p.pos].ypt,.7,1.4),.5));
   const MZ=L.mz||{};if(cfg.mz&&MZ.receivers){let m=D.man_rate;m=m==null?(MZ.man_share||.4):+m;this.ypt_r=this.ypt_r.map((v,i)=>{const z=MZ.receivers[this.R[i].gsis||''];return z?v*Math.pow(clip(m*z.man+(1-m)*z.zone,.8,1.25),.7):v});
     const sy=Math.max(...MZ.seasons);const oz=MZ.offenses[sy+'|'+(O.oc_prior_unit||team)]||MZ.offenses[sy+'|'+team];if(oz)this.mp*=clip(1+KP*(m*oz.man+(1-m)*oz.zone),.9,1.1);this.man_rate=m}
   this.U=P.filter(p=>p.rush_w>0);let rw=this.U.map(p=>p.pos==='QB'?Math.max(0,p.rush_w-this.scramble*36/26):p.rush_w);s=rw.reduce((a,b)=>a+b,0);rw=rw.map(x=>x/s);
   let gl=this.U.map(p=>p.gl_rush||0);s=gl.reduce((a,b)=>a+b,0);gl=s?gl.map(x=>x/s):rw;
-  this.rw=cum(rw);this.rw_gl=cum(rw.map((x,i)=>.5*x+.5*gl[i]));this.ypc_r=this.U.map(p=>Math.pow(clip(p.ypc/pm[p.pos].ypc,.75,1.3),.5));
+  this.rw_raw=rw;this.gl_raw=gl;this.rw=cum(rw);this.rw_gl=cum(rw.map((x,i)=>.5*x+.5*gl[i]));this.ypc_r=this.U.map(p=>Math.pow(clip(p.ypc/pm[p.pos].ypc,.75,1.3),.5));
   this.qb_ypc=Math.pow(clip(g(q,'ypc',4.5)/4.5,.7,1.4),.5)}
 function pick(cum,u){let i=0;while(i<cum.length-1&&u>cum[i])i++;return i}
 function simulate(PR,game,n,seed,onProgress){
-  const L=PR.league,R=rng(seed||7),PP=tables(L),CB=PR.calib||{},c_pass=CB.pass_logit||0,c_yard=CB.yard_scale||1,c_td=CB.td_mult||1;
+  const L=PR.league,R=rng(seed||7),PP=tables(L),CB=PR.calib||{},c_pass=CB.pass_logit||0,c_yard=CB.yard_scale||1,c_td=CB.td_mult||1,c_py=CB.pass_scale||1,c_ry=CB.rush_scale||1,c_pace=CB.pace_scale||1;
   const TAILP=Math.round(100-100*L.explosive_pass),TAILR=Math.round(100-100*L.explosive_rush),RZP=L.rz_td.pass,RZR=L.rz_td.rush;
   const Y=(k,z,dn)=>L.yards[`${k}|${ZONES[z]}|${dn?'late':'early'}`],YSCR=L.yards.scramble,YSACK=L.yards.sack,PUNT=L.punt_net,KO=L.ko_start,C=(z,dn)=>L.comp[`${ZONES[z]}|${dn?'late':'early'}`],F4=(tg,z)=>L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]!=null?L.fourth_go[`${TGS[tg]}|${ZONES[z]}`]:.05;
-  const TM=[new Team(PR,game.away,game.home,false),new Team(PR,game.home,game.away,true)];
+  const TM=[new Team(PR,game.away,game.home,false),new Team(PR,game.home,game.away,true)];const PEN=(PR.cfg||{}).pen||0,PD=L.pen_def!=null?L.pen_def:.05,PO=L.pen_off!=null?L.pen_off:.05;
   if((PR.cfg||{}).dome&&/^(dome|closed)$/.test(String(game.roof||'')))TM.forEach(tm=>tm.mp*=1.02);
   const PACE2=(PR.cfg||{}).pace2&&L.snap_gap_state?L.snap_gap_state:null;
   if((PR.cfg||{}).rest){[[TM[0],'away_rest'],[TM[1],'home_rest']].forEach(([tm,rk])=>{const rd=game[rk]||7,m=rd<=5?.985:rd>=10?1.015:1;tm.mp*=m;tm.mr*=m})}
   const qi=n=>Math.floor(R()*n),pq=a=>a[qi(101)];
   const box=TM.map(t=>({tgt:t.R.map(()=>[]),rec:t.R.map(()=>[]),recyd:t.R.map(()=>[]),rectd:t.R.map(()=>[]),car:t.U.map(()=>[]),ruyd:t.U.map(()=>[]),rutd:t.U.map(()=>[]),
     att:[],cmp:[],pyd:[],ptd:[],int:[],sk:[],qbru:[],qbryd:[],qbrtd:[],plays:[],yds:[],to:[],drives:[],rzt:[],fga:[],fgm:[],punts:[],top:[],third:[],thirdc:[],fd:[],downs:[],go4:[],otd:[]}));
-  const SA=[],SH=[],OT=[];
+  const SA=[],SH=[],OT=[];const SSD=+((PR.cfg||{}).share_sd||0);
+  const gauss=()=>{let u=0,v=0;while(u===0)u=R();while(v===0)v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+  const disp=w=>{const m=w.map(x=>x*Math.exp(SSD*gauss()-SSD*SSD/2));const s=m.reduce((a,b)=>a+b,0)||1;return m.map(x=>x/s)};const cum=a=>{let c=0;return a.map(x=>c+=x)};
   for(let s=0;s<n;s++){
+    if(SSD>0)TM.forEach(t=>{const w=disp(t.w),rz=disp(t.rz_raw),ru=disp(t.rw_raw),gl=disp(t.gl_raw);t.tw=cum(w);t.tw_rz=cum(w.map((x,i)=>.5*x+.5*rz[i]));t.rw=cum(ru);t.rw_gl=cum(ru.map((x,i)=>.5*x+.5*gl[i]))});
     const B=box.map((b,side)=>({tgt:b.tgt.map(()=>0),rec:b.rec.map(()=>0),recyd:b.recyd.map(()=>0),rectd:b.rectd.map(()=>0),car:b.car.map(()=>0),ruyd:b.ruyd.map(()=>0),rutd:b.rutd.map(()=>0),
       att:0,cmp:0,pyd:0,ptd:0,int:0,sk:0,qbru:0,qbryd:0,qbrtd:0,plays:0,yds:0,to:0,drives:0,rzt:0,fga:0,fgm:0,punts:0,top:0,third:0,thirdc:0,fd:0,downs:0,go4:0,otd:0}));
     const sc=[0,0];let poss=qi(2);const recv2=1-poss;let clock=3600,yl=pq(KO),down=1,togo=10,ot=false,half2=false,inrz=false,otPoss=[false,false],done=false;B[poss].drives++;
@@ -67,11 +70,11 @@ function simulate(PR,game,n,seed,onProgress){
       const fgOk=dist<=55||(dist<=62&&sd>=-3&&sd<=0&&clock<120);const is4=down===4;const u=R();
       let go=is4&&u<goP,fgt=is4&&!go&&fgOk,punt=is4&&!go&&!fgOk;
       const last=(clock<=40&&clock>0&&!half2&&dist<=58)||(clock<=40&&half2&&dist<=58&&sd>=-3&&sd<=0);if(last&&!is4&&!go)fgt=true;if(last)punt=false;
-      const normal=!fgt&&!punt&&!kneel;
+      let normal=!fgt&&!punt&&!kneel;let dpen=false,open_=false;if(PEN&&normal){const u2=R();if(u2<PD)dpen=true;else if(u2<PD+PO)open_=true;if(dpen||open_)normal=false}
       let p=PP[`${clip(down,1,4)}|${TGS[tg]}|${ZONES[z]}|${SDS[sdb(sd)]}|${TS[tb(clock)]}`];p=sig(logit(p)+T.pass_shift+c_pass);if(z===3)p=.5*p+.5*T.rz_pass;
       const ispass=normal&&R()<p,isrush=normal&&!ispass;
       let yards=0,turnover=false,incomplete=false,tdRet=false,spot=0,fgMade=false,td=false;
-      const mp=T.mp*c_yard,mr=T.mr*c_yard,rzf=T.rzf*c_td;
+      const mp=T.mp*c_yard*c_py,mr=T.mr*c_yard*c_ry,rzf=T.rzf*c_td;
       if(go)Bo.go4++;
       if(ispass){Bo.plays++;const r=R();
         if(r<T.sack_rate){yards=Math.max(pq(YSACK),-(99-yl));Bo.sk++;if(R()<L.fum_sack)turnover=true}
@@ -94,7 +97,7 @@ function simulate(PR,game,n,seed,onProgress){
       if(tdRet)sc[d]+=7;
       if(td){const sa=sd+6,two=sa===-2||sa===-5;sc[o]+=6+(two?(R()<.48?2:0):(R()<.94?1:0))}
       let gap=incomplete?L.snap_gap.incomplete:(PACE2?(PACE2[SDS[sdb(sd)]+'|'+(clock<=1800?1:0)]||L.snap_gap.run_or_complete):L.snap_gap.run_or_complete);const hurry=(sd<0&&clock<240)||(clock>1800&&clock<1920);
-      if(hurry)gap=incomplete?L.snap_gap.hurry_incomplete:L.snap_gap.hurry;gap*=T.pace;if(fgt||punt)gap=6;if(td||turnover||tdRet)gap=incomplete?5:12;if(kneel)gap=clock+1;
+      if(hurry)gap=incomplete?L.snap_gap.hurry_incomplete:L.snap_gap.hurry;gap*=T.pace*c_pace;if(fgt||punt)gap=6;if(td||turnover||tdRet)gap=incomplete?5:12;if(kneel)gap=clock+1;if(dpen||open_){gap=5;if(dpen){const u3=R(),yp0=u3<.45?5:u3<.7?10:u3<.9?15:25,yp=Math.min(yp0,yl-1),auto=R()<.7;yl-=yp;const tg=togo-yp,first=auto||tg<=0;if(first){down=1;togo=Math.min(10,yl);Bo.fd++}else togo=tg}else{const yp=R()<.6?5:10;yl=Math.min(99,yl+yp);togo+=yp}}
       Bo.top+=gap;const before=clock;clock=Math.max(0,clock-gap);
       const kick=td||tdRet||fgMade;let newPoss=false,newYl=0;
       if(kick){newPoss=true;newYl=pq(KO);if(R()<L.ko_ret_td){sc[d]+=7;newPoss=false;kickoff()}}
@@ -116,6 +119,11 @@ function simulate(PR,game,n,seed,onProgress){
   }
   return summary(game,TM,SA,SH,box,n,OT)}
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0,med=a=>{const s=a.slice().sort((x,y)=>x-y);return s.length?s[Math.floor(s.length/2)]:0},pct=(a,p)=>{const s=a.slice().sort((x,y)=>x-y);return s.length?s[Math.min(s.length-1,Math.floor(p/100*s.length))]:0},sd=a=>{const m=mean(a);return Math.sqrt(mean(a.map(x=>(x-m)*(x-m))))};
+const QS=[5,10,25,50,75,90,95],r1=v=>Math.round(v*10)/10,r2=v=>Math.round(v*100)/100,r3=v=>Math.round(v*1000)/1000;
+function qd(a){const s=a.slice().sort((x,y)=>x-y),n=s.length,o={mean:r2(mean(a)),sd:r2(sd(a))};QS.forEach(p=>{const i=(n-1)*p/100,lo=Math.floor(i),hi=Math.ceil(i);o['p'+p]=r1(s[lo]+(s[hi]-s[lo])*(i-lo))});return o}
+function hist(a,step,hi){const m=Math.floor(hi/step),c=new Array(m+1).fill(0);a.forEach(v=>{c[clip(Math.floor(v/step+1e-9),0,m)]++});return {step,counts:c}}
+function fanblock(ppr,rec){const m=mean(ppr),d={ppr:qd(ppr),half:qd(ppr.map((v,i)=>v-.5*rec[i])),std:qd(ppr.map((v,i)=>v-rec[i])),boom:r3(mean(ppr.map(v=>v>=Math.max(1.5*m,m+6)?1:0))),bust:r3(mean(ppr.map(v=>v<=.5*m?1:0))),p20:r3(mean(ppr.map(v=>v>=20?1:0))),p10:r3(mean(ppr.map(v=>v>=10?1:0))),hist:hist(ppr,1,50)};d.range=r1(d.ppr.p90-d.ppr.p10);d.cv=m>0?r3(sd(ppr)/m):null;return d}
+const zeros=n=>new Array(n).fill(0),add=(a,b)=>a.map((v,i)=>v+(b?b[i]:0));
 function summary(game,TM,SA,SH,box,N,OT){
   const margin=SA.map((a,i)=>SH[i]-a),total=SA.map((a,i)=>a+SH[i]);const pairs={};SA.forEach((a,i)=>{const k=Math.round(a)+'-'+Math.round(SH[i]);pairs[k]=(pairs[k]||0)+1});
   const likely=Object.entries(pairs).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([k,c])=>{const [a,h]=k.split('-').map(Number);return {away:a,home:h,p:c/N}});
@@ -125,19 +133,30 @@ function summary(game,TM,SA,SH,box,N,OT){
       const tot=B.recyd[i].map((v,k)=>v+(ruyd?ruyd[k]:0)),tds=B.rectd[i].map((v,k)=>v+(rutd?rutd[k]:0));
       return {name:p.name,pos:p.pos,slot:p.slot,inj:p.inj,tgt:mean(B.tgt[i]),rec:mean(B.rec[i]),rec_yds:mean(B.recyd[i]),rec_yds_med:med(B.recyd[i]),rec_yds_p25:pct(B.recyd[i],25),rec_yds_p75:pct(B.recyd[i],75),rec_td:mean(B.rectd[i]),
         car:car?mean(car):null,rush_yds:ruyd?mean(ruyd):null,rush_yds_med:ruyd?med(ruyd):null,rush_yds_p25:ruyd?pct(ruyd,25):null,rush_yds_p75:ruyd?pct(ruyd,75):null,rush_td:rutd?mean(rutd):null,
-        p_td:mean(tds.map(v=>v>=1?1:0)),p_100:mean(tot.map(v=>v>=100?1:0)),share:T.w[i]}});
-    T.U.forEach((q,j)=>{if(q.pos==='QB'||pl.some(x=>x.name===q.name))return;pl.push({name:q.name,pos:q.pos,slot:q.slot,inj:q.inj,tgt:0,rec:0,rec_yds:0,rec_yds_med:0,rec_yds_p25:0,rec_yds_p75:0,rec_td:0,car:mean(B.car[j]),rush_yds:mean(B.ruyd[j]),rush_yds_med:med(B.ruyd[j]),rush_yds_p25:pct(B.ruyd[j],25),rush_yds_p75:pct(B.ruyd[j],75),rush_td:mean(B.rutd[j]),p_td:mean(B.rutd[j].map(v=>v>=1?1:0)),p_100:mean(B.ruyd[j].map(v=>v>=100?1:0)),share:0})});
+        p_td:mean(tds.map(v=>v>=1?1:0)),p_100:mean(tot.map(v=>v>=100?1:0)),p_2td:mean(tds.map(v=>v>=2?1:0)),share:T.w[i],
+        dist:Object.assign({tgt:qd(B.tgt[i]),rec:qd(B.rec[i]),rec_yds:qd(B.recyd[i])},car?{car:qd(car),rush_yds:qd(ruyd),rr_yds:qd(tot)}:{}),
+        hist:Object.assign({rec:hist(B.rec[i],1,15),rec_yds:hist(B.recyd[i],5,200)},car?{car:hist(car,1,35),rush_yds:hist(ruyd,5,200),rr_yds:hist(tot,5,250)}:{}),
+        fan:fanblock(B.rec[i].map((r,k)=>r+.1*tot[k]+6*tds[k]),B.rec[i])}});
+    T.U.forEach((q,j)=>{if(q.pos==='QB'||pl.some(x=>x.name===q.name))return;pl.push({name:q.name,pos:q.pos,slot:q.slot,inj:q.inj,tgt:0,rec:0,rec_yds:0,rec_yds_med:0,rec_yds_p25:0,rec_yds_p75:0,rec_td:0,car:mean(B.car[j]),rush_yds:mean(B.ruyd[j]),rush_yds_med:med(B.ruyd[j]),rush_yds_p25:pct(B.ruyd[j],25),rush_yds_p75:pct(B.ruyd[j],75),rush_td:mean(B.rutd[j]),p_td:mean(B.rutd[j].map(v=>v>=1?1:0)),p_100:mean(B.ruyd[j].map(v=>v>=100?1:0)),p_2td:mean(B.rutd[j].map(v=>v>=2?1:0)),share:0,
+      dist:{car:qd(B.car[j]),rush_yds:qd(B.ruyd[j]),rr_yds:qd(B.ruyd[j])},hist:{car:hist(B.car[j],1,35),rush_yds:hist(B.ruyd[j],5,200),rr_yds:hist(B.ruyd[j],5,250)},fan:fanblock(B.ruyd[j].map((v,k)=>.1*v+6*B.rutd[j][k]),zeros(N))})});
     const q=T.qb,j=T.U.findIndex(u=>u.pos==='QB');
-    const qb={name:q.name,att:mean(B.att),cmp:mean(B.cmp),pass_yds:mean(B.pyd),pass_yds_med:med(B.pyd),pass_yds_p25:pct(B.pyd,25),pass_yds_p75:pct(B.pyd,75),pass_td:mean(B.ptd),int:mean(B.int),sacks:mean(B.sk),car:mean(B.qbru)+(j>=0?mean(B.car[j]):0),rush_yds:mean(B.qbryd)+(j>=0?mean(B.ruyd[j]):0),rush_td:mean(B.qbrtd)+(j>=0?mean(B.rutd[j]):0),p_300:mean(B.pyd.map(v=>v>=300?1:0)),p_2td:mean(B.ptd.map(v=>v>=2?1:0)),p_int:mean(B.int.map(v=>v>=1?1:0))};
+    const qb={name:q.name,att:mean(B.att),cmp:mean(B.cmp),pass_yds:mean(B.pyd),pass_yds_med:med(B.pyd),pass_yds_p25:pct(B.pyd,25),pass_yds_p75:pct(B.pyd,75),pass_td:mean(B.ptd),int:mean(B.int),sacks:mean(B.sk),car:mean(B.qbru)+(j>=0?mean(B.car[j]):0),rush_yds:mean(B.qbryd)+(j>=0?mean(B.ruyd[j]):0),rush_td:mean(B.qbrtd)+(j>=0?mean(B.rutd[j]):0),p_300:mean(B.pyd.map(v=>v>=300?1:0)),p_2td:mean(B.ptd.map(v=>v>=2?1:0)),p_int:mean(B.int.map(v=>v>=1?1:0)),pos:'QB',slot:'QB1',inj:q.inj||'1'};
+    const qry=add(B.qbryd,j>=0?B.ruyd[j]:null),qrt=add(B.qbrtd,j>=0?B.rutd[j]:null),qrc=add(B.qbru,j>=0?B.car[j]:null);
+    qb.dist={att:qd(B.att),cmp:qd(B.cmp),pass_yds:qd(B.pyd),pass_td:qd(B.ptd),int:qd(B.int),car:qd(qrc),rush_yds:qd(qry)};
+    qb.hist={att:hist(B.att,1,60),cmp:hist(B.cmp,1,45),pass_yds:hist(B.pyd,10,500),pass_td:hist(B.ptd,1,7),int:hist(B.int,1,5),rush_yds:hist(qry,5,150),car:hist(qrc,1,20)};
+    qb.fan=fanblock(B.pyd.map((v,k)=>.04*v+4*B.ptd[k]-2*B.int[k]+.1*qry[k]+6*qrt[k]),zeros(N));qb.p_td=mean(qrt.map(v=>v>=1?1:0));qb.p_3td=mean(B.ptd.map(v=>v>=3?1:0));
     const pts=side===0?SA:SH;
     const team={plays:mean(B.plays),pass_att:mean(B.att),rush_att:T.U.reduce((a,_,k)=>a+mean(B.car[k]),0)+mean(B.qbru),yds:mean(B.yds),to:mean(B.to),drives:mean(B.drives),rz_trips:mean(B.rzt),fga:mean(B.fga),fgm:mean(B.fgm),punts:mean(B.punts),top:mean(B.top),third:mean(B.third),third_conv:B.thirdc.reduce((a,b)=>a+b,0)/Math.max(1,B.third.reduce((a,b)=>a+b,0)),first_downs:mean(B.fd),downs:mean(B.downs),go4:mean(B.go4),otd:mean(B.otd),
-      pts:mean(pts),pts_med:med(pts),pts_p10:pct(pts,10),pts_p90:pct(pts,90)};
+      pass_yds:mean(B.pyd),rush_yds:T.U.reduce((a,_,k)=>a+mean(B.ruyd[k]),0)+mean(B.qbryd),pass_td:mean(B.ptd),rush_td:T.U.reduce((a,_,k)=>a+mean(B.rutd[k]),0)+mean(B.qbrtd),
+      pts:mean(pts),pts_med:med(pts),pts_p10:pct(pts,10),pts_p90:pct(pts,90),pts_p25:pct(pts,25),pts_p75:pct(pts,75),pts_sd:sd(pts),
+      p20:mean(pts.map(v=>v>=20?1:0)),p24:mean(pts.map(v=>v>=24?1:0)),p28:mean(pts.map(v=>v>=28?1:0)),p30:mean(pts.map(v=>v>=30?1:0)),p_shutout:mean(pts.map(v=>v===0?1:0)),plays_sd:sd(B.plays),yds_sd:sd(B.yds),to_dist:hist(B.to,1,6)};
     return {team:T.name,qb,players:pl.sort((a,b)=>(b.tgt+(b.car||0))-(a.tgt+(a.car||0))),team_stats:team}};
   const spread=game.spread,tot=game.total;
   return {game_id:game.game_id,week:game.week,away:game.away,home:game.home,date:game.date,time:game.time,n:N,spread,total:tot,roof:game.roof,away_qb:TM[0].qb.name,home_qb:TM[1].qb.name,
     p_home:mean(margin.map(m=>m>0?1:0)),p_away:mean(margin.map(m=>m<0?1:0)),p_tie:mean(margin.map(m=>m===0?1:0)),p_ot:mean(OT),
     mean_away:mean(SA),mean_home:mean(SH),med_away:med(SA),med_home:med(SH),mean_margin:mean(margin),sd_margin:sd(margin),mean_total:mean(total),sd_total:sd(total),likely,headline,
     p_home_cover:spread==null?null:mean(margin.map(m=>m>spread?1:0)),p_push:spread==null?null:mean(margin.map(m=>m===spread?1:0)),p_over:tot==null?null:mean(total.map(t=>t>tot?1:0)),p_total_push:tot==null?null:mean(total.map(t=>t===tot?1:0)),
-    margin_dist:dist(margin,-45,45),total_dist:dist(total,10,90),box:[teamBox(0,TM[0],box[0]),teamBox(1,TM[1],box[1])],actual:game.home_score==null?null:{away:game.away_score,home:game.home_score}}}
+    margin_dist:dist(margin,-45,45),total_dist:dist(total,10,90),margin_q:(()=>{const o=qd(margin);delete o.mean;delete o.sd;return o})(),total_q:(()=>{const o=qd(total);delete o.mean;delete o.sd;return o})(),
+    p_one_score:mean(margin.map(m=>Math.abs(m)<=8?1:0)),p_blowout:mean(margin.map(m=>Math.abs(m)>=17?1:0)),p_both20:mean(SA.map((a,i)=>a>=20&&SH[i]>=20?1:0)),box:[teamBox(0,TM[0],box[0]),teamBox(1,TM[1],box[1])],actual:game.home_score==null?null:{away:game.away_score,home:game.home_score}}}
 root.RainmanSim={simulate,Team};
 })(typeof self!=='undefined'?self:this);
