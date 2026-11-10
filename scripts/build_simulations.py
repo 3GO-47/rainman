@@ -98,8 +98,11 @@ def backtest(n, only=None):
     pdir = f'data/processed/sim_bt_parts{tag}'; weeks = sorted(int(w) for w in cur.week.unique()); rows = []; os.makedirs(pdir, exist_ok=True)
     for w in weeks:
         part = f'{pdir}/w{w}.json'
-        if (only and w not in only) or (not only and os.path.exists(part)):
-            if os.path.exists(part): rows += json.load(open(part))
+        # a cached week is reused only while it still covers every finished game of that week (a Thursday-only part must not stand for the whole week)
+        cached = json.load(open(part)) if os.path.exists(part) else None
+        if cached is not None and len(cached) < int((cur.week == w).sum()): cached = None
+        if (only and w not in only) or (not only and cached is not None):
+            if cached is not None: rows += cached
             continue
         wrows = []; prows = []
         PR = params(w, out=f'data/processed/_sim_params_bt{tag}.json', env_extra={'SIM_CFG': json.dumps(cfg)})
