@@ -1,11 +1,11 @@
 {
- "pulled": "2026-11-16T00:06Z",
+ "pulled": "2026-11-16T05:21Z",
  "season": 2026,
  "week": 10,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "SEA@LV": "post",
-  "SF@DAL": "in",
+  "LAC@BAL": "pre",
+  "WSH@NYG": "post",
   "NE@DET": "post",
   "KC@ATL": "post",
   "HOU@CLE": "post",
@@ -14,19 +14,19 @@
   "MIA@IND": "post",
   "CAR@NO": "post",
   "BUF@NYJ": "post",
+  "SEA@LV": "post",
   "LAR@ARI": "post",
-  "PIT@CIN": "pre",
-  "WSH@NYG": "post",
-  "LAC@BAL": "pre"
+  "SF@DAL": "post",
+  "PIT@CIN": "post"
  },
  "scores": {
-  "SEA@LV": [
-   21,
-   13
+  "LAC@BAL": [
+   0,
+   0
   ],
-  "SF@DAL": [
-   38,
-   25
+  "WSH@NYG": [
+   24,
+   21
   ],
   "NE@DET": [
    10,
@@ -60,118 +60,70 @@
    31,
    12
   ],
+  "SEA@LV": [
+   21,
+   13
+  ],
   "LAR@ARI": [
    34,
    6
   ],
+  "SF@DAL": [
+   46,
+   40
+  ],
   "PIT@CIN": [
-   0,
-   0
-  ],
-  "WSH@NYG": [
-   24,
-   21
-  ],
-  "LAC@BAL": [
-   0,
-   0
+   18,
+   38
   ]
  },
  "plays": [
   {
-   "game": "SEA@LV",
-   "q": 1,
-   "clock": "7:41",
-   "team": "LV",
-   "player": "Fernando Mendoza",
+   "game": "WSH@NYG",
+   "q": 2,
+   "clock": "2:35",
+   "team": "NYG",
+   "player": "Cam Skattebo",
    "how": "rush"
   },
   {
-   "game": "SEA@LV",
-   "q": 1,
-   "clock": "2:32",
-   "team": "SEA",
-   "player": "Cooper Kupp",
+   "game": "WSH@NYG",
+   "q": 2,
+   "clock": "0:05",
+   "team": "WSH",
+   "player": "Ben Sinnott",
    "how": "rec"
   },
   {
-   "game": "SEA@LV",
+   "game": "WSH@NYG",
    "q": 3,
-   "clock": "9:28",
-   "team": "SEA",
-   "player": "Jadarian Price",
+   "clock": "10:22",
+   "team": "NYG",
+   "player": "Cam Skattebo",
    "how": "rush"
   },
   {
-   "game": "SEA@LV",
+   "game": "WSH@NYG",
    "q": 3,
-   "clock": "7:10",
-   "team": "SEA",
-   "player": "Jaxon Smith-Njigba",
-   "how": "rec"
-  },
-  {
-   "game": "SF@DAL",
-   "q": 1,
    "clock": "6:56",
-   "team": "SF",
-   "player": "Deebo Samuel Sr.",
+   "team": "WSH",
+   "player": "Antonio Williams",
    "how": "rec"
   },
   {
-   "game": "SF@DAL",
-   "q": 1,
-   "clock": "1:08",
-   "team": "DAL",
-   "player": "George Pickens",
-   "how": "rec"
-  },
-  {
-   "game": "SF@DAL",
-   "q": 2,
-   "clock": "4:08",
-   "team": "DAL",
-   "player": "George Pickens",
-   "how": "rec"
-  },
-  {
-   "game": "SF@DAL",
-   "q": 2,
-   "clock": "2:26",
-   "team": "SF",
-   "player": "Christian McCaffrey",
-   "how": "rec"
-  },
-  {
-   "game": "SF@DAL",
-   "q": 3,
-   "clock": "12:10",
-   "team": "SF",
-   "player": "Kaelon Black",
-   "how": "rush"
-  },
-  {
-   "game": "SF@DAL",
-   "q": 3,
-   "clock": "6:59",
-   "team": "SF",
-   "player": "Deebo Samuel Sr.",
-   "how": "rush"
-  },
-  {
-   "game": "SF@DAL",
+   "game": "WSH@NYG",
    "q": 4,
-   "clock": "11:26",
-   "team": "SF",
-   "player": "Christian McCaffrey",
-   "how": "rush"
+   "clock": "8:13",
+   "team": "NYG",
+   "player": "Isaiah Likely",
+   "how": "rec"
   },
   {
-   "game": "SF@DAL",
+   "game": "WSH@NYG",
    "q": 4,
-   "clock": "9:08",
-   "team": "DAL",
-   "player": "George Pickens",
+   "clock": "0:57",
+   "team": "WSH",
+   "player": "Stefon Diggs",
    "how": "rec"
   },
   {
@@ -511,6 +463,38 @@
    "how": "rush"
   },
   {
+   "game": "SEA@LV",
+   "q": 1,
+   "clock": "7:41",
+   "team": "LV",
+   "player": "Fernando Mendoza",
+   "how": "rush"
+  },
+  {
+   "game": "SEA@LV",
+   "q": 1,
+   "clock": "2:32",
+   "team": "SEA",
+   "player": "Cooper Kupp",
+   "how": "rec"
+  },
+  {
+   "game": "SEA@LV",
+   "q": 3,
+   "clock": "9:28",
+   "team": "SEA",
+   "player": "Jadarian Price",
+   "how": "rush"
+  },
+  {
+   "game": "SEA@LV",
+   "q": 3,
+   "clock": "7:10",
+   "team": "SEA",
+   "player": "Jaxon Smith-Njigba",
+   "how": "rec"
+  },
+  {
    "game": "LAR@ARI",
    "q": 2,
    "clock": "1:06",
@@ -543,51 +527,147 @@
    "how": "rec"
   },
   {
-   "game": "WSH@NYG",
-   "q": 2,
-   "clock": "2:35",
-   "team": "NYG",
-   "player": "Cam Skattebo",
-   "how": "rush"
-  },
-  {
-   "game": "WSH@NYG",
-   "q": 2,
-   "clock": "0:05",
-   "team": "WSH",
-   "player": "Ben Sinnott",
-   "how": "rec"
-  },
-  {
-   "game": "WSH@NYG",
-   "q": 3,
-   "clock": "10:22",
-   "team": "NYG",
-   "player": "Cam Skattebo",
-   "how": "rush"
-  },
-  {
-   "game": "WSH@NYG",
-   "q": 3,
+   "game": "SF@DAL",
+   "q": 1,
    "clock": "6:56",
-   "team": "WSH",
-   "player": "Antonio Williams",
+   "team": "SF",
+   "player": "Deebo Samuel Sr.",
    "how": "rec"
   },
   {
-   "game": "WSH@NYG",
-   "q": 4,
-   "clock": "8:13",
-   "team": "NYG",
-   "player": "Isaiah Likely",
+   "game": "SF@DAL",
+   "q": 1,
+   "clock": "1:08",
+   "team": "DAL",
+   "player": "George Pickens",
    "how": "rec"
   },
   {
-   "game": "WSH@NYG",
+   "game": "SF@DAL",
+   "q": 2,
+   "clock": "4:08",
+   "team": "DAL",
+   "player": "George Pickens",
+   "how": "rec"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 2,
+   "clock": "2:26",
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "how": "rec"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 3,
+   "clock": "12:10",
+   "team": "SF",
+   "player": "Kaelon Black",
+   "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 3,
+   "clock": "6:59",
+   "team": "SF",
+   "player": "Deebo Samuel Sr.",
+   "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
    "q": 4,
-   "clock": "0:57",
-   "team": "WSH",
-   "player": "Stefon Diggs",
+   "clock": "11:26",
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "9:08",
+   "team": "DAL",
+   "player": "George Pickens",
+   "how": "rec"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "3:42",
+   "team": "DAL",
+   "player": "Ryan Flournoy",
+   "how": "rec"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "3:23",
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "how": "rec"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "0:43",
+   "team": "DAL",
+   "player": "CeeDee Lamb",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 2,
+   "clock": "14:47",
+   "team": "CIN",
+   "player": "Drew Sample",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 2,
+   "clock": "5:28",
+   "team": "CIN",
+   "player": "Chase Brown",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 2,
+   "clock": "0:09",
+   "team": "CIN",
+   "player": "Dohnte Meyers",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 3,
+   "clock": "4:12",
+   "team": "CIN",
+   "player": "Chase Brown",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 4,
+   "clock": "12:16",
+   "team": "PIT",
+   "player": "DK Metcalf",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 4,
+   "clock": "10:08",
+   "team": "CIN",
+   "player": "Samaje Perine",
+   "how": "rush"
+  },
+  {
+   "game": "PIT@CIN",
+   "q": 4,
+   "clock": "7:19",
+   "team": "PIT",
+   "player": "Pat Freiermuth",
    "how": "rec"
   }
  ]
