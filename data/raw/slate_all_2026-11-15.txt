@@ -1,6 +1,4 @@
 # multi-sport slate · pulled 2026-11-15 locally (scripts/local/pull_espn.py slate) · preseason rows dropped
-G|nfl|401873062|2026-11-15T21:05Z|STATUS_IN_PROGRESS|26|SEA|Seattle Seahawks|5-4|nfl/500/scoreboard/sea.png||13|LV|Las Vegas Raiders|4-5|nfl/500/scoreboard/lv.png||Allegiant Stadium|CBS|||10|2|0||
-G|nfl|401873061|2026-11-15T21:05Z|STATUS_IN_PROGRESS|14|LAR|Los Angeles Rams|5-4|nfl/500/scoreboard/lar.png||22|ARI|Arizona Cardinals|3-6|nfl/500/scoreboard/ari.png||State Farm Stadium|CBS|||10|2|0||
 G|nfl|401873063|2026-11-15T21:25Z|STATUS_IN_PROGRESS|25|SF|San Francisco 49ers|7-1|nfl/500/scoreboard/sf.png||6|DAL|Dallas Cowboys|4-5|nfl/500/scoreboard/dal.png||AT&T Stadium|Fox|||10|2|0||
 G|nfl|401873053|2026-11-15T14:30Z|STATUS_FINAL|17|NE|New England Patriots|5-5|nfl/500/scoreboard/ne.png||8|DET|Detroit Lions|7-2|nfl/500/scoreboard/det.png||FC Bayern Munich Stadium|Fox|||10|2|1||NFL Munich Game
 G|nfl|401873058|2026-11-15T18Z|STATUS_FINAL|12|KC|Kansas City Chiefs|7-2|nfl/500/scoreboard/kc.png||1|ATL|Atlanta Falcons|3-7|nfl/500/scoreboard/atl.png||Mercedes-Benz Stadium|CBS|||10|2|0||
@@ -10,6 +8,8 @@ G|nfl|401873057|2026-11-15T18Z|STATUS_FINAL|30|JAX|Jacksonville Jaguars|7-2|nfl/
 G|nfl|401873059|2026-11-15T18Z|STATUS_FINAL|15|MIA|Miami Dolphins|1-8|nfl/500/scoreboard/mia.png||11|IND|Indianapolis Colts|3-7|nfl/500/scoreboard/ind.png||Lucas Oil Stadium|CBS|||10|2|0||
 G|nfl|401873055|2026-11-15T18Z|STATUS_FINAL|29|CAR|Carolina Panthers|4-5|nfl/500/scoreboard/car.png||18|NO|New Orleans Saints|3-6|nfl/500/scoreboard/no.png||Caesars Superdome|Fox|||10|2|0||
 G|nfl|401873054|2026-11-15T18Z|STATUS_FINAL|2|BUF|Buffalo Bills|8-1|nfl/500/scoreboard/buf.png||20|NYJ|New York Jets|2-8|nfl/500/scoreboard/nyj.png||MetLife Stadium|CBS|||10|2|0||
+G|nfl|401873062|2026-11-15T21:05Z|STATUS_FINAL|26|SEA|Seattle Seahawks|6-4|nfl/500/scoreboard/sea.png||13|LV|Las Vegas Raiders|4-6|nfl/500/scoreboard/lv.png||Allegiant Stadium|CBS|||10|2|0||
+G|nfl|401873061|2026-11-15T21:05Z|STATUS_FINAL|14|LAR|Los Angeles Rams|6-4|nfl/500/scoreboard/lar.png||22|ARI|Arizona Cardinals|3-7|nfl/500/scoreboard/ari.png||State Farm Stadium|CBS|||10|2|0||
 G|nfl|401873064|2026-11-16T01:20Z|STATUS_SCHEDULED|23|PIT|Pittsburgh Steelers|6-2|nfl/500/scoreboard/pit.png||4|CIN|Cincinnati Bengals|6-2|nfl/500/scoreboard/cin.png||Paycor Stadium|NBC|CIN -3.5|49.5|10|2|0|DraftKings|
 G|nfl|401873065|2026-11-17T01:15Z|STATUS_SCHEDULED|24|LAC|Los Angeles Chargers|0-8|nfl/500/scoreboard/lac.png||33|BAL|Baltimore Ravens|4-5|nfl/500/scoreboard/bal.png||M&T Bank Stadium|ESPN|BAL -4.5|38.5|10|2|0|DraftKings|
 G|nfl|401873066|2026-11-20T01:15Z|STATUS_SCHEDULED|11|IND|Indianapolis Colts|3-7|nfl/500/scoreboard/ind.png||34|HOU|Houston Texans|3-6|nfl/500/scoreboard/hou.png||Reliant Stadium|Prime Video|HOU -9.5|44.5|11|2|0|DraftKings|
@@ -17,11 +17,11 @@ G|nfl|401873070|2026-11-22T18Z|STATUS_SCHEDULED|15|MIA|Miami Dolphins|1-8|nfl/50
 G|nfl|401873071|2026-11-22T18Z|STATUS_SCHEDULED|18|NO|New Orleans Saints|3-6|nfl/500/scoreboard/no.png||3|CHI|Chicago Bears|7-2|nfl/500/scoreboard/chi.png||Soldier Field|Fox|CHI -9.5|49.5|11|2|0|DraftKings|
 G|nfl|401873073|2026-11-22T18Z|STATUS_SCHEDULED|10|TEN|Tennessee Titans|1-8|nfl/500/scoreboard/ten.png||6|DAL|Dallas Cowboys|4-5|nfl/500/scoreboard/dal.png||AT&T Stadium|Fox|DAL -7.5|52.5|11|2|0|DraftKings|
 G|nfl|401873072|2026-11-22T18Z|STATUS_SCHEDULED|27|TB|Tampa Bay Buccaneers|3-6|nfl/500/scoreboard/tb.png||8|DET|Detroit Lions|7-2|nfl/500/scoreboard/det.png||Ford Field|Fox|DET -6|46.5|11|2|0|DraftKings|
-G|nfl|401873067|2026-11-22T18Z|STATUS_SCHEDULED|22|ARI|Arizona Cardinals|3-6|nfl/500/scoreboard/ari.png||12|KC|Kansas City Chiefs|7-2|nfl/500/scoreboard/kc.png||Arrowhead Stadium|CBS|KC -14.5|41.5|11|2|0|DraftKings|
+G|nfl|401873067|2026-11-22T18Z|STATUS_SCHEDULED|22|ARI|Arizona Cardinals|3-7|nfl/500/scoreboard/ari.png||12|KC|Kansas City Chiefs|7-2|nfl/500/scoreboard/kc.png||Arrowhead Stadium|CBS|KC -14.5|41.5|11|2|0|DraftKings|
 G|nfl|401873076|2026-11-22T18Z|STATUS_SCHEDULED|23|PIT|Pittsburgh Steelers|6-2|nfl/500/scoreboard/pit.png||21|PHI|Philadelphia Eagles|2-7|nfl/500/scoreboard/phi.png||Lincoln Financial Field|CBS|PIT -4.5|38.5|11|2|0|DraftKings|
 G|nfl|401873068|2026-11-22T18Z|STATUS_SCHEDULED|33|BAL|Baltimore Ravens|4-5|nfl/500/scoreboard/bal.png||29|CAR|Carolina Panthers|4-5|nfl/500/scoreboard/car.png||Bank of America Stadium|Fox|CAR -1.5|44.5|11|2|0|DraftKings|
 G|nfl|401873074|2026-11-22T21:05Z|STATUS_SCHEDULED|20|NYJ|New York Jets|2-8|nfl/500/scoreboard/nyj.png||24|LAC|Los Angeles Chargers|0-8|nfl/500/scoreboard/lac.png||SoFi Stadium|Fox|LAC -3|40.5|11|2|0|DraftKings|
-G|nfl|401873075|2026-11-22T21:25Z|STATUS_SCHEDULED|13|LV|Las Vegas Raiders|4-5|nfl/500/scoreboard/lv.png||7|DEN|Denver Broncos|7-2|nfl/500/scoreboard/den.png||Empower Field at Mile High|CBS|DEN -8.5|40.5|11|2|0|DraftKings|
+G|nfl|401873075|2026-11-22T21:25Z|STATUS_SCHEDULED|13|LV|Las Vegas Raiders|4-6|nfl/500/scoreboard/lv.png||7|DEN|Denver Broncos|7-2|nfl/500/scoreboard/den.png||Empower Field at Mile High|CBS|DEN -9.5|40.5|11|2|0|DraftKings|
 G|nfl|401873069|2026-11-22T21:25Z|STATUS_SCHEDULED|30|JAX|Jacksonville Jaguars|7-2|nfl/500/scoreboard/jax.png||19|NYG|New York Giants|5-3-1|nfl/500/scoreboard/nyg.png||MetLife Stadium|CBS|JAX -6.5|46.5|11|2|0|DraftKings|
 G|nfl|401873077|2026-11-23T01:20Z|STATUS_SCHEDULED|16|MIN|Minnesota Vikings|7-2|nfl/500/scoreboard/min.png||25|SF|San Francisco 49ers|7-1|nfl/500/scoreboard/sf.png||Estadio Banorte|NBC|SF -3.5|46.5|11|2|1|DraftKings|NFL Mexico City Game
 G|cfb|401856887|2026-11-15T18Z|STATUS_FINAL|145|MISS|Ole Miss Rebels|6-4|ncaa/500/145.png|19|201|OU|Oklahoma Sooners|6-4|ncaa/500/201.png||Memorial Stadium (Norman, OK)|SEC Network|||11|2|0||
@@ -31,17 +31,17 @@ G|cfb|401866466|2026-11-18T00Z|STATUS_SCHEDULED|193|M-OH|Miami (OH) RedHawks|6-4
 G|cfb|401866467|2026-11-19T00Z|STATUS_SCHEDULED|2006|AKR|Akron Zips|1-9|ncaa/500/2006.png||113|MASS|Massachusetts Minutemen|5-5|ncaa/500/113.png||Warren McGuirk Alumni Stadium|CBSSN|MASS -3|46.5|12|2|0|DraftKings|
 G|cfb|401866469|2026-11-19T00:30Z|STATUS_SCHEDULED|2117|CMU|Central Michigan Chippewas|5-5|ncaa/500/2117.png||2084|BUFF|Buffalo Bulls|7-3|ncaa/500/2084.png||Broadview Stadium|ESPNU|BUF -2.5|43.5|12|2|0|DraftKings|
 G|cfb|401862830|2026-11-20T00:30Z|STATUS_SCHEDULED|242|RICE|Rice Owls|1-9|ncaa/500/242.png||218|TEM|Temple Owls|2-8|ncaa/500/218.png||Lincoln Financial Field|ESPN|TEM -3.5|48.5|12|2|0|DraftKings|
-G|cfb|401856869|2026-11-20T23Z|STATUS_SCHEDULED|66|ISU|Iowa State Cyclones|5-5|ncaa/500/66.png||2116|UCF|UCF Knights|5-5|ncaa/500/2116.png||Acrisure Bounce House|FS1|UCF -1.5|53.5|12|2|0|DraftKings|
+G|cfb|401856869|2026-11-20T23Z|STATUS_SCHEDULED|66|ISU|Iowa State Cyclones|5-5|ncaa/500/66.png||2116|UCF|UCF Knights|5-5|ncaa/500/2116.png||Acrisure Bounce House|FS1|UCF -2.5|53.5|12|2|0|DraftKings|
 G|cfb|401858303|2026-11-21T00:30Z|STATUS_SCHEDULED|228|CLEM|Clemson Tigers|6-4|ncaa/500/228.png||150|DUKE|Duke Blue Devils|7-3|ncaa/500/150.png||Wallace Wade Stadium|ESPN|DUKE -11.5|43.5|12|2|0|DraftKings|
 G|cfb|401866468|2026-11-21T00:30Z|STATUS_SCHEDULED|189|BGSU|Bowling Green Falcons|3-7|ncaa/500/189.png||2649|TOL|Toledo Rockets|8-2|ncaa/500/2649.png||Glass Bowl|ESPN2|TOL -15.5|48.5|12|2|0|DraftKings|
 G|cfb|401858529|2026-11-21T01Z|STATUS_SCHEDULED|2483|ORE|Oregon Ducks|7-3|ncaa/500/2483.png|16|127|MSU|Michigan State Spartans|3-7|ncaa/500/127.png||Spartan Stadium|Fox|ORE -14|44.5|12|2|0|DraftKings|
 G|cfb|401864545|2026-11-21T01Z|STATUS_SCHEDULED|2638|UTEP|UTEP Miners|1-9|ncaa/500/2638.png||2005|AFA|Air Force Falcons|8-2|ncaa/500/2005.png||Falcon Stadium|CW|AF -22.5|45.5|12|2|0|DraftKings|
-G|cfb|401864542|2026-11-21T02Z|STATUS_SCHEDULED|167|UNM|New Mexico Lobos|8-2|ncaa/500/167.png||2751|WYO|Wyoming Cowboys|7-3|ncaa/500/2751.png||War Memorial Stadium|FS1|UNM -9.5|37.5|12|2|0|DraftKings|
+G|cfb|401864542|2026-11-21T02Z|STATUS_SCHEDULED|167|UNM|New Mexico Lobos|8-2|ncaa/500/167.png||2751|WYO|Wyoming Cowboys|7-3|ncaa/500/2751.png||War Memorial Stadium|FS1|UNM -8.5|37.5|12|2|0|DraftKings|
 G|cfb|401858302|2026-11-21T05Z|STATUS_SCHEDULED|259|VT|Virginia Tech Hokies|6-4|ncaa/500/259.png||2390|MIA|Miami Hurricanes|9-1|ncaa/500/2390.png|7|Hard Rock Stadium||MIA -20.5|60.5|12|2|0|DraftKings|
 G|cfb|401858306|2026-11-21T05Z|STATUS_SCHEDULED|221|PITT|Pittsburgh Panthers|6-4|ncaa/500/221.png||97|LOU|Louisville Cardinals|7-3|ncaa/500/97.png||L&N Federal Credit Union Stadium||LOU -12.5|51.5|12|2|0|DraftKings|
 G|cfb|401862835|2026-11-21T05Z|STATUS_SCHEDULED|249|UNT|North Texas Mean Green|7-3|ncaa/500/249.png||2655|TULN|Tulane Green Wave|5-5|ncaa/500/2655.png||Yulman Stadium||UNT -7|57.5|12|2|0|DraftKings|
 G|cfb|401856866|2026-11-21T17Z|STATUS_SCHEDULED|252|BYU|BYU Cougars|8-2|ncaa/500/252.png|10|2305|KU|Kansas Jayhawks|4-6|ncaa/500/2305.png||David Booth Kansas Memorial Stadium|ABC|BYU -6|48.5|12|2|0|DraftKings|
-G|cfb|401858310|2026-11-21T17Z|STATUS_SCHEDULED|154|WAKE|Wake Forest Demon Deacons|9-1|ncaa/500/154.png|13|59|GT|Georgia Tech Yellow Jackets|3-7|ncaa/500/59.png||Bobby Dodd Stadium|ESPN|WAKE -21.5|57.5|12|2|0|DraftKings|
+G|cfb|401858310|2026-11-21T17Z|STATUS_SCHEDULED|154|WAKE|Wake Forest Demon Deacons|9-1|ncaa/500/154.png|13|59|GT|Georgia Tech Yellow Jackets|3-7|ncaa/500/59.png||Bobby Dodd Stadium|ESPN|WAKE -21|57.5|12|2|0|DraftKings|
 G|cfb|401856749|2026-11-21T17Z|STATUS_SCHEDULED|2747|WOF|Wofford Terriers|5-6|ncaa/500/2747.png||145|MISS|Ole Miss Rebels|6-4|ncaa/500/145.png|19|Vaught-Hemingway Stadium|SECN+|||12|2|0||
 G|cfb|401858531|2026-11-21T17Z|STATUS_SCHEDULED|194|OSU|Ohio State Buckeyes|7-3|ncaa/500/194.png|20|158|NEB|Nebraska Cornhuskers|6-4|ncaa/500/158.png||Memorial Stadium (Lincoln, NE)|Fox|OSU -2.5|43.5|12|2|0|DraftKings|
 G|cfb|401856748|2026-11-21T17Z|STATUS_SCHEDULED|238|VAN|Vanderbilt Commodores|4-6|ncaa/500/238.png||57|FLA|Florida Gators|6-4|ncaa/500/57.png||Ben Hill Griffin Stadium||FLA -13.5|47.5|12|2|0|DraftKings|
@@ -68,15 +68,15 @@ G|cfb|401871077|2026-11-21T20Z|STATUS_SCHEDULED|48|DEL|Delaware Blue Hens|5-5|nc
 G|cfb|401871078|2026-11-21T20Z|STATUS_SCHEDULED|2229|FIU|Florida International Panthers|4-6|ncaa/500/2229.png||338|KENN|Kennesaw State Owls|4-6|ncaa/500/338.png||Walens Family Field at Fifth Third Stadium|ESPN+|KENN -3.5|44.5|12|2|0|DraftKings|
 G|cfb|401858528|2026-11-21T20:30Z|STATUS_SCHEDULED|26|UCLA|UCLA Bruins|10-0|ncaa/500/26.png|4|130|MICH|Michigan Wolverines|5-5|ncaa/500/130.png||Michigan Stadium|CBS|UCLA -5.5|39.5|12|2|0|DraftKings|
 G|cfb|401856755|2026-11-21T20:30Z|STATUS_SCHEDULED|8|ARK|Arkansas Razorbacks|4-6|ncaa/500/8.png||251|TEX|Texas Longhorns|8-2|ncaa/500/251.png|6|DKR-Texas Memorial Stadium|ESPN|TEX -21|46.5|12|2|0|DraftKings|
-G|cfb|401856754|2026-11-21T20:30Z|STATUS_SCHEDULED|99|LSU|LSU Tigers|6-4|ncaa/500/99.png|21|2633|TENN|Tennessee Volunteers|8-2|ncaa/500/2633.png|8|Neyland Stadium|ABC|LSU -1.5|45.5|12|2|0|DraftKings|
+G|cfb|401856754|2026-11-21T20:30Z|STATUS_SCHEDULED|99|LSU|LSU Tigers|6-4|ncaa/500/99.png|21|2633|TENN|Tennessee Volunteers|8-2|ncaa/500/2633.png|8|Neyland Stadium|ABC|TENN -1.5|45.5|12|2|0|DraftKings|
 G|cfb|401858535|2026-11-21T20:30Z|STATUS_SCHEDULED|84|IU|Indiana Hoosiers|9-1|ncaa/500/84.png|9|264|WASH|Washington Huskies|6-4|ncaa/500/264.png||Husky Stadium|Peacock|IU -7.5|43.5|12|2|0|DraftKings|
 G|cfb|401856871|2026-11-21T20:30Z|STATUS_SCHEDULED|2641|TTU|Texas Tech Red Raiders|9-1|ncaa/500/2641.png|12|239|BAY|Baylor Bears|6-4|ncaa/500/239.png||McLane Stadium|Fox|TTU -3.5|57.5|12|2|0|DraftKings|
 G|cfb|401856747|2026-11-21T20:30Z|STATUS_SCHEDULED|2535|SAM|Samford Bulldogs|4-7|ncaa/500/2535.png||2|AUB|Auburn Tigers|6-4|ncaa/500/2.png||Jordan-Hare Stadium|SEC Network|||12|2|0||
-G|cfb|401858304|2026-11-21T20:30Z|STATUS_SCHEDULED|152|NCSU|NC State Wolfpack|4-6|ncaa/500/152.png||52|FSU|Florida State Seminoles|5-5|ncaa/500/52.png||Doak Campbell Stadium|ACC Network|FSU -8.5|54.5|12|2|0|DraftKings|
+G|cfb|401858304|2026-11-21T20:30Z|STATUS_SCHEDULED|152|NCSU|NC State Wolfpack|4-6|ncaa/500/152.png||52|FSU|Florida State Seminoles|5-5|ncaa/500/52.png||Doak Campbell Stadium|ACC Network|FSU -9.5|54.5|12|2|0|DraftKings|
 G|cfb|401858532|2026-11-21T20:30Z|STATUS_SCHEDULED|164|RUTG|Rutgers Scarlet Knights|2-8|ncaa/500/164.png||213|PSU|Penn State Nittany Lions|6-4|ncaa/500/213.png||Beaver Stadium|FS1|PSU -24.5|50.5|12|2|0|DraftKings|
-G|cfb|401861968|2026-11-21T20:30Z|STATUS_SCHEDULED|295|ODU|Old Dominion Monarchs|3-7|ncaa/500/295.png||41|CONN|UConn Huskies|5-5|ncaa/500/41.png||Pratt & Whitney Stadium|CBSSN|CONN -14|47.5|12|2|0|DraftKings|
+G|cfb|401861968|2026-11-21T20:30Z|STATUS_SCHEDULED|295|ODU|Old Dominion Monarchs|3-7|ncaa/500/295.png||41|CONN|UConn Huskies|5-5|ncaa/500/41.png||Pratt & Whitney Stadium|CBSSN|CONN -13.5|47.5|12|2|0|DraftKings|
 G|cfb|401864543|2026-11-21T21Z|STATUS_SCHEDULED|2459|NIU|Northern Illinois Huskies|0-10|ncaa/500/2459.png||2449|NDSU|North Dakota State Bison|8-2|ncaa/500/2449.png||Fargodome|CW|NDSU -24.5|45.5|12|2|0|DraftKings|
-G|cfb|401869953|2026-11-21T21Z|STATUS_SCHEDULED|290|GASO|Georgia Southern Eagles|6-4|ncaa/500/290.png||2653|TROY|Troy Trojans|4-6|ncaa/500/2653.png||Veterans Memorial Stadium (AL)|ESPN+|GASO -8.5|49.5|12|2|0|DraftKings|
+G|cfb|401869953|2026-11-21T21Z|STATUS_SCHEDULED|290|GASO|Georgia Southern Eagles|6-4|ncaa/500/290.png||2653|TROY|Troy Trojans|4-6|ncaa/500/2653.png||Veterans Memorial Stadium (AL)|ESPN+|GASO -8.5|48.5|12|2|0|DraftKings|
 G|cfb|401869958|2026-11-21T21Z|STATUS_SCHEDULED|2247|GAST|Georgia State Panthers|5-5|ncaa/500/2247.png||276|MRSH|Marshall Thundering Herd|5-5|ncaa/500/276.png||Joan C. Edwards Stadium|ESPN+|GAST -1.5|57.5|12|2|0|DraftKings|
 G|cfb|401871101|2026-11-21T21Z|STATUS_SCHEDULED|6|USA|South Alabama Jaguars|5-5|ncaa/500/6.png||2572|USM|Southern Miss Golden Eagles|3-7|ncaa/500/2572.png||M. M. Roberts Stadium|ESPN+|USA -5.5|63.5|12|2|0|DraftKings|
 G|cfb|401860920|2026-11-21T23Z|STATUS_SCHEDULED|265|WSU|Washington State Cougars|2-8|ncaa/500/265.png||326|TXST|Texas State Bobcats|6-4|ncaa/500/326.png||UFCU Stadium|USA Net|TXST -11.5|59.5|12|2|0|DraftKings|
@@ -96,14 +96,14 @@ G|cfb|401856870|2026-11-22T03:15Z|STATUS_SCHEDULED|197|OKST|Oklahoma State Cowbo
 G|cfb|401860919|2026-11-22T03:30Z|STATUS_SCHEDULED|328|USU|Utah State Aggies|4-6|ncaa/500/328.png||204|ORST|Oregon State Beavers|5-5|ncaa/500/204.png||Reser Stadium|CBSSN|ORST -9.5|51.5|12|2|0|DraftKings|
 G|cfb|401864541|2026-11-22T03:30Z|STATUS_SCHEDULED|62|HAW|Hawai'i Rainbow Warriors|3-7|ncaa/500/62.png||2440|NEV|Nevada Wolf Pack|4-6|ncaa/500/2440.png||Mackay Stadium|FS1|NEV -4|41.5|12|2|0|DraftKings|
 G|nba|401909985|2026-11-15T18Z|STATUS_FINAL|11|IND|Indiana Pacers|5-9|nba/500/scoreboard/ind.png||20|PHI|Philadelphia 76ers|11-3|nba/500/scoreboard/phi.png||Xfinity Mobile Arena|DAZN IND||||2|0||
-G|nba|401909986|2026-11-15T21Z|STATUS_IN_PROGRESS|13|LAL|Los Angeles Lakers|11-2|nba/500/scoreboard/lal.png||21|PHX|Phoenix Suns|5-6|nba/500/scoreboard/phx.png||Mortgage Matchup Center|Spectrum Sports Net,Spectrum Sports Net +,Arizona's Family 3TV,Suns Live||||2|0||
-G|nba|401909987|2026-11-15T21:30Z|STATUS_IN_PROGRESS|30|CHA|Charlotte Hornets|4-8|nba/500/scoreboard/cha.png||12|LAC|LA Clippers|3-8|nba/500/scoreboard/lac.png||Intuit Dome|ClipperVision||||2|0||
+G|nba|401909986|2026-11-15T21Z|STATUS_FINAL|13|LAL|Los Angeles Lakers|12-2|nba/500/scoreboard/lal.png||21|PHX|Phoenix Suns|5-7|nba/500/scoreboard/phx.png||Mortgage Matchup Center|Spectrum Sports Net,Spectrum Sports Net +,Arizona's Family 3TV,Suns Live||||2|0||
+G|nba|401909987|2026-11-15T21:30Z|STATUS_FINAL|30|CHA|Charlotte Hornets|4-9|nba/500/scoreboard/cha.png||12|LAC|LA Clippers|4-8|nba/500/scoreboard/lac.png||Intuit Dome|ClipperVision||||2|0||
 G|nba|401909988|2026-11-15T22Z|STATUS_IN_PROGRESS|24|SA|San Antonio Spurs|11-2|nba/500/scoreboard/sa.png||26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||Delta Center|KJZZ-TV,Jazz+,DAZN SAS||||2|0||
-G|nba|401909989|2026-11-15T23Z|STATUS_IN_PROGRESS|6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||TD Garden|KFAA-TV,MavsTV||||2|0||
+G|nba|401909989|2026-11-15T23Z|STATUS_HALFTIME|6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||TD Garden|KFAA-TV,MavsTV||||2|0||
 G|nba|401909990|2026-11-15T23Z|STATUS_IN_PROGRESS|18|NY|New York Knicks|6-6|nba/500/scoreboard/ny.png||28|TOR|Toronto Raptors|5-7|nba/500/scoreboard/tor.png||Scotiabank Arena|||||2|0||
-G|nba|401909991|2026-11-16T00Z|STATUS_SCHEDULED|10|HOU|Houston Rockets|10-3|nba/500/scoreboard/hou.png||27|WSH|Washington Wizards|4-9|nba/500/scoreboard/wsh.png||Capital One Arena|MNMT|HOU -7.5|223.5||2|0|DraftKings|
+G|nba|401909991|2026-11-16T00Z|STATUS_SCHEDULED|10|HOU|Houston Rockets|10-3|nba/500/scoreboard/hou.png||27|WSH|Washington Wizards|4-9|nba/500/scoreboard/wsh.png||Capital One Arena|MNMT|HOU -8.5|224.5||2|0|DraftKings|
 G|nba|401909992|2026-11-16T01Z|STATUS_SCHEDULED|1|ATL|Atlanta Hawks|7-6|nba/500/scoreboard/atl.png||15|MIL|Milwaukee Bucks|1-12|nba/500/scoreboard/mil.png||Fiserv Forum|MyMi,Bucks App|ATL -8.5|233.5||2|0|DraftKings|
-G|nba|401909993|2026-11-16T02Z|STATUS_SCHEDULED|25|OKC|Oklahoma City Thunder|8-5|nba/500/scoreboard/okc.png||23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||Golden 1 Center|KSBI,Thunder App|OKC -10.5|223.5||2|0|DraftKings|
+G|nba|401909993|2026-11-16T02Z|STATUS_SCHEDULED|25|OKC|Oklahoma City Thunder|8-5|nba/500/scoreboard/okc.png||23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||Golden 1 Center|KSBI,Thunder App|OKC -11.5|223.5||2|0|DraftKings|
 G|nba|401909994|2026-11-17T00Z|STATUS_SCHEDULED|19|ORL|Orlando Magic|5-7|nba/500/scoreboard/orl.png||2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||TD Garden|NBCSN||||2|0||
 G|nba|401909995|2026-11-17T00Z|STATUS_SCHEDULED|4|CHI|Chicago Bulls|3-9|nba/500/scoreboard/chi.png||5|CLE|Cleveland Cavaliers|7-7|nba/500/scoreboard/cle.png||Rocket Arena|DAZN CLE||||2|0||
 G|nba|401909996|2026-11-17T00Z|STATUS_SCHEDULED|29|MEM|Memphis Grizzlies|9-4|nba/500/scoreboard/mem.png||27|WSH|Washington Wizards|4-9|nba/500/scoreboard/wsh.png||Capital One Arena|MNMT||||2|0||
@@ -111,12 +111,12 @@ G|nba|401909997|2026-11-17T00:30Z|STATUS_SCHEDULED|20|PHI|Philadelphia 76ers|11-
 G|nba|401909998|2026-11-17T00:30Z|STATUS_SCHEDULED|10|HOU|Houston Rockets|10-3|nba/500/scoreboard/hou.png||14|MIA|Miami Heat|7-6|nba/500/scoreboard/mia.png||Kaseya Center|||||2|0||
 G|nba|401909999|2026-11-17T01Z|STATUS_SCHEDULED|22|POR|Portland Trail Blazers|9-3|nba/500/scoreboard/por.png||16|MIN|Minnesota Timberwolves|9-4|nba/500/scoreboard/min.png||Target Center|KUNP 16,BlazerVision,DAZN MIN||||2|0||
 G|nba|401910000|2026-11-17T01Z|STATUS_SCHEDULED|9|GS|Golden State Warriors|8-5|nba/500/scoreboard/gs.png||3|NO|New Orleans Pelicans|4-10|nba/500/scoreboard/no.png||Smoothie King Center|GCSEN,Pelicans.com||||2|0||
-G|nba|401910001|2026-11-17T02Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-6|nba/500/scoreboard/phx.png||7|DEN|Denver Nuggets|7-4|nba/500/scoreboard/den.png||Ball Arena|Suns Live,Arizona's Family 3TV||||2|0||
+G|nba|401910001|2026-11-17T02Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-7|nba/500/scoreboard/phx.png||7|DEN|Denver Nuggets|7-4|nba/500/scoreboard/den.png||Ball Arena|Suns Live,Arizona's Family 3TV||||2|0||
 G|nba|401910002|2026-11-18T00:30Z|STATUS_SCHEDULED|18|NY|New York Knicks|6-6|nba/500/scoreboard/ny.png||28|TOR|Toronto Raptors|5-7|nba/500/scoreboard/tor.png||Scotiabank Arena|||||2|0||
 G|nba|401910003|2026-11-18T01Z|STATUS_SCHEDULED|22|POR|Portland Trail Blazers|9-3|nba/500/scoreboard/por.png||16|MIN|Minnesota Timberwolves|9-4|nba/500/scoreboard/min.png||Target Center|BlazerVision,DAZN MIN||||2|0||
 G|nba|401910004|2026-11-18T01Z|STATUS_SCHEDULED|8|DET|Detroit Pistons|8-4|nba/500/scoreboard/det.png||24|SA|San Antonio Spurs|11-2|nba/500/scoreboard/sa.png||Frost Bank Center|NBC||||2|0||
-G|nba|401910006|2026-11-18T03:30Z|STATUS_SCHEDULED|26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||12|LAC|LA Clippers|3-8|nba/500/scoreboard/lac.png||Intuit Dome|ClipperVision,KJZZ-TV,Jazz+||||2|0||
-G|nba|401910005|2026-11-18T04Z|STATUS_SCHEDULED|30|CHA|Charlotte Hornets|4-8|nba/500/scoreboard/cha.png||13|LAL|Los Angeles Lakers|11-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +,NBC||||2|0||
+G|nba|401910006|2026-11-18T03:30Z|STATUS_SCHEDULED|26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||12|LAC|LA Clippers|4-8|nba/500/scoreboard/lac.png||Intuit Dome|ClipperVision,KJZZ-TV,Jazz+||||2|0||
+G|nba|401910005|2026-11-18T04Z|STATUS_SCHEDULED|30|CHA|Charlotte Hornets|4-9|nba/500/scoreboard/cha.png||13|LAL|Los Angeles Lakers|12-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +,NBC||||2|0||
 G|nba|401910007|2026-11-19T00Z|STATUS_SCHEDULED|29|MEM|Memphis Grizzlies|9-4|nba/500/scoreboard/mem.png||5|CLE|Cleveland Cavaliers|7-7|nba/500/scoreboard/cle.png||Rocket Arena|DAZN CLE,DAZN MEM||||2|0||
 G|nba|401910008|2026-11-19T00Z|STATUS_SCHEDULED|10|HOU|Houston Rockets|10-3|nba/500/scoreboard/hou.png||11|IND|Indiana Pacers|5-9|nba/500/scoreboard/ind.png||Gainbridge Fieldhouse|DAZN IND||||2|0||
 G|nba|401910009|2026-11-19T00Z|STATUS_SCHEDULED|15|MIL|Milwaukee Bucks|1-12|nba/500/scoreboard/mil.png||14|MIA|Miami Heat|7-6|nba/500/scoreboard/mia.png||Kaseya Center|ESPN,MyMi,Bucks App||||2|0||
@@ -127,24 +127,24 @@ G|nba|401910013|2026-11-19T01Z|STATUS_SCHEDULED|8|DET|Detroit Pistons|8-4|nba/50
 G|nba|401910014|2026-11-19T01Z|STATUS_SCHEDULED|1|ATL|Atlanta Hawks|7-6|nba/500/scoreboard/atl.png||25|OKC|Oklahoma City Thunder|8-5|nba/500/scoreboard/okc.png||Paycom Center|KSBI,Thunder App||||2|0||
 G|nba|401910016|2026-11-19T01Z|STATUS_SCHEDULED|9|GS|Golden State Warriors|8-5|nba/500/scoreboard/gs.png||6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||American Airlines Center|KFAA-TV,MavsTV||||2|0||
 G|nba|401910015|2026-11-19T02:30Z|STATUS_SCHEDULED|2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||7|DEN|Denver Nuggets|7-4|nba/500/scoreboard/den.png||Ball Arena|ESPN||||2|0||
-G|nba|401910017|2026-11-19T03Z|STATUS_SCHEDULED|26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||13|LAL|Los Angeles Lakers|11-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +,KJZZ-TV,Jazz+||||2|0||
-G|nba|401910018|2026-11-19T03Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-6|nba/500/scoreboard/phx.png||23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||Golden 1 Center|Suns Live,Arizona's Family 3TV||||2|0||
+G|nba|401910017|2026-11-19T03Z|STATUS_SCHEDULED|26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||13|LAL|Los Angeles Lakers|12-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +,KJZZ-TV,Jazz+||||2|0||
+G|nba|401910018|2026-11-19T03Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-7|nba/500/scoreboard/phx.png||23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||Golden 1 Center|Suns Live,Arizona's Family 3TV||||2|0||
 G|nba|401910019|2026-11-20T01Z|STATUS_SCHEDULED|9|GS|Golden State Warriors|8-5|nba/500/scoreboard/gs.png||29|MEM|Memphis Grizzlies|9-4|nba/500/scoreboard/mem.png||FedExForum|DAZN MEM||||2|0||
 G|nba|401910020|2026-11-20T01Z|STATUS_SCHEDULED|22|POR|Portland Trail Blazers|9-3|nba/500/scoreboard/por.png||15|MIL|Milwaukee Bucks|1-12|nba/500/scoreboard/mil.png||Fiserv Forum|KUNP 16,BlazerVision,MyMi,Bucks App||||2|0||
 G|nba|401910021|2026-11-20T01Z|STATUS_SCHEDULED|18|NY|New York Knicks|6-6|nba/500/scoreboard/ny.png||16|MIN|Minnesota Timberwolves|9-4|nba/500/scoreboard/min.png||Target Center|NBA TV,DAZN MIN||||2|0||
-G|nba|401910022|2026-11-20T01Z|STATUS_SCHEDULED|12|LAC|LA Clippers|3-8|nba/500/scoreboard/lac.png||24|SA|San Antonio Spurs|11-2|nba/500/scoreboard/sa.png||Frost Bank Center|DAZN SAS,KTLA,ClipperVision||||2|0||
-G|nba|401909305|2026-11-21T00Z|STATUS_SCHEDULED|30|CHA|Charlotte Hornets|4-8|nba/500/scoreboard/cha.png||1|ATL|Atlanta Hawks|7-6|nba/500/scoreboard/atl.png||State Farm Arena|||||2|0||NBA Cup - Group Play
+G|nba|401910022|2026-11-20T01Z|STATUS_SCHEDULED|12|LAC|LA Clippers|4-8|nba/500/scoreboard/lac.png||24|SA|San Antonio Spurs|11-2|nba/500/scoreboard/sa.png||Frost Bank Center|DAZN SAS,KTLA,ClipperVision||||2|0||
+G|nba|401909305|2026-11-21T00Z|STATUS_SCHEDULED|30|CHA|Charlotte Hornets|4-9|nba/500/scoreboard/cha.png||1|ATL|Atlanta Hawks|7-6|nba/500/scoreboard/atl.png||State Farm Arena|||||2|0||NBA Cup - Group Play
 G|nba|401909306|2026-11-21T00:30Z|STATUS_SCHEDULED|19|ORL|Orlando Magic|5-7|nba/500/scoreboard/orl.png||17|BKN|Brooklyn Nets|3-9|nba/500/scoreboard/bkn.png||Barclays Center|DAZN (YES)||||2|0||NBA Cup - Group Play
 G|nba|401909307|2026-11-21T00:30Z|STATUS_SCHEDULED|11|IND|Indiana Pacers|5-9|nba/500/scoreboard/ind.png||5|CLE|Cleveland Cavaliers|7-7|nba/500/scoreboard/cle.png||Rocket Arena|DAZN CLE||||2|0||NBA Cup - Group Play
 G|nba|401909308|2026-11-21T00:30Z|STATUS_SCHEDULED|28|TOR|Toronto Raptors|5-7|nba/500/scoreboard/tor.png||8|DET|Detroit Pistons|8-4|nba/500/scoreboard/det.png||Little Caesars Arena|Prime Video||||2|0||NBA Cup - Group Play
 G|nba|401909309|2026-11-21T01Z|STATUS_SCHEDULED|27|WSH|Washington Wizards|4-9|nba/500/scoreboard/wsh.png||4|CHI|Chicago Bulls|3-9|nba/500/scoreboard/chi.png||United Center|MNMT||||2|0||NBA Cup - Group Play
 G|nba|401909310|2026-11-21T01Z|STATUS_SCHEDULED|3|NO|New Orleans Pelicans|4-10|nba/500/scoreboard/no.png||25|OKC|Oklahoma City Thunder|8-5|nba/500/scoreboard/okc.png||Paycom Center|KSBI,Thunder App,GCSEN,Pelicans.com||||2|0||NBA Cup - Group Play
-G|nba|401909311|2026-11-21T02:30Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-6|nba/500/scoreboard/phx.png||26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||Delta Center|Suns Live,Arizona's Family 3TV,KJZZ-TV,Jazz+||||2|0||NBA Cup - Group Play
+G|nba|401909311|2026-11-21T02:30Z|STATUS_SCHEDULED|21|PHX|Phoenix Suns|5-7|nba/500/scoreboard/phx.png||26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||Delta Center|Suns Live,Arizona's Family 3TV,KJZZ-TV,Jazz+||||2|0||NBA Cup - Group Play
 G|nba|401909312|2026-11-21T03Z|STATUS_SCHEDULED|10|HOU|Houston Rockets|10-3|nba/500/scoreboard/hou.png||7|DEN|Denver Nuggets|7-4|nba/500/scoreboard/den.png||Ball Arena|Prime Video||||2|0||NBA Cup - Group Play
-G|nba|401909313|2026-11-21T03Z|STATUS_SCHEDULED|23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||13|LAL|Los Angeles Lakers|11-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +||||2|0||NBA Cup - Group Play
+G|nba|401909313|2026-11-21T03Z|STATUS_SCHEDULED|23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||13|LAL|Los Angeles Lakers|12-2|nba/500/scoreboard/lal.png||crypto.com Arena|Spectrum Sports Net,Spectrum Sports Net +||||2|0||NBA Cup - Group Play
 G|nba|401910023|2026-11-21T18Z|STATUS_SCHEDULED|15|MIL|Milwaukee Bucks|1-12|nba/500/scoreboard/mil.png||20|PHI|Philadelphia 76ers|11-3|nba/500/scoreboard/phi.png||Xfinity Mobile Arena|MyMi,Bucks App||||2|0||
 G|nba|401910024|2026-11-22T00:30Z|STATUS_SCHEDULED|22|POR|Portland Trail Blazers|9-3|nba/500/scoreboard/por.png||18|NY|New York Knicks|6-6|nba/500/scoreboard/ny.png||Madison Square Garden|NBA TV,KUNP 16,BlazerVision||||2|0||
-G|nba|401910025|2026-11-22T01Z|STATUS_SCHEDULED|12|LAC|LA Clippers|3-8|nba/500/scoreboard/lac.png||6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||American Airlines Center|KFAA-TV,MavsTV,ClipperVision||||2|0||
+G|nba|401910025|2026-11-22T01Z|STATUS_SCHEDULED|12|LAC|LA Clippers|4-8|nba/500/scoreboard/lac.png||6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||American Airlines Center|KFAA-TV,MavsTV,ClipperVision||||2|0||
 G|nba|401910026|2026-11-22T01Z|STATUS_SCHEDULED|29|MEM|Memphis Grizzlies|9-4|nba/500/scoreboard/mem.png||16|MIN|Minnesota Timberwolves|9-4|nba/500/scoreboard/min.png||Target Center|DAZN MIN,DAZN MEM||||2|0||
 G|nba|401910027|2026-11-22T01Z|STATUS_SCHEDULED|3|NO|New Orleans Pelicans|4-10|nba/500/scoreboard/no.png||24|SA|San Antonio Spurs|11-2|nba/500/scoreboard/sa.png||Frost Bank Center|DAZN SAS,GCSEN,Pelicans.com||||2|0||
 G|nba|401910028|2026-11-22T03Z|STATUS_SCHEDULED|2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||23|SAC|Sacramento Kings|1-11|nba/500/scoreboard/sac.png||Golden 1 Center|NBA TV||||2|0||
@@ -155,10 +155,7 @@ G|nba|401910032|2026-11-23T00Z|STATUS_SCHEDULED|7|DEN|Denver Nuggets|7-4|nba/500
 G|nba|401910033|2026-11-23T00Z|STATUS_SCHEDULED|6|DAL|Dallas Mavericks|7-6|nba/500/scoreboard/dal.png||26|UTAH|Utah Jazz|1-12|nba/500/scoreboard/utah.png||Delta Center|KJZZ-TV,Jazz+,KFAA-TV,MavsTV||||2|0||
 G|nba|401910034|2026-11-23T01Z|STATUS_SCHEDULED|11|IND|Indiana Pacers|5-9|nba/500/scoreboard/ind.png||18|NY|New York Knicks|6-6|nba/500/scoreboard/ny.png||Madison Square Garden|DAZN IND||||2|0||
 G|nba|401910035|2026-11-23T01:30Z|STATUS_SCHEDULED|2|BOS|Boston Celtics|10-2|nba/500/scoreboard/bos.png||9|GS|Golden State Warriors|8-5|nba/500/scoreboard/gs.png||Chase Center|||||2|0||
-G|ncaab|401928789|2026-11-15T21Z|STATUS_IN_PROGRESS|166|NMSU|New Mexico State Aggies|1-2|ncaa/500/166.png||21|SDSU|San Diego State Aztecs|3-0|ncaa/500/21.png||Frontwave Arena|CW||||2|1||Compete 4 Cause Classic
-G|ncaab|401929405|2026-11-15T21:30Z|STATUS_IN_PROGRESS|2178|DOAN|Doane Tigers||||233|SDAK|South Dakota Coyotes|1-4|ncaa/500/233.png||Sanford Coyote Sports Center|Summit League Network,Midco Sports Plus||||2|0||
-G|ncaab|401923393|2026-11-15T21:30Z|STATUS_IN_PROGRESS|2711|WMU|Western Michigan Broncos|3-1|ncaa/500/2711.png||88|USI|Southern Indiana Screaming Eagles|1-3|ncaa/500/88.png||Liberty Arena (IN)|ESPN+||||2|0||
-G|ncaab|401917175|2026-11-15T21:30Z|STATUS_IN_PROGRESS|2441|NHVN|New Haven Chargers|1-2|ncaa/500/2441.png||213|PSU|Penn State Nittany Lions|3-1|ncaa/500/213.png||Bryce Jordan Center|Peacock||||2|0||
+G|ncaab|401920681|2026-11-16T00Z|STATUS_IN_PROGRESS|183|SYR|Syracuse Orange|2-1|ncaa/500/183.png||2599|SJU|St. John's Red Storm|3-0|ncaa/500/2599.png|13|Madison Square Garden|Peacock||||2|0||
 G|ncaab|401911017|2026-11-15T22:30Z|STATUS_IN_PROGRESS|2099|CAN|Canisius Golden Griffins|2-2|ncaa/500/2099.png||2084|BUF|Buffalo Bulls|1-2|ncaa/500/2084.png||Broadview Arena|ESPN+||||2|0||
 G|ncaab|401926733|2026-11-15T23Z|STATUS_IN_PROGRESS|3120|ECCL|Ecclesia Royals||||2630|UTM|UT Martin Skyhawks|2-2|ncaa/500/2630.png||Kathleen and Tom Elam Center|ESPN+||||2|0||
 G|ncaab|401920124|2026-11-15T23Z|STATUS_IN_PROGRESS|13|CP|Cal Poly Mustangs|2-2|ncaa/500/13.png||147|MTST|Montana State Bobcats|1-2|ncaa/500/147.png||Worthington Arena|ESPN+||||2|0||
@@ -188,13 +185,16 @@ G|ncaab|401921168|2026-11-15T20Z|STATUS_FINAL|325|CLE|Cleveland State Vikings|3-
 G|ncaab|401911251|2026-11-15T20Z|STATUS_FINAL|2272|HPU|High Point Panthers|5-0|ncaa/500/2272.png||139|SLU|Saint Louis Billikens|3-1|ncaa/500/139.png||Chaifetz Arena|ESPN2||||2|0||
 G|ncaab|401909493|2026-11-15T20Z|STATUS_FINAL|156|CREI|Creighton Bluejays|3-1|ncaa/500/156.png||2294|IOWA|Iowa Hawkeyes|2-2|ncaa/500/2294.png||Casey's Center|FS1||||2|1||
 G|ncaab|401934396|2026-11-15T21Z|STATUS_FINAL|2005|AF|Air Force Falcons|3-2|ncaa/500/2005.png||279|PAC|Pacific Tigers|3-1|ncaa/500/279.png||Alex G. Spanos Center|ESPN+||||2|0||
+G|ncaab|401928789|2026-11-15T21Z|STATUS_FINAL|166|NMSU|New Mexico State Aggies|1-3|ncaa/500/166.png||21|SDSU|San Diego State Aztecs|4-0|ncaa/500/21.png||Frontwave Arena|CW||||2|1||Compete 4 Cause Classic
 G|ncaab|401928353|2026-11-15T21Z|STATUS_FINAL|3185|UCME|UC Merced Bobcats||||2540|UCSB|UC Santa Barbara Gauchos|4-0|ncaa/500/2540.png||The Thunderdome|ESPN+||||2|0||
 G|ncaab|401919825|2026-11-15T21Z|STATUS_FINAL|2385|MERC|Mercyhurst Lakers|1-4|ncaa/500/2385.png||256|JMU|James Madison Dukes|2-2|ncaa/500/256.png||Atlantic Union Bank Center|ESPN+||||2|0||
 G|ncaab|401917531|2026-11-15T21Z|STATUS_FINAL|2130|CHST|Chicago State Cougars|2-4|ncaa/500/2130.png||2351|LMU|Loyola Marymount Lions|2-3|ncaa/500/2351.png||Gersten Pavilion|ESPN+||||2|0||
 G|ncaab|401917528|2026-11-15T21Z|STATUS_FINAL|304|IDST|Idaho State Bengals|0-4|ncaa/500/304.png||2547|SEA|Seattle U Redhawks|2-2|ncaa/500/2547.png||Redhawk Center|ESPN+||||2|0||
-G|ncaab|401920681|2026-11-16T00Z|STATUS_SCHEDULED|183|SYR|Syracuse Orange|2-1|ncaa/500/183.png||2599|SJU|St. John's Red Storm|3-0|ncaa/500/2599.png|13|Madison Square Garden|Peacock|SJU -12.5|148.5||2|0|DraftKings|
-G|ncaab|401926772|2026-11-16T00Z|STATUS_SCHEDULED|2029|UAPB|Arkansas-Pine Bluff Golden Lions|0-4|ncaa/500/2029.png||30|USC|USC Trojans|3-0|ncaa/500/30.png|21|Galen Center|B1G+|USC -46.5|157.5||2|0|DraftKings|
-G|ncaab|401929200|2026-11-16T01Z|STATUS_SCHEDULED|326|TXST|Texas State Bobcats|4-0|ncaa/500/326.png||2636|UTSA|UTSA Roadrunners|2-1|ncaa/500/2636.png||UTSA Convocation Center|ESPN2|TXST -3.5|147.5||2|0|DraftKings|
+G|ncaab|401929405|2026-11-15T21:30Z|STATUS_FINAL|2178|DOAN|Doane Tigers||||233|SDAK|South Dakota Coyotes|2-4|ncaa/500/233.png||Sanford Coyote Sports Center|Summit League Network,Midco Sports Plus||||2|0||
+G|ncaab|401923393|2026-11-15T21:30Z|STATUS_FINAL|2711|WMU|Western Michigan Broncos|4-1|ncaa/500/2711.png||88|USI|Southern Indiana Screaming Eagles|1-4|ncaa/500/88.png||Liberty Arena (IN)|ESPN+||||2|0||
+G|ncaab|401917175|2026-11-15T21:30Z|STATUS_FINAL|2441|NHVN|New Haven Chargers|1-3|ncaa/500/2441.png||213|PSU|Penn State Nittany Lions|4-1|ncaa/500/213.png||Bryce Jordan Center|Peacock||||2|0||
+G|ncaab|401926772|2026-11-16T00Z|STATUS_IN_PROGRESS|2029|UAPB|Arkansas-Pine Bluff Golden Lions|0-4|ncaa/500/2029.png||30|USC|USC Trojans|3-0|ncaa/500/30.png|21|Galen Center|B1G+||||2|0||
+G|ncaab|401929200|2026-11-16T01Z|STATUS_SCHEDULED|326|TXST|Texas State Bobcats|4-0|ncaa/500/326.png||2636|UTSA|UTSA Roadrunners|2-1|ncaa/500/2636.png||UTSA Convocation Center|ESPN2|TXST -3.5|146.5||2|0|DraftKings|
 G|ncaab|401925718|2026-11-16T01Z|STATUS_SCHEDULED|2488|PANE|Paine Lions||||2065|BCU|Bethune-Cookman Wildcats|0-4|ncaa/500/2065.png||Moore Gymnasium (FL)|||||2|0||
 G|ncaab|401920896|2026-11-16T01Z|STATUS_SCHEDULED|324|CCU|Coastal Carolina Chanticleers|2-2|ncaa/500/324.png||275|WIS|Wisconsin Badgers|3-0|ncaa/500/275.png||Kohl Center|BTN|WIS -27.5|148.5||2|0|DraftKings|
 G|ncaab|401911472|2026-11-16T02Z|STATUS_SCHEDULED|2011|ALST|Alabama State Hornets|1-2|ncaa/500/2011.png||23|SJSU|San José State Spartans|1-2|ncaa/500/23.png||Provident Credit Union Event Center|MW+|SJSU -13.5|150.5||2|0|DraftKings|
@@ -207,14 +207,14 @@ G|ncaab|401921087|2026-11-16T23Z|STATUS_SCHEDULED|314|IONA|Iona Gaels|2-3|ncaa/5
 G|ncaab|401916298|2026-11-16T23Z|STATUS_SCHEDULED|2016|ALCN|Alcorn State Braves|0-4|ncaa/500/2016.png||120|MD|Maryland Terrapins|1-2|ncaa/500/120.png||XFINITY Center|BTN|MD -34.5|152.5||2|0|DraftKings|
 G|ncaab|401916317|2026-11-16T23:30Z|STATUS_SCHEDULED|2504|PV|Prairie View A&M Panthers|2-3|ncaa/500/2504.png||194|OSU|Ohio State Buckeyes|2-2|ncaa/500/194.png||Schottenstein Center|B1G+|OSU -34.5|153.5||2|0|DraftKings|
 G|ncaab|401921804|2026-11-17T00Z|STATUS_SCHEDULED|2755|GRAM|Grambling Tigers|1-1|ncaa/500/2755.png||96|UK|Kentucky Wildcats|3-1|ncaa/500/96.png|24|Rupp Arena|SECN+|UK -30.5|159.5||2|0|DraftKings|
-G|ncaab|401928841|2026-11-17T00Z|STATUS_SCHEDULED|2198|EKU|Eastern Kentucky Colonels|3-1|ncaa/500/2198.png||2309|KENT|Kent State Golden Flashes|1-2|ncaa/500/2309.png||M.A.C. Center|ESPN+|KENT -10.5|157.5||2|0|DraftKings|
+G|ncaab|401928841|2026-11-17T00Z|STATUS_SCHEDULED|2198|EKU|Eastern Kentucky Colonels|3-1|ncaa/500/2198.png||2309|KENT|Kent State Golden Flashes|1-2|ncaa/500/2309.png||M.A.C. Center|ESPN+|KENT -10.5|158.5||2|0|DraftKings|
 G|ncaab|401927352|2026-11-17T00Z|STATUS_SCHEDULED|3229|VUL|Virginia Lynchburg Dragons||||2428|NCCU|North Carolina Central Eagles|0-4|ncaa/500/2428.png||McDougald-McLendon Arena|||||2|0||
 G|ncaab|401925864|2026-11-17T00Z|STATUS_SCHEDULED|98|WKU|Western Kentucky Hilltoppers|3-1|ncaa/500/98.png||202|TLSA|Tulsa Golden Hurricane|3-0|ncaa/500/202.png||Reynolds Center|ESPNU|TLSA -6.5|159.5||2|0|DraftKings|
 G|ncaab|401922240|2026-11-17T00Z|STATUS_SCHEDULED|2227|FMU|Florida Memorial Lions||||56|STET|Stetson Hatters|0-4|ncaa/500/56.png||Insight Credit Union Arena at Edmunds Center|ESPN+||||2|0||
 G|ncaab|401921182|2026-11-17T00Z|STATUS_SCHEDULED|111949|DSLU|DeSales Bulldogs||||219|PENN|Pennsylvania Quakers|1-3|ncaa/500/219.png||The Palestra|ESPN+||||2|0||
 G|ncaab|401919807|2026-11-17T00Z|STATUS_SCHEDULED|2900|STMN|St. Thomas Tommies|2-3|ncaa/500/2900.png||112358|LIU|Long Island University Sharks|0-5|ncaa/500/112358.png||Brooklyn Athletic Center|NEC Front Row|STMN -2.5|149.5||2|0|DraftKings|
-G|ncaab|401918075|2026-11-17T00Z|STATUS_SCHEDULED|2643|CIT|The Citadel Bulldogs|3-1|ncaa/500/2643.png||228|CLEM|Clemson Tigers|3-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network|CLEM -23.5|145.5||2|0|DraftKings|
-G|ncaab|401911240|2026-11-17T00Z|STATUS_SCHEDULED|257|RICH|Richmond Spiders|3-1|ncaa/500/257.png||259|VT|Virginia Tech Hokies|4-0|ncaa/500/259.png||Cassell Coliseum|ACCNX|VT -13.5|154.5||2|0|DraftKings|
+G|ncaab|401918075|2026-11-17T00Z|STATUS_SCHEDULED|2643|CIT|The Citadel Bulldogs|3-1|ncaa/500/2643.png||228|CLEM|Clemson Tigers|3-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network|CLEM -23.5|144.5||2|0|DraftKings|
+G|ncaab|401911240|2026-11-17T00Z|STATUS_SCHEDULED|257|RICH|Richmond Spiders|3-1|ncaa/500/257.png||259|VT|Virginia Tech Hokies|4-0|ncaa/500/259.png||Cassell Coliseum|ACCNX|VT -12.5|154.5||2|0|DraftKings|
 G|ncaab|401906783|2026-11-17T00Z|STATUS_SCHEDULED|294|JAX|Jacksonville Dolphins|2-1|ncaa/500/294.png||61|UGA|Georgia Bulldogs|4-0|ncaa/500/61.png||Stegeman Coliseum|SEC Network|UGA -23.5|153.5||2|0|DraftKings|
 G|ncaab|401927364|2026-11-17T00:30Z|STATUS_SCHEDULED|2627|TAR|Tarleton State Texans|3-1|ncaa/500/2627.png||2181|DRKE|Drake Bulldogs|3-0|ncaa/500/2181.png||Knapp Center|ESPN+|DRKE -10.5|145.5||2|0|DraftKings|
 G|ncaab|401926153|2026-11-17T00:30Z|STATUS_SCHEDULED|111166|MIDW|Midway Eagles||||2546|SEMO|Southeast Missouri State Redhawks|2-2|ncaa/500/2546.png||Show Me Center|ESPN+||||2|0||
@@ -223,7 +223,7 @@ G|ncaab|401928997|2026-11-17T01Z|STATUS_SCHEDULED|502|CSJ|Calumet St. Joseph Cri
 G|ncaab|401920735|2026-11-17T01Z|STATUS_SCHEDULED|171|COLU|Columbia Lions|3-1|ncaa/500/171.png||77|NU|Northwestern Wildcats|3-1|ncaa/500/77.png||Welsh-Ryan Arena|B1G+|NU -12.5|139.5||2|0|DraftKings|
 G|ncaab|401917964|2026-11-17T01Z|STATUS_SCHEDULED|2000|ACU|Abilene Christian Wildcats|1-2|ncaa/500/2000.png||2623|MOST|Missouri State Bears|3-0|ncaa/500/2623.png||Great Southern Bank Arena|ESPN+|MOST -6.5|144.5||2|0|DraftKings|
 G|ncaab|401917917|2026-11-17T01Z|STATUS_SCHEDULED|2110|CARK|Central Arkansas Bears|2-2|ncaa/500/2110.png||197|OKST|Oklahoma State Cowboys|2-1|ncaa/500/197.png||Gallagher-Iba Arena|ESPN+|OKST -21.5|160.5||2|0|DraftKings|
-G|ncaab|401916307|2026-11-17T01Z|STATUS_SCHEDULED|2710|WIU|Western Illinois Leathernecks|1-3|ncaa/500/2710.png||135|MINN|Minnesota Golden Gophers|4-0|ncaa/500/135.png||The Barn by Blue Cross and Blue Shield of Minnesota|BTN|MINN -36.5|138.5||2|0|DraftKings|
+G|ncaab|401916307|2026-11-17T01Z|STATUS_SCHEDULED|2710|WIU|Western Illinois Leathernecks|1-3|ncaa/500/2710.png||135|MINN|Minnesota Golden Gophers|4-0|ncaa/500/135.png||The Barn by Blue Cross and Blue Shield of Minnesota|BTN|MINN -35.5|139.5||2|0|DraftKings|
 G|ncaab|401909798|2026-11-17T01Z|STATUS_SCHEDULED|149|MONT|Montana Grizzlies|2-2|ncaa/500/149.png||2306|KSU|Kansas State Wildcats|2-1|ncaa/500/2306.png||Bramlage Coliseum|ESPN+|KSU -15.5|155.5||2|0|DraftKings|
 G|ncaab|401920808|2026-11-17T01:30Z|STATUS_SCHEDULED|2545|SELA|SE Louisiana Lions|1-2|ncaa/500/2545.png||245|TA&M|Texas A&M Aggies|4-0|ncaa/500/245.png||Reed Arena|SECN+|TA&M -34.5|158.5||2|0|DraftKings|
 G|ncaab|401917981|2026-11-17T01:30Z|STATUS_SCHEDULED|2937|DCC|Dallas Christian Crusaders||||2433|ULM|UL Monroe Warhawks|1-5|ncaa/500/2433.png||b1Bank Fant Coliseum|ESPN+||||2|0||
@@ -231,7 +231,7 @@ G|ncaab|401929192|2026-11-17T02:30Z|STATUS_SCHEDULED|2837|ETAM|East Texas A&M Li
 G|ncaab|401924265|2026-11-17T03Z|STATUS_SCHEDULED|299|LBSU|Long Beach State Beach|1-2|ncaa/500/299.png||26|UCLA|UCLA Bruins|3-0|ncaa/500/26.png|9|Pauley Pavilion|BTN|UCLA -34.5|148.5||2|0|DraftKings|
 G|ncaab|401926228|2026-11-17T03Z|STATUS_SCHEDULED|2145|UCCS|Colorado Colorado Springs Mountain Lions||ncaa/500/2145.png||2172|DEN|Denver Pioneers|0-3|ncaa/500/2172.png||Hamilton Gymnasium|ESPN+||||2|0||
 G|ncaab|401920373|2026-11-17T03Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|1-3|ncaa/500/2640.png||28|UCSD|UC San Diego Tritons|2-1|ncaa/500/28.png||LionTree Arena|ESPN+|UCSD -18.5|156.5||2|0|DraftKings|
-G|ncaab|401917532|2026-11-17T03Z|STATUS_SCHEDULED|2502|PRST|Portland State Vikings|2-2|ncaa/500/2502.png||2608|SMC|Saint Mary's Gaels|3-1|ncaa/500/2608.png||University Credit Union Pavilion|ESPN+|SMC -17.5|150.5||2|0|DraftKings|
+G|ncaab|401917532|2026-11-17T03Z|STATUS_SCHEDULED|2502|PRST|Portland State Vikings|2-2|ncaa/500/2502.png||2608|SMC|Saint Mary's Gaels|3-1|ncaa/500/2608.png||University Credit Union Pavilion|ESPN+|SMC -18.5|150.5||2|0|DraftKings|
 G|ncaab|401920904|2026-11-17T16Z|STATUS_SCHEDULED|111914|WLSN|Wilson WILSON||||48|DEL|Delaware Blue Hens|2-2|ncaa/500/48.png||Bob Carpenter Center|ESPN+||||2|0||
 G|ncaab|401928360|2026-11-17T17Z|STATUS_SCHEDULED|2347|LCHR|Louisiana Christian Wildcats||||2582|SOU|Southern Jaguars|0-5|ncaa/500/2582.png||F.G. Clark Activity Center|||||2|0||
 G|ncaab|401927381|2026-11-17T17Z|STATUS_SCHEDULED|2275|HOF|Hofstra Pride|2-2|ncaa/500/2275.png||93|MUR|Murray State Racers|4-0|ncaa/500/93.png||Landers Center|ESPN+||||2|1||
@@ -306,10 +306,10 @@ G|ncaab|401922292|2026-11-18T23:30Z|STATUS_SCHEDULED|2635|TNTC|Tennessee Tech Go
 G|ncaab|401922283|2026-11-18T23:30Z|STATUS_SCHEDULED|2535|SAM|Samford Bulldogs|1-2|ncaa/500/2535.png||2908|UPST|South Carolina Upstate Spartans|1-4|ncaa/500/2908.png||G.B. Hodge Center|ESPN+||||2|0||
 G|ncaab|401920974|2026-11-18T23:30Z|STATUS_SCHEDULED|236|UTC|Chattanooga Mocs|2-2|ncaa/500/236.png||2737|WIN|Winthrop Eagles|0-4|ncaa/500/2737.png||Winthrop Coliseum|ESPN+||||2|0||
 G|ncaab|401920947|2026-11-18T23:30Z|STATUS_SCHEDULED|2174|DETM|Detroit Mercy Titans|0-3|ncaa/500/2174.png||2199|EMU|Eastern Michigan Eagles|2-1|ncaa/500/2199.png||Gervin GameAbove Center|ESPN+||||2|0||Cancun Challenge - Campus Game
-G|ncaab|401917181|2026-11-18T23:30Z|STATUS_SCHEDULED|85|IUIN|IU Indianapolis Jaguars|3-1|ncaa/500/85.png||213|PSU|Penn State Nittany Lions|3-1|ncaa/500/213.png||Bryce Jordan Center|BTN||||2|0||
+G|ncaab|401917181|2026-11-18T23:30Z|STATUS_SCHEDULED|85|IUIN|IU Indianapolis Jaguars|3-1|ncaa/500/85.png||213|PSU|Penn State Nittany Lions|4-1|ncaa/500/213.png||Bryce Jordan Center|BTN||||2|0||
 G|ncaab|401909516|2026-11-18T23:30Z|STATUS_SCHEDULED|2426|NAVY|Navy Midshipmen|4-1|ncaa/500/2426.png||46|GTWN|Georgetown Hoyas|4-0|ncaa/500/46.png||Capital One Arena|ESPN+,Patriot League TV||||2|0||
 G|ncaab|401920682|2026-11-19T00Z|STATUS_SCHEDULED|2561|SIE|Siena Saints|3-1|ncaa/500/2561.png||2599|SJU|St. John's Red Storm|3-0|ncaa/500/2599.png|13|Carnesecca Arena|truTV||||2|0||
-G|ncaab|401929014|2026-11-19T00Z|STATUS_SCHEDULED|343|MCLA|MCLA Mohawks||||2441|NHVN|New Haven Chargers|1-2|ncaa/500/2441.png||Jeffery P. Hazell Athletics Center|||||2|0||
+G|ncaab|401929014|2026-11-19T00Z|STATUS_SCHEDULED|343|MCLA|MCLA Mohawks||||2441|NHVN|New Haven Chargers|1-3|ncaa/500/2441.png||Jeffery P. Hazell Athletics Center|||||2|0||
 G|ncaab|401928843|2026-11-19T00Z|STATUS_SCHEDULED|190|DFC|Defiance Yellow Jackets||ncaa/500/190.png||193|M-OH|Miami (OH) RedHawks|3-0|ncaa/500/193.png||Millett Hall|ESPN+||||2|0||
 G|ncaab|401928347|2026-11-19T00Z|STATUS_SCHEDULED|2382|MER|Mercer Bears|2-3|ncaa/500/2382.png||2506|PRES|Presbyterian Blue Hose|0-3|ncaa/500/2506.png||Templeton Center|ESPN+||||2|0||
 G|ncaab|401926838|2026-11-19T00Z|STATUS_SCHEDULED|256|JMU|James Madison Dukes|2-2|ncaa/500/256.png||119|TOW|Towson Tigers|3-2|ncaa/500/119.png||SECU Arena|FloSports||||2|0||
@@ -345,14 +345,14 @@ G|ncaab|401929201|2026-11-19T01Z|STATUS_SCHEDULED|2916|UIW|Incarnate Word Cardin
 G|ncaab|401928398|2026-11-19T01Z|STATUS_SCHEDULED|2029|UAPB|Arkansas-Pine Bluff Golden Lions|0-4|ncaa/500/2029.png||2032|ARST|Arkansas State Red Wolves|2-2|ncaa/500/2032.png||First National Bank Arena|ESPN+||||2|0||
 G|ncaab|401927357|2026-11-19T01Z|STATUS_SCHEDULED|2870|PFW|Purdue Fort Wayne Mastodons|2-2|ncaa/500/2870.png||71|BRAD|Bradley Braves|3-2|ncaa/500/71.png||Carver Arena|ESPN+||||2|0||
 G|ncaab|401924721|2026-11-19T01Z|STATUS_SCHEDULED|172|COR|Cornell Big Red|2-2|ncaa/500/172.png||183|SYR|Syracuse Orange|2-1|ncaa/500/183.png||JMA Wireless Dome|ACC Network||||2|0||
-G|ncaab|401923394|2026-11-19T01Z|STATUS_SCHEDULED|2877|LWU|Lindsey Wilson Blue Raiders||||88|USI|Southern Indiana Screaming Eagles|1-3|ncaa/500/88.png||Liberty Arena (IN)|ESPN+||||2|0||
+G|ncaab|401923394|2026-11-19T01Z|STATUS_SCHEDULED|2877|LWU|Lindsey Wilson Blue Raiders||||88|USI|Southern Indiana Screaming Eagles|1-4|ncaa/500/88.png||Liberty Arena (IN)|ESPN+||||2|0||
 G|ncaab|401919848|2026-11-19T01Z|STATUS_SCHEDULED|160|UNH|New Hampshire Wildcats|3-2|ncaa/500/160.png||284|STO|Stonehill Skyhawks|1-3|ncaa/500/284.png||Merkert Gymnasium|NEC Front Row||||2|0||
 G|ncaab|401917982|2026-11-19T01Z|STATUS_SCHEDULED|2433|ULM|UL Monroe Warhawks|1-5|ncaa/500/2433.png||99|LSU|LSU Tigers|4-0|ncaa/500/99.png||Pete Maravich Assembly Center|SECN+||||2|0||
 G|ncaab|401911393|2026-11-19T01Z|STATUS_SCHEDULED|2430|UNCG|UNC Greensboro Spartans|2-2|ncaa/500/2430.png||2241|GWEB|Gardner-Webb Runnin' Bulldogs|1-3|ncaa/500/2241.png||Paul Porter Arena|ESPN+||||2|0||
 G|ncaab|401911232|2026-11-19T01Z|STATUS_SCHEDULED|2724|WICH|Wichita State Shockers|3-1|ncaa/500/2724.png||2350|LUC|Loyola Chicago Ramblers|3-1|ncaa/500/2350.png||Gentile Arena|ESPN+||||2|0||
 G|ncaab|401909555|2026-11-19T01Z|STATUS_SCHEDULED|103|BC|Boston College Eagles|4-0|ncaa/500/103.png||108|HARV|Harvard Crimson|2-3|ncaa/500/108.png||Lavietes Pavilion|ESPN+||||2|0||
 G|ncaab|401906805|2026-11-19T01Z|STATUS_SCHEDULED|2097|CAM|Campbell Fighting Camels|1-3|ncaa/500/2097.png||201|OU|Oklahoma Sooners|3-1|ncaa/500/201.png||Lloyd Noble Center|SECN+||||2|0||
-G|ncaab|401926064|2026-11-19T01:30Z|STATUS_SCHEDULED|233|SDAK|South Dakota Coyotes|1-4|ncaa/500/233.png||158|NEB|Nebraska Cornhuskers|4-0|ncaa/500/158.png|25|Pinnacle Bank Arena|BTN||||2|0||
+G|ncaab|401926064|2026-11-19T01:30Z|STATUS_SCHEDULED|233|SDAK|South Dakota Coyotes|2-4|ncaa/500/233.png||158|NEB|Nebraska Cornhuskers|4-0|ncaa/500/158.png|25|Pinnacle Bank Arena|BTN||||2|0||
 G|ncaab|401909742|2026-11-19T02Z|STATUS_SCHEDULED|41|CONN|UConn Huskies|4-0|ncaa/500/41.png|4|12|ARIZ|Arizona Wildcats|3-1|ncaa/500/12.png|12|McKale Center at ALKEME Arena|FS1||||2|0||
 G|ncaab|401921742|2026-11-19T02Z|STATUS_SCHEDULED|2458|UNCO|Northern Colorado Bears|2-2|ncaa/500/2458.png||252|BYU|BYU Cougars|4-0|ncaa/500/252.png|23|Marriott Center|ESPN+||||2|0||
 G|ncaab|401929176|2026-11-19T02Z|STATUS_SCHEDULED|2449|NDSU|North Dakota State Bison|2-4|ncaa/500/2449.png||36|CSU|Colorado State Rams|3-1|ncaa/500/36.png||Moby Arena|YouTube||||2|0||
@@ -364,7 +364,7 @@ G|ncaab|401911473|2026-11-19T02Z|STATUS_SCHEDULED|278|FRES|Fresno State Bulldogs
 G|ncaab|401909762|2026-11-19T02Z|STATUS_SCHEDULED|2501|PORT|Portland Pilots|3-2|ncaa/500/2501.png||38|COLO|Colorado Buffaloes|2-2|ncaa/500/38.png||CU Events Center|ESPN+||||2|0||
 G|ncaab|401909494|2026-11-19T02Z|STATUS_SCHEDULED|2065|BCU|Bethune-Cookman Wildcats|0-4|ncaa/500/2065.png||156|CREI|Creighton Bluejays|3-1|ncaa/500/156.png||CHI Health Center Omaha|truTV||||2|0||
 G|ncaab|401917535|2026-11-19T02:30Z|STATUS_SCHEDULED|27|UCR|UC Riverside Highlanders|3-1|ncaa/500/27.png||301|USD|San Diego Toreros|3-1|ncaa/500/301.png||Jenny Craig Pavilion|ESPN+||||2|0||
-G|ncaab|401929146|2026-11-19T03Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|1-3|ncaa/500/2640.png||21|SDSU|San Diego State Aztecs|3-0|ncaa/500/21.png||Viejas Arena|YouTube||||2|0||
+G|ncaab|401929146|2026-11-19T03Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|1-3|ncaa/500/2640.png||21|SDSU|San Diego State Aztecs|4-0|ncaa/500/21.png||Viejas Arena|YouTube||||2|0||
 G|ncaab|401929004|2026-11-19T03Z|STATUS_SCHEDULED|265|WSU|Washington State Cougars|1-3|ncaa/500/265.png||62|HAW|Hawai'i Rainbow Warriors|3-1|ncaa/500/62.png||Angel of the Winds Arena|||||2|1||
 G|ncaab|401921064|2026-11-19T03Z|STATUS_SCHEDULED|309|UL|Louisiana Ragin' Cajuns|1-2|ncaa/500/309.png||2539|SF|San Francisco Dons|3-1|ncaa/500/2539.png||The Sobrato Center|ESPN+||||2|0||
 G|ncaab|401920516|2026-11-19T03Z|STATUS_SCHEDULED|-2|TBD|TBD||||-1|TBD|TBD||||Michelob ULTRA Arena|||||2|1||Players Era 8
@@ -399,7 +399,7 @@ G|ncaab|401920520|2026-11-20T01:30Z|STATUS_SCHEDULED|-2|TBD|TBD||||-1|TBD|TBD|||
 G|ncaab|401930884|2026-11-20T02Z|STATUS_SCHEDULED|204|ORST|Oregon State Beavers|4-0|ncaa/500/204.png||2483|ORE|Oregon Ducks|3-0|ncaa/500/2483.png||Moda Center|BTN||||2|1||
 G|ncaab|401928354|2026-11-20T02Z|STATUS_SCHEDULED|2540|UCSB|UC Santa Barbara Gauchos|4-0|ncaa/500/2540.png||2492|PEPP|Pepperdine Waves|2-2|ncaa/500/2492.png||Firestone Fieldhouse|ESPN+||||2|0||
 G|ncaab|401925941|2026-11-20T02Z|STATUS_SCHEDULED|3101|UTU|Utah Tech Trailblazers|1-3|ncaa/500/3101.png||264|WASH|Washington Huskies|2-0|ncaa/500/264.png||Alaska Airlines Arena|B1G+||||2|0||
-G|ncaab|401911534|2026-11-20T02Z|STATUS_SCHEDULED|2638|UTEP|UTEP Miners|2-1|ncaa/500/2638.png||166|NMSU|New Mexico State Aggies|1-2|ncaa/500/166.png||Pan American Center|ESPN+||||2|0||
+G|ncaab|401911534|2026-11-20T02Z|STATUS_SCHEDULED|2638|UTEP|UTEP Miners|2-1|ncaa/500/2638.png||166|NMSU|New Mexico State Aggies|1-3|ncaa/500/166.png||Pan American Center|ESPN+||||2|0||
 G|ncaab|401925916|2026-11-20T03Z|STATUS_SCHEDULED|3218|NWIC|Northwest Indian RedHawks||ncaa/500/3218.png||2502|PRST|Portland State Vikings|2-2|ncaa/500/2502.png||Viking Pavilion|ESPN+||||2|0||
 G|ncaab|401920349|2026-11-20T03Z|STATUS_SCHEDULED|16|SAC|Sacramento State Hornets|1-2|ncaa/500/16.png||24|STAN|Stanford Cardinal|3-1|ncaa/500/24.png||Maples Pavilion|ACCNX||||2|0||
 G|ncaab|401918056|2026-11-20T03Z|STATUS_SCHEDULED|2837|ETAM|East Texas A&M Lions|3-1|ncaa/500/2837.png||25|CAL|California Golden Bears|3-2|ncaa/500/25.png||Haas Pavilion|ACCNX||||2|0||
@@ -437,7 +437,7 @@ G|ncaab|401924844|2026-11-21T00Z|STATUS_SCHEDULED|315|NIA|Niagara Purple Eagles|
 G|ncaab|401924736|2026-11-21T00Z|STATUS_SCHEDULED|2405|MONM|Monmouth Hawks|1-2|ncaa/500/2405.png||163|PRIN|Princeton Tigers|3-2|ncaa/500/163.png||Jadwin Gymnasium|ESPN+||||2|0||
 G|ncaab|401921107|2026-11-21T00Z|STATUS_SCHEDULED|91|BELL|Bellarmine Knights|1-4|ncaa/500/91.png||2198|EKU|Eastern Kentucky Colonels|3-1|ncaa/500/2198.png||Baptist Health Arena|ESPN+||||2|0||
 G|ncaab|401921007|2026-11-21T00Z|STATUS_SCHEDULED|140|KC|Kansas City Roos|2-3|ncaa/500/140.png||314|IONA|Iona Gaels|2-3|ncaa/500/314.png||Hynes Athletics Center|ESPN+||||2|0||
-G|ncaab|401920922|2026-11-21T00Z|STATUS_SCHEDULED|2711|WMU|Western Michigan Broncos|3-1|ncaa/500/2711.png||116|MSM|Mount St. Mary's Mountaineers|1-2|ncaa/500/116.png||Knott Arena|ESPN+||||2|0||
+G|ncaab|401920922|2026-11-21T00Z|STATUS_SCHEDULED|2711|WMU|Western Michigan Broncos|4-1|ncaa/500/2711.png||116|MSM|Mount St. Mary's Mountaineers|1-2|ncaa/500/116.png||Knott Arena|ESPN+||||2|0||
 G|ncaab|401920818|2026-11-21T00Z|STATUS_SCHEDULED|2545|SELA|SE Louisiana Lions|1-2|ncaa/500/2545.png||338|KENN|Kennesaw State Owls|4-0|ncaa/500/338.png||VyStar Arena|ESPN+||||2|0||Cancun Challenge - Campus Game
 G|ncaab|401920357|2026-11-21T00Z|STATUS_SCHEDULED|108|HARV|Harvard Crimson|2-3|ncaa/500/108.png||107|HC|Holy Cross Crusaders|0-4|ncaa/500/107.png||Hart Center Arena|ESPN+||||2|0||
 G|ncaab|401920195|2026-11-21T00Z|STATUS_SCHEDULED|2603|JOES|Saint Joseph's Hawks|4-0|ncaa/500/2603.png||2182|DREX|Drexel Dragons|2-2|ncaa/500/2182.png||Daskalakis Athletic Center|FloSports||||2|0||Big 5 Classic - Campus Game
@@ -464,7 +464,7 @@ G|ncaab|401920137|2026-11-21T02Z|STATUS_SCHEDULED|2934|CSUB|Cal State Bakersfiel
 G|ncaab|401912710|2026-11-21T02Z|STATUS_SCHEDULED|276|MRSH|Marshall Thundering Herd|1-3|ncaa/500/276.png||153|UNC|North Carolina Tar Heels|3-1|ncaa/500/153.png||Dean E. Smith Center|ACC Network||||2|0||
 G|ncaab|401925664|2026-11-21T03Z|STATUS_SCHEDULED|2011|ALST|Alabama State Hornets|1-2|ncaa/500/2011.png||278|FRES|Fresno State Bulldogs|3-1|ncaa/500/278.png||Save Mart Center|YouTube||||2|0||
 G|ncaab|401911252|2026-11-21T04Z|STATUS_SCHEDULED|139|SLU|Saint Louis Billikens|3-1|ncaa/500/139.png||2608|SMC|Saint Mary's Gaels|3-1|ncaa/500/2608.png||University Credit Union Pavilion|ESPN2||||2|0||
-G|ncaab|401923312|2026-11-21T05Z|STATUS_SCHEDULED|160|UNH|New Hampshire Wildcats|3-2|ncaa/500/160.png||2441|NHVN|New Haven Chargers|1-2|ncaa/500/2441.png||Jeffery P. Hazell Athletics Center|||||2|0||
+G|ncaab|401923312|2026-11-21T05Z|STATUS_SCHEDULED|160|UNH|New Hampshire Wildcats|3-2|ncaa/500/160.png||2441|NHVN|New Haven Chargers|1-3|ncaa/500/2441.png||Jeffery P. Hazell Athletics Center|||||2|0||
 G|ncaab|401921811|2026-11-21T05Z|STATUS_SCHEDULED|2511|QUC|Queens University Royals|3-2|ncaa/500/2511.png||99|LSU|LSU Tigers|4-0|ncaa/500/99.png||Pete Maravich Assembly Center|SECN+||||2|0||
 G|ncaab|401917537|2026-11-21T05Z|STATUS_SCHEDULED|71|BRAD|Bradley Braves|3-2|ncaa/500/71.png||279|PAC|Pacific Tigers|3-1|ncaa/500/279.png||Alex G. Spanos Center|ESPN+||||2|0||
 G|ncaab|401924884|2026-11-21T16Z|STATUS_SCHEDULED|2561|SIE|Siena Saints|3-1|ncaa/500/2561.png||2083|BUCK|Bucknell Bison|0-4|ncaa/500/2083.png||Sojka Pavilion|ESPN+||||2|0||
@@ -530,14 +530,14 @@ G|ncaab|401919809|2026-11-22T18Z|STATUS_SCHEDULED|2217|FAIR|Fairfield Stags|2-2|
 G|ncaab|401912212|2026-11-22T18Z|STATUS_SCHEDULED|119|TOW|Towson Tigers|3-2|ncaa/500/119.png||44|AMER|American University Eagles|2-2|ncaa/500/44.png||Bender Arena|ESPN+||||2|0||
 G|ncaab|401909527|2026-11-22T18Z|STATUS_SCHEDULED|2130|CHST|Chicago State Cougars|2-4|ncaa/500/2130.png||269|MARQ|Marquette Golden Eagles|2-2|ncaa/500/269.png||Fiserv Forum|ESPN+||||2|0||
 G|ncaab|401928802|2026-11-22T19Z|STATUS_SCHEDULED|45|GW|George Washington Revolutionaries|4-0|ncaa/500/45.png||98|WKU|Western Kentucky Hilltoppers|3-1|ncaa/500/98.png||Colonial Hall|CBSSN||||2|1||Greenbrier Tip-Off
-G|ncaab|401925942|2026-11-22T19Z|STATUS_SCHEDULED|233|SDAK|South Dakota Coyotes|1-4|ncaa/500/233.png||3101|UTU|Utah Tech Trailblazers|1-3|ncaa/500/3101.png||Sanford Pentagon|||||2|1||
+G|ncaab|401925942|2026-11-22T19Z|STATUS_SCHEDULED|233|SDAK|South Dakota Coyotes|2-4|ncaa/500/233.png||3101|UTU|Utah Tech Trailblazers|1-3|ncaa/500/3101.png||Sanford Pentagon|||||2|1||
 G|ncaab|401921748|2026-11-22T19Z|STATUS_SCHEDULED|2349|UML|UMass Lowell River Hawks|3-1|ncaa/500/2349.png||2132|CIN|Cincinnati Bearcats|3-1|ncaa/500/2132.png||Fifth Third Arena|ESPN+||||2|0||
 G|ncaab|401921706|2026-11-22T19Z|STATUS_SCHEDULED|2751|WYO|Wyoming Cowboys|3-1|ncaa/500/2751.png||2184|DUQ|Duquesne Dukes|4-0|ncaa/500/2184.png||Ocean Center|FloSports||||2|1||Sunshine Slam
 G|ncaab|401918988|2026-11-22T19Z|STATUS_SCHEDULED|339|EVAN|Evansville Purple Aces|2-2|ncaa/500/339.png||235|MEM|Memphis Tigers|3-1|ncaa/500/235.png||FedExForum|ESPN+||||2|0||
 G|ncaab|401918455|2026-11-22T19Z|STATUS_SCHEDULED|2729|W&M|William & Mary Tribe|2-2|ncaa/500/2729.png||2754|YSU|Youngstown State Penguins|2-2|ncaa/500/2754.png||Zidian Family Arena at Beeghly Center|ESPN+||||2|0||
 G|ncaab|401911200|2026-11-22T19Z|STATUS_SCHEDULED|301|USD|San Diego Toreros|3-1|ncaa/500/301.png||2230|FOR|Fordham Rams|3-1|ncaa/500/2230.png||Acrisure Arena|||||2|1||Acrisure Series
-G|ncaab|401928790|2026-11-22T19:30Z|STATUS_SCHEDULED|2523|RMU|Robert Morris Colonials|1-3|ncaa/500/2523.png||166|NMSU|New Mexico State Aggies|1-2|ncaa/500/166.png||The Reef|||||2|1||Jacksonville Classic
-G|ncaab|401906868|2026-11-22T20Z|STATUS_SCHEDULED|88|USI|Southern Indiana Screaming Eagles|1-3|ncaa/500/88.png||251|TEX|Texas Longhorns|4-0|ncaa/500/251.png|7|Moody Center|SECN+||||2|0||
+G|ncaab|401928790|2026-11-22T19:30Z|STATUS_SCHEDULED|2523|RMU|Robert Morris Colonials|1-3|ncaa/500/2523.png||166|NMSU|New Mexico State Aggies|1-3|ncaa/500/166.png||The Reef|||||2|1||Jacksonville Classic
+G|ncaab|401906868|2026-11-22T20Z|STATUS_SCHEDULED|88|USI|Southern Indiana Screaming Eagles|1-4|ncaa/500/88.png||251|TEX|Texas Longhorns|4-0|ncaa/500/251.png|7|Moody Center|SECN+||||2|0||
 G|ncaab|401925066|2026-11-22T20Z|STATUS_SCHEDULED|2653|TROY|Troy Trojans|1-3|ncaa/500/2653.png||2447|NICH|Nicholls Colonels|2-2|ncaa/500/2447.png||Pensacola Bay Center|||||2|1||Pensacola Invitational
 G|ncaab|401922252|2026-11-22T20Z|STATUS_SCHEDULED|2697|UWF|West Florida Argonauts|2-3|ncaa/500/2697.png||6|USA|South Alabama Jaguars|2-3|ncaa/500/6.png||Mitchell Center|ESPN+||||2|0||
 G|ncaab|401929202|2026-11-22T20:30Z|STATUS_SCHEDULED|2377|MCN|McNeese Cowboys|2-1|ncaa/500/2377.png||326|TXST|Texas State Bobcats|4-0|ncaa/500/326.png||Strahan Arena at the University Events Center|CW||||2|0||
@@ -615,15 +615,10 @@ G|nhl|401892769|2026-11-22T22Z|STATUS_SCHEDULED|2|BUF|Buffalo Sabres|8-8-4|nhl/5
 G|nhl|401892770|2026-11-23T00Z|STATUS_SCHEDULED|6|EDM|Edmonton Oilers|15-3-3|nhl/500/scoreboard/edm.png||19|STL|St. Louis Blues|9-9-2|nhl/500/scoreboard/stl.png||Enterprise Center|ESPN+,Blues App,BN+||||2|0||
 G|nhl|401892771|2026-11-23T00Z|STATUS_SCHEDULED|16|PIT|Pittsburgh Penguins|7-11-2|nhl/500/scoreboard/pit.png||9|DAL|Dallas Stars|11-6-2|nhl/500/scoreboard/dal.png||American Airlines Center|ESPN+,Prime Video (Local)||||2|0||
 G|nhl|401892772|2026-11-23T01Z|STATUS_SCHEDULED|4|CHI|Chicago Blackhawks|5-13-2|nhl/500/scoreboard/chi.png||22|VAN|Vancouver Canucks|3-17-1|nhl/500/scoreboard/van.png||Rogers Arena|ESPN+,CHSN||||2|0||
-G|ncaaw|401906079|2026-11-15T22:30Z|STATUS_HALFTIME|41|CONN|UConn Huskies|3-1|ncaa/500/41.png|4|97|LOU|Louisville Cardinals|5-0|ncaa/500/97.png|7|KFC Yum! Center|ESPN||||2|0||
-G|ncaaw|401915326|2026-11-15T23Z|STATUS_IN_PROGRESS|163|PRIN|Princeton Tigers|5-0|ncaa/500/163.png||26|UCLA|UCLA Bruins|3-0|ncaa/500/26.png|10|Pauley Pavilion|BTN||||2|0||
-G|ncaaw|401923339|2026-11-15T21:30Z|STATUS_IN_PROGRESS|2640|TXSO|Texas Southern Tigers|0-3|ncaa/500/2640.png||202|TLSA|Tulsa Golden Hurricane|2-1|ncaa/500/202.png||Reynolds Center|ESPN+||||2|0||
-G|ncaaw|401927488|2026-11-15T22Z|STATUS_IN_PROGRESS|2608|SMC|Saint Mary's Gaels|1-3|ncaa/500/2608.png||2010|AAMU|Alabama A&M Bulldogs|1-3|ncaa/500/2010.png||Stan Sheriff Center|||||2|1||Bank of Hawaii Classic
-G|ncaaw|401926959|2026-11-15T22Z|STATUS_IN_PROGRESS|3152|WLWL|Walla Walla Wolves||||70|IDHO|Idaho Vandals|2-1|ncaa/500/70.png||ICCU Arena|ESPN+||||2|0||
-G|ncaaw|401917704|2026-11-15T22Z|STATUS_IN_PROGRESS|279|PAC|Pacific Tigers|1-2|ncaa/500/279.png||2239|CSUF|Cal State Fullerton Titans|2-2|ncaa/500/2239.png||Titan Gym|ESPN+||||2|0||
-G|ncaaw|401915981|2026-11-15T22Z|STATUS_END_PERIOD|2250|GONZ|Gonzaga Bulldogs|2-2|ncaa/500/2250.png||24|STAN|Stanford Cardinal|3-1|ncaa/500/24.png||Maples Pavilion|ACCNX||||2|0||
-G|ncaaw|401915887|2026-11-15T22Z|STATUS_IN_PROGRESS|56|STET|Stetson Hatters|1-3|ncaa/500/56.png||228|CLEM|Clemson Tigers|3-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network||||2|0||
-G|ncaaw|401917930|2026-11-15T23Z|STATUS_IN_PROGRESS|82|UIC|UIC Flames|3-1|ncaa/500/82.png||66|ISU|Iowa State Cyclones|4-0|ncaa/500/66.png||Hilton Coliseum|ESPN+||||2|0||
+G|ncaaw|401906079|2026-11-15T22:30Z|STATUS_IN_PROGRESS|41|CONN|UConn Huskies|3-1|ncaa/500/41.png|4|97|LOU|Louisville Cardinals|5-0|ncaa/500/97.png|7|KFC Yum! Center|ESPN||||2|0||
+G|ncaaw|401915326|2026-11-15T23Z|STATUS_HALFTIME|163|PRIN|Princeton Tigers|5-0|ncaa/500/163.png||26|UCLA|UCLA Bruins|3-0|ncaa/500/26.png|10|Pauley Pavilion|BTN||||2|0||
+G|ncaaw|401927488|2026-11-15T22Z|STATUS_FINAL|2608|SMC|Saint Mary's Gaels|2-3|ncaa/500/2608.png||2010|AAMU|Alabama A&M Bulldogs|1-4|ncaa/500/2010.png||Stan Sheriff Center|||||2|1||Bank of Hawaii Classic
+G|ncaaw|401917930|2026-11-15T23Z|STATUS_HALFTIME|82|UIC|UIC Flames|3-1|ncaa/500/82.png||66|ISU|Iowa State Cyclones|4-0|ncaa/500/66.png||Hilton Coliseum|ESPN+||||2|0||
 G|ncaaw|401918850|2026-11-15T18Z|STATUS_FINAL|30|USC|USC Trojans|3-1|ncaa/500/30.png|3|2579|SC|South Carolina Gamecocks|4-0|ncaa/500/2579.png|1|Bon Secours Wellness Arena|ABC||||2|1||The Real SC
 G|ncaaw|401915909|2026-11-15T20Z|STATUS_FINAL|276|MRSH|Marshall Thundering Herd|4-1|ncaa/500/276.png||150|DUKE|Duke Blue Devils|4-0|ncaa/500/150.png|5|Cameron Indoor Stadium|ACC Network||||2|0||
 G|ncaaw|401918830|2026-11-15T18Z|STATUS_FINAL|238|VAN|Vanderbilt Commodores|4-1|ncaa/500/238.png|8|2294|IOWA|Iowa Hawkeyes|4-1|ncaa/500/2294.png|10|Tyson Events Center|FS1||||2|1||Bad Boy Mowers Series
@@ -682,8 +677,13 @@ G|ncaaw|401934275|2026-11-15T20:30Z|STATUS_FINAL|2378|UMBC|UMBC Retrievers|4-1|n
 G|ncaaw|401927001|2026-11-15T21Z|STATUS_FINAL|2502|PRST|Portland State Vikings|0-5|ncaa/500/2502.png||23|SJSU|San José State Spartans|1-2|ncaa/500/23.png||Provident Credit Union Event Center|MW+||||2|0||
 G|ncaaw|401919465|2026-11-15T21Z|STATUS_FINAL|44|AMER|American University Eagles|0-3|ncaa/500/44.png||48|DEL|Delaware Blue Hens|1-3|ncaa/500/48.png||Bob Carpenter Center|ESPN+||||2|0||
 G|ncaaw|401917706|2026-11-15T21Z|STATUS_FINAL|2539|SF|San Francisco Dons|3-1|ncaa/500/2539.png||28|UCSD|UC San Diego Tritons|2-2|ncaa/500/28.png||LionTree Arena|ESPN+||||2|0||
-G|ncaaw|401915964|2026-11-16T00Z|STATUS_SCHEDULED|2447|NICH|Nicholls Colonels|2-2|ncaa/500/2447.png||2567|SMU|SMU Mustangs|4-0|ncaa/500/2567.png||Moody Coliseum (Dallas)|ACCNX||||2|0||
-G|ncaaw|401915595|2026-11-16T00Z|STATUS_SCHEDULED|2099|CAN|Canisius Golden Griffins|2-1|ncaa/500/2099.png||183|SYR|Syracuse Orange|3-0|ncaa/500/183.png||JMA Wireless Dome|ACC Network|SYR -33.5|132.5||2|0|DraftKings|
+G|ncaaw|401923339|2026-11-15T21:30Z|STATUS_FINAL|2640|TXSO|Texas Southern Tigers|0-4|ncaa/500/2640.png||202|TLSA|Tulsa Golden Hurricane|3-1|ncaa/500/202.png||Reynolds Center|ESPN+||||2|0||
+G|ncaaw|401926959|2026-11-15T22Z|STATUS_FINAL|3152|WLWL|Walla Walla Wolves||||70|IDHO|Idaho Vandals|3-1|ncaa/500/70.png||ICCU Arena|ESPN+||||2|0||
+G|ncaaw|401917704|2026-11-15T22Z|STATUS_FINAL|279|PAC|Pacific Tigers|2-2|ncaa/500/279.png||2239|CSUF|Cal State Fullerton Titans|2-3|ncaa/500/2239.png||Titan Gym|ESPN+||||2|0||
+G|ncaaw|401915981|2026-11-15T22Z|STATUS_FINAL|2250|GONZ|Gonzaga Bulldogs|2-3|ncaa/500/2250.png||24|STAN|Stanford Cardinal|4-1|ncaa/500/24.png||Maples Pavilion|ACCNX||||2|0||
+G|ncaaw|401915887|2026-11-15T22Z|STATUS_FINAL|56|STET|Stetson Hatters|1-4|ncaa/500/56.png||228|CLEM|Clemson Tigers|4-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network||||2|0||
+G|ncaaw|401915964|2026-11-16T00Z|STATUS_IN_PROGRESS|2447|NICH|Nicholls Colonels|2-2|ncaa/500/2447.png||2567|SMU|SMU Mustangs|4-0|ncaa/500/2567.png||Moody Coliseum (Dallas)|ACCNX||||2|0||
+G|ncaaw|401915595|2026-11-16T00Z|STATUS_IN_PROGRESS|2099|CAN|Canisius Golden Griffins|2-1|ncaa/500/2099.png||183|SYR|Syracuse Orange|3-0|ncaa/500/183.png||JMA Wireless Dome|ACC Network||||2|0||
 G|ncaaw|401928046|2026-11-16T00:30Z|STATUS_SCHEDULED|2351|LMU|Loyola Marymount Lions|4-0|ncaa/500/2351.png||62|HAW|Hawai'i Rainbow Wahine|1-2|ncaa/500/62.png||Stan Sheriff Center|MW+||||2|0||Bank of Hawaii Classic
 G|ncaaw|401913057|2026-11-16T02Z|STATUS_SCHEDULED|204|ORST|Oregon State Beavers|2-1|ncaa/500/204.png||12|ARIZ|Arizona Wildcats|2-1|ncaa/500/12.png||McKale Center at ALKEME Arena|ESPN+||||2|0||
 G|ncaaw|401920493|2026-11-15T21Z|STATUS_CANCELED|147|MTST|Montana State Bobcats|2-0|ncaa/500/147.png||2439|UNLV|UNLV Lady Rebels|1-2|ncaa/500/2439.png||The Pavilion|||||2|0||
@@ -761,7 +761,7 @@ G|ncaaw|401920441|2026-11-18T01Z|STATUS_SCHEDULED|357|AMCC|Texas A&M-Corpus Chri
 G|ncaaw|401918556|2026-11-18T01Z|STATUS_SCHEDULED|2296|JKST|Jackson State Lady Tigers|1-3|ncaa/500/2296.png||2032|ARST|Arkansas State Red Wolves|0-3|ncaa/500/2032.png||First National Bank Arena|ESPN+||||2|0||
 G|ncaaw|401913876|2026-11-18T01Z|STATUS_SCHEDULED|2724|WICH|Wichita State Shockers|1-3|ncaa/500/2724.png||198|ORU|Oral Roberts Golden Eagles|2-3|ncaa/500/198.png||Mabee Center|||||2|0||
 G|ncaaw|401916084|2026-11-18T01:30Z|STATUS_SCHEDULED|301|USD|San Diego Toreros|3-1|ncaa/500/301.png||9|ASU|Arizona State Sun Devils|3-0|ncaa/500/9.png||Desert Financial Arena|ESPN+||||2|0||
-G|ncaaw|401923340|2026-11-18T02Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|0-3|ncaa/500/2640.png||201|OU|Oklahoma Sooners|4-0|ncaa/500/201.png|14|Lloyd Noble Center|SEC Network||||2|0||
+G|ncaaw|401923340|2026-11-18T02Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|0-4|ncaa/500/2640.png||201|OU|Oklahoma Sooners|4-0|ncaa/500/201.png|14|Lloyd Noble Center|SEC Network||||2|0||
 G|ncaaw|401928373|2026-11-18T02Z|STATUS_SCHEDULED|2094|CLU|Cal Lutheran Kingsmen||ncaa/500/2094.png||2540|UCSB|UC Santa Barbara Gauchos|3-1|ncaa/500/2540.png||The Thunderdome|ESPN+||||2|0||
 G|ncaaw|401913833|2026-11-18T02:30Z|STATUS_SCHEDULED|242|RICE|Rice Owls|4-0|ncaa/500/242.png||2439|UNLV|UNLV Lady Rebels|1-2|ncaa/500/2439.png||The Pavilion|MW+||||2|0||
 G|ncaaw|401917707|2026-11-18T03Z|STATUS_SCHEDULED|2253|GCU|Grand Canyon Lopes|3-0|ncaa/500/2253.png||2541|SCU|Santa Clara Broncos|3-1|ncaa/500/2541.png||Leavey Center|ESPN+||||2|0||
@@ -786,7 +786,7 @@ G|ncaaw|401929631|2026-11-18T23Z|STATUS_SCHEDULED|3229|VUL|Virginia Lynchburg Dr
 G|ncaaw|401926025|2026-11-18T23Z|STATUS_SCHEDULED|2747|WOF|Wofford Terriers|3-2|ncaa/500/2747.png||2429|CLT|Charlotte 49ers|1-2|ncaa/500/2429.png||Halton Arena|ESPN+||||2|0||
 G|ncaaw|401919466|2026-11-18T23Z|STATUS_SCHEDULED|2182|DREX|Drexel Dragons|1-3|ncaa/500/2182.png||44|AMER|American University Eagles|0-3|ncaa/500/44.png||Bender Arena|ESPN+||||2|0||
 G|ncaaw|401919449|2026-11-18T23Z|STATUS_SCHEDULED|322|LAF|Lafayette Leopards|1-3|ncaa/500/322.png||2612|SPU|Saint Peter's Peacocks|0-3|ncaa/500/2612.png||Yanitelli Center|ESPN+||||2|0||
-G|ncaaw|401915888|2026-11-18T23Z|STATUS_SCHEDULED|2908|UPST|South Carolina Upstate Spartans|4-1|ncaa/500/2908.png||228|CLEM|Clemson Tigers|3-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network||||2|0||
+G|ncaaw|401915888|2026-11-18T23Z|STATUS_SCHEDULED|2908|UPST|South Carolina Upstate Spartans|4-1|ncaa/500/2908.png||228|CLEM|Clemson Tigers|4-1|ncaa/500/228.png||Littlejohn Coliseum|ACC Network||||2|0||
 G|ncaaw|401915668|2026-11-18T23Z|STATUS_SCHEDULED|2441|NHVN|New Haven Chargers|1-2|ncaa/500/2441.png||314|IONA|Iona Gaels|2-3|ncaa/500/314.png||Hynes Athletics Center|ESPN+||||2|0||
 G|ncaaw|401914492|2026-11-18T23Z|STATUS_SCHEDULED|2385|MERC|Mercyhurst Lakers|1-4|ncaa/500/2385.png||172|COR|Cornell Big Red|2-2|ncaa/500/172.png||Newman Arena|ESPN+||||2|0||
 G|ncaaw|401913814|2026-11-18T23Z|STATUS_SCHEDULED|2115|CCSU|Central Connecticut Blue Devils|0-5|ncaa/500/2115.png||2349|UML|UMass Lowell River Hawks|2-3|ncaa/500/2349.png||Kennedy Family Athletic Complex|ESPN+||||2|0||
@@ -822,14 +822,14 @@ G|ncaaw|401918003|2026-11-19T00:30Z|STATUS_SCHEDULED|250|UTA|UT Arlington Maveri
 G|ncaaw|401907051|2026-11-19T00:30Z|STATUS_SCHEDULED|2599|SJU|St. John's Red Storm|4-0|ncaa/500/2599.png||197|OKST|Oklahoma State Cowgirls|4-1|ncaa/500/197.png|19|Gallagher-Iba Arena|ESPN+||||2|0||
 G|ncaaw|401928004|2026-11-19T00:30Z|STATUS_SCHEDULED|2029|UAPB|Arkansas-Pine Bluff Golden Lions|1-3|ncaa/500/2029.png||2348|LT|Louisiana Tech Lady Techsters|4-1|ncaa/500/2348.png||Thomas Assembly Center|ESPN+||||2|0||
 G|ncaaw|401926050|2026-11-19T00:30Z|STATUS_SCHEDULED|2598|SFPA|Saint Francis Red Wolves||ncaa/500/2598.png||249|UNT|North Texas Mean Green|3-1|ncaa/500/249.png||The Super Pit|ESPN+||||2|0||
-G|ncaaw|401920211|2026-11-19T00:30Z|STATUS_SCHEDULED|2443|NOLA|LSU New Orleans Privateers|0-4|ncaa/500/2443.png||202|TLSA|Tulsa Golden Hurricane|2-1|ncaa/500/202.png||Reynolds Center|ESPN+||||2|0||
+G|ncaaw|401920211|2026-11-19T00:30Z|STATUS_SCHEDULED|2443|NOLA|LSU New Orleans Privateers|0-4|ncaa/500/2443.png||202|TLSA|Tulsa Golden Hurricane|3-1|ncaa/500/202.png||Reynolds Center|ESPN+||||2|0||
 G|ncaaw|401911794|2026-11-19T00:30Z|STATUS_SCHEDULED|2437|OMA|Omaha Mavericks|2-2|ncaa/500/2437.png||156|CREI|Creighton Bluejays|3-1|ncaa/500/156.png||D.J. Sokol Arena|ESPN+||||2|0||
 G|ncaaw|401906966|2026-11-19T01Z|STATUS_SCHEDULED|2305|KU|Kansas Jayhawks|3-1|ncaa/500/2305.png||135|MINN|Minnesota Golden Gophers|4-0|ncaa/500/135.png|18|The Barn by Blue Cross and Blue Shield of Minnesota|Peacock,NBCSN||||2|0||
 G|ncaaw|401930343|2026-11-19T01Z|STATUS_SCHEDULED|108878|BTHS|Bethesda Flames||||2464|NAU|Northern Arizona Lumberjacks|0-3|ncaa/500/2464.png||Rolle Activity Center|ESPN+||||2|0||
 G|ncaaw|401921235|2026-11-19T01Z|STATUS_SCHEDULED|2623|MOST|Missouri State Lady Bears|3-1|ncaa/500/2623.png||139|SLU|Saint Louis Billikens|2-2|ncaa/500/139.png||Chaifetz Arena|ESPN+||||2|0||
 G|ncaaw|401920499|2026-11-19T01Z|STATUS_SCHEDULED|2751|WYO|Wyoming Cowgirls|2-2|ncaa/500/2751.png||2571|SDST|South Dakota State Jackrabbits|1-3|ncaa/500/2571.png||First Bank & Trust Arena|Summit League Network,Midco Sports Plus||||2|0||
 G|ncaaw|401920026|2026-11-19T01:30Z|STATUS_SCHEDULED|253|SUU|Southern Utah Thunderbirds|2-2|ncaa/500/253.png||2005|AF|Air Force Falcons|2-2|ncaa/500/2005.png||Clune Arena|MW+||||2|0||
-G|ncaaw|401926987|2026-11-19T02Z|STATUS_SCHEDULED|149|MONT|Montana Lady Griz|1-3|ncaa/500/149.png||2250|GONZ|Gonzaga Bulldogs|2-2|ncaa/500/2250.png||McCarthey Athletic Center|YouTube||||2|0||
+G|ncaaw|401926987|2026-11-19T02Z|STATUS_SCHEDULED|149|MONT|Montana Lady Griz|1-3|ncaa/500/149.png||2250|GONZ|Gonzaga Bulldogs|2-3|ncaa/500/2250.png||McCarthey Athletic Center|YouTube||||2|0||
 G|ncaaw|401921616|2026-11-19T02Z|STATUS_SCHEDULED|304|IDST|Idaho State Bengals|4-1|ncaa/500/304.png||300|UCI|UC Irvine Anteaters|1-1|ncaa/500/300.png||Bren Events Center|ESPN+||||2|0||
 G|ncaaw|401920276|2026-11-19T02Z|STATUS_SCHEDULED|38|COLO|Colorado Buffaloes|4-0|ncaa/500/38.png||167|UNM|New Mexico Lobos|1-3|ncaa/500/167.png||The Pit|MW+||||2|0||
 G|ncaaw|401917709|2026-11-19T02Z|STATUS_SCHEDULED|2502|PRST|Portland State Vikings|0-5|ncaa/500/2502.png||2501|PORT|Portland Pilots|2-2|ncaa/500/2501.png||Chiles Center|ESPN+||||2|0||
@@ -854,11 +854,11 @@ G|ncaaw|401906895|2026-11-19T23Z|STATUS_SCHEDULED|2226|FAU|Florida Atlantic Owls
 G|ncaaw|401906107|2026-11-19T23Z|STATUS_SCHEDULED|2026|APP|App State Mountaineers|3-1|ncaa/500/2026.png||154|WAKE|Wake Forest Demon Deacons|4-1|ncaa/500/154.png||LJVM Coliseum|ACCNX||||2|0||
 G|ncaaw|401927982|2026-11-19T23:30Z|STATUS_SCHEDULED|2729|W&M|William & Mary Tribe|2-2|ncaa/500/2729.png||295|ODU|Old Dominion Monarchs|3-2|ncaa/500/295.png||Chartway Arena|ESPN+||||2|0||
 G|ncaaw|401919438|2026-11-19T23:30Z|STATUS_SCHEDULED|2529|SHU|Sacred Heart Pioneers|1-3|ncaa/500/2529.png||127|MSU|Michigan State Spartans|4-0|ncaa/500/127.png||Breslin Center|B1G+||||2|0||
-G|ncaaw|401919060|2026-11-19T23:30Z|STATUS_SCHEDULED|56|STET|Stetson Hatters|1-3|ncaa/500/56.png||2116|UCF|UCF Knights|4-1|ncaa/500/2116.png||Addition Financial Arena|ESPN+||||2|0||
+G|ncaaw|401919060|2026-11-19T23:30Z|STATUS_SCHEDULED|56|STET|Stetson Hatters|1-4|ncaa/500/56.png||2116|UCF|UCF Knights|4-1|ncaa/500/2116.png||Addition Financial Arena|ESPN+||||2|0||
 G|ncaaw|401922832|2026-11-20T00Z|STATUS_SCHEDULED|2466|NWST|Northwestern State Lady Demons|1-3|ncaa/500/2466.png||201|OU|Oklahoma Sooners|4-0|ncaa/500/201.png|14|Lloyd Noble Center|SECN+||||2|0||
 G|ncaaw|401929055|2026-11-20T00Z|STATUS_SCHEDULED|2649|TOL|Toledo Rockets|2-2|ncaa/500/2649.png||2174|DETM|Detroit Mercy Titans|3-2|ncaa/500/2174.png||Calihan Hall|ESPN+||||2|0||
 G|ncaaw|401928204|2026-11-20T00Z|STATUS_SCHEDULED|2081|BRYN|Bryan Lions||||2535|SAM|Samford Bulldogs|2-3|ncaa/500/2535.png||Pete Hanna Center|||||2|0||
-G|ncaaw|401926080|2026-11-20T00Z|STATUS_SCHEDULED|5|UAB|UAB Blazers|3-0|ncaa/500/5.png||2010|AAMU|Alabama A&M Bulldogs|1-3|ncaa/500/2010.png||Event Center|SWAC TV||||2|0||
+G|ncaaw|401926080|2026-11-20T00Z|STATUS_SCHEDULED|5|UAB|UAB Blazers|3-0|ncaa/500/5.png||2010|AAMU|Alabama A&M Bulldogs|1-4|ncaa/500/2010.png||Event Center|SWAC TV||||2|0||
 G|ncaaw|401925623|2026-11-20T00Z|STATUS_SCHEDULED|2428|NCCU|North Carolina Central Eagles|2-4|ncaa/500/2428.png||2430|UNCG|UNC Greensboro Spartans|3-2|ncaa/500/2430.png||Bodford Arena|ESPN+||||2|0||
 G|ncaaw|401922327|2026-11-20T00Z|STATUS_SCHEDULED|2344|LONG|Longwood Lancers|2-2|ncaa/500/2344.png||2653|TROY|Troy Trojans|2-2|ncaa/500/2653.png||Trojan Arena|ESPN+||||2|0||
 G|ncaaw|401918649|2026-11-20T00Z|STATUS_SCHEDULED|2534|SHSU|Sam Houston Bearkats|2-2|ncaa/500/2534.png||2433|ULM|UL Monroe Warhawks|1-2|ncaa/500/2433.png||b1Bank Fant Coliseum|ESPN+||||2|0||
@@ -880,16 +880,16 @@ G|ncaaw|401912994|2026-11-20T01:30Z|STATUS_SCHEDULED|333|ALA|Alabama Crimson Tid
 G|ncaaw|401921548|2026-11-20T02Z|STATUS_SCHEDULED|21|SDSU|San Diego State Aztecs|3-1|ncaa/500/21.png||2463|CSUN|Cal State Northridge Matadors|1-2|ncaa/500/2463.png||Premier America Credit Union Arena|ESPN+||||2|0||
 G|ncaaw|401917710|2026-11-20T02Z|STATUS_SCHEDULED|299|LBSU|Long Beach State Beach|0-2|ncaa/500/299.png||2539|SF|San Francisco Dons|3-1|ncaa/500/2539.png||The Sobrato Center|ESPN+||||2|0||
 G|ncaaw|401918898|2026-11-20T03Z|STATUS_SCHEDULED|13|CP|Cal Poly Mustangs|3-1|ncaa/500/13.png||26|UCLA|UCLA Bruins|3-0|ncaa/500/26.png|10|Pauley Pavilion|B1G+||||2|0||
-G|ncaaw|401921522|2026-11-20T03Z|STATUS_SCHEDULED|2692|WEB|Weber State Wildcats|3-0|ncaa/500/2692.png||2239|CSUF|Cal State Fullerton Titans|2-2|ncaa/500/2239.png||Titan Gym|ESPN+||||2|0||
+G|ncaaw|401921522|2026-11-20T03Z|STATUS_SCHEDULED|2692|WEB|Weber State Wildcats|3-0|ncaa/500/2692.png||2239|CSUF|Cal State Fullerton Titans|2-3|ncaa/500/2239.png||Titan Gym|ESPN+||||2|0||
 G|ncaaw|401918905|2026-11-20T03Z|STATUS_SCHEDULED|2217|FAIR|Fairfield Stags|3-1|ncaa/500/2217.png||2483|ORE|Oregon Ducks|4-1|ncaa/500/2483.png||Matthew Knight Arena|B1G+||||2|0||
 G|ncaaw|401929110|2026-11-20T16Z|STATUS_SCHEDULED|2523|RMU|Robert Morris Colonials|2-1|ncaa/500/2523.png||2006|AKR|Akron Zips|1-3|ncaa/500/2006.png||James A. Rhodes Arena|ESPN+||||2|0||
 G|ncaaw|401918520|2026-11-20T17Z|STATUS_SCHEDULED|2755|GRAM|Grambling Lady Tigers|1-3|ncaa/500/2755.png||2110|CARK|Central Arkansas Sugar Bears|2-2|ncaa/500/2110.png||Farris Center|ESPN+||||2|0||
 G|ncaaw|401916060|2026-11-20T17Z|STATUS_SCHEDULED|2016|ALCN|Alcorn State Lady Braves|1-1|ncaa/500/2016.png||2655|TULN|Tulane Green Wave|2-1|ncaa/500/2655.png||Avron B. Fogelman Arena in the Devlin Fieldhouse|ESPN+||||2|0||
 G|ncaaw|401918809|2026-11-20T18Z|STATUS_SCHEDULED|55|JXST|Jacksonville State Gamecocks|2-1|ncaa/500/55.png||155|UND|North Dakota Fighting Hawks|1-3|ncaa/500/155.png||Betty Engelstad Sioux Center|Summit League Network,Midco Sports Plus||||2|0||
 G|ncaaw|401918426|2026-11-20T18Z|STATUS_SCHEDULED|2698|WGA|West Georgia Wolves|4-1|ncaa/500/2698.png||2400|MVSU|Mississippi Valley State Devilettes|0-5|ncaa/500/2400.png||R.W. Harrison HPER Complex|SWAC TV||||2|0||
-G|ncaaw|401917711|2026-11-20T19Z|STATUS_SCHEDULED|279|PAC|Pacific Tigers|1-2|ncaa/500/279.png||16|SAC|Sacramento State Hornets|4-1|ncaa/500/16.png||Hornet Pavilion|ESPN+||||2|0||
+G|ncaaw|401917711|2026-11-20T19Z|STATUS_SCHEDULED|279|PAC|Pacific Tigers|2-2|ncaa/500/279.png||16|SAC|Sacramento State Hornets|4-1|ncaa/500/16.png||Hornet Pavilion|ESPN+||||2|0||
 G|ncaaw|401918511|2026-11-20T21Z|STATUS_SCHEDULED|126757|SCKY|Simmons (KY) Falcons||||2198|EKU|Eastern Kentucky Colonels|4-1|ncaa/500/2198.png||Baptist Health Arena|ESPN+||||2|0||
-G|ncaaw|401915889|2026-11-20T22Z|STATUS_SCHEDULED|2427|UNCA|UNC Asheville Bulldogs|2-2|ncaa/500/2427.png||228|CLEM|Clemson Tigers|3-1|ncaa/500/228.png||Littlejohn Coliseum|ACCNX||||2|0||
+G|ncaaw|401915889|2026-11-20T22Z|STATUS_SCHEDULED|2427|UNCA|UNC Asheville Bulldogs|2-2|ncaa/500/2427.png||228|CLEM|Clemson Tigers|4-1|ncaa/500/228.png||Littlejohn Coliseum|ACCNX||||2|0||
 G|ncaaw|401925787|2026-11-20T22:30Z|STATUS_SCHEDULED|119|TOW|Towson Tigers|3-2|ncaa/500/119.png||2329|LEH|Lehigh Mountain Hawks|1-3|ncaa/500/2329.png||Stabler Arena|ESPN+||||2|0||
 G|ncaaw|401918660|2026-11-20T23Z|STATUS_SCHEDULED|276|MRSH|Marshall Thundering Herd|4-1|ncaa/500/276.png||96|UK|Kentucky Wildcats|5-0|ncaa/500/96.png|12|Memorial Coliseum (KY)|SECN+||||2|0||
 G|ncaaw|401926087|2026-11-20T23Z|STATUS_SCHEDULED|2448|NCAT|North Carolina A&T Aggies|2-2|ncaa/500/2448.png||2426|NAVY|Navy Midshipmen|2-2|ncaa/500/2426.png||Alumni Hall (Navy)|ESPN+,Patriot League TV||||2|0||
@@ -918,9 +918,9 @@ G|ncaaw|401918774|2026-11-21T01Z|STATUS_SCHEDULED|2443|NOLA|LSU New Orleans Priv
 G|ncaaw|401916085|2026-11-21T01:30Z|STATUS_SCHEDULED|2541|SCU|Santa Clara Broncos|3-1|ncaa/500/2541.png||9|ASU|Arizona State Sun Devils|3-0|ncaa/500/9.png||Mullett Arena|ESPN+||||2|0||
 G|ncaaw|401913860|2026-11-21T01:30Z|STATUS_SCHEDULED|108|HARV|Harvard Crimson|3-2|ncaa/500/108.png||36|CSU|Colorado State Rams|2-2|ncaa/500/36.png||Moby Arena|YouTube||||2|0||
 G|ncaaw|401927014|2026-11-21T02Z|STATUS_SCHEDULED|3101|UTU|Utah Tech Trailblazers|2-2|ncaa/500/3101.png||2540|UCSB|UC Santa Barbara Gauchos|3-1|ncaa/500/2540.png||The Thunderdome|ESPN+||||2|0||
-G|ncaaw|401920269|2026-11-21T02Z|STATUS_SCHEDULED|70|IDHO|Idaho Vandals|2-1|ncaa/500/70.png||2440|NEV|Nevada Wolf Pack|1-3|ncaa/500/2440.png||Lawlor Events Center|MW+||||2|0||
+G|ncaaw|401920269|2026-11-21T02Z|STATUS_SCHEDULED|70|IDHO|Idaho Vandals|3-1|ncaa/500/70.png||2440|NEV|Nevada Wolf Pack|1-3|ncaa/500/2440.png||Lawlor Events Center|MW+||||2|0||
 G|ncaaw|401918935|2026-11-21T02Z|STATUS_SCHEDULED|3084|UVU|Utah Valley Wolverines|2-1|ncaa/500/3084.png||254|UTAH|Utah Utes|4-0|ncaa/500/254.png||Jon M. Huntsman Center|ESPN+||||2|0||
-G|ncaaw|401915982|2026-11-21T03Z|STATUS_SCHEDULED|24|STAN|Stanford Cardinal|3-1|ncaa/500/24.png||264|WASH|Washington Huskies|3-0|ncaa/500/264.png|16|Alaska Airlines Arena|Peacock,NBCSN||||2|0||
+G|ncaaw|401915982|2026-11-21T03Z|STATUS_SCHEDULED|24|STAN|Stanford Cardinal|4-1|ncaa/500/24.png||264|WASH|Washington Huskies|3-0|ncaa/500/264.png|16|Alaska Airlines Arena|Peacock,NBCSN||||2|0||
 G|ncaaw|401917712|2026-11-21T03Z|STATUS_SCHEDULED|304|IDST|Idaho State Bengals|4-1|ncaa/500/304.png||2351|LMU|Loyola Marymount Lions|4-0|ncaa/500/2351.png||Gersten Pavilion|ESPN+||||2|0||
 G|ncaaw|401918467|2026-11-21T04Z|STATUS_SCHEDULED|239|BAY|Baylor Bears|5-0|ncaa/500/239.png||30|USC|USC Trojans|3-1|ncaa/500/30.png|3|Intuit Dome|BTN||||2|1||Bad Boy Mowers Series
 G|ncaaw|401918918|2026-11-21T17Z|STATUS_SCHEDULED|2415|MORG|Morgan State Lady Bears|1-5|ncaa/500/2415.png||120|MD|Maryland Terrapins|2-1|ncaa/500/120.png|19|XFINITY Center|B1G+||||2|0||
@@ -960,7 +960,7 @@ G|ncaaw|401913790|2026-11-21T20Z|STATUS_SCHEDULED|2885|NJIT|NJIT Highlanders|4-1
 G|ncaaw|401913049|2026-11-21T20Z|STATUS_SCHEDULED|85|IUIN|IU Indianapolis Jaguars|2-2|ncaa/500/85.png||305|DEP|DePaul Blue Demons|4-1|ncaa/500/305.png||Wintrust Arena|ESPN+||||2|0||
 G|ncaaw|401929020|2026-11-21T20:30Z|STATUS_SCHEDULED|2309|KENT|Kent State Golden Flashes|0-3|ncaa/500/2309.png||325|CLE|Cleveland State Vikings|1-2|ncaa/500/325.png||Wolstein Center|ESPN+||||2|0||
 G|ncaaw|401923486|2026-11-21T21Z|STATUS_SCHEDULED|2916|UIW|Incarnate Word Cardinals|1-3|ncaa/500/2916.png||245|TA&M|Texas A&M Aggies|3-0|ncaa/500/245.png||Reed Arena|SECN+||||2|0||
-G|ncaaw|401923341|2026-11-21T21Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|0-3|ncaa/500/2640.png||2638|UTEP|UTEP Miners|3-1|ncaa/500/2638.png||Don Haskins Center|MW+||||2|0||
+G|ncaaw|401923341|2026-11-21T21Z|STATUS_SCHEDULED|2640|TXSO|Texas Southern Tigers|0-4|ncaa/500/2640.png||2638|UTEP|UTEP Miners|3-1|ncaa/500/2638.png||Don Haskins Center|MW+||||2|0||
 G|ncaaw|401920277|2026-11-21T21Z|STATUS_SCHEDULED|166|NMSU|New Mexico State Aggies|2-1|ncaa/500/166.png||167|UNM|New Mexico Lobos|1-3|ncaa/500/167.png||The Pit|MW+||||2|0||
 G|ncaaw|401916155|2026-11-21T21Z|STATUS_SCHEDULED|2458|UNCO|Northern Colorado Bears|3-1|ncaa/500/2458.png||252|BYU|BYU Cougars|5-0|ncaa/500/252.png||Marriott Center|ESPN+||||2|0||
 G|ncaaw|401906093|2026-11-21T22Z|STATUS_SCHEDULED|333|ALA|Alabama Crimson Tide|5-1|ncaa/500/333.png||153|UNC|North Carolina Tar Heels|2-2|ncaa/500/153.png|23|State Farm Field House|ESPN+||||2|1||WBCA Showcase
@@ -969,7 +969,7 @@ G|ncaaw|401916189|2026-11-21T22Z|STATUS_SCHEDULED|2132|CIN|Cincinnati Bearcats|3
 G|ncaaw|401915669|2026-11-21T22Z|STATUS_SCHEDULED|314|IONA|Iona Gaels|2-3|ncaa/500/314.png||2083|BUCK|Bucknell Bison|1-3|ncaa/500/2083.png||Sojka Pavilion|ESPN+||||2|0||
 G|ncaaw|401915965|2026-11-21T23Z|STATUS_SCHEDULED|2253|GCU|Grand Canyon Lopes|3-0|ncaa/500/2253.png||2567|SMU|SMU Mustangs|4-0|ncaa/500/2567.png||Moody Coliseum (Dallas)|ACCNX||||2|0||
 G|ncaaw|401915910|2026-11-22T00Z|STATUS_SCHEDULED|150|DUKE|Duke Blue Devils|4-0|ncaa/500/150.png|5|171|COLU|Columbia Lions|3-2|ncaa/500/171.png||Levien Gymnasium|ESPN+||||2|0||
-G|ncaaw|401928067|2026-11-22T00Z|STATUS_SCHEDULED|2250|GONZ|Gonzaga Bulldogs|2-2|ncaa/500/2250.png||62|HAW|Hawai'i Rainbow Wahine|1-2|ncaa/500/62.png||George Q. Cannon Activities Center|MW+,BallerTV||||2|1||North Shore Showcase
+G|ncaaw|401928067|2026-11-22T00Z|STATUS_SCHEDULED|2250|GONZ|Gonzaga Bulldogs|2-3|ncaa/500/2250.png||62|HAW|Hawai'i Rainbow Wahine|1-2|ncaa/500/62.png||George Q. Cannon Activities Center|MW+,BallerTV||||2|1||North Shore Showcase
 G|ncaaw|401921021|2026-11-22T00Z|STATUS_SCHEDULED|2429|CLT|Charlotte 49ers|1-2|ncaa/500/2429.png||2166|DAV|Davidson Wildcats|1-3|ncaa/500/2166.png||John M. Belk Arena|ESPN+||||2|0||
 G|ncaaw|401919710|2026-11-22T01Z|STATUS_SCHEDULED|2197|EIU|Eastern Illinois Panthers|1-4|ncaa/500/2197.png||93|MUR|Murray State Racers|2-2|ncaa/500/93.png||CFSB Center|ESPN+||||2|0||
 G|ncaaw|401917713|2026-11-22T02:15Z|STATUS_SCHEDULED|2547|SEA|Seattle U Redhawks|2-2|ncaa/500/2547.png||2130|CHST|Chicago State Cougars|2-3|ncaa/500/2130.png||Alaska Airlines Center|||||2|1||Great Alaska Shootout
@@ -993,7 +993,7 @@ G|ncaaw|401911795|2026-11-22T19Z|STATUS_SCHEDULED|158|NEB|Nebraska Cornhuskers|4
 G|ncaaw|401928200|2026-11-22T19Z|STATUS_SCHEDULED|2382|MER|Mercer Bears|3-2|ncaa/500/2382.png||2241|GWEB|Gardner-Webb Runnin' Bulldogs|1-2|ncaa/500/2241.png||Paul Porter Arena|ESPN+||||2|0||
 G|ncaaw|401927958|2026-11-22T19Z|STATUS_SCHEDULED|2413|MORE|Morehead State Eagles|0-5|ncaa/500/2413.png||2717|WCU|Western Carolina Catamounts|5-0|ncaa/500/2717.png||Ramsey Center|ESPN+||||2|0||
 G|ncaaw|401927938|2026-11-22T19Z|STATUS_SCHEDULED|2261|HAMP|Hampton Lady Pirates|1-3|ncaa/500/2261.png||48|DEL|Delaware Blue Hens|1-3|ncaa/500/48.png||Bob Carpenter Center|ESPN+||||2|0||
-G|ncaaw|401927088|2026-11-22T19Z|STATUS_SCHEDULED|2750|WRST|Wright State Raiders|1-3|ncaa/500/2750.png||56|STET|Stetson Hatters|1-3|ncaa/500/56.png||Insight Credit Union Arena at Edmunds Center|ESPN+||||2|0||
+G|ncaaw|401927088|2026-11-22T19Z|STATUS_SCHEDULED|2750|WRST|Wright State Raiders|1-3|ncaa/500/2750.png||56|STET|Stetson Hatters|1-4|ncaa/500/56.png||Insight Credit Union Arena at Edmunds Center|ESPN+||||2|0||
 G|ncaaw|401926001|2026-11-22T19Z|STATUS_SCHEDULED|2115|CCSU|Central Connecticut Blue Devils|0-5|ncaa/500/2115.png||261|UVM|Vermont Catamounts|3-2|ncaa/500/261.png||Patrick Gymnasium|ESPN+||||2|0||
 G|ncaaw|401923333|2026-11-22T19Z|STATUS_SCHEDULED|250|UTA|UT Arlington Mavericks|2-2|ncaa/500/250.png||2634|TNST|Tennessee State Lady Tigers|2-2|ncaa/500/2634.png||Gentry Center|ESPN+||||2|0||
 G|ncaaw|401920018|2026-11-22T19Z|STATUS_SCHEDULED|2674|VAL|Valparaiso Beacons|1-4|ncaa/500/2674.png||2565|SIUE|SIU Edwardsville Cougars|4-1|ncaa/500/2565.png||First Community Arena|ESPN+||||2|0||
@@ -1008,7 +1008,7 @@ G|ncaaw|401913681|2026-11-22T19Z|STATUS_SCHEDULED|107|HC|Holy Cross Crusaders|3-
 G|ncaaw|401912509|2026-11-22T19Z|STATUS_SCHEDULED|2327|LMCR|Lees McRae Bobcats||||2335|LIB|Liberty Flames|2-1|ncaa/500/2335.png||Liberty Arena (VA)|ESPN+||||2|0||
 G|ncaaw|401906967|2026-11-22T19:30Z|STATUS_SCHEDULED|2305|KU|Kansas Jayhawks|3-1|ncaa/500/2305.png||2571|SDST|South Dakota State Jackrabbits|1-3|ncaa/500/2571.png||T-Mobile Center|ESPN+||||2|1||28.5 Hoops Women's Invitational
 G|ncaaw|401918911|2026-11-22T20Z|STATUS_SCHEDULED|2117|CMU|Central Michigan Chippewas|0-3|ncaa/500/2117.png||135|MINN|Minnesota Golden Gophers|4-0|ncaa/500/135.png|18|The Barn by Blue Cross and Blue Shield of Minnesota|B1G+||||2|0||
-G|ncaaw|401924634|2026-11-22T20Z|STATUS_SCHEDULED|2010|AAMU|Alabama A&M Bulldogs|1-3|ncaa/500/2010.png||145|MISS|Ole Miss Rebels|4-0|ncaa/500/145.png|21|The Sandy and John Black Pavilion at Ole Miss|SECN+||||2|0||
+G|ncaaw|401924634|2026-11-22T20Z|STATUS_SCHEDULED|2010|AAMU|Alabama A&M Bulldogs|1-4|ncaa/500/2010.png||145|MISS|Ole Miss Rebels|4-0|ncaa/500/145.png|21|The Sandy and John Black Pavilion at Ole Miss|SECN+||||2|0||
 G|ncaaw|401927019|2026-11-22T20Z|STATUS_SCHEDULED|2692|WEB|Weber State Wildcats|3-0|ncaa/500/2692.png||36|CSU|Colorado State Rams|2-2|ncaa/500/36.png||Moby Arena|YouTube||||2|0||
 G|ncaaw|401926953|2026-11-22T20Z|STATUS_SCHEDULED|331|EWU|Eastern Washington Eagles|2-2|ncaa/500/331.png||253|SUU|Southern Utah Thunderbirds|2-2|ncaa/500/253.png||America First Event Center|ESPN+||||2|0||
 G|ncaaw|401918858|2026-11-22T20Z|STATUS_SCHEDULED|344|MSST|Mississippi State Bulldogs|4-0|ncaa/500/344.png||2572|USM|Southern Miss Lady Eagles|3-1|ncaa/500/2572.png||Reed Green Coliseum|ESPN+||||2|0||
@@ -1023,11 +1023,11 @@ G|ncaaw|401909674|2026-11-22T21Z|STATUS_SCHEDULED|2737|WIN|Winthrop Eagles|3-1|n
 G|ncaaw|401921465|2026-11-22T22Z|STATUS_SCHEDULED|13|CP|Cal Poly Mustangs|3-1|ncaa/500/13.png||264|WASH|Washington Huskies|3-0|ncaa/500/264.png|16|Alaska Airlines Arena|B1G+||||2|0||
 G|ncaaw|401907053|2026-11-22T22Z|STATUS_SCHEDULED|2724|WICH|Wichita State Shockers|1-3|ncaa/500/2724.png||197|OKST|Oklahoma State Cowgirls|4-1|ncaa/500/197.png|19|T-Mobile Center|||||2|1||28.5 Hoops Women's Invitational
 G|ncaaw|401926985|2026-11-22T22Z|STATUS_SCHEDULED|304|IDST|Idaho State Bengals|4-1|ncaa/500/304.png||27|UCR|UC Riverside Highlanders|1-3|ncaa/500/27.png||SRC Arena|ESPN+||||2|0||
-G|ncaaw|401926980|2026-11-22T22Z|STATUS_SCHEDULED|131725|NWIC|Northwest Indian Eagles||||70|IDHO|Idaho Vandals|2-1|ncaa/500/70.png||ICCU Arena|ESPN+||||2|0||
+G|ncaaw|401926980|2026-11-22T22Z|STATUS_SCHEDULED|131725|NWIC|Northwest Indian Eagles||||70|IDHO|Idaho Vandals|3-1|ncaa/500/70.png||ICCU Arena|ESPN+||||2|0||
 G|ncaaw|401925981|2026-11-22T22Z|STATUS_SCHEDULED|2127|CHSO|Charleston Southern Buccaneers|0-4|ncaa/500/2127.png||2569|SCST|South Carolina State Lady Bulldogs|1-3|ncaa/500/2569.png||Smith-Hammond-Middleton Memorial Center|||||2|0||
-G|ncaaw|401923737|2026-11-22T22Z|STATUS_SCHEDULED|2617|SFA|Stephen F. Austin Ladyjacks|1-1|ncaa/500/2617.png||202|TLSA|Tulsa Golden Hurricane|2-1|ncaa/500/202.png||Comerica Center|||||2|1||Hoopfest Women’s Basketball Classic
+G|ncaaw|401923737|2026-11-22T22Z|STATUS_SCHEDULED|2617|SFA|Stephen F. Austin Ladyjacks|1-1|ncaa/500/2617.png||202|TLSA|Tulsa Golden Hurricane|3-1|ncaa/500/202.png||Comerica Center|||||2|1||Hoopfest Women’s Basketball Classic
 G|ncaaw|401917717|2026-11-22T22Z|STATUS_SCHEDULED|2934|CSUB|Cal State Bakersfield Roadrunners|1-1|ncaa/500/2934.png||2539|SF|San Francisco Dons|3-1|ncaa/500/2539.png||The Sobrato Center|ESPN+||||2|0||
-G|ncaaw|401915983|2026-11-22T22Z|STATUS_SCHEDULED|24|STAN|Stanford Cardinal|3-1|ncaa/500/24.png||2501|PORT|Portland Pilots|2-2|ncaa/500/2501.png||Chiles Center|ESPN+||||2|0||
+G|ncaaw|401915983|2026-11-22T22Z|STATUS_SCHEDULED|24|STAN|Stanford Cardinal|4-1|ncaa/500/24.png||2501|PORT|Portland Pilots|2-2|ncaa/500/2501.png||Chiles Center|ESPN+||||2|0||
 G|ncaaw|401912957|2026-11-22T22:30Z|STATUS_SCHEDULED|26|UCLA|UCLA Bruins|3-0|ncaa/500/26.png|10|2633|TENN|Tennessee Lady Volunteers|4-0|ncaa/500/2633_ncw.png||Food City Center|ESPN||||2|0||
 G|ncaaw|401929635|2026-11-22T23Z|STATUS_SCHEDULED|-2|TBD|TBD||||-1|TBD|TBD||||Alaska Airlines Center|||||2|1||Great Alaska Shootout - Championship
 G|ncaaw|401906985|2026-11-23T00:30Z|STATUS_SCHEDULED|142|MIZ|Missouri Tigers|5-0|ncaa/500/142.png||2306|KSU|Kansas State Wildcats|4-1|ncaa/500/2306.png||T-Mobile Center|||||2|1||28.5 Hoops Women's Invitational

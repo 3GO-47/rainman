@@ -1,11 +1,10 @@
 {
- "pulled": "2026-11-15T23:21Z",
+ "pulled": "2026-11-16T00:06Z",
  "season": 2026,
  "week": 10,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "SEA@LV": "in",
-  "LAR@ARI": "in",
+  "SEA@LV": "post",
   "SF@DAL": "in",
   "NE@DET": "post",
   "KC@ATL": "post",
@@ -15,6 +14,7 @@
   "MIA@IND": "post",
   "CAR@NO": "post",
   "BUF@NYJ": "post",
+  "LAR@ARI": "post",
   "PIT@CIN": "pre",
   "WSH@NYG": "post",
   "LAC@BAL": "pre"
@@ -22,15 +22,11 @@
  "scores": {
   "SEA@LV": [
    21,
-   10
-  ],
-  "LAR@ARI": [
-   31,
-   6
+   13
   ],
   "SF@DAL": [
-   24,
-   16
+   38,
+   25
   ],
   "NE@DET": [
    10,
@@ -63,6 +59,10 @@
   "BUF@NYJ": [
    31,
    12
+  ],
+  "LAR@ARI": [
+   34,
+   6
   ],
   "PIT@CIN": [
    0,
@@ -111,38 +111,6 @@
    "how": "rec"
   },
   {
-   "game": "LAR@ARI",
-   "q": 2,
-   "clock": "1:06",
-   "team": "LAR",
-   "player": "Tyler Higbee",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@ARI",
-   "q": 2,
-   "clock": "0:13",
-   "team": "LAR",
-   "player": "Xavier Smith",
-   "how": "rec"
-  },
-  {
-   "game": "LAR@ARI",
-   "q": 3,
-   "clock": "10:17",
-   "team": "LAR",
-   "player": "Blake Corum",
-   "how": "rush"
-  },
-  {
-   "game": "LAR@ARI",
-   "q": 3,
-   "clock": "5:55",
-   "team": "LAR",
-   "player": "Davis Allen",
-   "how": "rec"
-  },
-  {
    "game": "SF@DAL",
    "q": 1,
    "clock": "6:56",
@@ -181,6 +149,30 @@
    "team": "SF",
    "player": "Kaelon Black",
    "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 3,
+   "clock": "6:59",
+   "team": "SF",
+   "player": "Deebo Samuel Sr.",
+   "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "11:26",
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "how": "rush"
+  },
+  {
+   "game": "SF@DAL",
+   "q": 4,
+   "clock": "9:08",
+   "team": "DAL",
+   "player": "George Pickens",
+   "how": "rec"
   },
   {
    "game": "NE@DET",
@@ -517,6 +509,38 @@
    "team": "BUF",
    "player": "James Cook III",
    "how": "rush"
+  },
+  {
+   "game": "LAR@ARI",
+   "q": 2,
+   "clock": "1:06",
+   "team": "LAR",
+   "player": "Tyler Higbee",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@ARI",
+   "q": 2,
+   "clock": "0:13",
+   "team": "LAR",
+   "player": "Xavier Smith",
+   "how": "rec"
+  },
+  {
+   "game": "LAR@ARI",
+   "q": 3,
+   "clock": "10:17",
+   "team": "LAR",
+   "player": "Blake Corum",
+   "how": "rush"
+  },
+  {
+   "game": "LAR@ARI",
+   "q": 3,
+   "clock": "5:55",
+   "team": "LAR",
+   "player": "Davis Allen",
+   "how": "rec"
   },
   {
    "game": "WSH@NYG",
