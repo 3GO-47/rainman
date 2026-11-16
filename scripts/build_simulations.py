@@ -98,11 +98,8 @@ def backtest(n, only=None):
     pdir = f'data/processed/sim_bt_parts{tag}'; weeks = sorted(int(w) for w in cur.week.unique()); rows = []; os.makedirs(pdir, exist_ok=True)
     for w in weeks:
         part = f'{pdir}/w{w}.json'
-        # a cached week is reused only while it still covers every finished game of that week (a Thursday-only part must not stand for the whole week)
-        cached = json.load(open(part)) if os.path.exists(part) else None
-        if cached is not None and len(cached) < int((cur.week == w).sum()): cached = None
-        if (only and w not in only) or (not only and cached is not None):
-            if cached is not None: rows += cached
+        if (only and w not in only) or (not only and os.path.exists(part)):
+            if os.path.exists(part): rows += json.load(open(part))
             continue
         wrows = []; prows = []
         PR = params(w, out=f'data/processed/_sim_params_bt{tag}.json', env_extra={'SIM_CFG': json.dumps(cfg)})
@@ -168,20 +165,32 @@ def backtest(n, only=None):
     return dict(summary=summ, rows=R)
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('--n', type=int, default=10000); ap.add_argument('--week', type=int); ap.add_argument('--backtest', action='store_true'); ap.add_argument('--bt-n', type=int, default=4000); ap.add_argument('--no-calib', action='store_true'); ap.add_argument('--bt-weeks', help='e.g. 1-3 or 4,5'); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument('--n', type=int, default=10000); ap.add_argument('--week', type=int); ap.add_argument('--backtest', action='store_true'); ap.add_argument('--bt-n', type=int, default=4000); ap.add_argument('--no-calib', action='store_true'); ap.add_argument('--bt-weeks', help='e.g. 1-3 or 4,5'); ap.add_argument('--next', action='store_true', help='also simulate the FOLLOWING week as an early look → sim_games_next.json (same calibration, lines as posted so far)'); ap.add_argument('--next-only', action='store_true', help='only the early look, reusing sim_params.json for the week and calibration'); a = ap.parse_args()
     if a.backtest:
         only = None
         if a.bt_weeks: only = [w for part in a.bt_weeks.split(',') for w in (range(int(part.split('-')[0]), int(part.split('-')[-1]) + 1))]
         bt = backtest(a.bt_n, only); bt['built'] = time.strftime('%Y-%m-%d %H:%M')
         if not bt.get('grid'): json.dump(_clean(bt), open('data/processed/sim_backtest.json', 'w'), separators=(',', ':'))
         return
-    PR = params(a.week)
-    if not a.no_calib:
+    if a.next_only:
+        PR = json.load(open('data/processed/sim_params.json')); a.next = True
+    else: PR = params(a.week)
+    if not a.no_calib and not a.next_only:
         cb = calibrate(PR); json.dump(_clean(PR), open('data/processed/sim_params.json', 'w'), separators=(',', ':')); print('  calibration', cb)
-    print(f"week {PR['week']} · {len(PR['games'])} games · {a.n:,} sims each · pbp through {PR['pbp_through']}")
-    res = run_week(PR, a.n)
-    json.dump(_clean(dict(built=time.strftime('%Y-%m-%d %H:%M'), season=PR['season'], week=PR['week'], n=a.n, pbp_through=PR['pbp_through'], calib=PR.get('calib'), games=res)), open('data/processed/sim_games.json', 'w'), separators=(',', ':'))
-    print('data/processed/sim_games.json written')
+    if not a.next_only:
+        print(f"week {PR['week']} · {len(PR['games'])} games · {a.n:,} sims each · pbp through {PR['pbp_through']}")
+        res = run_week(PR, a.n)
+        json.dump(_clean(dict(built=time.strftime('%Y-%m-%d %H:%M'), season=PR['season'], week=PR['week'], n=a.n, pbp_through=PR['pbp_through'], calib=PR.get('calib'), games=res)), open('data/processed/sim_games.json', 'w'), separators=(',', ':'))
+        print('data/processed/sim_games.json written')
+    if a.next:
+        # early look at the following week: parameters as of now (this week's games are not in the play-by-play yet), the current calibration, whatever lines the books have posted
+        PN = params(PR['week'] + 1, out='data/processed/sim_params_next.json')
+        if PN.get('games'):
+            PN['calib'] = PR.get('calib'); json.dump(_clean(PN), open('data/processed/sim_params_next.json', 'w'), separators=(',', ':'))
+            print(f"next week {PN['week']} · {len(PN['games'])} games · early look")
+            resn = run_week(PN, a.n, seed=211)
+            json.dump(_clean(dict(built=time.strftime('%Y-%m-%d %H:%M'), season=PN['season'], week=PN['week'], n=a.n, pbp_through=PN['pbp_through'], calib=PN.get('calib'), early=True, games=resn)), open('data/processed/sim_games_next.json', 'w'), separators=(',', ':'))
+            print('data/processed/sim_games_next.json written')
 
 if __name__ == '__main__':
     main()

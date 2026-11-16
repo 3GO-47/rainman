@@ -102,7 +102,7 @@ def main():
     # Simulations (Layer 0): parameters from the fresh pbp / usage / depth chart, the coming week × 10,000, the backtest for any
     # week not yet graded (cached per week), then the page
     try:
-        run(['scripts/build_simulations.py', '--n', '10000'])
+        run(['scripts/build_simulations.py', '--n', '10000', '--next'])   # v4.1: plus the following week as an early look (sim_games_next.json)
         run(['scripts/build_simulations.py', '--backtest', '--bt-n', '4000'])
         run(['scripts/build_simulations_page.py'])
     except (Exception, SystemExit) as e: print('  simulations skipped:', e)
