@@ -428,6 +428,8 @@ def main():
         return dict(log=log[-600:], plan=100000, state=dict(lines=st.get('lines', {}), props=props, last_run=st.get('last_run', '')))
     data['api'] = api_payload()
     data['injuries'] = rows_of('data/processed/injuries_current.csv')
+    data['qbTargets'] = json.load(open('data/processed/qb_targets.json', encoding='utf-8')) if os.path.exists('data/processed/qb_targets.json') else None  # v61
+    data['categories'] = json.load(open('data/processed/categories.json', encoding='utf-8')) if os.path.exists('data/processed/categories.json') else None  # v61
     data['lineMoves'] = [{k: v for k, v in r.items() if k != 'series'} for r in rows_of('data/processed/line_moves.csv')]
     data['dfs'] = {'entries': rows_of('data/processed/dfs_entries.csv'), 'summary': rows_of('data/processed/dfs_summary.csv')}
     # DraftKings posted salaries per week, so the DFS tab can price and value every candidate, not just the frozen nine
@@ -531,7 +533,19 @@ def main():
                 for r in v:
                     for c in r.keys():
                         if c not in cols: cols.append(c)
-                container[key] = {'__cols': cols, 'rows': [[r.get(c) for c in cols] for r in v]}
+                rows = [[r.get(c) for c in cols] for r in v]
+                # v61b: columns of repeated strings become indexes into a per-column dictionary (lossless; rehydrated on load)
+                dct = {}
+                for j in range(len(cols)):
+                    vals = [row[j] for row in rows]
+                    strs = [x for x in vals if isinstance(x, str)]
+                    if len(strs) < 50 or any(not isinstance(x, (str, type(None))) for x in vals): continue
+                    uniq = list(dict.fromkeys(strs))
+                    if sum(len(x) + 2 for x in strs) <= len(strs) * 3 + sum(len(x) + 3 for x in uniq): continue
+                    idx = {x: i for i, x in enumerate(uniq)}
+                    for row in rows: row[j] = idx[row[j]] if row[j] is not None else None
+                    dct[str(j)] = uniq
+                container[key] = {'__cols': cols, 'rows': rows} | ({'__dict': dct} if dct else {})
                 paths.append(path)
         for k in list(d.keys()):
             if isinstance(d[k], list): do(d, k, k)
