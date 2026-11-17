@@ -1,10 +1,9 @@
 {
- "pulled": "2026-11-17T00:01Z",
+ "pulled": "2026-11-17T05:21Z",
  "season": 2026,
  "week": 10,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "LAC@BAL": "pre",
   "WSH@NYG": "post",
   "NE@DET": "post",
   "KC@ATL": "post",
@@ -17,13 +16,10 @@
   "SEA@LV": "post",
   "LAR@ARI": "post",
   "SF@DAL": "post",
-  "PIT@CIN": "post"
+  "PIT@CIN": "post",
+  "LAC@BAL": "post"
  },
  "scores": {
-  "LAC@BAL": [
-   0,
-   0
-  ],
   "WSH@NYG": [
    24,
    21
@@ -75,6 +71,10 @@
   "PIT@CIN": [
    18,
    38
+  ],
+  "LAC@BAL": [
+   23,
+   20
   ]
  },
  "plays": [
@@ -669,6 +669,38 @@
    "team": "PIT",
    "player": "Pat Freiermuth",
    "how": "rec"
+  },
+  {
+   "game": "LAC@BAL",
+   "q": 1,
+   "clock": "10:39",
+   "team": "LAC",
+   "player": "Justin Herbert",
+   "how": "rush"
+  },
+  {
+   "game": "LAC@BAL",
+   "q": 2,
+   "clock": "12:33",
+   "team": "BAL",
+   "player": "Derrick Henry",
+   "how": "rush"
+  },
+  {
+   "game": "LAC@BAL",
+   "q": 2,
+   "clock": "1:56",
+   "team": "LAC",
+   "player": "Omarion Hampton",
+   "how": "rush"
+  },
+  {
+   "game": "LAC@BAL",
+   "q": 4,
+   "clock": "10:23",
+   "team": "BAL",
+   "player": "Derrick Henry",
+   "how": "rush"
   }
  ]
 }
