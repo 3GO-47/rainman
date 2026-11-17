@@ -26,8 +26,8 @@ ATL|QB|3|Andy Dalton|
 ATL|QB|4|Jack Strand|
 ATL|RB|1|Bijan Robinson|
 ATL|RB|2|Khalil Herbert|
-ATL|RB|3|Brian Robinson Jr.|IR
-ATL|RB|4|Trey Sermon|IR
+ATL|RB|3|Brian Robinson Jr.|
+ATL|RB|4|Trey Sermon|
 ATL|WR1|1|Drake London|
 ATL|WR1|2|Zachariah Branch|
 ATL|WR2|1|Jahan Dotson|
@@ -101,8 +101,8 @@ CHI|QB|3|Case Keenum|
 CHI|RB|1|D'Andre Swift|
 CHI|RB|2|Kyle Monangai|
 CHI|RB|3|Roschon Johnson|
-CHI|RB|4|Zavier Scott|
-CHI|RB|5|Brittain Brown|
+CHI|RB|4|Zavier Scott|IR
+CHI|RB|5|Brittain Brown|IR
 CHI|WR1|1|Luther Burden III|
 CHI|WR1|2|Zavion Thomas|
 CHI|WR2|1|Rome Odunze|
@@ -111,9 +111,9 @@ CHI|WR3|1|Kalif Raymond|
 CHI|TE|1|Colston Loveland|
 CHI|TE|2|Sam Roush|
 CHI|TE|3|Stephen Carlson|
-CHI|TE|4|Hayden Large|
-CHI|TE|5|Cole Kmet|
-CHI|TE|6|Nikola Kalinic|
+CHI|TE|4|Hayden Large|IR
+CHI|TE|5|Cole Kmet|IR
+CHI|TE|6|Nikola Kalinic|IR
 CIN|QB|1|Joe Burrow|
 CIN|QB|2|Joe Flacco|
 CIN|RB|1|Chase Brown|
@@ -138,7 +138,7 @@ CLE|QB|4|Taylen Green|
 CLE|RB|1|Quinshon Judkins|
 CLE|RB|2|Dylan Sampson|
 CLE|RB|3|Jaleel McLaughlin|
-CLE|RB|4|Raheim Sanders|IR
+CLE|RB|4|Raheim Sanders|
 CLE|WR1|1|Denzel Boston|
 CLE|WR1|2|Malachi Corley|
 CLE|WR2|1|KC Concepcion|
@@ -148,8 +148,8 @@ CLE|WR3|2|Isaiah Bond|
 CLE|TE|1|Harold Fannin Jr.|
 CLE|TE|2|Blake Whiteheart|
 CLE|TE|3|Carsen Ryan|
-CLE|TE|4|Joe Royer|IR
-CLE|FB|1|Michael Burton|IR
+CLE|TE|4|Joe Royer|
+CLE|FB|1|Michael Burton|
 DAL|QB|1|Dak Prescott|
 DAL|QB|2|Sam Howell|
 DAL|RB|1|Javonte Williams|
@@ -172,8 +172,8 @@ DEN|QB|2|Jarrett Stidham|
 DEN|QB|3|Sam Ehlinger|
 DEN|RB|1|Jonah Coleman|
 DEN|RB|2|J.K. Dobbins|
-DEN|RB|3|RJ Harvey|
-DEN|RB|4|Tyler Badie|
+DEN|RB|3|RJ Harvey|IR
+DEN|RB|4|Tyler Badie|IR
 DEN|WR1|1|Jaylen Waddle|
 DEN|WR1|2|Troy Franklin|
 DEN|WR2|1|Courtland Sutton|
@@ -184,7 +184,7 @@ DEN|TE|1|Evan Engram|
 DEN|TE|2|Adam Trautman|
 DEN|TE|3|Nate Adkins|
 DEN|TE|4|Dallen Bentley|
-DEN|TE|5|Caleb Lohner|
+DEN|TE|5|Caleb Lohner|IR
 DEN|FB|1|Adam Prentice|
 DET|QB|1|Jared Goff|
 DET|QB|2|Joshua Dobbs|
@@ -211,7 +211,7 @@ GB|RB|4|Chris Brooks|
 GB|RB|5|Pierre Strong Jr.|
 GB|WR1|1|Christian Watson|
 GB|WR1|2|Skyy Moore|
-GB|WR1|3|Jayden Reed|IR
+GB|WR1|3|Jayden Reed|
 GB|WR2|1|Matthew Golden|
 GB|WR2|2|Bo Melton|
 GB|WR3|1|Savion Williams|
@@ -219,9 +219,9 @@ GB|WR3|2|J. Michael Sturdivant|
 GB|TE|1|Tucker Kraft|
 GB|TE|2|Mark Redman|
 GB|TE|3|Jonnu Smith|
-GB|TE|4|Luke Musgrave|IR
-GB|TE|5|Josh Whyle|IR
-GB|TE|6|Thomas Yassmin|IR
+GB|TE|4|Luke Musgrave|
+GB|TE|5|Josh Whyle|
+GB|TE|6|Thomas Yassmin|
 HOU|QB|1|C.J. Stroud|
 HOU|QB|2|Davis Mills|
 HOU|QB|3|Graham Mertz|IR
@@ -306,12 +306,12 @@ LAC|RB|1|Omarion Hampton|
 LAC|RB|2|Kimani Vidal|
 LAC|RB|3|Keaton Mitchell|
 LAC|WR1|1|Ladd McConkey|
-LAC|WR1|2|KeAndre Lambert-Smith|
+LAC|WR1|2|Derius Davis|
 LAC|WR1|3|Theo Wease Jr.|
 LAC|WR2|1|Quentin Johnston|
-LAC|WR2|2|Brenen Thompson|
+LAC|WR2|2|KeAndre Lambert-Smith|
 LAC|WR3|1|Tre' Harris|
-LAC|WR3|2|Derius Davis|
+LAC|WR3|2|Brenen Thompson|
 LAC|TE|1|Charlie Kolar|
 LAC|TE|2|Oronde Gadsden|
 LAC|TE|3|David Njoku|
@@ -320,23 +320,23 @@ LAC|FB|2|Alec Ingold|IR
 LAR|QB|1|Matthew Stafford|
 LAR|QB|2|Stetson Bennett IV|
 LAR|QB|3|Ty Simpson|
-LAR|QB|4|Matthew Caldwell|IR
+LAR|QB|4|Matthew Caldwell|
 LAR|RB|1|Kyren Williams|
 LAR|RB|2|Blake Corum|
 LAR|RB|3|Ronnie Rivers|
-LAR|RB|4|Dean Connors|IR
+LAR|RB|4|Dean Connors|
 LAR|WR1|1|Konata Mumpfield|
 LAR|WR1|2|Xavier Smith|
-LAR|WR1|3|Jordan Whittington|IR
+LAR|WR1|3|Jordan Whittington|
 LAR|WR2|1|Tutu Atwell|
-LAR|WR2|2|Puka Nacua|IR
+LAR|WR2|2|Puka Nacua|
 LAR|WR3|1|CJ Daniels|
-LAR|WR3|2|Davante Adams|IR
+LAR|WR3|2|Davante Adams|
 LAR|TE|1|Tyler Higbee|
 LAR|TE|2|Colby Parkinson|
 LAR|TE|3|Davis Allen|
 LAR|TE|4|Max Klare|
-LAR|TE|5|Terrance Ferguson|IR
+LAR|TE|5|Terrance Ferguson|
 LV|QB|1|Fernando Mendoza|
 LV|QB|2|Aidan O'Connell|
 LV|RB|1|Ashton Jeanty|
@@ -395,18 +395,18 @@ NE|QB|3|Behren Morton|
 NE|RB|1|Rhamondre Stevenson|
 NE|RB|2|Corey Kiner|
 NE|RB|3|Lan Larison|
-NE|RB|4|TreVeyon Henderson|IR
-NE|RB|5|Myles Montgomery|IR
+NE|RB|4|TreVeyon Henderson|
+NE|RB|5|Myles Montgomery|
 NE|WR1|1|A.J. Brown|
 NE|WR1|2|Efton Chism III|
 NE|WR2|1|Mack Hollins|
 NE|WR2|2|Kyle Williams|
 NE|WR3|1|DeMario Douglas|
-NE|WR3|2|Romeo Doubs|IR
+NE|WR3|2|Romeo Doubs|
 NE|TE|1|Hunter Henry|
 NE|TE|2|Eli Raridon|
 NE|TE|3|Cameron Latu|
-NE|TE|4|Julian Hill|IR
+NE|TE|4|Julian Hill|
 NE|FB|1|Reggie Gilliam|
 NO|QB|1|Tyler Shough|
 NO|QB|2|Spencer Rattler|
@@ -468,13 +468,13 @@ NYJ|TE|5|Andrew Beck|
 PHI|QB|1|Joe Milton III|
 PHI|QB|2|Tanner McKee|
 PHI|QB|3|Cole Payton|
-PHI|QB|4|Jalen Hurts|
+PHI|QB|4|Jalen Hurts|IR
 PHI|RB|1|Saquon Barkley|
-PHI|RB|2|Will Shipley|
-PHI|RB|3|Tank Bigsby|
+PHI|RB|2|Will Shipley|IR
+PHI|RB|3|Tank Bigsby|IR
 PHI|WR1|1|DeVonta Smith|
 PHI|WR1|2|Darius Cooper|
-PHI|WR1|3|Johnny Wilson|
+PHI|WR1|3|Johnny Wilson|IR
 PHI|WR2|1|Dontayvion Wicks|
 PHI|WR2|2|Elijah Moore|
 PHI|WR3|1|Makai Lemon|
@@ -517,13 +517,13 @@ SEA|WR1|2|Tory Horton|
 SEA|WR2|1|Rashid Shaheed|
 SEA|WR2|2|Irv Charles|
 SEA|WR3|1|Cooper Kupp|
-SEA|WR3|2|Jake Bobo|IR
+SEA|WR3|2|Jake Bobo|
 SEA|TE|1|AJ Barner|
 SEA|TE|2|Eric Saubert|
 SEA|TE|3|Nick Kallerup|
-SEA|TE|4|Elijah Arroyo|IR
+SEA|TE|4|Elijah Arroyo|
 SEA|FB|1|Brady Russell|
-SEA|FB|2|Robbie Ouzts|IR
+SEA|FB|2|Robbie Ouzts|
 SF|QB|1|Brock Purdy|
 SF|QB|2|Mac Jones|
 SF|QB|3|Kurtis Rourke|
@@ -558,7 +558,7 @@ TB|WR1|2|Tez Johnson|
 TB|WR2|1|Chris Godwin Jr.|
 TB|WR2|2|Kameron Johnson|
 TB|WR3|1|Ted Hurst III|
-TB|WR3|2|Jalen McMillan|
+TB|WR3|2|Jalen McMillan|IR
 TB|TE|1|Cade Otton|
 TB|TE|2|Payne Durham|
 TB|TE|3|Bauer Sharp|

@@ -1,4 +1,5 @@
 # I|team|player|pos|status|injury|return|date|fantasy|comment  (site.api.espn.com/apis/site/v2/sports/football/nfl/injuries; pulled 2026-11-17)
+I|ARI|James Conner|RB|Injured Reserve|Foot|2026-11-29|2026-11-17|IR-R|Updating a previous report, Conner (foot) no longer appears to be a candidate to return from injured reserve to play Week 11 versus the Chiefs, according to Tyl
 I|ARI|Jayden Williams|OT|Questionable|Knee|2026-11-22|2026-11-17|QUESTIONABLE|questionable
 I|ARI|Hjalte Froholdt|C|Questionable|Concussion|2026-11-22|2026-11-17|QUESTIONABLE|questionable
 I|ARI|Jon Gaines II|G|Questionable|Ankle|2026-11-22|2026-11-17|QUESTIONABLE|questionable
@@ -23,7 +24,6 @@ I|ARI|Reggie Virgil|WR|Active|||2026-11-13||Virgil will take over a larger role 
 I|ARI|Bam Knight|RB|Active|||2026-11-13||Knight (concussion) is cleared to play Sunday against the Rams, Josh Weinfuss of ESPN.com reports.
 I|ARI|Elijah Higgins|TE|Active|||2026-11-13||Higgins is signing a contract extension with the Cardinals through 2029, Darren Urban of the Cardinals' official site reports.
 I|ARI|Budda Baker|S|Active|||2026-11-12||Baker recorded 11 tackles (three solo) in Sunday's 17-3 loss to the Cardinals.
-I|ARI|Evan Hull|RB|Active|||2026-11-11||Hull failed to haul in his lone target during the Cardinals' 17-3 loss to the Seahawks on Sunday.
 I|ATL|Divine Deablo|LB|Out|Forearm|2026-11-29|2026-11-17|QUESTIONABLE|out
 I|ATL|Zachariah Branch|WR|Out|Hamstring|2026-11-29|2026-11-17|QUESTIONABLE|out
 I|ATL|Jahan Dotson|WR|Active|||2026-11-17||Dotson caught three passes for 63 yards on six targets in Sunday's 35-13 loss to the Chiefs.
@@ -299,14 +299,14 @@ I|GB|Travis Glover|OT|Active|||2026-11-15||Glover (knee) is active for Sunday's 
 I|GB|Lukas Van Ness|DE|Active|||2026-11-15||Van Ness (back) is active for Sunday's game against the Vikings.
 I|GB|Javon Bullard|S|Active|||2026-11-15||Bullard (ankle) is active for Sunday's game against the Vikings.
 I|GB|Xavier McKinney|S|Active|||2026-11-15||McKinney (foot) is active for Sunday's game against the Vikings.
+I|HOU|Azeez Al-Shaair|LB|Injured Reserve|Groin|2026-12-20|2026-11-17|IR|The Texans placed Al-Shaair (groin) on injured reserve Tuesday.
 I|HOU|Danielle Hunter|DE|Questionable|Hamstring|2026-11-19|2026-11-17|QUESTIONABLE|questionable
-I|HOU|Brevin Jordan|TE|Questionable|Finger|2026-11-19|2026-11-17|QUESTIONABLE|questionable
+I|HOU|Brevin Jordan|TE|Questionable|Foot|2026-11-19|2026-11-17|QUESTIONABLE|questionable
 I|HOU|Kayshon Boutte|WR|Active|||2026-11-17||Boutte failed to catch his lone target in Sunday's 27-24 loss to the Browns.
 I|HOU|Ka'imi Fairbairn|PK|Active|||2026-11-17||Fairbairn converted his sole field-goal attempt and made all three PATs in the Texans' 27-24 loss to the Browns on Sunday.
 I|HOU|Dare Ogunbowale|RB|Active|||2026-11-17||Ogunbowale reverted to the Texans' practice squad Monday, per the NFL's official transaction log.
 I|HOU|Keylan Rutledge|G|Active|||2026-11-17||Rutledge (neck) was a full participant in Monday's walkthrough practice.
 I|HOU|Wyatt Teller|G|Active|||2026-11-17||Teller (illness) was a full participant in Monday's walkthrough practice.
-I|HOU|Azeez Al-Shaair|LB|Questionable|Groin|2026-11-19|2026-11-17|QUESTIONABLE|Al-Shaair (groin) did not participate in Monday's walkthrough practice.
 I|HOU|Jake Hummel|LB|Questionable|Groin|2026-11-19|2026-11-17|QUESTIONABLE|questionable
 I|HOU|Woody Marks|RB|Doubtful|Concussion|2026-11-19|2026-11-17|DOUBTFUL|Marks (concussion) missed Monday's walkthrough.
 I|HOU|Marvin Harrison Jr.|WR|Questionable|Hamstring|2026-11-19|2026-11-17|QUESTIONABLE|Harrison (hamstring) was estimated as a non-participant on Monday's practice report.
@@ -333,7 +333,7 @@ I|IND|Laquon Treadwell|WR|Active|||2026-11-17||Treadwell caught three passes on 
 I|IND|DJ Giddens|RB|Active|||2026-11-17||Giddens played two offensive snaps and didn't show up on the box score otherwise during the Colts' 24-22 win over the Dolphins on Sunday.
 I|IND|Will Mallory|TE|Questionable|Hamstring|2026-11-19|2026-11-17|QUESTIONABLE|Mallory (hamstring) did not participate in Monday's walkthrough practice.
 I|IND|Anthony Gould|WR|Questionable|Toe|2026-11-19|2026-11-17|QUESTIONABLE|Gould (toe) was estimated as limited in Monday's walkthrough practice.
-I|IND|Charvarius Ward|CB|Questionable|Knee|2026-11-19|2026-11-16|QUESTIONABLE|Colts head coach Shane Steichen reported Ward (shin) didn't return to Sunday's 24-22 win over the Dolphins and could miss Thursday's game versus Houston, James 
+I|IND|Charvarius Ward|CB|Questionable|Knee|2026-11-19|2026-11-16|QUESTIONABLE|Colts head coach Shane Steichen said that Ward (shin) is uncertain to be available for Thursday's game against the Texans after exiting Sunday's 24-22 win over 
 I|IND|Sauce Gardner|CB|Questionable|Calf|2026-11-19|2026-11-16|QUESTIONABLE|Colts head coach Shane Steichen reported Gardner suffered a left calf injury during Sunday's 24-22 win over the Dolphins and may not play Thursday versus Housto
 I|IND|Riley Leonard|QB|Active|||2026-11-16||
 I|IND|Seth McGowan|RB|Active|||2026-11-16||McGowan rushed 12 times for 77 yards and a touchdown and returned two kickoffs for 61 yards in the Colts' 24-22 win over the Dolphins on Sunday.
@@ -477,7 +477,7 @@ I|LAR|Davante Adams|WR|Injured Reserve|Hamstring|2026-11-25|2026-11-15|IR|Accord
 I|MIA|Jared Wayne|WR|Questionable|Quadriceps|2026-11-22|2026-11-17|QUESTIONABLE|questionable
 I|MIA|Chris Bell|WR|Questionable|Knee|2026-11-22|2026-11-17|QUESTIONABLE|questionable
 I|MIA|Aaron Brewer|C|Questionable|Concussion|2026-11-22|2026-11-17|QUESTIONABLE|questionable
-I|MIA|Zeek Biggers|DT|Out|Knee - Meniscus|2027-02-15|2026-11-17|OUT|Biggers will undergo a season-ending knee surgery in the near future, Ian Rapoport of NFL Network reports.
+I|MIA|Zeek Biggers|DT|Out|Knee - Meniscus|2027-02-15|2026-11-17|OUT|Biggers sustained a lateral meniscus tear during Sunday's 24-22 loss to the Colts and will require season-ending surgery on his right knee, Ian Rapoport of NFL 
 I|MIA|Jaylen Wright|RB|Active|||2026-11-17||Wright turned three carries into minus-2 yards, caught both of his targets for 17 yards and returned four kickoffs for 88 yards during the Dolphins' 24-22 loss 
 I|MIA|Kaytron Allen|RB|Active|||2026-11-17||Allen turned his lone carry into zero yards and hauled in his lone target for minus-4 yards during the Dolphins' 24-22 loss to the Colts on Sunday.
 I|MIA|Jordan Phillips|DT|Questionable|Arm|2026-11-22|2026-11-16|QUESTIONABLE|Phillips underwent further tests Monday on the arm he injured in Sunday's 24-22 loss to the Colts, Barry Jackson of the Miami Herald reports.
