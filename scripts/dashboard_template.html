@@ -6513,7 +6513,7 @@ function metaProp(root='#metaprop',px='mp'){
     const past=(J.picksAll||[]).filter(p=>p.type==='PROP'&&+p.week===G.week);
     if(G.week===LW){n.innerHTML='';n.hidden=true;return}
     n.hidden=false;
-    const res=r=>r.result==='W'?'<b style="color:var(--green)">W</b>':r.result==='L'?'<b style="color:var(--red)">L</b>':r.result==='P'?'P':'<span class="dim">open</span>';
+    const res=r=>r.result==='W'?'<b style="color:var(--green)">W</b>':r.result==='L'?'<b style="color:var(--red)">L</b>':r.result==='P'?'P':r.result==='V'?'<span class="dim" title="no game-log row for him that week (inactive or no touches)">void</span>':'<span class="dim">open</span>';
     const tbl=past.length?thTable(['player','team','opp','market','side',{l:'line',g:false},{l:'price',g:false},{l:'model',t:'the model\'s chance for the side'},{l:'edge'},{l:'actual',g:false},{l:'result',g:false}],past.map(p=>[pn(p.player,p.team,true),tcell(p.team),p.opp||'',p.market,p.side,p.line,p.price!=null&&p.price!==''?mlTxt(+p.price):'—',p.model!=null&&p.model!==''?{v:+p.model,h:pkPct(+p.model,0)}:null,p.edge!=null&&p.edge!==''?{v:+p.edge,h:pkPct(+p.edge,1)}:null,p.actual??'',res(p)])):'';
     n.innerHTML=`<div class="panel"><h3>week ${G.week} · ${G.week<LW?'the card, graded':'no lines yet'} <span class="f">${G.week<LW?`the books' full prop sheet is kept only for the live week (wk ${LW}, below) · these are the props the card bet in week ${G.week}, graded from the box scores`:`the books post week-${G.week} props midweek · the live sheet below is week ${LW}`}</span></h3>${tbl}</div>`};
   function build(){

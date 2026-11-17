@@ -138,10 +138,20 @@ def ledger(B):
     COLS = {'pass_yds': ['pass_yds'], 'pass_td': ['pass_td'], 'pass_att': ['pass_att'], 'completions': ['cmp'], 'interceptions': ['int'],
             'rush_yds': ['rush_yds'], 'rush_att': ['rush_att'], 'receptions': ['rec'], 'rec_yds': ['rec_yds'],
             'rush_rec_yds': ['rush_yds', 'rec_yds'], 'pass_rush_yds': ['pass_yds', 'rush_yds']}
+    # v61.1: names from the books carry suffixes and punctuation the logs do not ("Michael Penix Jr." / "Michael Penix",
+    # "DJ Moore" / "D.J. Moore", "Kenneth Walker III") — match on a normalized key, same team first; a player whose team's game
+    # is in the logs but who has no row (inactive, or never touched the ball) is voided (V) instead of waiting forever.
+    import re
+    nk = lambda n: re.sub(r'[^a-z]', '', re.sub(r'\b(jr|sr|ii|iii|iv|v)\b', '', str(n).lower().replace('.', ' ')))
+    L = L.assign(_k=L.player.map(nk))
+    teams_in = set(zip(L.team, L.week))
     for i, r in led.iterrows():
         if isinstance(r.result, str) and r.result: continue
-        g = L[(L.player == r.player) & (L.week == r.week)]
-        if not len(g): continue
+        g = L[(L._k == nk(r.player)) & (L.week == r.week)]
+        if len(g) > 1 and 'team' in g: g2 = g[g.team == r.team]; g = g2 if len(g2) else g
+        if not len(g):
+            if (r.team, r.week) in teams_in: led.at[i, 'result'] = 'V'
+            continue
         a = float(g[COLS[r.market]].sum(axis=1).iloc[0]); led.at[i, 'actual'] = a
         led.at[i, 'result'] = 'P' if a == r.line else ('W' if (a > r.line) == (r.side == 'Over') else 'L')
     led.to_csv(LP, index=False)
