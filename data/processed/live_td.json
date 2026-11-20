@@ -1,10 +1,10 @@
 {
- "pulled": "2026-11-19T23:46Z",
+ "pulled": "2026-11-20T05:21Z",
  "season": 2026,
  "week": 11,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "IND@HOU": "pre",
+  "IND@HOU": "post",
   "MIA@BUF": "pre",
   "NO@CHI": "pre",
   "TEN@DAL": "pre",
@@ -20,8 +20,8 @@
  },
  "scores": {
   "IND@HOU": [
-   0,
-   0
+   3,
+   26
   ],
   "MIA@BUF": [
    0,
@@ -72,5 +72,30 @@
    0
   ]
  },
- "plays": []
+ "plays": [
+  {
+   "game": "IND@HOU",
+   "q": 1,
+   "clock": "2:14",
+   "team": "HOU",
+   "player": "Nico Collins",
+   "how": "rec"
+  },
+  {
+   "game": "IND@HOU",
+   "q": 2,
+   "clock": "7:38",
+   "team": "HOU",
+   "player": "Kayshon Boutte",
+   "how": "rec"
+  },
+  {
+   "game": "IND@HOU",
+   "q": 3,
+   "clock": "4:19",
+   "team": "HOU",
+   "player": "Marlin Klein",
+   "how": "rec"
+  }
+ ]
 }
