@@ -428,6 +428,9 @@ def main():
         return dict(log=log[-600:], plan=100000, state=dict(lines=st.get('lines', {}), props=props, last_run=st.get('last_run', '')))
     data['api'] = api_payload()
     data['injuries'] = rows_of('data/processed/injuries_current.csv')
+    if os.path.exists('data/processed/mix_backtest.json'):   # v66: the mixture backtest (rule record + this week's plays)
+        _mx = json.load(open('data/processed/mix_backtest.json', encoding='utf-8'))
+        data['mix'] = {k: _mx.get(k) for k in ('built', 'n', 'weeks', 'single', 'rules', 'walk_forward', 'walk_forward_total', 'current')}
     data['qbTargets'] = json.load(open('data/processed/qb_targets.json', encoding='utf-8')) if os.path.exists('data/processed/qb_targets.json') else None  # v61
     data['categories'] = json.load(open('data/processed/categories.json', encoding='utf-8')) if os.path.exists('data/processed/categories.json') else None  # v61
     data['lineMoves'] = [{k: v for k, v in r.items() if k != 'series'} for r in rows_of('data/processed/line_moves.csv')]

@@ -94,7 +94,7 @@ def main():
     except (Exception, SystemExit) as e: print('  build_first_td skipped:', e)
     try: run(['scripts/build_backtest.py'])
     except SystemExit as e: print('!! build_backtest failed — the Backtest tab keeps its last build:', e)
-    for _s in ('scripts/build_qb_targets.py', 'scripts/build_categories.py'):   # v61: QB Targets + Live Categories feed the dashboard
+    for _s in ('scripts/build_qb_targets.py', 'scripts/build_categories.py', 'scripts/build_mix_backtest.py'):   # v61: QB Targets + Live Categories feed the dashboard
         try: run([_s])
         except (Exception, SystemExit) as e: print('  %s skipped: %s' % (_s, e))
     run(['scripts/build_dashboard.py'])
