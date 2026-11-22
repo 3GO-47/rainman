@@ -1,16 +1,16 @@
 {
- "pulled": "2026-11-22T17:39Z",
+ "pulled": "2026-11-22T19:16Z",
  "season": 2026,
  "week": 11,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "MIA@BUF": "pre",
-  "NO@CHI": "pre",
-  "TEN@DAL": "pre",
-  "TB@DET": "pre",
-  "ARI@KC": "pre",
-  "PIT@PHI": "pre",
-  "BAL@CAR": "pre",
+  "MIA@BUF": "in",
+  "NO@CHI": "in",
+  "TEN@DAL": "in",
+  "TB@DET": "in",
+  "ARI@KC": "in",
+  "PIT@PHI": "in",
+  "BAL@CAR": "in",
   "NYJ@LAC": "pre",
   "LV@DEN": "pre",
   "JAX@NYG": "pre",
@@ -20,32 +20,32 @@
  },
  "scores": {
   "MIA@BUF": [
-   0,
-   0
+   3,
+   20
   ],
   "NO@CHI": [
-   0,
-   0
+   7,
+   16
   ],
   "TEN@DAL": [
-   0,
-   0
+   6,
+   27
   ],
   "TB@DET": [
-   0,
-   0
+   6,
+   10
   ],
   "ARI@KC": [
-   0,
-   0
+   7,
+   24
   ],
   "PIT@PHI": [
-   0,
-   0
+   3,
+   13
   ],
   "BAL@CAR": [
-   0,
-   0
+   19,
+   20
   ],
   "NYJ@LAC": [
    0,
@@ -73,6 +73,174 @@
   ]
  },
  "plays": [
+  {
+   "game": "MIA@BUF",
+   "q": 2,
+   "clock": "13:23",
+   "team": "BUF",
+   "player": "DJ Moore",
+   "how": "rec"
+  },
+  {
+   "game": "MIA@BUF",
+   "q": 2,
+   "clock": "3:48",
+   "team": "BUF",
+   "player": "James Cook III",
+   "how": "rush"
+  },
+  {
+   "game": "NO@CHI",
+   "q": 2,
+   "clock": "11:34",
+   "team": "CHI",
+   "player": "D'Andre Swift",
+   "how": "rec"
+  },
+  {
+   "game": "NO@CHI",
+   "q": 2,
+   "clock": "7:21",
+   "team": "CHI",
+   "player": "Colston Loveland",
+   "how": "rec"
+  },
+  {
+   "game": "NO@CHI",
+   "q": 2,
+   "clock": "3:34",
+   "team": "NO",
+   "player": "Alvin Kamara",
+   "how": "rec"
+  },
+  {
+   "game": "TEN@DAL",
+   "q": 1,
+   "clock": "8:23",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rush"
+  },
+  {
+   "game": "TEN@DAL",
+   "q": 1,
+   "clock": "1:35",
+   "team": "DAL",
+   "player": "KaVontae Turpin",
+   "how": "rush"
+  },
+  {
+   "game": "TEN@DAL",
+   "q": 2,
+   "clock": "12:59",
+   "team": "DAL",
+   "player": "CeeDee Lamb",
+   "how": "rec"
+  },
+  {
+   "game": "TEN@DAL",
+   "q": 2,
+   "clock": "4:08",
+   "team": "DAL",
+   "player": "George Pickens",
+   "how": "rec"
+  },
+  {
+   "game": "TB@DET",
+   "q": 2,
+   "clock": "10:37",
+   "team": "DET",
+   "player": "Amon-Ra St. Brown",
+   "how": "rec"
+  },
+  {
+   "game": "TB@DET",
+   "q": 2,
+   "clock": "0:04",
+   "team": "TB",
+   "player": "Ted Hurst III",
+   "how": "rec"
+  },
+  {
+   "game": "ARI@KC",
+   "q": 1,
+   "clock": "9:46",
+   "team": "KC",
+   "player": "Travis Kelce",
+   "how": "rec"
+  },
+  {
+   "game": "ARI@KC",
+   "q": 1,
+   "clock": "0:48",
+   "team": "KC",
+   "player": "Emmett Johnson",
+   "how": "rush"
+  },
+  {
+   "game": "ARI@KC",
+   "q": 2,
+   "clock": "9:48",
+   "team": "ARI",
+   "player": "Simi Fehoko",
+   "how": "rec"
+  },
+  {
+   "game": "ARI@KC",
+   "q": 2,
+   "clock": "1:54",
+   "team": "KC",
+   "player": "Travis Kelce",
+   "how": "rec"
+  },
+  {
+   "game": "PIT@PHI",
+   "q": 1,
+   "clock": "0:35",
+   "team": "PHI",
+   "player": "Saquon Barkley",
+   "how": "rush"
+  },
+  {
+   "game": "BAL@CAR",
+   "q": 1,
+   "clock": "11:21",
+   "team": "BAL",
+   "player": "Rashod Bateman",
+   "how": "rec"
+  },
+  {
+   "game": "BAL@CAR",
+   "q": 1,
+   "clock": "0:01",
+   "team": "CAR",
+   "player": "Mitchell Evans",
+   "how": "rec"
+  },
+  {
+   "game": "BAL@CAR",
+   "q": 2,
+   "clock": "10:01",
+   "team": "CAR",
+   "player": "Chuba Hubbard",
+   "how": "rush"
+  },
+  {
+   "game": "BAL@CAR",
+   "q": 2,
+   "clock": "9:49",
+   "team": "BAL",
+   "player": "Devontez Walker",
+   "how": "ret"
+  },
+  {
+   "game": "BAL@CAR",
+   "q": 2,
+   "clock": "5:06",
+   "team": "CAR",
+   "player": "Tetairoa McMillan",
+   "how": "rec"
+  },
   {
    "game": "IND@HOU",
    "q": 1,
