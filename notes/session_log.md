@@ -1048,3 +1048,6 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 ## n145 — v75 (2026-11-22): depth-chart mark on the Player Grid
 - A small 1/2/3/4 in front of each RB / WR / TE name (from u.dslot||u.slot): 1 solid, 2 grey, 3-4 outlined; hover names the slot. QBs unmarked (all QB1). Nothing else changed. Patch: scripts/patch_v75_grid_depth_mark.py.
 - v75b: the mark is 11px, sits partly in the left padding, and at four-across the RB name column takes 2 points from the opponent column — same names fit as before the mark (checked live at 2048).
+
+## n146 — v76 (2026-11-22): depth marks coloured
+- Player Grid depth marks: 1 blue, 2 violet, 3 pink, 4 slate (none on the green-red matchup scale). Patch: scripts/patch_v76_depth_mark_colour.py.
