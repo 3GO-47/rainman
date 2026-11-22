@@ -1044,3 +1044,6 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 
 ## n144 — v74 (2026-11-22): rank subscripts coloured
 - The rank subscript beside each figure takes the same green-to-red scale as the figure (gradeColor). Nothing else changed. Patch: scripts/patch_v74_subscript_colour.py.
+
+## n145 — v75 (2026-11-22): depth-chart mark on the Player Grid
+- A small 1/2/3/4 in front of each RB / WR / TE name (from u.dslot||u.slot): 1 solid, 2 grey, 3-4 outlined; hover names the slot. QBs unmarked (all QB1). Nothing else changed. Patch: scripts/patch_v75_grid_depth_mark.py.
