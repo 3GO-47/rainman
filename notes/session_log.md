@@ -1034,3 +1034,10 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Category Grid: tables per row by room (min 456 px each) instead of five squeezed across; pixel columns. 0 clipped at 1288/1440/1720/2048/2560 (was 1,259 clipped cells at 1288, 173 at 2048).
 - Known, untouched: TD Board clips at 1288 (2,644 cells) and 68 long names at 2048 — pre-existing, not changed without Josh's go.
 - Patch: scripts/patch_v72_live_marks_grid_fit.py (validated from pristine v71 template, byte-identical on the PC: 518b9633).
+
+## n143 — v73 (2026-11-22): restore the grids
+- Josh: the v71/v72 layout changes were never asked for. Player Grid is the pre-v71 grid again (four across, original columns/widths; no RZ / L5 / SCORE columns, no $ chips). Rank subscripts kept; a table drops them only if a figure would be cut (lgFit).
+- Category Grid back to the original five-across layout and widths; the "scored marks live" line removed.
+- Kept from v72: check-off boxes gone, scored marks refresh live from ESPN in the browser.
+- RULE: change only what was asked. No layout changes to a view he did not name.
+- Patch: scripts/patch_v73_restore_grids.py (template ae91e08f).
