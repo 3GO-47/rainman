@@ -475,6 +475,9 @@ def main():
         sched[r['team']] = [r[f'week_{i}'] for i in range(1, nwk + 1)]
     data['sched26'] = sched
     # games26 row: [week, vis, home, date, day, time_et, slate] — kickoff cols from kickoffs_2026.csv
+    try:   # v70: flexed games — take the real kickoff from the newest ESPN scoreboard pull
+        import update_kickoffs; update_kickoffs.main()
+    except Exception as e: print('  update_kickoffs skipped:', e)
     kick = {}
     if os.path.exists('data/processed/kickoffs_2026.csv'):
         for r in csv.DictReader(open('data/processed/kickoffs_2026.csv')):
