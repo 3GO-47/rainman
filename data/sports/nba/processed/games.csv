@@ -5,13 +5,13 @@ eid,date,day,away,home,venue,tv,odds,ou,away_rec,home_rec,neutral,note,stype,mod
 401910026,2026-11-22T01:00Z,2026-11-21,MEM,MIN,Target Center,DAZN MIN,,,,,False,,reg,4.94,229.6,0.66,,,117.3,112.3
 401910027,2026-11-22T01:00Z,2026-11-21,NO,SA,Frost Bank Center,DAZN SAS,,,,,False,,reg,19.11,231.3,0.944,,,125.2,106.1
 401910028,2026-11-22T03:00Z,2026-11-21,BOS,SAC,Golden 1 Center,NBA TV,,,,,False,,reg,-19.58,224.4,0.051,,,102.4,122.0
-401910029,2026-11-22T20:30Z,2026-11-22,DET,ATL,State Farm Arena,,DET -1.5,223.5,10-5,10-6,False,,reg,-2.55,228.9,0.416,1.5,,113.2,115.7
-401910030,2026-11-22T23Z,2026-11-22,OKC,MIA,Kaseya Center,"KSBI,Thunder App",MIA -4.5,231.5,10-6,9-6,False,,reg,-2.72,231.1,0.41,-4.5,,114.2,116.9
-401910031,2026-11-23T00Z,2026-11-22,ORL,WSH,Capital One Arena,MNMT,ORL -4.5,220.5,7-8,6-11,False,,reg,-4.07,228.0,0.367,4.5,,112.0,116.0
-401910032,2026-11-23T00Z,2026-11-22,DEN,CHI,United Center,,DEN -10.5,235.5,9-5,4-11,False,,reg,-6.92,234.6,0.282,10.5,,113.9,120.8
-401910033,2026-11-23T00Z,2026-11-22,DAL,UTAH,Delta Center,"KJZZ-TV,Jazz+,KFAA-TV,MavsTV",UTAH -1.5,223.5,9-7,3-14,False,,reg,-2.73,229.7,0.41,-1.5,,113.5,116.2
-401910035,2026-11-23T01:30Z,2026-11-22,BOS,GS,Chase Center,,BOS -8.5,210.5,11-5,8-8,False,,reg,-7.73,223.0,0.26,8.5,,107.6,115.4
-401910034,2026-11-23T01Z,2026-11-22,IND,NY,Madison Square Garden,DAZN IND,NY -7.5,213.5,5-11,10-6,False,,reg,13.95,222.7,0.878,-7.5,,118.3,104.4
+401910029,2026-11-22T20:30Z,2026-11-22,DET,ATL,State Farm Arena,,,,10-6,11-6,False,,reg,-2.55,228.9,0.416,,,113.2,115.7
+401910030,2026-11-22T23Z,2026-11-22,OKC,MIA,Kaseya Center,"KSBI,Thunder App",,,10-6,9-6,False,,reg,-2.72,231.1,0.41,,,114.2,116.9
+401910031,2026-11-23T00Z,2026-11-22,ORL,WSH,Capital One Arena,MNMT,ORL -4.5,219.5,7-8,6-11,False,,reg,-4.07,228.0,0.367,4.5,,112.0,116.0
+401910032,2026-11-23T00Z,2026-11-22,DEN,CHI,United Center,,DEN -10.5,236.5,9-5,4-11,False,,reg,-6.92,234.6,0.282,10.5,,113.9,120.8
+401910033,2026-11-23T00Z,2026-11-22,DAL,UTAH,Delta Center,"KJZZ-TV,Jazz+,KFAA-TV,MavsTV",DAL -2.5,225.5,9-7,3-14,False,,reg,-2.73,229.7,0.41,2.5,,113.5,116.2
+401910035,2026-11-23T01:30Z,2026-11-22,BOS,GS,Chase Center,,BOS -7.5,210.5,11-5,8-8,False,,reg,-7.73,223.0,0.26,7.5,,107.6,115.4
+401910034,2026-11-23T01Z,2026-11-22,IND,NY,Madison Square Garden,DAZN IND,NY -7.5,212.5,5-11,10-6,False,,reg,13.95,222.7,0.878,-7.5,,118.3,104.4
 401910038,2026-11-24T00:30Z,2026-11-23,OKC,IND,Gainbridge Fieldhouse,"KSBI,Thunder App,DAZN IND",,,10-6,5-11,False,,reg,-8.78,225.3,0.232,,,108.2,117.0
 401910039,2026-11-24T00:30Z,2026-11-23,MIL,TOR,Scotiabank Arena,"MyMi,Bucks App",,,1-16,6-10,False,,reg,14.02,226.7,0.879,,,120.3,106.3
 401910040,2026-11-24T00:30Z,2026-11-23,BKN,MIN,Target Center,"NBCSN,DAZN MIN",,,3-12,12-5,False,,reg,18.63,226.0,0.94,,,122.3,103.7
@@ -22,7 +22,7 @@ eid,date,day,away,home,venue,tv,odds,ou,away_rec,home_rec,neutral,note,stype,mod
 401910042,2026-11-24T01Z,2026-11-23,PHX,NO,Smoothie King Center,"Suns Live,Arizona's Family 3TV,GCSEN,Pelicans.com",,,8-7,5-13,False,,reg,-3.06,232.6,0.399,,,114.8,117.8
 401910044,2026-11-24T03Z,2026-11-23,UTAH,LAL,crypto.com Arena,"NBA TV,Spectrum Sports Net,Spectrum Sports Net +,KJZZ-TV,Jazz+",,,3-14,14-3,False,,reg,14.78,232.1,0.891,,,123.4,108.6
 401910045,2026-11-24T03Z,2026-11-23,SA,SAC,Golden 1 Center,DAZN SAS,,,14-3,2-14,False,,reg,-20.32,227.8,0.045,,,103.7,124.1
-401909314,2026-11-25T00Z,2026-11-24,DET,ORL,Kia Center,,,,10-5,7-8,False,NBA Cup - Group Play,reg,-6.4,224.3,0.297,,,109.0,115.4
+401909314,2026-11-25T00Z,2026-11-24,DET,ORL,Kia Center,,,,10-6,7-8,False,NBA Cup - Group Play,reg,-6.4,224.3,0.297,,,109.0,115.4
 401909315,2026-11-25T01Z,2026-11-24,BOS,WSH,Capital One Arena,NBC,,,11-5,6-11,False,NBA Cup - Group Play,reg,-15.7,225.1,0.095,,,104.7,120.4
 401909316,2026-11-25T03Z,2026-11-24,DAL,DEN,Ball Arena,"NBC,KFAA-TV,MavsTV",,,9-7,9-5,False,NBA Cup - Group Play,reg,7.03,228.9,0.721,,,118.0,110.9
 401909317,2026-11-25T22Z,2026-11-25,MIA,PHI,Xfinity Mobile Arena,ESPN,,,9-6,14-3,False,NBA Cup - Group Play,reg,2.79,233.7,0.592,,,118.3,115.5
@@ -34,12 +34,12 @@ eid,date,day,away,home,venue,tv,odds,ou,away_rec,home_rec,neutral,note,stype,mod
 401909322,2026-11-26T01Z,2026-11-25,BKN,MIL,Fiserv Forum,"DAZN (YES),MyMi,Bucks App",,,3-12,1-16,False,NBA Cup - Group Play,reg,0.71,228.0,0.523,,,114.3,113.6
 401909324,2026-11-26T03Z,2026-11-25,SAC,GS,Chase Center,,,,2-14,8-8,False,NBA Cup - Group Play,reg,14.36,228.9,0.884,,,121.6,107.3
 401909325,2026-11-26T03Z,2026-11-25,SA,POR,Moda Center,"ESPN,KUNP 16,BlazerVision",,,14-3,10-6,False,NBA Cup - Group Play,reg,-3.8,227.2,0.376,,,111.7,115.5
-401909327,2026-11-28T00:30Z,2026-11-27,MIL,DET,Little Caesars Arena,"MyMi,Bucks App",,,1-16,10-5,False,NBA Cup - Group Play,reg,19.88,226.5,0.951,,,123.2,103.3
+401909327,2026-11-28T00:30Z,2026-11-27,MIL,DET,Little Caesars Arena,"MyMi,Bucks App",,,1-16,10-6,False,NBA Cup - Group Play,reg,19.88,226.5,0.951,,,123.2,103.3
 401909328,2026-11-28T00:30Z,2026-11-27,PHI,IND,Gainbridge Fieldhouse,,,,14-3,5-11,False,NBA Cup - Group Play,reg,-3.85,227.9,0.374,,,112.0,115.9
 401909329,2026-11-28T00:30Z,2026-11-27,BKN,TOR,Scotiabank Arena,DAZN (YES),,,3-12,6-10,False,NBA Cup - Group Play,reg,12.22,226.0,0.846,,,119.1,106.9
 401909326,2026-11-28T00Z,2026-11-27,MIA,NY,Madison Square Garden,Prime Video,,,9-6,10-6,False,NBA Cup - Group Play,reg,7.89,228.5,0.745,,,118.2,110.3
 401909331,2026-11-28T01:30Z,2026-11-27,MEM,MIN,Target Center,"DAZN MIN,DAZN MEM",,,12-5,12-5,False,NBA Cup - Group Play,reg,4.94,229.6,0.66,,,117.3,112.3
-401909330,2026-11-28T01Z,2026-11-27,ATL,BOS,TD Garden,,,,10-6,11-5,False,NBA Cup - Group Play,reg,10.28,226.0,0.804,,,118.1,107.9
+401909330,2026-11-28T01Z,2026-11-27,ATL,BOS,TD Garden,,,,11-6,11-5,False,NBA Cup - Group Play,reg,10.28,226.0,0.804,,,118.1,107.9
 401909333,2026-11-28T02:30Z,2026-11-27,LAL,SA,Frost Bank Center,Prime Video,,,14-3,14-3,False,NBA Cup - Group Play,reg,8.02,229.2,0.748,,,118.6,110.6
 401909334,2026-11-28T02:30Z,2026-11-27,DEN,UTAH,Delta Center,"KJZZ-TV,Jazz+",,,9-5,3-14,False,NBA Cup - Group Play,reg,-7.25,230.3,0.273,,,111.5,118.8
 401909335,2026-11-28T02:30Z,2026-11-27,NO,LAC,Intuit Dome,"ClipperVision,GCSEN,Pelicans.com",,,5-13,4-11,False,NBA Cup - Group Play,reg,5.19,233.1,0.667,,,119.1,113.9
@@ -54,8 +54,8 @@ eid,date,day,away,home,venue,tv,odds,ou,away_rec,home_rec,neutral,note,stype,mod
 401910051,2026-11-29T21Z,2026-11-29,LAL,MEM,FedExForum,"Spectrum Sports Net,Spectrum Sports Net +,DAZN MEM",,,14-3,12-5,False,,reg,2.65,233.8,0.587,,,118.2,115.6
 401910052,2026-11-29T21Z,2026-11-29,BOS,SA,Frost Bank Center,"NBA TV,DAZN SAS",,,11-5,14-3,False,,reg,3.23,221.9,0.606,,,112.6,109.3
 401910053,2026-11-29T22Z,2026-11-29,PHX,UTAH,Delta Center,"Suns Live,Arizona's Family 3TV,KJZZ-TV,Jazz+",,,8-7,3-14,False,,reg,-4.24,229.4,0.362,,,112.6,116.8
-401910055,2026-11-29T23Z,2026-11-29,ORL,DET,Little Caesars Arena,,,,7-8,10-5,False,,reg,11.4,224.3,0.829,,,117.9,106.5
-401910056,2026-11-29T23Z,2026-11-29,ATL,NY,Madison Square Garden,,,,10-6,10-6,False,,reg,7.47,225.2,0.733,,,116.3,108.9
+401910055,2026-11-29T23Z,2026-11-29,ORL,DET,Little Caesars Arena,,,,7-8,10-6,False,,reg,11.4,224.3,0.829,,,117.9,106.5
+401910056,2026-11-29T23Z,2026-11-29,ATL,NY,Madison Square Garden,,,,11-6,10-6,False,,reg,7.47,225.2,0.733,,,116.3,108.9
 401910057,2026-11-29T23Z,2026-11-29,DEN,TOR,Scotiabank Arena,,,,9-5,6-10,False,,reg,1.21,227.1,0.54,,,114.2,112.9
 401910058,2026-11-29T23Z,2026-11-29,NO,POR,Moda Center,"BlazerVision,GCSEN,Pelicans.com",,,5-13,10-6,False,,reg,12.81,233.2,0.857,,,123.0,110.2
 401910059,2026-11-30T01:30Z,2026-11-29,LAC,GS,Chase Center,ClipperVision,,,4-11,8-8,False,,reg,5.45,228.2,0.675,,,116.8,111.4
