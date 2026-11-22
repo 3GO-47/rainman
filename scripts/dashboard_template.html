@@ -5752,7 +5752,7 @@ const tNum=v=>v==null?'':Math.abs(v)>=10?Math.round(v).toString():Math.abs(v)>=1
 /* one cell: the number, tinted by where that rank sits among the defenses */
 const tCell=(v,r,tip)=>v==null?'<td class="op"><span class="dim">\u00b7</span></td>'
   :`<td class="op" title="${esc(tip||'')}${r==null?'':' \u00b7 rank '+(+r).toFixed(+r%1?1:0)+' of '+NT}">`
-   +`<span class="badge" style="${r==null?'':gradeStyle(+r)}">${tNum(v)}</span>${r==null?'':`<sub class="rks">${Math.floor(+r)}</sub>`}</td>`;/* v68 */
+   +`<span class="badge" style="${r==null?'':gradeStyle(+r)}">${tNum(v)}</span>${r==null?'':`<sub class="rks" style="color:${gradeColor(+r)}">${Math.floor(+r)}</sub>`}</td>`;/* v68 *//* v74 */
 const tPsi=v=>v==null?'<td class="md"><span class="dim">\u00b7</span></td>'
   :`<td class="md" title="mean of the opponent's ranks across this slot's stats \u00b7 1 = softest">`
    +`<span class="psi" style="color:${gradeColor(+v)}">${Math.round(v)}</span></td>`;

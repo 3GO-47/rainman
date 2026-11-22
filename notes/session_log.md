@@ -1041,3 +1041,6 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 - Kept from v72: check-off boxes gone, scored marks refresh live from ESPN in the browser.
 - RULE: change only what was asked. No layout changes to a view he did not name.
 - Patch: scripts/patch_v73_restore_grids.py (template ae91e08f).
+
+## n144 — v74 (2026-11-22): rank subscripts coloured
+- The rank subscript beside each figure takes the same green-to-red scale as the figure (gradeColor). Nothing else changed. Patch: scripts/patch_v74_subscript_colour.py.
