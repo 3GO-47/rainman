@@ -54,7 +54,7 @@ def dvp_rank_asof(D):
         x = df[cols].astype(float); return (x.fillna(0) * np.array([6 if c.endswith('TD') else 1 if 'Recep' in c else .1 for c in cols])).sum(axis=1)
     for se in SEASONS:
         prev = D[D.season == se - 1]; cur = D[D.season == se]
-        for w in sorted(cur.week.unique()):
+        for w in sorted(set(int(x) for x in cur.week.unique()) | ({int(cur.week.max()) + 1} if len(cur) else set())):   # + the week ahead, so the live week has ranks
             sofar = cur[cur.week < w]
             for slk in SLOTSTAT:
                 src = sofar if len(sofar) and sofar.groupby('defense').size().min() >= 2 else prev
