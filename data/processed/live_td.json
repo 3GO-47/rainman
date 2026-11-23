@@ -1,12 +1,11 @@
 {
- "pulled": "2026-11-22T23:46Z",
+ "pulled": "2026-11-23T05:21Z",
  "season": 2026,
  "week": 11,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "NYJ@LAC": "in",
-  "LV@DEN": "in",
-  "JAX@NYG": "in",
+  "CIN@WSH": "pre",
+  "IND@HOU": "post",
   "MIA@BUF": "post",
   "NO@CHI": "post",
   "TEN@DAL": "post",
@@ -14,22 +13,19 @@
   "ARI@KC": "post",
   "PIT@PHI": "post",
   "BAL@CAR": "post",
-  "MIN@SF": "pre",
-  "IND@HOU": "post",
-  "CIN@WSH": "pre"
+  "NYJ@LAC": "post",
+  "LV@DEN": "post",
+  "JAX@NYG": "post",
+  "MIN@SF": "post"
  },
  "scores": {
-  "NYJ@LAC": [
-   27,
-   24
+  "CIN@WSH": [
+   0,
+   0
   ],
-  "LV@DEN": [
-   17,
-   23
-  ],
-  "JAX@NYG": [
-   6,
-   20
+  "IND@HOU": [
+   3,
+   26
   ],
   "MIA@BUF": [
    9,
@@ -59,114 +55,46 @@
    33,
    35
   ],
+  "NYJ@LAC": [
+   27,
+   24
+  ],
+  "LV@DEN": [
+   24,
+   38
+  ],
+  "JAX@NYG": [
+   18,
+   23
+  ],
   "MIN@SF": [
-   0,
-   0
-  ],
-  "IND@HOU": [
-   3,
-   26
-  ],
-  "CIN@WSH": [
-   0,
-   0
+   10,
+   35
   ]
  },
  "plays": [
   {
-   "game": "NYJ@LAC",
-   "q": 2,
-   "clock": "13:34",
-   "team": "NYJ",
-   "player": "Breece Hall",
-   "how": "rec"
-  },
-  {
-   "game": "NYJ@LAC",
-   "q": 2,
-   "clock": "3:07",
-   "team": "NYJ",
-   "player": "Sterling Shepard",
-   "how": "rec"
-  },
-  {
-   "game": "NYJ@LAC",
-   "q": 2,
-   "clock": "0:00",
-   "team": "LAC",
-   "player": "Justin Herbert",
-   "how": "rush"
-  },
-  {
-   "game": "NYJ@LAC",
-   "q": 4,
-   "clock": "13:01",
-   "team": "LAC",
-   "player": "Ladd McConkey",
-   "how": "rec"
-  },
-  {
-   "game": "NYJ@LAC",
-   "q": 4,
-   "clock": "9:46",
-   "team": "NYJ",
-   "player": "Sterling Shepard",
-   "how": "rec"
-  },
-  {
-   "game": "NYJ@LAC",
-   "q": 4,
-   "clock": "1:58",
-   "team": "LAC",
-   "player": "Ladd McConkey",
-   "how": "rec"
-  },
-  {
-   "game": "LV@DEN",
-   "q": 2,
-   "clock": "14:50",
-   "team": "DEN",
-   "player": "Adam Trautman",
-   "how": "rec"
-  },
-  {
-   "game": "LV@DEN",
-   "q": 2,
-   "clock": "10:35",
-   "team": "DEN",
-   "player": "Jonah Coleman",
-   "how": "rush"
-  },
-  {
-   "game": "LV@DEN",
-   "q": 2,
-   "clock": "2:45",
-   "team": "LV",
-   "player": "Ashton Jeanty",
-   "how": "rec"
-  },
-  {
-   "game": "LV@DEN",
-   "q": 3,
-   "clock": "5:13",
-   "team": "LV",
-   "player": "Ian Thomas",
-   "how": "rec"
-  },
-  {
-   "game": "JAX@NYG",
+   "game": "IND@HOU",
    "q": 1,
-   "clock": "2:07",
-   "team": "NYG",
-   "player": "Jameis Winston",
-   "how": "rush"
+   "clock": "2:14",
+   "team": "HOU",
+   "player": "Nico Collins",
+   "how": "rec"
   },
   {
-   "game": "JAX@NYG",
+   "game": "IND@HOU",
    "q": 2,
-   "clock": "6:04",
-   "team": "NYG",
-   "player": "Malik Nabers",
+   "clock": "7:38",
+   "team": "HOU",
+   "player": "Kayshon Boutte",
+   "how": "rec"
+  },
+  {
+   "game": "IND@HOU",
+   "q": 3,
+   "clock": "4:19",
+   "team": "HOU",
+   "player": "Marlin Klein",
    "how": "rec"
   },
   {
@@ -466,28 +394,188 @@
    "how": "rush"
   },
   {
-   "game": "IND@HOU",
-   "q": 1,
-   "clock": "2:14",
-   "team": "HOU",
-   "player": "Nico Collins",
-   "how": "rec"
-  },
-  {
-   "game": "IND@HOU",
+   "game": "NYJ@LAC",
    "q": 2,
-   "clock": "7:38",
-   "team": "HOU",
-   "player": "Kayshon Boutte",
+   "clock": "13:34",
+   "team": "NYJ",
+   "player": "Breece Hall",
    "how": "rec"
   },
   {
-   "game": "IND@HOU",
-   "q": 3,
-   "clock": "4:19",
-   "team": "HOU",
-   "player": "Marlin Klein",
+   "game": "NYJ@LAC",
+   "q": 2,
+   "clock": "3:07",
+   "team": "NYJ",
+   "player": "Sterling Shepard",
    "how": "rec"
+  },
+  {
+   "game": "NYJ@LAC",
+   "q": 2,
+   "clock": "0:00",
+   "team": "LAC",
+   "player": "Justin Herbert",
+   "how": "rush"
+  },
+  {
+   "game": "NYJ@LAC",
+   "q": 4,
+   "clock": "13:01",
+   "team": "LAC",
+   "player": "Ladd McConkey",
+   "how": "rec"
+  },
+  {
+   "game": "NYJ@LAC",
+   "q": 4,
+   "clock": "9:46",
+   "team": "NYJ",
+   "player": "Sterling Shepard",
+   "how": "rec"
+  },
+  {
+   "game": "NYJ@LAC",
+   "q": 4,
+   "clock": "1:58",
+   "team": "LAC",
+   "player": "Ladd McConkey",
+   "how": "rec"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 2,
+   "clock": "14:50",
+   "team": "DEN",
+   "player": "Adam Trautman",
+   "how": "rec"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 2,
+   "clock": "10:35",
+   "team": "DEN",
+   "player": "Jonah Coleman",
+   "how": "rush"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 2,
+   "clock": "2:45",
+   "team": "LV",
+   "player": "Ashton Jeanty",
+   "how": "rec"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 3,
+   "clock": "5:13",
+   "team": "LV",
+   "player": "Ian Thomas",
+   "how": "rec"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 3,
+   "clock": "0:20",
+   "team": "DEN",
+   "player": "Jonah Coleman",
+   "how": "rush"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 4,
+   "clock": "9:21",
+   "team": "DEN",
+   "player": "Jonah Coleman",
+   "how": "rush"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 4,
+   "clock": "4:29",
+   "team": "LV",
+   "player": "Jack Bech",
+   "how": "rec"
+  },
+  {
+   "game": "LV@DEN",
+   "q": 4,
+   "clock": "1:52",
+   "team": "DEN",
+   "player": "Ja'Quan McMillian",
+   "how": "ret"
+  },
+  {
+   "game": "JAX@NYG",
+   "q": 1,
+   "clock": "2:07",
+   "team": "NYG",
+   "player": "Jameis Winston",
+   "how": "rush"
+  },
+  {
+   "game": "JAX@NYG",
+   "q": 2,
+   "clock": "6:04",
+   "team": "NYG",
+   "player": "Malik Nabers",
+   "how": "rec"
+  },
+  {
+   "game": "JAX@NYG",
+   "q": 4,
+   "clock": "6:39",
+   "team": "JAX",
+   "player": "Brian Thomas Jr.",
+   "how": "rec"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 1,
+   "clock": "11:16",
+   "team": "SF",
+   "player": "George Kittle",
+   "how": "rec"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 1,
+   "clock": "1:13",
+   "team": "MIN",
+   "player": "Aaron Jones Sr.",
+   "how": "rush"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 2,
+   "clock": "14:13",
+   "team": "SF",
+   "player": "George Kittle",
+   "how": "rec"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 2,
+   "clock": "2:09",
+   "team": "SF",
+   "player": "Mike Evans",
+   "how": "rec"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 2,
+   "clock": "1:59",
+   "team": "SF",
+   "player": "Ji'Ayir Brown",
+   "how": "ret"
+  },
+  {
+   "game": "MIN@SF",
+   "q": 4,
+   "clock": "13:26",
+   "team": "SF",
+   "player": "Christian McCaffrey",
+   "how": "rush"
   }
  ]
 }
