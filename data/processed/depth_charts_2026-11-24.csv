@@ -1,7 +1,7 @@
 player,team,slot,injury,pos_row,depth,espn_depth,note,trend,l2,se,gp,log_name
-Josh Johnson,ARI,QB1,1,QB,1,2,promoted — Beck out,0,15.5,31.0,1,Josh Johnson
-Joey Aguilar,ARI,QB2,1,QB,2,3,promoted — Beck out,0,0.0,0.0,0,Joey Aguilar
-Carson Beck,ARI,QB3,-1,QB,3,1,,0,9.0,18.0,1,Carson Beck
+Carson Beck,ARI,QB1,0,QB,1,1,,0,9.0,18.0,1,Carson Beck
+Josh Johnson,ARI,QB2,1,QB,2,2,,0,15.5,31.0,1,Josh Johnson
+Joey Aguilar,ARI,QB3,1,QB,3,3,,0,0.0,0.0,0,Joey Aguilar
 Gardner Minshew II,ARI,QB4,-1,QB,4,4,,-1,0.0,26.5,2,Gardner Minshew
 Tyler Allgeier,ARI,RB1,1,RB,1,1,,-1,6.5,11.5,11,Tyler Allgeier
 Bam Knight,ARI,RB2,1,RB,2,2,,0,0.0,0.0,0,Bam Knight
@@ -36,7 +36,7 @@ Nick Muse,ATL,TE4,1,TE,4,4,,0,0.0,2.0,1,Nick Muse
 Drake London,ATL,WR1,1,WR1,1,1,,0,8.5,8.0,10,Drake London
 Jahan Dotson,ATL,WR2,1,WR2,1,1,,0,4.0,3.9,10,Jahan Dotson
 Olamide Zaccheaus,ATL,WR3,1,WR3,1,1,,0,3.5,2.5,8,Olamide Zaccheaus
-Zachariah Branch,ATL,WR4+,-1,WR1,2,2,,0,0.0,2.0,6,Zachariah Branch
+Zachariah Branch,ATL,WR4+,0,WR1,2,2,,0,0.0,2.0,6,Zachariah Branch
 Beaux Collins,ATL,WR4+,1,WR2,2,2,,0,1.0,2.0,1,Beaux Collins
 Chris Blair,ATL,WR4+,1,WR3,2,2,,0,2.5,2.2,4,Chris Blair
 Jacoby Brissett,BAL,QB1,1,QB,1,1,,0,43.0,43.0,2,Jacoby Brissett
@@ -64,10 +64,10 @@ Kyle Allen,BUF,QB2,1,QB,2,2,,0,0.0,0.0,4,Kyle Allen
 James Cook III,BUF,RB1,1,RB,1,1,,0,21.5,23.0,10,James Cook
 Ty Johnson,BUF,RB2,1,RB,2,2,,0,5.0,4.2,8,Ty Johnson
 Ray Davis,BUF,RB3,1,RB,3,3,,0,3.0,2.9,8,Ray Davis
-Dawson Knox,BUF,TE1,1,TE,1,2,promoted — Kincaid out,0,3.0,2.3,10,Dawson Knox
-Jackson Hawes,BUF,TE2,1,TE,2,3,promoted — Kincaid out,0,0.0,1.3,3,Jackson Hawes
-Keleki Latu,BUF,TE3,1,TE,3,4,promoted — Kincaid out,0,2.0,2.5,2,Keleki Latu
-Dalton Kincaid,BUF,TE4,-1,TE,4,1,,-1,1.5,4.6,9,Dalton Kincaid
+Dalton Kincaid,BUF,TE1,0,TE,1,1,,-1,1.5,4.6,9,Dalton Kincaid
+Dawson Knox,BUF,TE2,1,TE,2,2,,0,3.0,2.3,10,Dawson Knox
+Jackson Hawes,BUF,TE3,1,TE,3,3,,0,0.0,1.3,3,Jackson Hawes
+Keleki Latu,BUF,TE4,1,TE,4,4,,0,2.0,2.5,2,Keleki Latu
 DJ Moore,BUF,WR1,1,WR1,1,1,,1,8.0,6.0,8,D.J. Moore
 Khalil Shakir,BUF,WR2,1,WR2,1,1,,0,6.0,5.4,10,Khalil Shakir
 Keon Coleman,BUF,WR3,1,WR3,1,1,,0,3.5,4.0,10,Keon Coleman
@@ -113,22 +113,22 @@ Rome Odunze,CHI,WR2,1,WR2,1,1,,0,5.5,5.5,10,Rome Odunze
 Kalif Raymond,CHI,WR3,1,WR3,1,1,,0,5.5,4.5,10,Kalif Raymond
 Zavion Thomas,CHI,WR4+,1,WR1,2,2,,0,2.5,2.2,6,Zavion Thomas
 Jahdae Walker,CHI,WR4+,1,WR2,2,2,,0,0.0,1.0,2,Jahdae Walker
-Joe Burrow,CIN,QB1,1,QB,1,1,,0,36.5,37.8,9,Joe Burrow
+Joe Burrow,CIN,QB1,1,QB,1,1,,0,42.0,38.0,10,Joe Burrow
 Joe Flacco,CIN,QB2,1,QB,2,2,,0,0.0,0.0,0,Joe Flacco
-Chase Brown,CIN,RB1,1,RB,1,1,,0,15.5,18.6,9,Chase Brown
-Samaje Perine,CIN,RB2,1,RB,2,2,,1,10.5,7.4,9,Samaje Perine
+Chase Brown,CIN,RB1,1,RB,1,1,,0,16.5,18.1,10,Chase Brown
+Samaje Perine,CIN,RB2,1,RB,2,2,,1,10.0,7.7,10,Samaje Perine
 Tahj Brooks,CIN,RB3,1,RB,3,3,,0,1.5,3.0,2,Tahj Brooks
-Mike Gesicki,CIN,TE1,1,TE,1,1,,0,2.0,3.5,8,Mike Gesicki
-Drew Sample,CIN,TE2,1,TE,2,2,,0,1.5,2.2,5,Drew Sample
-Jack Endries,CIN,TE3,1,TE,3,4,promoted — Grandy out,0,1.5,1.3,3,Jack Endries
-Cam Grandy,CIN,TE4,-1,TE,4,3,,0,0.0,0.0,0,Cam Grandy
+Mike Gesicki,CIN,TE1,1,TE,1,1,,0,4.0,3.8,9,Mike Gesicki
+Drew Sample,CIN,TE2,1,TE,2,2,,0,2.0,2.0,6,Drew Sample
+Cam Grandy,CIN,TE3,1,TE,3,3,,0,0.0,0.0,0,Cam Grandy
+Jack Endries,CIN,TE4,1,TE,4,4,,0,3.5,2.2,4,Jack Endries
 Erick All Jr.,CIN,TE5,-1,TE,5,5,,0,0.0,3.0,3,Erick All
 Tanner Hudson,CIN,TE6,-1,TE,6,6,,0,0.0,1.8,4,Tanner Hudson
-Ja'Marr Chase,CIN,WR1,1,WR1,1,1,,1,13.0,9.7,9,Ja'Marr Chase
-Tee Higgins,CIN,WR2,1,WR2,1,1,,-1,6.0,8.1,9,Tee Higgins
-Dohnte Meyers,CIN,WR3,1,WR3,1,1,,0,2.5,3.1,9,Dohnte Meyers
-Colbie Young,CIN,WR4+,1,WR1,2,2,,0,0.0,1.0,2,Colbie Young
-Mitchell Tinsley,CIN,WR4+,1,WR2,2,2,,0,0.5,3.0,3,Mitchell Tinsley
+Ja'Marr Chase,CIN,WR1,1,WR1,1,1,,0,11.5,9.6,10,Ja'Marr Chase
+Tee Higgins,CIN,WR2,1,WR2,1,1,,-1,4.5,7.6,10,Tee Higgins
+Dohnte Meyers,CIN,WR3,1,WR3,1,1,,0,2.0,3.0,10,Dohnte Meyers
+Colbie Young,CIN,WR4+,1,WR1,2,2,,0,1.0,1.3,3,Colbie Young
+Mitchell Tinsley,CIN,WR4+,1,WR2,2,2,,0,0.0,3.0,3,Mitchell Tinsley
 Andrei Iosivas,CIN,WR4+,-1,WR3,2,2,,0,0.0,2.0,2,Andrei Iosivas
 Deshaun Watson,CLE,QB1,1,QB,1,1,,-1,20.0,32.1,9,Deshaun Watson
 Shedeur Sanders,CLE,QB2,1,QB,2,2,,1,15.5,11.3,3,Shedeur Sanders
@@ -154,16 +154,16 @@ Javonte Williams,DAL,RB1,1,RB,1,1,,0,19.0,20.1,11,Javonte Williams
 Tyler Goodson,DAL,RB2,-1,RB,2,2,,-1,0.0,8.0,6,Tyler Goodson
 Malik Davis,DAL,RB3,-1,RB,3,3,,0,0.0,0.0,0,Malik Davis
 Hunter Luepke,DAL,FB1,1,FB,1,1,,0,1.0,1.4,7,Hunter Luepke
-Brevyn Spann-Ford,DAL,TE1,1,TE,1,2,promoted — Ferguson out,0,2.5,2.6,10,Brevyn Spann-Ford
-Luke Schoonmaker,DAL,TE2,1,TE,2,3,promoted — Ferguson out,0,1.5,1.2,5,Luke Schoonmaker
-James Mitchell,DAL,TE3,1,TE,3,4,promoted — Ferguson out,0,1.0,2.0,1,James Mitchell
-Jake Ferguson,DAL,TE4,-1,TE,4,1,,0,0.0,3.4,8,Jake Ferguson
+Jake Ferguson,DAL,TE1,0,TE,1,1,,0,0.0,3.4,8,Jake Ferguson
+Brevyn Spann-Ford,DAL,TE2,1,TE,2,2,,0,2.5,2.6,10,Brevyn Spann-Ford
+Luke Schoonmaker,DAL,TE3,1,TE,3,3,,0,1.5,1.2,5,Luke Schoonmaker
+James Mitchell,DAL,TE4,1,TE,4,4,,0,1.0,2.0,1,James Mitchell
 Princeton Fant,DAL,TE5,-1,TE,5,5,,0,0.0,0.0,0,Princeton Fant
 CeeDee Lamb,DAL,WR1,1,WR1,1,1,,0,12.5,12.1,11,CeeDee Lamb
 George Pickens,DAL,WR2,1,WR2,1,1,,1,14.0,9.0,10,George Pickens
 Ryan Flournoy,DAL,WR3,1,WR3,1,1,,0,4.0,5.0,11,Ryan Flournoy
 KaVontae Turpin,DAL,WR4+,1,WR1,2,2,,0,2.0,1.8,6,KaVontae Turpin
-Jonathan Mingo,DAL,WR4+,-1,WR2,2,2,,0,0.0,2.2,5,Jonathan Mingo
+Jonathan Mingo,DAL,WR4+,0,WR2,2,2,,0,0.0,2.2,5,Jonathan Mingo
 Camden Brown,DAL,WR4+,1,WR3,2,2,,0,0.0,0.0,0,Camden Brown
 Bo Nix,DEN,QB1,1,QB,1,1,,0,36.0,32.2,10,Bo Nix
 Jarrett Stidham,DEN,QB2,1,QB,2,2,,0,0.0,0.0,0,Jarrett Stidham
@@ -202,10 +202,10 @@ DeAndre Carter,DET,WR4+,1,WR2,2,2,,0,0.0,1.0,1,DeAndre Carter
 Tom Kennedy,DET,WR4+,-1,WR3,2,2,,0,0.0,0.0,0,Tom Kennedy
 Jordan Love,GB,QB1,1,QB,1,1,,-1,28.0,36.8,10,Jordan Love
 Tyrod Taylor,GB,QB2,1,QB,2,2,,0,1.0,1.0,2,Tyrod Taylor
-Kaleb Johnson,GB,RB1,1,RB,1,2,promoted — Jacobs out,1,12.0,7.9,7,Kaleb Johnson
-MarShawn Lloyd,GB,RB2,1,RB,2,3,promoted — Jacobs out,-1,3.5,9.0,9,MarShawn Lloyd
-Chris Brooks,GB,RB3,1,RB,3,4,promoted — Jacobs out,-1,1.5,4.6,5,Chris Brooks
-Josh Jacobs,GB,RB4,-1,RB,4,1,,-1,2.0,16.3,3,Josh Jacobs
+Josh Jacobs,GB,RB1,0,RB,1,1,,-1,2.0,16.3,3,Josh Jacobs
+Kaleb Johnson,GB,RB2,1,RB,2,2,,1,12.0,7.9,7,Kaleb Johnson
+MarShawn Lloyd,GB,RB3,1,RB,3,3,,-1,3.5,9.0,9,MarShawn Lloyd
+Chris Brooks,GB,RB4,1,RB,4,4,,-1,1.5,4.6,5,Chris Brooks
 Tucker Kraft,GB,TE1,1,TE,1,1,,-1,3.5,5.6,10,Tucker Kraft
 Mark Redman,GB,TE2,1,TE,2,2,,0,0.5,1.3,3,Mark Redman
 Jonnu Smith,GB,TE3,1,TE,3,3,,0,0.0,2.0,4,Jonnu Smith
@@ -223,20 +223,20 @@ C.J. Stroud,HOU,QB1,1,QB,1,1,,0,32.5,34.7,10,C.J. Stroud
 Davis Mills,HOU,QB2,1,QB,2,2,,0,0.0,2.0,1,Davis Mills
 Graham Mertz,HOU,QB3,-1,QB,3,3,,0,0.0,0.0,0,Graham Mertz
 David Montgomery,HOU,RB1,1,RB,1,1,,0,15.0,14.8,6,David Montgomery
-Emari Demercado,HOU,RB2,1,RB,2,3,promoted — Marks out,0,8.0,8.0,3,Emari Demercado
-Woody Marks,HOU,RB3,-1,RB,3,2,,-1,6.5,14.3,9,Woody Marks
+Woody Marks,HOU,RB2,0,RB,2,2,,-1,6.5,14.3,9,Woody Marks
+Emari Demercado,HOU,RB3,1,RB,3,3,,0,8.0,8.0,3,Emari Demercado
 British Brooks,HOU,RB4,-1,RB,4,4,,0,0.0,0.0,0,British Brooks
 Dalton Schultz,HOU,TE1,1,TE,1,1,,-1,1.5,5.0,10,Dalton Schultz
 Foster Moreau,HOU,TE2,1,TE,2,2,,0,0.5,2.1,7,Foster Moreau
-Marlin Klein,HOU,TE3,1,TE,3,4,promoted — Jordan out,0,2.0,2.5,2,Marlin Klein
-Cade Stover,HOU,TE4,1,TE,4,5,promoted — Jordan out,0,0.0,0.8,4,Cade Stover
-Brevin Jordan,HOU,TE5,-1,TE,5,3,,0,0.0,1.0,2,Brevin Jordan
+Brevin Jordan,HOU,TE3,0,TE,3,3,,0,0.0,1.0,2,Brevin Jordan
+Marlin Klein,HOU,TE4,1,TE,4,4,,0,2.0,2.5,2,Marlin Klein
+Cade Stover,HOU,TE5,1,TE,5,5,,0,0.0,0.8,4,Cade Stover
 Nico Collins,HOU,WR1,1,WR1,1,1,,1,10.5,7.5,8,Nico Collins
 Xavier Hutchinson,HOU,WR2,1,WR2,1,1,,0,6.0,5.7,10,Xavier Hutchinson
 Kayshon Boutte,HOU,WR3,0,WR3,1,1,,0,1.5,3.1,10,Kayshon Boutte
 Tank Dell,HOU,WR4+,1,WR1,2,2,,0,4.0,4.5,4,Tank Dell
 Jayden Higgins,HOU,WR4+,-1,WR1,3,3,,0,0.0,0.0,0,Jayden Higgins
-Marvin Harrison Jr.,HOU,WR4+,-1,WR2,2,2,,0,0.0,3.7,3,Marvin Harrison Jr.
+Marvin Harrison Jr.,HOU,WR4+,0,WR2,2,2,,0,0.0,3.7,3,Marvin Harrison Jr.
 Jaylin Noel,HOU,WR4+,-1,WR2,3,3,,0,0.0,3.3,7,Jaylin Noel
 Nikko Remigio,HOU,WR4+,1,WR3,2,2,,0,0.0,0.0,0,Nikko Remigio
 Anthony Richardson Sr.,IND,QB1,1,QB,1,1,,0,1.0,2.0,2,Anthony Richardson
@@ -245,9 +245,9 @@ Jonathan Taylor,IND,RB1,1,RB,1,1,,0,18.0,21.2,11,Jonathan Taylor
 DJ Giddens,IND,RB2,1,RB,2,3,promoted — McGowan out,-1,1.0,4.0,2,DJ Giddens
 Seth McGowan,IND,RB3,-1,RB,3,2,,1,8.0,5.9,11,Seth McGowan
 Tyler Warren,IND,TE1,1,TE,1,1,,-1,4.0,6.8,9,Tyler Warren
-Drew Ogletree,IND,TE2,1,TE,2,3,promoted — Mallory out,0,0.0,0.0,0,Drew Ogletree
-Pharaoh Brown,IND,TE3,1,TE,3,4,promoted — Mallory out,0,0.0,1.0,1,Pharaoh Brown
-Will Mallory,IND,TE4,-1,TE,4,2,,-1,0.0,4.5,2,Will Mallory
+Will Mallory,IND,TE2,0,TE,2,2,,-1,0.0,4.5,2,Will Mallory
+Drew Ogletree,IND,TE3,1,TE,3,3,,0,0.0,0.0,0,Drew Ogletree
+Pharaoh Brown,IND,TE4,1,TE,4,4,,0,0.0,1.0,1,Pharaoh Brown
 Mo Alie-Cox,IND,TE5,-1,TE,5,5,,0,0.0,1.5,4,Mo Alie-Cox
 Carson Towt,IND,TE6,-1,TE,6,6,,0,0.0,0.0,0,Carson Towt
 Laquon Treadwell,IND,WR1,1,WR1,1,1,,0,2.0,3.0,11,Laquon Treadwell
@@ -277,9 +277,9 @@ CJ Williams,JAX,WR4+,1,WR3,2,2,,0,0.0,0.0,0,CJ Williams
 Patrick Mahomes,KC,QB1,1,QB,1,1,,0,37.0,33.7,10,Patrick Mahomes
 Justin Fields,KC,QB2,1,QB,2,2,,0,0.5,0.3,3,Justin Fields
 Garrett Nussmeier,KC,QB3,1,QB,3,3,,0,0.0,0.0,0,Garrett Nussmeier
-Emmett Johnson,KC,RB1,1,RB,1,2,promoted — III out,1,28.0,9.8,10,Emmett Johnson
-Jaydn Ott,KC,RB2,1,RB,2,3,promoted — III out,0,2.5,4.0,2,Jaydn Ott
-Kenneth Walker III,KC,RB3,-1,RB,3,1,,-1,0.0,24.4,8,Kenneth Walker III
+Kenneth Walker III,KC,RB1,0,RB,1,1,,-1,0.0,24.4,8,Kenneth Walker III
+Emmett Johnson,KC,RB2,1,RB,2,2,,1,28.0,9.8,10,Emmett Johnson
+Jaydn Ott,KC,RB3,1,RB,3,3,,0,2.5,4.0,2,Jaydn Ott
 Brashard Smith,KC,RB4,-1,RB,4,4,,0,0.0,1.0,1,Brashard Smith
 Ben VanSumeren,KC,FB1,0,FB,1,1,,0,0.0,0.0,0,Ben VanSumeren
 Travis Kelce,KC,TE1,1,TE,1,1,,0,4.5,5.7,10,Travis Kelce
@@ -313,7 +313,7 @@ Tre' Harris,LAC,WR3,1,WR3,1,1,,0,3.5,4.7,9,Tre Harris
 Derius Davis,LAC,WR4+,1,WR1,2,2,,0,0.0,1.0,5,Derius Davis
 Theo Wease Jr.,LAC,WR4+,1,WR1,3,3,,0,0.5,1.7,3,Theo Wease Jr.
 KeAndre Lambert-Smith,LAC,WR4+,1,WR2,2,2,,-1,0.0,6.5,2,KeAndre Lambert-Smith
-Brenen Thompson,LAC,WR4+,-1,WR3,2,2,,0,0.0,3.0,1,Brenen Thompson
+Brenen Thompson,LAC,WR4+,0,WR3,2,2,,0,0.0,3.0,1,Brenen Thompson
 Matthew Stafford,LAR,QB1,1,QB,1,1,,0,34.5,37.2,10,Matthew Stafford
 Stetson Bennett IV,LAR,QB2,1,QB,2,2,,0,0.0,3.0,1,Stetson Bennett
 Ty Simpson,LAR,QB3,1,QB,3,3,,0,0.0,0.0,0,Ty Simpson
@@ -340,9 +340,9 @@ Ashton Jeanty,LV,RB1,1,RB,1,1,,0,16.0,18.3,11,Ashton Jeanty
 Mike Washington Jr.,LV,RB2,1,RB,2,2,,0,9.0,8.6,11,Mike Washington Jr.
 Dylan Laube,LV,RB3,1,RB,3,3,,-1,0.0,4.5,2,Dylan Laube
 Connor Heyward,LV,FB1,1,FB,1,1,,0,1.0,1.5,6,Connor Heyward
-Michael Mayer,LV,TE1,1,TE,1,2,promoted — Bowers out,0,3.5,4.8,11,Michael Mayer
-Ian Thomas,LV,TE2,1,TE,2,3,promoted — Bowers out,0,1.0,1.2,6,Ian Thomas
-Brock Bowers,LV,TE3,-1,TE,3,1,,-1,1.0,8.9,8,Brock Bowers
+Brock Bowers,LV,TE1,0,TE,1,1,,-1,1.0,8.9,8,Brock Bowers
+Michael Mayer,LV,TE2,1,TE,2,2,,0,3.5,4.8,11,Michael Mayer
+Ian Thomas,LV,TE3,1,TE,3,3,,0,1.0,1.2,6,Ian Thomas
 Tre Tucker,LV,WR1,1,WR1,1,1,,0,6.0,6.2,11,Tre Tucker
 Jalen Nailor,LV,WR2,1,WR2,1,1,,0,4.5,4.1,9,Jalen Nailor
 Jack Bech,LV,WR3,1,WR3,1,1,,1,8.0,4.8,5,Jack Bech
@@ -368,11 +368,11 @@ Caleb Douglas,MIA,WR2,1,WR2,1,1,,1,9.0,6.4,7,Caleb Douglas
 Chris Bell,MIA,WR3,1,WR3,1,1,,0,2.0,3.2,9,Chris Bell
 Kevin Coleman Jr.,MIA,WR4+,1,WR1,2,2,,0,3.5,3.1,9,Kevin Coleman
 Jalen Tolbert,MIA,WR4+,1,WR2,2,2,,0,1.5,1.4,5,Jalen Tolbert
-Jared Wayne,MIA,WR4+,-1,WR3,2,2,,0,0.0,0.0,0,Jared Wayne
+Jared Wayne,MIA,WR4+,0,WR3,2,2,,0,0.0,0.0,0,Jared Wayne
 Kirk Cousins,MIN,QB1,1,QB,1,1,,0,34.5,34.5,2,Kirk Cousins
-Carson Wentz,MIN,QB2,1,QB,2,3,promoted — Murray out,-1,2.5,17.2,4,Carson Wentz
-Max Brosmer,MIN,QB3,1,QB,3,4,promoted — Murray out,0,0.0,7.0,1,Max Brosmer
-Kyler Murray,MIN,QB4,-1,QB,4,2,,-1,0.0,25.7,6,Kyler Murray
+Kyler Murray,MIN,QB2,0,QB,2,2,,-1,0.0,25.7,6,Kyler Murray
+Carson Wentz,MIN,QB3,1,QB,3,3,,-1,2.5,17.2,4,Carson Wentz
+Max Brosmer,MIN,QB4,1,QB,4,4,,0,0.0,7.0,1,Max Brosmer
 Jordan Mason,MIN,RB1,1,RB,1,1,,0,14.5,13.0,6,Jordan Mason
 Aaron Jones Sr.,MIN,RB2,1,RB,2,2,,-1,10.5,15.8,10,Aaron Jones
 DeeJay Dallas,MIN,RB3,1,RB,3,3,,0,0.5,1.2,8,DeeJay Dallas
@@ -458,11 +458,11 @@ Jelani Woods,NYJ,TE4,1,TE,4,4,,0,0.0,1.0,5,Jelani Woods
 Andrew Beck,NYJ,TE5,1,TE,5,5,,0,0.0,0.0,2,Andrew Beck
 Garrett Wilson,NYJ,WR1,1,WR1,1,1,,0,9.5,8.2,10,Garrett Wilson
 Adonai Mitchell,NYJ,WR2,1,WR2,1,1,,0,5.5,6.4,7,Adonai Mitchell
-Malik McClain,NYJ,WR3,1,WR3,1,2,promoted — Jr. out,0,0.0,0.0,0,Malik McClain
-Isaiah Williams,NYJ,WR4+,-1,WR1,2,2,,0,3.5,2.4,9,Isaiah Williams
+Omar Cooper Jr.,NYJ,WR3,0,WR3,1,1,,-1,0.0,6.0,4,Omar Cooper
+Isaiah Williams,NYJ,WR4+,0,WR1,2,2,,0,3.5,2.4,9,Isaiah Williams
 Arian Smith,NYJ,WR4+,-1,WR1,3,3,,0,0.0,1.0,1,Arian Smith
 Tim Patrick,NYJ,WR4+,1,WR2,2,2,,0,0.5,2.3,3,Tim Patrick
-Omar Cooper Jr.,NYJ,WR4+,-1,WR3,2,1,,-1,0.0,6.0,4,Omar Cooper
+Malik McClain,NYJ,WR4+,1,WR3,2,2,,0,0.0,0.0,0,Malik McClain
 Joe Milton III,PHI,QB1,1,QB,1,1,,0,27.5,27.5,2,Joe Milton III
 Tanner McKee,PHI,QB2,0,QB,2,2,,-1,0.0,38.0,3,Tanner McKee
 Cole Payton,PHI,QB3,1,QB,3,3,,0,0.0,0.0,0,Cole Payton
@@ -503,9 +503,9 @@ Ben Skowronek,PIT,WR4+,1,WR1,2,2,,0,0.5,1.2,4,Ben Skowronek
 Cole Burgess,PIT,WR4+,-1,WR1,3,3,,0,0.0,0.0,0,Cole Burgess
 Kaden Wetjen,PIT,WR4+,1,WR2,2,2,,0,0.0,0.0,0,Kaden Wetjen
 Michael Pittman Jr.,PIT,WR4+,-1,WR3,2,2,,-1,0.0,4.0,3,Michael Pittman Jr.
-Drew Lock,SEA,QB1,1,QB,1,2,promoted — Darnold out,0,22.5,23.2,4,Drew Lock
-Jalen Milroe,SEA,QB2,1,QB,2,3,promoted — Darnold out,0,0.0,0.0,0,Jalen Milroe
-Sam Darnold,SEA,QB3,-1,QB,3,1,,-1,0.0,30.1,7,Sam Darnold
+Sam Darnold,SEA,QB1,0,QB,1,1,,-1,0.0,30.1,7,Sam Darnold
+Drew Lock,SEA,QB2,1,QB,2,2,,0,22.5,23.2,4,Drew Lock
+Jalen Milroe,SEA,QB3,1,QB,3,3,,0,0.0,0.0,0,Jalen Milroe
 Zach Charbonnet,SEA,RB1,1,RB,1,1,,0,19.0,16.0,3,Zach Charbonnet
 Jadarian Price,SEA,RB2,1,RB,2,2,,0,11.5,12.0,6,Jadarian Price
 Emanuel Wilson,SEA,RB3,1,RB,3,3,,-1,0.0,17.1,7,Emanuel Wilson
@@ -576,23 +576,23 @@ Elic Ayomanor,TEN,WR3,1,WR3,1,1,,1,6.5,3.9,10,Elic Ayomanor
 Calvin Ridley,TEN,WR4+,1,WR1,2,2,,0,3.0,2.7,7,Calvin Ridley
 Xavier Restrepo,TEN,WR4+,1,WR2,2,2,,0,2.0,2.0,2,Xavier Restrepo
 Wan'Dale Robinson,TEN,WR4+,-1,WR3,2,2,,-1,2.0,6.0,9,Wan'Dale Robinson
-Jayden Daniels,WAS,QB1,1,QB,1,1,,0,34.0,30.4,7,Jayden Daniels
+Jayden Daniels,WAS,QB1,1,QB,1,1,,0,34.0,31.0,8,Jayden Daniels
 Marcus Mariota,WAS,QB2,1,QB,2,2,,-1,0.0,17.0,3,Marcus Mariota
-Athan Kaliakmanis,WAS,QB3,-1,QB,3,3,,0,0.0,33.0,1,Athan Kaliakmanis
-Rachaad White,WAS,RB1,1,RB,1,2,promoted — Croskey-Merritt out,0,11.5,11.0,8,Rachaad White
-Austin Ekeler,WAS,RB2,1,RB,2,3,promoted — Croskey-Merritt out,1,12.0,7.5,6,Austin Ekeler
-Jacory Croskey-Merritt,WAS,RB3,-1,RB,3,1,,-1,0.0,14.8,5,Jacory Croskey-Merritt
-Robert Henry Jr.,WAS,RB4,-1,RB,4,4,,0,1.0,2.0,1,Robert Henry Jr.
+Athan Kaliakmanis,WAS,QB3,1,QB,3,3,,0,0.0,33.0,1,Athan Kaliakmanis
+Rachaad White,WAS,RB1,1,RB,1,2,promoted — Croskey-Merritt out,-1,6.5,11.0,8,Rachaad White
+Austin Ekeler,WAS,RB2,1,RB,2,3,promoted — Croskey-Merritt out,1,11.5,7.9,7,Austin Ekeler
+Robert Henry Jr.,WAS,RB3,1,RB,3,4,promoted — Croskey-Merritt out,0,1.0,2.0,1,Robert Henry Jr.
+Jacory Croskey-Merritt,WAS,RB4,-1,RB,4,1,,-1,8.0,15.0,6,Jacory Croskey-Merritt
 Jeremy McNichols,WAS,RB5,-1,RB,5,5,,-1,0.0,5.5,2,Jeremy McNichols
-Chig Okonkwo,WAS,TE1,1,TE,1,1,,0,7.5,5.6,7,Chig Okonkwo
+Chig Okonkwo,WAS,TE1,1,TE,1,1,,0,6.5,5.5,8,Chig Okonkwo
 Ben Sinnott,WAS,TE2,1,TE,2,2,,0,2.0,2.0,3,Ben Sinnott
 John Bates,WAS,TE3,1,TE,3,3,,0,0.0,1.5,4,John Bates
-Colson Yankoff,WAS,TE4,1,TE,4,4,,0,0.5,1.2,4,Colson Yankoff
-Stefon Diggs,WAS,WR1,1,WR1,1,1,,0,7.5,7.4,8,Stefon Diggs
-Antonio Williams,WAS,WR2,1,WR2,1,1,,0,4.0,4.6,9,Antonio Williams
-Treylon Burks,WAS,WR3,1,WR3,1,1,,0,1.5,3.6,7,Treylon Burks
-Van Jefferson,WAS,WR4+,1,WR1,2,2,,0,3.5,4.0,2,Van Jefferson
+Colson Yankoff,WAS,TE4,1,TE,4,4,,0,0.0,1.2,4,Colson Yankoff
+Stefon Diggs,WAS,WR1,1,WR1,1,1,,0,8.0,7.2,9,Stefon Diggs
+Antonio Williams,WAS,WR2,1,WR2,1,1,,0,6.5,5.2,10,Antonio Williams
+Treylon Burks,WAS,WR3,1,WR3,1,1,,0,3.0,3.5,8,Treylon Burks
+Van Jefferson,WAS,WR4+,1,WR1,2,2,,0,0.5,3.0,3,Van Jefferson
 Terry McLaurin,WAS,WR4+,-1,WR1,3,3,,-1,0.0,5.4,5,Terry McLaurin
-Luke McCaffrey,WAS,WR4+,1,WR2,2,2,,0,0.5,1.0,2,Luke McCaffrey
+Luke McCaffrey,WAS,WR4+,1,WR2,2,2,,0,0.0,1.0,2,Luke McCaffrey
 Jaylin Lane,WAS,WR4+,-1,WR2,3,3,,0,0.0,1.0,2,Jaylin Lane
 Dyami Brown,WAS,WR4+,-1,WR3,2,2,,0,0.0,2.7,6,Dyami Brown
