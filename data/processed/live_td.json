@@ -1,10 +1,9 @@
 {
- "pulled": "2026-11-23T23:46Z",
+ "pulled": "2026-11-24T05:21Z",
  "season": 2026,
  "week": 11,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "CIN@WSH": "pre",
   "IND@HOU": "post",
   "MIA@BUF": "post",
   "NO@CHI": "post",
@@ -16,13 +15,10 @@
   "NYJ@LAC": "post",
   "LV@DEN": "post",
   "JAX@NYG": "post",
-  "MIN@SF": "post"
+  "MIN@SF": "post",
+  "CIN@WSH": "post"
  },
  "scores": {
-  "CIN@WSH": [
-   0,
-   0
-  ],
   "IND@HOU": [
    3,
    26
@@ -70,6 +66,10 @@
   "MIN@SF": [
    10,
    35
+  ],
+  "CIN@WSH": [
+   20,
+   22
   ]
  },
  "plays": [
@@ -576,6 +576,30 @@
    "team": "SF",
    "player": "Christian McCaffrey",
    "how": "rush"
+  },
+  {
+   "game": "CIN@WSH",
+   "q": 2,
+   "clock": "1:55",
+   "team": "CIN",
+   "player": "Tee Higgins",
+   "how": "rec"
+  },
+  {
+   "game": "CIN@WSH",
+   "q": 2,
+   "clock": "0:12",
+   "team": "WSH",
+   "player": "Jacory Croskey-Merritt",
+   "how": "rush"
+  },
+  {
+   "game": "CIN@WSH",
+   "q": 3,
+   "clock": "7:04",
+   "team": "CIN",
+   "player": "Colbie Young",
+   "how": "rec"
   }
  ]
 }
