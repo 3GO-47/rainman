@@ -477,7 +477,10 @@ def main():
     data['sched26'] = sched
     # games26 row: [week, vis, home, date, day, time_et, slate] — kickoff cols from kickoffs_2026.csv
     try:   # v70: flexed games — take the real kickoff from the newest ESPN scoreboard pull
-        import update_kickoffs; update_kickoffs.main()
+        # NFL only: importing update_kickoffs moves the working directory to the repo root, which sent the NCAA build to the
+        # NFL files (ncaa refresh failed on 2026-11-24 with data/processed/players.csv not found)
+        if LEAGUE == 'nfl':
+            import update_kickoffs; update_kickoffs.main()
     except Exception as e: print('  update_kickoffs skipped:', e)
     kick = {}
     if os.path.exists('data/processed/kickoffs_2026.csv'):
