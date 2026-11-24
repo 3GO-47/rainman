@@ -1051,3 +1051,10 @@ Left as designed: Player Board / H2H / Splits tables scroll horizontally inside 
 
 ## n146 — v76 (2026-11-22): depth marks coloured
 - Player Grid depth marks: 1 blue, 2 violet, 3 pink, 4 slate (none on the green-red matchup scale). Patch: scripts/patch_v76_depth_mark_colour.py.
+
+## n147 — 2026-11-23 (Mon evening) — week 11 imported through Sunday; week 12 early look refreshed
+- Loop had pulled the 12 finished week-11 boxes (TNF + 11 Sunday games; 24 teams, 245 rows, every team's receiving yards/TDs reconcile to its passing); dvp_weekly 24 defenses; ledger wk 11: 1,082 graded, 84 void, 155 open (CIN@WAS tonight).
+- GAP FOUND: the nflverse cache (pbp, snaps, charting) is only fetched on Tuesdays, so usage / red-zone shares / QB targets / categories usage tiers / sim parameters were still through week 10. Fetched in the cloud workspace (pbp + snaps have all 12 week-11 games; FTN charting only TNF so far) and copied to data/raw/nflverse/; reran the loop's refresh steps from build_advanced on (week pinned to 11) + sims. sim_games_next (week 12, 16 games, no byes) now runs on pbp through week 11.
+- This VM's clock is UTC: after 6 PM CT it is already "tomorrow", and date-based builders (refresh auto_week, build_categories) jump a week early. Run them here with TZ=America/Chicago. Background processes die when a device call ends — run steps in the foreground (_up/refresh_steps.py list|run a b budget).
+- Week 12 (Thanksgiving): GB@LAR Wed 8:00 PM (sits in the TNF chip with KC@BUF Thu night, by build_kickoffs design), CHI@DET + PHI@DAL Thu day, DEN@PIT Fri, 10 Sun, CAR@TB Mon. Lines 16/16 spread + total. No byes.
+- Still to come from the loop's Tuesday 06:50 run: CIN@WAS box + pbp, depth-chart snapshot, flip to week 12, backtest week 11.
