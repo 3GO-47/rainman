@@ -1,11 +1,11 @@
 {
- "pulled": "2026-11-26T05:21Z",
+ "pulled": "2026-11-26T23:21Z",
  "season": 2026,
  "week": 12,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "CHI@DET": "pre",
-  "PHI@DAL": "pre",
+  "PHI@DAL": "in",
+  "CHI@DET": "post",
   "KC@BUF": "pre",
   "GB@LAR": "post",
   "DEN@PIT": "pre",
@@ -22,13 +22,13 @@
   "CAR@TB": "pre"
  },
  "scores": {
-  "CHI@DET": [
-   0,
-   0
-  ],
   "PHI@DAL": [
-   0,
-   0
+   10,
+   21
+  ],
+  "CHI@DET": [
+   39,
+   35
   ],
   "KC@BUF": [
    0,
@@ -88,6 +88,110 @@
   ]
  },
  "plays": [
+  {
+   "game": "PHI@DAL",
+   "q": 1,
+   "clock": "8:50",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 1,
+   "clock": "0:36",
+   "team": "DAL",
+   "player": "KaVontae Turpin",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 2,
+   "clock": "5:09",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 2,
+   "clock": "4:06",
+   "team": "PHI",
+   "player": "DeVonta Smith",
+   "how": "rec"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 2,
+   "clock": "12:51",
+   "team": "DET",
+   "player": "Jahmyr Gibbs",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 2,
+   "clock": "4:07",
+   "team": "CHI",
+   "player": "Kyle Monangai",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 2,
+   "clock": "0:06",
+   "team": "DET",
+   "player": "Sam LaPorta",
+   "how": "rec"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 3,
+   "clock": "10:40",
+   "team": "CHI",
+   "player": "Kyle Monangai",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 3,
+   "clock": "5:45",
+   "team": "DET",
+   "player": "Jahmyr Gibbs",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 3,
+   "clock": "3:09",
+   "team": "CHI",
+   "player": "D'Andre Swift",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 4,
+   "clock": "8:20",
+   "team": "DET",
+   "player": "Jahmyr Gibbs",
+   "how": "rush"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 4,
+   "clock": "7:20",
+   "team": "CHI",
+   "player": "Rome Odunze",
+   "how": "rec"
+  },
+  {
+   "game": "CHI@DET",
+   "q": 4,
+   "clock": "0:03",
+   "team": "CHI",
+   "player": "Rome Odunze",
+   "how": "rec"
+  },
   {
    "game": "GB@LAR",
    "q": 2,
