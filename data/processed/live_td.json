@@ -1,13 +1,13 @@
 {
- "pulled": "2026-11-25T23:46Z",
+ "pulled": "2026-11-26T05:21Z",
  "season": 2026,
  "week": 12,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "GB@LAR": "pre",
   "CHI@DET": "pre",
   "PHI@DAL": "pre",
   "KC@BUF": "pre",
+  "GB@LAR": "post",
   "DEN@PIT": "pre",
   "NO@CIN": "pre",
   "NYG@IND": "pre",
@@ -22,10 +22,6 @@
   "CAR@TB": "pre"
  },
  "scores": {
-  "GB@LAR": [
-   0,
-   0
-  ],
   "CHI@DET": [
    0,
    0
@@ -37,6 +33,10 @@
   "KC@BUF": [
    0,
    0
+  ],
+  "GB@LAR": [
+   13,
+   26
   ],
   "DEN@PIT": [
    0,
@@ -87,5 +87,30 @@
    0
   ]
  },
- "plays": []
+ "plays": [
+  {
+   "game": "GB@LAR",
+   "q": 2,
+   "clock": "11:29",
+   "team": "LAR",
+   "player": "Kyren Williams",
+   "how": "rush"
+  },
+  {
+   "game": "GB@LAR",
+   "q": 2,
+   "clock": "8:06",
+   "team": "GB",
+   "player": "Christian Watson",
+   "how": "rec"
+  },
+  {
+   "game": "GB@LAR",
+   "q": 3,
+   "clock": "6:58",
+   "team": "LAR",
+   "player": "Blake Corum",
+   "how": "rush"
+  }
+ ]
 }
