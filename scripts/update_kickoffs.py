@@ -14,11 +14,28 @@ except Exception:
 FIX = {'WSH': 'WAS', 'LA': 'LAR', 'JAC': 'JAX'}
 KO = 'data/processed/kickoffs_2026.csv'
 
+def regroup(rows):
+    """Slate chips the way they are watched: a Wednesday (or Tuesday) game stands alone as WED, and a Thursday with more than
+    one game (Thanksgiving) is one THU slate holding every game that day — afternoon and night together. A lone Thursday
+    night game stays TNF. Works on dict rows with week / date / day / slate; returns how many rows changed."""
+    per = {}
+    for r in rows:
+        if r.get('day') == 'Thu': per[(str(r['week']), r['date'])] = per.get((str(r['week']), r['date']), 0) + 1
+    n = 0
+    for r in rows:
+        if r.get('slate') == 'TBD': continue
+        new = r.get('slate')
+        if r.get('day') in ('Wed', 'Tue'): new = 'WED'
+        elif r.get('day') == 'Thu': new = 'THU' if per.get((str(r['week']), r['date']), 0) > 1 else 'TNF'
+        if new != r.get('slate'): r['slate'] = new; n += 1
+    return n
+
 def slate_of(dt):
     d = dt.strftime('%a'); h = dt.hour + dt.minute / 60
     if d == 'Sun': return 'INTL' if h < 12 else 'EARLY' if h < 15 else 'LATE' if h < 19 else 'SNF'
     if d == 'Mon': return 'MNF'
-    if d in ('Thu', 'Wed', 'Tue'): return 'THU' if (d == 'Thu' and h < 19) else 'TNF'
+    if d in ('Wed', 'Tue'): return 'WED'
+    if d == 'Thu': return 'TNF'          # regroup() turns a multi-game Thursday into one THU slate
     if d == 'Fri': return 'FRI'
     return 'SAT'
 
@@ -47,9 +64,11 @@ def main(quiet=False):
         dt = espn.get((r['vis'], r['home'], r['date'][:4]))
         if dt is None or abs((dt.replace(tzinfo=None) - datetime.datetime.strptime(r['date'], '%Y-%m-%d')).days) > 3: continue   # same matchup, another week
         new = dict(date=dt.strftime('%Y-%m-%d'), day=dt.strftime('%a'), time_et=dt.strftime('%I:%M %p').lstrip('0'), slate=slate_of(dt))
+        if new['day'] == 'Thu' and r['day'] == 'Thu' and r['slate'] in ('THU', 'TNF'): new['slate'] = r['slate']   # the Thursday grouping is regroup()'s call, not a change
         if any(r[k] != v for k, v in new.items()):
             changed.append(f"wk {r['week']} {r['vis']}@{r['home']}: {r['day']} {r['time_et']} {r['slate']} -> {new['day']} {new['time_et']} {new['slate']}"); r.update(new)
-    if changed:
+    regrouped = regroup(rows)             # WED alone, Thanksgiving's Thursday games together
+    if changed or regrouped:
         with open(KO, 'w', newline='', encoding='utf-8') as f:
             w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
         if not quiet: print(f'kickoffs_2026.csv: {len(changed)} kickoff(s) corrected from {os.path.basename(files[-1])}: ' + ' · '.join(changed))

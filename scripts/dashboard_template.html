@@ -1700,9 +1700,9 @@ const TREND_SE=(()=>{const wk={};J.weekly.forEach(r=>(wk[r[1]]=wk[r[1]]||new Set
 const CUR_SE=TREND_SE;
 /* ---------- GLOBAL FILTER: week · slate · game · team — applies to every tab ---------- */
 const GM={wk:0,vis:1,home:2,date:3,day:4,time:5,slate:6};
-const SLATE_LBL=LG.slateLbl||{TNF:'TNF',THU:'THU DAY',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
-const SLATE_TIP=LG.slateTip||{TNF:'Thursday night (incl. the Wednesday opener)',THU:'Thanksgiving-day afternoon games',FRI:'Friday holiday windows',SAT:'Saturday windows',INTL:'Sunday 9:30 AM ET international games',EARLY:'Sunday 1:00 PM ET / 12:00 CT',LATE:'Sunday 4:05-4:25 PM ET / 3:05-3:25 CT',SNF:'Sunday night',MNF:'Monday night',TBD:'kickoff not yet set (NFL flex)'};
-const SLATE_ORDER=LG.slateOrder||['TNF','THU','FRI','SAT','INTL','EARLY','LATE','SNF','MNF','TBD'];
+/* v77 */const SLATE_LBL=LG.slateLbl||{WED:'WED',TNF:'TNF',THU:'THU',FRI:'FRI',SAT:'SAT',INTL:'INTL AM',EARLY:'SUN 1P',LATE:'SUN 4P',SNF:'SNF',MNF:'MNF',TBD:'TBD'};
+const SLATE_TIP=LG.slateTip||{WED:'Wednesday game',TNF:'Thursday night',THU:'Every Thursday game when there is more than one (Thanksgiving)',FRI:'Friday holiday windows',SAT:'Saturday windows',INTL:'Sunday 9:30 AM ET international games',EARLY:'Sunday 1:00 PM ET / 12:00 CT',LATE:'Sunday 4:05-4:25 PM ET / 3:05-3:25 CT',SNF:'Sunday night',MNF:'Monday night',TBD:'kickoff not yet set (NFL flex)'};
+const SLATE_ORDER=LG.slateOrder||['WED','TNF','THU','FRI','SAT','INTL','EARLY','LATE','SNF','MNF','TBD'];
 const G={week:J.week||1,slates:new Set(),pos:new Set(),game:'',team:'',owner:'',conf:'',lines:''};
 /* v40: book lines on CFB players (J.lines, 'player|team' -> {td,pr,b,m}); power-conference groups for the CONF filter */
 const LINES=J.cfbLines||{};const P4=new Set(['SEC','Big Ten','Big 12','ACC']);
@@ -1717,7 +1717,7 @@ const ctTime=t=>{const m=/(\d+):(\d+) (AM|PM)/.exec(t||'');if(!m)return '';let h
 const GAMES=wk=>J.games26.filter(g=>g[GM.wk]===wk).sort((a,b)=>(a[GM.date]<b[GM.date]?-1:a[GM.date]>b[GM.date]?1:0)||tmin(a[GM.time])-tmin(b[GM.time]));
 const gameOf=(t,wk)=>GAMES(wk).find(g=>g[GM.vis]===t||g[GM.home]===t);
 const oppFor=(t,wk)=>(J.sched26[t]||[])[wk-1]||'';
-const SLATE_C=LG.slateColor||{TNF:'#c39bff',THU:'#ffb347',FRI:'#ff9f43',SAT:'#61dcff',INTL:'#2ee6a6',EARLY:'#00c853',LATE:'#e8b339',SNF:'#4da3ff',MNF:'#ff5252',TBD:'#8b98a5',MIDWK:'#c39bff',SAT_AM:'#2ee6a6',SAT_PM:'#00c853',SAT_NT:'#4da3ff',SAT_LT:'#e8b339',SUNMON:'#ff5252'};
+const SLATE_C=LG.slateColor||{WED:'#f78fd6',TNF:'#c39bff',THU:'#ffb347',FRI:'#ff9f43',SAT:'#61dcff',INTL:'#2ee6a6',EARLY:'#00c853',LATE:'#e8b339',SNF:'#4da3ff',MNF:'#ff5252',TBD:'#8b98a5',MIDWK:'#c39bff',SAT_AM:'#2ee6a6',SAT_PM:'#00c853',SAT_NT:'#4da3ff',SAT_LT:'#e8b339',SUNMON:'#ff5252'};
 const slateC=s=>SLATE_C[s]||'#8b98a5';
 const slateChip=s=>s?`<span class="slate" data-s="${s}" style="--w:${slateC(s)}" title="${SLATE_TIP[s]||''}">${SLATE_LBL[s]||s}</span>`:'';
 const kickLbl=g=>!g?'':g[GM.time]?`${g[GM.day]} ${g[GM.time]} ET / ${ctTime(g[GM.time])} ${slateChip(g[GM.slate])}`:`${g[GM.day]} kickoff TBD`;
@@ -4160,7 +4160,7 @@ function glossary(){
    ['role','Snap share and target share from nflverse snap counts + play-by-play; arrows compare the last game with the season.'],
    ['turnover','Share of last season\'s 11 highest-snap starters who are gone; returning-snap % is the share of their snaps still on the roster.'],
    ['&omega;','That defense\'s weekly allowed waveform for the stat (latest season with 4+ weeks), dashed line = its mean.'],
-   ['slate chips','TNF / SUN 1P / SUN 4P / SNF / MNF etc. — click any chip in the bar to filter every tab to that window; combine several.'],
+   ['slate chips','WED / TNF / THU / SUN 1P / SUN 4P / SNF / MNF etc. — click any chip in the bar to filter every tab to that window; combine several.'],
    ['game model','Opponent-adjusted margin rating (last 17 games, prior season ×0.6, shrunk) + 1.6 home field + rest; a pick needs a 3-point disagreement with the market. Picks are frozen when first built and graded against that line. Backtest: does not beat the closing spread; totals 54.6% on a small sample.'],
    ['props','DraftKings lines from ESPN\'s public odds feed. PROJ = own weighted stat average shrunk to the slot mean × trust-shrunk DvP at the Big Board\'s position weights; L10 = share of the last 10 games over the line; a lean needs a 10% gap, L10 agreement and 6+ games.']];
   const open=()=>{if($('#glModal'))return;document.body.insertAdjacentHTML('beforeend',`<div id="glModal" class="modal"><div class="modalbox" style="max-width:760px"><button class="mclose" id="glX">ESC &times;</button><h3>glossary <span class="f">every number traces to data/game_logs + nflverse; hover any badge for its derivation</span></h3>

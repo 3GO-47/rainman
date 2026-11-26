@@ -9,7 +9,7 @@ Then, because the schedule moves (flexes, international slots, Saturday games), 
 Week 18 stays TBD until the NFL sets it (nflverse shows a 1:00 placeholder until then).
 Output joins 1:1 onto data/processed/games_2026.csv on (week, vis, home).
 
-Slate buckets (Eastern kickoff):  TNF  Thu/Wed night      EARLY  Sun 1:00 PM      LATE  Sun 4:05/4:25 PM
+Slate buckets (Eastern kickoff):  WED  Wed · TNF  Thu night · THU  a Thursday with 2+ games (all of them)      EARLY  Sun 1:00 PM      LATE  Sun 4:05/4:25 PM
   SNF  Sun >= 7 PM   MNF  Mon   INTL  Sun 9:30 AM (London/Europe)   THU  Thanksgiving-day Thu games
   FRI / SAT  holiday + late-season Saturday windows                   TBD  week 18 (NFL flexes all times)
 Usage: python3 scripts/build_kickoffs.py
@@ -46,7 +46,8 @@ def minutes(t):  # '4:25 PM' -> minutes since midnight
 def slate(week, day, t):
     if week == 18 or not t: return 'TBD'
     mn = minutes(t)
-    if day in ('Thu', 'Wed'): return 'TNF' if mn >= 19 * 60 else 'THU'
+    if day in ('Wed', 'Tue'): return 'WED'
+    if day == 'Thu': return 'TNF'          # regroup() below turns a multi-game Thursday (Thanksgiving) into one THU slate
     if day == 'Mon': return 'MNF'
     if day == 'Sat': return 'SAT'
     if day == 'Fri': return 'FRI'
@@ -119,6 +120,8 @@ def main():
         day = datetime.date.fromisoformat(d).strftime('%a')
         r.update(date=d, day=day, time_et=t, slate=slate(k[0], day, t))
     if moved: print('  moved since PFR\'s schedule: ' + '; '.join(moved))
+    from update_kickoffs import regroup    # WED alone, Thanksgiving's Thursday games together (one rule, shared with the ESPN correction)
+    regroup(out)
     with open('data/processed/kickoffs_2026.csv', 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=['week','vis','home','date','day','time_et','slate'])
         w.writeheader(); w.writerows(out)
