@@ -1,14 +1,14 @@
 {
- "pulled": "2026-11-26T23:46Z",
+ "pulled": "2026-11-27T05:21Z",
  "season": 2026,
  "week": 12,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "PHI@DAL": "in",
-  "CHI@DET": "post",
-  "KC@BUF": "pre",
-  "GB@LAR": "post",
   "DEN@PIT": "pre",
+  "GB@LAR": "post",
+  "CHI@DET": "post",
+  "PHI@DAL": "post",
+  "KC@BUF": "post",
   "NO@CIN": "pre",
   "NYG@IND": "pre",
   "NYJ@MIA": "pre",
@@ -22,15 +22,7 @@
   "CAR@TB": "pre"
  },
  "scores": {
-  "PHI@DAL": [
-   10,
-   28
-  ],
-  "CHI@DET": [
-   39,
-   35
-  ],
-  "KC@BUF": [
+  "DEN@PIT": [
    0,
    0
   ],
@@ -38,9 +30,17 @@
    13,
    26
   ],
-  "DEN@PIT": [
-   0,
-   0
+  "CHI@DET": [
+   39,
+   35
+  ],
+  "PHI@DAL": [
+   39,
+   38
+  ],
+  "KC@BUF": [
+   10,
+   13
   ],
   "NO@CIN": [
    0,
@@ -89,44 +89,28 @@
  },
  "plays": [
   {
-   "game": "PHI@DAL",
-   "q": 1,
-   "clock": "8:50",
-   "team": "DAL",
-   "player": "Javonte Williams",
+   "game": "GB@LAR",
+   "q": 2,
+   "clock": "11:29",
+   "team": "LAR",
+   "player": "Kyren Williams",
    "how": "rush"
   },
   {
-   "game": "PHI@DAL",
-   "q": 1,
-   "clock": "0:36",
-   "team": "DAL",
-   "player": "KaVontae Turpin",
+   "game": "GB@LAR",
+   "q": 2,
+   "clock": "8:06",
+   "team": "GB",
+   "player": "Christian Watson",
    "how": "rec"
   },
   {
-   "game": "PHI@DAL",
-   "q": 2,
-   "clock": "5:09",
-   "team": "DAL",
-   "player": "Javonte Williams",
+   "game": "GB@LAR",
+   "q": 3,
+   "clock": "6:58",
+   "team": "LAR",
+   "player": "Blake Corum",
    "how": "rush"
-  },
-  {
-   "game": "PHI@DAL",
-   "q": 2,
-   "clock": "4:06",
-   "team": "PHI",
-   "player": "DeVonta Smith",
-   "how": "rec"
-  },
-  {
-   "game": "PHI@DAL",
-   "q": 2,
-   "clock": "0:04",
-   "team": "DAL",
-   "player": "Javonte Williams",
-   "how": "rec"
   },
   {
    "game": "CHI@DET",
@@ -201,27 +185,99 @@
    "how": "rec"
   },
   {
-   "game": "GB@LAR",
-   "q": 2,
-   "clock": "11:29",
-   "team": "LAR",
-   "player": "Kyren Williams",
+   "game": "PHI@DAL",
+   "q": 1,
+   "clock": "8:50",
+   "team": "DAL",
+   "player": "Javonte Williams",
    "how": "rush"
   },
   {
-   "game": "GB@LAR",
-   "q": 2,
-   "clock": "8:06",
-   "team": "GB",
-   "player": "Christian Watson",
+   "game": "PHI@DAL",
+   "q": 1,
+   "clock": "0:36",
+   "team": "DAL",
+   "player": "KaVontae Turpin",
    "how": "rec"
   },
   {
-   "game": "GB@LAR",
+   "game": "PHI@DAL",
+   "q": 2,
+   "clock": "5:09",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 2,
+   "clock": "4:06",
+   "team": "PHI",
+   "player": "DeVonta Smith",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 2,
+   "clock": "0:04",
+   "team": "DAL",
+   "player": "Javonte Williams",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@DAL",
    "q": 3,
-   "clock": "6:58",
-   "team": "LAR",
-   "player": "Blake Corum",
+   "clock": "0:15",
+   "team": "PHI",
+   "player": "DeVonta Smith",
+   "how": "rec"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 4,
+   "clock": "13:46",
+   "team": "PHI",
+   "player": "Kenny Moore II 3 Yd return of blocked pu",
+   "how": "?"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 4,
+   "clock": "10:11",
+   "team": "DAL",
+   "player": "Dak Prescott",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 4,
+   "clock": "9:09",
+   "team": "PHI",
+   "player": "Joe Milton",
+   "how": "rush"
+  },
+  {
+   "game": "PHI@DAL",
+   "q": 4,
+   "clock": "2:10",
+   "team": "PHI",
+   "player": "Makai Lemon",
+   "how": "rec"
+  },
+  {
+   "game": "KC@BUF",
+   "q": 2,
+   "clock": "14:32",
+   "team": "BUF",
+   "player": "James Cook III",
+   "how": "rush"
+  },
+  {
+   "game": "KC@BUF",
+   "q": 3,
+   "clock": "11:28",
+   "team": "KC",
+   "player": "Emmett Johnson",
    "how": "rush"
   }
  ]
