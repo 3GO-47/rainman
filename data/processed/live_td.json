@@ -1,14 +1,14 @@
 {
- "pulled": "2026-11-27T23:46Z",
+ "pulled": "2026-11-28T05:21Z",
  "season": 2026,
  "week": 12,
  "source": "ESPN scoreboard + summary scoringPlays",
  "games": {
-  "DEN@PIT": "post",
   "GB@LAR": "post",
   "CHI@DET": "post",
   "PHI@DAL": "post",
   "KC@BUF": "post",
+  "DEN@PIT": "post",
   "NO@CIN": "pre",
   "NYG@IND": "pre",
   "NYJ@MIA": "pre",
@@ -22,10 +22,6 @@
   "CAR@TB": "pre"
  },
  "scores": {
-  "DEN@PIT": [
-   5,
-   27
-  ],
   "GB@LAR": [
    13,
    26
@@ -41,6 +37,10 @@
   "KC@BUF": [
    10,
    13
+  ],
+  "DEN@PIT": [
+   5,
+   27
   ],
   "NO@CIN": [
    0,
@@ -88,30 +88,6 @@
   ]
  },
  "plays": [
-  {
-   "game": "DEN@PIT",
-   "q": 1,
-   "clock": "6:03",
-   "team": "PIT",
-   "player": "T.J. Watt Fumble Recovery in End Zone (C",
-   "how": "?"
-  },
-  {
-   "game": "DEN@PIT",
-   "q": 1,
-   "clock": "1:40",
-   "team": "PIT",
-   "player": "DK Metcalf",
-   "how": "rec"
-  },
-  {
-   "game": "DEN@PIT",
-   "q": 2,
-   "clock": "1:33",
-   "team": "PIT",
-   "player": "Jalen Ramsey",
-   "how": "ret"
-  },
   {
    "game": "GB@LAR",
    "q": 2,
@@ -303,6 +279,30 @@
    "team": "KC",
    "player": "Emmett Johnson",
    "how": "rush"
+  },
+  {
+   "game": "DEN@PIT",
+   "q": 1,
+   "clock": "6:03",
+   "team": "PIT",
+   "player": "T.J. Watt Fumble Recovery in End Zone (C",
+   "how": "?"
+  },
+  {
+   "game": "DEN@PIT",
+   "q": 1,
+   "clock": "1:40",
+   "team": "PIT",
+   "player": "DK Metcalf",
+   "how": "rec"
+  },
+  {
+   "game": "DEN@PIT",
+   "q": 2,
+   "clock": "1:33",
+   "team": "PIT",
+   "player": "Jalen Ramsey",
+   "how": "ret"
   }
  ]
 }
